@@ -2905,19 +2905,50 @@
         .map(normalizePinnedRepo);
     };
 
+    let githubRepoSourcesPromise = null;
+
+    const fetchGitHubRepoSources = () => {
+      if (!githubRepoSourcesPromise) {
+        githubRepoSourcesPromise = Promise.allSettled([
+          fetchPaged(`https://api.github.com/users/${encodeURIComponent(CONFIG.githubUser)}/repos?type=owner&sort=updated&direction=desc`),
+          fetchPaged("https://api.github.com/orgs/Paryx-Labs/repos?type=public&sort=updated&direction=desc")
+        ]).then(([games, labs]) => ({ games, labs }));
+      }
+
+      return githubRepoSourcesPromise;
+    };
+
+    const hydratePinnedProjects = (pins, sources) => {
+      const reposByName = new Map();
+
+      [sources.games, sources.labs].forEach((result) => {
+        if (result.status !== "fulfilled") return;
+        result.value.forEach((repo) => {
+          if (!repo?.full_name) return;
+          reposByName.set(repo.full_name.toLowerCase(), repo);
+        });
+      });
+
+      return pins.map((pin) => {
+        const repo = reposByName.get(`${pin.owner}/${pin.name}`.toLowerCase());
+        return repo ? normalizeGitHubRepo(repo) : pin;
+      });
+    };
+
     const loadPinnedProjects = async () => {
       const container = $("repos");
       const note = $("reposNote");
       note.textContent = "loading pinned repositories…";
 
-      let projects;
-      let fallback = false;
-      try {
-        projects = await fetchPinnedProjects();
-      } catch {
-        projects = FALLBACK_PINNED;
-        fallback = true;
-      }
+      const [pinsResult, sources] = await Promise.all([
+        fetchPinnedProjects()
+          .then((projects) => ({ projects, fallback: false }))
+          .catch(() => ({ projects: FALLBACK_PINNED, fallback: true })),
+        fetchGitHubRepoSources()
+      ]);
+
+      const projects = hydratePinnedProjects(pinsResult.projects, sources);
+      const fallback = pinsResult.fallback;
 
       container.innerHTML = projects.map((project) => repoCard(project)).join("");
       [...container.children].forEach((card, index) => card.style.setProperty("--i", index));
@@ -3041,11 +3072,7 @@
       $("labsNote").textContent = "loading public repositories…";
 
       otherProjectsPromise = (async () => {
-        const [gamesResult, labsResult] = await Promise.allSettled([
-          fetchPaged(`https://api.github.com/users/${encodeURIComponent(CONFIG.githubUser)}/repos?type=owner&sort=updated&direction=desc`),
-          fetchPaged("https://api.github.com/orgs/Paryx-Labs/repos?type=public&sort=updated&direction=desc")
-        ]);
-
+        const { games: gamesResult, labs: labsResult } = await fetchGitHubRepoSources();
         const renders = [];
 
         if (gamesResult.status === "fulfilled") {
