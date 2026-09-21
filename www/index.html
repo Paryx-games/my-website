@@ -1795,9 +1795,10 @@
     </section>
 
     <section class="discord-presence-slot" id="discordPresenceSlot" hidden>
-      <h2 id="discordActivityHeading" hidden>Activity</h2>
+      <h2>Activity</h2>
       <div class="discord-activities" id="discordPresence" aria-live="polite"></div>
     </section>
+    <div class="discord-presence-slot" id="discordPresenceErrorSlot" hidden aria-live="polite"></div>
 
     <section>
       <h2>Time</h2>
@@ -2889,9 +2890,7 @@
     };
 
     const hideDiscordPresence = () => {
-      const slot = $("discordPresenceSlot");
-      slot.hidden = true;
-      $("discordActivityHeading").hidden = true;
+      $("discordPresenceSlot").hidden = true;
       $("discordPresence").innerHTML = "";
     };
 
@@ -2903,21 +2902,23 @@
 
       if (!activities.length) {
         hideDiscordPresence();
+        $("discordPresenceErrorSlot").hidden = true;
+        $("discordPresenceErrorSlot").innerHTML = "";
         return;
       }
 
       root.innerHTML = activities.map((activity) => discordActivityCard(activity, payload?.spotify)).join("");
-      $("discordActivityHeading").hidden = false;
+      $("discordPresenceErrorSlot").hidden = true;
+      $("discordPresenceErrorSlot").innerHTML = "";
       slot.hidden = false;
       initializeDiscordActivityCards();
     };
 
     const renderDiscordPresenceError = (message) => {
-      const slot = $("discordPresenceSlot");
-      const root = $("discordPresence");
-      $("discordActivityHeading").hidden = true;
-      root.innerHTML = `<div class="discord-presence-error">${UI.warning}<span>${esc(message)}</span></div>`;
-      slot.hidden = false;
+      hideDiscordPresence();
+      const errorSlot = $("discordPresenceErrorSlot");
+      errorSlot.innerHTML = `<div class="discord-presence-error">${UI.warning}<span>${esc(message)}</span></div>`;
+      errorSlot.hidden = false;
     };
 
     const loadDiscordPresence = async () => {
