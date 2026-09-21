@@ -271,7 +271,7 @@
         caret.hidden = true;
         line.classList.add("is-visible");
         $("rot").textContent = TEST_TEXT;
-        rotCaret.hidden = true;
+        rotCaret.style.display = "none";
         $("rotator").classList.add("is-visible");
         $("mainPage").classList.add("is-visible");
         return;
@@ -287,9 +287,7 @@
       await sleep(90);
 
       await typeInto($("rot"), TEST_TEXT, 65, 55);
-      rotCaret.classList.add("is-idle");
-      await sleep(1000);
-      rotCaret.hidden = true;
+      rotCaret.style.display = "none";
       await sleep(350);
 
       $("mainPage").classList.add("is-visible");
