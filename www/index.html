@@ -4,23 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>paryx's site</title>
+  <title>paryx.uk</title>
   <meta name="description"
-    content="Paryx is an indie developer building software, Roblox projects, developer tools, and experiments while learning how systems work.">
-  <link rel="canonical" href="https://paryx.vercel.app/">
+    content="paryx.uk is Paryx's personal developer site, featuring software projects, Roblox development, experiments, GitHub repositories, and live activity.">
+  <meta name="application-name" content="paryx.uk">
+  <link rel="canonical" href="https://paryx.uk/">
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0a0a0b">
   <link rel="icon" type="image/svg+xml" href="/assets/logo_white.svg">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://paryx.vercel.app/">
-  <meta property="og:title" content="paryx's site">
+  <meta property="og:url" content="https://paryx.uk/">
+  <meta property="og:title" content="paryx.uk">
   <meta property="og:description"
-    content="Indie developer building software, Roblox projects, developer tools, and experiments.">
-  <meta property="og:site_name" content="paryx's site">
+    content="Paryx's personal developer site for software projects, Roblox development, experiments, GitHub repositories, and live activity.">
+  <meta property="og:site_name" content="paryx.uk">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="paryx's site">
+  <meta name="twitter:title" content="paryx.uk">
   <meta name="twitter:description"
-    content="Indie developer building software, Roblox projects, developer tools, and experiments.">
+    content="Paryx's personal developer site for software projects, Roblox development, experiments, GitHub repositories, and live activity.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@675&display=swap" rel="stylesheet">
@@ -130,6 +131,11 @@
       letter-spacing: -0.035em;
       color: var(--color-text);
       user-select: none;
+      transition: opacity var(--motion-fast) var(--ease);
+    }
+
+    .site-title:hover {
+      opacity: 0.78;
     }
 
     .site-title span {
@@ -1794,7 +1800,8 @@
 </head>
 
 <body>
-  <div class="site-title">paryx<span>.uk</span></div>
+  <button class="site-title" id="siteTitleCopy" type="button" data-tip="Copy site URL" aria-label="Copy https://paryx.uk/ to clipboard">paryx<span>.uk</span></button>
+  <span class="sr-only" id="siteTitleStatus" role="status"></span>
   <div class="grid" aria-hidden="true"></div>
 
   <section class="hero">
@@ -2694,6 +2701,23 @@
         field.remove();
         return copied;
       }
+    };
+
+    const initSiteTitleCopy = () => {
+      const button = $("siteTitleCopy");
+      const status = $("siteTitleStatus");
+      if (!button || !status) return;
+
+      button.addEventListener("click", async () => {
+        const copied = await copyText("https://paryx.uk/");
+        status.textContent = copied ? "Site URL copied" : "Could not copy site URL";
+        button.dataset.tip = copied ? "Copied" : "Copy failed";
+
+        setTimeout(() => {
+          button.dataset.tip = "Copy site URL";
+          status.textContent = "";
+        }, 1600);
+      });
     };
 
     const contactCard = ({ label, value, icon, brand, mailto }) => {
@@ -3765,6 +3789,7 @@
     };
 
     runHero();
+    initSiteTitleCopy();
     initScrollButton();
     initClocks();
     initPicker();
