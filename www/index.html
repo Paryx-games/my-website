@@ -1433,10 +1433,6 @@
       letter-spacing: 0.08em;
     }
 
-    .discord-activity-card[data-spotify="false"] .discord-activity-kind {
-      transform: translate(3px, -3px);
-    }
-
     .discord-activity-kind-icon {
       display: grid;
       place-items: center;
@@ -1455,6 +1451,11 @@
     .discord-activity-kind-icon img {
       display: block;
       object-fit: contain;
+    }
+
+    .discord-activity-kind-label.is-playing {
+      position: relative;
+      transform: translate(-3px, 3px);
     }
 
     .discord-activity-name {
@@ -2799,7 +2800,7 @@
       <div class="discord-activity-copy">
         <div class="discord-activity-kind">
           <span class="discord-activity-kind-icon${spotify ? " is-spotify" : ""}">${icon}</span>
-          <span>${esc(kind)}</span>
+          <span class="${!spotify && kind === "Playing" ? "discord-activity-kind-label is-playing" : "discord-activity-kind-label"}">${esc(kind)}</span>
         </div>
         <div class="discord-activity-name">${esc(name)}</div>
         ${primaryDetail ? `<div class="discord-activity-detail">${esc(primaryDetail)}</div>` : ""}
