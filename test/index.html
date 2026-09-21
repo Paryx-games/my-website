@@ -246,7 +246,7 @@
 
   <script>
     const HERO_TEXT = "Hi, I'm Paryx";
-    const TEST_TEXT = "This is my testing domain";
+    const TEST_TEXT = "This is my testing domain!";
 
     const $ = (id) => document.getElementById(id);
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -288,6 +288,8 @@
 
       await typeInto($("rot"), TEST_TEXT, 65, 55);
       rotCaret.classList.add("is-idle");
+      await sleep(1000);
+      rotCaret.hidden = true;
       await sleep(350);
 
       $("mainPage").classList.add("is-visible");
