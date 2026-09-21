@@ -2720,6 +2720,7 @@
     };
 
     const DISCORD_STATUS_ENDPOINT = "/api/discord-status";
+    const LANYARD_SOCKET_URL = "wss://api.lanyard.rest/socket";
 
     const discordActivityType = (activity) => {
       if (typeof activity?.type === "string") {
@@ -2938,16 +2939,181 @@
           throw new Error(`Discord activity unavailable (${response.status})${detail}`);
         }
 
-        renderDiscordPresence(await response.json());
+        const payload = await response.json();
+        renderDiscordPresence(payload);
+        return payload;
       } catch (error) {
         renderDiscordPresenceError(error instanceof Error ? error.message : "Discord activity unavailable");
+        return null;
       }
     };
 
-    const initDiscordPresence = () => {
+    const normalizeLanyardTimestamp = (value) => {
+      const timestamp = Number(value);
+      if (!Number.isFinite(timestamp) || timestamp <= 0) return null;
+      return timestamp < 1e12 ? timestamp * 1000 : timestamp;
+    };
+
+    let lanyardUserId = "";
+    let lanyardSocket = null;
+    let lanyardHeartbeatTimer = 0;
+    let lanyardReconnectTimer = 0;
+    let lanyardFallbackTimer = 0;
+    let lanyardReconnectAttempts = 0;
+
+    const normalizeLanyardPresence = (data) => {
+      const user = data?.discord_user || {};
+      const activities = Array.isArray(data?.activities)
+        ? data.activities.map((activity) => ({
+            type: activity?.type ?? null,
+            name: activity?.name || "",
+            details: activity?.details || "",
+            state: activity?.state || "",
+            applicationId: activity?.application_id || "",
+            createdAt: normalizeLanyardTimestamp(activity?.created_at),
+            timestamps: {
+              start: normalizeLanyardTimestamp(activity?.timestamps?.start),
+              end: normalizeLanyardTimestamp(activity?.timestamps?.end)
+            },
+            assets: {
+              largeImage: activity?.assets?.large_image || "",
+              largeText: activity?.assets?.large_text || "",
+              smallImage: activity?.assets?.small_image || "",
+              smallText: activity?.assets?.small_text || ""
+            }
+          }))
+        : [];
+
+      const spotify = data?.spotify
+        ? {
+            song: data.spotify.song || "",
+            artist: data.spotify.artist || "",
+            album: data.spotify.album || "",
+            albumArtUrl: data.spotify.album_art_url || "",
+            timestamps: {
+              start: normalizeLanyardTimestamp(data.spotify?.timestamps?.start),
+              end: normalizeLanyardTimestamp(data.spotify?.timestamps?.end)
+            }
+          }
+        : null;
+
+      return {
+        user: {
+          id: user.id || data?.user_id || lanyardUserId,
+          username: user.username || "",
+          displayName: user.global_name || user.display_name || user.username || "",
+          avatar: user.avatar || ""
+        },
+        status: data?.discord_status || "offline",
+        spotify,
+        activities
+      };
+    };
+
+    const stopLanyardFallbackPolling = () => {
+      if (!lanyardFallbackTimer) return;
+      clearInterval(lanyardFallbackTimer);
+      lanyardFallbackTimer = 0;
+    };
+
+    const startLanyardFallbackPolling = () => {
+      if (lanyardFallbackTimer) return;
+      lanyardFallbackTimer = setInterval(loadDiscordPresence, 30000);
+    };
+
+    const clearLanyardHeartbeat = () => {
+      if (!lanyardHeartbeatTimer) return;
+      clearInterval(lanyardHeartbeatTimer);
+      lanyardHeartbeatTimer = 0;
+    };
+
+    const scheduleLanyardReconnect = () => {
+      if (!lanyardUserId || lanyardReconnectTimer) return;
+      startLanyardFallbackPolling();
+      const delay = Math.min(30000, 1000 * (2 ** Math.min(lanyardReconnectAttempts, 5)));
+      lanyardReconnectAttempts++;
+      lanyardReconnectTimer = setTimeout(() => {
+        lanyardReconnectTimer = 0;
+        connectLanyardSocket();
+      }, delay);
+    };
+
+    const connectLanyardSocket = () => {
+      if (!lanyardUserId || !("WebSocket" in window)) {
+        startLanyardFallbackPolling();
+        return;
+      }
+
+      if (lanyardSocket && (
+        lanyardSocket.readyState === WebSocket.OPEN ||
+        lanyardSocket.readyState === WebSocket.CONNECTING
+      )) return;
+
+      clearLanyardHeartbeat();
+      const socket = new WebSocket(LANYARD_SOCKET_URL);
+      lanyardSocket = socket;
+
+      socket.addEventListener("message", (event) => {
+        let message;
+        try {
+          message = JSON.parse(event.data);
+        } catch {
+          return;
+        }
+
+        if (message?.op === 1) {
+          const heartbeatInterval = Number(message?.d?.heartbeat_interval) || 30000;
+          socket.send(JSON.stringify({
+            op: 2,
+            d: { subscribe_to_id: lanyardUserId }
+          }));
+
+          clearLanyardHeartbeat();
+          lanyardHeartbeatTimer = setInterval(() => {
+            if (socket.readyState === WebSocket.OPEN) {
+              socket.send(JSON.stringify({ op: 3 }));
+            }
+          }, heartbeatInterval);
+          return;
+        }
+
+        if (message?.op !== 0 || !["INIT_STATE", "PRESENCE_UPDATE"].includes(message?.t)) return;
+
+        const presence = message.d;
+        if (!presence || (presence.user_id && String(presence.user_id) !== lanyardUserId)) return;
+
+        renderDiscordPresence(normalizeLanyardPresence(presence));
+        lanyardReconnectAttempts = 0;
+        stopLanyardFallbackPolling();
+      });
+
+      socket.addEventListener("close", () => {
+        if (lanyardSocket !== socket) return;
+        lanyardSocket = null;
+        clearLanyardHeartbeat();
+        scheduleLanyardReconnect();
+      });
+
+      socket.addEventListener("error", () => {
+        if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+          socket.close();
+        }
+      });
+    };
+
+    const initDiscordPresence = async () => {
       hideDiscordPresence();
-      loadDiscordPresence();
-      setInterval(loadDiscordPresence, 30000);
+      const initial = await loadDiscordPresence();
+      lanyardUserId = String(initial?.user?.id || "");
+
+      if (lanyardUserId) connectLanyardSocket();
+      else startLanyardFallbackPolling();
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden || !lanyardUserId) return;
+        if (!lanyardSocket || lanyardSocket.readyState === WebSocket.CLOSED) connectLanyardSocket();
+      });
+
       setInterval(updateDiscordActivityTimes, 1000);
     };
 
