@@ -1794,9 +1794,10 @@
           aria-hidden="true"></span></p>
     </section>
 
-    <div class="discord-presence-slot" id="discordPresenceSlot" hidden>
+    <section class="discord-presence-slot" id="discordPresenceSlot" hidden>
+      <h2 id="discordActivityHeading" hidden>Activity</h2>
       <div class="discord-activities" id="discordPresence" aria-live="polite"></div>
-    </div>
+    </section>
 
     <section>
       <h2>Time</h2>
@@ -2890,6 +2891,7 @@
     const hideDiscordPresence = () => {
       const slot = $("discordPresenceSlot");
       slot.hidden = true;
+      $("discordActivityHeading").hidden = true;
       $("discordPresence").innerHTML = "";
     };
 
@@ -2905,6 +2907,7 @@
       }
 
       root.innerHTML = activities.map((activity) => discordActivityCard(activity, payload?.spotify)).join("");
+      $("discordActivityHeading").hidden = false;
       slot.hidden = false;
       initializeDiscordActivityCards();
     };
@@ -2912,6 +2915,7 @@
     const renderDiscordPresenceError = (message) => {
       const slot = $("discordPresenceSlot");
       const root = $("discordPresence");
+      $("discordActivityHeading").hidden = true;
       root.innerHTML = `<div class="discord-presence-error">${UI.warning}<span>${esc(message)}</span></div>`;
       slot.hidden = false;
     };
