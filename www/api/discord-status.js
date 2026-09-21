@@ -9,7 +9,8 @@ const send = (res, status, body) => {
 
 const numericTimestamp = (value) => {
   const timestamp = Number(value);
-  return Number.isFinite(timestamp) && timestamp > 0 ? timestamp : null;
+  if (!Number.isFinite(timestamp) || timestamp <= 0) return null;
+  return timestamp < 1e12 ? timestamp * 1000 : timestamp;
 };
 
 export default async function handler(req, res) {
@@ -48,6 +49,7 @@ export default async function handler(req, res) {
           details: activity?.details || "",
           state: activity?.state || "",
           applicationId: activity?.application_id || "",
+          createdAt: numericTimestamp(activity?.created_at),
           timestamps: {
             start: numericTimestamp(activity?.timestamps?.start),
             end: numericTimestamp(activity?.timestamps?.end)

@@ -2774,7 +2774,7 @@
       const secondaryDetail = spotify
         ? (spotifyInfo?.album ? `on ${spotifyInfo.album}` : "")
         : (activity?.state || activity?.assets?.largeText || "");
-      const start = Number(spotifyInfo?.timestamps?.start ?? activity?.timestamps?.start ?? 0) || 0;
+      const start = Number(spotifyInfo?.timestamps?.start ?? activity?.timestamps?.start ?? activity?.createdAt ?? 0) || 0;
       const end = Number(spotifyInfo?.timestamps?.end ?? activity?.timestamps?.end ?? 0) || 0;
       const hasProgress = spotify && start > 0 && end > start;
       const hasElapsed = !spotify && start > 0;
