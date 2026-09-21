@@ -23,7 +23,7 @@
     content="Indie developer building software, Roblox projects, developer tools, and experiments.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@675&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
   <style>
     :root {
@@ -116,6 +116,20 @@
 
     h3 {
       margin-bottom: var(--space-3);
+    }
+
+    .site-title {
+      position: fixed;
+      top: 1.5rem;
+      left: 1.5rem;
+      z-index: 20;
+      font-family: "Sora", sans-serif;
+      font-size: 1.1rem;
+      font-weight: 675;
+      line-height: 1;
+      letter-spacing: -0.035em;
+      color: var(--color-text);
+      user-select: none;
     }
 
     .grid {
@@ -1776,6 +1790,7 @@
 </head>
 
 <body>
+  <div class="site-title">paryx</div>
   <div class="grid" aria-hidden="true"></div>
 
   <section class="hero">
