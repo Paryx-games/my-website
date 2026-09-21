@@ -7,6 +7,12 @@ const send = (res, status, body) => {
   res.send(JSON.stringify(body));
 };
 
+const numericTimestamp = (value) => {
+  const timestamp = Number(value);
+  if (!Number.isFinite(timestamp) || timestamp <= 0) return null;
+  return timestamp < 1e12 ? timestamp * 1000 : timestamp;
+};
+
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
@@ -41,9 +47,34 @@ export default async function handler(req, res) {
           type: activity?.type ?? null,
           name: activity?.name || "",
           details: activity?.details || "",
-          state: activity?.state || ""
+          state: activity?.state || "",
+          applicationId: activity?.application_id || "",
+          createdAt: numericTimestamp(activity?.created_at),
+          timestamps: {
+            start: numericTimestamp(activity?.timestamps?.start),
+            end: numericTimestamp(activity?.timestamps?.end)
+          },
+          assets: {
+            largeImage: activity?.assets?.large_image || "",
+            largeText: activity?.assets?.large_text || "",
+            smallImage: activity?.assets?.small_image || "",
+            smallText: activity?.assets?.small_text || ""
+          }
         }))
       : [];
+
+    const spotify = data.spotify
+      ? {
+          song: data.spotify.song || "",
+          artist: data.spotify.artist || "",
+          album: data.spotify.album || "",
+          albumArtUrl: data.spotify.album_art_url || "",
+          timestamps: {
+            start: numericTimestamp(data.spotify?.timestamps?.start),
+            end: numericTimestamp(data.spotify?.timestamps?.end)
+          }
+        }
+      : null;
 
     return send(res, 200, {
       user: {
@@ -53,6 +84,7 @@ export default async function handler(req, res) {
         avatar: user.avatar || ""
       },
       status: data.discord_status || "offline",
+      spotify,
       activities
     });
   } catch {
