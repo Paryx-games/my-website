@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paryx.vercel.app/sitemap.xml
