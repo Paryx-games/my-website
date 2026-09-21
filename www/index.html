@@ -1303,79 +1303,252 @@
     }
 
     .discord-activity-card {
-      display: flex;
+      --activity-accent: #8b8b95;
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
       align-items: center;
-      gap: 0.85rem;
+      gap: 1.1rem;
       min-width: 0;
-      padding: 0.9rem 1rem;
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius);
-      background: var(--color-surface);
+      min-height: 144px;
+      overflow: hidden;
+      padding: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      background: rgba(10, 10, 11, 0.9);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        0 18px 45px rgba(0, 0, 0, 0.18);
       transition:
         border-color var(--motion-fast) var(--ease),
-        background-color var(--motion-fast) var(--ease);
+        transform var(--motion-fast) var(--ease);
     }
 
     .discord-activity-card:hover {
-      border-color: var(--color-border-hover);
-      background: #111114;
+      border-color: color-mix(in srgb, var(--activity-accent) 42%, var(--color-border-hover));
+      transform: translateY(-1px);
     }
 
-    .discord-activity-icon {
+    .discord-activity-backdrop {
+      position: absolute;
+      inset: -28px;
+      z-index: -3;
+      width: calc(100% + 56px);
+      height: calc(100% + 56px);
+      object-fit: cover;
+      filter: blur(24px) saturate(1.25);
+      opacity: 0.34;
+      transform: scale(1.08);
+      pointer-events: none;
+    }
+
+    .discord-activity-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(90deg, rgba(8, 8, 9, 0.42) 0%, rgba(8, 8, 9, 0.7) 40%, rgba(8, 8, 9, 0.92) 100%),
+        linear-gradient(0deg, rgba(8, 8, 9, 0.68), transparent 62%);
+      pointer-events: none;
+    }
+
+    .discord-activity-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(circle at 14% 50%, color-mix(in srgb, var(--activity-accent) 16%, transparent), transparent 34%);
+      pointer-events: none;
+    }
+
+    .discord-activity-art-shell {
+      position: relative;
+      width: 112px;
+      height: 112px;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--activity-accent) 56%, rgba(255, 255, 255, 0.16));
+      border-radius: 14px;
+      background: rgba(14, 14, 16, 0.86);
+      box-shadow: 0 10px 28px color-mix(in srgb, var(--activity-accent) 18%, transparent);
+    }
+
+    .discord-activity-art {
+      position: relative;
+      z-index: 2;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .discord-activity-placeholder {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
       display: grid;
       place-items: center;
-      width: 38px;
-      height: 38px;
-      flex: none;
-      border-radius: 9px;
-      background: #16161a;
-      color: var(--color-muted);
+      color: var(--activity-accent);
+      background: rgba(18, 18, 21, 0.94);
     }
 
-    .discord-activity-icon.is-spotify {
-      color: #1ed760;
+    .discord-activity-placeholder svg {
+      width: 34px;
+      height: 34px;
     }
 
-    .discord-activity-icon svg {
-      width: 21px;
-      height: 21px;
-    }
-
-    .discord-activity-icon.is-spotify svg {
+    .discord-activity-placeholder.is-spotify svg {
       fill: currentColor;
+    }
+
+    .discord-activity-card.activity-art-missing .discord-activity-art,
+    .discord-activity-card.activity-art-missing .discord-activity-backdrop {
+      display: none;
     }
 
     .discord-activity-copy {
       min-width: 0;
-      flex: 1;
     }
 
     .discord-activity-kind {
-      color: var(--color-faint);
-      font-size: 0.7rem;
-      line-height: 1.2;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      min-width: 0;
+      color: var(--color-soft);
+      font-size: 0.78rem;
+      font-weight: 300;
+      line-height: 1.3;
+      letter-spacing: 0.08em;
+    }
+
+    .discord-activity-kind-icon {
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      flex: none;
+      color: var(--activity-accent);
+    }
+
+    .discord-activity-kind-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .discord-activity-kind-icon.is-spotify svg {
+      fill: currentColor;
     }
 
     .discord-activity-name {
-      margin-top: 0.22rem;
+      margin-top: 0.65rem;
       overflow: hidden;
-      color: var(--color-soft);
-      font-size: 0.9375rem;
-      line-height: 1.35;
+      color: var(--color-text);
+      font-size: clamp(1.08rem, 3vw, 1.35rem);
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .discord-activity-detail {
-      margin-top: 0.16rem;
+      margin-top: 0.18rem;
       overflow: hidden;
-      color: var(--color-muted);
-      font-size: 0.78rem;
-      line-height: 1.45;
+      color: var(--color-soft);
+      font-size: 0.86rem;
+      font-weight: 300;
+      line-height: 1.4;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .discord-activity-detail.is-secondary {
+      color: var(--color-muted);
+      font-size: 0.76rem;
+    }
+
+    .discord-activity-progress {
+      display: grid;
+      grid-template-columns: auto minmax(70px, 1fr) auto;
+      align-items: center;
+      gap: 0.7rem;
+      margin-top: 0.85rem;
+      color: var(--color-soft);
+      font-size: 0.72rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .discord-activity-progress-track {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .discord-activity-progress-fill {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--activity-accent);
+      box-shadow: 0 0 10px color-mix(in srgb, var(--activity-accent) 52%, transparent);
+      transition: width 0.8s linear;
+    }
+
+    .discord-activity-elapsed {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.8rem;
+      color: var(--activity-accent);
+      font-size: 0.76rem;
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .discord-activity-elapsed::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    @media (max-width: 560px) {
+      .discord-activity-card {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 0.85rem;
+        min-height: 112px;
+        padding: 0.8rem;
+        border-radius: 15px;
+      }
+
+      .discord-activity-art-shell {
+        width: 82px;
+        height: 82px;
+        border-radius: 11px;
+      }
+
+      .discord-activity-name {
+        margin-top: 0.42rem;
+        font-size: 1rem;
+      }
+
+      .discord-activity-kind {
+        font-size: 0.68rem;
+      }
+
+      .discord-activity-progress {
+        gap: 0.45rem;
+        margin-top: 0.6rem;
+        font-size: 0.66rem;
+      }
+
+      .discord-activity-detail.is-secondary {
+        display: none;
+      }
     }
 
     .discord-presence-error {
@@ -2535,40 +2708,158 @@
       }[activity?.type] || "Activity";
     };
 
-    const discordActivityIcon = (activity) => {
-      const spotify = Number(activity?.type) === 2 || /spotify/i.test(activity?.name || "");
+    const isSpotifyActivity = (activity) =>
+      Number(activity?.type) === 2 || /spotify/i.test(activity?.name || "");
 
-      if (spotify) {
-        return {
-          className: "is-spotify",
-          svg: `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.42a.75.75 0 0 1-1.03.25c-2.82-1.72-6.37-2.11-10.55-1.16a.75.75 0 1 1-.33-1.46c4.58-1.04 8.5-.59 11.66 1.34a.75.75 0 0 1 .25 1.03Zm1.47-3.27a.94.94 0 0 1-1.29.31c-3.23-1.98-8.16-2.55-11.98-1.39a.94.94 0 0 1-.55-1.79c4.37-1.33 9.8-.69 13.51 1.58.44.27.58.85.31 1.29Zm.13-3.4C14.32 7.45 7.94 7.24 4.24 8.36a1.12 1.12 0 1 1-.65-2.15c4.25-1.29 11.31-1.04 15.75 1.59a1.12 1.12 0 0 1-1.15 1.95Z"/></svg>`
-        };
-      }
+    const activityIcon = (spotify) => spotify
+      ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.59 14.42a.75.75 0 0 1-1.03.25c-2.82-1.72-6.37-2.11-10.55-1.16a.75.75 0 1 1-.33-1.46c4.58-1.04 8.5-.59 11.66 1.34a.75.75 0 0 1 .25 1.03Zm1.47-3.27a.94.94 0 0 1-1.29.31c-3.23-1.98-8.16-2.55-11.98-1.39a.94.94 0 0 1-.55-1.79c4.37-1.33 9.8-.69 13.51 1.58.44.27.58.85.31 1.29Zm.13-3.4C14.32 7.45 7.94 7.24 4.24 8.36a1.12 1.12 0 1 1-.65-2.15c4.25-1.29 11.31-1.04 15.75 1.59a1.12 1.12 0 0 1-1.15 1.95Z"/></svg>`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9h8a5 5 0 0 1 4.67 6.8l-1.14 2.94a2 2 0 0 1-3.13.82L14 17.5h-4l-2.4 2.06a2 2 0 0 1-3.13-.82L3.33 15.8A5 5 0 0 1 8 9Z"/><path d="M8 13v3M6.5 14.5h3"/><path d="M16 13.5h.01M18 15.5h.01"/></svg>`;
 
-      return {
-        className: "",
-        svg: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 9h8a5 5 0 0 1 4.67 6.8l-1.14 2.94a2 2 0 0 1-3.13.82L14 17.5h-4l-2.4 2.06a2 2 0 0 1-3.13-.82L3.33 15.8A5 5 0 0 1 8 9Z"/><path d="M8 13v3M6.5 14.5h3"/><path d="M16 13.5h.01M18 15.5h.01"/></svg>`
-      };
+    const discordAssetUrl = (activity) => {
+      const raw = activity?.assets?.largeImage || "";
+      if (!raw) return "";
+      if (/^https?:\/\//i.test(raw)) return raw;
+      if (raw.startsWith("mp:")) return `https://media.discordapp.net/${raw.slice(3)}`;
+
+      const applicationId = activity?.applicationId || "";
+      if (!applicationId) return "";
+      return `https://cdn.discordapp.com/app-assets/${encodeURIComponent(applicationId)}/${encodeURIComponent(raw)}.png?size=512`;
     };
 
-    const discordActivityCard = (activity) => {
-      const icon = discordActivityIcon(activity);
-      const type = discordActivityType(activity);
-      const spotify = Number(activity?.type) === 2 || /spotify/i.test(activity?.name || "");
-      const name = spotify ? (activity?.details || activity?.name || "Spotify") : (activity?.name || "Discord activity");
-      const metadata = [
-        spotify ? activity?.state : activity?.details,
-        !spotify ? activity?.state : ""
-      ].filter(Boolean);
+    const formatActivityClock = (milliseconds) => {
+      const total = Math.max(0, Math.floor(milliseconds / 1000));
+      const hours = Math.floor(total / 3600);
+      const minutes = Math.floor((total % 3600) / 60);
+      const seconds = total % 60;
+      return hours
+        ? `${hours}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`
+        : `${minutes}:${String(seconds).padStart(2, "0")}`;
+    };
 
-      return `<article class="discord-activity-card">
-      <span class="discord-activity-icon ${icon.className}">${icon.svg}</span>
+    const formatActivityElapsed = (milliseconds) => {
+      const totalMinutes = Math.max(0, Math.floor(milliseconds / 60000));
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+      if (hours && minutes) return `${hours}h ${minutes}m`;
+      if (hours) return `${hours}h`;
+      return `${Math.max(1, minutes)}m`;
+    };
+
+    const discordActivityCard = (activity, spotifyData) => {
+      const spotify = isSpotifyActivity(activity);
+      const spotifyInfo = spotify ? spotifyData : null;
+      const art = spotifyInfo?.albumArtUrl || discordAssetUrl(activity);
+      const icon = activityIcon(spotify);
+      const kind = spotify ? "Listening to Spotify" : discordActivityType(activity);
+      const name = spotify
+        ? (spotifyInfo?.song || activity?.details || activity?.name || "Spotify")
+        : (activity?.name || "Discord activity");
+      const primaryDetail = spotify
+        ? (spotifyInfo?.artist || activity?.state || "")
+        : (activity?.details || "");
+      const secondaryDetail = spotify
+        ? (spotifyInfo?.album ? `on ${spotifyInfo.album}` : "")
+        : (activity?.state || activity?.assets?.largeText || "");
+      const start = Number(spotifyInfo?.timestamps?.start ?? activity?.timestamps?.start ?? 0) || 0;
+      const end = Number(spotifyInfo?.timestamps?.end ?? activity?.timestamps?.end ?? 0) || 0;
+      const hasProgress = spotify && start > 0 && end > start;
+      const hasElapsed = !spotify && start > 0;
+      const fallbackAccent = spotify ? "#1ed760" : "#8b8b95";
+
+      return `<article class="discord-activity-card${art ? "" : " activity-art-missing"}" style="--activity-accent:${fallbackAccent}" data-start="${start}" data-end="${end}" data-spotify="${spotify ? "true" : "false"}">
+      ${art ? `<img class="discord-activity-backdrop" src="${esc(art)}" alt="" crossorigin="anonymous" aria-hidden="true">` : ""}
+      <div class="discord-activity-art-shell">
+        <span class="discord-activity-placeholder${spotify ? " is-spotify" : ""}">${icon}</span>
+        ${art ? `<img class="discord-activity-art" src="${esc(art)}" alt="" crossorigin="anonymous" decoding="async">` : ""}
+      </div>
       <div class="discord-activity-copy">
-        <div class="discord-activity-kind">${esc(type)}</div>
+        <div class="discord-activity-kind">
+          <span class="discord-activity-kind-icon${spotify ? " is-spotify" : ""}">${icon}</span>
+          <span>${esc(kind)}</span>
+        </div>
         <div class="discord-activity-name">${esc(name)}</div>
-        ${metadata.map((value) => `<div class="discord-activity-detail">${esc(value)}</div>`).join("")}
+        ${primaryDetail ? `<div class="discord-activity-detail">${esc(primaryDetail)}</div>` : ""}
+        ${secondaryDetail ? `<div class="discord-activity-detail is-secondary">${esc(secondaryDetail)}</div>` : ""}
+        ${hasProgress ? `<div class="discord-activity-progress">
+          <span data-activity-current>0:00</span>
+          <div class="discord-activity-progress-track" aria-hidden="true"><div class="discord-activity-progress-fill" data-activity-progress></div></div>
+          <span data-activity-total>${formatActivityClock(end - start)}</span>
+        </div>` : ""}
+        ${hasElapsed ? `<div class="discord-activity-elapsed" data-activity-elapsed>playing for ${formatActivityElapsed(Date.now() - start)}</div>` : ""}
       </div>
     </article>`;
+    };
+
+    const averageActivityColor = (card) => {
+      const image = card.querySelector(".discord-activity-art");
+      if (!image) return;
+
+      const sample = () => {
+        if (!image.naturalWidth || !image.naturalHeight) return;
+
+        try {
+          const canvas = document.createElement("canvas");
+          canvas.width = 32;
+          canvas.height = 32;
+          const context = canvas.getContext("2d", { willReadFrequently: true });
+          if (!context) return;
+
+          context.drawImage(image, 0, 0, canvas.width, canvas.height);
+          const pixels = context.getImageData(0, 0, canvas.width, canvas.height).data;
+          let red = 0;
+          let green = 0;
+          let blue = 0;
+          let count = 0;
+
+          for (let index = 0; index < pixels.length; index += 16) {
+            if (pixels[index + 3] < 96) continue;
+            red += pixels[index];
+            green += pixels[index + 1];
+            blue += pixels[index + 2];
+            count++;
+          }
+
+          if (!count) return;
+          card.style.setProperty(
+            "--activity-accent",
+            `rgb(${Math.round(red / count)} ${Math.round(green / count)} ${Math.round(blue / count)})`
+          );
+        } catch { }
+      };
+
+      image.addEventListener("error", () => card.classList.add("activity-art-missing"), { once: true });
+      if (image.complete) sample();
+      else image.addEventListener("load", sample, { once: true });
+    };
+
+    const updateDiscordActivityTimes = () => {
+      const now = Date.now();
+
+      document.querySelectorAll(".discord-activity-card").forEach((card) => {
+        const start = Number(card.dataset.start) || 0;
+        const end = Number(card.dataset.end) || 0;
+
+        const elapsed = card.querySelector("[data-activity-elapsed]");
+        if (elapsed && start) {
+          elapsed.textContent = `playing for ${formatActivityElapsed(now - start)}`;
+        }
+
+        const progress = card.querySelector("[data-activity-progress]");
+        const current = card.querySelector("[data-activity-current]");
+        const total = card.querySelector("[data-activity-total]");
+        if (!progress || !current || !start || end <= start) return;
+
+        const duration = end - start;
+        const played = Math.min(duration, Math.max(0, now - start));
+        progress.style.width = `${Math.min(100, played / duration * 100)}%`;
+        current.textContent = formatActivityClock(played);
+        if (total) total.textContent = formatActivityClock(duration);
+      });
+    };
+
+    const initializeDiscordActivityCards = () => {
+      document.querySelectorAll(".discord-activity-card").forEach(averageActivityColor);
+      updateDiscordActivityTimes();
     };
 
     const hideDiscordPresence = () => {
@@ -2588,8 +2879,9 @@
         return;
       }
 
-      root.innerHTML = activities.map(discordActivityCard).join("");
+      root.innerHTML = activities.map((activity) => discordActivityCard(activity, payload?.spotify)).join("");
       slot.hidden = false;
+      initializeDiscordActivityCards();
     };
 
     const renderDiscordPresenceError = (message) => {
@@ -2626,6 +2918,7 @@
       hideDiscordPresence();
       loadDiscordPresence();
       setInterval(loadDiscordPresence, 30000);
+      setInterval(updateDiscordActivityTimes, 1000);
     };
 
     const repoCard = ({ owner, name, description, language, stars = 0, forks = 0, archived = false }, { detailed = true } = {}) => {
