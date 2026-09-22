@@ -1715,6 +1715,15 @@
       text-align: center;
     }
 
+    footer a {
+      color: var(--color-muted);
+      transition: color var(--motion-fast) var(--ease);
+    }
+
+    footer a:hover {
+      color: var(--color-soft);
+    }
+
     @keyframes blink {
       50% {
         opacity: 0;
@@ -1965,7 +1974,7 @@
     </section>
   </main>
 
-  <footer>Paryx</footer>
+  <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="/privacy-policy">Privacy Policy</a></footer>
 
   <button class="scroll-btn" id="scrollBtn" aria-label="Scroll down">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
