@@ -217,7 +217,7 @@
 
     <section>
       <h2>The short version</h2>
-      <p>paryx.uk does not have user accounts, advertising, behavioural profiling, or a contact form. It does not sell or rent personal data. The site mainly displays static content, public information from external services, and basic site-usage analytics through Vercel Web Analytics.</p>
+      <p>paryx.uk does not have user accounts, advertising, behavioural profiling, or a contact form. It does not sell or rent personal data. The site mainly displays static content, public information from external services, and basic site-usage analytics through Vercel Web Analytics. All other optional Vercel data-sharing and model-training settings controlled by Paryx are opted out.</p>
     </section>
 
     <section>
@@ -232,7 +232,7 @@
         <li><strong>Basic technical request data.</strong> When you load the site, hosting and network providers may automatically process information such as your IP address, browser and device information, requested URL, request time, and security or diagnostic data needed to deliver and protect the site.</li>
         <li><strong>Your browser time zone.</strong> The homepage reads the time zone reported by your browser so it can show your local time. This value is used in the browser and is not intentionally sent to paryx.uk for storage.</li>
         <li><strong>Local browser storage.</strong> The homepage stores a short-lived cache of public GitHub repository statistics and language data in <code>localStorage</code>. Cache entries are treated as fresh for up to one hour. They may remain on your device until refreshed, overwritten, or cleared by you or your browser. This cache does not contain an account identifier, email address, or information intended to identify you, and it is not used for cross-site tracking.</li>
-        <li><strong>Vercel Web Analytics.</strong> The site uses Vercel Web Analytics to understand basic site usage, such as page views, referrers, broad country-level location, browser, operating system, and device information. Paryx uses this analytics data only to understand traffic and how the site is used. It is not used by Paryx for advertising, behavioural profiling, data brokerage, or AI or machine-learning model training.</li>
+        <li><strong>Vercel Web Analytics.</strong> The site uses Vercel Web Analytics to understand basic site usage, such as page views, referrers, broad country-level location, browser, operating system, and device information. Vercel documents this analytics data as anonymous and aggregated, with its temporary visitor identifier discarded after 24 hours. Paryx uses this analytics only to understand traffic and how the site is used. No custom analytics events are currently configured. Analytics is not used by Paryx for advertising, behavioural profiling, data brokerage, or AI or machine-learning model training.</li>
         <li><strong>Third-party requests.</strong> Some live content, fonts, icons, and activity artwork are loaded from third-party services. When your browser connects to those services, they may receive normal connection information such as your IP address, browser information, and request details.</li>
         <li><strong>Messages you send.</strong> If you contact Paryx by email, the email address, message content, and any other information you choose to include will be processed so the message can be read and answered.</li>
       </ul>
@@ -265,24 +265,29 @@
     </section>
 
     <section>
+      <h2>Optional data collection and sharing</h2>
+      <p>All optional Vercel data-sharing and AI or machine-learning model-training settings under Paryx's control are configured to opt out. Vercel Web Analytics is the only optional visitor analytics feature intentionally enabled.</p>
+      <p>This does not disable technical processing that is necessary to host, secure, deliver, and troubleshoot the website, because that processing is required for the service to operate.</p>
+    </section>
+
+    <section>
       <h2>Third-party services</h2>
-      <p>The site currently relies on or connects to the following services for specific features:</p>
+      <p>The site currently relies on or connects to the following services for specific features. Where a dedicated privacy notice is available, it is linked directly:</p>
       <ul>
-        <li><strong>Vercel</strong> for website hosting, serverless functionality, and Web Analytics. Analytics is used by Paryx only to understand site traffic and usage.</li>
-        <li><strong>GitHub</strong> for public repository information and project links.</li>
-        <li><strong>Berrysauce pinned repository API</strong> to retrieve publicly visible pinned GitHub repositories.</li>
-        <li><strong>Lanyard</strong> for live Discord presence information.</li>
-        <li><strong>Discord</strong> for activity images and related public presence assets.</li>
-        <li><strong>Google Fonts</strong> for the Inter and Sora typefaces.</li>
-        <li><strong>Simple Icons CDN</strong> for certain public icon assets used by live activity cards.</li>
-        <li><strong>Email providers</strong> when you choose to contact Paryx by email.</li>
+        <li><strong>Vercel</strong> for website hosting, serverless functionality, and Web Analytics. Analytics is used by Paryx only to understand site traffic and usage. See Vercel's <a href="https://vercel.com/legal/privacy-notice" target="_blank" rel="noopener noreferrer">Privacy Notice</a> and <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">Web Analytics privacy information</a>.</li>
+        <li><strong>GitHub</strong> for public repository information and project links. See GitHub's <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">General Privacy Statement</a>.</li>
+        <li><strong>Berrysauce pinned repository API</strong> to retrieve publicly visible pinned GitHub repositories. A separate privacy notice is not published for this small open-source API; its <a href="https://github.com/berrysauce/pinned" target="_blank" rel="noopener noreferrer">public project and service information</a> is available on GitHub.</li>
+        <li><strong>Lanyard</strong> for live Discord presence information. A separate privacy notice is not published for the service; its <a href="https://github.com/Phineas/lanyard" target="_blank" rel="noopener noreferrer">public project and service information</a> is available on GitHub.</li>
+        <li><strong>Discord</strong> for activity images and related public presence assets. See Discord's <a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</li>
+        <li><strong>Google Fonts</strong> for the Inter and Sora typefaces. See Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</li>
+        <li><strong>Simple Icons CDN</strong> for certain public icon assets used by live activity cards. Simple Icons does not publish a dedicated privacy notice for the CDN; see its <a href="https://github.com/simple-icons/simple-icons" target="_blank" rel="noopener noreferrer">public project information</a> and <a href="https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md" target="_blank" rel="noopener noreferrer">legal disclaimer</a>.</li>
       </ul>
-      <p>These providers may process technical information independently under their own privacy policies. paryx.uk is not responsible for the privacy practices of external websites you choose to visit through links on the site.</p>
+      <p>These providers may process technical information independently under their own privacy practices. paryx.uk is not responsible for the privacy practices of external websites you choose to visit through links on the site.</p>
     </section>
 
     <section>
       <h2>Sharing and sale of data</h2>
-      <p>Personal data is not sold, rented, or shared with advertisers or data brokers. Analytics data is not used by Paryx for advertising, profiling, or AI or machine-learning model training. Information is shared only with service providers where needed to operate and analyse the site, respond to communications, comply with a legal obligation, or protect the site and its users.</p>
+      <p>Personal data is not sold, rented, or shared with advertisers or data brokers. Analytics data is not used by Paryx for advertising, profiling, or AI or machine-learning model training. Optional Vercel data-sharing and model-training settings under Paryx's control are opted out. Information is shared only with service providers where needed to operate and analyse the site, respond to communications, comply with a legal obligation, or protect the site and its users.</p>
     </section>
 
     <section>
@@ -292,7 +297,8 @@
 
     <section>
       <h2>How long information is kept</h2>
-      <p>paryx.uk does not maintain its own visitor-profile database. Browser-side repository cache entries are treated as current for up to one hour but may remain on your device until they are refreshed or cleared. Vercel Web Analytics and hosting, security, and infrastructure data are retained according to Vercel's service settings and privacy practices. Email correspondence is kept only for as long as it is reasonably useful for the conversation, record keeping, security, or legal requirements.</p>
+      <p>paryx.uk does not maintain its own visitor-profile database. Browser-side repository cache entries are treated as current for up to one hour but may remain on your device until they are refreshed or cleared. Vercel states that the temporary visitor identifier used by Web Analytics is discarded after 24 hours; aggregated analytics reporting is retained according to the Vercel plan and service settings.</p>
+      <p>For information directly controlled by Paryx, ordinary enquiry emails are retained for up to 12 months after the last relevant message. Correspondence relating to privacy or data-rights requests is retained for up to 24 months after the request is closed so there is a record of how it was handled. Information may be kept longer where reasonably necessary for an ongoing issue, security investigation, legal obligation, or legal claim, and may be deleted earlier when it is no longer needed.</p>
     </section>
 
     <section>

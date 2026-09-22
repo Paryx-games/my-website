@@ -27,7 +27,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@675&display=swap" rel="stylesheet">
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <script>document.documentElement.classList.add('js')</script>
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <style>
     :root {
       --color-bg: #0a0a0b;
@@ -1649,6 +1648,42 @@
       font-size: var(--text-small);
     }
 
+    .contact-label-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.14rem 0.45rem;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      color: var(--color-faint);
+      font-size: 0.6875rem;
+      line-height: 1.25;
+      white-space: nowrap;
+      cursor: help;
+      transition:
+        color var(--motion-fast) var(--ease),
+        border-color var(--motion-fast) var(--ease),
+        background-color var(--motion-fast) var(--ease);
+    }
+
+    .contact-badge.is-primary {
+      color: var(--color-soft);
+      border-color: var(--color-border-hover);
+      background: var(--color-hover);
+    }
+
+    .contact-badge:hover,
+    .contact-badge:focus-visible {
+      color: var(--color-text);
+      border-color: var(--color-border-strong);
+    }
+
     .contact-card .v {
       margin-top: 0.1rem;
       font-size: 0.9375rem;
@@ -2731,11 +2766,17 @@
       });
     };
 
-    const contactCard = ({ label, value, icon, brand, mailto }) => {
+    const contactCard = ({ label, value, icon, brand, mailto, badge, badgeTip, primary }) => {
       const what = label.toLowerCase();
+      const badgeHtml = badge
+        ? `<span class="contact-badge${primary ? " is-primary" : ""}" tabindex="0" data-tip="${esc(badgeTip || badge)}" aria-label="${esc(badgeTip || badge)}">${esc(badge)}</span>`
+        : "";
       return `<div class="contact-card" style="--brand:${brand}">
       <span class="brand-icon">${ico(icon, brand)}</span>
-      <div class="meta"><div class="k">${esc(label)}</div><div class="v">${esc(value)}</div></div>
+      <div class="meta">
+        <div class="contact-label-row"><div class="k">${esc(label)}</div>${badgeHtml}</div>
+        <div class="v">${esc(value)}</div>
+      </div>
       <div class="actions">
         <button class="icon-btn" type="button" data-copy="${esc(value)}" data-what="${what}" data-tip="Copy ${what}" aria-label="Copy ${what}"><span class="i-copy">${UI.copy}</span><span class="i-check">${UI.check}</span></button>
         ${mailto ? `<a class="icon-btn" href="mailto:${esc(value)}" data-tip="Send an email" aria-label="Send an email">${UI.mail}</a>` : ""}
@@ -2765,8 +2806,24 @@
 
     const renderContacts = () => {
       const cards = [
-        { label: "Email", value: CONFIG.email, icon: "gmail", brand: "#EA4335", mailto: true },
-        { label: "Discord", value: CONFIG.discord, icon: "discord", brand: "#5865F2" }
+        {
+          label: "Discord",
+          value: CONFIG.discord,
+          icon: "discord",
+          brand: "#5865F2",
+          badge: "Primary contact",
+          badgeTip: "Preferred contact - usually the fastest way to reach me",
+          primary: true
+        },
+        {
+          label: "Email",
+          value: CONFIG.email,
+          icon: "gmail",
+          brand: "#EA4335",
+          mailto: true,
+          badge: "Secondary contact",
+          badgeTip: "Secondary contact - useful for longer or more formal enquiries"
+        }
       ].filter((card) => card.value);
       if (!cards.length) return hideSection("contacts");
       $("contacts").innerHTML = cards.map(contactCard).join("");
