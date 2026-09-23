@@ -1179,10 +1179,14 @@
       width: 15px;
       height: 15px;
       fill: currentColor;
-      color: var(--brand, currentColor);
       transition:
         color var(--motion-fast) var(--ease),
         filter var(--motion-fast) var(--ease);
+    }
+
+    .link-chip:hover svg,
+    .link-chip:focus-visible svg {
+      color: var(--brand, var(--color-text));
     }
 
     .link-chip.is-gradient:hover {
@@ -1197,7 +1201,8 @@
       color: transparent;
     }
 
-    .link-chip.is-gradient svg {
+    .link-chip.is-gradient:hover svg,
+    .link-chip.is-gradient:focus-visible svg {
       color: #25F4EE;
       filter: drop-shadow(1px 0 #FE2C55);
     }
