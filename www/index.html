@@ -195,6 +195,11 @@
       min-height: 1.1em;
     }
 
+    .hero-name {
+      font-family: "Sora", sans-serif;
+      font-weight: 675;
+    }
+
     .rotator {
       min-height: 1.6em;
       color: var(--color-muted);
@@ -2169,7 +2174,8 @@
       "Asia/Seoul", "Australia/Sydney", "Pacific/Auckland"
     ];
 
-    const HERO_TEXT = "Hi, I'm Paryx";
+    const HERO_PREFIX = "Hi, I'm ";
+    const HERO_NAME = "Paryx";
     const REPO_CACHE_MS = 36e5;
     const GITHUB_LANGUAGE_COLORS = {
       "C#": "#178600",
@@ -2272,7 +2278,7 @@
       const rot = $("rot");
 
       if (reduce) {
-        $("type").textContent = HERO_TEXT;
+        $("type").innerHTML = `${esc(HERO_PREFIX)}<span class="hero-name">${esc(HERO_NAME)}</span>`;
         caret.hidden = true;
         line.classList.add("is-visible", "is-done");
         rot.textContent = lines[0];
@@ -2283,7 +2289,11 @@
       }
 
       await sleep(700);
-      await typeInto($("type"), HERO_TEXT, 62, 72);
+      await typeInto($("type"), HERO_PREFIX, 62, 72);
+      const heroName = document.createElement("span");
+      heroName.className = "hero-name";
+      $("type").append(heroName);
+      await typeInto(heroName, HERO_NAME, 62, 72);
       caret.hidden = true;
       await sleep(140);
       line.classList.add("is-visible");
