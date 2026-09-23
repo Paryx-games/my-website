@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Hello world</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@700&display=swap">
+  <style>
+    :root {
+      box-sizing: border-box;
+      color-scheme: dark;
+      --bg: #000;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    html {
+      height: 100%;
+      background: var(--bg);
+      scroll-padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    body {
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .swatches {
+      position: fixed;
+      left: 50%;
+      bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+      display: flex;
+      gap: 14px;
+      transform: translateX(-50%);
+    }
+
+    .swatches button {
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: 1px solid #3a3a3a;
+      border-radius: 50%;
+      opacity: 0.55;
+      cursor: pointer;
+    }
+
+    .swatches button:hover,
+    .swatches button[aria-pressed="true"] {
+      opacity: 1;
+    }
+
+    .swatches button[aria-pressed="true"] {
+      outline: 1px solid #8a8a8a;
+      outline-offset: 3px;
+    }
+
+    .swatches button:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="stage" aria-label="Hello world, typed out with pixels floating off each letter"></canvas>
+  <div id="swatches" class="swatches" role="group" aria-label="Colour"></div>
+
+  <script>
+    (() => {
+      const TEXT = "Hello world";
+      const COUNT = TEXT.length;
+      const TYPE_INTERVAL = 170;
+      const START_DELAY = 500;
+      const TRAIL_TIME = 550;
+      const CURSOR_LINGER = 900;
+      const CURSOR_BLINK = 520;
+      const LOOP_PAUSE = 2200;
+      const MAX_PARTICLES = 500;
+
+      const BLUE = "#5b8cff";
+      const GREEN = "#2bff88";
+      const PINK = "#ff4fa3";
+      const ORANGE = "#ff8a2b";
+
+      const solid = (label, text, accent) => ({
+        label,
+        text,
+        accent,
+        dust: [text, text, accent],
+        density: 1,
+        swatch: `linear-gradient(135deg, ${text} 50%, ${accent} 50%)`,
+      });
+
+      const blend = (label, text, accent, from, to) => ({
+        label,
+        text,
+        accent,
+        blend: [from, to],
+        density: 0.45,
+        swatch: `linear-gradient(135deg, ${from}, ${to})`,
+      });
+
+      const PALETTES = {
+        blue: solid("White and blue", "#f5f5f5", BLUE),
+        green: solid("Green tint", "#d9ffe6", GREEN),
+        blueGreen: blend("Blue and green blend", "#e6fff5", GREEN, BLUE, GREEN),
+        pink: solid("Pink", "#ffe4f1", PINK),
+        orange: solid("Orange", "#fff0e0", ORANGE),
+        pinkOrange: blend("Pink and orange blend", "#fff0ea", "#ff6f61", PINK, ORANGE),
+      };
+
+      const canvas = document.getElementById("stage");
+      const swatchBar = document.getElementById("swatches");
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      let ctx;
+      let width = 0;
+      let height = 0;
+      let layout;
+      let pixel = 4;
+      let glyphPoints = [];
+      let particles = [];
+      let palette = PALETTES.blue;
+      let startTime = 0;
+      let spawnedCount = 0;
+      let finishedAt = 0;
+      let resizeTimer;
+
+      const fontSpec = (size) => `700 ${size}px Sora, system-ui, "Segoe UI", Helvetica, Arial, sans-serif`;
+      const clamp01 = (value) => Math.max(0, Math.min(1, value));
+      const hexToRgb = (hex) => [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+
+      function setupCanvas() {
+        const rect = canvas.getBoundingClientRect();
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(rect.width * ratio);
+        canvas.height = Math.floor(rect.height * ratio);
+        ctx = canvas.getContext("2d");
+        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+        width = canvas.width / ratio;
+        height = canvas.height / ratio;
+      }
+
+      function measureLayout() {
+        ctx.font = fontSpec(100);
+        const size = Math.min(140, (width * 0.84 / ctx.measureText(TEXT).width) * 100);
+        ctx.font = fontSpec(size);
+
+        const offsets = [0];
+        for (let i = 1; i <= COUNT; i++) {
+          offsets.push(ctx.measureText(TEXT.slice(0, i)).width);
+        }
+
+        const left = (width - offsets[COUNT]) / 2;
+        layout = {
+          size,
+          x: offsets.map((offset) => offset + left),
+          baseline: height / 2 + size * 0.38,
+        };
+        pixel = Math.max(3, Math.round(size / 22));
+      }
+
+      function sampleGlyphPoints() {
+        const w = Math.floor(width);
+        const h = Math.floor(height);
+        const buffer = document.createElement("canvas");
+        buffer.width = w;
+        buffer.height = h;
+
+        const bufferCtx = buffer.getContext("2d");
+        bufferCtx.font = fontSpec(layout.size);
+        bufferCtx.textBaseline = "alphabetic";
+        bufferCtx.fillText(TEXT, layout.x[0], layout.baseline);
+        const data = bufferCtx.getImageData(0, 0, w, h).data;
+
+        glyphPoints = [...TEXT].map((char, index) => {
+          const points = [];
+          if (char === " ") return points;
+
+          for (let y = 0; y < h; y += pixel) {
+            for (let x = Math.floor(layout.x[index]); x < layout.x[index + 1] && x < w; x += pixel) {
+              if (data[(y * w + x) * 4 + 3] > 128) points.push([x, y]);
+            }
+          }
+          return points;
+        });
+      }
+
+      function dustColor(x) {
+        if (!palette.blend) {
+          return palette.dust[Math.floor(Math.random() * palette.dust.length)];
+        }
+
+        const from = hexToRgb(palette.blend[0]);
+        const to = hexToRgb(palette.blend[1]);
+        const progress = (x - layout.x[0]) / (layout.x[COUNT] - layout.x[0]);
+        const mix = clamp01(progress * 0.8 + 0.1 + (Math.random() - 0.5) * 0.5);
+        const channels = from.map((value, i) => Math.round(value + (to[i] - value) * mix));
+        return `rgb(${channels.join(",")})`;
+      }
+
+      function spawnParticle(letterIndex, now) {
+        const points = glyphPoints[letterIndex];
+        if (!points.length) return;
+
+        let point = points[Math.floor(Math.random() * points.length)];
+        const other = points[Math.floor(Math.random() * points.length)];
+        if (other[1] < point[1]) point = other;
+
+        particles.push({
+          x: point[0],
+          y: point[1] - Math.random() * layout.size * 0.12,
+          vx: (Math.random() - 0.5) * 22,
+          vy: -(60 + Math.random() * 150),
+          born: now,
+          life: 1000 + Math.random() * 1000,
+          size: pixel * (0.6 + Math.random() * 0.9),
+          color: dustColor(point[0]),
+        });
+      }
+
+      function restart(now) {
+        startTime = now;
+        spawnedCount = 0;
+        particles = [];
+        finishedAt = 0;
+      }
+
+      function visibleLetters(elapsed) {
+        return Math.max(0, Math.min(COUNT, Math.floor((elapsed - START_DELAY) / TYPE_INTERVAL) + 1));
+      }
+
+      function emitBursts(visible, now) {
+        const burst = Math.round(14 * palette.density);
+        for (; spawnedCount < visible; spawnedCount++) {
+          for (let i = 0; i < burst; i++) spawnParticle(spawnedCount, now);
+        }
+      }
+
+      function emitTrails(visible, elapsed, now) {
+        for (let i = 0; i < visible; i++) {
+          const age = elapsed - START_DELAY - i * TYPE_INTERVAL;
+          if (age < TRAIL_TIME && Math.random() < 0.7 * palette.density) spawnParticle(i, now);
+        }
+      }
+
+      function drawLetters(visible, elapsed) {
+        ctx.fillStyle = palette.text;
+        for (let i = 0; i < visible; i++) {
+          const age = elapsed - START_DELAY - i * TYPE_INTERVAL;
+          const fade = clamp01(age / 120);
+          ctx.globalAlpha = fade;
+          ctx.fillText(TEXT[i], layout.x[i], layout.baseline - (1 - fade) * 10);
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      function drawCursor(visible, elapsed) {
+        const typing = visible < COUNT || elapsed < START_DELAY + COUNT * TYPE_INTERVAL + CURSOR_LINGER;
+        const blinkOn = Math.floor(elapsed / CURSOR_BLINK) % 2 === 0;
+        if (!typing && !blinkOn) return;
+
+        ctx.fillStyle = palette.accent;
+        ctx.fillRect(
+          layout.x[visible] + layout.size * 0.05,
+          layout.baseline - layout.size * 0.78,
+          layout.size * 0.3,
+          layout.size * 0.8
+        );
+      }
+
+      function drawParticles(now) {
+        let alive = 0;
+        for (const particle of particles) {
+          const age = now - particle.born;
+          if (age > particle.life) continue;
+          alive++;
+
+          const seconds = age / 1000;
+          const remaining = 1 - age / particle.life;
+          const x = Math.round((particle.x + particle.vx * seconds) / pixel) * pixel;
+          const y = Math.round((particle.y + particle.vy * seconds) / pixel) * pixel;
+
+          ctx.globalAlpha = remaining * remaining * 0.95;
+          ctx.fillStyle = particle.color;
+          ctx.fillRect(x, y, particle.size, particle.size);
+        }
+        ctx.globalAlpha = 1;
+
+        if (particles.length > MAX_PARTICLES) {
+          particles = particles.filter((particle) => now - particle.born < particle.life);
+        }
+        return alive;
+      }
+
+      function render(now) {
+        const elapsed = now - startTime;
+        const visible = visibleLetters(elapsed);
+
+        ctx.clearRect(0, 0, width, height);
+        ctx.font = fontSpec(layout.size);
+        ctx.textBaseline = "alphabetic";
+
+        emitBursts(visible, now);
+        emitTrails(visible, elapsed, now);
+        drawLetters(visible, elapsed);
+        drawCursor(visible, elapsed);
+        const alive = drawParticles(now);
+
+        const settled = elapsed > START_DELAY + COUNT * TYPE_INTERVAL + TRAIL_TIME + CURSOR_LINGER;
+        return visible >= COUNT && alive === 0 && settled;
+      }
+
+      function tick(now) {
+        if (render(now)) {
+          if (!finishedAt) finishedAt = now;
+          else if (now - finishedAt > LOOP_PAUSE) restart(now);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function showStatic() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.font = fontSpec(layout.size);
+        ctx.fillStyle = palette.text;
+        ctx.fillText(TEXT, layout.x[0], layout.baseline);
+      }
+
+      function replay() {
+        if (reducedMotion) showStatic();
+        else restart(performance.now());
+      }
+
+      function prepare() {
+        setupCanvas();
+        measureLayout();
+        sampleGlyphPoints();
+      }
+
+      function buildSwatches() {
+        for (const next of Object.values(PALETTES)) {
+          const button = document.createElement("button");
+          button.setAttribute("aria-label", next.label);
+          button.setAttribute("aria-pressed", next === palette);
+          button.style.background = next.swatch;
+          button.addEventListener("click", () => {
+            palette = next;
+            for (const other of swatchBar.children) {
+              other.setAttribute("aria-pressed", other === button);
+            }
+            replay();
+          });
+          swatchBar.appendChild(button);
+        }
+      }
+
+      function boot() {
+        prepare();
+        replay();
+        if (!reducedMotion) requestAnimationFrame(tick);
+      }
+
+      buildSwatches();
+
+      canvas.addEventListener("click", () => {
+        if (!reducedMotion) restart(performance.now());
+      });
+
+      addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          prepare();
+          replay();
+        }, 150);
+      });
+
+      Promise.race([
+        document.fonts.load(fontSpec(100)),
+        new Promise((resolve) => setTimeout(resolve, 2500)),
+      ])
+        .catch(() => {})
+        .then(boot);
+    })();
+  </script>
+</body>
+</html>
