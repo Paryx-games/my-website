@@ -217,7 +217,7 @@
 
     <section>
       <h2>The short version</h2>
-      <p>paryx.uk does not have user accounts, advertising, behavioural profiling, or a contact form. It does not sell or rent personal data. The site mainly displays static content, public information from external services, and basic site-usage analytics through Vercel Web Analytics. All other optional Vercel data-sharing and model-training settings controlled by Paryx are opted out.</p>
+      <p>paryx.uk does not have user accounts, advertising, behavioural profiling, or a contact form. It does not sell or rent personal data. Cloudflare sits in front of Vercel to secure, deliver, and optimise site traffic, and basic site-usage and real-world performance analytics are provided through Vercel Web Analytics and Cloudflare Web Analytics. All other optional Vercel data-sharing and model-training settings controlled by Paryx are opted out.</p>
     </section>
 
     <section>
@@ -229,13 +229,19 @@
     <section>
       <h2>Information that may be processed</h2>
       <ul>
-        <li><strong>Basic technical request data.</strong> When you load the site, hosting and network providers may automatically process information such as your IP address, browser and device information, requested URL, request time, and security or diagnostic data needed to deliver and protect the site.</li>
+        <li><strong>Basic technical request data.</strong> Cloudflare proxies traffic in front of Vercel, so Cloudflare and Vercel may process normal technical request information such as your IP address, requested URL, request time, browser and device information, connection details, and security or diagnostic data needed to secure, deliver, optimise, and troubleshoot the site.</li>
         <li><strong>Your browser time zone.</strong> The homepage reads the time zone reported by your browser so it can show your local time. This value is used in the browser and is not intentionally sent to paryx.uk for storage.</li>
         <li><strong>Local browser storage.</strong> The homepage stores a short-lived cache of public GitHub repository statistics and language data in <code>localStorage</code>. Cache entries are treated as fresh for up to one hour. They may remain on your device until refreshed, overwritten, or cleared by you or your browser. This cache does not contain an account identifier, email address, or information intended to identify you, and it is not used for cross-site tracking.</li>
-        <li><strong>Vercel Web Analytics.</strong> The site uses Vercel Web Analytics to understand basic site usage, such as page views, referrers, broad country-level location, browser, operating system, and device information. Vercel documents this analytics data as anonymous and aggregated, with its temporary visitor identifier discarded after 24 hours. Paryx uses this analytics only to understand traffic and how the site is used. No custom analytics events are currently configured. Analytics is not used by Paryx for advertising, behavioural profiling, data brokerage, or AI or machine-learning model training.</li>
         <li><strong>Third-party requests.</strong> Some live content, fonts, icons, and activity artwork are loaded from third-party services. When your browser connects to those services, they may receive normal connection information such as your IP address, browser information, and request details.</li>
         <li><strong>Messages you send.</strong> If you contact Paryx by email, the email address, message content, and any other information you choose to include will be processed so the message can be read and answered.</li>
       </ul>
+    </section>
+
+    <section>
+      <h2>Analytics and performance measurement</h2>
+      <p>paryx.uk uses Vercel Web Analytics and Cloudflare Web Analytics / Real User Measurement (RUM) to understand aggregate site usage, diagnose problems, and measure how pages perform for real visitors. This information is not used for advertising, cross-site behavioural profiling, data brokerage, or AI or machine-learning model training by Paryx.</p>
+      <p>Depending on the provider and feature, analytics and performance information can include page views and visits, referrer information, approximate location, browser, operating system and device type, and page-load or Core Web Vitals performance metrics. Vercel documents its Web Analytics data as anonymous and aggregated, with its temporary visitor identifier discarded after 24 hours.</p>
+      <p>Cloudflare Web Analytics / RUM measures page usage and real-world loading performance using browser performance APIs. Cloudflare states that its RUM beacon does not use cookies or browser storage, does not track visitors across Cloudflare customer sites, and discards the source IP address received by the RUM request at the nearest Cloudflare data centre rather than storing it in the RUM service's core databases or logs. This RUM handling is separate from normal Cloudflare proxy, security, and infrastructure request processing described elsewhere in this policy.</p>
     </section>
 
     <section>
@@ -246,7 +252,7 @@
         <li>display public project and live activity information;</li>
         <li>protect the site, prevent abuse, and investigate technical problems;</li>
         <li>maintain reliability and performance;</li>
-        <li>understand aggregate site traffic and which pages are being used; and</li>
+        <li>understand aggregate site traffic, diagnose issues, and measure real-world page performance; and</li>
         <li>respond to messages or privacy requests you send.</li>
       </ul>
       <p>Analytics and personal data are not used by Paryx for advertising, data brokerage, behavioural profiling, or AI or machine-learning model training.</p>
@@ -260,13 +266,13 @@
 
     <section>
       <h2>Cookies and similar storage</h2>
-      <p>paryx.uk does not intentionally set advertising cookies. Vercel Web Analytics is designed to provide analytics without using analytics cookies. The homepage uses browser <code>localStorage</code> only to cache public GitHub repository data as described above.</p>
+      <p>paryx.uk does not intentionally set advertising cookies. Vercel Web Analytics and Cloudflare Web Analytics / RUM are designed to provide analytics without analytics cookies, and Cloudflare's RUM beacon does not use browser storage. The homepage uses browser <code>localStorage</code> only to cache public GitHub repository data as described above.</p>
       <p>Third-party services used by the site operate under their own privacy and storage practices. You can clear local storage and cookies through your browser settings at any time.</p>
     </section>
 
     <section>
       <h2>Optional data collection and sharing</h2>
-      <p>All optional Vercel data-sharing and AI or machine-learning model-training settings under Paryx's control are configured to opt out. Vercel Web Analytics is the only optional visitor analytics feature intentionally enabled.</p>
+      <p>All optional Vercel data-sharing and AI or machine-learning model-training settings under Paryx's control are configured to opt out. Vercel Web Analytics and Cloudflare Web Analytics / RUM are the visitor analytics and performance-measurement features intentionally enabled.</p>
       <p>This does not disable technical processing that is necessary to host, secure, deliver, and troubleshoot the website, because that processing is required for the service to operate.</p>
     </section>
 
@@ -274,12 +280,13 @@
       <h2>Third-party services</h2>
       <p>The site currently relies on or connects to the following services for specific features. Where a dedicated privacy notice is available, it is linked directly:</p>
       <ul>
-        <li><strong>Vercel</strong> for website hosting, serverless functionality, and Web Analytics. Analytics is used by Paryx only to understand site traffic and usage. See Vercel's <a href="https://vercel.com/legal/privacy-notice" target="_blank" rel="noopener noreferrer">Privacy Notice</a> and <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">Web Analytics privacy information</a>.</li>
+        <li><strong>Cloudflare</strong> as a reverse-proxy layer in front of Vercel for traffic delivery, security, infrastructure and performance optimisation, and Cloudflare Web Analytics / RUM. Cloudflare may process normal technical request and security information while proxying and protecting traffic. See Cloudflare's <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="https://developers.cloudflare.com/web-analytics/about/" target="_blank" rel="noopener noreferrer">Web Analytics information</a>.</li>
+        <li><strong>Vercel</strong> for website hosting, serverless functionality, and Web Analytics as described above. See Vercel's <a href="https://vercel.com/legal/privacy-notice" target="_blank" rel="noopener noreferrer">Privacy Notice</a> and <a href="https://vercel.com/docs/analytics/privacy-policy" target="_blank" rel="noopener noreferrer">Web Analytics privacy information</a>.</li>
         <li><strong>GitHub</strong> for public repository information and project links. See GitHub's <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer">General Privacy Statement</a>.</li>
         <li><strong>Berrysauce pinned repository API</strong> to retrieve publicly visible pinned GitHub repositories. A separate privacy notice is not published for this small open-source API; its <a href="https://github.com/berrysauce/pinned" target="_blank" rel="noopener noreferrer">public project and service information</a> is available on GitHub.</li>
         <li><strong>Lanyard</strong> for live Discord presence information. A separate privacy notice is not published for the service; its <a href="https://github.com/Phineas/lanyard" target="_blank" rel="noopener noreferrer">public project and service information</a> is available on GitHub.</li>
         <li><strong>Discord</strong> for activity images and related public presence assets. See Discord's <a href="https://discord.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</li>
-        <li><strong>Google Fonts</strong> for the Inter and Sora typefaces. See Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</li>
+        <li><strong>Google Fonts / Cloudflare Fonts</strong> for the Inter and Sora typefaces. Cloudflare Fonts rewrites the site's Google Fonts references so supported pages ordinarily deliver the font CSS and files through paryx.uk and Cloudflare rather than making the visitor's browser contact Google Fonts directly. If Cloudflare cannot transform a page, Google Fonts may be used as a fallback. See Cloudflare's <a href="https://developers.cloudflare.com/speed/optimization/content/fonts/" target="_blank" rel="noopener noreferrer">Cloudflare Fonts documentation</a> and Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.</li>
         <li><strong>Simple Icons CDN</strong> for certain public icon assets used by live activity cards. Simple Icons does not publish a dedicated privacy notice for the CDN; see its <a href="https://github.com/simple-icons/simple-icons" target="_blank" rel="noopener noreferrer">public project information</a> and <a href="https://github.com/simple-icons/simple-icons/blob/develop/DISCLAIMER.md" target="_blank" rel="noopener noreferrer">legal disclaimer</a>.</li>
       </ul>
       <p>These providers may process technical information independently under their own privacy practices. paryx.uk is not responsible for the privacy practices of external websites you choose to visit through links on the site.</p>
@@ -287,7 +294,7 @@
 
     <section>
       <h2>Sharing and sale of data</h2>
-      <p>Personal data is not sold, rented, or shared with advertisers or data brokers. Analytics data is not used by Paryx for advertising, profiling, or AI or machine-learning model training. Optional Vercel data-sharing and model-training settings under Paryx's control are opted out. Information is shared only with service providers where needed to operate and analyse the site, respond to communications, comply with a legal obligation, or protect the site and its users.</p>
+      <p>Personal data is not sold, rented, or shared with advertisers or data brokers. Analytics and performance data are not used by Paryx for advertising, cross-site behavioural profiling, or AI or machine-learning model training. Optional Vercel data-sharing and model-training settings under Paryx's control are opted out. Information is shared only with service providers such as Cloudflare and Vercel where needed to secure, deliver, optimise, operate and analyse the site, respond to communications, comply with a legal obligation, or protect the site and its users.</p>
     </section>
 
     <section>
@@ -297,7 +304,7 @@
 
     <section>
       <h2>How long information is kept</h2>
-      <p>paryx.uk does not maintain its own visitor-profile database. Browser-side repository cache entries are treated as current for up to one hour but may remain on your device until they are refreshed or cleared. Vercel states that the temporary visitor identifier used by Web Analytics is discarded after 24 hours; aggregated analytics reporting is retained according to the Vercel plan and service settings.</p>
+      <p>paryx.uk does not maintain its own visitor-profile database. Browser-side repository cache entries are treated as current for up to one hour but may remain on your device until they are refreshed or cleared. Vercel states that the temporary visitor identifier used by Web Analytics is discarded after 24 hours. Cloudflare states that the source IP received by its RUM beacon is discarded at the nearest Cloudflare data centre and is not stored in the RUM service's core databases or logs. Aggregated analytics and provider infrastructure, security, and operational data are retained according to the relevant service settings and privacy practices.</p>
       <p>For information directly controlled by Paryx, ordinary enquiry emails are retained for up to 12 months after the last relevant message. Correspondence relating to privacy or data-rights requests is retained for up to 24 months after the request is closed so there is a record of how it was handled. Information may be kept longer where reasonably necessary for an ongoing issue, security investigation, legal obligation, or legal claim, and may be deleted earlier when it is no longer needed.</p>
     </section>
 
