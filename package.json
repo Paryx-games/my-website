@@ -1,8 +1,18 @@
 {
+	"scripts": {
+		"dev:triangle-led-front": "vite --config test/previews/triangle-led-front/vite.config.mts",
+		"build:triangle-led-front": "vite build --config test/previews/triangle-led-front/vite.config.mts"
+	},
 	"dependencies": {
+		"lil-gui": "^0.21.0",
+		"react": "^19.3.0",
+		"react-dom": "^19.3.0",
 		"vgpu": "^0.5.0"
 	},
 	"devDependencies": {
-		"@webgpu/types": "^0.1.74"
+		"@vgpu/wgsl": "^0.5.0",
+		"@vitejs/plugin-react": "^6.1.1",
+		"@webgpu/types": "^0.1.74",
+		"vite": "^8.3.0"
 	}
 }

@@ -1,6 +1,15 @@
+# local secrets and deployment state
 .env
 .env.local
 .env.*.local
 .vercel
+
+# installed dependencies and package cache
 node_modules
+.pnpm-store
+
+# generated preview builds
+test/previews/triangle-led-front/dist
+
+# operating system files
 .DS_Store
