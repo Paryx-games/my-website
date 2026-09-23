@@ -1722,6 +1722,32 @@
       color: var(--color-text);
     }
 
+    .discord-app-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      height: 32px;
+      padding: 0 0.65rem;
+      border-radius: 8px;
+      color: var(--color-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition:
+        color var(--motion-fast) var(--ease),
+        background var(--motion-fast) var(--ease);
+    }
+
+    .discord-app-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .discord-app-btn:hover {
+      background: var(--color-hover);
+      color: var(--color-text);
+    }
+
     .icon-btn .i-check {
       display: none;
     }
@@ -1737,6 +1763,55 @@
     .icon-btn.is-copied .i-check {
       display: block;
       animation: pop 0.3s var(--ease);
+    }
+
+    .app-toast {
+      position: fixed;
+      z-index: 20000;
+      left: 50%;
+      top: 50%;
+      width: min(360px, calc(100vw - 32px));
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--color-border-hover);
+      border-radius: 12px;
+      background: rgba(21, 21, 24, 0.96);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      color: var(--color-soft);
+      text-align: left;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+      transition:
+        opacity 160ms ease,
+        transform 160ms var(--ease);
+      backdrop-filter: blur(12px);
+    }
+
+    .app-toast[hidden] {
+      display: none;
+    }
+
+    .app-toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .app-toast strong,
+    .app-toast span {
+      display: block;
+    }
+
+    .app-toast strong {
+      color: var(--color-text);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .app-toast span {
+      margin-top: 0.3rem;
+      color: var(--color-muted);
+      font-size: 0.78rem;
+      line-height: 1.45;
     }
 
     .sr-only {
@@ -1842,7 +1917,8 @@
       .link-chip,
       .contact-card,
       .repo-foot span,
-      .repo-foot .dot {
+      .repo-foot .dot,
+      .app-toast {
         transition: none;
       }
 
@@ -2018,6 +2094,11 @@
 
   <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="/privacy-policy">Privacy Policy</a></footer>
 
+  <div class="app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden>
+    <strong id="appToastTitle"></strong>
+    <span id="appToastMessage"></span>
+  </div>
+
   <button class="scroll-btn" id="scrollBtn" aria-label="Scroll down">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
       stroke-linejoin="round" aria-hidden="true">
@@ -2177,6 +2258,9 @@
 
     const HERO_PREFIX = "Hi, I'm ";
     const HERO_NAME = "Paryx";
+    const DISCORD_APP_URL = "discord://-/users/1376223581658419243";
+    const platform = navigator.userAgentData?.platform || navigator.platform || "";
+    const IS_WINDOWS = /windows|win32|win64/i.test(platform) || /windows/i.test(navigator.userAgent);
     const REPO_CACHE_MS = 36e5;
     const GITHUB_LANGUAGE_COLORS = {
       "C#": "#178600",
@@ -2777,7 +2861,29 @@
       });
     };
 
-    const contactCard = ({ label, value, icon, brand, mailto, url, badge, badgeTip, primary }) => {
+    let toastTimer = 0;
+    let toastHideTimer = 0;
+
+    const showToast = (title, message) => {
+      const toast = $("appToast");
+      if (!toast) return;
+
+      clearTimeout(toastTimer);
+      clearTimeout(toastHideTimer);
+      $("appToastTitle").textContent = title;
+      $("appToastMessage").textContent = message;
+      toast.hidden = false;
+      requestAnimationFrame(() => toast.classList.add("is-visible"));
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("is-visible");
+        toastHideTimer = setTimeout(() => {
+          if (!toast.classList.contains("is-visible")) toast.hidden = true;
+        }, reduce ? 0 : 180);
+      }, 3200);
+    };
+
+    const contactCard = ({ label, value, icon, brand, mailto, url, appUrl, badge, badgeTip, primary }) => {
       const what = label.toLowerCase();
       const badgeHtml = badge
         ? `<span class="contact-badge${primary ? " is-primary" : ""}" tabindex="0" data-tip="${esc(badgeTip || badge)}" aria-label="${esc(badgeTip || badge)}">${esc(badge)}</span>`
@@ -2792,6 +2898,7 @@
         <button class="icon-btn" type="button" data-copy="${esc(value)}" data-what="${what}" data-tip="Copy ${what}" aria-label="Copy ${what}"><span class="i-copy">${UI.copy}</span><span class="i-check">${UI.check}</span></button>
         ${mailto ? `<a class="icon-btn" href="mailto:${esc(value)}" data-tip="Send an email" aria-label="Send an email">${UI.mail}</a>` : ""}
         ${url ? `<a class="icon-btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-tip="Open ${what}" aria-label="Open ${what}">${UI.launch}</a>` : ""}
+        ${appUrl && IS_WINDOWS ? `<a class="discord-app-btn" href="${esc(appUrl)}" data-discord-app data-tip="Open in Discord desktop app" aria-label="Open in Discord desktop app">${UI.launch}<span>Open in Discord</span></a>` : ""}
       </div>
       <span class="sr-only" role="status"></span>
     </div>`;
@@ -2800,6 +2907,15 @@
     const copyTimers = new WeakMap();
 
     const onContactClick = async (event) => {
+      const discordAppLink = event.target.closest(".discord-app-btn[data-discord-app]");
+      if (discordAppLink) {
+        showToast(
+          "Opening Discord...",
+          "This only works if the Discord desktop app is installed."
+        );
+        return;
+      }
+
       const button = event.target.closest(".icon-btn[data-copy]");
       if (!button) return;
       const status = button.closest(".contact-card").querySelector("[role=status]");
@@ -2824,6 +2940,7 @@
           icon: "discord",
           brand: "#5865F2",
           url: "https://discord.com/users/1376223581658419243",
+          appUrl: DISCORD_APP_URL,
           badge: "Primary contact",
           badgeTip: "Preferred contact - usually the fastest way to reach me",
           primary: true
