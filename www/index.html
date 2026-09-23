@@ -2777,7 +2777,7 @@
       });
     };
 
-    const contactCard = ({ label, value, icon, brand, mailto, badge, badgeTip, primary }) => {
+    const contactCard = ({ label, value, icon, brand, mailto, url, badge, badgeTip, primary }) => {
       const what = label.toLowerCase();
       const badgeHtml = badge
         ? `<span class="contact-badge${primary ? " is-primary" : ""}" tabindex="0" data-tip="${esc(badgeTip || badge)}" aria-label="${esc(badgeTip || badge)}">${esc(badge)}</span>`
@@ -2791,6 +2791,7 @@
       <div class="actions">
         <button class="icon-btn" type="button" data-copy="${esc(value)}" data-what="${what}" data-tip="Copy ${what}" aria-label="Copy ${what}"><span class="i-copy">${UI.copy}</span><span class="i-check">${UI.check}</span></button>
         ${mailto ? `<a class="icon-btn" href="mailto:${esc(value)}" data-tip="Send an email" aria-label="Send an email">${UI.mail}</a>` : ""}
+        ${url ? `<a class="icon-btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-tip="Open ${what}" aria-label="Open ${what}">${UI.launch}</a>` : ""}
       </div>
       <span class="sr-only" role="status"></span>
     </div>`;
@@ -2822,6 +2823,7 @@
           value: CONFIG.discord,
           icon: "discord",
           brand: "#5865F2",
+          url: "https://discord.com/users/1376223581658419243",
           badge: "Primary contact",
           badgeTip: "Preferred contact - usually the fastest way to reach me",
           primary: true
