@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0a0a0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@500&display=swap" rel="stylesheet">
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 
   <style>
@@ -108,6 +108,11 @@
       font-weight: 300;
       letter-spacing: -0.03em;
       line-height: 1.1;
+    }
+
+    .hero-name {
+      font-family: "Sora", sans-serif;
+      font-weight: 500;
     }
 
     .line {
@@ -225,7 +230,7 @@
   <div class="grid" aria-hidden="true"></div>
 
   <section class="hero">
-    <h1 aria-label="Hi, I'm Paryx"><span id="type"></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
+    <h1 aria-label="Hi, I'm paryx"><span id="type"></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
 
     <div class="line" id="line" aria-hidden="true"></div>
 
@@ -246,7 +251,8 @@
   </section>
 
   <script>
-    const HERO_TEXT = "Hi, I'm Paryx";
+    const HERO_PREFIX = "Hi, I'm ";
+    const HERO_NAME = "paryx";
     const TEST_TEXT = "This is my testing domain!";
 
     const $ = (id) => document.getElementById(id);
@@ -268,7 +274,11 @@
       const rotCaret = $("rotCaret");
 
       if (reduce) {
-        $("type").textContent = HERO_TEXT;
+        $("type").textContent = HERO_PREFIX;
+        const heroName = document.createElement("span");
+        heroName.className = "hero-name";
+        heroName.textContent = HERO_NAME;
+        $("type").append(heroName);
         caret.hidden = true;
         line.classList.add("is-visible");
         $("rot").textContent = TEST_TEXT;
@@ -279,7 +289,11 @@
       }
 
       await sleep(700);
-      await typeInto($("type"), HERO_TEXT, 62, 72);
+      await typeInto($("type"), HERO_PREFIX, 62, 72);
+      const heroName = document.createElement("span");
+      heroName.className = "hero-name";
+      $("type").append(heroName);
+      await typeInto(heroName, HERO_NAME, 62, 72);
       caret.hidden = true;
       await sleep(140);
 
