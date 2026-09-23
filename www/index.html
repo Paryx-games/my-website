@@ -1179,11 +1179,15 @@
       width: 15px;
       height: 15px;
       fill: currentColor;
+      color: var(--brand, currentColor);
+      transition:
+        color var(--motion-fast) var(--ease),
+        filter var(--motion-fast) var(--ease);
     }
 
     .link-chip.is-gradient:hover {
-      border-color: #8f7188;
-      background: linear-gradient(90deg, rgba(255, 0, 80, 0.1), rgba(37, 244, 238, 0.1));
+      border-color: var(--brand);
+      background: linear-gradient(90deg, rgba(37, 244, 238, 0.1), rgba(254, 44, 85, 0.1));
     }
 
     .link-chip.is-gradient:hover span {
@@ -1193,8 +1197,9 @@
       color: transparent;
     }
 
-    .link-chip.is-gradient:hover svg {
-      color: #9d8fba;
+    .link-chip.is-gradient svg {
+      color: #25F4EE;
+      filter: drop-shadow(1px 0 #FE2C55);
     }
 
     @supports (color: color-mix(in srgb, red, blue)) {
@@ -2121,15 +2126,15 @@
         "reverse engineering, networking, and more"
       ],
       links: [
-        { label: "GitHub", icon: "github", brand: "#F0F6FC", url: "https://github.com/Paryx-games" },
+        { label: "GitHub", icon: "github", brand: "#FFFFFF", url: "https://github.com/Paryx-games" },
         { label: "Discord", icon: "discord", brand: "#5865F2", url: "https://discord.com/users/1376223581658419243" },
-        { label: "Steam", icon: "steam", brand: "#66C0F4", url: "https://steamcommunity.com/id/paryxgaming/" },
-        { label: "X", icon: "x", brand: "#F0F6FC", url: "https://x.com/paryx_games" },
-        { label: "YouTube", icon: "youtube", brand: "#FF0033", url: "https://www.youtube.com/@ParyxGames" },
+        { label: "Steam", icon: "steam", brand: "#FFFFFF", url: "https://steamcommunity.com/id/paryxgaming/" },
+        { label: "X", icon: "x", brand: "#FFFFFF", url: "https://x.com/paryx_games" },
+        { label: "YouTube", icon: "youtube", brand: "#FF0000", url: "https://www.youtube.com/@ParyxGames" },
         { label: "Twitch", icon: "twitch", brand: "#9146FF", url: "https://www.twitch.tv/paryxgames" },
-        { label: "TikTok", icon: "tiktok", brand: "#F0F6FC", url: "https://www.tiktok.com/@paryx.games" },
+        { label: "TikTok", icon: "tiktok", brand: "#25F4EE", gradient: "linear-gradient(90deg,#25F4EE 0%,#FFFFFF 48%,#FE2C55 100%)", url: "https://www.tiktok.com/@paryx.games" },
         { label: "Reddit", icon: "reddit", brand: "#FF4500", url: "https://www.reddit.com/user/Narrow_Proof4204/" },
-        { label: "Roblox", icon: "roblox", brand: "#00A2FF", url: "https://www.roblox.com/users/1577142632/profile" }
+        { label: "Roblox", icon: "roblox", brand: "#FFFFFF", url: "https://www.roblox.com/users/1577142632/profile" }
       ],
       languages: [
         ["Lua", "lua", "#5C5CFF", "https://www.lua.org/"],
