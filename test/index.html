@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0a0a0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@700&display=swap" rel="stylesheet">
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 
   <style>
@@ -111,8 +111,20 @@
     }
 
     .hero-name {
+      position: relative;
       font-family: "Sora", sans-serif;
-      font-weight: 500;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .hero-name.is-pixel-typing {
+      color: transparent;
+    }
+
+    .hero-name canvas {
+      position: absolute;
+      left: 0;
+      pointer-events: none;
     }
 
     .line {
@@ -250,6 +262,7 @@
     </p>
   </section>
 
+  <script src="/assets/pixel-name.js"></script>
   <script>
     const HERO_PREFIX = "Hi, I'm ";
     const HERO_NAME = "paryx";
@@ -293,8 +306,8 @@
       const heroName = document.createElement("span");
       heroName.className = "hero-name";
       $("type").append(heroName);
-      await typeInto(heroName, HERO_NAME, 62, 72);
       caret.hidden = true;
+      await startPixelName(HERO_NAME);
       await sleep(140);
 
       line.classList.add("is-visible");
