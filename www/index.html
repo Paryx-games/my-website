@@ -1327,9 +1327,79 @@
       margin: calc(var(--section-gap) * -0.38) 0;
     }
 
+    .discord-presence-summary {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 1.4em;
+      margin: calc(var(--space-4) * -0.4) 0 var(--space-4);
+      color: var(--color-soft);
+      font-size: var(--text-small);
+      line-height: 1.5;
+    }
+
+    .discord-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+
+    .discord-status-dot {
+      width: 7px;
+      height: 7px;
+      flex: none;
+      border-radius: 50%;
+      background: #80848e;
+    }
+
+    .discord-status-dot[data-status="online"] {
+      background: #23a55a;
+    }
+
+    .discord-status-dot[data-status="idle"] {
+      background: #f0b232;
+    }
+
+    .discord-status-dot[data-status="dnd"] {
+      background: #f23f43;
+    }
+
+    .discord-presence-separator {
+      color: var(--color-faint);
+    }
+
+    .discord-custom-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      min-width: 0;
+      color: var(--color-muted);
+      font-weight: 300;
+    }
+
+    .discord-custom-status svg {
+      width: 14px;
+      height: 14px;
+      flex: none;
+      stroke: currentColor;
+    }
+
+    .discord-custom-status span {
+      overflow-wrap: anywhere;
+    }
+
     .discord-activities {
       display: grid;
       gap: var(--space-3);
+    }
+
+    .discord-activity-empty {
+      color: var(--color-muted);
+      font-size: var(--text-small);
+      font-weight: 300;
+      line-height: 1.6;
     }
 
     .discord-activity-card {
@@ -1939,9 +2009,25 @@
           aria-hidden="true"></span></p>
     </section>
 
-    <section class="discord-presence-slot" id="discordPresenceSlot" hidden>
+    <section class="discord-presence-slot" id="discordPresenceSlot">
       <h2>Activity</h2>
-      <div class="discord-activities" id="discordPresence" aria-live="polite"></div>
+      <div class="discord-presence-summary" id="discordPresenceSummary" aria-live="polite">
+        <span class="discord-status">
+          <i class="discord-status-dot" id="discordStatusDot" data-status="offline" aria-hidden="true"></i>
+          <span id="discordStatusText">Loading...</span>
+        </span>
+        <span class="discord-presence-separator" id="discordStatusSeparator" aria-hidden="true" hidden>•</span>
+        <span class="discord-custom-status" id="discordCustomStatus" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+          </svg>
+          <span id="discordCustomStatusText"></span>
+        </span>
+      </div>
+      <div class="discord-activities" id="discordPresence" aria-live="polite">
+        <p class="discord-activity-empty">Checking Discord activity...</p>
+      </div>
     </section>
     <div class="discord-presence-slot" id="discordPresenceErrorSlot" hidden aria-live="polite"></div>
 
@@ -3125,9 +3211,35 @@
       updateDiscordActivityTimes();
     };
 
-    const hideDiscordPresence = () => {
-      $("discordPresenceSlot").hidden = true;
-      $("discordPresence").innerHTML = "";
+    const DISCORD_STATUS_META = {
+      online: { label: "Online" },
+      idle: { label: "Away" },
+      dnd: { label: "Do Not Disturb" },
+      offline: { label: "Offline" }
+    };
+
+    const resetDiscordPresence = () => {
+      $("discordPresenceSlot").hidden = false;
+      $("discordStatusDot").dataset.status = "offline";
+      $("discordStatusText").textContent = "Loading...";
+      $("discordStatusSeparator").hidden = true;
+      $("discordCustomStatus").hidden = true;
+      $("discordCustomStatusText").textContent = "";
+      $("discordPresence").innerHTML = '<p class="discord-activity-empty">Checking Discord activity...</p>';
+    };
+
+    const renderDiscordPresenceSummary = (payload) => {
+      const status = String(payload?.status || "offline").toLowerCase();
+      const meta = DISCORD_STATUS_META[status] || DISCORD_STATUS_META.offline;
+      const customStatus = (Array.isArray(payload?.activities) ? payload.activities : [])
+        .find((activity) => activity && Number(activity.type) === 4);
+      const customText = String(customStatus?.state || "").trim();
+
+      $("discordStatusDot").dataset.status = status in DISCORD_STATUS_META ? status : "offline";
+      $("discordStatusText").textContent = meta.label;
+      $("discordStatusSeparator").hidden = !customText;
+      $("discordCustomStatus").hidden = !customText;
+      $("discordCustomStatusText").textContent = customText;
     };
 
     const renderDiscordPresence = (payload) => {
@@ -3136,22 +3248,29 @@
       const activities = (Array.isArray(payload?.activities) ? payload.activities : [])
         .filter((activity) => activity && Number(activity.type) !== 4);
 
+      renderDiscordPresenceSummary(payload);
+      $("discordPresenceErrorSlot").hidden = true;
+      $("discordPresenceErrorSlot").innerHTML = "";
+      slot.hidden = false;
+
       if (!activities.length) {
-        hideDiscordPresence();
-        $("discordPresenceErrorSlot").hidden = true;
-        $("discordPresenceErrorSlot").innerHTML = "";
+        root.innerHTML = '<p class="discord-activity-empty">Not doing anything currently</p>';
         return;
       }
 
       root.innerHTML = activities.map((activity) => discordActivityCard(activity, payload?.spotify)).join("");
-      $("discordPresenceErrorSlot").hidden = true;
-      $("discordPresenceErrorSlot").innerHTML = "";
-      slot.hidden = false;
       initializeDiscordActivityCards();
     };
 
     const renderDiscordPresenceError = (message) => {
-      hideDiscordPresence();
+      $("discordPresenceSlot").hidden = false;
+      $("discordStatusDot").dataset.status = "offline";
+      $("discordStatusText").textContent = "Status unavailable";
+      $("discordStatusSeparator").hidden = true;
+      $("discordCustomStatus").hidden = true;
+      $("discordCustomStatusText").textContent = "";
+      $("discordPresence").innerHTML = '<p class="discord-activity-empty">Discord activity unavailable</p>';
+
       const errorSlot = $("discordPresenceErrorSlot");
       errorSlot.innerHTML = `<div class="discord-presence-error">${UI.warning}<span>${esc(message)}</span></div>`;
       errorSlot.hidden = false;
@@ -3337,7 +3456,7 @@
     };
 
     const initDiscordPresence = async () => {
-      hideDiscordPresence();
+      resetDiscordPresence();
       const initial = await loadDiscordPresence();
       lanyardUserId = String(initial?.user?.id || "");
 
