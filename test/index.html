@@ -118,11 +118,7 @@
       letter-spacing: 0;
     }
 
-    .hero-name.is-pixel-typing {
-      color: transparent;
-    }
-
-    .hero-name canvas {
+    .pixel-dust {
       position: absolute;
       left: 0;
       pointer-events: none;
@@ -165,6 +161,14 @@
       background: var(--color-text);
       vertical-align: -0.05em;
       opacity: 0.7;
+    }
+
+    .caret.is-pixel-name {
+      width: 0.3em;
+      height: 0.8em;
+      margin-left: 0.05em;
+      background: var(--pixel-accent, #5b8cff);
+      opacity: 1;
     }
 
     .rotator .caret {
@@ -264,170 +268,196 @@
   </section>
 
   <script>
-const startPixelName = async (name) => {
-  const palettes = [
-    { text: "#f5f5f5", accent: "#5b8cff" },
-    { text: "#d9ffe6", accent: "#2bff88" },
-    { text: "#ffe4f1", accent: "#ff4fa3" },
-    { text: "#fff0e0", accent: "#ff8a2b" },
-  ];
-  const typeInterval = 170;
-  const trailTime = 550;
-  const cursorLinger = 900;
-  const loopPause = 2200;
-  const nameElement = document.querySelector(".hero-name");
-  nameElement.textContent = name;
+    const PIXEL_NAME_CONFIG = {
+      palettes: [
+        { text: "#f5f5f5", accent: "#5b8cff" },
+        { text: "#d9ffe6", accent: "#2bff88" },
+        { text: "#ffe4f1", accent: "#ff4fa3" },
+        { text: "#fff0e0", accent: "#ff8a2b" },
+      ],
+      typeInterval: 230,
+      eraseInterval: 130,
+      holdDuration: 2600,
+      restartPause: 450,
+      trailTime: 550,
+      cursorLinger: 900,
+      particleBurst: 14,
+      trailChance: 0.7,
+      horizontalSpeed: 22,
+      verticalSpeedMin: 60,
+      verticalSpeedMax: 210,
+      particleLifeMin: 1000,
+      particleLifeMax: 2000,
+      maxParticles: 500,
+    };
 
-  if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const startPixelName = async (name) => {
+      const nameElement = document.querySelector(".hero-name");
+      const hero = nameElement.closest(".hero");
+      const caret = document.getElementById("caret");
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  const canvas = document.createElement("canvas");
-  canvas.setAttribute("aria-hidden", "true");
-  nameElement.append(canvas);
-  const context = canvas.getContext("2d");
-  if (!context) return;
+      const canvas = document.createElement("canvas");
+      canvas.className = "pixel-dust";
+      canvas.setAttribute("aria-hidden", "true");
+      const context = canvas.getContext("2d");
+      if (!context) return;
 
-  let layout;
-  let glyphPoints = [];
-  let particles = [];
-  let paletteIndex = 0;
-  let startedAt = 0;
-  let spawnedCount = 0;
-  let finishedAt = 0;
-  let firstCycleComplete;
-  const firstCycle = new Promise((resolve) => { firstCycleComplete = resolve; });
-  const clamp = (value) => Math.max(0, Math.min(1, value));
+      const baselineMarker = document.createElement("span");
+      baselineMarker.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline;pointer-events:none";
+      nameElement.after(baselineMarker);
+      hero.append(canvas);
 
-  const prepare = () => {
-    const style = getComputedStyle(nameElement);
-    const size = parseFloat(style.fontSize);
-    const font = `${style.fontWeight} ${size}px ${style.fontFamily}`;
-    const ratio = Math.min(devicePixelRatio || 1, 2);
-    const buffer = document.createElement("canvas");
-    const bufferContext = buffer.getContext("2d");
-    bufferContext.font = font;
-    const offsets = [0];
-    for (let index = 1; index <= name.length; index++) {
-      offsets.push(bufferContext.measureText(name.slice(0, index)).width);
-    }
-    const width = Math.ceil(offsets[name.length] + size * 0.4);
-    const height = Math.ceil(size * 1.8);
-    const baseline = size * 1.28;
-    const pixel = Math.max(3, Math.round(size / 22));
+      let layout;
+      let particles = [];
+      let cycleIndex = -1;
+      let previousVisible = 0;
+      let startedAt = 0;
+      let firstCycleComplete;
+      const firstCycle = new Promise((resolve) => { firstCycleComplete = resolve; });
+      const glyphPoints = new Map();
 
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    canvas.style.top = `${-size * 0.4}px`;
-    canvas.width = Math.ceil(width * ratio);
-    canvas.height = Math.ceil(height * ratio);
-    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const prepare = () => {
+        const size = parseFloat(getComputedStyle(nameElement).fontSize);
+        const topPadding = Math.ceil(PIXEL_NAME_CONFIG.verticalSpeedMax * PIXEL_NAME_CONFIG.particleLifeMax / 1000 + size * 0.12 + 16);
+        const width = hero.clientWidth;
+        const height = hero.clientHeight + topPadding;
+        const ratio = Math.min(devicePixelRatio || 1, 2);
+        canvas.style.top = `${-topPadding}px`;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        canvas.width = Math.ceil(width * ratio);
+        canvas.height = Math.ceil(height * ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        layout = { width, height, topPadding, pixel: Math.max(3, Math.round(size / 22)) };
+        glyphPoints.clear();
+      };
 
-    buffer.width = width;
-    buffer.height = height;
-    bufferContext.font = font;
-    bufferContext.textBaseline = "alphabetic";
-    bufferContext.fillText(name, 0, baseline);
-    const pixels = bufferContext.getImageData(0, 0, width, height).data;
-    glyphPoints = [...name].map((letter, index) => {
-      const points = [];
-      if (letter === " ") return points;
-      for (let y = 0; y < height; y += pixel) {
-        for (let x = Math.floor(offsets[index]); x < offsets[index + 1]; x += pixel) {
-          if (pixels[(y * width + x) * 4 + 3] > 128) points.push([x, y]);
+      const pointsFor = (letter) => {
+        if (glyphPoints.has(letter)) return glyphPoints.get(letter);
+        const style = getComputedStyle(nameElement);
+        const size = parseFloat(style.fontSize);
+        const buffer = document.createElement("canvas");
+        buffer.width = Math.ceil(size * 2);
+        buffer.height = Math.ceil(size * 1.5);
+        const bufferContext = buffer.getContext("2d");
+        bufferContext.font = `${style.fontWeight} ${size}px ${style.fontFamily}`;
+        bufferContext.textBaseline = "alphabetic";
+        bufferContext.fillText(letter, 0, size);
+        const pixels = bufferContext.getImageData(0, 0, buffer.width, buffer.height).data;
+        const points = [];
+        for (let y = 0; y < buffer.height; y += layout.pixel) {
+          for (let x = 0; x < buffer.width; x += layout.pixel) {
+            if (pixels[(y * buffer.width + x) * 4 + 3] > 128) points.push([x, y]);
+          }
         }
-      }
-      return points;
-    });
-    layout = { width, height, size, font, offsets, baseline, pixel };
-  };
+        glyphPoints.set(letter, points);
+        return points;
+      };
 
-  const spawnParticle = (index, now) => {
-    const points = glyphPoints[index];
-    if (!points.length) return;
-    let point = points[Math.floor(Math.random() * points.length)];
-    const other = points[Math.floor(Math.random() * points.length)];
-    if (other[1] < point[1]) point = other;
-    const palette = palettes[paletteIndex];
-    particles.push({
-      x: point[0],
-      y: point[1] - Math.random() * layout.size * 0.12,
-      velocityX: (Math.random() - 0.5) * 22,
-      velocityY: -(60 + Math.random() * 150),
-      born: now,
-      life: 1000 + Math.random() * 1000,
-      size: layout.pixel * (0.6 + Math.random() * 0.9),
-      color: Math.random() < 2 / 3 ? palette.text : palette.accent,
-    });
-  };
+      const emitLetter = (index, now, count) => {
+        const points = pointsFor(name[index]);
+        const textNode = nameElement.firstChild;
+        if (!points.length || !textNode || textNode.length <= index) return;
+        const range = document.createRange();
+        range.setStart(textNode, index);
+        range.setEnd(textNode, index + 1);
+        const letterBounds = range.getBoundingClientRect();
+        const heroBounds = hero.getBoundingClientRect();
+        const baseline = baselineMarker.getBoundingClientRect().top;
+        const size = parseFloat(getComputedStyle(nameElement).fontSize);
+        const palette = PIXEL_NAME_CONFIG.palettes[cycleIndex % PIXEL_NAME_CONFIG.palettes.length];
+        for (let particleIndex = 0; particleIndex < count; particleIndex++) {
+          let point = points[Math.floor(Math.random() * points.length)];
+          const other = points[Math.floor(Math.random() * points.length)];
+          if (other[1] < point[1]) point = other;
+          particles.push({
+            x: letterBounds.left - heroBounds.left + point[0],
+            y: baseline - heroBounds.top + layout.topPadding - size + point[1] - Math.random() * size * 0.12,
+            velocityX: (Math.random() - 0.5) * PIXEL_NAME_CONFIG.horizontalSpeed,
+            velocityY: -(PIXEL_NAME_CONFIG.verticalSpeedMin + Math.random() * (PIXEL_NAME_CONFIG.verticalSpeedMax - PIXEL_NAME_CONFIG.verticalSpeedMin)),
+            born: now,
+            life: PIXEL_NAME_CONFIG.particleLifeMin + Math.random() * (PIXEL_NAME_CONFIG.particleLifeMax - PIXEL_NAME_CONFIG.particleLifeMin),
+            size: layout.pixel * (0.6 + Math.random() * 0.9),
+            color: Math.random() < 2 / 3 ? palette.text : palette.accent,
+          });
+        }
+      };
 
-  const draw = (now) => {
-    const elapsed = now - startedAt;
-    const visible = Math.min(name.length, Math.floor(elapsed / typeInterval) + 1);
-    const palette = palettes[paletteIndex];
-    const { width, height, size, font, offsets, baseline, pixel } = layout;
-    context.clearRect(0, 0, width, height);
-    context.font = font;
-    context.textBaseline = "alphabetic";
+      const draw = (now) => {
+        const elapsed = Math.max(0, now - startedAt);
+        const typingDuration = name.length * PIXEL_NAME_CONFIG.typeInterval;
+        const erasingStartsAt = typingDuration + PIXEL_NAME_CONFIG.holdDuration;
+        const erasingEndsAt = erasingStartsAt + name.length * PIXEL_NAME_CONFIG.eraseInterval;
+        const cycleDuration = erasingEndsAt + PIXEL_NAME_CONFIG.restartPause;
+        const nextCycleIndex = Math.floor(elapsed / cycleDuration);
+        const cycleElapsed = elapsed % cycleDuration;
+        if (nextCycleIndex !== cycleIndex) {
+          cycleIndex = nextCycleIndex;
+          previousVisible = 0;
+          particles = [];
+          const palette = PIXEL_NAME_CONFIG.palettes[cycleIndex % PIXEL_NAME_CONFIG.palettes.length];
+          nameElement.style.color = palette.text;
+          caret.style.setProperty("--pixel-accent", palette.accent);
+        }
 
-    for (; spawnedCount < visible; spawnedCount++) {
-      for (let count = 0; count < 14; count++) spawnParticle(spawnedCount, now);
-    }
-    for (let index = 0; index < visible; index++) {
-      const age = elapsed - index * typeInterval;
-      if (age < trailTime && Math.random() < 0.7) spawnParticle(index, now);
-      const fade = clamp(age / 120);
-      context.globalAlpha = fade;
-      context.fillStyle = palette.text;
-      context.fillText(name[index], offsets[index], baseline - (1 - fade) * 10);
-    }
-    context.globalAlpha = 1;
+        const isTyping = cycleElapsed < typingDuration;
+        const isErasing = cycleElapsed >= erasingStartsAt && cycleElapsed < erasingEndsAt;
+        caret.classList.toggle("is-idle", !isTyping && !isErasing && cycleElapsed >= typingDuration + PIXEL_NAME_CONFIG.cursorLinger);
+        const visible = isTyping
+          ? Math.min(name.length, Math.floor(cycleElapsed / PIXEL_NAME_CONFIG.typeInterval) + 1)
+          : isErasing
+            ? Math.max(0, name.length - Math.floor((cycleElapsed - erasingStartsAt) / PIXEL_NAME_CONFIG.eraseInterval) - 1)
+            : cycleElapsed < erasingStartsAt ? name.length : 0;
 
-    const isTyping = visible < name.length || elapsed < name.length * typeInterval + cursorLinger;
-    if (isTyping || Math.floor(elapsed / 520) % 2 === 0) {
-      context.fillStyle = palette.accent;
-      context.fillRect(offsets[visible] + size * 0.05, baseline - size * 0.78, size * 0.3, size * 0.8);
-    }
+        if (visible !== previousVisible) {
+          nameElement.textContent = name.slice(0, visible);
+          if (isTyping) {
+            for (let index = previousVisible; index < visible; index++) emitLetter(index, now, PIXEL_NAME_CONFIG.particleBurst);
+          }
+          previousVisible = visible;
+        }
+        if (isTyping) {
+          for (let index = 0; index < visible; index++) {
+            const age = cycleElapsed - index * PIXEL_NAME_CONFIG.typeInterval;
+            if (age < PIXEL_NAME_CONFIG.trailTime && Math.random() < PIXEL_NAME_CONFIG.trailChance) emitLetter(index, now, 1);
+          }
+        }
 
-    let alive = 0;
-    for (const particle of particles) {
-      const age = now - particle.born;
-      if (age > particle.life) continue;
-      alive++;
-      const seconds = age / 1000;
-      const remaining = 1 - age / particle.life;
-      const x = Math.round((particle.x + particle.velocityX * seconds) / pixel) * pixel;
-      const y = Math.round((particle.y + particle.velocityY * seconds) / pixel) * pixel;
-      context.globalAlpha = remaining * remaining * 0.95;
-      context.fillStyle = particle.color;
-      context.fillRect(x, y, particle.size, particle.size);
-    }
-    context.globalAlpha = 1;
-    if (particles.length > 500) particles = particles.filter((particle) => now - particle.born < particle.life);
+        context.clearRect(0, 0, layout.width, layout.height);
+        for (const particle of particles) {
+          const age = now - particle.born;
+          if (age > particle.life) continue;
+          const seconds = age / 1000;
+          const remaining = 1 - age / particle.life;
+          const x = Math.round((particle.x + particle.velocityX * seconds) / layout.pixel) * layout.pixel;
+          const y = Math.round((particle.y + particle.velocityY * seconds) / layout.pixel) * layout.pixel;
+          context.globalAlpha = remaining * remaining * 0.95;
+          context.fillStyle = particle.color;
+          context.fillRect(x, y, particle.size, particle.size);
+        }
+        context.globalAlpha = 1;
+        if (particles.length > PIXEL_NAME_CONFIG.maxParticles) particles = particles.filter((particle) => now - particle.born < particle.life);
+        if (elapsed >= typingDuration && firstCycleComplete) {
+          firstCycleComplete();
+          firstCycleComplete = null;
+        }
+        requestAnimationFrame(draw);
+      };
 
-    if (visible === name.length && elapsed >= name.length * typeInterval) firstCycleComplete();
-    if (visible === name.length && alive === 0 && elapsed > name.length * typeInterval + trailTime + cursorLinger) {
-      if (!finishedAt) finishedAt = now;
-      if (now - finishedAt > loopPause) {
-        paletteIndex = (paletteIndex + 1) % palettes.length;
-        startedAt = now;
-        spawnedCount = 0;
-        finishedAt = 0;
+      const style = getComputedStyle(nameElement);
+      await Promise.race([document.fonts.load(`${style.fontWeight} 100px ${style.fontFamily}`).catch(() => {}), new Promise((resolve) => setTimeout(resolve, 2500))]);
+      prepare();
+      nameElement.textContent = "";
+      caret.classList.add("is-pixel-name");
+      startedAt = performance.now();
+      requestAnimationFrame(draw);
+      addEventListener("resize", () => {
+        prepare();
         particles = [];
-      }
-    }
-    requestAnimationFrame(draw);
-  };
-
-  await Promise.race([document.fonts.load("700 100px Sora").catch(() => {}), new Promise((resolve) => setTimeout(resolve, 2500))]);
-  prepare();
-  nameElement.classList.add("is-pixel-typing");
-  startedAt = performance.now();
-  requestAnimationFrame(draw);
-  addEventListener("resize", () => {
-    prepare();
-    particles = [];
-  });
-  await firstCycle;
-};
+      });
+      await firstCycle;
+    };
   </script>
   <script>
     const HERO_PREFIX = "Hi, I'm ";
@@ -473,7 +503,7 @@ const startPixelName = async (name) => {
       heroName.className = "hero-name";
       heroName.textContent = HERO_NAME;
       $("type").append(heroName);
-      caret.hidden = true;
+      caret.hidden = false;
       await startPixelName(HERO_NAME);
       await sleep(140);
 
