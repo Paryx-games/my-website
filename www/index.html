@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- keep editable configs at the top of each site's script, before functions or dom setup. keep css tokens at the top of the stylesheet. follow this for future sites too. -->
 <html lang="en">
 
 <head>
@@ -24,7 +25,7 @@
     content="Paryx's personal developer site for software projects, Roblox development, experiments, GitHub repositories, and live activity.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@675&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@675;700&display=swap" rel="stylesheet">
   <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
   <script>document.documentElement.classList.add('js')</script>
   <style>
@@ -195,6 +196,19 @@
       min-height: 1.1em;
     }
 
+    .hero-name {
+      position: relative;
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .pixel-dust {
+      position: absolute;
+      left: 0;
+      pointer-events: none;
+    }
+
     .rotator {
       min-height: 1.6em;
       color: var(--color-muted);
@@ -238,6 +252,14 @@
       background: var(--color-text);
       vertical-align: -0.05em;
       opacity: 0.7;
+    }
+
+    .caret.is-pixel-name {
+      width: 0.3em;
+      height: 0.8em;
+      margin-left: 0.05em;
+      background: var(--pixel-accent, #5b8cff);
+      opacity: 1;
     }
 
     .rotator .caret {
@@ -1174,22 +1196,14 @@
       width: 15px;
       height: 15px;
       fill: currentColor;
+      transition:
+        color var(--motion-fast) var(--ease),
+        filter var(--motion-fast) var(--ease);
     }
 
-    .link-chip.is-gradient:hover {
-      border-color: #8f7188;
-      background: linear-gradient(90deg, rgba(255, 0, 80, 0.1), rgba(37, 244, 238, 0.1));
-    }
-
-    .link-chip.is-gradient:hover span {
-      background: var(--brand-gradient);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-    }
-
-    .link-chip.is-gradient:hover svg {
-      color: #9d8fba;
+    .link-chip:hover svg,
+    .link-chip:focus-visible svg {
+      color: var(--brand, var(--color-text));
     }
 
     @supports (color: color-mix(in srgb, red, blue)) {
@@ -1330,9 +1344,79 @@
       margin: calc(var(--section-gap) * -0.38) 0;
     }
 
+    .discord-presence-summary {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 1.4em;
+      margin: calc(var(--space-4) * -0.4) 0 var(--space-4);
+      color: var(--color-soft);
+      font-size: var(--text-small);
+      line-height: 1.5;
+    }
+
+    .discord-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+    }
+
+    .discord-status-dot {
+      width: 7px;
+      height: 7px;
+      flex: none;
+      border-radius: 50%;
+      background: #80848e;
+    }
+
+    .discord-status-dot[data-status="online"] {
+      background: #23a55a;
+    }
+
+    .discord-status-dot[data-status="idle"] {
+      background: #f0b232;
+    }
+
+    .discord-status-dot[data-status="dnd"] {
+      background: #f23f43;
+    }
+
+    .discord-presence-separator {
+      color: var(--color-faint);
+    }
+
+    .discord-custom-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.38rem;
+      min-width: 0;
+      color: var(--color-muted);
+      font-weight: 300;
+    }
+
+    .discord-custom-status svg {
+      width: 14px;
+      height: 14px;
+      flex: none;
+      stroke: currentColor;
+    }
+
+    .discord-custom-status span {
+      overflow-wrap: anywhere;
+    }
+
     .discord-activities {
       display: grid;
       gap: var(--space-3);
+    }
+
+    .discord-activity-empty {
+      color: var(--color-muted);
+      font-size: var(--text-small);
+      font-weight: 300;
+      line-height: 1.6;
     }
 
     .discord-activity-card {
@@ -1717,6 +1801,32 @@
       color: var(--color-text);
     }
 
+    .discord-app-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      height: 32px;
+      padding: 0 0.65rem;
+      border-radius: 8px;
+      color: var(--color-muted);
+      font-size: 0.75rem;
+      font-weight: 500;
+      white-space: nowrap;
+      transition:
+        color var(--motion-fast) var(--ease),
+        background var(--motion-fast) var(--ease);
+    }
+
+    .discord-app-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .discord-app-btn:hover {
+      background: var(--color-hover);
+      color: var(--color-text);
+    }
+
     .icon-btn .i-check {
       display: none;
     }
@@ -1732,6 +1842,55 @@
     .icon-btn.is-copied .i-check {
       display: block;
       animation: pop 0.3s var(--ease);
+    }
+
+    .app-toast {
+      position: fixed;
+      z-index: 20000;
+      left: 50%;
+      top: 50%;
+      width: min(360px, calc(100vw - 32px));
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--color-border-hover);
+      border-radius: 12px;
+      background: rgba(21, 21, 24, 0.96);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      color: var(--color-soft);
+      text-align: left;
+      pointer-events: none;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.96);
+      transition:
+        opacity 160ms ease,
+        transform 160ms var(--ease);
+      backdrop-filter: blur(12px);
+    }
+
+    .app-toast[hidden] {
+      display: none;
+    }
+
+    .app-toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .app-toast strong,
+    .app-toast span {
+      display: block;
+    }
+
+    .app-toast strong {
+      color: var(--color-text);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .app-toast span {
+      margin-top: 0.3rem;
+      color: var(--color-muted);
+      font-size: 0.78rem;
+      line-height: 1.45;
     }
 
     .sr-only {
@@ -1837,7 +1996,8 @@
       .link-chip,
       .contact-card,
       .repo-foot span,
-      .repo-foot .dot {
+      .repo-foot .dot,
+      .app-toast {
         transition: none;
       }
 
@@ -1851,7 +2011,7 @@
   <div class="grid" aria-hidden="true"></div>
 
   <section class="hero">
-    <h1 aria-label="Hi, I'm Paryx"><span id="type"></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
+    <h1 aria-label="Hi, I'm paryx"><span id="type"></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
     <div class="line" id="line" aria-hidden="true"></div>
     <p class="rotator" id="rotator"><span id="rot"></span><span class="caret" id="rotCaret" aria-hidden="true"></span>
     </p>
@@ -1866,9 +2026,25 @@
           aria-hidden="true"></span></p>
     </section>
 
-    <section class="discord-presence-slot" id="discordPresenceSlot" hidden>
+    <section class="discord-presence-slot" id="discordPresenceSlot">
       <h2>Activity</h2>
-      <div class="discord-activities" id="discordPresence" aria-live="polite"></div>
+      <div class="discord-presence-summary" id="discordPresenceSummary" aria-live="polite">
+        <span class="discord-status">
+          <i class="discord-status-dot" id="discordStatusDot" data-status="offline" aria-hidden="true"></i>
+          <span id="discordStatusText">Loading...</span>
+        </span>
+        <span class="discord-presence-separator" id="discordStatusSeparator" aria-hidden="true" hidden>•</span>
+        <span class="discord-custom-status" id="discordCustomStatus" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+          </svg>
+          <span id="discordCustomStatusText"></span>
+        </span>
+      </div>
+      <div class="discord-activities" id="discordPresence" aria-live="polite">
+        <p class="discord-activity-empty">Checking Discord activity...</p>
+      </div>
     </section>
     <div class="discord-presence-slot" id="discordPresenceErrorSlot" hidden aria-live="polite"></div>
 
@@ -2013,6 +2189,11 @@
 
   <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="/privacy-policy">Privacy Policy</a></footer>
 
+  <div class="app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden>
+    <strong id="appToastTitle"></strong>
+    <span id="appToastMessage"></span>
+  </div>
+
   <button class="scroll-btn" id="scrollBtn" aria-label="Scroll down">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
       stroke-linejoin="round" aria-hidden="true">
@@ -2020,6 +2201,198 @@
     </svg>
   </button>
 
+  <script>
+    const PIXEL_NAME_CONFIG = {
+      palettes: [
+        { text: "#f5f5f5", accent: "#5b8cff" },
+        { text: "#d9ffe6", accent: "#2bff88" },
+        { text: "#ffe4f1", accent: "#ff4fa3" },
+        { text: "#fff0e0", accent: "#ff8a2b" },
+      ],
+      typeInterval: 230,
+      eraseInterval: 130,
+      holdDuration: 2600,
+      restartPause: 450,
+      trailTime: 550,
+      cursorLinger: 900,
+      particleBurst: 14,
+      trailChance: 0.7,
+      horizontalSpeed: 22,
+      verticalSpeedMin: 60,
+      verticalSpeedMax: 210,
+      particleLifeMin: 1000,
+      particleLifeMax: 2000,
+      maxParticles: 500,
+    };
+
+    const startPixelName = async (name) => {
+      const nameElement = document.querySelector(".hero-name");
+      const hero = nameElement.closest(".hero");
+      const caret = document.getElementById("caret");
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      const canvas = document.createElement("canvas");
+      canvas.className = "pixel-dust";
+      canvas.setAttribute("aria-hidden", "true");
+      const context = canvas.getContext("2d");
+      if (!context) return;
+
+      const baselineMarker = document.createElement("span");
+      baselineMarker.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline;pointer-events:none";
+      nameElement.after(baselineMarker);
+      hero.append(canvas);
+
+      let layout;
+      let particles = [];
+      let cycleIndex = -1;
+      let previousVisible = 0;
+      let startedAt = 0;
+      let firstCycleComplete;
+      const firstCycle = new Promise((resolve) => { firstCycleComplete = resolve; });
+      const glyphPoints = new Map();
+
+      const prepare = () => {
+        const size = parseFloat(getComputedStyle(nameElement).fontSize);
+        const topPadding = Math.ceil(PIXEL_NAME_CONFIG.verticalSpeedMax * PIXEL_NAME_CONFIG.particleLifeMax / 1000 + size * 0.12 + 16);
+        const width = hero.clientWidth;
+        const height = hero.clientHeight + topPadding;
+        const ratio = Math.min(devicePixelRatio || 1, 2);
+        canvas.style.top = `${-topPadding}px`;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        canvas.width = Math.ceil(width * ratio);
+        canvas.height = Math.ceil(height * ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        layout = { width, height, topPadding, pixel: Math.max(3, Math.round(size / 22)) };
+        glyphPoints.clear();
+      };
+
+      const pointsFor = (letter) => {
+        if (glyphPoints.has(letter)) return glyphPoints.get(letter);
+        const style = getComputedStyle(nameElement);
+        const size = parseFloat(style.fontSize);
+        const buffer = document.createElement("canvas");
+        buffer.width = Math.ceil(size * 2);
+        buffer.height = Math.ceil(size * 1.5);
+        const bufferContext = buffer.getContext("2d");
+        bufferContext.font = `${style.fontWeight} ${size}px ${style.fontFamily}`;
+        bufferContext.textBaseline = "alphabetic";
+        bufferContext.fillText(letter, 0, size);
+        const pixels = bufferContext.getImageData(0, 0, buffer.width, buffer.height).data;
+        const points = [];
+        for (let y = 0; y < buffer.height; y += layout.pixel) {
+          for (let x = 0; x < buffer.width; x += layout.pixel) {
+            if (pixels[(y * buffer.width + x) * 4 + 3] > 128) points.push([x, y]);
+          }
+        }
+        glyphPoints.set(letter, points);
+        return points;
+      };
+
+      const emitLetter = (index, now, count) => {
+        const points = pointsFor(name[index]);
+        const textNode = nameElement.firstChild;
+        if (!points.length || !textNode || textNode.length <= index) return;
+        const range = document.createRange();
+        range.setStart(textNode, index);
+        range.setEnd(textNode, index + 1);
+        const letterBounds = range.getBoundingClientRect();
+        const heroBounds = hero.getBoundingClientRect();
+        const baseline = baselineMarker.getBoundingClientRect().top;
+        const size = parseFloat(getComputedStyle(nameElement).fontSize);
+        const palette = PIXEL_NAME_CONFIG.palettes[cycleIndex % PIXEL_NAME_CONFIG.palettes.length];
+        for (let particleIndex = 0; particleIndex < count; particleIndex++) {
+          let point = points[Math.floor(Math.random() * points.length)];
+          const other = points[Math.floor(Math.random() * points.length)];
+          if (other[1] < point[1]) point = other;
+          particles.push({
+            x: letterBounds.left - heroBounds.left + point[0],
+            y: baseline - heroBounds.top + layout.topPadding - size + point[1] - Math.random() * size * 0.12,
+            velocityX: (Math.random() - 0.5) * PIXEL_NAME_CONFIG.horizontalSpeed,
+            velocityY: -(PIXEL_NAME_CONFIG.verticalSpeedMin + Math.random() * (PIXEL_NAME_CONFIG.verticalSpeedMax - PIXEL_NAME_CONFIG.verticalSpeedMin)),
+            born: now,
+            life: PIXEL_NAME_CONFIG.particleLifeMin + Math.random() * (PIXEL_NAME_CONFIG.particleLifeMax - PIXEL_NAME_CONFIG.particleLifeMin),
+            size: layout.pixel * (0.6 + Math.random() * 0.9),
+            color: Math.random() < 2 / 3 ? palette.text : palette.accent,
+          });
+        }
+      };
+
+      const draw = (now) => {
+        const elapsed = Math.max(0, now - startedAt);
+        const typingDuration = name.length * PIXEL_NAME_CONFIG.typeInterval;
+        const erasingStartsAt = typingDuration + PIXEL_NAME_CONFIG.holdDuration;
+        const erasingEndsAt = erasingStartsAt + name.length * PIXEL_NAME_CONFIG.eraseInterval;
+        const cycleDuration = erasingEndsAt + PIXEL_NAME_CONFIG.restartPause;
+        const nextCycleIndex = Math.floor(elapsed / cycleDuration);
+        const cycleElapsed = elapsed % cycleDuration;
+        if (nextCycleIndex !== cycleIndex) {
+          cycleIndex = nextCycleIndex;
+          previousVisible = 0;
+          particles = [];
+          const palette = PIXEL_NAME_CONFIG.palettes[cycleIndex % PIXEL_NAME_CONFIG.palettes.length];
+          nameElement.style.color = palette.text;
+          caret.style.setProperty("--pixel-accent", palette.accent);
+        }
+
+        const isTyping = cycleElapsed < typingDuration;
+        const isErasing = cycleElapsed >= erasingStartsAt && cycleElapsed < erasingEndsAt;
+        caret.classList.toggle("is-idle", !isTyping && !isErasing && cycleElapsed >= typingDuration + PIXEL_NAME_CONFIG.cursorLinger);
+        const visible = isTyping
+          ? Math.min(name.length, Math.floor(cycleElapsed / PIXEL_NAME_CONFIG.typeInterval) + 1)
+          : isErasing
+            ? Math.max(0, name.length - Math.floor((cycleElapsed - erasingStartsAt) / PIXEL_NAME_CONFIG.eraseInterval) - 1)
+            : cycleElapsed < erasingStartsAt ? name.length : 0;
+
+        if (visible !== previousVisible) {
+          nameElement.textContent = name.slice(0, visible);
+          if (isTyping) {
+            for (let index = previousVisible; index < visible; index++) emitLetter(index, now, PIXEL_NAME_CONFIG.particleBurst);
+          }
+          previousVisible = visible;
+        }
+        if (isTyping) {
+          for (let index = 0; index < visible; index++) {
+            const age = cycleElapsed - index * PIXEL_NAME_CONFIG.typeInterval;
+            if (age < PIXEL_NAME_CONFIG.trailTime && Math.random() < PIXEL_NAME_CONFIG.trailChance) emitLetter(index, now, 1);
+          }
+        }
+
+        context.clearRect(0, 0, layout.width, layout.height);
+        for (const particle of particles) {
+          const age = now - particle.born;
+          if (age > particle.life) continue;
+          const seconds = age / 1000;
+          const remaining = 1 - age / particle.life;
+          const x = Math.round((particle.x + particle.velocityX * seconds) / layout.pixel) * layout.pixel;
+          const y = Math.round((particle.y + particle.velocityY * seconds) / layout.pixel) * layout.pixel;
+          context.globalAlpha = remaining * remaining * 0.95;
+          context.fillStyle = particle.color;
+          context.fillRect(x, y, particle.size, particle.size);
+        }
+        context.globalAlpha = 1;
+        if (particles.length > PIXEL_NAME_CONFIG.maxParticles) particles = particles.filter((particle) => now - particle.born < particle.life);
+        if (elapsed >= typingDuration && firstCycleComplete) {
+          firstCycleComplete();
+          firstCycleComplete = null;
+        }
+        requestAnimationFrame(draw);
+      };
+
+      const style = getComputedStyle(nameElement);
+      await Promise.race([document.fonts.load(`${style.fontWeight} 100px ${style.fontFamily}`).catch(() => {}), new Promise((resolve) => setTimeout(resolve, 2500))]);
+      prepare();
+      nameElement.textContent = "";
+      caret.classList.add("is-pixel-name");
+      startedAt = performance.now();
+      requestAnimationFrame(draw);
+      addEventListener("resize", () => {
+        prepare();
+        particles = [];
+      });
+      await firstCycle;
+    };
+  </script>
   <script>
     const CONFIG = {
       githubUser: "Paryx-games",
@@ -2035,13 +2408,15 @@
         "reverse engineering, networking, and more"
       ],
       links: [
-        { label: "GitHub", icon: "github", brand: "#F0F6FC", url: "https://github.com/Paryx-games" },
-        { label: "X", icon: "x", brand: "#F0F6FC", url: "https://x.com/paryx_games" },
-        { label: "YouTube", icon: "youtube", brand: "#FF0033", url: "https://www.youtube.com/@ParyxGames" },
+        { label: "GitHub", icon: "github", brand: "#FFFFFF", url: "https://github.com/Paryx-games" },
+        { label: "Discord", icon: "discord", brand: "#5865F2", url: "https://discord.com/users/1376223581658419243" },
+        { label: "Steam", icon: "steam", brand: "#FFFFFF", url: "https://steamcommunity.com/id/paryxgaming/" },
+        { label: "X", icon: "x", brand: "#FFFFFF", url: "https://x.com/paryx_games" },
+        { label: "YouTube", icon: "youtube", brand: "#FF0000", url: "https://www.youtube.com/@ParyxGames" },
         { label: "Twitch", icon: "twitch", brand: "#9146FF", url: "https://www.twitch.tv/paryxgames" },
-        { label: "TikTok", icon: "tiktok", brand: "#F0F6FC", url: "https://www.tiktok.com/@paryx.games" },
+        { label: "TikTok", icon: "tiktok", brand: "#25F4EE", url: "https://www.tiktok.com/@paryx.games" },
         { label: "Reddit", icon: "reddit", brand: "#FF4500", url: "https://www.reddit.com/user/Narrow_Proof4204/" },
-        { label: "Roblox", icon: "roblox", brand: "#00A2FF", url: "https://www.roblox.com/users/1577142632/profile" }
+        { label: "Roblox", icon: "roblox", brand: "#FFFFFF", url: "https://www.roblox.com/users/1577142632/profile" }
       ],
       languages: [
         ["Lua", "lua", "#5C5CFF", "https://www.lua.org/"],
@@ -2103,6 +2478,7 @@
     const ICONS = {
       github: "M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12",
       discord: "M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z",
+      steam: "M11.979 0C5.678 0 .511 4.86.022 11.037l6.432 2.658c.545-.371 1.203-.59 1.912-.59.063 0 .125.004.188.006l2.861-4.142V8.91c0-2.495 2.028-4.524 4.524-4.524 2.494 0 4.524 2.031 4.524 4.527s-2.03 4.525-4.524 4.525h-.105l-4.076 2.911c0 .052.004.105.004.159 0 1.875-1.515 3.396-3.39 3.396-1.635 0-3.016-1.173-3.331-2.727L.436 15.27C1.862 20.307 6.486 24 11.979 24c6.627 0 11.999-5.373 11.999-12S18.605 0 11.979 0zM7.54 18.21l-1.473-.61c.262.543.714.999 1.314 1.25 1.297.539 2.793-.076 3.332-1.375.263-.63.264-1.319.005-1.949s-.75-1.121-1.377-1.383c-.624-.26-1.29-.249-1.878-.03l1.523.63c.956.4 1.409 1.5 1.009 2.455-.397.957-1.497 1.41-2.454 1.012H7.54zm11.415-9.303c0-1.662-1.353-3.015-3.015-3.015-1.665 0-3.015 1.353-3.015 3.015 0 1.665 1.35 3.015 3.015 3.015 1.663 0 3.015-1.35 3.015-3.015zm-5.273-.005c0-1.252 1.013-2.266 2.265-2.266 1.249 0 2.266 1.014 2.266 2.266 0 1.251-1.017 2.265-2.266 2.265-1.253 0-2.265-1.014-2.265-2.265z",
       x: "M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z",
       youtube: "M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z",
       twitch: "M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z",
@@ -2169,7 +2545,11 @@
       "Asia/Seoul", "Australia/Sydney", "Pacific/Auckland"
     ];
 
-    const HERO_TEXT = "Hi, I'm Paryx";
+    const HERO_PREFIX = "Hi, I'm ";
+    const HERO_NAME = "paryx";
+    const DISCORD_APP_URL = "discord://-/users/1376223581658419243";
+    const platform = navigator.userAgentData?.platform || navigator.platform || "";
+    const IS_WINDOWS = /windows|win32|win64/i.test(platform) || /windows/i.test(navigator.userAgent);
     const REPO_CACHE_MS = 36e5;
     const GITHUB_LANGUAGE_COLORS = {
       "C#": "#178600",
@@ -2272,7 +2652,7 @@
       const rot = $("rot");
 
       if (reduce) {
-        $("type").textContent = HERO_TEXT;
+        $("type").innerHTML = `${esc(HERO_PREFIX)}<span class="hero-name">${esc(HERO_NAME)}</span>`;
         caret.hidden = true;
         line.classList.add("is-visible", "is-done");
         rot.textContent = lines[0];
@@ -2283,8 +2663,13 @@
       }
 
       await sleep(700);
-      await typeInto($("type"), HERO_TEXT, 62, 72);
-      caret.hidden = true;
+      await typeInto($("type"), HERO_PREFIX, 62, 72);
+      const heroName = document.createElement("span");
+      heroName.className = "hero-name";
+      heroName.textContent = HERO_NAME;
+      $("type").append(heroName);
+      caret.hidden = false;
+      await startPixelName(HERO_NAME);
       await sleep(140);
       line.classList.add("is-visible");
       $("rotator").classList.add("is-visible");
@@ -2766,7 +3151,29 @@
       });
     };
 
-    const contactCard = ({ label, value, icon, brand, mailto, badge, badgeTip, primary }) => {
+    let toastTimer = 0;
+    let toastHideTimer = 0;
+
+    const showToast = (title, message) => {
+      const toast = $("appToast");
+      if (!toast) return;
+
+      clearTimeout(toastTimer);
+      clearTimeout(toastHideTimer);
+      $("appToastTitle").textContent = title;
+      $("appToastMessage").textContent = message;
+      toast.hidden = false;
+      requestAnimationFrame(() => toast.classList.add("is-visible"));
+
+      toastTimer = setTimeout(() => {
+        toast.classList.remove("is-visible");
+        toastHideTimer = setTimeout(() => {
+          if (!toast.classList.contains("is-visible")) toast.hidden = true;
+        }, reduce ? 0 : 180);
+      }, 3200);
+    };
+
+    const contactCard = ({ label, value, icon, brand, mailto, url, appUrl, badge, badgeTip, primary }) => {
       const what = label.toLowerCase();
       const badgeHtml = badge
         ? `<span class="contact-badge${primary ? " is-primary" : ""}" tabindex="0" data-tip="${esc(badgeTip || badge)}" aria-label="${esc(badgeTip || badge)}">${esc(badge)}</span>`
@@ -2780,6 +3187,8 @@
       <div class="actions">
         <button class="icon-btn" type="button" data-copy="${esc(value)}" data-what="${what}" data-tip="Copy ${what}" aria-label="Copy ${what}"><span class="i-copy">${UI.copy}</span><span class="i-check">${UI.check}</span></button>
         ${mailto ? `<a class="icon-btn" href="mailto:${esc(value)}" data-tip="Send an email" aria-label="Send an email">${UI.mail}</a>` : ""}
+        ${url ? `<a class="icon-btn" href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-tip="Open ${what}" aria-label="Open ${what}">${UI.launch}</a>` : ""}
+        ${appUrl && IS_WINDOWS ? `<a class="discord-app-btn" href="${esc(appUrl)}" data-discord-app data-tip="Open in Discord desktop app" aria-label="Open in Discord desktop app">${UI.launch}<span>Open in Discord</span></a>` : ""}
       </div>
       <span class="sr-only" role="status"></span>
     </div>`;
@@ -2788,6 +3197,15 @@
     const copyTimers = new WeakMap();
 
     const onContactClick = async (event) => {
+      const discordAppLink = event.target.closest(".discord-app-btn[data-discord-app]");
+      if (discordAppLink) {
+        showToast(
+          "Opening Discord...",
+          "This only works if the Discord desktop app is installed."
+        );
+        return;
+      }
+
       const button = event.target.closest(".icon-btn[data-copy]");
       if (!button) return;
       const status = button.closest(".contact-card").querySelector("[role=status]");
@@ -2811,6 +3229,8 @@
           value: CONFIG.discord,
           icon: "discord",
           brand: "#5865F2",
+          url: "https://discord.com/users/1376223581658419243",
+          appUrl: DISCORD_APP_URL,
           badge: "Primary contact",
           badgeTip: "Preferred contact - usually the fastest way to reach me",
           primary: true
@@ -3001,9 +3421,35 @@
       updateDiscordActivityTimes();
     };
 
-    const hideDiscordPresence = () => {
-      $("discordPresenceSlot").hidden = true;
-      $("discordPresence").innerHTML = "";
+    const DISCORD_STATUS_META = {
+      online: { label: "Online" },
+      idle: { label: "Away" },
+      dnd: { label: "Do Not Disturb" },
+      offline: { label: "Offline" }
+    };
+
+    const resetDiscordPresence = () => {
+      $("discordPresenceSlot").hidden = false;
+      $("discordStatusDot").dataset.status = "offline";
+      $("discordStatusText").textContent = "Loading...";
+      $("discordStatusSeparator").hidden = true;
+      $("discordCustomStatus").hidden = true;
+      $("discordCustomStatusText").textContent = "";
+      $("discordPresence").innerHTML = '<p class="discord-activity-empty">Checking Discord activity...</p>';
+    };
+
+    const renderDiscordPresenceSummary = (payload) => {
+      const status = String(payload?.status || "offline").toLowerCase();
+      const meta = DISCORD_STATUS_META[status] || DISCORD_STATUS_META.offline;
+      const customStatus = (Array.isArray(payload?.activities) ? payload.activities : [])
+        .find((activity) => activity && Number(activity.type) === 4);
+      const customText = String(customStatus?.state || "").trim();
+
+      $("discordStatusDot").dataset.status = status in DISCORD_STATUS_META ? status : "offline";
+      $("discordStatusText").textContent = meta.label;
+      $("discordStatusSeparator").hidden = !customText;
+      $("discordCustomStatus").hidden = !customText;
+      $("discordCustomStatusText").textContent = customText;
     };
 
     const renderDiscordPresence = (payload) => {
@@ -3012,22 +3458,29 @@
       const activities = (Array.isArray(payload?.activities) ? payload.activities : [])
         .filter((activity) => activity && Number(activity.type) !== 4);
 
+      renderDiscordPresenceSummary(payload);
+      $("discordPresenceErrorSlot").hidden = true;
+      $("discordPresenceErrorSlot").innerHTML = "";
+      slot.hidden = false;
+
       if (!activities.length) {
-        hideDiscordPresence();
-        $("discordPresenceErrorSlot").hidden = true;
-        $("discordPresenceErrorSlot").innerHTML = "";
+        root.innerHTML = '<p class="discord-activity-empty">Not doing anything currently</p>';
         return;
       }
 
       root.innerHTML = activities.map((activity) => discordActivityCard(activity, payload?.spotify)).join("");
-      $("discordPresenceErrorSlot").hidden = true;
-      $("discordPresenceErrorSlot").innerHTML = "";
-      slot.hidden = false;
       initializeDiscordActivityCards();
     };
 
     const renderDiscordPresenceError = (message) => {
-      hideDiscordPresence();
+      $("discordPresenceSlot").hidden = false;
+      $("discordStatusDot").dataset.status = "offline";
+      $("discordStatusText").textContent = "Status unavailable";
+      $("discordStatusSeparator").hidden = true;
+      $("discordCustomStatus").hidden = true;
+      $("discordCustomStatusText").textContent = "";
+      $("discordPresence").innerHTML = '<p class="discord-activity-empty">Discord activity unavailable</p>';
+
       const errorSlot = $("discordPresenceErrorSlot");
       errorSlot.innerHTML = `<div class="discord-presence-error">${UI.warning}<span>${esc(message)}</span></div>`;
       errorSlot.hidden = false;
@@ -3213,7 +3666,7 @@
     };
 
     const initDiscordPresence = async () => {
-      hideDiscordPresence();
+      resetDiscordPresence();
       const initial = await loadDiscordPresence();
       lanyardUserId = String(initial?.user?.id || "");
 
