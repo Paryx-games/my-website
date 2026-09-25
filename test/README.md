@@ -1,7 +1,7 @@
 # test.paryx.uk
 
-A small testing space for web experiments and ideas separate from the main site.
+A testing space for anything experimental or unstable.
 
 Visit [`test.paryx.uk`](https://test.paryx.uk)
 
-The current page keeps the same visual style as [`paryx.uk`](https://paryx.uk) while giving experiments their own place to live.
+This site is used for prototypes, experiments, new technologies, random ideas, and anything else that isn't ready or intended for production. Content may change, break, or disappear at any time.
