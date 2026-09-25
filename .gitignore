@@ -8,6 +8,9 @@
 node_modules
 .pnpm-store
 
+# builds
+dist/
+
 # generated preview builds
 test/previews/triangle-led-front/dist
 
