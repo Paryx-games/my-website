@@ -1,0 +1,8 @@
+{
+	"name": "paryx-api",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"@vercel/node": "^5.10.2"
+	}
+}
