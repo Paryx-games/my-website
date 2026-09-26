@@ -194,23 +194,39 @@
       left: 1.5rem;
       z-index: 20;
       isolation: isolate;
+      display: inline-block;
+      overflow: visible;
       font-family: "Sora", sans-serif;
       font-size: 1.35rem;
       font-weight: 675;
       line-height: 1;
       letter-spacing: -0.035em;
-      color: #fff;
-      background-image:
-        linear-gradient(145deg, #fff 0%, rgba(255, 255, 255, 0.92) 42%, rgba(222, 235, 255, 0.88) 62%, #fff 100%);
-      background-clip: text;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      -webkit-text-stroke: 0.45px rgba(255, 255, 255, 0.72);
-      text-shadow:
-        0 0 10px rgba(205, 224, 255, 0.2),
-        0 2px 10px rgba(0, 0, 0, 0.28);
+      color: rgba(255, 255, 255, 0.28);
       user-select: none;
       transition: opacity var(--motion-fast) var(--ease);
+    }
+
+    .site-title-label {
+      display: block;
+      color: rgba(255, 255, 255, 0.26);
+      -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.2);
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.22);
+      transition: opacity var(--motion-fast) var(--ease);
+    }
+
+    .site-title-acrylic {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--motion-fast) var(--ease);
+    }
+
+    .site-title.is-acrylic-ready .site-title-acrylic {
+      opacity: 0.72;
+    }
+
+    .site-title.is-acrylic-ready .site-title-label {
+      opacity: 0.12;
     }
 
     .site-title:hover {
@@ -2167,7 +2183,7 @@
     <canvas class="galaxy-canvas" id="galaxyCanvas" aria-hidden="true"></canvas>
     <div class="galaxy-vignette" id="galaxyVignette" aria-hidden="true"></div>
   </div>
-  <button class="site-title" id="siteTitleCopy" type="button" data-tip="Copy site URL" aria-label="Copy https://paryx.uk/ to clipboard">paryx<span>.uk</span></button>
+  <button class="site-title" id="siteTitleCopy" type="button" data-tip="Copy site URL" aria-label="Copy https://paryx.uk/ to clipboard"><canvas class="site-title-acrylic" id="siteTitleAcrylic" aria-hidden="true"></canvas><span class="site-title-label">paryx.uk</span></button>
   <span class="sr-only" id="siteTitleStatus" role="status"></span>
   <div class="grid" aria-hidden="true"></div>
 
