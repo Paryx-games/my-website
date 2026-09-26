@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getLanguageColor } from "../../../lib/language-colors";
-import { getRepositoryLanguages } from "../../../lib/languages";
+import { getLanguageColor } from "../../../lib/language-colors.js";
+import { getRepositoryLanguages } from "../../../lib/languages.js";
 
 const BAR_WIDTH = 600;
 const BAR_HEIGHT = 16;

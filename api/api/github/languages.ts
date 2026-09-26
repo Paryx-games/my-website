@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { getRepositoryLanguages } from "../../lib/languages";
+import { getRepositoryLanguages } from "../../lib/languages.js";
 
 export default async function handler(
   req: VercelRequest,
