@@ -1,5 +1,7 @@
 # paryx.uk
 
+![GitHub language breakdown](https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website)
+
 This repository contains the sites under [`paryx.uk`](https://paryx.uk).
 
 | Directory | Domain | Purpose |
