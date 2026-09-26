@@ -6,6 +6,10 @@
 		{
 			"source": "/github/languages",
 			"destination": "/api/github/languages"
+		},
+		{
+			"source": "/github/languages/bar",
+			"destination": "/api/github/languages/bar"
 		}
 	]
 }
