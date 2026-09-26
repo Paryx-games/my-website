@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@pmndrs/detect-gpu": "^6.0.22",
+    "@vercel/analytics": "^2.0.1",
     "vgpu": "0.5.0"
   },
   "devDependencies": {
