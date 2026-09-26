@@ -193,40 +193,16 @@
       top: 1.5rem;
       left: 1.5rem;
       z-index: 20;
-      isolation: isolate;
-      display: inline-block;
-      overflow: visible;
       font-family: "Sora", sans-serif;
       font-size: 1.35rem;
       font-weight: 675;
       line-height: 1;
       letter-spacing: -0.035em;
-      color: rgba(255, 255, 255, 0.28);
+      color: rgba(255, 255, 255, 0.58);
+      -webkit-text-stroke: 0.55px rgba(72, 72, 78, 0.62);
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.22);
       user-select: none;
       transition: opacity var(--motion-fast) var(--ease);
-    }
-
-    .site-title-label {
-      display: block;
-      color: rgba(255, 255, 255, 0.58);
-      -webkit-text-stroke: 0.3px rgba(255, 255, 255, 0.28);
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.28);
-      transition: opacity var(--motion-fast) var(--ease);
-    }
-
-    .site-title-acrylic {
-      position: absolute;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity var(--motion-fast) var(--ease);
-    }
-
-    .site-title.is-acrylic-ready .site-title-acrylic {
-      opacity: 0.9;
-    }
-
-    .site-title.is-acrylic-ready .site-title-label {
-      opacity: 0.38;
     }
 
     .site-title:hover {
@@ -2183,7 +2159,7 @@
     <canvas class="galaxy-canvas" id="galaxyCanvas" aria-hidden="true"></canvas>
     <div class="galaxy-vignette" id="galaxyVignette" aria-hidden="true"></div>
   </div>
-  <button class="site-title" id="siteTitleCopy" type="button" data-tip="Copy site URL" aria-label="Copy https://paryx.uk/ to clipboard"><canvas class="site-title-acrylic" id="siteTitleAcrylic" aria-hidden="true"></canvas><span class="site-title-label">paryx.uk</span></button>
+  <button class="site-title" id="siteTitleCopy" type="button" data-tip="Copy site URL" aria-label="Copy https://paryx.uk/ to clipboard">paryx.uk</button>
   <span class="sr-only" id="siteTitleStatus" role="status"></span>
   <div class="grid" aria-hidden="true"></div>
 
