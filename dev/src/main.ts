@@ -1,5 +1,8 @@
+import { inject } from '@vercel/analytics';
 import { createRenderer, type Renderer } from './renderer';
 import { DEFAULT_QUALITY_PREFERENCE, isQualityPreference, type QualityPreference, type QualityState } from './quality';
+
+inject();
 
 const STORAGE_KEY = 'paryx.galaxy.quality';
 const QUALITY_MODES: readonly QualityPreference[] = ['ultra', 'high', 'battery'];
