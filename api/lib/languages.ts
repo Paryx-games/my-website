@@ -14,10 +14,17 @@ type RepositoryLanguagesResult =
   | { data: RepositoryLanguages; error?: never; status: 200 }
   | { data?: never; error: string; status: number };
 
+export function getRepositoryLanguageCacheTag(repository: string): string {
+  return `github-languages-${repository.toLowerCase().replace("/", "-")}`;
+}
+
 export async function getRepositoryLanguages(
   repository: unknown,
 ): Promise<RepositoryLanguagesResult> {
-  if (typeof repository !== "string" || !/^[^/]+\/[^/]+$/.test(repository)) {
+  if (
+    typeof repository !== "string" ||
+    !/^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/.test(repository)
+  ) {
     return {
       error: "Expected ?repo=owner/repository",
       status: 400,

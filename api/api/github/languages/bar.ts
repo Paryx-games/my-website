@@ -1,6 +1,9 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getLanguageColor } from "../../../lib/language-colors.js";
-import { getRepositoryLanguages } from "../../../lib/languages.js";
+import {
+  getRepositoryLanguageCacheTag,
+  getRepositoryLanguages,
+} from "../../../lib/languages.js";
 
 const BAR_WIDTH = 600;
 const BAR_HEIGHT = 16;
@@ -47,15 +50,18 @@ export default async function handler(
 ) {
   const result = await getRepositoryLanguages(req.query.repo);
 
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=3600, stale-while-revalidate=86400",
-  );
-
   if (result.error) {
     return res.status(result.status).json({ error: result.error });
   }
 
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=3600, stale-while-revalidate=86400",
+  );
+  res.setHeader(
+    "Vercel-Cache-Tag",
+    getRepositoryLanguageCacheTag(result.data.repository),
+  );
   res.setHeader("Content-Type", "image/svg+xml; charset=utf-8");
   res.setHeader("X-Content-Type-Options", "nosniff");
 

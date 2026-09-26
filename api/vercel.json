@@ -10,6 +10,10 @@
 		{
 			"source": "/github/languages/bar",
 			"destination": "/api/github/languages/bar"
+		},
+		{
+			"source": "/github/languages/revalidate",
+			"destination": "/api/github/languages/revalidate"
 		}
 	]
 }
