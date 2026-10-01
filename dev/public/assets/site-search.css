@@ -1,4 +1,7 @@
 #search-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   max-height: min(80dvh, 760px);
   overflow-y: auto;
 }
