@@ -1,17 +1,20 @@
 import { cp, mkdir, rm, writeFile, access } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { evaluate } from '@mdx-js/mdx';
-import * as runtime from 'react/jsx-runtime';
 import { renderToStaticMarkup } from 'react-dom/server';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeHighlight from 'rehype-highlight';
-import { loadPosts, tagSlug, visiblePosts } from '../src/content.js';
-import { mdxComponents } from '../src/components.js';
-import { Article, Document, Listing } from '../src/layout.js';
+import {
+  loadPosts,
+  tagSlug,
+  visiblePosts,
+  seriesPosts,
+} from '../src/content.js';
+import { Article, Document, Listing, AuthorProfile } from '../src/layout.js';
 import { isPreview, site } from '../src/config.js';
 import { rss, searchIndex, sitemap } from '../src/feeds.js';
+
+import { authors } from '../src/authors.js';
+import { compileArticle } from '../src/article-content.js';
+import { socialImage } from '../src/social-image.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'dist');
@@ -20,6 +23,8 @@ export async function build({
   development = false,
 }: { development?: boolean } = {}) {
   const posts = await loadPosts(path.join(root, 'content/posts'), development);
+  const compiled = new Map<string, string>();
+  for (const post of posts) compiled.set(post.slug, await compileArticle(post));
   const published = visiblePosts(posts);
   const noindex = isPreview() || development;
   await rm(output, { recursive: true, force: true });
@@ -38,13 +43,19 @@ export async function build({
   };
   await page(
     'index.html',
-    <Document title={site.name} image={published[0]?.banner} noindex={noindex}>
+    <Document
+      title={site.name}
+      image={published[0] ? `/og/${published[0].slug}.png` : undefined}
+      noindex={noindex}
+    >
       <Listing posts={posts} allPosts={published} />
     </Document>,
   );
+  await mkdir(path.join(output, 'og'), { recursive: true });
   for (const post of posts) {
+    let bannerPath: string | undefined;
     if (post.banner) {
-      const bannerPath = path.resolve(root, 'public', `.${post.banner}`);
+      bannerPath = path.resolve(root, 'public', `.${post.banner}`);
       if (!bannerPath.startsWith(path.join(root, 'public') + path.sep))
         throw new Error(`${post.slug}: banner path leaves public directory`);
       await access(bannerPath).catch(() => {
@@ -53,29 +64,22 @@ export async function build({
         );
       });
     }
-    // Only repository-authored content is executed; no user-supplied MDX is accepted.
-    const { default: Content } = await evaluate(post.content, {
-      ...runtime,
-      format: post.extension === '.md' ? 'md' : 'mdx',
-      remarkPlugins: [remarkGfm],
-      rehypePlugins: [
-        rehypeSlug,
-        [rehypeHighlight, { detect: false, ignoreMissing: true }],
-      ],
-      baseUrl: new URL('../content/posts/', import.meta.url),
-    });
+    await writeFile(
+      path.join(output, 'og', `${post.slug}.png`),
+      await socialImage(post, bannerPath),
+    );
     await page(
       `${post.slug}.html`,
       <Document
         title={post.title}
         description={post.description}
         pathname={`/${post.slug}`}
-        image={post.banner}
+        image={`/og/${post.slug}.png`}
         post={post}
         noindex={noindex || post.draft}
       >
         <Article post={post} posts={published}>
-          <Content components={mdxComponents} />
+          <div dangerouslySetInnerHTML={{ __html: compiled.get(post.slug)! }} />
         </Article>
       </Document>,
     );
@@ -92,6 +96,49 @@ export async function build({
         <Listing
           tag={tag}
           posts={posts.filter((post) => post.tags.includes(tag))}
+          allPosts={published}
+        />
+      </Document>,
+    );
+  }
+  for (const author of Object.values(authors)) {
+    await page(
+      `authors/${author.id}.html`,
+      <Document
+        title={`${author.name}'s articles`}
+        description={author.bio}
+        pathname={`/authors/${author.id}`}
+        noindex={noindex}
+      >
+        <Listing
+          title={author.name}
+          description={`Articles by ${author.name}.`}
+          introduction={<AuthorProfile author={author} />}
+          posts={published.filter((post) => post.authors.includes(author.id))}
+          allPosts={published}
+        />
+      </Document>,
+    );
+  }
+  for (const slug of [
+    ...new Set(
+      published.flatMap((post) => (post.series ? [post.series.slug] : [])),
+    ),
+  ]) {
+    const parts = seriesPosts(published, slug);
+    const title = parts[0].series!.title;
+    await page(
+      `series/${slug}.html`,
+      <Document
+        title={title}
+        description={`Read ${title}, an article series from paryx.`}
+        pathname={`/series/${slug}`}
+        noindex={noindex}
+      >
+        <Listing
+          title={title}
+          description="An article series, in reading order."
+          posts={parts}
           allPosts={published}
         />
       </Document>,

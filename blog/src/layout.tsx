@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import { authors } from './authors.js';
+import { authors, type Author } from './authors.js';
 import { absoluteUrl, formatDate, site } from './config.js';
-import { tagSlug, type Post } from './content.js';
+import { tagSlug, relatedPosts, seriesPosts, type Post } from './content.js';
 
 export function Tags({ tags }: { tags: string[] }) {
   return (
@@ -25,13 +25,9 @@ export function Byline({ post }: { post: Post }) {
             <div className="author" key={id}>
               <img src={author.avatar} alt="" width="44" height="44" />
               <div>
-                {author.url ? (
-                  <a href={author.url} rel="author">
-                    {author.name}
-                  </a>
-                ) : (
-                  <span>{author.name}</span>
-                )}
+                <a href={`/authors/${id}`} rel="author">
+                  {author.name}
+                </a>
                 {author.role && <small>{author.role}</small>}
               </div>
             </div>
@@ -76,13 +72,14 @@ export function Search({ id = 'sidebar-search' }: { id?: string }) {
   );
 }
 
-export function Sidebar({ posts }: { posts: Post[] }) {
+export function Sidebar({ posts, post }: { posts: Post[]; post?: Post }) {
   const counts = new Map<string, number>();
   posts.forEach((post) =>
     post.tags.forEach((tag) => counts.set(tag, (counts.get(tag) ?? 0) + 1)),
   );
   return (
     <aside className="sidebar" aria-label="Explore the blog">
+      {post && <Contents post={post} />}
       <Search />
       <section>
         <h2>Categories</h2>
@@ -218,11 +215,12 @@ export function Document({
         '@type': 'BlogPosting',
         headline: post.title,
         description: post.description,
-        ...(image ? { image: [absoluteUrl(image)] } : {}),
+        ...(post.banner ? { image: [absoluteUrl(post.banner)] } : {}),
         author: post.authors.map((id) => ({
           '@type': 'Person',
           name: authors[id].name,
-          ...(authors[id].url ? { url: authors[id].url } : {}),
+          url: absoluteUrl(`/authors/${id}`),
+          ...(authors[id].url ? { sameAs: authors[id].url } : {}),
         })),
         datePublished: post.date,
         dateModified: post.updated ?? post.date,
@@ -258,7 +256,21 @@ export function Document({
         {image && (
           <>
             <meta property="og:image" content={absoluteUrl(image)} />
-            <meta property="og:image:alt" content={post?.bannerAlt ?? title} />
+            <meta
+              property="og:image:alt"
+              content={post ? `${post.title} — paryx` : title}
+            />
+            {image.startsWith('/og/') && (
+              <>
+                <meta property="og:image:width" content="1200" />
+                <meta property="og:image:height" content="630" />
+                <meta property="og:image:type" content="image/png" />
+              </>
+            )}
+            <meta
+              name="twitter:image:alt"
+              content={post ? `${post.title} — paryx` : title}
+            />
             <meta name="twitter:image" content={absoluteUrl(image)} />
           </>
         )}
@@ -275,15 +287,13 @@ export function Document({
             {post.authors.map((id) => (
               <meta name="author" content={authors[id].name} key={id} />
             ))}
-            {post.authors
-              .filter((id) => authors[id].url)
-              .map((id) => (
-                <meta
-                  property="article:author"
-                  content={authors[id].url}
-                  key={id}
-                />
-              ))}
+            {post.authors.map((id) => (
+              <meta
+                property="article:author"
+                content={absoluteUrl(`/authors/${id}`)}
+                key={id}
+              />
+            ))}
             {post.tags.map((tag) => (
               <meta property="article:tag" content={tag} key={tag} />
             ))}
@@ -303,7 +313,7 @@ export function Document({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;675;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;675;700&display=swap"
           rel="stylesheet"
         />
         <link rel="stylesheet" href="/assets/blog.css" />
@@ -344,7 +354,7 @@ export function Document({
           </div>
           <Search id="dialog-search" />
           <p className="search-status" role="status" aria-live="polite">
-            Search by title, topic, or author.
+            Search titles, topics, authors, and article content.
           </p>
           <div className="search-results" />
         </dialog>
@@ -390,9 +400,29 @@ export function Article({
             <p className="deck">{post.description}</p>
             <Byline post={post} />
           </header>
+          {(post.headings?.length ?? 0) >= 3 && (
+            <details className="mobile-contents">
+              <summary>On this page</summary>
+              <Contents post={post} />
+            </details>
+          )}
+          {post.series && (
+            <p className="series-label">
+              Part {post.series.part} of{' '}
+              <a href={`/series/${post.series.slug}`}>{post.series.title}</a>
+            </p>
+          )}
           <div className="prose">{children}</div>
+          {((post.series && !post.draft) ||
+            relatedPosts(post, posts).length > 0) && (
+            <footer className="article-extras" aria-label="More articles">
+              <p className="eyebrow">Continue reading</p>
+              <SeriesNavigation post={post} posts={posts} />
+              <RelatedArticles post={post} posts={posts} />
+            </footer>
+          )}
         </article>
-        <Sidebar posts={posts} />
+        <Sidebar posts={posts} post={post} />
       </div>
     </main>
   );
@@ -402,23 +432,31 @@ export function Listing({
   posts,
   allPosts,
   tag,
+  title,
+  description,
+  introduction,
 }: {
   posts: Post[];
   allPosts: Post[];
   tag?: string;
+  title?: string;
+  description?: string;
+  introduction?: ReactNode;
 }) {
   const [featured, ...rest] = posts;
   return (
     <main id="main" className="listing">
       <header className="listing-intro">
         <p className="eyebrow">The paryx blog</p>
-        <h1>{tag ?? 'Notes on building things.'}</h1>
+        <h1>{title ?? tag ?? 'Notes on building things.'}</h1>
         <p className="deck">
-          {tag
-            ? `Articles filed under ${tag}.`
-            : 'Software, experiments, and lessons learned along the way.'}
+          {description ??
+            (tag
+              ? `Articles filed under ${tag}.`
+              : 'Software, experiments, and lessons learned along the way.')}
         </p>
       </header>
+      {introduction}
       <div className="compact-search" id="search">
         <Search id="listing-search" />
       </div>
@@ -446,7 +484,7 @@ export function Listing({
           {rest.map((post) => (
             <PostSummary key={post.slug} post={post} />
           ))}
-          <p className="empty-state" data-empty-search hidden>
+          <p className="empty-state" data-empty-search role="status" hidden>
             No articles match your search.
           </p>
         </div>
@@ -463,18 +501,10 @@ function PostSummary({
   post: Post;
   featured?: boolean;
 }) {
-  const searchText = [
-    post.title,
-    post.description,
-    ...post.tags,
-    ...post.authors.map((id) => authors[id].name),
-  ]
-    .join(' ')
-    .toLowerCase();
   return (
     <article
       className={`post-summary ${featured ? 'featured' : ''}`}
-      data-search-text={searchText}
+      data-post-url={`/${post.slug}`}
     >
       {!featured && post.banner && (
         <a href={`/${post.slug}`} tabIndex={-1} aria-hidden="true">
@@ -493,6 +523,12 @@ function PostSummary({
           <p className="demo-label">Demo article · illustrative content</p>
         )}
         <Tags tags={post.tags} />
+        {post.series && (
+          <p className="series-label">
+            Part {post.series.part} of{' '}
+            <a href={`/series/${post.series.slug}`}>{post.series.title}</a>
+          </p>
+        )}
         <h2>
           <a href={`/${post.slug}`}>{post.title}</a>
         </h2>
@@ -504,5 +540,115 @@ function PostSummary({
         </a>
       </div>
     </article>
+  );
+}
+
+function Contents({ post }: { post: Post }) {
+  if ((post.headings?.length ?? 0) < 3) return null;
+  return (
+    <nav className="contents" aria-label="Article contents">
+      <h2>On this page</h2>
+      <ol>
+        {post.headings!.map((heading) => (
+          <li
+            key={heading.id}
+            className={heading.level === 3 ? 'contents-subheading' : undefined}
+          >
+            <a href={`#${heading.id}`}>{heading.title}</a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
+function SeriesNavigation({ post, posts }: { post: Post; posts: Post[] }) {
+  if (!post.series || post.draft) return null;
+  const parts = seriesPosts(posts, post.series.slug);
+  const position = parts.findIndex((part) => part.slug === post.slug);
+  const previous = parts[position - 1];
+  const next = parts[position + 1];
+  return (
+    <nav className="series-navigation" aria-label="Article series">
+      <p className="eyebrow">Article series</p>
+      <h2>
+        <a href={`/series/${post.series.slug}`}>{post.series.title}</a>
+      </h2>
+      <p>
+        Part {post.series.part} · {parts.length}{' '}
+        {parts.length === 1 ? 'article' : 'articles'}
+      </p>
+      <div>
+        {previous && (
+          <a href={`/${previous.slug}`} rel="prev">
+            <small>← Previous article</small>
+            {previous.title}
+          </a>
+        )}
+        {next && (
+          <a href={`/${next.slug}`} rel="next">
+            <small>Next article →</small>
+            {next.title}
+          </a>
+        )}
+      </div>
+    </nav>
+  );
+}
+
+function RelatedArticles({ post, posts }: { post: Post; posts: Post[] }) {
+  const related = relatedPosts(post, posts);
+  if (!related.length) return null;
+  return (
+    <section className="related-articles" aria-labelledby="related-title">
+      <h2 id="related-title">Related articles</h2>
+      {related.map((article) => (
+        <a
+          className="related-post"
+          href={`/${article.slug}`}
+          key={article.slug}
+        >
+          {article.banner && (
+            <img
+              src={article.banner}
+              alt=""
+              width="120"
+              height="68"
+              loading="lazy"
+            />
+          )}
+          <div>
+            <strong>{article.title}</strong>
+            <p>{article.description}</p>
+            <time dateTime={article.date}>{formatDate(article.date)}</time>
+            {article.demo && <small> · Demo article</small>}
+          </div>
+        </a>
+      ))}
+    </section>
+  );
+}
+
+export function AuthorProfile({ author }: { author: Author }) {
+  return (
+    <section className="author-profile" aria-label={`About ${author.name}`}>
+      <img src={author.avatar} alt="" width="72" height="72" />
+      <div>
+        {author.role && <p className="eyebrow">{author.role}</p>}
+        {author.bio && <p>{author.bio}</p>}
+        <ul>
+          {author.url && (
+            <li>
+              <a href={author.url}>Website ↗</a>
+            </li>
+          )}
+          {author.projects?.map((project) => (
+            <li key={project.url}>
+              <a href={project.url}>{project.name} ↗</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
   );
 }

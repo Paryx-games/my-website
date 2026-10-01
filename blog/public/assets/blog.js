@@ -23,7 +23,7 @@ async function search(query) {
   const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   results.replaceChildren();
   if (!words.length) {
-    status.textContent = 'Search by title, topic, or author.';
+    status.textContent = 'Search titles, topics, authors, and article content.';
     return;
   }
   status.textContent = 'Searching…';
@@ -31,7 +31,13 @@ async function search(query) {
     const posts = await loadIndex();
     if (version !== queryVersion) return;
     const matches = posts.filter((post) => {
-      const text = [post.title, post.description, ...post.tags, ...post.authors]
+      const text = [
+        post.title,
+        post.description,
+        ...post.tags,
+        ...post.authors,
+        post.text ?? '',
+      ]
         .join(' ')
         .toLowerCase();
       return words.every((word) => text.includes(word));
@@ -44,7 +50,13 @@ async function search(query) {
       const title = document.createElement('strong');
       title.textContent = post.title;
       const description = document.createElement('p');
-      description.textContent = post.description;
+      const body = post.text ?? '';
+      const matchAt = body.toLowerCase().indexOf(words[0]);
+      const start = Math.max(0, matchAt - 60);
+      description.textContent =
+        matchAt >= 0
+          ? `${start ? '…' : ''}${body.slice(start, start + 200)}${body.length > start + 200 ? '…' : ''}`
+          : post.description;
       link.append(title, description);
       results.append(link);
     }
@@ -89,19 +101,47 @@ dialogInput?.form?.addEventListener('submit', (event) => {
   search(dialogInput.value);
 });
 
-function filterListing(query) {
+let listingVersion = 0;
+async function filterListing(query) {
+  const version = ++listingVersion;
   const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  let count = 0;
-  document.querySelectorAll('[data-search-text]').forEach((post) => {
-    post.hidden = !words.every((word) =>
-      post.dataset.searchText.includes(word),
-    );
-    if (!post.hidden) count++;
-  });
   const empty = document.querySelector('[data-empty-search]');
-  if (empty) empty.hidden = count > 0 || words.length === 0;
-  const banner = document.querySelector('.featured-banner');
-  if (banner) banner.hidden = words.length > 0;
+  try {
+    const index = words.length ? await loadIndex() : [];
+    if (version !== listingVersion) return;
+    const matches = new Set(
+      index
+        .filter((post) => {
+          const text = [
+            post.title,
+            post.description,
+            ...post.tags,
+            ...post.authors,
+            post.text ?? '',
+          ]
+            .join(' ')
+            .toLowerCase();
+          return words.every((word) => text.includes(word));
+        })
+        .map((post) => post.url),
+    );
+    let count = 0;
+    document.querySelectorAll('[data-post-url]').forEach((post) => {
+      post.hidden = words.length > 0 && !matches.has(post.dataset.postUrl);
+      if (!post.hidden) count++;
+    });
+    if (empty) {
+      empty.textContent = 'No articles match your search.';
+      empty.hidden = count > 0 || words.length === 0;
+    }
+    const banner = document.querySelector('.featured-banner');
+    if (banner) banner.hidden = words.length > 0;
+  } catch {
+    if (version === listingVersion && empty) {
+      empty.textContent = 'Search could not load. Please try again.';
+      empty.hidden = false;
+    }
+  }
 }
 
 document

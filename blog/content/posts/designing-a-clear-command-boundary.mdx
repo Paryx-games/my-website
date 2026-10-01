@@ -1,0 +1,64 @@
+---
+title: 'Designing a clear command boundary'
+description: "An illustrative follow-up on small interfaces, useful errors, and testing a desktop application's boundaries."
+date: '2026-09-30'
+authors: [paryx]
+banner: '/blog/banners/roblox-manager-v2.webp'
+bannerAlt: 'A luminous planet above a dark mountain landscape.'
+tags: [Engineering, Rust, Tauri]
+series:
+  slug: roblox-manager-notes
+  title: 'Roblox Manager development notes'
+  part: 2
+demo: true
+draft: false
+---
+
+This is **demo content**, continuing the illustrative Roblox Manager article. It describes a possible design exercise, not a shipped feature or product announcement.
+
+A desktop application becomes easier to understand when its interface and native code agree on a small vocabulary. The boundary should describe what the user wants to accomplish, rather than expose every implementation detail.
+
+## Give each command one purpose
+
+Consider an interface that asks for application status. A single `app_status` command can return a focused result without making the interface understand the native application's internal modules.
+
+- Name commands after the action or information they represent.
+- Keep the input small enough to explain in one sentence.
+- Return explicit data instead of relying on hidden side effects.
+
+```rust
+#[derive(serde::Serialize)]
+struct AppStatus {
+    ready: bool,
+    message: String,
+}
+```
+
+<Callout type="tip">
+  A useful boundary lets each side change without requiring the other side to
+  know why.
+</Callout>
+
+## Make failures understandable
+
+An error should help someone decide what to do next. For this exercise, a recoverable connection failure would offer a retry, while invalid configuration would explain which setting needs attention.
+
+### Preserve useful context
+
+Keep diagnostic context available to developers, but make the visible message concise. Avoid presenting a raw stack trace as the only explanation.
+
+## Test the conversation
+
+A small contract is straightforward to exercise: valid input, invalid input, success, and recoverable failure. The test should verify the conversation between the interface and native code.
+
+The word **idempotency** describes an especially useful property here: repeating a request should not unexpectedly duplicate an action. It is worth deciding which commands need that guarantee before adding retries.
+
+<Figure
+  src="/blog/banners/roblox-manager-v2.webp"
+  alt="A bright planetary horizon beyond a mountain ridge."
+  caption="Demo artwork shared by this illustrative series."
+/>
+
+## Leave the next step obvious
+
+An interface should make the current state clear and offer one useful next action. A small boundary is a practical place to begin.
