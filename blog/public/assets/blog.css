@@ -620,9 +620,10 @@ h6 {
 }
 .eyebrow {
   color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
   margin: 0 0 12px;
 }
 .listing-intro h1 {
