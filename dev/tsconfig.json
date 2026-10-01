@@ -5,7 +5,7 @@
     "moduleResolution": "Bundler",
     "strict": true,
     "noEmit": true,
-    "types": ["@webgpu/types", "@vgpu/wgsl/wgsl-types", "vite/client"],
+    "types": ["vite/client", "node"],
     "lib": ["ES2022", "DOM", "DOM.Iterable"]
   },
   "include": ["src", "vite.config.mts"]

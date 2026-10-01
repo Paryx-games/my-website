@@ -10,8 +10,8 @@
     content="paryx.uk is Paryx's personal developer site, featuring software projects, Roblox development, experiments, GitHub repositories, and live activity.">
   <meta name="application-name" content="paryx.uk">
   <link rel="canonical" href="https://paryx.uk/">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#000000">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#080809">
   <link rel="icon" type="image/svg+xml" href="/assets/logo_white.svg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://paryx.uk/">
@@ -25,23 +25,21 @@
     content="Paryx's personal developer site for software projects, Roblox development, experiments, GitHub repositories, and live activity.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@675;700&display=swap" rel="stylesheet">
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;675;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
   <style>
     :root {
-      --color-bg: #0a0a0f;
-      --color-surface: #0f0f11;
+      --color-bg: #080809;
+      --color-surface: #101113;
       --color-text: #ececee;
       --color-soft: #c9c9ce;
-      --color-muted: #7d7d85;
-      --color-faint: #4a4a50;
-      --color-line: rgba(255, 255, 255, 0.1);
+      --color-muted: #b6b6bf;
+      --color-faint: #92929d;
+      --color-line: #29292e;
       --color-hover: rgba(255, 255, 255, 0.06);
-      --color-border: #232327;
+      --color-border: #29292e;
       --color-border-hover: #3a3a40;
       --color-border-strong: #55555c;
-      --color-grid: rgba(255, 255, 255, 0.05);
 
       --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
       --text-display: clamp(2.25rem, 6vw, 4.5rem);
@@ -57,7 +55,6 @@
       --section-gap: 5rem;
 
       --radius: 10px;
-      --grid-size: 56px;
       --motion-slow: 1.4s;
       --motion-medium: 0.55s;
       --motion-fast: 0.22s;
@@ -77,7 +74,7 @@
 
     html {
       scroll-behavior: smooth;
-      background: #000;
+      background: var(--color-bg);
     }
 
     body {
@@ -85,73 +82,11 @@
       isolation: isolate;
       min-height: 100vh;
       overflow-anchor: none;
-      background: transparent;
+      background: var(--color-bg);
       color: var(--color-text);
       font-family: var(--font-sans);
       font-size: var(--text-body);
       -webkit-font-smoothing: antialiased;
-    }
-
-    .galaxy-backdrop {
-      position: absolute;
-      inset: 0 0 auto;
-      height: 100%;
-      z-index: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .page-stars {
-      position: fixed;
-      inset: -5vh -5vw;
-      z-index: 1;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .star-layer {
-      position: absolute;
-      inset: -8%;
-      pointer-events: none;
-      will-change: transform, opacity, filter;
-    }
-
-    .star-layer--dense {
-      opacity: var(--stars-dense, 0.82);
-      background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.66) 0 0.62px, transparent 1px),
-        radial-gradient(circle, rgba(190, 211, 255, 0.48) 0 0.58px, transparent 0.95px),
-        radial-gradient(circle, rgba(255, 255, 255, 0.36) 0 0.52px, transparent 0.9px);
-      background-size: 113px 127px, 157px 149px, 199px 181px;
-      background-position: 19px 31px, 83px 107px, 151px 43px;
-      animation:
-        star-drift-a 104s linear infinite,
-        star-twinkle-a 7.4s ease-in-out infinite alternate;
-    }
-
-    .star-layer--mid {
-      opacity: var(--stars-mid, 0.62);
-      background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.82) 0 0.76px, transparent 1.12px),
-        radial-gradient(circle, rgba(182, 205, 255, 0.62) 0 0.68px, transparent 1.04px),
-        radial-gradient(circle, rgba(255, 255, 255, 0.48) 0 0.6px, transparent 1px);
-      background-size: 233px 251px, 311px 293px, 379px 367px;
-      background-position: 37px 17px, 109px 151px, 211px 73px;
-      animation:
-        star-drift-b 139s linear infinite,
-        star-twinkle-b 10.1s ease-in-out infinite alternate;
-    }
-
-    .star-layer--sparse {
-      opacity: var(--stars-sparse, 0.44);
-      background-image:
-        radial-gradient(circle, rgba(255, 255, 255, 0.94) 0 0.95px, transparent 1.32px),
-        radial-gradient(circle, rgba(210, 224, 255, 0.72) 0 0.82px, transparent 1.18px);
-      background-size: 521px 499px, 701px 643px;
-      background-position: 103px 151px, 377px 89px;
-      animation:
-        star-drift-c 173s linear infinite,
-        star-twinkle-c 12.8s ease-in-out infinite alternate;
     }
 
     a {
@@ -186,56 +121,6 @@
 
     h3 {
       margin-bottom: var(--space-3);
-    }
-
-    .site-title {
-      position: fixed;
-      top: 1.5rem;
-      left: 1.5rem;
-      z-index: 20;
-      font-family: "Sora", sans-serif;
-      font-size: 1.28rem;
-      font-weight: 675;
-      line-height: 1;
-      letter-spacing: -0.035em;
-      color: rgba(255, 255, 255, 0.58);
-      user-select: none;
-      transition: opacity var(--motion-fast) var(--ease);
-    }
-
-    .site-title:hover {
-      opacity: 0.78;
-    }
-
-    .grid {
-      display: none;
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
-      background-size: var(--grid-size) var(--grid-size);
-      -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 100%);
-      mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 100%);
-    }
-
-    .grid::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
-      background-size: var(--grid-size) var(--grid-size);
-      opacity: 0;
-      -webkit-mask-image: radial-gradient(circle 135px at var(--mouse-x, -300px) var(--mouse-y, -300px), #000 0%, rgba(0, 0, 0, 0.95) 38%, transparent 78%);
-      mask-image: radial-gradient(circle 135px at var(--mouse-x, -300px) var(--mouse-y, -300px), #000 0%, rgba(0, 0, 0, 0.95) 38%, transparent 78%);
-      transition: opacity 160ms ease;
-    }
-
-    .grid.is-pointer-active::after {
-      opacity: 1;
     }
 
     .hero {
@@ -1903,8 +1788,7 @@
       padding: 0.9rem 1rem;
       border: 1px solid var(--color-border-hover);
       border-radius: 12px;
-      background: rgba(21, 21, 24, 0.96);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      background: var(--color-surface);
       color: var(--color-soft);
       text-align: left;
       pointer-events: none;
@@ -1913,7 +1797,6 @@
       transition:
         opacity 160ms ease,
         transform 160ms var(--ease);
-      backdrop-filter: blur(12px);
     }
 
     .app-toast[hidden] {
@@ -2054,122 +1937,46 @@
     }
 
     
-    .hero {
-      overflow: hidden;
-      isolation: isolate;
-      z-index: 2;
-    }
-
-    .galaxy-canvas,
-    .galaxy-vignette {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .galaxy-canvas {
-      z-index: 0;
-      display: block;
-      contain: strict;
-      opacity: 0;
-      transition: opacity 700ms var(--ease);
-    }
-
-    .galaxy-canvas.is-ready {
-      opacity: 1;
-    }
-
-    .galaxy-vignette {
-      z-index: 1;
-      height: min(100vh, 100svh);
-      background:
-        radial-gradient(circle at 50% 42%, transparent 0 24%, rgba(4, 4, 7, 0.1) 60%, rgba(0, 0, 0, 0.28) 100%),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0.07) 78%, rgba(0, 0, 0, 0.16) 91%, rgba(0, 0, 0, 0.26) 100%);
-      -webkit-mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, #000 0%, #000 58%, transparent 100%);
-      mask-image: radial-gradient(ellipse 100% 100% at 50% 0%, #000 0%, #000 58%, transparent 100%);
-    }
-
-    .galaxy-backdrop .galaxy-canvas {
-      position: absolute;
-      inset: 0;
-    }
-
-    .galaxy-backdrop .galaxy-vignette {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-    }
-
-    .hero > h1,
-    .hero > .line,
-    .hero > .rotator {
-      position: relative;
-      z-index: 2;
-    }
-
-    .galaxy-fallback .galaxy-backdrop {
-      display: none;
-    }
-
-    @keyframes star-drift-a {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(12px, -8px, 0); }
-    }
-
-    @keyframes star-drift-b {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(-10px, 7px, 0); }
-    }
-
-    @keyframes star-drift-c {
-      from { transform: translate3d(0, 0, 0); }
-      to { transform: translate3d(7px, 11px, 0); }
-    }
-
-    @keyframes star-twinkle-a {
-      from { filter: brightness(0.92); }
-      to { filter: brightness(1.08); }
-    }
-
-    @keyframes star-twinkle-b {
-      from { filter: brightness(0.9); }
-      to { filter: brightness(1.12); }
-    }
-
-    @keyframes star-twinkle-c {
-      from { filter: brightness(0.94); }
-      to { filter: brightness(1.07); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .star-layer {
-        animation: none;
-      }
-    }
   </style>
 </head>
 
 <body>
-  <div class="galaxy-backdrop" id="galaxyBackdrop" aria-hidden="true">
-    <canvas class="galaxy-canvas" id="galaxyCanvas" aria-hidden="true"></canvas>
-    <div class="galaxy-vignette" id="galaxyVignette" aria-hidden="true"></div>
-  </div>
-  <button class="site-title" id="siteTitleCopy" type="button" data-tip="Copy site URL" aria-label="Copy https://paryx.uk/ to clipboard">paryx.uk</button>
-  <span class="sr-only" id="siteTitleStatus" role="status"></span>
-  <div class="grid" aria-hidden="true"></div>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="https://paryx.uk">paryx</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/" aria-current="page">Home</a>
+        <a href="https://blog.paryx.uk">Blog</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="https://blog.paryx.uk/#search" data-open-search aria-label="Search blog articles">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        </a>
+        <details class="mobile-nav">
+          <summary aria-label="Toggle navigation"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18"/></svg></summary>
+          <nav aria-label="Mobile navigation">
+            <a href="/" aria-current="page">Home</a>
+            <a href="https://blog.paryx.uk">Blog</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+            <a href="https://blog.paryx.uk/rss.xml">RSS feed</a>
+          </nav>
+        </details>
+      </div>
+    </header>
 
   <section class="hero">
-    <h1 aria-label="Hi, I'm paryx"><span id="type"></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
+    <h1 aria-label="Hi, I'm paryx"><span id="type">Hi, I'm <span class="hero-name">paryx</span></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
     <div class="line" id="line" aria-hidden="true"></div>
-    <p class="rotator" id="rotator"><span id="rot"></span><span class="caret" id="rotCaret" aria-hidden="true"></span>
+    <p class="rotator" id="rotator"><span id="rot">Welcome to my website!</span><span class="caret" id="rotCaret" aria-hidden="true"></span>
     </p>
   </section>
 
   <main class="content" id="content">
-    <section class="about">
+    <section class="about" id="about">
       <h2>About</h2>
       <p><span id="aboutText">I'm paryx, a small indie developer who loves coding as a hobby and making new projects.
           I'm also currently learning more about software engineering beyond just coding, including things like reverse
@@ -2238,7 +2045,7 @@
       <p class="note" id="timeDiff"></p>
     </section>
 
-    <section>
+    <section id="projects">
       <h2>Projects</h2>
       <p class="projects-live-note">Fetched from GitHub in real time</p>
       <div class="repos reveal" id="repos"></div>
@@ -2338,7 +2145,21 @@
     </section>
   </main>
 
-  <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="/privacy-policy">Privacy Policy</a></footer>
+  <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="https://paryx.uk/privacy-policy">Privacy Policy</a></footer>
+  </div>
+
+  <dialog id="search-dialog" aria-labelledby="search-title">
+    <div class="dialog-header">
+      <h2 id="search-title">Search blog articles</h2>
+      <button class="icon-button" type="button" data-close-search aria-label="Close search">×</button>
+    </div>
+    <form class="search-form" action="https://blog.paryx.uk/" method="get" role="search">
+      <label class="sr-only" for="blog-search">Search articles</label>
+      <input id="blog-search" type="search" name="q" placeholder="Search articles…" autocomplete="off" required>
+      <button type="submit">Search</button>
+    </form>
+    <p class="search-hint">Search articles by title, topic, or author on the paryx blog.</p>
+  </dialog>
 
   <div class="app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden>
     <strong id="appToastTitle"></strong>
@@ -3094,23 +2915,6 @@
         field.remove();
         return copied;
       }
-    };
-
-    const initSiteTitleCopy = () => {
-      const button = $("siteTitleCopy");
-      const status = $("siteTitleStatus");
-      if (!button || !status) return;
-
-      button.addEventListener("click", async () => {
-        const copied = await copyText("https://paryx.uk/");
-        status.textContent = copied ? "Site URL copied" : "Could not copy site URL";
-        button.dataset.tip = copied ? "Copied" : "Copy failed";
-
-        setTimeout(() => {
-          button.dataset.tip = "Copy site URL";
-          status.textContent = "";
-        }, 1600);
-      });
     };
 
     let toastTimer = 0;
@@ -4225,59 +4029,6 @@
       addEventListener("resize", position);
     };
 
-    const initGridPointer = () => {
-      const grid = document.querySelector(".grid");
-      if (!grid || !matchMedia("(pointer: fine)").matches) return;
-      let frame = 0;
-      let x = -300;
-      let y = -300;
-      const paint = () => {
-        frame = 0;
-        grid.style.setProperty("--mouse-x", `${x}px`);
-        grid.style.setProperty("--mouse-y", `${y}px`);
-        grid.classList.add("is-pointer-active");
-      };
-      addEventListener("pointermove", (event) => {
-        x = event.clientX;
-        y = event.clientY;
-        if (!frame) frame = requestAnimationFrame(paint);
-      }, { passive: true });
-      document.documentElement.addEventListener("mouseleave", () => grid.classList.remove("is-pointer-active"));
-    };
-
-    const initScrollReactiveStars = () => {
-      const stars = $("pageStars");
-      if (!stars) return;
-
-      let frame = 0;
-      const clamp01 = (value) => Math.min(1, Math.max(0, value));
-      const smoothstep = (edge0, edge1, value) => {
-        const t = clamp01((value - edge0) / Math.max(0.0001, edge1 - edge0));
-        return t * t * (3 - 2 * t);
-      };
-
-      const paint = () => {
-        frame = 0;
-        const maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-        const progress = clamp01(scrollY / maxScroll);
-        const dense = 0.82 * (1 - smoothstep(0.02, 0.42, progress));
-        const mid = 0.62 * (1 - 0.72 * smoothstep(0.08, 0.78, progress));
-        const sparse = 0.44 * (1 - 0.34 * smoothstep(0.18, 1, progress));
-
-        stars.style.setProperty("--stars-dense", dense.toFixed(3));
-        stars.style.setProperty("--stars-mid", mid.toFixed(3));
-        stars.style.setProperty("--stars-sparse", sparse.toFixed(3));
-      };
-
-      const schedule = () => {
-        if (!frame) frame = requestAnimationFrame(paint);
-      };
-
-      addEventListener("scroll", schedule, { passive: true });
-      addEventListener("resize", schedule);
-      paint();
-    };
-
     const initTabTitle = () => {
       const home = document.title;
       document.addEventListener("visibilitychange", () => {
@@ -4305,7 +4056,6 @@
     };
 
     runHero();
-    initSiteTitleCopy();
     initScrollButton();
     initClocks();
     initPicker();
@@ -4317,7 +4067,6 @@
     initAboutTypewriter();
     initMoreDetails();
     initTooltips();
-    initGridPointer();
     initTabTitle();
     initReveal();
   </script>
