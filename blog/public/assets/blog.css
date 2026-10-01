@@ -1110,3 +1110,45 @@ dialog::backdrop {
     height: 48px;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-banner {
+    animation: blog-enter 450ms ease-out both;
+  }
+  .article-header,
+  .listing-intro,
+  .author-profile {
+    animation: blog-enter 380ms ease-out both;
+  }
+  .article-header {
+    animation-delay: 60ms;
+  }
+  .mobile-nav[open] nav,
+  #search-dialog[open] {
+    animation: blog-enter 180ms ease-out both;
+  }
+  .tags a,
+  .series-navigation > div > a,
+  .related-post,
+  .search-result,
+  .code-toolbar button {
+    transition:
+      color 160ms ease,
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+  .related-post:hover,
+  .related-post:focus-visible {
+    background-color: #101113;
+  }
+}
+@keyframes blog-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
