@@ -29,7 +29,18 @@ export function rss(posts: Post[]): string {
 export function sitemap(posts: Post[]): string {
   const published = visiblePosts(posts);
   const tags = [...new Set(published.flatMap((post) => post.tags))];
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.origin}/</loc></url>${published.map((post) => `<url><loc>${absoluteUrl(`/${post.slug}`)}</loc><lastmod>${post.updated ?? post.date}</lastmod></url>`).join('')}${tags.map((tag) => `<url><loc>${absoluteUrl(`/tags/${tagSlug(tag)}`)}</loc></url>`).join('')}</urlset>`;
+  const profiles = [...new Set(published.flatMap((post) => post.authors))].map(
+    (id) => `/authors/${id}`,
+  );
+  const series = [
+    ...new Set(
+      published.flatMap((post) => (post.series ? [post.series.slug] : [])),
+    ),
+  ].map((slug) => `/series/${slug}`);
+  const extra = [...profiles, ...series]
+    .map((url) => `<url><loc>${absoluteUrl(url)}</loc></url>`)
+    .join('');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${site.origin}/</loc></url>${published.map((post) => `<url><loc>${absoluteUrl(`/${post.slug}`)}</loc><lastmod>${post.updated ?? post.date}</lastmod></url>`).join('')}${tags.map((tag) => `<url><loc>${absoluteUrl(`/tags/${tagSlug(tag)}`)}</loc></url>`).join('')}${extra}</urlset>`;
 }
 
 export function searchIndex(posts: Post[]) {
@@ -40,5 +51,6 @@ export function searchIndex(posts: Post[]) {
     authors: post.authors.map((id) => authors[id].name),
     url: `/${post.slug}`,
     date: post.date,
+    text: post.searchText ?? '',
   }));
 }
