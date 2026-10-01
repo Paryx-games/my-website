@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import { authors } from './authors.js';
 import { absoluteUrl, formatDate, site } from './config.js';
 import { tagSlug, type Post } from './content.js';
@@ -348,6 +349,7 @@ export function Document({
           </p>
           <div className="search-results" />
         </dialog>
+        <Analytics />
       </body>
     </html>
   );
