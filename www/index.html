@@ -1464,6 +1464,9 @@
     }
 
     .discord-activity-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
       min-width: 0;
     }
 
@@ -1499,13 +1502,8 @@
       object-fit: contain;
     }
 
-    .discord-activity-kind-label.is-playing {
-      position: relative;
-      transform: translate(-3px, 3px);
-    }
-
     .discord-activity-name {
-      margin-top: 0.65rem;
+      margin-top: 0.4rem;
       overflow: hidden;
       color: var(--color-text);
       font-size: clamp(1.08rem, 3vw, 1.35rem);
@@ -1517,7 +1515,7 @@
     }
 
     .discord-activity-detail {
-      margin-top: 0.18rem;
+      margin-top: 0;
       overflow: hidden;
       color: var(--color-soft);
       font-size: 0.86rem;
@@ -1537,7 +1535,7 @@
       grid-template-columns: auto minmax(70px, 1fr) auto;
       align-items: center;
       gap: 0.7rem;
-      margin-top: 0.85rem;
+      margin-top: 0.6rem;
       color: var(--color-soft);
       font-size: 0.72rem;
       font-variant-numeric: tabular-nums;
@@ -1561,9 +1559,9 @@
 
     .discord-activity-elapsed {
       display: inline-flex;
-      align-items: center;
+      align-items: baseline;
       gap: 0.55rem;
-      margin-top: 0.8rem;
+      margin-top: 0.55rem;
       color: var(--color-muted);
       font-size: 0.76rem;
       font-weight: 400;
@@ -1571,8 +1569,6 @@
     }
 
     .discord-activity-elapsed > span {
-      position: relative;
-      top: -3px;
       font-size: calc(0.76rem + 2px);
     }
 
@@ -1583,7 +1579,6 @@
     }
 
     .discord-activity-elapsed .clock-sep {
-      top: -3px;
       color: var(--color-faint);
     }
 
@@ -1603,7 +1598,7 @@
       }
 
       .discord-activity-name {
-        margin-top: 0.42rem;
+        margin-top: 0.17rem;
         font-size: 1rem;
       }
 
@@ -1613,7 +1608,7 @@
 
       .discord-activity-progress {
         gap: 0.45rem;
-        margin-top: 0.6rem;
+        margin-top: 0.35rem;
         font-size: 0.66rem;
       }
 
@@ -3114,7 +3109,7 @@
       const end = Number(spotifyInfo?.timestamps?.end ?? activity?.timestamps?.end ?? 0) || 0;
       const hasProgress = spotify && start > 0 && end > start;
       const hasElapsed = !spotify && start > 0;
-      const fallbackAccent = spotify ? "#1ed760" : coding ? "#6ca5d9" : "#8b8b95";
+      const fallbackAccent = spotify ? "#1ed760" : "#8b8b95";
 
       return `<article class="discord-activity-card${coding ? " is-coding" : ""}${art ? "" : " activity-art-missing"}" style="--activity-accent:${fallbackAccent}" data-start="${start}" data-end="${end}" data-spotify="${spotify ? "true" : "false"}">
       ${art ? `<img class="discord-activity-backdrop" src="${esc(art)}" alt="" crossorigin="anonymous" aria-hidden="true">` : ""}
