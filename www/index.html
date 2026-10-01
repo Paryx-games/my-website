@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- keep editable configs at the top of each site's script, before functions or dom setup. keep css tokens at the top of the stylesheet. follow this for future sites too. -->
+
 <html lang="en">
 
 <head>
@@ -11,7 +11,7 @@
   <meta name="application-name" content="paryx.uk">
   <link rel="canonical" href="https://paryx.uk/">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0a0a0b">
+  <meta name="theme-color" content="#080809">
   <link rel="icon" type="image/svg+xml" href="/assets/logo_white.svg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://paryx.uk/">
@@ -25,23 +25,21 @@
     content="Paryx's personal developer site for software projects, Roblox development, experiments, GitHub repositories, and live activity.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Sora:wght@675;700&display=swap" rel="stylesheet">
-  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;675;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
   <style>
     :root {
-      --color-bg: #0a0a0b;
-      --color-surface: #0f0f11;
+      --color-bg: #080809;
+      --color-surface: #101113;
       --color-text: #ececee;
       --color-soft: #c9c9ce;
-      --color-muted: #7d7d85;
-      --color-faint: #4a4a50;
-      --color-line: rgba(255, 255, 255, 0.1);
+      --color-muted: #b6b6bf;
+      --color-faint: #92929d;
+      --color-line: #29292e;
       --color-hover: rgba(255, 255, 255, 0.06);
-      --color-border: #232327;
+      --color-border: #29292e;
       --color-border-hover: #3a3a40;
       --color-border-strong: #55555c;
-      --color-grid: rgba(255, 255, 255, 0.05);
 
       --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
       --text-display: clamp(2.25rem, 6vw, 4.5rem);
@@ -57,7 +55,6 @@
       --section-gap: 5rem;
 
       --radius: 10px;
-      --grid-size: 56px;
       --motion-slow: 1.4s;
       --motion-medium: 0.55s;
       --motion-fast: 0.22s;
@@ -77,9 +74,14 @@
 
     html {
       scroll-behavior: smooth;
+      background: var(--color-bg);
     }
 
     body {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      overflow-anchor: none;
       background: var(--color-bg);
       color: var(--color-text);
       font-family: var(--font-sans);
@@ -121,59 +123,6 @@
       margin-bottom: var(--space-3);
     }
 
-    .site-title {
-      position: fixed;
-      top: 1.5rem;
-      left: 1.5rem;
-      z-index: 20;
-      font-family: "Sora", sans-serif;
-      font-size: 1.1rem;
-      font-weight: 675;
-      line-height: 1;
-      letter-spacing: -0.035em;
-      color: var(--color-text);
-      user-select: none;
-      transition: opacity var(--motion-fast) var(--ease);
-    }
-
-    .site-title:hover {
-      opacity: 0.78;
-    }
-
-    .site-title span {
-      color: var(--color-muted);
-    }
-
-    .grid {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(to right, var(--color-grid) 1px, transparent 1px),
-        linear-gradient(to bottom, var(--color-grid) 1px, transparent 1px);
-      background-size: var(--grid-size) var(--grid-size);
-      -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 100%);
-      mask-image: radial-gradient(ellipse 75% 70% at 50% 50%, #000 30%, transparent 100%);
-    }
-
-    .grid::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
-      background-size: var(--grid-size) var(--grid-size);
-      opacity: 0;
-      -webkit-mask-image: radial-gradient(circle 135px at var(--mouse-x, -300px) var(--mouse-y, -300px), #000 0%, rgba(0, 0, 0, 0.95) 38%, transparent 78%);
-      mask-image: radial-gradient(circle 135px at var(--mouse-x, -300px) var(--mouse-y, -300px), #000 0%, rgba(0, 0, 0, 0.95) 38%, transparent 78%);
-      transition: opacity 160ms ease;
-    }
-
-    .grid.is-pointer-active::after {
-      opacity: 1;
-    }
-
     .hero {
       position: relative;
       z-index: 1;
@@ -201,12 +150,6 @@
       font-family: "Sora", sans-serif;
       font-weight: 700;
       letter-spacing: 0;
-    }
-
-    .pixel-dust {
-      position: absolute;
-      left: 0;
-      pointer-events: none;
     }
 
     .rotator {
@@ -252,14 +195,6 @@
       background: var(--color-text);
       vertical-align: -0.05em;
       opacity: 0.7;
-    }
-
-    .caret.is-pixel-name {
-      width: 0.3em;
-      height: 0.8em;
-      margin-left: 0.05em;
-      background: var(--pixel-accent, #5b8cff);
-      opacity: 1;
     }
 
     .rotator .caret {
@@ -317,7 +252,7 @@
 
     .content {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       width: min(680px, 100% - 3rem);
       margin: 0 auto;
       padding: var(--space-12) 0;
@@ -1853,8 +1788,7 @@
       padding: 0.9rem 1rem;
       border: 1px solid var(--color-border-hover);
       border-radius: 12px;
-      background: rgba(21, 21, 24, 0.96);
-      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+      background: var(--color-surface);
       color: var(--color-soft);
       text-align: left;
       pointer-events: none;
@@ -1863,7 +1797,6 @@
       transition:
         opacity 160ms ease,
         transform 160ms var(--ease);
-      backdrop-filter: blur(12px);
     }
 
     .app-toast[hidden] {
@@ -1904,7 +1837,7 @@
 
     footer {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       padding-bottom: var(--space-8);
       color: var(--color-faint);
       font-size: var(--text-small);
@@ -2002,23 +1935,48 @@
       }
 
     }
+
+
   </style>
 </head>
 
 <body>
-  <button class="site-title" id="siteTitleCopy" type="button" data-tip="Copy site URL" aria-label="Copy https://paryx.uk/ to clipboard">paryx<span>.uk</span></button>
-  <span class="sr-only" id="siteTitleStatus" role="status"></span>
-  <div class="grid" aria-hidden="true"></div>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="https://paryx.uk">paryx</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/" aria-current="page">Home</a>
+        <a href="https://blog.paryx.uk">Blog</a>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="https://blog.paryx.uk/#search" data-open-search aria-label="Search blog articles">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        </a>
+        <details class="mobile-nav">
+          <summary aria-label="Toggle navigation"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18"/></svg></summary>
+          <nav aria-label="Mobile navigation">
+            <a href="/" aria-current="page">Home</a>
+            <a href="https://blog.paryx.uk">Blog</a>
+            <a href="#projects">Projects</a>
+            <a href="#about">About</a>
+            <a href="https://blog.paryx.uk/rss.xml">RSS feed</a>
+          </nav>
+        </details>
+      </div>
+    </header>
 
   <section class="hero">
-    <h1 aria-label="Hi, I'm paryx"><span id="type"></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
+    <h1 aria-label="Hi, I'm paryx"><span id="type">Hi, I'm <span class="hero-name">paryx</span></span><span class="caret" id="caret" aria-hidden="true"></span></h1>
     <div class="line" id="line" aria-hidden="true"></div>
-    <p class="rotator" id="rotator"><span id="rot"></span><span class="caret" id="rotCaret" aria-hidden="true"></span>
+    <p class="rotator" id="rotator"><span id="rot">Welcome to my website!</span><span class="caret" id="rotCaret" aria-hidden="true"></span>
     </p>
   </section>
 
   <main class="content" id="content">
-    <section class="about">
+    <section class="about" id="about">
       <h2>About</h2>
       <p><span id="aboutText">I'm paryx, a small indie developer who loves coding as a hobby and making new projects.
           I'm also currently learning more about software engineering beyond just coding, including things like reverse
@@ -2087,7 +2045,7 @@
       <p class="note" id="timeDiff"></p>
     </section>
 
-    <section>
+    <section id="projects">
       <h2>Projects</h2>
       <p class="projects-live-note">Fetched from GitHub in real time</p>
       <div class="repos reveal" id="repos"></div>
@@ -2188,6 +2146,20 @@
   </main>
 
   <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="/privacy-policy">Privacy Policy</a></footer>
+  </div>
+
+  <dialog id="search-dialog" aria-labelledby="search-title">
+    <div class="dialog-header">
+      <h2 id="search-title">Search blog articles</h2>
+      <button class="icon-button" type="button" data-close-search aria-label="Close search">×</button>
+    </div>
+    <form class="search-form" action="https://blog.paryx.uk/" method="get" role="search">
+      <label class="sr-only" for="blog-search">Search articles</label>
+      <input id="blog-search" type="search" name="q" placeholder="Search articles…" autocomplete="off" required>
+      <button type="submit">Search</button>
+    </form>
+    <p class="search-hint">Search articles by title, topic, or author on the paryx blog.</p>
+  </dialog>
 
   <div class="app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden>
     <strong id="appToastTitle"></strong>
@@ -2200,199 +2172,6 @@
       <path d="M8 3v10M3.5 8.5L8 13l4.5-4.5" />
     </svg>
   </button>
-
-  <script>
-    const PIXEL_NAME_CONFIG = {
-      palettes: [
-        { text: "#f5f5f5", accent: "#5b8cff" },
-        { text: "#d9ffe6", accent: "#2bff88" },
-        { text: "#ffe4f1", accent: "#ff4fa3" },
-        { text: "#fff0e0", accent: "#ff8a2b" },
-      ],
-      typeInterval: 230,
-      eraseInterval: 130,
-      holdDuration: 2600,
-      restartPause: 450,
-      trailTime: 550,
-      cursorLinger: 900,
-      particleBurst: 14,
-      trailChance: 0.7,
-      horizontalSpeed: 22,
-      verticalSpeedMin: 60,
-      verticalSpeedMax: 210,
-      particleLifeMin: 1000,
-      particleLifeMax: 2000,
-      maxParticles: 500,
-    };
-
-    const startPixelName = async (name) => {
-      const nameElement = document.querySelector(".hero-name");
-      const hero = nameElement.closest(".hero");
-      const caret = document.getElementById("caret");
-      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-      const canvas = document.createElement("canvas");
-      canvas.className = "pixel-dust";
-      canvas.setAttribute("aria-hidden", "true");
-      const context = canvas.getContext("2d");
-      if (!context) return;
-
-      const baselineMarker = document.createElement("span");
-      baselineMarker.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline;pointer-events:none";
-      nameElement.after(baselineMarker);
-      hero.append(canvas);
-
-      let layout;
-      let particles = [];
-      let cycleIndex = -1;
-      let previousVisible = 0;
-      let startedAt = 0;
-      let firstCycleComplete;
-      const firstCycle = new Promise((resolve) => { firstCycleComplete = resolve; });
-      const glyphPoints = new Map();
-
-      const prepare = () => {
-        const size = parseFloat(getComputedStyle(nameElement).fontSize);
-        const topPadding = Math.ceil(PIXEL_NAME_CONFIG.verticalSpeedMax * PIXEL_NAME_CONFIG.particleLifeMax / 1000 + size * 0.12 + 16);
-        const width = hero.clientWidth;
-        const height = hero.clientHeight + topPadding;
-        const ratio = Math.min(devicePixelRatio || 1, 2);
-        canvas.style.top = `${-topPadding}px`;
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        canvas.width = Math.ceil(width * ratio);
-        canvas.height = Math.ceil(height * ratio);
-        context.setTransform(ratio, 0, 0, ratio, 0, 0);
-        layout = { width, height, topPadding, pixel: Math.max(3, Math.round(size / 22)) };
-        glyphPoints.clear();
-      };
-
-      const pointsFor = (letter) => {
-        if (glyphPoints.has(letter)) return glyphPoints.get(letter);
-        const style = getComputedStyle(nameElement);
-        const size = parseFloat(style.fontSize);
-        const buffer = document.createElement("canvas");
-        buffer.width = Math.ceil(size * 2);
-        buffer.height = Math.ceil(size * 1.5);
-        const bufferContext = buffer.getContext("2d");
-        bufferContext.font = `${style.fontWeight} ${size}px ${style.fontFamily}`;
-        bufferContext.textBaseline = "alphabetic";
-        bufferContext.fillText(letter, 0, size);
-        const pixels = bufferContext.getImageData(0, 0, buffer.width, buffer.height).data;
-        const points = [];
-        for (let y = 0; y < buffer.height; y += layout.pixel) {
-          for (let x = 0; x < buffer.width; x += layout.pixel) {
-            if (pixels[(y * buffer.width + x) * 4 + 3] > 128) points.push([x, y]);
-          }
-        }
-        glyphPoints.set(letter, points);
-        return points;
-      };
-
-      const emitLetter = (index, now, count) => {
-        const points = pointsFor(name[index]);
-        const textNode = nameElement.firstChild;
-        if (!points.length || !textNode || textNode.length <= index) return;
-        const range = document.createRange();
-        range.setStart(textNode, index);
-        range.setEnd(textNode, index + 1);
-        const letterBounds = range.getBoundingClientRect();
-        const heroBounds = hero.getBoundingClientRect();
-        const baseline = baselineMarker.getBoundingClientRect().top;
-        const size = parseFloat(getComputedStyle(nameElement).fontSize);
-        const palette = PIXEL_NAME_CONFIG.palettes[cycleIndex % PIXEL_NAME_CONFIG.palettes.length];
-        for (let particleIndex = 0; particleIndex < count; particleIndex++) {
-          let point = points[Math.floor(Math.random() * points.length)];
-          const other = points[Math.floor(Math.random() * points.length)];
-          if (other[1] < point[1]) point = other;
-          particles.push({
-            x: letterBounds.left - heroBounds.left + point[0],
-            y: baseline - heroBounds.top + layout.topPadding - size + point[1] - Math.random() * size * 0.12,
-            velocityX: (Math.random() - 0.5) * PIXEL_NAME_CONFIG.horizontalSpeed,
-            velocityY: -(PIXEL_NAME_CONFIG.verticalSpeedMin + Math.random() * (PIXEL_NAME_CONFIG.verticalSpeedMax - PIXEL_NAME_CONFIG.verticalSpeedMin)),
-            born: now,
-            life: PIXEL_NAME_CONFIG.particleLifeMin + Math.random() * (PIXEL_NAME_CONFIG.particleLifeMax - PIXEL_NAME_CONFIG.particleLifeMin),
-            size: layout.pixel * (0.6 + Math.random() * 0.9),
-            color: Math.random() < 2 / 3 ? palette.text : palette.accent,
-          });
-        }
-      };
-
-      const draw = (now) => {
-        const elapsed = Math.max(0, now - startedAt);
-        const typingDuration = name.length * PIXEL_NAME_CONFIG.typeInterval;
-        const erasingStartsAt = typingDuration + PIXEL_NAME_CONFIG.holdDuration;
-        const erasingEndsAt = erasingStartsAt + name.length * PIXEL_NAME_CONFIG.eraseInterval;
-        const cycleDuration = erasingEndsAt + PIXEL_NAME_CONFIG.restartPause;
-        const nextCycleIndex = Math.floor(elapsed / cycleDuration);
-        const cycleElapsed = elapsed % cycleDuration;
-        if (nextCycleIndex !== cycleIndex) {
-          cycleIndex = nextCycleIndex;
-          previousVisible = 0;
-          particles = [];
-          const palette = PIXEL_NAME_CONFIG.palettes[cycleIndex % PIXEL_NAME_CONFIG.palettes.length];
-          nameElement.style.color = palette.text;
-          caret.style.setProperty("--pixel-accent", palette.accent);
-        }
-
-        const isTyping = cycleElapsed < typingDuration;
-        const isErasing = cycleElapsed >= erasingStartsAt && cycleElapsed < erasingEndsAt;
-        caret.classList.toggle("is-idle", !isTyping && !isErasing && cycleElapsed >= typingDuration + PIXEL_NAME_CONFIG.cursorLinger);
-        const visible = isTyping
-          ? Math.min(name.length, Math.floor(cycleElapsed / PIXEL_NAME_CONFIG.typeInterval) + 1)
-          : isErasing
-            ? Math.max(0, name.length - Math.floor((cycleElapsed - erasingStartsAt) / PIXEL_NAME_CONFIG.eraseInterval) - 1)
-            : cycleElapsed < erasingStartsAt ? name.length : 0;
-
-        if (visible !== previousVisible) {
-          nameElement.textContent = name.slice(0, visible);
-          if (isTyping) {
-            for (let index = previousVisible; index < visible; index++) emitLetter(index, now, PIXEL_NAME_CONFIG.particleBurst);
-          }
-          previousVisible = visible;
-        }
-        if (isTyping) {
-          for (let index = 0; index < visible; index++) {
-            const age = cycleElapsed - index * PIXEL_NAME_CONFIG.typeInterval;
-            if (age < PIXEL_NAME_CONFIG.trailTime && Math.random() < PIXEL_NAME_CONFIG.trailChance) emitLetter(index, now, 1);
-          }
-        }
-
-        context.clearRect(0, 0, layout.width, layout.height);
-        for (const particle of particles) {
-          const age = now - particle.born;
-          if (age > particle.life) continue;
-          const seconds = age / 1000;
-          const remaining = 1 - age / particle.life;
-          const x = Math.round((particle.x + particle.velocityX * seconds) / layout.pixel) * layout.pixel;
-          const y = Math.round((particle.y + particle.velocityY * seconds) / layout.pixel) * layout.pixel;
-          context.globalAlpha = remaining * remaining * 0.95;
-          context.fillStyle = particle.color;
-          context.fillRect(x, y, particle.size, particle.size);
-        }
-        context.globalAlpha = 1;
-        if (particles.length > PIXEL_NAME_CONFIG.maxParticles) particles = particles.filter((particle) => now - particle.born < particle.life);
-        if (elapsed >= typingDuration && firstCycleComplete) {
-          firstCycleComplete();
-          firstCycleComplete = null;
-        }
-        requestAnimationFrame(draw);
-      };
-
-      const style = getComputedStyle(nameElement);
-      await Promise.race([document.fonts.load(`${style.fontWeight} 100px ${style.fontFamily}`).catch(() => {}), new Promise((resolve) => setTimeout(resolve, 2500))]);
-      prepare();
-      nameElement.textContent = "";
-      caret.classList.add("is-pixel-name");
-      startedAt = performance.now();
-      requestAnimationFrame(draw);
-      addEventListener("resize", () => {
-        prepare();
-        particles = [];
-      });
-      await firstCycle;
-    };
-  </script>
   <script>
     const CONFIG = {
       githubUser: "Paryx-games",
@@ -2401,11 +2180,10 @@
       discord: "paryx.games",
       awayTitle: "come back :(",
       rotatingLines: [
-        "welcome to my corner of the internet",
-        "indie developer",
-        "learning how software works under the hood",
-        "always building something new",
-        "reverse engineering, networking, and more"
+        "Welcome to my website!",
+        "I love coding as a hobby!",
+        "I do reverse engineering, networking, docker and more!",
+        "Scroll down to find out more!"
       ],
       links: [
         { label: "GitHub", icon: "github", brand: "#FFFFFF", url: "https://github.com/Paryx-games" },
@@ -2650,7 +2428,6 @@
       const line = $("line");
       const rotCaret = $("rotCaret");
       const rot = $("rot");
-
       if (reduce) {
         $("type").innerHTML = `${esc(HERO_PREFIX)}<span class="hero-name">${esc(HERO_NAME)}</span>`;
         caret.hidden = true;
@@ -2663,13 +2440,19 @@
       }
 
       await sleep(700);
-      await typeInto($("type"), HERO_PREFIX, 62, 72);
+
+      const type = $("type");
+      type.textContent = "";
+      caret.hidden = false;
+
+      await typeInto(type, HERO_PREFIX, 62, 72);
+
       const heroName = document.createElement("span");
       heroName.className = "hero-name";
-      heroName.textContent = HERO_NAME;
-      $("type").append(heroName);
-      caret.hidden = false;
-      await startPixelName(HERO_NAME);
+      type.append(heroName);
+      await typeInto(heroName, HERO_NAME, 90, 70);
+      caret.hidden = true;
+
       await sleep(140);
       line.classList.add("is-visible");
       $("rotator").classList.add("is-visible");
@@ -2678,12 +2461,12 @@
 
       for (let n = 0; ; n++) {
         rotCaret.classList.remove("is-idle");
-        await typeInto(rot, lines[n % lines.length], 65, 55);
+        await typeInto(rot, lines[n % lines.length], 90, 65);
         rotCaret.classList.add("is-idle");
-        await sleep(2400);
+        await sleep(4000);
         rotCaret.classList.remove("is-idle");
-        await eraseFrom(rot, 18);
-        await sleep(350);
+        await eraseFrom(rot, 24);
+        await sleep(500);
       }
     };
 
@@ -3132,23 +2915,6 @@
         field.remove();
         return copied;
       }
-    };
-
-    const initSiteTitleCopy = () => {
-      const button = $("siteTitleCopy");
-      const status = $("siteTitleStatus");
-      if (!button || !status) return;
-
-      button.addEventListener("click", async () => {
-        const copied = await copyText("https://paryx.uk/");
-        status.textContent = copied ? "Site URL copied" : "Could not copy site URL";
-        button.dataset.tip = copied ? "Copied" : "Copy failed";
-
-        setTimeout(() => {
-          button.dataset.tip = "Copy site URL";
-          status.textContent = "";
-        }, 1600);
-      });
     };
 
     let toastTimer = 0;
@@ -4263,26 +4029,6 @@
       addEventListener("resize", position);
     };
 
-    const initGridPointer = () => {
-      const grid = document.querySelector(".grid");
-      if (!grid || !matchMedia("(pointer: fine)").matches) return;
-      let frame = 0;
-      let x = -300;
-      let y = -300;
-      const paint = () => {
-        frame = 0;
-        grid.style.setProperty("--mouse-x", `${x}px`);
-        grid.style.setProperty("--mouse-y", `${y}px`);
-        grid.classList.add("is-pointer-active");
-      };
-      addEventListener("pointermove", (event) => {
-        x = event.clientX;
-        y = event.clientY;
-        if (!frame) frame = requestAnimationFrame(paint);
-      }, { passive: true });
-      document.documentElement.addEventListener("mouseleave", () => grid.classList.remove("is-pointer-active"));
-    };
-
     const initTabTitle = () => {
       const home = document.title;
       document.addEventListener("visibilitychange", () => {
@@ -4310,7 +4056,6 @@
     };
 
     runHero();
-    initSiteTitleCopy();
     initScrollButton();
     initClocks();
     initPicker();
@@ -4322,10 +4067,10 @@
     initAboutTypewriter();
     initMoreDetails();
     initTooltips();
-    initGridPointer();
     initTabTitle();
     initReveal();
   </script>
+  <script type="module" src="/src/main.ts"></script>
 </body>
 
 </html>
