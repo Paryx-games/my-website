@@ -1,20 +1,15 @@
 # paryx.uk
 
-Welcome to the source code of my website, [`paryx.uk`](https://paryx.uk). I deploy it on Vercel and manage all code through here (mostly, the stuff that isn't private). For the websites, I use [vgpu](https://vgpu.sh/) (WGSL shaders) and HTML/CSS/JavaScript.
+My home on the web: projects, experiments, and notes on the things I build.
 
-You can see below the languages using an [API endpoint](https://github.com/Paryx-games/my-website/tree/main/api#language-statistics) from this repository and [GitHub Linguist](https://github.com/github-linguist/linguist) (external)!
+Visit [paryx.uk](https://paryx.uk) to explore my work, or read the [blog](https://blog.paryx.uk) for software stories and lessons learned along the way.
 
-<img src="https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&amp;details=true" alt="language breakdown">
+| Site                                   | Purpose                                                |
+| -------------------------------------- | ------------------------------------------------------ |
+| [paryx.uk](https://paryx.uk)           | Main website and projects                              |
+| [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories         |
+| [dev.paryx.uk](https://dev.paryx.uk)   | A preview of changes to the main website               |
+| [test.paryx.uk](https://test.paryx.uk) | Prototypes and experimental ideas                      |
+| [api.paryx.uk](https://api.paryx.uk)   | Services supporting the sites and other Paryx projects |
 
----
-
-This repository contains the sites under [`paryx.uk`](https://paryx.uk).
-
-| Directory | Domain | Purpose |
-| --- | --- | --- |
-| `www/` | [`paryx.uk`](https://paryx.uk) | Main website |
-| `dev/` | [`dev.paryx.uk`](https://dev.paryx.uk) | Main website staging |
-| `test/` | [`test.paryx.uk`](https://test.paryx.uk) | Testing website |
-| `api/` | [`api.paryx.uk`](https://api.paryx.uk) | API Endpoints |
-
-Each site lives in its own directory so the main site and subdomains can stay separate while sharing the same repository.
+<img src="https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&amp;details=true" alt="Languages used across the paryx.uk sites">
