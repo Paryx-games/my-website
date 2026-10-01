@@ -413,8 +413,14 @@ export function Article({
             </p>
           )}
           <div className="prose">{children}</div>
-          <SeriesNavigation post={post} posts={posts} />
-          <RelatedArticles post={post} posts={posts} />
+          {((post.series && !post.draft) ||
+            relatedPosts(post, posts).length > 0) && (
+            <footer className="article-extras" aria-label="More articles">
+              <p className="eyebrow">Continue reading</p>
+              <SeriesNavigation post={post} posts={posts} />
+              <RelatedArticles post={post} posts={posts} />
+            </footer>
+          )}
         </article>
         <Sidebar posts={posts} post={post} />
       </div>
@@ -564,6 +570,7 @@ function SeriesNavigation({ post, posts }: { post: Post; posts: Post[] }) {
   const next = parts[position + 1];
   return (
     <nav className="series-navigation" aria-label="Article series">
+      <p className="eyebrow">Article series</p>
       <h2>
         <a href={`/series/${post.series.slug}`}>{post.series.title}</a>
       </h2>

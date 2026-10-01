@@ -965,11 +965,29 @@ dialog::backdrop {
   text-decoration: underline;
   text-underline-offset: 4px;
 }
-.series-navigation,
+.article-extras {
+  margin-top: clamp(56px, 7vw, 80px);
+  padding-top: 32px;
+  border-top: 2px solid #45454d;
+}
+.article-extras > .eyebrow {
+  margin: 0 0 32px;
+}
+.series-navigation {
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--line);
+}
+.series-navigation > .eyebrow {
+  margin: 0 0 12px;
+}
 .related-articles {
-  border-top: 1px solid var(--line);
-  margin-top: 40px;
-  padding-top: 28px;
+  margin-top: 32px;
+}
+.related-articles:first-of-type {
+  margin-top: 0;
+}
+.series-navigation + .related-articles {
+  margin-top: 32px;
 }
 .series-navigation p {
   color: var(--muted);
@@ -983,6 +1001,17 @@ dialog::backdrop {
 .series-navigation a {
   overflow-wrap: anywhere;
 }
+.series-navigation > div > a {
+  display: block;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  line-height: 1.6;
+}
+.series-navigation > div > a:hover,
+.series-navigation > div > a:focus-visible {
+  border-color: #65656e;
+}
 .series-navigation small {
   display: block;
   margin-bottom: 8px;
@@ -991,7 +1020,7 @@ dialog::backdrop {
 .related-post {
   display: flex;
   gap: 20px;
-  padding: 20px 0;
+  padding: 24px 0;
   border-bottom: 1px solid var(--line);
 }
 .related-post img {
