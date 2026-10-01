@@ -27,7 +27,7 @@
     content="Paryx's personal developer site for software projects, Roblox development, experiments, GitHub repositories, and live activity.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;675;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;675;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
   <style>
     :root {
@@ -2147,7 +2147,23 @@
     </section>
   </main>
 
-  <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="/privacy-policy">Privacy Policy</a></footer>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-identity">
+        <a class="footer-brand" href="/">paryx</a>
+        <p>Projects, experiments, and the things I'm building.</p>
+      </div>
+      <nav aria-label="Explore the site">
+        <h2>Explore</h2>
+        <ul><li><a href="#projects">Projects</a></li><li><a href="#about">About me</a></li><li><a href="https://blog.paryx.uk">Blog</a></li></ul>
+      </nav>
+      <nav aria-label="Find paryx elsewhere">
+        <h2>Keep in touch</h2>
+        <ul><li><a href="https://github.com/Paryx-games">GitHub</a></li><li><a href="mailto:paryx@paryx.uk">Email me</a></li><li><a href="https://blog.paryx.uk/rss.xml">Follow via RSS</a></li></ul>
+      </nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 paryx</span><a href="/privacy-policy">Privacy policy</a></div>
+  </footer>
   </div>
 
   <dialog id="search-dialog" aria-labelledby="search-title">
@@ -3021,7 +3037,11 @@
     const DISCORD_STATUS_ENDPOINT = "/api/discord-status";
     const LANYARD_SOCKET_URL = "wss://api.lanyard.rest/socket";
 
+    const isCodingActivity = (activity) =>
+      /^(?:visualstudiocode|vscode)(?:insiders)?$/i.test(String(activity?.name || "").replace(/[\s._-]+/g, ""));
+
     const discordActivityType = (activity) => {
+      if (isCodingActivity(activity)) return "Coding";
       if (typeof activity?.type === "string") {
         return activity.type.charAt(0).toUpperCase() + activity.type.slice(1);
       }
@@ -3074,9 +3094,12 @@
 
     const discordActivityCard = (activity, spotifyData) => {
       const spotify = isSpotifyActivity(activity);
+      const coding = !spotify && isCodingActivity(activity);
       const spotifyInfo = spotify ? spotifyData : null;
       const art = spotifyInfo?.albumArtUrl || discordAssetUrl(activity);
-      const icon = activityIcon(spotify);
+      const icon = coding
+        ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5m-3-13-2 16"/></svg>`
+        : activityIcon(spotify);
       const kind = spotify ? "Listening to Spotify" : discordActivityType(activity);
       const name = spotify
         ? (spotifyInfo?.song || activity?.details || activity?.name || "Spotify")
@@ -3091,9 +3114,9 @@
       const end = Number(spotifyInfo?.timestamps?.end ?? activity?.timestamps?.end ?? 0) || 0;
       const hasProgress = spotify && start > 0 && end > start;
       const hasElapsed = !spotify && start > 0;
-      const fallbackAccent = spotify ? "#1ed760" : "#8b8b95";
+      const fallbackAccent = spotify ? "#1ed760" : coding ? "#6ca5d9" : "#8b8b95";
 
-      return `<article class="discord-activity-card${art ? "" : " activity-art-missing"}" style="--activity-accent:${fallbackAccent}" data-start="${start}" data-end="${end}" data-spotify="${spotify ? "true" : "false"}">
+      return `<article class="discord-activity-card${coding ? " is-coding" : ""}${art ? "" : " activity-art-missing"}" style="--activity-accent:${fallbackAccent}" data-start="${start}" data-end="${end}" data-spotify="${spotify ? "true" : "false"}">
       ${art ? `<img class="discord-activity-backdrop" src="${esc(art)}" alt="" crossorigin="anonymous" aria-hidden="true">` : ""}
       <div class="discord-activity-art-shell">
         <span class="discord-activity-placeholder${spotify ? " is-spotify" : ""}">${icon}</span>
@@ -3112,7 +3135,7 @@
           <div class="discord-activity-progress-track" aria-hidden="true"><div class="discord-activity-progress-fill" data-activity-progress></div></div>
           <span data-activity-total>${formatActivityClock(end - start)}</span>
         </div>` : ""}
-        ${hasElapsed ? `<div class="discord-activity-elapsed"><span>Playing time</span><strong data-activity-elapsed>${formatActivityElapsedClock(Date.now() - start)}</strong></div>` : ""}
+        ${hasElapsed ? `<div class="discord-activity-elapsed"><span>${coding ? "Coding time" : "Playing time"}</span><strong data-activity-elapsed>${formatActivityElapsedClock(Date.now() - start)}</strong></div>` : ""}
       </div>
     </article>`;
     };

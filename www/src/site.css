@@ -315,3 +315,83 @@ dialog::backdrop {
     padding: 20px;
   }
 }
+.site-footer {
+  margin-top: clamp(64px, 8vw, 100px);
+  border-top: 1px solid var(--line);
+  padding: 40px 0 24px;
+  color: var(--muted);
+  text-align: left;
+  font-size: 14px;
+}
+.footer-main {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+  gap: 40px;
+  padding-bottom: 36px;
+}
+.site-footer .footer-brand {
+  font-family: "Sora", sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -1px;
+}
+.footer-identity p {
+  max-width: 330px;
+  margin: 12px 0 0;
+  line-height: 1.7;
+}
+.site-footer nav h2 {
+  font-family: "Sora", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  margin: 0 0 16px;
+  letter-spacing: normal;
+  text-transform: none;
+}
+.site-footer nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+.site-footer nav a {
+  display: inline-block;
+  line-height: 1.6;
+  color: var(--text);
+}
+.site-footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.site-footer a:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+}
+@media (max-width: 600px) {
+  .footer-main {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+  .footer-identity {
+    grid-column: 1 / -1;
+  }
+}
+.discord-activity-card.is-coding .discord-activity-kind {
+  color: #a9c8ee;
+}
+.discord-activity-card.is-coding .discord-activity-elapsed > span {
+  color: #a9c8ee;
+}

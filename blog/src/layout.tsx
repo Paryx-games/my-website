@@ -337,9 +337,49 @@ export function Document({
           <Header />
           {children}
           <footer className="site-footer">
-            <a href="https://paryx.uk">paryx</a>
-            <span>Notes on building things.</span>
-            <a href="/rss.xml">RSS</a>
+            <div className="footer-main">
+              <div className="footer-identity">
+                <a className="footer-brand" href="https://paryx.uk">
+                  paryx
+                </a>
+                <p>
+                  Notes from my projects, experiments, and everything I learn
+                  along the way.
+                </p>
+              </div>
+              <nav aria-label="Explore the blog">
+                <h2>Explore</h2>
+                <ul>
+                  <li>
+                    <a href="/">All posts</a>
+                  </li>
+                  <li>
+                    <a href="/authors/paryx">About the author</a>
+                  </li>
+                  <li>
+                    <a href="https://paryx.uk/#projects">My projects</a>
+                  </li>
+                </ul>
+              </nav>
+              <nav aria-label="Follow and contact paryx">
+                <h2>Keep in touch</h2>
+                <ul>
+                  <li>
+                    <a href="/rss.xml">Follow via RSS</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/Paryx-games">GitHub</a>
+                  </li>
+                  <li>
+                    <a href="mailto:paryx@paryx.uk">Email me</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <div className="footer-bottom">
+              <span>© {new Date().getFullYear()} paryx</span>
+              <a href="https://paryx.uk/privacy-policy">Privacy policy</a>
+            </div>
           </footer>
         </div>
         <dialog id="search-dialog" aria-labelledby="search-title">
