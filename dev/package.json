@@ -5,16 +5,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@pmndrs/detect-gpu": "^6.0.22",
-    "@vercel/analytics": "^2.0.1",
-    "vgpu": "0.5.0"
+    "@vercel/analytics": "^2.0.1"
   },
   "devDependencies": {
-    "@vgpu/wgsl": "0.5.0",
-    "@webgpu/types": "^0.1.74",
+    "@types/node": "^22.20.4",
     "typescript": "^5.8.3",
     "vite": "^8.3.0"
   }

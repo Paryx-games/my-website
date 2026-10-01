@@ -8,44 +8,24 @@ importers:
 
   .:
     dependencies:
-      '@pmndrs/detect-gpu':
-        specifier: ^6.0.22
-        version: 6.0.23
       '@vercel/analytics':
         specifier: ^2.0.1
         version: 2.0.1
-      vgpu:
-        specifier: 0.5.0
-        version: 0.5.0
     devDependencies:
-      '@vgpu/wgsl':
-        specifier: 0.5.0
-        version: 0.5.0(@vgpu/adapter-node@0.5.0)
-      '@webgpu/types':
-        specifier: ^0.1.74
-        version: 0.1.74
+      '@types/node':
+        specifier: ^22.20.4
+        version: 22.20.4
       typescript:
         specifier: ^5.8.3
         version: 5.9.3
       vite:
         specifier: ^8.3.0
-        version: 8.3.1
+        version: 8.3.1(@types/node@22.20.4)
 
 packages:
 
-  '@modelcontextprotocol/core@2.0.0':
-    resolution: {integrity: sha512-pJCEwGG7Lfr/+PQp9ZTwKXNeO5wzbfKL7H3MYpCorM4oFBoQrdjnBgEoqG+RjhsvS1FKrDbKux+M1HhlnGWqcA==}
-    engines: {node: '>=20'}
-
-  '@modelcontextprotocol/server@2.0.0':
-    resolution: {integrity: sha512-YhHWdHfpFMQfd0prsEnxKeS3Qz3ytIGmsS0sth4KDjnacIT7hxk6hXHkJ9KysxlkvTM+WZAtQbbcUhdoP4Hvtw==}
-    engines: {node: '>=20'}
-
   '@oxc-project/types@0.151.0':
     resolution: {integrity: sha512-J1yXrIlNDZVzE3ada310xeAw7nH8yCAyLPuUIsjKatFPmfn5bS1oW+cM+QsGOtVWd5nhSpbwZWx/rue+r5Z+PA==}
-
-  '@pmndrs/detect-gpu@6.0.23':
-    resolution: {integrity: sha512-kkWgtg7Vq3V+J9F5Ad4MolQenoQrE6Lb2VTbepenTDqjVQwYHQ2+YWYAIylHGYMlzSkmEmpYZzf7aRRE4adSmQ==}
 
   '@rolldown/binding-android-arm-eabi@1.2.11':
     resolution: {integrity: sha512-A5kXfGKvKWWZE0TtPrfsvT+q4Y5d1QG8gGUzpYjGydM+fARM9MuX90PrXYXe0XbsDVgyxxNzHo6giCj90bsFNw==}
@@ -146,6 +126,9 @@ packages:
   '@rolldown/pluginutils@1.0.1':
     resolution: {integrity: sha512-2j9bGt5Jh8hj+vPtgzPtl72j0yRxHAyumoo6TNfAjsLB04UtpSvPbPcDcBMxz7n+9CYB0c1GxQFxYRg2jimqGw==}
 
+  '@types/node@22.20.4':
+    resolution: {integrity: sha512-zJRE40jpHtKqE/C4fgHrAKQLJuSpzEnP9ff9Y7YtoR3Wd2pwqzlekDeEuUQXjRd+QCYnVnNwuJYmhdk9XV8gvA==}
+
   '@vercel/analytics@2.0.1':
     resolution: {integrity: sha512-MTQG6V9qQrt1tsDeF+2Uoo5aPjqbVPys1xvnIftXSJYG2SrwXRHnqEvVoYID7BTruDz4lCd2Z7rM1BdkUehk2g==}
     peerDependencies:
@@ -173,38 +156,6 @@ packages:
       vue:
         optional: true
       vue-router:
-        optional: true
-
-  '@vgpu/adapter-mock@0.5.0':
-    resolution: {integrity: sha512-YtgXOFn1qI+8oTJenG2wWbQPA28V0CfE5UJs5Xqbt6qyR/xaZ5LHH2XWTwFcjnqn2b1xQCyTatJCMyyOdweUnw==}
-
-  '@vgpu/adapter-node@0.5.0':
-    resolution: {integrity: sha512-lgzqFcLDejwRgwlaNStzkwLNU9b4aN2OoPpWqT1UyPmK521BSw2OIQKzAuDIkzNlREla6KNC12G6bthhOzZKzw==}
-
-  '@vgpu/core@0.5.0':
-    resolution: {integrity: sha512-z80DHRHViv6+FKKkPzggEtT1ZZs/WCKRQbzJuwYdA135DZaSbCMoRK4anhM+I/nOHuDpf7H3xjkwE6rfolWZUw==}
-
-  '@vgpu/wgsl-std@0.5.0':
-    resolution: {integrity: sha512-NjMyJxwy4evFNCSqFQy4EqAbZ7iU+NUyJYyG9tLUhbdDLzBmfZlk1S3PyRZ9olBFFfEiVW2JNVw10maPKLEs1A==}
-
-  '@vgpu/wgsl@0.5.0':
-    resolution: {integrity: sha512-PDlDJem7J28C9bk+vPy2kYZEoW8+nYIx2oN4nu7/WF2V7ETx32BtmWcawwMbhiu/CVsobFafML0h0eqLRBNa3Q==}
-    peerDependencies:
-      '@vgpu/adapter-node': '>=0.1.6 <1.0.0 || ^0.5.0-rc.0'
-    peerDependenciesMeta:
-      '@vgpu/adapter-node':
-        optional: true
-
-  '@webgpu/types@0.1.74':
-    resolution: {integrity: sha512-lgiI4hbuLcI9unnm2cL/tvCaQU45dp0xcLWJh5uB/9MBGvIA4F8XIk7nSiBeg+K4xWGYwgZKn80LmERI5CxoTA==}
-
-  debug@4.4.3:
-    resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
-    engines: {node: '>=6.0'}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
         optional: true
 
   detect-libc@2.1.2:
@@ -299,9 +250,6 @@ packages:
     resolution: {integrity: sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==}
     engines: {node: '>= 12.0.0'}
 
-  ms@2.1.3:
-    resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-
   nanoid@3.3.19:
     resolution: {integrity: sha512-Y2tUNy4ouw6tq5oDSKeQYGOyhkUBhNOcGV/02KC+6kd9eDGqdZd++mjMiIDilrBYvjEnCYvVtsuHCuP+okSfug==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -313,14 +261,6 @@ packages:
   picomatch@4.0.7:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
-
-  pixelmatch@7.2.0:
-    resolution: {integrity: sha512-xhcb4yHu9sM/G7foGzoLtXYcC0zHEaOXXjRKhGup0fw78Nf2Tkiapv4EQyMzrbcmQPsllAI7DbFY2UT7PlI9Pg==}
-    hasBin: true
-
-  pngjs@7.0.0:
-    resolution: {integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==}
-    engines: {node: '>=14.19.0'}
 
   postcss@8.5.28:
     resolution: {integrity: sha512-RRuzqDtt5Y9h3quz5hWhK+TPnsmVs6WwSU6LkJMeY4HstUEDuYTG8UJSdawMRzmzAtV+KEoG8N3Qg2qLy5vM/A==}
@@ -344,14 +284,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  vgpu@0.5.0:
-    resolution: {integrity: sha512-isQfMHRTysYFfT8UWTzqQI/ROw2L7lVkj7xoUJlvIF6FjYxBNS/YNG7qp3tZ7ZvZZ3uwYjso+geQv/bEq5Hl3w==}
-    hasBin: true
-    peerDependencies:
-      three: '>=0.180.0 <0.200.0'
-    peerDependenciesMeta:
-      three:
-        optional: true
+  undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
 
   vite@8.3.1:
     resolution: {integrity: sha512-/bvH9E9tmCXRGp2uXY3WbOldqpTwFkbha/8ANaEQ6VkxhH60KyqLwgZq6lG2y+4uT55x9+9eUHMpQ7uGnOCKjA==}
@@ -396,29 +330,9 @@ packages:
       yaml:
         optional: true
 
-  webgpu@0.4.0:
-    resolution: {integrity: sha512-F5pimn3Aoi0zWjuRdiVs5TnrUwSzD2lESBohsIUsqyitWkGRQlXU2fhV6ycXlQTa1bvAf3sjqiUpBEpmSQ5ptA==}
-
-  wgpu-matrix@3.4.2:
-    resolution: {integrity: sha512-IfZFbG7olEYBD76VCZy2TzqM57GKy3LT++AZh37tMHPPByO6R2h61zXGBZFNPi2IzxNivNi8y5dvze5PjaczjA==}
-
-  zod@4.6.5:
-    resolution: {integrity: sha512-v5l/aFXZQeai4awLbOpSoHecE9UiMrnfx75tEXLjNonXVARxQ5mOeipTjROUchszUNCqnE+hqAMujRsRHsut2Q==}
-
 snapshots:
 
-  '@modelcontextprotocol/core@2.0.0':
-    dependencies:
-      zod: 4.6.5
-
-  '@modelcontextprotocol/server@2.0.0':
-    dependencies:
-      '@modelcontextprotocol/core': 2.0.0
-      zod: 4.6.5
-
   '@oxc-project/types@0.151.0': {}
-
-  '@pmndrs/detect-gpu@6.0.23': {}
 
   '@rolldown/binding-android-arm-eabi@1.2.11':
     optional: true
@@ -467,40 +381,11 @@ snapshots:
 
   '@rolldown/pluginutils@1.0.1': {}
 
+  '@types/node@22.20.4':
+    dependencies:
+      undici-types: 6.21.0
+
   '@vercel/analytics@2.0.1': {}
-
-  '@vgpu/adapter-mock@0.5.0(@vgpu/adapter-node@0.5.0)':
-    dependencies:
-      '@vgpu/core': 0.5.0(@vgpu/adapter-node@0.5.0)
-    transitivePeerDependencies:
-      - '@vgpu/adapter-node'
-
-  '@vgpu/adapter-node@0.5.0':
-    dependencies:
-      '@vgpu/core': 0.5.0(@vgpu/adapter-node@0.5.0)
-      webgpu: 0.4.0
-    transitivePeerDependencies:
-      - supports-color
-
-  '@vgpu/core@0.5.0(@vgpu/adapter-node@0.5.0)':
-    dependencies:
-      '@vgpu/wgsl': 0.5.0(@vgpu/adapter-node@0.5.0)
-    transitivePeerDependencies:
-      - '@vgpu/adapter-node'
-
-  '@vgpu/wgsl-std@0.5.0': {}
-
-  '@vgpu/wgsl@0.5.0(@vgpu/adapter-node@0.5.0)':
-    dependencies:
-      '@vgpu/wgsl-std': 0.5.0
-    optionalDependencies:
-      '@vgpu/adapter-node': 0.5.0
-
-  '@webgpu/types@0.1.74': {}
-
-  debug@4.4.3:
-    dependencies:
-      ms: 2.1.3
 
   detect-libc@2.1.2: {}
 
@@ -560,19 +445,11 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.33.0
       lightningcss-win32-x64-msvc: 1.33.0
 
-  ms@2.1.3: {}
-
   nanoid@3.3.19: {}
 
   picocolors@1.1.1: {}
 
   picomatch@4.0.7: {}
-
-  pixelmatch@7.2.0:
-    dependencies:
-      pngjs: 7.0.0
-
-  pngjs@7.0.0: {}
 
   postcss@8.5.28:
     dependencies:
@@ -610,23 +487,9 @@ snapshots:
 
   typescript@5.9.3: {}
 
-  vgpu@0.5.0:
-    dependencies:
-      '@modelcontextprotocol/server': 2.0.0
-      '@vgpu/adapter-mock': 0.5.0(@vgpu/adapter-node@0.5.0)
-      '@vgpu/adapter-node': 0.5.0
-      '@vgpu/core': 0.5.0(@vgpu/adapter-node@0.5.0)
-      '@vgpu/wgsl': 0.5.0(@vgpu/adapter-node@0.5.0)
-      '@vgpu/wgsl-std': 0.5.0
-      '@webgpu/types': 0.1.74
-      pixelmatch: 7.2.0
-      pngjs: 7.0.0
-      wgpu-matrix: 3.4.2
-      zod: 4.6.5
-    transitivePeerDependencies:
-      - supports-color
+  undici-types@6.21.0: {}
 
-  vite@8.3.1:
+  vite@8.3.1(@types/node@22.20.4):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -634,15 +497,5 @@ snapshots:
       rolldown: 1.2.11
       tinyglobby: 0.2.17
     optionalDependencies:
+      '@types/node': 22.20.4
       fsevents: 2.3.3
-
-  webgpu@0.4.0:
-    dependencies:
-      '@webgpu/types': 0.1.74
-      debug: 4.4.3
-    transitivePeerDependencies:
-      - supports-color
-
-  wgpu-matrix@3.4.2: {}
-
-  zod@4.6.5: {}
