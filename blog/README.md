@@ -8,4 +8,4 @@ Articles bring together project stories, engineering ideas, and practical discov
 
 The design keeps the focus on reading, with a dark background, wide banners, and spacious typography across desktop, tablet, and phone.
 
-Follow new articles through the [RSS feed](https://blog.paryx.uk/rss.xml). Illustrative demo articles are clearly labelled; they are not product announcements.
+Follow new articles through the [RSS feed](https://blog.paryx.uk/rss.xml).
