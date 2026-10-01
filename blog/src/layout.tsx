@@ -420,6 +420,12 @@ export function Document({
           </section>
           <div className="search-results" />
         </dialog>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };`,
+          }}
+        />
+        <script defer src="/_vercel/insights/script.js" />
       </body>
     </html>
   );
