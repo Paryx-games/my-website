@@ -680,11 +680,6 @@ h6 {
 .read-link:hover {
   text-decoration: underline;
 }
-.compact-search {
-  display: none;
-  margin-bottom: 22px;
-  scroll-margin-top: 20px;
-}
 .empty-state {
   color: var(--muted);
   line-height: 1.7;
@@ -718,20 +713,6 @@ dialog::backdrop {
 .search-status {
   font-size: 13px;
   color: var(--muted);
-}
-.search-result {
-  display: block;
-  padding: 16px 0;
-  border-top: 1px solid var(--line);
-}
-.search-result:hover strong {
-  text-decoration: underline;
-}
-.search-result p {
-  font-size: 14px;
-  line-height: 1.5;
-  color: var(--muted);
-  margin: 8px 0 0;
 }
 .sr-only {
   position: absolute;
@@ -782,9 +763,6 @@ dialog::backdrop {
   }
   .hero-banner {
     aspect-ratio: 2.6;
-  }
-  .compact-search {
-    display: block;
   }
   .article-header h1,
   .featured h2 {
@@ -1112,7 +1090,6 @@ dialog::backdrop {
   .tags a,
   .series-navigation > div > a,
   .related-post,
-  .search-result,
   .code-toolbar button {
     transition:
       color 160ms ease,

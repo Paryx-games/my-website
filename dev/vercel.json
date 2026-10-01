@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/search-index.json",
+      "destination": "https://blog.paryx.uk/search-index.json"
+    }
+  ]
+}

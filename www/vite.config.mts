@@ -5,9 +5,14 @@ const preview = ["preview", "development"].includes(
   process.env.VERCEL_ENV ?? "",
 );
 
+const searchProxy = {
+  "/search-index.json": { target: "https://blog.paryx.uk", changeOrigin: true },
+};
+
 export default defineConfig({
   appType: "mpa",
-  server: { host: "127.0.0.1" },
+  server: { host: "127.0.0.1", proxy: searchProxy },
+  preview: { proxy: searchProxy },
   plugins: [
     {
       name: "production-indexing",

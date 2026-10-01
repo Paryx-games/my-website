@@ -1,0 +1,108 @@
+#search-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  max-height: min(80dvh, 760px);
+  overflow-y: auto;
+}
+.search-status {
+  margin: 18px 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.site-search-section {
+  margin-top: 24px;
+}
+.site-search-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.site-search-heading h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: normal;
+  margin: 0;
+}
+.site-search-heading button {
+  color: var(--muted);
+  padding: 4px 0;
+  font-size: 13px;
+  cursor: pointer;
+}
+.site-search-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.site-search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+.site-search-result strong {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+.site-search-result span {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.site-search-result small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.site-search-result:hover,
+.site-search-result:focus-visible {
+  border-color: #65656e;
+  background: var(--surface);
+}
+.search-results {
+  display: grid;
+  gap: 8px;
+}
+.site-search-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-search-history button {
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--text);
+  background: var(--surface);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  cursor: pointer;
+}
+#search-dialog :is(a, button):focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+@media (max-width: 400px) {
+  .site-search-shortcuts {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .site-search-result {
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+}
