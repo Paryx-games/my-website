@@ -4,6 +4,9 @@
 .env.*.local
 .vercel
 
+# personal guides and maintenance notes (in any directory)
+PERSONAL.md
+
 # installed dependencies and package cache
 node_modules
 .pnpm-store
