@@ -42,6 +42,8 @@ test("VS Code names from presence providers display as coding with a code icon a
     assert.equal(type(activity), "Coding");
     const rendered = card(activity);
     assert.ok(rendered.includes(" is-coding"));
+    assert.ok(rendered.includes("--activity-accent:#8b8b95"));
+    assert.ok(!rendered.includes("#6ca5d9"));
     assert.ok(rendered.includes(">Coding</span>"));
     assert.ok(rendered.includes(">Coding time</span>"));
     assert.ok(rendered.includes("Editing index.ts"));

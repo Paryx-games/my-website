@@ -389,9 +389,3 @@ dialog::backdrop {
     grid-column: 1 / -1;
   }
 }
-.discord-activity-card.is-coding .discord-activity-kind {
-  color: #a9c8ee;
-}
-.discord-activity-card.is-coding .discord-activity-elapsed > span {
-  color: #a9c8ee;
-}
