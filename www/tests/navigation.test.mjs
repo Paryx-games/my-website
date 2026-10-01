@@ -58,7 +58,7 @@ function harness(origin = "https://paryx.uk/") {
 }
 
 test("all independent deployments ship identical navigation assets", async () => {
-  for (const file of ["navigation.js", "navigation.css"]) {
+  for (const file of ["navigation.js", "navigation.css", "site-search.js", "site-search.css"]) {
     const main = await readFile(
       new URL(`../public/assets/${file}`, import.meta.url),
       "utf8",

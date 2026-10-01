@@ -5,6 +5,8 @@
 <head>
   <link rel="stylesheet" href="/assets/navigation.css">
   <script src="/assets/navigation.js"></script>
+  <link rel="stylesheet" href="/assets/site-search.css">
+  <script src="/assets/site-search.js" type="module"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Paryx - Home</title>
@@ -27,7 +29,7 @@
     content="Paryx's personal developer site for software projects, Roblox development, experiments, GitHub repositories, and live activity.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;675;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;675;700&display=swap" rel="stylesheet">
   <script>document.documentElement.classList.add('js')</script>
   <style>
     :root {
@@ -1954,7 +1956,7 @@
         <a href="#about">About</a>
       </nav>
       <div class="header-actions">
-        <a class="icon-button" href="https://blog.paryx.uk/#search" data-open-search aria-label="Search blog articles">
+        <a class="icon-button" href="https://blog.paryx.uk/" data-open-search aria-label="Search paryx">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
         </a>
         <details class="mobile-nav">
@@ -2150,17 +2152,20 @@
   <footer><span>Paryx</span><span aria-hidden="true"> · </span><a href="https://paryx.uk/privacy-policy">Privacy Policy</a></footer>
   </div>
 
-  <dialog id="search-dialog" aria-labelledby="search-title">
+  <dialog id="search-dialog" aria-labelledby="search-title" data-search-index="/search-index.json">
     <div class="dialog-header">
-      <h2 id="search-title">Search blog articles</h2>
+      <h2 id="search-title">Search paryx</h2>
       <button class="icon-button" type="button" data-close-search aria-label="Close search">×</button>
     </div>
     <form class="search-form" action="https://blog.paryx.uk/" method="get" role="search">
-      <label class="sr-only" for="blog-search">Search articles</label>
-      <input id="blog-search" type="search" name="q" placeholder="Search articles…" autocomplete="off" required>
+      <label class="sr-only" for="dialog-search">Search paryx</label>
+      <input id="dialog-search" type="search" name="q" placeholder="Search paryx…" autocomplete="off">
       <button type="submit">Search</button>
     </form>
-    <p class="search-hint">Search articles by title, topic, or author on the paryx blog.</p>
+    <p class="search-status" role="status" aria-live="polite">Jump to a page, or search pages and published articles.</p>
+    <section class="site-search-section" data-search-history hidden><div class="site-search-heading"><h3>Recent searches</h3><button type="button" data-clear-history>Clear history</button></div><div class="site-search-history" data-history-list></div></section>
+    <section class="site-search-section" data-search-shortcuts><div class="site-search-heading"><h3>Page shortcuts</h3></div><div class="site-search-shortcuts" data-shortcut-list></div></section>
+    <div class="search-results"></div>
   </dialog>
 
   <div class="app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden>

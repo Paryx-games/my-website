@@ -5,5 +5,11 @@
   "buildCommand": "pnpm build",
   "outputDirectory": "dist",
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/search-index.json",
+      "destination": "https://blog.paryx.uk/search-index.json"
+    }
+  ]
 }

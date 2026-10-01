@@ -51,18 +51,18 @@ export function Byline({ post }: { post: Post }) {
   );
 }
 
-export function Search({ id = 'sidebar-search' }: { id?: string }) {
+export function Search({ id = 'dialog-search' }: { id?: string }) {
   return (
     <form className="search-form" action="/" role="search">
       <label className="sr-only" htmlFor={id}>
-        Search articles
+        Search paryx
       </label>
       <span aria-hidden="true">⌕</span>
       <input
         id={id}
         type="search"
         name="q"
-        placeholder="Search articles…"
+        placeholder="Search paryx…"
         autoComplete="off"
       />
       <button className="sr-only focus-reveal" type="submit">
@@ -80,7 +80,6 @@ export function Sidebar({ posts, post }: { posts: Post[]; post?: Post }) {
   return (
     <aside className="sidebar" aria-label="Explore the blog">
       {post && <Contents post={post} />}
-      <Search />
       <section>
         <h2>Categories</h2>
         <a className="category" href="/">
@@ -136,9 +135,9 @@ export function Header() {
       <div className="header-actions">
         <a
           className="icon-button"
-          href="/#search"
+          href="/"
           data-open-search
-          aria-label="Search articles"
+          aria-label="Search paryx"
         >
           <svg
             width="20"
@@ -320,6 +319,8 @@ export function Document({
         />
         <link rel="stylesheet" href="/assets/blog.css" />
         <script src="/assets/blog.js" defer />
+        <link rel="stylesheet" href="/assets/site-search.css" />
+        <script src="/assets/site-search.js" type="module" />
         {schema && (
           <script
             type="application/ld+json"
@@ -382,9 +383,13 @@ export function Document({
             </div>
           </footer>
         </div>
-        <dialog id="search-dialog" aria-labelledby="search-title">
+        <dialog
+          id="search-dialog"
+          aria-labelledby="search-title"
+          data-search-index="/search-index.json"
+        >
           <div className="dialog-header">
-            <h2 id="search-title">Search articles</h2>
+            <h2 id="search-title">Search paryx</h2>
             <button
               className="icon-button"
               type="button"
@@ -396,8 +401,23 @@ export function Document({
           </div>
           <Search id="dialog-search" />
           <p className="search-status" role="status" aria-live="polite">
-            Search titles, topics, authors, and article content.
+            Jump to a page, or search pages and published articles.
           </p>
+          <section className="site-search-section" data-search-history hidden>
+            <div className="site-search-heading">
+              <h3>Recent searches</h3>
+              <button type="button" data-clear-history>
+                Clear history
+              </button>
+            </div>
+            <div className="site-search-history" data-history-list />
+          </section>
+          <section className="site-search-section" data-search-shortcuts>
+            <div className="site-search-heading">
+              <h3>Page shortcuts</h3>
+            </div>
+            <div className="site-search-shortcuts" data-shortcut-list />
+          </section>
           <div className="search-results" />
         </dialog>
       </body>
@@ -499,9 +519,6 @@ export function Listing({
         </p>
       </header>
       {introduction}
-      <div className="compact-search" id="search">
-        <Search id="listing-search" />
-      </div>
       {featured?.banner && (
         <a className="featured-banner" href={`/${featured.slug}`}>
           <img
@@ -526,9 +543,6 @@ export function Listing({
           {rest.map((post) => (
             <PostSummary key={post.slug} post={post} />
           ))}
-          <p className="empty-state" data-empty-search role="status" hidden>
-            No articles match your search.
-          </p>
         </div>
         <Sidebar posts={allPosts} />
       </div>
@@ -544,10 +558,7 @@ function PostSummary({
   featured?: boolean;
 }) {
   return (
-    <article
-      className={`post-summary ${featured ? 'featured' : ''}`}
-      data-post-url={`/${post.slug}`}
-    >
+    <article className={`post-summary ${featured ? 'featured' : ''}`}>
       {!featured && post.banner && (
         <a href={`/${post.slug}`} tabIndex={-1} aria-hidden="true">
           <img
