@@ -8,7 +8,7 @@ tags:
   - GitHub
   - Security
   - Git
-draft: true
+draft: false
 ---
 
 I recently started signing my Git commits with a dedicated SSH signing key.
