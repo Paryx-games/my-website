@@ -9,13 +9,12 @@ test('the real welcome post replaces every example article in the public archive
     fileURLToPath(new URL('../content/posts/', import.meta.url)),
     true,
   );
-  assert.deepEqual(
-    posts.map((post) => post.slug),
-    ['welcome-to-my-blog'],
-  );
-  assert.equal(posts[0].demo, false);
-  assert.equal(posts[0].draft, false);
-  assert.ok(posts[0].content.includes('Hi, welcome to my blog!'));
+  const welcome = posts.find((post) => post.slug === 'welcome-to-my-blog');
+  assert.ok(welcome, 'the welcome post remains in the growing archive');
+  assert.equal(welcome.demo, false);
+  assert.equal(welcome.draft, false);
+  assert.ok(welcome.content.includes('Hi, welcome to my blog!'));
+  assert.ok(!posts.some((post) => post.demo), 'example articles were removed');
   for (const output of [
     rss(posts),
     sitemap(posts),
