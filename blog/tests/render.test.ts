@@ -10,6 +10,34 @@ import rehypeHighlight from 'rehype-highlight';
 import { mdxComponents } from '../src/components.js';
 import { Document } from '../src/layout.js';
 import { parsePost } from '../src/content.js';
+import { compileArticle } from '../src/article-content.js';
+
+test('GitHub alerts render in Markdown and MDX while preserving rich content and ordinary quotes', async () => {
+  for (const extension of ['md', 'mdx']) {
+    const content = ['NOTE', 'TIP', 'IMPORTANT', 'WARNING', 'CAUTION']
+      .map(
+        (type) =>
+          `> [!${type}]\n> **Advice** with [a link](https://example.com).\n>\n> - First item\n> - Second item`,
+      )
+      .join('\n\n');
+    const post = parsePost(
+      `---\ntitle: Alerts\ndescription: Alert test\ndate: '2026-10-04'\nauthors: [paryx]\n---\n${content}\n\n> Ordinary quote\n\n> [!UNKNOWN]\n> Keep this quote\n\n> Prefix [!NOTE]\n\n\`\`\`text\n> [!WARNING]\n\`\`\``,
+      `alerts.${extension}`,
+    );
+    const html = await compileArticle(post);
+    for (const type of ['note', 'tip', 'important', 'warning', 'caution'])
+      assert.ok(html.includes(`callout-${type}`), `${extension}: ${type}`);
+    assert.equal((html.match(/<aside /g) ?? []).length, 5);
+    assert.ok(html.includes('<strong>Advice</strong>'));
+    assert.ok(html.includes('<li>Second item</li>'));
+    assert.ok(html.includes('<blockquote>\n<p>Ordinary quote</p>'));
+    assert.ok(html.includes('[!UNKNOWN]'));
+    assert.ok(html.includes('Prefix [!NOTE]'));
+    assert.ok(html.includes('&gt; [!WARNING]'));
+    assert.ok(post.searchText?.includes('Advice'));
+    assert.ok(!post.searchText?.includes('[!TIP]'));
+  }
+});
 
 test('MDX renders semantic components, GFM, heading anchors and highlighted copyable code without hydration', async () => {
   const { default: Content } = await evaluate(

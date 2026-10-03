@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeHighlight from 'rehype-highlight';
 import { mdxComponents } from './components.js';
+import { rehypeGithubAlerts } from './github-alerts.js';
 import type { Post } from './content.js';
 
 type Node = DefaultTreeAdapterMap['node'];
@@ -52,6 +53,7 @@ export async function compileArticle(post: Post) {
     format: post.extension === '.md' ? 'md' : 'mdx',
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
+      rehypeGithubAlerts,
       rehypeSlug,
       [rehypeHighlight, { detect: false, ignoreMissing: true }],
     ],
