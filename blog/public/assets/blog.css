@@ -576,25 +576,38 @@ h6 {
   margin-bottom: 12px;
 }
 .callout {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-left: 3px solid #9bafc3;
-  border-radius: 6px;
-  padding: 16px 20px;
+  --callout-color: #4493f8;
+  border-left: 3px solid var(--callout-color);
+  padding: 4px 20px;
   margin: 26px 0;
 }
-.callout > strong {
-  display: block;
+.callout > .callout-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--callout-color);
   margin-bottom: 8px;
+}
+.callout-title svg {
+  flex-shrink: 0;
+}
+.callout > div > :first-child {
+  margin-top: 0;
 }
 .callout p:last-child {
   margin-bottom: 0;
 }
 .callout-warning {
-  border-left-color: #c6ac77;
+  --callout-color: #d29922;
 }
 .callout-tip {
-  border-left-color: #96b69c;
+  --callout-color: #3fb950;
+}
+.callout-important {
+  --callout-color: #ab7df8;
+}
+.callout-caution {
+  --callout-color: #f85149;
 }
 .task-list-item {
   list-style: none;
