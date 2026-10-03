@@ -3,6 +3,7 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import readingTime from 'reading-time';
 import { authors } from './authors.js';
+import { isRemoteBanner } from './banners.js';
 
 export interface Post {
   title: string;
@@ -95,9 +96,10 @@ export function parsePost(source: string, filename: string): Post {
   }
   if (
     data.banner &&
+    !isRemoteBanner(data.banner) &&
     (!data.banner.startsWith('/') || data.banner.startsWith('//'))
   )
-    fail('banner must be a root-relative public asset path');
+    fail('banner must be a root-relative public asset path or HTTPS URL');
   const slug = data.slug ?? path.basename(filename, path.extname(filename));
   if (
     typeof slug !== 'string' ||

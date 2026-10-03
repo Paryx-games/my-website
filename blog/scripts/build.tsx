@@ -1,4 +1,4 @@
-import { cp, mkdir, rm, writeFile, access } from 'node:fs/promises';
+import { cp, mkdir, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -15,6 +15,7 @@ import { rss, searchIndex, sitemap } from '../src/feeds.js';
 import { authors } from '../src/authors.js';
 import { compileArticle } from '../src/article-content.js';
 import { socialImage } from '../src/social-image.js';
+import { resolveBanner } from '../src/banners.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'dist');
@@ -27,9 +28,15 @@ export async function build({
   for (const post of posts) compiled.set(post.slug, await compileArticle(post));
   const published = visiblePosts(posts);
   const noindex = isPreview() || development;
-  await rm(output, { recursive: true, force: true });
+  await rm(output, { recursive: true, force: true, maxRetries: 3 });
   await mkdir(output, { recursive: true });
   await cp(path.join(root, 'public'), output, { recursive: true });
+  const banners = new Map<string, string | undefined>();
+  for (const post of posts)
+    banners.set(
+      post.slug,
+      await resolveBanner(post, path.join(root, 'public'), output),
+    );
   const page = async (
     filename: string,
     node: Parameters<typeof renderToStaticMarkup>[0],
@@ -53,20 +60,9 @@ export async function build({
   );
   await mkdir(path.join(output, 'og'), { recursive: true });
   for (const post of posts) {
-    let bannerPath: string | undefined;
-    if (post.banner) {
-      bannerPath = path.resolve(root, 'public', `.${post.banner}`);
-      if (!bannerPath.startsWith(path.join(root, 'public') + path.sep))
-        throw new Error(`${post.slug}: banner path leaves public directory`);
-      await access(bannerPath).catch(() => {
-        throw new Error(
-          `${post.slug}: banner asset does not exist: ${post.banner}`,
-        );
-      });
-    }
     await writeFile(
       path.join(output, 'og', `${post.slug}.png`),
-      await socialImage(post, bannerPath),
+      await socialImage(post, banners.get(post.slug)),
     );
     await page(
       `${post.slug}.html`,

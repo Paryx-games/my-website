@@ -16,7 +16,7 @@ export async function socialImage(
   bannerPath?: string,
 ): Promise<Buffer> {
   const background = bannerPath
-    ? await sharp(bannerPath)
+    ? await sharp(await readFile(bannerPath))
         .resize(1200, 630, { fit: 'cover', position: 'centre' })
         .png()
         .toBuffer()
