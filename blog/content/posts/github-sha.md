@@ -9,6 +9,7 @@ tags:
   - Security
   - Git
 draft: false
+slug: github-commits-signing
 ---
 
 I recently started signing my Git commits with a dedicated SSH signing key.
