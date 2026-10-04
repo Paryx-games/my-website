@@ -59,9 +59,10 @@ revealSection(location.hash);
 const sectionRail = document.createElement("nav");
 sectionRail.className = "section-rail";
 sectionRail.setAttribute("aria-label", "Page sections");
-const railSections = [...sectionToggles.keys()];
+const footer = document.querySelector<HTMLElement>(".site-footer");
+const railSections = [document.body, ...sectionToggles.keys(), ...(footer ? [footer] : [])];
 const railLinks = railSections.map(section => {
-  const name = section.querySelector("h2")?.textContent || "Section";
+  const name = section === document.body ? "Top" : section === footer ? "Footer" : section.querySelector("h2")?.textContent || "Section";
   section.id ||= name.toLowerCase().replace(/\s+/g, "-");
   const link = document.createElement("a");
   link.href = `#${section.id}`;
@@ -100,8 +101,10 @@ function updateRail() {
   railFrame = 0;
   const visible = railSections.filter(section => !section.hidden);
   const anchor = innerHeight * 0.35;
-  const active = [...visible].reverse().find(section => section.getBoundingClientRect().top <= anchor) || visible[0];
-  sectionRail.hidden = !visible.length || (document.getElementById("content")?.getBoundingClientRect().top ?? Infinity) > innerHeight * 0.8;
+  const atBottom = scrollY > 0 && scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+  const nearFooter = footer && footer.getBoundingClientRect().top <= innerHeight * 0.8;
+  const active = (atBottom || nearFooter) && footer ? footer : [...visible].reverse().find(section => section.getBoundingClientRect().top <= anchor) || visible[0];
+  sectionRail.hidden = !visible.length;
   railLinks.forEach((link, index) => {
     link.hidden = railSections[index].hidden;
     if (railSections[index] === active) link.setAttribute("aria-current", "location");
