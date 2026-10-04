@@ -7,6 +7,8 @@
 .game-card.is-revealed { animation: game-card-enter 400ms var(--ease) both; }
 .game-cover { display: block; }
 .game-cover img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 8px; transition: filter 200ms var(--ease); }
+.game-card-roblox .game-cover-image, .game-card-roblox .game-cover img { aspect-ratio: 1; }
+.game-card-roblox .game-cover strong .game-card-icon { aspect-ratio: auto; }
 .game-cover strong { display: flex; align-items: start; gap: 5px; padding-top: 8px; font-size: 0.85rem; line-height: 1.35; letter-spacing: -0.01em; }
 .game-cover strong .game-card-icon { width: 12px; height: 12px; aspect-ratio: auto; border-radius: 2px; }
 .game-icon-shell { width: 12px; height: 12px; flex: none; margin-top: 1px; }
@@ -92,6 +94,27 @@ img.is-loading { opacity: 0 !important; }
 .game-playtime-row dt { font-size: 0.85rem; color: var(--color-muted); }
 .game-playtime-row dd { margin: 0; text-align: right; font-size: 0.9rem; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 #game-description { color: var(--color-muted); font-size: 0.9375rem; line-height: 1.7; margin: 20px 0; }
+#game-description { white-space: pre-line; }
+.game-roblox-overview { display: flex; flex-direction: column; gap: 16px; min-width: 0; grid-column: 2; margin: 0; }
+.game-roblox-panel { min-width: 0; padding: 20px; background: rgba(12, 17, 21, 0.58); border: 1px solid rgba(150, 165, 180, 0.18); border-radius: 12px; }
+#game-roblox-details { padding: 20px; }
+.game-roblox-panel h3 { margin: 0 0 16px; color: var(--color-muted); font-size: 0.9rem; }
+#game-roblox-about #game-description { margin: 0; font-size: 0.9rem; overflow-wrap: anywhere; }
+.is-roblox #game-website { margin-top: 20px; }
+#game-roblox-details h3 { margin: 0 0 12px; color: var(--color-faint); font-size: 0.8rem; }
+#game-roblox-details dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; margin: 0 0 16px; }
+.game-roblox-stat-votes { grid-column: 1 / -1; }
+#game-roblox-details dt { color: var(--color-faint); font-size: 0.75rem; margin-bottom: 3px; }
+#game-roblox-details dd { margin: 0; font-size: 0.85rem; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+#game-roblox-details a { color: var(--color-muted); font-size: 0.8rem; text-decoration: underline; }
+.game-roblox-snapshot { color: var(--color-faint); font-size: 0.7rem; line-height: 1.5; margin: 10px 0 0; }
+@media (min-width: 1050px) {
+  #game-showcase.is-roblox { width: min(1800px, calc(100vw - 48px)); padding-left: 28px; padding-right: 28px; }
+  .is-roblox .game-showcase-layout { grid-template-columns: minmax(240px, 0.85fr) minmax(360px, 1.8fr) minmax(240px, 0.85fr); gap: 24px; }
+  .is-roblox .game-roblox-overview { grid-column: 3; grid-row: 1; padding-top: 36px; }
+}
+@media (max-width: 800px) { .game-roblox-overview { grid-column: 1; } }
+@media (max-width: 560px) { #game-roblox-details dl { grid-template-columns: repeat(2, minmax(0, 1fr)); } .game-roblox-panel, #game-roblox-details { padding: 16px; } }
 #game-website { display: flex; justify-content: space-between; align-items: center; gap: 12px; background: var(--game-accent); color: #101114; padding: 12px 16px; border-radius: 6px; font-weight: 600; font-size: 0.9375rem; text-decoration: none; transition: filter 150ms var(--ease), transform 150ms var(--ease); }
 #game-website:hover { filter: brightness(1.1); transform: translateY(-1px); }
 .game-gallery { min-width: 0; padding-top: 36px; }
@@ -102,6 +125,7 @@ img.is-loading { opacity: 0 !important; }
 .game-quote-link { color: var(--color-muted); text-decoration: underline; text-underline-offset: 3px; }
 .game-quote-link:hover { color: var(--color-text); }
 .game-quote-link img { display: inline-block; width: 16px; height: 16px; border-radius: 3px; margin-right: 5px; vertical-align: -3px; }
+.game-roblox-category-link { display: block; width: fit-content; margin-top: 8px; }
 .game-quote-link:focus-visible { outline: 2px solid var(--game-accent); outline-offset: 3px; }
 .game-picture-stage { position: relative; border-radius: 10px; overflow: hidden; background: #080a0d; border: 1px solid #4a4e52; }
 #game-picture { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }

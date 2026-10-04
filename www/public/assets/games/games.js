@@ -1,3 +1,6 @@
+import { robloxGames } from './roblox-games.js';
+export { robloxGames };
+
 export const games = [
   {
     id: "minecraft",
@@ -163,6 +166,7 @@ export const rotation = [
 ];
 
 export const catalogue = [
+  ...robloxGames,
   ...games,
   ...[
     {

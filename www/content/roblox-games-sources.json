@@ -1,0 +1,2495 @@
+{
+  "checked": "2026-10-04T20:31:24.717Z",
+  "sources": {
+    "votes": {
+      "url": "https://games.roblox.com/v1/games/votes?universeIds=4367208330,1718755273",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 4367208330,
+            "upVotes": 729645,
+            "downVotes": 111528
+          },
+          {
+            "id": 1718755273,
+            "upVotes": 136467,
+            "downVotes": 45226
+          }
+        ]
+      }
+    },
+    "thumbs-4367208330": {
+      "url": "https://thumbnails.roblox.com/v1/games/4367208330/thumbnails?thumbnailIds=125476256726913,17385698163,18880806192,133301246029522,18322541574,17385749910,79730083177091,139449456115882,82998446127232&size=768x432&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 125476256726913,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-d1c2185252b44ef983fb68b650296ba1/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 17385698163,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-da214c5e444090e7878c7dac3214a1bd/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 18880806192,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-c055a02fa730c2c58106a3a184c4ea8e/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 133301246029522,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-8b3540544a31359543de841a611e65c0/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 18322541574,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-d269ec3b51eb8d564e95906c06873bc0/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 17385749910,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-a4cd19dd70a2509d98a4ed32c14b85b1/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 79730083177091,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-1410c232ed358c1c84845e2e0d732637/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 139449456115882,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-fd76f636a822124d619272a7fd4327f0/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 82998446127232,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-13a32c01e2e002d457e321a64a26d593/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "icons": {
+      "url": "https://thumbnails.roblox.com/v1/games/icons?universeIds=4367208330,1718755273&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 1718755273,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-778eb2c16f0897c57bb585184486d9e8/512/512/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 4367208330,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-1c367e9e2c3d85b65c39323220b79d15/512/512/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "media-4367208330": {
+      "url": "https://games.roblox.com/v2/games/4367208330/media",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 125476256726913,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 17385698163,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 18880806192,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 133301246029522,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 18322541574,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 17385749910,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 79730083177091,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 139449456115882,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 82998446127232,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          }
+        ]
+      }
+    },
+    "thumbs-1718755273": {
+      "url": "https://thumbnails.roblox.com/v1/games/1718755273/thumbnails?thumbnailIds=124865975648503,78574666099031,90390489030486,100704560870110,107391538760711,87331594886912,4996510732&size=768x432&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 124865975648503,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-6f7989b622e1a1d5a8fbfb3838df41d1/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 78574666099031,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-d81752da35f5c20f35905adb4a12da78/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 90390489030486,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-e69d5e24dd49260fd3fd10ce28393467/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 100704560870110,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-9b79f6174ab614332c25ec1d487372f5/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 107391538760711,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-98ab16a5d063a8e81132935511e6620d/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 87331594886912,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-95d456caa960212e00a0c0f8704aa66b/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 4996510732,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-a7c652b7d827f08b6350f3149e530a73/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "details": {
+      "url": "https://games.roblox.com/v1/games?universeIds=4367208330,1718755273",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 4367208330,
+            "rootPlaceId": 12411473842,
+            "name": "Pressure",
+            "description": "You are expendable. You are not expected to return.\n\nHeadphones & graphics level 8 or above recommended.\nThis game is currently in alpha. Expect bugs and the sorts.\n\nJoin the group to receive a 10% discount on any and all Dead-Drop Shop purchases.\n\n⚠️ Exploiting using external programs and abusing bugs/glitches in ways that affect/ruin the experience for others, will result in a ban.",
+            "sourceName": null,
+            "sourceDescription": null,
+            "creator": {
+              "id": 9683893,
+              "name": "Urbanshade: Hadal Division",
+              "type": "Group",
+              "isRNVAccount": false,
+              "hasVerifiedBadge": true
+            },
+            "price": null,
+            "allowedGearGenres": [
+              "Funny"
+            ],
+            "allowedGearCategories": [],
+            "isGenreEnforced": false,
+            "copyingAllowed": false,
+            "playing": 1802,
+            "visits": 490326237,
+            "maxPlayers": 50,
+            "created": "2023-02-07T18:56:50.227Z",
+            "updated": "2026-10-01T19:25:30.317Z",
+            "studioAccessToApisAllowed": false,
+            "createVipServersAllowed": false,
+            "universeAvatarType": "MorphToR15",
+            "genre": "Comedy",
+            "genre_l1": "Survival",
+            "genre_l2": "Escape",
+            "untranslated_genre_l1": "survival",
+            "isAllGenre": false,
+            "isFavoritedByUser": false,
+            "favoritedCount": 1647395,
+            "canonicalUrlPath": "/games/12411473842/Pressure",
+            "isContentRestricted": false
+          },
+          {
+            "id": 1718755273,
+            "rootPlaceId": 4991214437,
+            "name": "town",
+            "description": "Fps base building sandbox set in Nowhere Ville, USA.\n\nFor building tools, join:\nhttps://www.roblox.com/groups/5502618/Hapless-Studios#!/about",
+            "sourceName": null,
+            "sourceDescription": null,
+            "creator": {
+              "id": 26600799,
+              "name": "DecodeUnicode",
+              "type": "User",
+              "isRNVAccount": false,
+              "hasVerifiedBadge": true
+            },
+            "price": null,
+            "allowedGearGenres": [
+              "FPS"
+            ],
+            "allowedGearCategories": [],
+            "isGenreEnforced": true,
+            "copyingAllowed": false,
+            "playing": 735,
+            "visits": 86454798,
+            "maxPlayers": 30,
+            "created": "2020-05-06T03:04:39.003Z",
+            "updated": "2026-10-03T21:45:54.1424973Z",
+            "studioAccessToApisAllowed": false,
+            "createVipServersAllowed": false,
+            "universeAvatarType": "MorphToR6",
+            "genre": "FPS",
+            "genre_l1": "Shooter",
+            "genre_l2": "Deathmatch Shooter",
+            "untranslated_genre_l1": "shooter",
+            "isAllGenre": false,
+            "isFavoritedByUser": false,
+            "favoritedCount": 321961,
+            "canonicalUrlPath": "/games/4991214437/town",
+            "isContentRestricted": false
+          }
+        ]
+      }
+    },
+    "media-1718755273": {
+      "url": "https://games.roblox.com/v2/games/1718755273/media",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 124865975648503,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 78574666099031,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 90390489030486,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 100704560870110,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 107391538760711,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 87331594886912,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 4996510732,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          }
+        ]
+      }
+    },
+    "badges-1718755273": {
+      "url": "https://badges.roblox.com/v1/universes/1718755273/badges?limit=100&sortOrder=Asc",
+      "status": 200,
+      "data": {
+        "previousPageCursor": null,
+        "nextPageCursor": null,
+        "data": []
+      },
+      "pages": [
+        "https://badges.roblox.com/v1/universes/1718755273/badges?limit=100&sortOrder=Asc"
+      ]
+    },
+    "badges-4367208330": {
+      "url": "https://badges.roblox.com/v1/universes/4367208330/badges?limit=100&sortOrder=Asc",
+      "status": 200,
+      "data": {
+        "previousPageCursor": null,
+        "nextPageCursor": null,
+        "data": [
+          {
+            "id": 167136656840536,
+            "name": "Expendable",
+            "description": "You are not expected to return.",
+            "displayName": "Expendable",
+            "displayDescription": "You are not expected to return.",
+            "enabled": true,
+            "iconImageId": 122469095918347,
+            "displayIconImageId": 122469095918347,
+            "created": "2024-05-31T19:19:38.496+00:00",
+            "updated": "2026-03-25T16:08:04.549+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 16091,
+              "awardedCount": 34005833,
+              "winRatePercentage": 0.403
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2888656477809579,
+            "name": "Pardoned",
+            "description": "No one will believe you anyway.",
+            "displayName": "Pardoned",
+            "displayDescription": "No one will believe you anyway.",
+            "enabled": true,
+            "iconImageId": 18322659742,
+            "displayIconImageId": 18322659742,
+            "created": "2024-05-31T19:52:59.478+00:00",
+            "updated": "2026-03-25T18:16:12.206+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 264,
+              "awardedCount": 1222645,
+              "winRatePercentage": 0.007
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2881390526517720,
+            "name": "Send In The Next Team",
+            "description": "We've got plenty in reserve.",
+            "displayName": "Send In The Next Team",
+            "displayDescription": "We've got plenty in reserve.",
+            "enabled": true,
+            "iconImageId": 17710964109,
+            "displayIconImageId": 17710964109,
+            "created": "2024-05-31T19:21:27.219+00:00",
+            "updated": "2026-03-25T16:07:43.624+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 8992,
+              "awardedCount": 26682674,
+              "winRatePercentage": 0.225
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4350119469963948,
+            "name": "Leave The Dead Where They Fall",
+            "description": "They're only dead weight.",
+            "displayName": "Leave The Dead Where They Fall",
+            "displayDescription": "They're only dead weight.",
+            "enabled": true,
+            "iconImageId": 17714563791,
+            "displayIconImageId": 17714563791,
+            "created": "2024-05-31T19:21:42.682+00:00",
+            "updated": "2026-03-25T16:07:38.877+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1007,
+              "awardedCount": 5317453,
+              "winRatePercentage": 0.025
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4425545868283159,
+            "name": "Dropping Like Flies",
+            "description": "Their bodies poison the water.",
+            "displayName": "Dropping Like Flies",
+            "displayDescription": "Their bodies poison the water.",
+            "enabled": true,
+            "iconImageId": 17710972444,
+            "displayIconImageId": 17710972444,
+            "created": "2024-05-31T19:21:59.04+00:00",
+            "updated": "2026-03-25T16:07:29.166+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 575,
+              "awardedCount": 2697016,
+              "winRatePercentage": 0.014
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3437027998303692,
+            "name": "Drowning In An Ocean Of Corpses",
+            "description": "Most of which are your own. ",
+            "displayName": "Drowning In An Ocean Of Corpses",
+            "displayDescription": "Most of which are your own. ",
+            "enabled": true,
+            "iconImageId": 17710985887,
+            "displayIconImageId": 17710985887,
+            "created": "2024-05-31T19:22:14.673+00:00",
+            "updated": "2026-03-25T16:07:11.801+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 324,
+              "awardedCount": 1471192,
+              "winRatePercentage": 0.008
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 897895598652928,
+            "name": "The Floors Are Their Canvas.",
+            "description": "Your blood is their paint. Paint it red.",
+            "displayName": "The Floors Are Their Canvas.",
+            "displayDescription": "Your blood is their paint. Paint it red.",
+            "enabled": true,
+            "iconImageId": 17714645186,
+            "displayIconImageId": 17714645186,
+            "created": "2024-05-31T19:22:44.821+00:00",
+            "updated": "2026-03-25T16:06:58.165+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 205,
+              "awardedCount": 653996,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3023878049391723,
+            "name": "No Refunds~",
+            "description": "Thanks for the money, sucker!",
+            "displayName": "No Refunds~",
+            "displayDescription": "Thanks for the money, sucker!",
+            "enabled": true,
+            "iconImageId": 17712183753,
+            "displayIconImageId": 17712183753,
+            "created": "2024-05-31T19:26:19.081+00:00",
+            "updated": "2026-03-25T16:06:32.584+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 752,
+              "awardedCount": 3661727,
+              "winRatePercentage": 0.019
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1449966484296824,
+            "name": "Every Lung Has Its Iron",
+            "description": "This is not an expedition. It is an execution.",
+            "displayName": "Every Lung Has Its Iron",
+            "displayDescription": "This is not an expedition. It is an execution.",
+            "enabled": true,
+            "iconImageId": 104504401606251,
+            "displayIconImageId": 104504401606251,
+            "created": "2024-05-31T19:27:47.157+00:00",
+            "updated": "2026-03-25T16:06:21.213+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 5482,
+              "awardedCount": 22231217,
+              "winRatePercentage": 0.137
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 881641189852068,
+            "name": "Ready For Anything",
+            "description": "Glad I heard that… Would have been dead if I didn’t...",
+            "displayName": "Ready For Anything",
+            "displayDescription": "Glad I heard that… Would have been dead if I didn’t...",
+            "enabled": true,
+            "iconImageId": 140596365821600,
+            "displayIconImageId": 140596365821600,
+            "created": "2024-05-31T19:28:04.681+00:00",
+            "updated": "2026-03-25T16:06:11.909+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1353,
+              "awardedCount": 6894297,
+              "winRatePercentage": 0.034
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2613492949692606,
+            "name": "An Ocean Of Blood",
+            "description": "Swimming in the sea of dying stars.",
+            "displayName": "An Ocean Of Blood",
+            "displayDescription": "Swimming in the sea of dying stars.",
+            "enabled": true,
+            "iconImageId": 128272378713359,
+            "displayIconImageId": 128272378713359,
+            "created": "2024-05-31T19:28:27.124+00:00",
+            "updated": "2026-03-25T16:05:56.262+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1511,
+              "awardedCount": 4949492,
+              "winRatePercentage": 0.038
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1296591292427807,
+            "name": "Oh",
+            "description": "Must have been the wind.",
+            "displayName": "Oh",
+            "displayDescription": "Must have been the wind.",
+            "enabled": true,
+            "iconImageId": 125347491640015,
+            "displayIconImageId": 125347491640015,
+            "created": "2024-05-31T19:39:23.853+00:00",
+            "updated": "2026-03-25T16:05:45.764+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1476,
+              "awardedCount": 5557562,
+              "winRatePercentage": 0.037
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4484828877925747,
+            "name": "Good Things Come To Those Who Wait",
+            "description": "I felt, with a fear I could not reason.",
+            "displayName": "Good Things Come To Those Who Wait",
+            "displayDescription": "I felt, with a fear I could not reason.",
+            "enabled": true,
+            "iconImageId": 101259500104780,
+            "displayIconImageId": 101259500104780,
+            "created": "2024-05-31T19:39:40.502+00:00",
+            "updated": "2026-03-25T16:03:30.49+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1235,
+              "awardedCount": 4246726,
+              "winRatePercentage": 0.031
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1036169708057426,
+            "name": "WAR",
+            "description": "Pure Pandemonium.",
+            "displayName": "WAR",
+            "displayDescription": "Pure Pandemonium.",
+            "enabled": true,
+            "iconImageId": 17712402484,
+            "displayIconImageId": 17712402484,
+            "created": "2024-05-31T19:39:54.014+00:00",
+            "updated": "2026-03-25T16:02:31.531+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 423,
+              "awardedCount": 3491392,
+              "winRatePercentage": 0.011
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3499992129151745,
+            "name": "D-Rank",
+            "description": "ESC + Restart.",
+            "displayName": "D-Rank",
+            "displayDescription": "ESC + Restart.",
+            "enabled": true,
+            "iconImageId": 17711203377,
+            "displayIconImageId": 17711203377,
+            "created": "2024-05-31T19:40:20.152+00:00",
+            "updated": "2026-03-25T18:08:42.168+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 305,
+              "awardedCount": 2208399,
+              "winRatePercentage": 0.008
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 834661888918927,
+            "name": "Can’t Take My Eyes Off You",
+            "description": "Can you hear them? They call your name.",
+            "displayName": "Can’t Take My Eyes Off You",
+            "displayDescription": "Can you hear them? They call your name.",
+            "enabled": true,
+            "iconImageId": 17712188979,
+            "displayIconImageId": 17712188979,
+            "created": "2024-05-31T19:40:36.336+00:00",
+            "updated": "2026-03-25T18:08:56.75+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3526,
+              "awardedCount": 15588315,
+              "winRatePercentage": 0.088
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3732000871242333,
+            "name": "+ENRAGED",
+            "description": "Hope you enjoy the rest of your run.",
+            "displayName": "+ENRAGED",
+            "displayDescription": "Hope you enjoy the rest of your run.",
+            "enabled": true,
+            "iconImageId": 17714379227,
+            "displayIconImageId": 17714379227,
+            "created": "2024-05-31T19:41:04.846+00:00",
+            "updated": "2026-03-25T18:09:09.272+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 428,
+              "awardedCount": 2333931,
+              "winRatePercentage": 0.011
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 982283364390964,
+            "name": "Loser",
+            "description": "Ha ha.",
+            "displayName": "Loser",
+            "displayDescription": "Ha ha.",
+            "enabled": true,
+            "iconImageId": 17714661257,
+            "displayIconImageId": 17714661257,
+            "created": "2024-05-31T19:41:33.593+00:00",
+            "updated": "2026-03-25T18:09:18.547+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3331,
+              "awardedCount": 11752009,
+              "winRatePercentage": 0.083
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3209990353160525,
+            "name": "Fool Me Once, Twice, Thrice, Fource And Fivce",
+            "description": "Ha ha (x5)",
+            "displayName": "Fool Me Once, Twice, Thrice, Fource And Fivce",
+            "displayDescription": "Ha ha (x5)",
+            "enabled": true,
+            "iconImageId": 17714662744,
+            "displayIconImageId": 17714662744,
+            "created": "2024-05-31T19:41:58.702+00:00",
+            "updated": "2026-03-25T18:09:34.066+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 26,
+              "awardedCount": 145024,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2965993106867001,
+            "name": "huh wuh",
+            "description": "A dark embrace.",
+            "displayName": "huh wuh",
+            "displayDescription": "A dark embrace.",
+            "enabled": true,
+            "iconImageId": 17711189109,
+            "displayIconImageId": 17711189109,
+            "created": "2024-05-31T19:42:20.182+00:00",
+            "updated": "2026-03-25T18:09:45.961+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3537,
+              "awardedCount": 14275127,
+              "winRatePercentage": 0.089
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2281021737544867,
+            "name": "Will 2 Live",
+            "description": "Down here, no one is left for dead.",
+            "displayName": "Will 2 Live",
+            "displayDescription": "Down here, no one is left for dead.",
+            "enabled": true,
+            "iconImageId": 17711190843,
+            "displayIconImageId": 17711190843,
+            "created": "2024-05-31T19:42:35.479+00:00",
+            "updated": "2026-03-25T18:10:09.396+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1402,
+              "awardedCount": 8846117,
+              "winRatePercentage": 0.035
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1497791063827676,
+            "name": "Smartest ROBLOX Players",
+            "description": "Survival instincts of an expendable. Oh wait...",
+            "displayName": "Smartest ROBLOX Players",
+            "displayDescription": "Survival instincts of an expendable. Oh wait...",
+            "enabled": true,
+            "iconImageId": 17714664479,
+            "displayIconImageId": 17714664479,
+            "created": "2024-05-31T19:43:01.844+00:00",
+            "updated": "2026-03-25T18:10:25.966+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2,
+              "awardedCount": 1421395,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4060182582509254,
+            "name": "A Shot In The Dark",
+            "description": "Should have checked the jumpscare timestamps.",
+            "displayName": "A Shot In The Dark",
+            "displayDescription": "Should have checked the jumpscare timestamps.",
+            "enabled": true,
+            "iconImageId": 17712198437,
+            "displayIconImageId": 17712198437,
+            "created": "2024-05-31T19:43:18.111+00:00",
+            "updated": "2026-03-25T18:10:49.464+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1444,
+              "awardedCount": 8682471,
+              "winRatePercentage": 0.036
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 81924265081499,
+            "name": "Too Close To The Sun",
+            "description": "My wax wings won’t give in just yet.",
+            "displayName": "Too Close To The Sun",
+            "displayDescription": "My wax wings won’t give in just yet.",
+            "enabled": true,
+            "iconImageId": 91737701223721,
+            "displayIconImageId": 91737701223721,
+            "created": "2024-05-31T19:43:38.018+00:00",
+            "updated": "2026-03-25T18:11:09.123+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 604,
+              "awardedCount": 3174888,
+              "winRatePercentage": 0.015
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3827668673915856,
+            "name": "They’re In The Walls",
+            "description": "Your footsteps are not your own.",
+            "displayName": "They’re In The Walls",
+            "displayDescription": "Your footsteps are not your own.",
+            "enabled": true,
+            "iconImageId": 71898955642734,
+            "displayIconImageId": 71898955642734,
+            "created": "2024-05-31T19:43:55.769+00:00",
+            "updated": "2026-03-25T18:11:21.368+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1017,
+              "awardedCount": 4662828,
+              "winRatePercentage": 0.025
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3147552141527553,
+            "name": "We Outta Wall Dwellers",
+            "description": "Yummies!",
+            "displayName": "We Outta Wall Dwellers",
+            "displayDescription": "Yummies!",
+            "enabled": true,
+            "iconImageId": 89004655498102,
+            "displayIconImageId": 89004655498102,
+            "created": "2024-05-31T19:44:44.287+00:00",
+            "updated": "2026-03-25T18:12:12.684+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 331,
+              "awardedCount": 1639365,
+              "winRatePercentage": 0.008
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4282399536652736,
+            "name": "Eyes In The Skies",
+            "description": "Don’t look up.",
+            "displayName": "Eyes In The Skies",
+            "displayDescription": "Don’t look up.",
+            "enabled": true,
+            "iconImageId": 18454041674,
+            "displayIconImageId": 18454041674,
+            "created": "2024-05-31T19:45:49.955+00:00",
+            "updated": "2026-03-25T18:13:05.697+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 936,
+              "awardedCount": 3865381,
+              "winRatePercentage": 0.023
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4230218698575406,
+            "name": "Sewer Creature",
+            "description": "MORAL: There was a Sewer Creature.",
+            "displayName": "Sewer Creature",
+            "displayDescription": "MORAL: There was a Sewer Creature.",
+            "enabled": true,
+            "iconImageId": 129507349450093,
+            "displayIconImageId": 129507349450093,
+            "created": "2025-05-27T01:02:48.477+00:00",
+            "updated": "2026-03-25T18:29:26.554+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 421,
+              "awardedCount": 1061470,
+              "winRatePercentage": 0.011
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3981519625685663,
+            "name": "Effective Motivator",
+            "description": "Your blood is nothing but fuel.",
+            "displayName": "Effective Motivator",
+            "displayDescription": "Your blood is nothing but fuel.",
+            "enabled": true,
+            "iconImageId": 110348578366748,
+            "displayIconImageId": 110348578366748,
+            "created": "2025-05-27T01:03:00.533+00:00",
+            "updated": "2026-03-25T18:29:35.383+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 420,
+              "awardedCount": 938591,
+              "winRatePercentage": 0.011
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 955997835040842,
+            "name": "Hard Carry",
+            "description": "My shoulders are sore from carrying this team.",
+            "displayName": "Hard Carry",
+            "displayDescription": "My shoulders are sore from carrying this team.",
+            "enabled": true,
+            "iconImageId": 88394549992945,
+            "displayIconImageId": 88394549992945,
+            "created": "2025-05-27T01:03:20.436+00:00",
+            "updated": "2026-03-25T18:29:42.495+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 155,
+              "awardedCount": 459170,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3716191590040457,
+            "name": "Uneasy Alliance",
+            "description": "The only reason you're playing this game.",
+            "displayName": "Uneasy Alliance",
+            "displayDescription": "The only reason you're playing this game.",
+            "enabled": true,
+            "iconImageId": 17795032158,
+            "displayIconImageId": 17795032158,
+            "created": "2024-05-31T19:48:13.566+00:00",
+            "updated": "2026-03-25T18:13:29.1+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 711,
+              "awardedCount": 5634369,
+              "winRatePercentage": 0.018
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 347071637835657,
+            "name": "Just Good Business",
+            "description": "You really don't settle for anything less than the best, do ya?",
+            "displayName": "Just Good Business",
+            "displayDescription": "You really don't settle for anything less than the best, do ya?",
+            "enabled": true,
+            "iconImageId": 17795031667,
+            "displayIconImageId": 17795031667,
+            "created": "2024-05-31T19:48:31.692+00:00",
+            "updated": "2026-03-25T18:13:43.071+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 246,
+              "awardedCount": 1556945,
+              "winRatePercentage": 0.006
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2624603286974933,
+            "name": "POP! Goes The Weasel",
+            "description": "Do you have any pain relief? I got a headache.",
+            "displayName": "POP! Goes The Weasel",
+            "displayDescription": "Do you have any pain relief? I got a headache.",
+            "enabled": true,
+            "iconImageId": 17712207105,
+            "displayIconImageId": 17712207105,
+            "created": "2024-05-31T19:49:31.831+00:00",
+            "updated": "2026-03-25T18:14:05.045+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 649,
+              "awardedCount": 1621564,
+              "winRatePercentage": 0.016
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1743482676101076,
+            "name": "Letting Go Of POVERTY, Watch This!",
+            "description": "The point is letting go... yeah right.",
+            "displayName": "Letting Go Of POVERTY, Watch This!",
+            "displayDescription": "The point is letting go... yeah right.",
+            "enabled": true,
+            "iconImageId": 17711370759,
+            "displayIconImageId": 17711370759,
+            "created": "2024-05-31T19:49:46.712+00:00",
+            "updated": "2026-03-26T15:43:08.09+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 96,
+              "awardedCount": 650079,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3105002542175649,
+            "name": "Mysterious Benefactor",
+            "description": "WE SHALL RECONVENE. VERY, VERY SOON.",
+            "displayName": "Mysterious Benefactor",
+            "displayDescription": "WE SHALL RECONVENE. VERY, VERY SOON.",
+            "enabled": true,
+            "iconImageId": 17712208376,
+            "displayIconImageId": 17712208376,
+            "created": "2024-05-31T19:50:04.124+00:00",
+            "updated": "2026-03-25T18:14:30.897+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1519,
+              "awardedCount": 4523630,
+              "winRatePercentage": 0.038
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1034140741999116,
+            "name": "*splat*",
+            "description": "Squashed like the insignificant pest you are.",
+            "displayName": "*splat*",
+            "displayDescription": "Squashed like the insignificant pest you are.",
+            "enabled": true,
+            "iconImageId": 17712345800,
+            "displayIconImageId": 17712345800,
+            "created": "2024-05-31T19:51:52.352+00:00",
+            "updated": "2026-03-25T18:15:31.396+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 30,
+              "awardedCount": 447215,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3317949922580027,
+            "name": "Who Cares About OSHA?",
+            "description": "Or NIOSH? Or NSC? Who cares, we die at work.",
+            "displayName": "Who Cares About OSHA?",
+            "displayDescription": "Or NIOSH? Or NSC? Who cares, we die at work.",
+            "enabled": true,
+            "iconImageId": 100734573162300,
+            "displayIconImageId": 100734573162300,
+            "created": "2024-11-16T13:35:53.969+00:00",
+            "updated": "2026-03-25T18:27:32.309+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1289,
+              "awardedCount": 3658067,
+              "winRatePercentage": 0.032
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3891141684689529,
+            "name": "Zero",
+            "description": "Press 0 for heals!",
+            "displayName": "Zero",
+            "displayDescription": "Press 0 for heals!",
+            "enabled": true,
+            "iconImageId": 72134624602295,
+            "displayIconImageId": 72134624602295,
+            "created": "2024-11-05T21:56:46.95+00:00",
+            "updated": "2026-03-25T18:25:43.516+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1816,
+              "awardedCount": 4187759,
+              "winRatePercentage": 0.045
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1328829931631224,
+            "name": "Ahh, Those Were The Bad Turrets, Weren't They?",
+            "description": "Hah! Was that your bullet-riddled body flying out the room?!",
+            "displayName": "Ahh, Those Were The Bad Turrets, Weren't They?",
+            "displayDescription": "Hah! Was that your bullet-riddled body flying out the room?!",
+            "enabled": true,
+            "iconImageId": 83879492680440,
+            "displayIconImageId": 83879492680440,
+            "created": "2024-07-21T21:27:46.73+00:00",
+            "updated": "2026-03-25T18:22:26.915+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2143,
+              "awardedCount": 9644560,
+              "winRatePercentage": 0.054
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1660768368993431,
+            "name": "LOOK AT ME",
+            "description": "Double trouble.",
+            "displayName": "LOOK AT ME",
+            "displayDescription": "Double trouble.",
+            "enabled": true,
+            "iconImageId": 18754197280,
+            "displayIconImageId": 18754197280,
+            "created": "2024-07-27T19:15:13.344+00:00",
+            "updated": "2026-03-25T18:22:34.787+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1449,
+              "awardedCount": 5266865,
+              "winRatePercentage": 0.036
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2675269677948739,
+            "name": "DiVine Intervention",
+            "description": "The clean air serves no purpose if it’s beaten out of you.",
+            "displayName": "DiVine Intervention",
+            "displayDescription": "The clean air serves no purpose if it’s beaten out of you.",
+            "enabled": true,
+            "iconImageId": 111939485797103,
+            "displayIconImageId": 111939485797103,
+            "created": "2024-11-05T21:56:02.293+00:00",
+            "updated": "2026-03-25T18:25:09.775+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 348,
+              "awardedCount": 1187337,
+              "winRatePercentage": 0.009
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1110614765093326,
+            "name": "Parale Parali",
+            "description": "Knee deep in your self-eating guilt.",
+            "displayName": "Parale Parali",
+            "displayDescription": "Knee deep in your self-eating guilt.",
+            "enabled": true,
+            "iconImageId": 104004975400256,
+            "displayIconImageId": 104004975400256,
+            "created": "2024-11-05T21:56:14.877+00:00",
+            "updated": "2026-03-25T18:25:18.604+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 156,
+              "awardedCount": 1043790,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4167376667153079,
+            "name": "Treasure Map To Infinite Bloxy Cola",
+            "description": "Maybe my son was useful after all.",
+            "displayName": "Treasure Map To Infinite Bloxy Cola",
+            "displayDescription": "Maybe my son was useful after all.",
+            "enabled": true,
+            "iconImageId": 70384022453399,
+            "displayIconImageId": 70384022453399,
+            "created": "2024-11-05T21:55:34.702+00:00",
+            "updated": "2026-03-25T18:24:57.478+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 606,
+              "awardedCount": 2234079,
+              "winRatePercentage": 0.015
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3831271348938472,
+            "name": "wawa",
+            "description": "Urbanshade’s best friend!",
+            "displayName": "wawa",
+            "displayDescription": "Urbanshade’s best friend!",
+            "enabled": true,
+            "iconImageId": 106746717787402,
+            "displayIconImageId": 106746717787402,
+            "created": "2024-11-05T21:56:25.258+00:00",
+            "updated": "2026-03-25T18:25:25.806+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 557,
+              "awardedCount": 2098579,
+              "winRatePercentage": 0.014
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2952251386380330,
+            "name": "whoops",
+            "description": ":(",
+            "displayName": "whoops",
+            "displayDescription": ":(",
+            "enabled": true,
+            "iconImageId": 131457078963315,
+            "displayIconImageId": 131457078963315,
+            "created": "2024-11-05T21:56:37.323+00:00",
+            "updated": "2026-03-25T18:25:33.847+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 261,
+              "awardedCount": 817506,
+              "winRatePercentage": 0.007
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 391191164485888,
+            "name": "Ouch Ouchie STOOOOPPPP!!!!",
+            "description": "Following basic instructions must be soooo hard!",
+            "displayName": "Ouch Ouchie STOOOOPPPP!!!!",
+            "displayDescription": "Following basic instructions must be soooo hard!",
+            "enabled": true,
+            "iconImageId": 17712664358,
+            "displayIconImageId": 17712664358,
+            "created": "2024-05-31T19:45:25.138+00:00",
+            "updated": "2026-03-25T18:12:26.49+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 652,
+              "awardedCount": 2923024,
+              "winRatePercentage": 0.016
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 441932628490552,
+            "name": "Lonely No Longer",
+            "description": "The voices are so loud!",
+            "displayName": "Lonely No Longer",
+            "displayDescription": "The voices are so loud!",
+            "enabled": true,
+            "iconImageId": 18822257489,
+            "displayIconImageId": 18822257489,
+            "created": "2024-08-05T19:33:37.721+00:00",
+            "updated": "2026-03-25T18:23:03.959+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1241,
+              "awardedCount": 5644313,
+              "winRatePercentage": 0.031
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2717672600284354,
+            "name": "AI Slop",
+            "description": "How about you generate a knuckle sandwich.",
+            "displayName": "AI Slop",
+            "displayDescription": "How about you generate a knuckle sandwich.",
+            "enabled": true,
+            "iconImageId": 18754062104,
+            "displayIconImageId": 18754062104,
+            "created": "2024-07-27T19:20:33.082+00:00",
+            "updated": "2026-03-25T18:22:50.496+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 380,
+              "awardedCount": 2016016,
+              "winRatePercentage": 0.01
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2559703287397862,
+            "name": "Salvation",
+            "description": "Let’s get going, little computer!",
+            "displayName": "Salvation",
+            "displayDescription": "Let’s get going, little computer!",
+            "enabled": true,
+            "iconImageId": 128486407781294,
+            "displayIconImageId": 128486407781294,
+            "created": "2025-05-27T01:01:36.769+00:00",
+            "updated": "2026-03-25T18:28:56.852+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 257,
+              "awardedCount": 895259,
+              "winRatePercentage": 0.006
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 906069877167909,
+            "name": "Stick To The Script",
+            "description": "He can finally see the sunset again.",
+            "displayName": "Stick To The Script",
+            "displayDescription": "He can finally see the sunset again.",
+            "enabled": true,
+            "iconImageId": 112712449951137,
+            "displayIconImageId": 112712449951137,
+            "created": "2025-05-27T01:01:51.265+00:00",
+            "updated": "2026-03-25T18:29:10.839+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 167,
+              "awardedCount": 475526,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 789812573439502,
+            "name": "You Deserve This",
+            "description": "Eat lead, vermin.",
+            "displayName": "You Deserve This",
+            "displayDescription": "Eat lead, vermin.",
+            "enabled": true,
+            "iconImageId": 18754061449,
+            "displayIconImageId": 18754061449,
+            "created": "2024-07-27T19:17:10.362+00:00",
+            "updated": "2026-03-25T18:22:42.571+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 167,
+              "awardedCount": 1461422,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2460674764252944,
+            "name": "Artifice",
+            "description": "Battered? Bruised? Good. Buy a drink.",
+            "displayName": "Artifice",
+            "displayDescription": "Battered? Bruised? Good. Buy a drink.",
+            "enabled": true,
+            "iconImageId": 17712229810,
+            "displayIconImageId": 17712229810,
+            "created": "2024-05-31T19:52:39.062+00:00",
+            "updated": "2026-03-26T15:42:41.972+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 213,
+              "awardedCount": 1330154,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2534841463460743,
+            "name": "So I Guess We'll Never Dance Again",
+            "description": "What a party poober!",
+            "displayName": "So I Guess We'll Never Dance Again",
+            "displayDescription": "What a party poober!",
+            "enabled": true,
+            "iconImageId": 105906017111582,
+            "displayIconImageId": 105906017111582,
+            "created": "2024-09-27T07:48:53.957+00:00",
+            "updated": "2026-03-25T18:23:40.072+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 100,
+              "awardedCount": 712796,
+              "winRatePercentage": 0.003
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1296286092761389,
+            "name": "Friends Forever",
+            "description": "...For the next 47 hours, at least.",
+            "displayName": "Friends Forever",
+            "displayDescription": "...For the next 47 hours, at least.",
+            "enabled": true,
+            "iconImageId": 128503621922168,
+            "displayIconImageId": 128503621922168,
+            "created": "2024-11-16T13:35:24.747+00:00",
+            "updated": "2026-03-25T18:27:21.56+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 180,
+              "awardedCount": 405487,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4132184690647638,
+            "name": ":3",
+            "description": "Cooperation is one of Urbanshade’s core values. It’s good to help a friend in need.",
+            "displayName": ":3",
+            "displayDescription": "Cooperation is one of Urbanshade’s core values. It’s good to help a friend in need.",
+            "enabled": true,
+            "iconImageId": 17712215870,
+            "displayIconImageId": 17712215870,
+            "created": "2024-05-31T19:50:27.513+00:00",
+            "updated": "2026-03-25T18:14:42.265+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 596,
+              "awardedCount": 4673978,
+              "winRatePercentage": 0.015
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1260859361287828,
+            "name": "Like Nothing Ever Happened",
+            "description": "You’re finally awake…again.",
+            "displayName": "Like Nothing Ever Happened",
+            "displayDescription": "You’re finally awake…again.",
+            "enabled": true,
+            "iconImageId": 124573290438921,
+            "displayIconImageId": 124573290438921,
+            "created": "2025-05-27T01:02:02.917+00:00",
+            "updated": "2026-03-25T18:29:18.439+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 633,
+              "awardedCount": 1364177,
+              "winRatePercentage": 0.016
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2290789837822417,
+            "name": "Walking Database",
+            "description": "Greed is good.",
+            "displayName": "Walking Database",
+            "displayDescription": "Greed is good.",
+            "enabled": true,
+            "iconImageId": 130683097594080,
+            "displayIconImageId": 130683097594080,
+            "created": "2024-05-31T19:50:45.195+00:00",
+            "updated": "2026-03-25T18:14:50.486+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 86,
+              "awardedCount": 404545,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2839918831929975,
+            "name": "Death Any%",
+            "description": "Now spend a month optimizing the milliseconds.",
+            "displayName": "Death Any%",
+            "displayDescription": "Now spend a month optimizing the milliseconds.",
+            "enabled": true,
+            "iconImageId": 17712220297,
+            "displayIconImageId": 17712220297,
+            "created": "2024-05-31T19:51:37.378+00:00",
+            "updated": "2026-03-25T18:15:13.602+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2200,
+              "awardedCount": 3722091,
+              "winRatePercentage": 0.055
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2138770691972107,
+            "name": "This MIGHT Be Bunny?",
+            "description": "Ooh.. shiny!",
+            "displayName": "This MIGHT Be Bunny?",
+            "displayDescription": "Ooh.. shiny!",
+            "enabled": true,
+            "iconImageId": 129843364645515,
+            "displayIconImageId": 129843364645515,
+            "created": "2024-05-31T19:51:05.405+00:00",
+            "updated": "2026-07-31T19:22:45.616+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 342,
+              "awardedCount": 2260220,
+              "winRatePercentage": 0.009
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4409330602343810,
+            "name": "It's Getting Late",
+            "description": "Go to bed.",
+            "displayName": "It's Getting Late",
+            "displayDescription": "Go to bed.",
+            "enabled": true,
+            "iconImageId": 91866011677308,
+            "displayIconImageId": 91866011677308,
+            "created": "2025-06-13T21:07:42.724+00:00",
+            "updated": "2026-03-25T18:29:47.543+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 320,
+              "awardedCount": 511591,
+              "winRatePercentage": 0.008
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4381130893499286,
+            "name": "Extra Careful",
+            "description": "One parasite and I'm dead...",
+            "displayName": "Extra Careful",
+            "displayDescription": "One parasite and I'm dead...",
+            "enabled": true,
+            "iconImageId": 106856478172494,
+            "displayIconImageId": 106856478172494,
+            "created": "2024-05-31T19:53:22.285+00:00",
+            "updated": "2026-03-25T18:16:31.535+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 25,
+              "awardedCount": 108275,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1633888447659452,
+            "name": "Parvum Opus",
+            "description": "How do you think this was even worthy of the cameras? At the VERY LEAST you didn't fail.",
+            "displayName": "Parvum Opus",
+            "displayDescription": "How do you think this was even worthy of the cameras? At the VERY LEAST you didn't fail.",
+            "enabled": true,
+            "iconImageId": 117619752437334,
+            "displayIconImageId": 117619752437334,
+            "created": "2025-11-17T01:15:54.712+00:00",
+            "updated": "2026-03-24T12:17:36.574+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 83,
+              "awardedCount": 164177,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1713476497417828,
+            "name": "Mediocrium Opus",
+            "description": "Not good at all, but not terrible. Simply mediocre.",
+            "displayName": "Mediocrium Opus",
+            "displayDescription": "Not good at all, but not terrible. Simply mediocre.",
+            "enabled": true,
+            "iconImageId": 127572384727278,
+            "displayIconImageId": 127572384727278,
+            "created": "2025-11-17T01:16:04.541+00:00",
+            "updated": "2026-03-24T12:17:39.188+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 56,
+              "awardedCount": 84390,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1192520224251653,
+            "name": "Bonum Opus",
+            "description": "You have some potential. Do you want a pat on the back or something?",
+            "displayName": "Bonum Opus",
+            "displayDescription": "You have some potential. Do you want a pat on the back or something?",
+            "enabled": true,
+            "iconImageId": 133016436999512,
+            "displayIconImageId": 133016436999512,
+            "created": "2025-11-17T01:16:16.383+00:00",
+            "updated": "2026-03-24T12:18:54.885+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 36,
+              "awardedCount": 48735,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3268201192963969,
+            "name": "Magnum Opus",
+            "description": "The ratings are through the roof! Spectacular performance, bravo!",
+            "displayName": "Magnum Opus",
+            "displayDescription": "The ratings are through the roof! Spectacular performance, bravo!",
+            "enabled": true,
+            "iconImageId": 132259187955105,
+            "displayIconImageId": 132259187955105,
+            "created": "2025-11-17T01:16:39.493+00:00",
+            "updated": "2026-03-24T12:19:10.564+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 22,
+              "awardedCount": 16278,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 883458815737237,
+            "name": "Power Of Friendship",
+            "description": "We can make it if we try.",
+            "displayName": "Power Of Friendship",
+            "displayDescription": "We can make it if we try.",
+            "enabled": true,
+            "iconImageId": 17712253595,
+            "displayIconImageId": 17712253595,
+            "created": "2024-05-31T19:54:00.083+00:00",
+            "updated": "2026-03-25T18:20:58.13+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 78,
+              "awardedCount": 283889,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 549234073969158,
+            "name": "Group Of Sweats",
+            "description": "Making it out with four people alive is pretty fantastic.",
+            "displayName": "Group Of Sweats",
+            "displayDescription": "Making it out with four people alive is pretty fantastic.",
+            "enabled": true,
+            "iconImageId": 17712255069,
+            "displayIconImageId": 17712255069,
+            "created": "2024-05-31T19:54:21.103+00:00",
+            "updated": "2026-03-25T18:21:08.243+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 13,
+              "awardedCount": 51542,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 4076671360176812,
+            "name": "This Badge Sucks",
+            "description": "Running on side rooms, RNG, and a dream...",
+            "displayName": "This Badge Sucks",
+            "displayDescription": "Running on side rooms, RNG, and a dream...",
+            "enabled": true,
+            "iconImageId": 17712256463,
+            "displayIconImageId": 17712256463,
+            "created": "2024-05-31T19:54:46.923+00:00",
+            "updated": "2026-03-25T18:21:24.137+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 9,
+              "awardedCount": 34847,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 223335639160189,
+            "name": "This Badge Really Sucks",
+            "description": "We heard you guys LOVED This Badge Sucks, so we added a sequel!",
+            "displayName": "This Badge Really Sucks",
+            "displayDescription": "We heard you guys LOVED This Badge Sucks, so we added a sequel!",
+            "enabled": true,
+            "iconImageId": 77462683938825,
+            "displayIconImageId": 77462683938825,
+            "created": "2026-01-17T19:34:38.071+00:00",
+            "updated": "2026-03-24T12:19:47.456+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 10,
+              "awardedCount": 4673,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2569761070324635,
+            "name": "Overstimuli",
+            "description": "Headache-inducing chaos.",
+            "displayName": "Overstimuli",
+            "displayDescription": "Headache-inducing chaos.",
+            "enabled": true,
+            "iconImageId": 110835857355228,
+            "displayIconImageId": 110835857355228,
+            "created": "2025-11-17T01:17:20.761+00:00",
+            "updated": "2026-08-13T19:35:31.594+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 28319,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3208837683491569,
+            "name": "Hi Again",
+            "description": "I remember you. Do you remember me?",
+            "displayName": "Hi Again",
+            "displayDescription": "I remember you. Do you remember me?",
+            "enabled": true,
+            "iconImageId": 96722152798731,
+            "displayIconImageId": 96722152798731,
+            "created": "2024-05-31T19:52:12.497+00:00",
+            "updated": "2026-03-25T18:15:41.089+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 13,
+              "awardedCount": 962536,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3127277151053968,
+            "name": "Cardsharp",
+            "description": "Counting cards isn't allowed. You'd get kicked out if they caught you doing that.",
+            "displayName": "Cardsharp",
+            "displayDescription": "Counting cards isn't allowed. You'd get kicked out if they caught you doing that.",
+            "enabled": true,
+            "iconImageId": 108564423568081,
+            "displayIconImageId": 108564423568081,
+            "created": "2026-01-17T19:32:15.959+00:00",
+            "updated": "2026-08-21T10:51:53.939+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 4,
+              "awardedCount": 11709,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2251478278903268,
+            "name": "Chaos, Chaos!",
+            "description": "YOU CAN DO ANYTHING!",
+            "displayName": "Chaos, Chaos!",
+            "displayDescription": "YOU CAN DO ANYTHING!",
+            "enabled": true,
+            "iconImageId": 102777436519208,
+            "displayIconImageId": 102777436519208,
+            "created": "2026-02-07T19:00:52.501+00:00",
+            "updated": "2026-07-05T19:17:54.694+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 8,
+              "awardedCount": 7897,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3448410116592201,
+            "name": "We Die In The Dark",
+            "description": "... So you can live in the light.",
+            "displayName": "We Die In The Dark",
+            "displayDescription": "... So you can live in the light.",
+            "enabled": true,
+            "iconImageId": 82259640647942,
+            "displayIconImageId": 82259640647942,
+            "created": "2024-05-31T19:55:07.289+00:00",
+            "updated": "2026-03-25T18:21:37.71+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 28,
+              "awardedCount": 194314,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1708641691884493,
+            "name": "I’m Outta Here!",
+            "description": "And you didn’t need to do the Backwards Long Jump!",
+            "displayName": "I’m Outta Here!",
+            "displayDescription": "And you didn’t need to do the Backwards Long Jump!",
+            "enabled": true,
+            "iconImageId": 17712260747,
+            "displayIconImageId": 17712260747,
+            "created": "2024-05-31T19:55:23.322+00:00",
+            "updated": "2026-03-25T18:21:48.864+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 67,
+              "awardedCount": 372779,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2784867290782163,
+            "name": "Glutton For Punishment",
+            "description": "You would make even Beelzebub proud.",
+            "displayName": "Glutton For Punishment",
+            "displayDescription": "You would make even Beelzebub proud.",
+            "enabled": true,
+            "iconImageId": 129520813857844,
+            "displayIconImageId": 129520813857844,
+            "created": "2024-11-05T21:55:22.836+00:00",
+            "updated": "2026-05-04T15:40:23.637+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 9,
+              "awardedCount": 33666,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2094518705108149,
+            "name": "We Didn’t Playtest To Make Sure This Was Possible",
+            "description": "Here’s your license now that you’re a certified clown!",
+            "displayName": "We Didn’t Playtest To Make Sure This Was Possible",
+            "displayDescription": "Here’s your license now that you’re a certified clown!",
+            "enabled": true,
+            "iconImageId": 17712261085,
+            "displayIconImageId": 17712261085,
+            "created": "2024-05-31T19:56:02.02+00:00",
+            "updated": "2026-03-25T18:22:00.958+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 22,
+              "awardedCount": 69416,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2077627668387416,
+            "name": "Death Incarnate",
+            "description": "Meet Harbinger.",
+            "displayName": "Death Incarnate",
+            "displayDescription": "Meet Harbinger.",
+            "enabled": true,
+            "iconImageId": 112040519509009,
+            "displayIconImageId": 112040519509009,
+            "created": "2024-11-05T21:56:58.273+00:00",
+            "updated": "2026-07-05T19:21:23.502+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 217,
+              "awardedCount": 247413,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1468549573287079,
+            "name": "I Think MatPat Will Enjoy Dissecting This 👀",
+            "description": "I believe MatPat is going to enjoy this 👀",
+            "displayName": "I Think MatPat Will Enjoy Dissecting This 👀",
+            "displayDescription": "I believe MatPat is going to enjoy this 👀",
+            "enabled": true,
+            "iconImageId": 112109745736850,
+            "displayIconImageId": 112109745736850,
+            "created": "2024-05-31T19:57:06.578+00:00",
+            "updated": "2026-03-25T18:22:16.929+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 5,
+              "awardedCount": 56584,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2928594078666212,
+            "name": "Wheres My Win?",
+            "description": "We should be done by now.",
+            "displayName": "Wheres My Win?",
+            "displayDescription": "We should be done by now.",
+            "enabled": true,
+            "iconImageId": 77670092488800,
+            "displayIconImageId": 77670092488800,
+            "created": "2024-11-07T21:30:54.98+00:00",
+            "updated": "2026-03-25T18:26:07.94+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 55,
+              "awardedCount": 430907,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2488667500452642,
+            "name": "Victory Lap?",
+            "description": "Why is it still going?",
+            "displayName": "Victory Lap?",
+            "displayDescription": "Why is it still going?",
+            "enabled": true,
+            "iconImageId": 131895793004336,
+            "displayIconImageId": 131895793004336,
+            "created": "2024-11-07T21:32:36.104+00:00",
+            "updated": "2026-03-25T18:26:15.262+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 16,
+              "awardedCount": 160895,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3075004429888131,
+            "name": "Premium Payout Or \"Difficult\" Badge, Call It",
+            "description": "theres no reaching room 1000th room badge cuz like do u actually want to do that? like sure its a nice round number but cmon now WHY would you put yourself through that. theres no point, theres no goal. youd be wasting your time, and for what? some achivement that in the grand scheme of things, no-one will care about? like wow congrats you held W for a few hours and pressed E every now and then. like this badge is just here for completionists, and because some people would obviously be complaining like \"oooh why doesnt endless have a hard-to-get badge :(((\" even tho its not really that difficult, more-so an endurance test. an endurance test against boredom.\n\nif you go for the badge, kudos I guess. thanks for the playtime &/or premium payout.",
+            "displayName": "Premium Payout Or \"Difficult\" Badge, Call It",
+            "displayDescription": "theres no reaching room 1000th room badge cuz like do u actually want to do that? like sure its a nice round number but cmon now WHY would you put yourself through that. theres no point, theres no goal. youd be wasting your time, and for what? some achivement that in the grand scheme of things, no-one will care about? like wow congrats you held W for a few hours and pressed E every now and then. like this badge is just here for completionists, and because some people would obviously be complaining like \"oooh why doesnt endless have a hard-to-get badge :(((\" even tho its not really that difficult, more-so an endurance test. an endurance test against boredom.\n\nif you go for the badge, kudos I guess. thanks for the playtime &/or premium payout.",
+            "enabled": true,
+            "iconImageId": 81100446118737,
+            "displayIconImageId": 81100446118737,
+            "created": "2024-11-07T21:32:43.126+00:00",
+            "updated": "2026-03-25T18:26:31.247+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 4,
+              "awardedCount": 43095,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3746140615397912,
+            "name": "Diminishing Returns",
+            "description": "Innovation Inc. All’s I’m sayin’.",
+            "displayName": "Diminishing Returns",
+            "displayDescription": "Innovation Inc. All’s I’m sayin’.",
+            "enabled": true,
+            "iconImageId": 102127725055907,
+            "displayIconImageId": 102127725055907,
+            "created": "2024-11-07T21:34:55.601+00:00",
+            "updated": "2026-03-25T18:26:41.731+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 8,
+              "awardedCount": 42489,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3461381302189012,
+            "name": "Made Of Steel",
+            "description": "Forged in the fires, godless machine.",
+            "displayName": "Made Of Steel",
+            "displayDescription": "Forged in the fires, godless machine.",
+            "enabled": true,
+            "iconImageId": 135836306780439,
+            "displayIconImageId": 135836306780439,
+            "created": "2024-11-07T21:50:35.014+00:00",
+            "updated": "2026-03-25T18:27:07.062+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 31,
+              "awardedCount": 169198,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2016720435205150,
+            "name": "Hunted",
+            "description": "🎵 You’ve been struck by… a smoooooth prisoner! 🎵",
+            "displayName": "Hunted",
+            "displayDescription": "🎵 You’ve been struck by… a smoooooth prisoner! 🎵",
+            "enabled": true,
+            "iconImageId": 138616746246114,
+            "displayIconImageId": 138616746246114,
+            "created": "2025-02-12T22:28:07.167+00:00",
+            "updated": "2026-03-25T18:28:22.343+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 101,
+              "awardedCount": 360343,
+              "winRatePercentage": 0.003
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 3059078604815184,
+            "name": "Big Ol Sphere",
+            "description": "What a wonderful performance!",
+            "displayName": "Big Ol Sphere",
+            "displayDescription": "What a wonderful performance!",
+            "enabled": true,
+            "iconImageId": 136135451921313,
+            "displayIconImageId": 136135451921313,
+            "created": "2025-02-12T22:28:27.375+00:00",
+            "updated": "2026-03-25T18:28:32.034+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 37,
+              "awardedCount": 129037,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2125913381284439,
+            "name": "Connection Terminated",
+            "description": "A labyrinth with no exit, a maze with no prize.",
+            "displayName": "Connection Terminated",
+            "displayDescription": "A labyrinth with no exit, a maze with no prize.",
+            "enabled": true,
+            "iconImageId": 106711535686715,
+            "displayIconImageId": 106711535686715,
+            "created": "2025-02-12T22:29:10.155+00:00",
+            "updated": "2026-03-25T18:28:41.139+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 23,
+              "awardedCount": 96260,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1294459815544587,
+            "name": "20/20/20/20",
+            "description": "OH MY GOD! OHHHHH I DID IT!",
+            "displayName": "20/20/20/20",
+            "displayDescription": "OH MY GOD! OHHHHH I DID IT!",
+            "enabled": true,
+            "iconImageId": 130013076745131,
+            "displayIconImageId": 130013076745131,
+            "created": "2025-02-21T21:16:23.797+00:00",
+            "updated": "2026-03-25T18:28:49.285+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 9,
+              "awardedCount": 32713,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1032478007491602,
+            "name": "Antacid Administered",
+            "description": "The real heartburn was the indigestion we got along the way.",
+            "displayName": "Antacid Administered",
+            "displayDescription": "The real heartburn was the indigestion we got along the way.",
+            "enabled": true,
+            "iconImageId": 97950282315580,
+            "displayIconImageId": 97950282315580,
+            "created": "2025-09-23T04:37:31.644+00:00",
+            "updated": "2026-03-25T18:30:48.694+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 150,
+              "awardedCount": 175933,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 241521208262729,
+            "name": "Underpaid Overperformer",
+            "description": "I don’t get paid enough for this.",
+            "displayName": "Underpaid Overperformer",
+            "displayDescription": "I don’t get paid enough for this.",
+            "enabled": true,
+            "iconImageId": 82355442036393,
+            "displayIconImageId": 82355442036393,
+            "created": "2025-09-23T04:37:45.207+00:00",
+            "updated": "2026-03-25T18:30:57.26+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 11,
+              "awardedCount": 18351,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 316410743527176,
+            "name": "I Just Felt Like Running",
+            "description": "That day, for no particular reason, I decided to go for a little run.",
+            "displayName": "I Just Felt Like Running",
+            "displayDescription": "That day, for no particular reason, I decided to go for a little run.",
+            "enabled": true,
+            "iconImageId": 74307229495136,
+            "displayIconImageId": 74307229495136,
+            "created": "2026-07-08T04:44:10.422+00:00",
+            "updated": "2026-08-07T17:44:49.3+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 68,
+              "awardedCount": 17389,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 160302427331565,
+            "name": "Gotta Go Fast!",
+            "description": "You've found your rhythm, navigating the firewall with absolute precision. Never lose your momentum.",
+            "displayName": "Gotta Go Fast!",
+            "displayDescription": "You've found your rhythm, navigating the firewall with absolute precision. Never lose your momentum.",
+            "enabled": true,
+            "iconImageId": 134359397135332,
+            "displayIconImageId": 134359397135332,
+            "created": "2026-07-08T04:48:03.226+00:00",
+            "updated": "2026-07-15T19:01:30.277+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 12,
+              "awardedCount": 4795,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 2577080440228758,
+            "name": "Hematogångeld Champion",
+            "description": "Through determination, precision, and unmatched performance, you became the Hematogångeld Champion. Wear this badge with pride.",
+            "displayName": "Hematogångeld Champion",
+            "displayDescription": "Through determination, precision, and unmatched performance, you became the Hematogångeld Champion. Wear this badge with pride.",
+            "enabled": true,
+            "iconImageId": 120929732570975,
+            "displayIconImageId": 120929732570975,
+            "created": "2026-07-08T04:49:09.8+00:00",
+            "updated": "2026-08-07T17:44:33.277+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 6,
+              "awardedCount": 864,
+              "winRatePercentage": 0
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          },
+          {
+            "id": 1205115900141518,
+            "name": "MOVE IT",
+            "description": "Outta my way.",
+            "displayName": "MOVE IT",
+            "displayDescription": "Outta my way.",
+            "enabled": true,
+            "iconImageId": 92179653300812,
+            "displayIconImageId": 92179653300812,
+            "created": "2026-08-05T10:01:18.141+00:00",
+            "updated": "2026-08-13T09:51:35.054+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 66,
+              "awardedCount": 11442,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 4367208330,
+              "name": "Pressure",
+              "rootPlaceId": 12411473842
+            }
+          }
+        ]
+      },
+      "pages": [
+        "https://badges.roblox.com/v1/universes/4367208330/badges?limit=100&sortOrder=Asc",
+        "https://badges.roblox.com/v1/universes/4367208330/badges?limit=100&sortOrder=Asc&cursor=eyJrZXkiOiJpZF8ycXpCOGQxUldZVXRJT2tZMXp3QUFBWk1JalVKeHp3QU5UeGhVcU5JWSIsInNvcnRPcmRlciI6IkFzYyIsInBhZ2luZ0RpcmVjdGlvbiI6IkZvcndhcmQiLCJwYWdlTnVtYmVyIjoyLCJkaXNjcmltaW5hdG9yIjoidW5pdmVyc2VJZDo0MzY3MjA4MzMwc29ydEJ5OiIsImNvdW50IjoxMDB9Cjg4ODNkZDlhNmExMTg3ZGVlOGYwYmYwYzQ0MzYzZGQ0ZDNjNmM0NzMxOWY4ZTgwODc2MmFlZDgwOGNhYTY4OWM%3D"
+      ]
+    }
+  }
+}

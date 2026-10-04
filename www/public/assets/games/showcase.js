@@ -1,8 +1,9 @@
-import { games, rotation, catalogue } from './games.js';
+import { games, rotation, catalogue, robloxGames } from './games.js';
 import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
 import { renderPlaytime } from './playtime.js';
 import { renderQuote } from './quote-links.js';
+import { renderRobloxDetails } from './roblox-details.js';
 
 let gameDetails = {};
 try {
@@ -59,6 +60,7 @@ const card = game => {
   const link = document.createElement('a');
   link.href = game.website;
   link.className = 'game-card-link';
+  if (game.roblox) container.classList.add('game-card-roblox');
   link.dataset.game = game.id;
   if (!document.getElementById(`game-card-${game.id}`)) link.id = `game-card-${game.id}`;
   const cover = document.createElement('span');
@@ -68,8 +70,8 @@ const card = game => {
   artworkShell.className = 'game-image-shell game-cover-image';
   artwork.alt = '';
   artwork.loading = 'lazy';
-  artwork.width = 600;
-  artwork.height = 900;
+  artwork.width = game.roblox ? 512 : 600;
+  artwork.height = game.roblox ? 512 : 900;
   artworkShell.append(artwork);
   loadGameImage(artwork, game.cover, { shell: artworkShell });
   const name = document.createElement('strong');
@@ -104,6 +106,8 @@ if (rotation.length) {
     return link;
   }));
 }
+document.getElementById('roblox-games-list').replaceChildren(...robloxGames.map(card));
+document.getElementById('roblox-games-count').textContent = robloxGames.length;
 
 if (!reducedMotion.matches && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
@@ -138,6 +142,12 @@ function openShowcase(game, link) {
   active = game;
   opener = link;
   const wasOpen = dialog.open;
+  dialog.classList.toggle('is-roblox', Boolean(active.roblox));
+  const description = document.getElementById('game-description');
+  const robloxOverview = document.getElementById('game-roblox-overview');
+  robloxOverview.hidden = !active.roblox;
+  if (active.roblox) document.getElementById('game-roblox-about').append(description);
+  else document.querySelector('.game-info-panel').insertBefore(description, document.getElementById('game-website'));
   dialog.style.setProperty('--game-accent', active.accent);
   loadGameImage(document.getElementById('game-backdrop'), active.backdrop || active.cover);
   title.textContent = active.title;
@@ -149,13 +159,26 @@ function openShowcase(game, link) {
   document.getElementById('game-description').textContent = active.description;
   const quote = typeof ratings[active.id]?.quote === 'string' ? ratings[active.id].quote.trim() : '';
   renderQuote(document.getElementById('game-quote-text'), quote, catalogue);
-  document.getElementById('game-quote').hidden = !quote;
+  if (active.id === 'roblox') {
+    const link = document.createElement('a');
+    link.href = '#roblox-games';
+    link.className = 'game-quote-link game-roblox-category-link';
+    link.dataset.robloxCategory = '';
+    const icon = document.createElement('img');
+    icon.src = active.icon;
+    icon.alt = '';
+    icon.width = 16;
+    icon.height = 16;
+    link.append(icon, 'Explore Roblox Games');
+    document.getElementById('game-quote-text').append(link);
+  }
+  document.getElementById('game-quote').hidden = !quote && active.id !== 'roblox';
   document.getElementById('game-ratings').replaceChildren(
     ratingsPanelElement(ratings[active.id], active.title),
   );
   const facts = document.getElementById('game-facts');
   facts.replaceChildren();
-  for (const [index, [label, value]] of [['Released', active.year], ['Developer', active.developer], ['Publisher', active.publisher], ['Genre', active.genre]].entries()) {
+  for (const [index, [label, value]] of [[active.roblox ? 'Created' : 'Released', active.year], [active.roblox ? 'Creator' : 'Developer', active.developer], [active.roblox ? 'Platform' : 'Publisher', active.roblox ? 'Roblox' : active.publisher], ['Genre', active.genre]].entries()) {
     const row = document.createElement('div');
     row.className = 'game-fact';
     row.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${factIcons[index]}</svg>`;
@@ -168,6 +191,10 @@ function openShowcase(game, link) {
   }
   document.getElementById('game-website').href = active.website;
   renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime);
+  renderRobloxDetails(document.getElementById('game-roblox-details'), active);
+  document.querySelector('.game-image-credit').textContent = active.roblox
+    ? 'Official experience icon and thumbnails from Roblox.'
+    : 'Official artwork and screenshots from the linked game page.';
   thumbs.replaceChildren(...active.pictures.map((src, index) => {
     const button = document.createElement('button');
     button.type = 'button';
@@ -202,6 +229,16 @@ dialog.addEventListener('click', event => {
   if (!game) return;
   event.preventDefault();
   openShowcase(game, document.getElementById(`game-card-${game.id}`));
+});
+dialog.addEventListener('click', async event => {
+  const link = event.target.closest('[data-roblox-category]');
+  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  opener = null;
+  await closeShowcase();
+  location.hash = 'roblox-games';
+  document.getElementById('roblox-games').scrollIntoView({ block: 'start', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+  document.getElementById('roblox-games-heading').focus({ preventScroll: true });
 });
 
 document.getElementById('game-close').addEventListener('click', closeShowcase);

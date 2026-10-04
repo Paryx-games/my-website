@@ -856,5 +856,127 @@
     "purpose": "publisher hero artwork",
     "width": 1280,
     "height": 720
+  },
+  "/assets/games/pressure-icon.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-1c367e9e2c3d85b65c39323220b79d15/512/512/Image/Png/noFilter",
+    "purpose": "official Roblox experience icon",
+    "width": 512,
+    "height": 512
+  },
+  "/assets/games/pressure-1.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-d1c2185252b44ef983fb68b650296ba1/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-2.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-da214c5e444090e7878c7dac3214a1bd/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-3.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-c055a02fa730c2c58106a3a184c4ea8e/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-4.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-8b3540544a31359543de841a611e65c0/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-5.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-d269ec3b51eb8d564e95906c06873bc0/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-6.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-a4cd19dd70a2509d98a4ed32c14b85b1/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-7.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-1410c232ed358c1c84845e2e0d732637/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-8.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-fd76f636a822124d619272a7fd4327f0/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/pressure-9.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-13a32c01e2e002d457e321a64a26d593/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/town-icon.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-778eb2c16f0897c57bb585184486d9e8/512/512/Image/Png/noFilter",
+    "purpose": "official Roblox experience icon",
+    "width": 512,
+    "height": 512
+  },
+  "/assets/games/town-1.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-6f7989b622e1a1d5a8fbfb3838df41d1/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/town-2.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-d81752da35f5c20f35905adb4a12da78/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/town-3.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-e69d5e24dd49260fd3fd10ce28393467/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/town-4.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-9b79f6174ab614332c25ec1d487372f5/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/town-5.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-98ab16a5d063a8e81132935511e6620d/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/town-6.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-95d456caa960212e00a0c0f8704aa66b/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/town-7.webp": {
+    "url": "https://tr.rbxcdn.com/180DAY-a7c652b7d827f08b6350f3149e530a73/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox experience thumbnail",
+    "width": 768,
+    "height": 414
+  },
+  "/assets/games/pressure-symbol.png": {
+    "suppliedBy": "user",
+    "originalFileName": "codex-clipboard-0e5b8020-6734-4f16-a9e2-14be77663998.png",
+    "purpose": "experience symbol",
+    "width": 500,
+    "height": 500
+  },
+  "/assets/games/pressure-logo.png": {
+    "suppliedBy": "user",
+    "originalFileName": "codex-clipboard-51a57a9f-2529-4aec-9e45-e7bd3d7308f7.png",
+    "purpose": "title wordmark",
+    "width": 512,
+    "height": 135
   }
 }
