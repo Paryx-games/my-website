@@ -4,6 +4,7 @@ import { ratingsPanelElement } from './ratings.js';
 import { renderPlaytime } from './playtime.js';
 import { renderQuote } from './quote-links.js';
 import { renderRobloxDetails } from './roblox-details.js';
+import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 
 let gameDetails = {};
 try {
@@ -109,6 +110,17 @@ if (rotation.length) {
 document.getElementById('roblox-games-list').replaceChildren(...robloxGames.map(card));
 document.getElementById('roblox-games-count').textContent = robloxGames.length;
 
+let playtimeRefresh;
+let playtimeRefreshedAt = 0;
+function refreshRemotePlaytime() {
+  if (playtimeRefresh || Date.now() - playtimeRefreshedAt < 60_000) return;
+  playtimeRefresh = fetchRemotePlaytime().then(response => {
+    if (!mergeRemotePlaytime(gameDetails, response, catalogue.map(game => game.id))) return;
+    if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime);
+  }).finally(() => { playtimeRefresh = null; playtimeRefreshedAt = Date.now(); });
+}
+refreshRemotePlaytime();
+
 if (!reducedMotion.matches && 'IntersectionObserver' in window) {
   const observer = new IntersectionObserver(entries => {
     for (const { target, isIntersecting } of entries) {
@@ -212,6 +224,7 @@ function openShowcase(game, link) {
   if (!wasOpen && !reducedMotion.matches) dialog.animate([{ opacity: 0, transform: 'translateY(12px) scale(0.985)' }, { opacity: 1, transform: 'translateY(0) scale(1)' }], { duration: 280, easing: 'ease-out' });
   document.body.classList.add('game-showcase-open');
   document.getElementById('game-close').focus();
+  refreshRemotePlaytime();
 }
 
 document.getElementById('games').addEventListener('click', event => {
