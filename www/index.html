@@ -1247,6 +1247,32 @@
       border-left: 1px solid var(--color-border);
     }
 
+    .profile-details-body {
+      display: grid;
+      gap: var(--space-8);
+    }
+
+    .profile-time-badges, .profile-contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem; }
+    .profile-skill-icons { display: block; margin: 1rem 0; }
+    .profile-skill-icons img { max-width: 100%; height: auto; }
+
+    .profile-details-body h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: var(--text-body);
+    }
+
+    .profile-details-body p + p { margin-top: var(--space-4); }
+    .profile-details-body img { max-width: 100%; height: auto; }
+    .profile-details-body h3 img { height: 37px; }
+    .profile-details-body p img { height: 17.5px; vertical-align: baseline; }
+    .profile-details-body p img[src*="media.paryx.uk"] { height: auto; border-radius: 8px; }
+    .profile-details-body pre { overflow-x: auto; padding: 1rem; background: var(--color-surface); border-radius: 8px; margin: 1rem 0; }
+    .profile-details-body a { text-decoration: underline; text-underline-offset: 3px; }
+    .detail-reveal { opacity: 0; transform: translateY(8px); transition: opacity 280ms var(--ease), transform 280ms var(--ease); }
+    .detail-reveal.is-visible { opacity: 1; transform: none; }
+
     .more-body h4 {
       display: flex;
       align-items: center;
@@ -2002,12 +2028,8 @@
   <main class="content" id="content">
     <section class="about" id="about">
       <h2>About</h2>
-      <p><span id="aboutText">I'm paryx, a hobbyist developer who enjoys building tools, websites, and other software projects.
-          I'm also currently learning more about software engineering beyond just coding, including things like reverse
-          engineering, networking, and how software works under the hood.</span><span class="caret" id="aboutCaret"
-          aria-hidden="true"></span></p>
-      <p><span id="aboutOpenSource">I make my projects open-source by default because I'd rather share what I learn with the internet.
-        Having the source publicly available also makes my projects easier for people to inspect and trust.</span></p>
+      <p><span id="aboutText">I&#39;m <strong>paryx</strong>, a hobbyist developer who enjoys building tools, websites, and other software projects. I&#39;m also currently learning more about software engineering beyond just coding, including things like reverse engineering, networking, and how software works under the hood.</span><span class="caret" id="aboutCaret" aria-hidden="true"></span></p>
+      <p><span id="aboutOpenSource">I make my projects open-source by default because I feel like sharing my knowledge with the internet is far better than keeping it proprietary. It also makes my projects easier for people to inspect and trust, since the source code is publicly available.</span></p>
     </section>
 
     <section class="discord-presence-slot" id="discordPresenceSlot">
@@ -2034,6 +2056,7 @@
 
     <section>
       <h2>Time</h2>
+      <div class="profile-time-badges"><a href="https://whattime.to/talk/paryx"><img src="https://whattime.link/u/paryx?style=flat&amp;size=compact&amp;show=name,status,time&amp;theme=dark&amp;accent=7fb2e1&amp;format=12h" alt="paryx on WhatTime.to" loading="lazy"></a> <a href="https://whattime.to"><img src="https://whattime.link/tz/europe/london?style=flat&amp;size=compact&amp;show=name,time&amp;theme=dark&amp;accent=7fb2e1&amp;format=12h" alt="Current time in London" loading="lazy"></a></div>
       <div class="times reveal">
         <div class="time-card">
           <div class="top">
@@ -2119,77 +2142,71 @@
 
       <div class="stack-group">
         <h3>Languages</h3>
+        <p>I can code in several languages! I've listed them below and ranked them based on my own level of experience, from strongest to still improving.</p>
+        <a class="profile-skill-icons" href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=lua,python,js,ts,rust,cpp" alt="My Coding Languages" loading="lazy"></a>
         <div class="stack reveal" id="stackLangs"></div>
         <p class="note">ranked by expertise, from best to still improving (in my opinion)</p>
-
-        <details class="more">
-          <summary aria-expanded="false">more details</summary>
-          <div class="more-clip">
-            <div class="more-body">
-              <article>
-                <h4><span class="mini-icons" data-icons="rust,cplusplus"></span>Rust and C++</h4>
-                <p>I began using C++ around October 2025. Before then, I'd mostly used languages that relied on
-                  runtimes, like Python and JavaScript. This was my first serious experience with an ahead-of-time
-                  compiled language, and progress was slow at first. The compiler and tooling took some figuring out,
-                  but the docs (and a little help from ChatGPT) helped me get the basics down. I didn't publish many
-                  of those projects because they weren't in a state where I wanted to make them public.</p>
-                <p>Then I discovered Rust. I didn't think much of it at first and assumed it was similar to C++ (which,
-                  on paper, is true, in a way), but then I learned about the Cargo ecosystem and I was hooked. It's like
-                  the Python and JavaScript ecosystems, but for Rust. Since then I've used Rust for a lot of projects,
-                  including my <a href="https://github.com/Paryx-games/roblox-manager" target="_blank"
-                    rel="noopener noreferrer">Roblox Manager</a>. I forked it (credit to the original author), have
-                  added a lot of features, and am working on a major v2 rewrite. Most of my other Rust projects were
-                  experimental or never reached a state where I wanted to publish them.</p>
-              </article>
-              <article>
-                <h4><span class="mini-icons" data-icons="lua"></span>Lua and Luau</h4>
-                <p>I started learning Luau over five or six years ago, mostly through YouTube tutorials and Roblox
-                  documentation. It's my strongest language. I haven't used plain Lua as much, but I'm confident in
-                  both, and most of the skills carry over. I've made multiple games, though most are unpublished
-                  because I tend to want everything to be perfect.</p>
-                <p>One was a partially unfinished tower defense game with purchasing and placement systems, lobby
-                  transfers, matchmaking, and difficulty tiers. I stepped away because it was a lot for a solo
-                  developer: VFX, sound design, art direction, building, and modelling all need attention alongside
-                  the programming.</p>
-                <p>I also ran a small Roblox studio with a few developers joining and leaving over the years. We
-                  raised about 15,000 Robux, which I'm still proud of. Projects included an obby, a large adventure
-                  game, story and testing games, two core games, and plenty of smaller experiments. I'd often get
-                  bored after three or four days, so a lot of those ideas never reached the finish line.</p>
-                <p>I'm proud of what I built on Roblox, but I've gradually moved towards general software projects,
-                  external tools for Roblox development, and learning languages and tooling beyond the platform.
-                  Making Roblox games was fun, but it doesn't fit what I want to focus on anymore.</p>
-                <p>Luau's typing system, compound assignments like <code>+=</code>, and string interpolation are
-                  features I really enjoy. Writing <code>print(`Hello {world}!`)</code> feels much cleaner to me than
-                  concatenating strings or using <code>string.format</code>, though that's personal preference.</p>
-              </article>
-              <article>
-                <h4><span class="mini-icons" data-icons="javascript,typescript,python"></span>JavaScript, TypeScript and Python</h4>
-                <p>I've used all three extensively for scripting and application development. JavaScript and
-                  TypeScript have been my go-to languages for Electron apps, websites, and React projects, with
-                  React being where I've used TypeScript the most.</p>
-                <p>Building Discord bots helped me learn JavaScript much faster. From mid-2025 to early 2026, I
-                  made bots for people in exchange for Robux or money. They were cheap and fairly easy to make,
-                  and I earned around £300. That helped fund my Roblox studio and some personal things.</p>
-                <p>I brought a lot of my JavaScript knowledge into TypeScript, but React was where I started
-                  learning it properly. I like how TypeScript makes larger projects easier to keep reliable.
-                  JavaScript's flexibility is useful, but it also makes it easier to miss edge cases.</p>
-                <p>I've used Python for years and still return to it for scripts, automation, quick tools, and
-                  anything I want to get working without much setup. Its simple syntax and huge package ecosystem
-                  make it convenient, though I now tend to prefer Rust and TypeScript for larger projects where
-                  I want stronger tooling, type safety, and more predictable behaviour.</p>
-                <p>I discovered <code>uv</code> around mid-2025 and now prefer it over using <code>pip</code>
-                  directly. It's fast, handles environments and dependencies cleanly, and makes working with Python
-                  much nicer. I don't use Python as much as I used to, but it's still ridiculously useful to have around.</p>
-              </article>
-            </div>
-          </div>
-        </details>
       </div>
 
       <div class="stack-group">
         <h3>Tools</h3>
+        <p>I also have skills in a few other tools, listed below.</p>
+        <a class="profile-skill-icons" href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=cloudflare,discordjs,docker,electron,git,github,mongodb,pnpm,robloxstudio,vscode" alt="My Skills" loading="lazy"></a>
         <div class="stack reveal" id="stackTools"></div>
       </div>
+    </section>
+
+<section id="more-details" class="profile-details">
+      <h2>More details</h2>
+      <div class="profile-details-body"><article><h3>
+  <img src="https://skillicons.dev/icons?i=rust,cpp" alt="Rust & C++" height="37" align="middle">
+
+  Rust and C++
+</h3>
+<p>I began using <img src="https://skillicons.dev/icons?i=cpp" alt="C++" height="17.5" align="bottom"> <strong>C++</strong> around October 2025. Before then, I had mostly used languages that relied on runtimes, which were simpler for me while I was still learning. Progress was slow at first and I ran into a lot of issues because this was my first serious experience with an ahead-of-time compiled language, unlike <img src="https://skillicons.dev/icons?i=py" alt="Python" height="17.5" align="bottom"> <strong>Python</strong> or <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" height="17.5" align="bottom"> <strong>JavaScript</strong>. The compiler and tooling were quite fiddly for me to figure out at first. Fortunately, I started learning more about how everything worked from the docs (and with a little bit of help from ChatGPT) and eventually figured out the basics. I didn&#39;t publish many of the projects I made because I felt they lacked quality and weren&#39;t in a state where I wanted to make them public.</p>
+<p>Then I discovered <img src="https://skillicons.dev/icons?i=rust" alt="Rust" height="17.5" align="bottom"> <strong>Rust</strong>. I thought nothing of it at first and assumed it was fairly similar to <img src="https://skillicons.dev/icons?i=cpp" alt="C++" height="17.5" align="bottom"> <strong>C++</strong> (which, on paper, is true, <em>in a way</em>). However, I then learned about the Cargo ecosystem and I was <strong>hooked.</strong> It felt like the Python/JavaScript package ecosystem, but for Rust. Since then, I&#39;ve used Rust for a lot of projects, including my <a href="https://github.com/Paryx-games/roblox-manager">Roblox Manager</a> project, which I originally forked from another developer. Since then, I&#39;ve added a lot of features and am currently working on a major v2 rewrite. I&#39;ve made more projects with Rust too, but this is one of the only public ones, as most of the others were experimental or never reached a state where I wanted to publish them.</p>
+</article>
+<article><h3>
+  <img src="https://skillicons.dev/icons?i=lua" alt="Lua" height="45" align="middle">
+
+  Lua & Luau
+</h3>
+<p>I don&#39;t remember much about when I started learning Luau since it was over 5-6 years ago now, but I mostly learned from YouTube tutorials and Roblox documentation. I haven&#39;t used Lua itself as much, however I&#39;m very strong in both Luau and Lua. I&#39;ve made multiple games using Luau, although most were unpublished because I&#39;m a neat freak and tend to want everything to be perfect.</p>
+<p>Some examples include a partially unfinished Tower Defense game with functioning purchasing and placement systems, lobby transferring, matchmaking, and difficulty tiers. I left it because I felt it would be too much work for a solo developer like me. Like a lot of other games I tried to make, you also have to think about VFX, sound design, art direction, building, modelling, and everything else around the actual programming. I did have a small studio with a few developers over the years, with some leaving and others joining, but I never fully dedicated myself to it because I was young (and still am, ish), so it was much harder without a proper budget behind it. I raised about 15,000 Robux during the time I had the studio, which was an incredible achievement for me at the time and something I&#39;m still really proud of. Smaller projects made under the studio included an obby, a huge adventure game which I&#39;m still sort of working on but not really, a bunch of story/testing games, two core games (one was way better than the other), and countless other random projects.</p>
+<p>One of the more annoying things about my Roblox games (and this is entirely my fault) is that I&#39;d often get bored of making them after 3-4 days, which severely limited what I was hoping to build. I could obviously continue them, but with where I left many of them, I don&#39;t really know how I&#39;d continue them now.</p>
+<p>I&#39;m very proud of a lot of my projects on Roblox, but I&#39;ve gradually moved on to more general software projects, external tools for Roblox development, and expanding my knowledge of languages and tooling outside Roblox. I&#39;ve had a lot of fun making games and experimenting on the platform, but Roblox game development just doesn&#39;t fit what I want to focus on anymore.</p>
+<p>For Lua, I&#39;m more experienced with Luau (Roblox-specific), but most of the skills carry over since Luau is a fork of Lua with extra features like the typing system, compound assignment operators like <code>+=</code>, <code>-=</code>, and <strong>string interpolation</strong>. I love string interpolation so much because it&#39;s really nice for keeping code clean. An example is below:</p>
+<pre><code class="language-lua">local world = &quot;World&quot;
+
+print(`Hello {world}!`)
+</code></pre>
+<p>Output: <code>Hello World!</code></p>
+<p>Otherwise, with standard Lua, you would have to do something like this, which can sometimes be better, but string interpolation feels much nicer to me.</p>
+<pre><code class="language-lua">local player = &quot;Alex&quot;
+local score = 50
+
+-- Option 1: Concatenation (using dots)
+print(&quot;Player &quot; .. player .. &quot; has a score of &quot; .. score)
+
+-- Option 2: Formatting (similar to C&#39;s printf)
+print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
+</code></pre>
+<p>Obviously that&#39;s personal preference, but I just feel like it&#39;s nicer. Moving on!</p>
+</article>
+<article><h3>
+  <img src="https://skillicons.dev/icons?i=js,ts,py" alt="JavaScript, TypeScript & Python" height="45" align="middle">
+
+  JavaScript, TypeScript and Python
+</h3>
+<p>Since I&#39;ve used all three extensively for scripting and application development, I&#39;ve consolidated them into one section as it&#39;s cleaner.</p>
+<p>I&#39;ve used JavaScript and TypeScript extensively for Electron apps, websites, and React projects, with React being where I&#39;ve used TypeScript the most. One thing that massively accelerated my JavaScript knowledge was building <strong>Discord bots</strong> (which is really surprising, I know).</p>
+<p>Back in mid-2025 to early 2026, I used to make Discord bots for people for Robux or money. They were cheap and fairly easy for me to make, so I charged a low rate and made a decent amount of money from it, around £300. This helped fund my Roblox studio mentioned earlier, as well as some personal stuff in real life.</p>
+<p>Here are some Robux transactions showing SOME of the money I received. This is only a small portion, as other transactions were handled with real money or through other methods.</p>
+<img src="https://media.paryx.uk/images/robux1.png" alt="First Robux page"><br><img src="https://media.paryx.uk/images/robux2.png" alt="Second Robux page"><p>Usernames and other sensitive transaction information have been blurred for privacy. Dates and Robux amounts (after the 30% Robux tax) are shown.</p>
+<p>I adapted a lot of my TypeScript knowledge from JavaScript, but React was where I really started learning it properly. I love TypeScript because it makes larger projects much easier to keep reliable. JavaScript is more flexible, but that flexibility can also make it easier to miss edge cases, which I hate having to test for when I just want to get something working quickly.</p>
+<p>For Python, I&#39;ve been using it for years and still come back to it regularly for scripts, automation, quick tools, and anything where I want to get something working without much setup. Its huge package ecosystem and simple syntax make it incredibly convenient, although over time I&#39;ve started preferring languages like Rust and TypeScript for larger projects where I want stronger tooling, type safety, and more predictable behaviour.</p>
+<p>Around mid-2025, I also discovered <code>uv</code>, which made working with Python much nicer for me. I now prefer it over using <code>pip</code> directly because it is extremely fast, handles environments and dependencies cleanly, and gives Python projects a much more modern workflow. I still don&#39;t use Python as much as I used to, but it remains one of those languages that is ridiculously useful to have around.</p>
+</article></div>
     </section>
 
     <section class="tight">
@@ -2199,6 +2216,7 @@
 
     <section>
       <h2>Contact</h2>
+      <div class="profile-contact-links"><a href="https://x.com/paryx_games"><img src="https://cdn.simpleicons.org/x/fff" width="24" alt="x"></a> <a href="https://discord.com"><img src="https://cdn.simpleicons.org/discord/fff" width="24" alt="discord"></a> <a href="mailto:paryx.games@gmail.com"><img src="https://cdn.simpleicons.org/gmail/fff" width="24" alt="email"></a> <a href="https://www.reddit.com/user/Narrow_Proof4204/"><img src="https://cdn.simpleicons.org/reddit/fff" width="24" alt="reddit"></a> <a href="https://www.roblox.com/users/1577142632/profile"><img src="https://cdn.simpleicons.org/roblox/fff" width="24" alt="roblox"></a></div>
       <div class="contacts reveal" id="contacts"></div>
     </section>
   </main>
@@ -2552,16 +2570,16 @@
       const text = $("aboutText");
       const paragraphs = [text, $("aboutOpenSource")];
       const caret = $("aboutCaret");
-      const full = paragraphs.map((paragraph) => paragraph.textContent.trim().replace(/\s+/g, " "));
+
       if (reduce) {
         caret.hidden = true;
         return;
       }
-      paragraphs.forEach((paragraph) => { paragraph.textContent = ""; });
+      const prepared = paragraphs.map(prepareRichText);
       const run = async () => {
         for (const [index, paragraph] of paragraphs.entries()) {
           paragraph.after(caret);
-          await typeInto(paragraph, full[index], 6, 8, 20);
+          await typePreparedText(prepared[index], caret);
         }
         caret.hidden = true;
       };
@@ -2599,72 +2617,18 @@
     };
 
     const initMoreDetails = () => {
-      document.querySelectorAll(".more").forEach((details) => {
-        const summary = details.querySelector("summary");
-        const clip = details.querySelector(".more-clip");
-        let closeTimer = 0;
-        let startTimer = 0;
-        let typing = false;
-        const sections = reduce ? [] : [...details.querySelectorAll(".more-body article")].map((article) => {
-          const nodes = prepareRichText(article);
-          article.classList.add("is-pending");
-          return { article, nodes };
+      const blocks = document.querySelectorAll('.profile-details-body article > *');
+      if (reduce || !('IntersectionObserver' in window)) return;
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(({ target, isIntersecting }) => {
+          if (!isIntersecting) return;
+          target.classList.add('is-visible');
+          observer.unobserve(target);
         });
-
-        const typeSections = async () => {
-          if (typing || details.dataset.typed) return;
-          typing = true;
-          const caret = document.createElement("span");
-          caret.className = "caret details-caret";
-          caret.setAttribute("aria-hidden", "true");
-          for (const { article, nodes } of sections) {
-            article.classList.remove("is-pending");
-            article.classList.add("is-entering");
-            await sleep(45);
-            await typePreparedText(nodes, caret);
-            await sleep(120);
-          }
-          caret.remove();
-          details.dataset.typed = "true";
-          typing = false;
-        };
-
-        const open = () => {
-          clearTimeout(closeTimer);
-          clearTimeout(startTimer);
-          details.open = true;
-          summary.setAttribute("aria-expanded", "true");
-          if (reduce) {
-            details.classList.add("is-expanded");
-            return;
-          }
-          requestAnimationFrame(() => {
-            details.classList.add("is-expanded");
-            startTimer = setTimeout(typeSections, 130);
-          });
-        };
-
-        const close = () => {
-          clearTimeout(closeTimer);
-          clearTimeout(startTimer);
-          summary.setAttribute("aria-expanded", "false");
-          details.classList.remove("is-expanded");
-          if (reduce) {
-            details.open = false;
-            return;
-          }
-          const finish = () => {
-            details.open = false;
-            clip.removeEventListener("transitionend", finish);
-          };
-          clip.addEventListener("transitionend", finish);
-          closeTimer = setTimeout(finish, 560);
-        };
-
-        summary.addEventListener("click", (event) => {
-          event.preventDefault();
-          details.classList.contains("is-expanded") ? close() : open();
-        });
+      }, { threshold: 0.08 });
+      blocks.forEach((block) => {
+        block.classList.add('detail-reveal');
+        observer.observe(block);
       });
     };
 
