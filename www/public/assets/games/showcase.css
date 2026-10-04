@@ -99,6 +99,10 @@ img.is-loading { opacity: 0 !important; }
 #game-quote[hidden] { display: none; }
 #game-quote > svg { width: 20px; height: 20px; flex: none; margin-top: 2px; }
 #game-quote p { margin: 0; font-size: 0.9rem; line-height: 1.6; white-space: pre-line; overflow-wrap: anywhere; }
+.game-quote-link { color: var(--color-muted); text-decoration: underline; text-underline-offset: 3px; }
+.game-quote-link:hover { color: var(--color-text); }
+.game-quote-link img { display: inline-block; width: 16px; height: 16px; border-radius: 3px; margin-right: 5px; vertical-align: -3px; }
+.game-quote-link:focus-visible { outline: 2px solid var(--game-accent); outline-offset: 3px; }
 .game-picture-stage { position: relative; border-radius: 10px; overflow: hidden; background: #080a0d; border: 1px solid #4a4e52; }
 #game-picture { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; }
 #game-showcase #game-prev, #game-showcase #game-next { position: absolute; bottom: 16px; width: 48px; height: 48px; border-radius: 50%; background: rgba(12, 18, 24, 0.9); font-size: 1.3rem; }

@@ -15,3 +15,5 @@ IMDb scores in that file are snapshots checked on 4 October 2026, with a link to
 Click a game card to see a separate ratings panel inside its showcase, with your stars, IMDb's audience score, and Metacritic's critic score out of 100. Metacritic entries include the platform and source slug; a `null` score means the listing has no Metascore yet, while a `null` entry means no listing was verified. These are also snapshots checked on 4 October 2026. Ratings appear only inside the showcase.
 
 Edit `public/assets/games/game.json` to add each game's `playtime`, for example `"playtime": { "pc": "250 hours", "mobile": "40 hours" }`. Numbers are treated as hours; text can include estimates such as `"250+ hours"`. Empty strings or `null` hide that platform. Playtime appears below Genre with PC and mobile icons; the whole section hides when both values are empty.
+
+Game titles mentioned in quotes automatically become inline links with their game icon. Use the full catalogue title, such as `Escape the Backrooms` or `Backrooms: Escape Together` (matching ignores case). Clicking opens that game's showcase; closing it focuses its game card.

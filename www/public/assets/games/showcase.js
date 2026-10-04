@@ -2,6 +2,7 @@ import { games, rotation, catalogue } from './games.js';
 import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
 import { renderPlaytime } from './playtime.js';
+import { renderQuote } from './quote-links.js';
 
 let gameDetails = {};
 try {
@@ -59,6 +60,7 @@ const card = game => {
   link.href = game.website;
   link.className = 'game-card-link';
   link.dataset.game = game.id;
+  if (!document.getElementById(`game-card-${game.id}`)) link.id = `game-card-${game.id}`;
   const cover = document.createElement('span');
   cover.className = 'game-cover';
   const artwork = document.createElement('img');
@@ -132,13 +134,10 @@ function showPicture(index) {
   if (dialog.open) thumbs.children[pictureIndex]?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
 }
 
-document.getElementById('games').addEventListener('click', event => {
-  const link = event.target.closest('[data-game]');
-  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-  active = catalogue.find(game => game.id === link.dataset.game);
-  if (!active) return;
-  event.preventDefault();
+function openShowcase(game, link) {
+  active = game;
   opener = link;
+  const wasOpen = dialog.open;
   dialog.style.setProperty('--game-accent', active.accent);
   loadGameImage(document.getElementById('game-backdrop'), active.backdrop || active.cover);
   title.textContent = active.title;
@@ -149,7 +148,7 @@ document.getElementById('games').addEventListener('click', event => {
   if (active.logo) loadGameImage(logo, active.logo, { shell: logo.parentElement });
   document.getElementById('game-description').textContent = active.description;
   const quote = typeof ratings[active.id]?.quote === 'string' ? ratings[active.id].quote.trim() : '';
-  document.getElementById('game-quote-text').textContent = quote ? `“${quote}”` : '';
+  renderQuote(document.getElementById('game-quote-text'), quote, catalogue);
   document.getElementById('game-quote').hidden = !quote;
   document.getElementById('game-ratings').replaceChildren(
     ratingsPanelElement(ratings[active.id], active.title),
@@ -182,10 +181,27 @@ document.getElementById('games').addEventListener('click', event => {
     return button;
   }));
   showPicture(0);
-  dialog.showModal();
-  if (!reducedMotion.matches) dialog.animate([{ opacity: 0, transform: 'translateY(12px) scale(0.985)' }, { opacity: 1, transform: 'translateY(0) scale(1)' }], { duration: 280, easing: 'ease-out' });
+  if (!wasOpen) dialog.showModal();
+  if (!wasOpen && !reducedMotion.matches) dialog.animate([{ opacity: 0, transform: 'translateY(12px) scale(0.985)' }, { opacity: 1, transform: 'translateY(0) scale(1)' }], { duration: 280, easing: 'ease-out' });
   document.body.classList.add('game-showcase-open');
   document.getElementById('game-close').focus();
+}
+
+document.getElementById('games').addEventListener('click', event => {
+  const link = event.target.closest('[data-game]');
+  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const game = catalogue.find(game => game.id === link.dataset.game);
+  if (!game) return;
+  event.preventDefault();
+  openShowcase(game, link);
+});
+dialog.addEventListener('click', event => {
+  const link = event.target.closest('[data-quote-game]');
+  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const game = catalogue.find(game => game.id === link.dataset.quoteGame);
+  if (!game) return;
+  event.preventDefault();
+  openShowcase(game, document.getElementById(`game-card-${game.id}`));
 });
 
 document.getElementById('game-close').addEventListener('click', closeShowcase);
