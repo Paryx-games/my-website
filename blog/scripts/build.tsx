@@ -55,7 +55,7 @@ export async function build({
       image={published[0] ? `/og/${published[0].slug}.png` : undefined}
       noindex={noindex}
     >
-      <Listing posts={posts} allPosts={published} />
+      <Listing posts={posts} allPosts={published} prioritizeFeatured />
     </Document>,
   );
   await mkdir(path.join(output, 'og'), { recursive: true });

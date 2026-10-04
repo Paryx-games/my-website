@@ -16,6 +16,10 @@ export interface Post {
   tags: string[];
   draft: boolean;
   demo: boolean;
+  featured?: boolean;
+  repository?: string;
+  relatedProjects?: { name: string; url: string }[];
+  status?: 'current' | 'outdated' | 'archived';
   slug: string;
   content: string;
   extension: '.md' | '.mdx';
@@ -54,6 +58,16 @@ function validDate(value: unknown): value is string {
   );
 }
 
+function validLink(value: unknown): value is string {
+  if (typeof value !== 'string') return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && !url.username && !url.password;
+  } catch {
+    return false;
+  }
+}
+
 export function parsePost(source: string, filename: string): Post {
   const { data, content } = matter(source);
   const fail = (message: string): never => {
@@ -86,10 +100,33 @@ export function parsePost(source: string, filename: string): Post {
       ))
   )
     fail('tags must be a list of non-empty names');
-  for (const key of ['draft', 'demo']) {
+  for (const key of ['draft', 'demo', 'featured']) {
     if (data[key] !== undefined && typeof data[key] !== 'boolean')
       fail(`${key} must be a boolean`);
   }
+  if (data.repository !== undefined && !validLink(data.repository))
+    fail('repository must be a full HTTPS URL');
+  if (
+    data.status !== undefined &&
+    !['current', 'outdated', 'archived'].includes(data.status)
+  )
+    fail('status must be current, outdated, or archived');
+  if (
+    data.relatedProjects !== undefined &&
+    (!Array.isArray(data.relatedProjects) ||
+      data.relatedProjects.some((project: unknown) => {
+        if (!project || typeof project !== 'object') return true;
+        const item = project as { name?: unknown; url?: unknown };
+        return (
+          typeof item.name !== 'string' ||
+          !item.name.trim() ||
+          !validLink(item.url)
+        );
+      }))
+  )
+    fail(
+      'relatedProjects must be a list of projects with a name and HTTPS url',
+    );
   for (const key of ['banner', 'bannerAlt']) {
     if (data[key] !== undefined && typeof data[key] !== 'string')
       fail(`${key} must be a string`);
@@ -137,6 +174,10 @@ export function parsePost(source: string, filename: string): Post {
     tags: [...new Set<string>(data.tags ?? [])],
     draft: data.draft ?? false,
     demo: data.demo ?? false,
+    featured: data.featured,
+    repository: data.repository,
+    relatedProjects: data.relatedProjects,
+    status: data.status,
     slug,
     content,
     extension: extension as Post['extension'],

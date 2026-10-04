@@ -15,6 +15,47 @@ export function Tags({ tags }: { tags: string[] }) {
   );
 }
 
+function PostBadges({ post }: { post: Post }) {
+  if (!post.featured && !post.status) return null;
+  return (
+    <div className="post-badges">
+      {post.featured && <span className="featured-badge">Featured</span>}
+      {post.status && (
+        <span className={`post-status post-status-${post.status}`}>
+          {post.status[0].toUpperCase() + post.status.slice(1)}
+        </span>
+      )}
+    </div>
+  );
+}
+
+function PostLinks({ post }: { post: Post }) {
+  if (!post.repository && !post.relatedProjects?.length) return null;
+  return (
+    <div className="post-links">
+      {post.repository && (
+        <a href={post.repository}>
+          View repository <span aria-hidden="true">↗</span>
+        </a>
+      )}
+      {!!post.relatedProjects?.length && (
+        <div>
+          <span>Related projects:</span>
+          <ul>
+            {post.relatedProjects.map((project) => (
+              <li key={`${project.name}-${project.url}`}>
+                <a href={project.url}>
+                  {project.name} <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Byline({ post }: { post: Post }) {
   return (
     <div className="byline">
@@ -464,9 +505,11 @@ export function Article({
               </p>
             )}
             <Tags tags={post.tags} />
+            <PostBadges post={post} />
             <h1>{post.title}</h1>
             <p className="deck">{post.description}</p>
             <Byline post={post} />
+            <PostLinks post={post} />
           </header>
           {(post.headings?.length ?? 0) >= 3 && (
             <details className="mobile-contents">
@@ -503,6 +546,7 @@ export function Listing({
   title,
   description,
   introduction,
+  prioritizeFeatured = false,
 }: {
   posts: Post[];
   allPosts: Post[];
@@ -510,8 +554,15 @@ export function Listing({
   title?: string;
   description?: string;
   introduction?: ReactNode;
+  prioritizeFeatured?: boolean;
 }) {
-  const [featured, ...rest] = posts;
+  const ordered = prioritizeFeatured
+    ? [
+        ...posts.filter((post) => post.featured && !post.draft),
+        ...posts.filter((post) => !post.featured || post.draft),
+      ]
+    : posts;
+  const [lead, ...rest] = ordered;
   return (
     <main id="main" className="listing">
       <header className="listing-intro">
@@ -533,7 +584,7 @@ export function Listing({
               <a href="/rss.xml">RSS feed</a>.
             </p>
           )}
-          {featured && <PostSummary post={featured} featured />}
+          {lead && <PostSummary post={lead} lead />}
           {rest.map((post) => (
             <PostSummary key={post.slug} post={post} />
           ))}
@@ -544,15 +595,9 @@ export function Listing({
   );
 }
 
-function PostSummary({
-  post,
-  featured = false,
-}: {
-  post: Post;
-  featured?: boolean;
-}) {
+function PostSummary({ post, lead = false }: { post: Post; lead?: boolean }) {
   return (
-    <article className={`post-summary ${featured ? 'featured' : ''}`}>
+    <article className={`post-summary ${lead ? 'featured' : ''}`}>
       {post.banner && (
         <a
           className="summary-banner"
@@ -566,8 +611,8 @@ function PostSummary({
             alt=""
             width="1200"
             height="340"
-            loading={featured ? 'eager' : 'lazy'}
-            fetchPriority={featured ? 'high' : undefined}
+            loading={lead ? 'eager' : 'lazy'}
+            fetchPriority={lead ? 'high' : undefined}
           />
         </a>
       )}
@@ -576,6 +621,7 @@ function PostSummary({
           <p className="demo-label">Demo article · illustrative content</p>
         )}
         <Tags tags={post.tags} />
+        <PostBadges post={post} />
         {post.series && (
           <p className="series-label">
             Part {post.series.part} of{' '}
