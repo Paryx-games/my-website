@@ -1,6 +1,16 @@
 import { games, rotation, catalogue } from './games.js';
 import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
+import { renderPlaytime } from './playtime.js';
+
+let gameDetails = {};
+try {
+  const response = await fetch('/assets/games/game.json');
+  if (!response.ok) throw new Error('Playtime unavailable');
+  gameDetails = await response.json();
+} catch (error) {
+  console.warn('Game playtime could not be loaded.', error);
+}
 
 let ratings = {};
 try {
@@ -158,6 +168,7 @@ document.getElementById('games').addEventListener('click', event => {
     facts.append(row);
   }
   document.getElementById('game-website').href = active.website;
+  renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime);
   thumbs.replaceChildren(...active.pictures.map((src, index) => {
     const button = document.createElement('button');
     button.type = 'button';

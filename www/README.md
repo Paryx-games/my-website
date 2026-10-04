@@ -13,3 +13,5 @@ Set a game's `quote` in the same file to your own text, for example `"quote": "O
 IMDb scores in that file are snapshots checked on 4 October 2026, with a link to each game's IMDb listing for the latest score. The two Backrooms games have no verified IMDb game listing, so their scores are unavailable. IMDb ratings use a separate 10-point scale.
 
 Click a game card to see a separate ratings panel inside its showcase, with your stars, IMDb's audience score, and Metacritic's critic score out of 100. Metacritic entries include the platform and source slug; a `null` score means the listing has no Metascore yet, while a `null` entry means no listing was verified. These are also snapshots checked on 4 October 2026. Ratings appear only inside the showcase.
+
+Edit `public/assets/games/game.json` to add each game's `playtime`, for example `"playtime": { "pc": "250 hours", "mobile": "40 hours" }`. Numbers are treated as hours; text can include estimates such as `"250+ hours"`. Empty strings or `null` hide that platform. Playtime appears below Genre with PC and mobile icons; the whole section hides when both values are empty.
