@@ -815,6 +815,15 @@
       fill: var(--color-muted);
     }
 
+    .repo-origin-icon { position: relative; flex: none; width: 18px; height: 18px; color: var(--color-muted); }
+    .repo-origin-icon > svg { width: 16px; height: 16px; fill: currentColor; }
+    .repo-fork-badge { position: absolute; right: -3px; bottom: -2px; width: 11px; height: 11px; border-radius: 3px; background: var(--color-surface); }
+    .repo-fork-badge svg { display: block; width: 9px; height: 9px; margin: 1px; fill: currentColor; }
+    .repo-parent { color: var(--color-faint); font-size: 0.75rem; line-height: 1.5; margin: 0; overflow-wrap: anywhere; }
+    .repo-parent a { text-decoration: underline; text-underline-offset: 2px; }
+    .repo-parent a:hover { color: var(--color-text); }
+    .repo.is-archived .repo-origin-icon { color: var(--archive); }
+
     .repo-actions {
       display: inline-flex;
       flex: none;
@@ -3612,18 +3621,23 @@
       setInterval(updateDiscordActivityTimes, 1000);
     };
 
-    const repoCard = ({ owner, name, description, language, stars = 0, forks = 0, archived = false }, { detailed = true } = {}) => {
+    const repoSource = (parent) => parent
+      ? `Forked from <a href="https://github.com/${parent.split("/").map(encodeURIComponent).join("/")}" target="_blank" rel="noopener noreferrer">${esc(parent)}</a>`
+      : "";
+
+    const repoCard = ({ owner, name, description, language, stars = 0, forks = 0, archived = false, fork = false, parent = null }, { detailed = true } = {}) => {
       const title = owner === CONFIG.githubUser ? name : `${owner}/${name}`;
       const fullName = `${owner}/${name}`;
       const url = `https://github.com/${owner}/${name}`;
       const languageColor = GITHUB_LANGUAGE_COLORS[language] || "#8b949e";
-      return `<article class="repo${archived ? " is-archived" : ""}" style="--lang:${languageColor}" data-repo-full-name="${esc(fullName)}">
+      return `<article class="repo${archived ? " is-archived" : ""}${fork ? " is-fork" : ""}" style="--lang:${languageColor}" data-repo-full-name="${esc(fullName)}">
       <div class="repo-head">
-        <div class="repo-title">${svg("github")}<span class="repo-name">${esc(title)}</span><button class="icon-btn repo-copy" type="button" data-repo-copy="${esc(fullName)}" data-tip="Copy ${esc(fullName)}" aria-label="Copy ${esc(fullName)}"><span class="i-copy">${UI.copy}</span><span class="i-check">${UI.check}</span></button></div>
+        <div class="repo-title"><span class="repo-origin-icon" aria-hidden="true">${svg("github")}<span class="repo-fork-badge"${fork ? "" : " hidden"}>${UI.fork}</span></span><span class="repo-name">${esc(title)}</span><button class="icon-btn repo-copy" type="button" data-repo-copy="${esc(fullName)}" data-tip="Copy ${esc(fullName)}" aria-label="Copy ${esc(fullName)}"><span class="i-copy">${UI.copy}</span><span class="i-check">${UI.check}</span></button></div>
         <div class="repo-actions">
           <a class="icon-btn repo-open" href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-tip="Open Repository" aria-label="Open ${esc(fullName)} on GitHub">${UI.launch}</a>
         </div>
       </div>
+      <p class="repo-parent"${fork && parent ? "" : " hidden"}>${fork ? repoSource(parent) : ""}</p>
       <p class="repo-desc">${esc(description || "No description yet")}</p>
       <div class="repo-foot">
         ${language ? `<span class="language"><i class="dot"></i>${esc(language)}</span>` : ""}
@@ -3715,7 +3729,7 @@
     };
 
     const fetchStats = async ({ owner, name }) => {
-      const key = `repo:v2:${owner}/${name}`;
+      const key = `repo:v3:${owner}/${name}`;
       try {
         const cached = JSON.parse(localStorage.getItem(key));
         if (cached && Array.isArray(cached.languages) && typeof cached.issuesOpen === "number" && typeof cached.prsOpen === "number" && Date.now() - cached.time < REPO_CACHE_MS) return cached;
@@ -3738,6 +3752,8 @@
         stars: repo.stargazers_count,
         forks: repo.forks_count,
         archived: Boolean(repo.archived),
+        fork: Boolean(repo.fork),
+        parent: repo.fork ? repo.parent?.full_name || null : null,
         issuesOpen: issues.filter((item) => item.state === "open").length,
         issuesClosed: issues.filter((item) => item.state === "closed").length,
         prsOpen: pulls.filter((item) => item.state === "open").length,
@@ -3784,6 +3800,11 @@
 
     const applyRepoStats = (card, stats) => {
       card.classList.toggle("is-archived", Boolean(stats.archived));
+      card.classList.toggle("is-fork", Boolean(stats.fork));
+      card.querySelector(".repo-fork-badge").hidden = !stats.fork;
+      const parent = card.querySelector(".repo-parent");
+      parent.hidden = !(stats.fork && stats.parent);
+      parent.innerHTML = stats.fork ? repoSource(stats.parent) : "";
       syncRepoNameTooltip(card);
       card.querySelector(".stars b").textContent = stats.stars;
       card.querySelector(".forks b").textContent = stats.forks;
@@ -3871,7 +3892,9 @@
       description: repo.description || "",
       language: typeof repo.language === "string" ? repo.language : repo.language?.name || "",
       stars: Number(repo.stars) || 0,
-      forks: Number(repo.forks) || 0
+      forks: Number(repo.forks) || 0,
+      fork: Boolean(repo.fork),
+      parent: repo.parent?.full_name || null
     });
 
     const normalizeGitHubRepo = (repo) => ({
@@ -3881,7 +3904,9 @@
       language: repo.language || "",
       stars: Number(repo.stargazers_count) || 0,
       forks: Number(repo.forks_count) || 0,
-      archived: Boolean(repo.archived)
+      archived: Boolean(repo.archived),
+      fork: Boolean(repo.fork),
+      parent: repo.parent?.full_name || null
     });
 
     const fetchPinnedProjects = async () => {
