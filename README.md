@@ -14,6 +14,12 @@ This repository contains my personal website, blog, development environments, an
 | [media.paryx.uk](https://media.paryx.uk) | Static media and assets stored in Cloudflare R2 | N/A | Cloudflare R2 |
 | [rm.paryx.uk](https://rm.paryx.uk) | Website for [Roblox Manager](https://github.com/Paryx-games/roblox-manager) | External | Vercel |
 
+## Playtime
+
+Game playtime flows from a Windows collector through authenticated Vercel API uploads into Neon PostgreSQL. Steam IDs are mapped to the website catalogue, while unmapped games are discarded. The site reads public minute totals without requiring a rebuild and combines them with manual platform values. The collector keeps a persistent upload sequence and pending batch so offline runs can retry safely.
+
+The repository contains the collector, API handlers, SQL migrations, and frontend integration. Runtime credentials and machine-specific setup notes are kept outside the public source.
+
 ## Languages
 
 ![Languages used across the paryx.uk sites](https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&details=true)
