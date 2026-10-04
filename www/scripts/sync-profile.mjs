@@ -1,5 +1,17 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { marked } from 'marked';
+import hljs from 'highlight.js/lib/core';
+import lua from 'highlight.js/lib/languages/lua';
+
+hljs.registerLanguage('lua', lua);
+const escape = text => text.replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
+marked.use({ renderer: {
+  code({ text, lang }) {
+    const language = (lang || 'text').split(/\s+/)[0];
+    const highlighted = hljs.getLanguage(language) ? hljs.highlight(text, { language }).value : escape(text);
+    return `<div class="code-block"><div class="code-toolbar"><span>${escape(language)}</span><button type="button" data-copy aria-label="Copy ${escape(language)} code">Copy</button></div><pre tabindex="0"><code class="language-${escape(language)} hljs">${highlighted}\n</code></pre><span class="sr-only" data-copy-status role="status" aria-live="polite"></span></div>\n`;
+  },
+} });
 
 // This is the supplied profile README, not the repository's project README.
 const root = new URL('../', import.meta.url);

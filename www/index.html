@@ -4,6 +4,8 @@
 
 <head>
   <link rel="stylesheet" href="/assets/scrollbars.css">
+  <link rel="stylesheet" href="/assets/code-blocks.css">
+  <script type="module" src="/assets/code-blocks.js"></script>
   <link rel="stylesheet" href="/assets/navigation.css">
   <script src="/assets/navigation.js"></script>
   <link rel="stylesheet" href="/assets/site-search.css">
@@ -2225,21 +2227,21 @@
 <p>One of the more annoying things about my Roblox games (and this is entirely my fault) is that I&#39;d often get bored of making them after 3-4 days, which severely limited what I was hoping to build. I could obviously continue them, but with where I left many of them, I don&#39;t really know how I&#39;d continue them now.</p>
 <p>I&#39;m very proud of a lot of my projects on Roblox, but I&#39;ve gradually moved on to more general software projects, external tools for Roblox development, and expanding my knowledge of languages and tooling outside Roblox. I&#39;ve had a lot of fun making games and experimenting on the platform, but Roblox game development just doesn&#39;t fit what I want to focus on anymore.</p>
 <p>For Lua, I&#39;m more experienced with Luau (Roblox-specific), but most of the skills carry over since Luau is a fork of Lua with extra features like the typing system, compound assignment operators like <code>+=</code>, <code>-=</code>, and <strong>string interpolation</strong>. I love string interpolation so much because it&#39;s really nice for keeping code clean. An example is below:</p>
-<pre><code class="language-lua">local world = &quot;World&quot;
+<div class="code-block"><div class="code-toolbar"><span>lua</span><button type="button" data-copy aria-label="Copy lua code">Copy</button></div><pre tabindex="0"><code class="language-lua hljs"><span class="hljs-keyword">local</span> world = <span class="hljs-string">&quot;World&quot;</span>
 
-print(`Hello {world}!`)
-</code></pre>
+<span class="hljs-built_in">print</span>(`Hello {world}!`)
+</code></pre><span class="sr-only" data-copy-status role="status" aria-live="polite"></span></div>
 <p>Output: <code>Hello World!</code></p>
 <p>Otherwise, with standard Lua, you would have to do something like this, which can sometimes be better, but string interpolation feels much nicer to me.</p>
-<pre><code class="language-lua">local player = &quot;Alex&quot;
-local score = 50
+<div class="code-block"><div class="code-toolbar"><span>lua</span><button type="button" data-copy aria-label="Copy lua code">Copy</button></div><pre tabindex="0"><code class="language-lua hljs"><span class="hljs-keyword">local</span> player = <span class="hljs-string">&quot;Alex&quot;</span>
+<span class="hljs-keyword">local</span> score = <span class="hljs-number">50</span>
 
--- Option 1: Concatenation (using dots)
-print(&quot;Player &quot; .. player .. &quot; has a score of &quot; .. score)
+<span class="hljs-comment">-- Option 1: Concatenation (using dots)</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Player &quot;</span> .. player .. <span class="hljs-string">&quot; has a score of &quot;</span> .. score)
 
--- Option 2: Formatting (similar to C&#39;s printf)
-print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
-</code></pre>
+<span class="hljs-comment">-- Option 2: Formatting (similar to C&#x27;s printf)</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-built_in">string</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;Player %s has a score of %d&quot;</span>, player, score))
+</code></pre><span class="sr-only" data-copy-status role="status" aria-live="polite"></span></div>
 <p>Obviously that&#39;s personal preference, but I just feel like it&#39;s nicer. Moving on!</p>
 </article>
 <article><h3>
