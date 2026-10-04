@@ -1,16 +1,19 @@
 # paryx.uk
 
-My home on the web: projects, experiments, and notes on the things I build.
+Source for [paryx.uk](https://paryx.uk) and its related sites.
 
-Visit [paryx.uk](https://paryx.uk) to explore my work, or read the [blog](https://blog.paryx.uk) for software stories and lessons learned along the way.
+This repository contains my personal website, blog, development environments, and supporting services. It's where I build and experiment with new ideas, document projects, and write about things I've learned along the way.
 
-| Site                                   | Purpose                                                                                                             |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| [paryx.uk](https://paryx.uk)           | Main website and projects                                                                                           |
-| [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories                                                                      |
-| [dev.paryx.uk](https://dev.paryx.uk)   | A preview of changes to the main website                                                                            |
-| [test.paryx.uk](https://test.paryx.uk) | Prototypes and experimental ideas                                                                                   |
-| [api.paryx.uk](https://api.paryx.uk)   | Services supporting the sites and other Paryx projects                                                              |
-| [rm.paryx.uk](https://rm.paryx.uk)     | [`Roblox Manager`](https://github.com/Paryx-games/roblox-manager) project (website in linked repo under `website/`) |
+| Site | Purpose | Directory | Platform |
+| --- | --- | --- | --- |
+| [paryx.uk](https://paryx.uk) | Main website, projects, and links | `www/` | Vercel |
+| [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel |
+| [dev.paryx.uk](https://dev.paryx.uk) | Development preview for upcoming changes | `dev/` | Vercel |
+| [test.paryx.uk](https://test.paryx.uk) | Prototypes and experimental features | `test/` | Vercel |
+| [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel |
+| [media.paryx.uk](https://media.paryx.uk) | Static media and assets stored in Cloudflare R2 | N/A | Cloudflare R2 |
+| [rm.paryx.uk](https://rm.paryx.uk) | Website for [Roblox Manager](https://github.com/Paryx-games/roblox-manager) | External | Vercel |
 
-<img src="https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&amp;details=true" alt="Languages used across the paryx.uk sites">
+## Languages
+
+![Languages used across the paryx.uk sites](https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&details=true)
