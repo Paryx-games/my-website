@@ -1,4 +1,5 @@
 import { games, rotation, catalogue } from './games.js';
+import { loadGameImage } from './load-image.js';
 
 const cards = document.getElementById('favorite-games');
 const dialog = document.getElementById('game-showcase');
@@ -35,21 +36,27 @@ const card = game => {
   const cover = document.createElement('span');
   cover.className = 'game-cover';
   const artwork = document.createElement('img');
-  artwork.src = game.cover;
+  const artworkShell = document.createElement('span');
+  artworkShell.className = 'game-image-shell game-cover-image';
   artwork.alt = '';
   artwork.loading = 'lazy';
   artwork.width = 600;
   artwork.height = 900;
+  artworkShell.append(artwork);
+  loadGameImage(artwork, game.cover, { shell: artworkShell });
   const name = document.createElement('strong');
   const icon = document.createElement('img');
   icon.className = 'game-card-icon';
-  icon.src = game.icon;
   icon.alt = '';
   icon.width = 16;
   icon.height = 16;
   icon.loading = 'lazy';
-  name.append(icon, game.title);
-  cover.append(artwork, name);
+  const iconShell = document.createElement('span');
+  iconShell.className = 'game-image-shell game-icon-shell';
+  iconShell.append(icon);
+  loadGameImage(icon, game.icon, { shell: iconShell });
+  name.append(iconShell, game.title);
+  cover.append(artworkShell, name);
   const facts = document.createElement('span');
   facts.className = 'game-card-facts';
   facts.textContent = `${game.year} · ${game.publisher}`;
@@ -86,9 +93,13 @@ if (!reducedMotion.matches && 'IntersectionObserver' in window) {
 
 function showPicture(index) {
   pictureIndex = (index + active.pictures.length) % active.pictures.length;
-  image.src = active.pictures[pictureIndex];
   image.alt = active.captions[pictureIndex];
-  if (!reducedMotion.matches) image.animate([{ opacity: 0.3, transform: 'scale(1.015)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 280, easing: 'ease-out' });
+  loadGameImage(image, active.pictures[pictureIndex], {
+    shell: image.parentElement,
+    onReady: () => {
+      if (!reducedMotion.matches) image.animate([{ opacity: 0, transform: 'scale(1.015)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 280, easing: 'ease-out' });
+    },
+  });
   [...thumbs.children].forEach((button, index) => button.setAttribute('aria-pressed', String(index === pictureIndex)));
   if (dialog.open) thumbs.children[pictureIndex]?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
 }
@@ -101,12 +112,13 @@ document.getElementById('games').addEventListener('click', event => {
   event.preventDefault();
   opener = link;
   dialog.style.setProperty('--game-accent', active.accent);
-  document.getElementById('game-backdrop').src = active.backdrop || active.cover;
+  loadGameImage(document.getElementById('game-backdrop'), active.backdrop || active.cover);
   title.textContent = active.title;
   const logo = document.getElementById('game-logo');
-  logo.hidden = !active.logo;
+  logo.parentElement.hidden = !active.logo;
+  logo.dataset.lightInk = String(active.id === 'forza-horizon-4');
   title.classList.toggle('sr-only', Boolean(active.logo));
-  if (active.logo) logo.src = active.logo;
+  if (active.logo) loadGameImage(logo, active.logo, { shell: logo.parentElement });
   document.getElementById('game-description').textContent = active.description;
   const facts = document.getElementById('game-facts');
   facts.replaceChildren();
@@ -127,10 +139,10 @@ document.getElementById('games').addEventListener('click', event => {
     button.type = 'button';
     button.setAttribute('aria-label', `Show picture ${index + 1}: ${active.captions[index]}`);
     const thumb = document.createElement('img');
-    thumb.src = src;
     thumb.alt = '';
     thumb.loading = 'lazy';
     button.append(thumb);
+    loadGameImage(thumb, src, { shell: button });
     button.addEventListener('click', () => showPicture(index));
     return button;
   }));

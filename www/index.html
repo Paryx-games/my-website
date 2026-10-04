@@ -2276,12 +2276,22 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
   </dialog>
 
   <dialog id="game-showcase" aria-labelledby="game-title">
+    <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs>
+      <filter id="game-logo-light-ink" color-interpolation-filters="sRGB">
+        <feColorMatrix in="SourceGraphic" type="luminanceToAlpha" result="ink" />
+        <feComponentTransfer in="ink" result="dark"><feFuncA type="discrete" tableValues="1 0 0 0" /></feComponentTransfer>
+        <feFlood flood-color="white" result="white" />
+        <feComposite in="white" in2="dark" operator="in" result="lightInk" />
+        <feComposite in="lightInk" in2="SourceAlpha" operator="in" result="maskedInk" />
+        <feMerge><feMergeNode in="SourceGraphic" /><feMergeNode in="maskedInk" /></feMerge>
+      </filter>
+    </defs></svg>
     <img id="game-backdrop" class="game-backdrop" alt="">
     <button type="button" id="game-close" aria-label="Close game showcase" autofocus>×</button>
     <div class="game-showcase-layout">
       <aside class="game-sidebar">
         <h2 id="game-title">Game showcase</h2>
-        <img id="game-logo" alt="" hidden>
+        <div class="game-logo-shell game-image-shell" hidden><img id="game-logo" alt=""></div>
         <div class="game-info-panel">
           <dl id="game-facts"></dl>
           <p id="game-description"></p>
