@@ -134,7 +134,7 @@ document.getElementById('games').addEventListener('click', event => {
   if (active.logo) loadGameImage(logo, active.logo, { shell: logo.parentElement });
   document.getElementById('game-description').textContent = active.description;
   const quote = typeof ratings[active.id]?.quote === 'string' ? ratings[active.id].quote.trim() : '';
-  document.getElementById('game-quote-text').textContent = quote;
+  document.getElementById('game-quote-text').textContent = quote ? `“${quote}”` : '';
   document.getElementById('game-quote').hidden = !quote;
   document.getElementById('game-ratings').replaceChildren(
     ratingsPanelElement(ratings[active.id], active.title),

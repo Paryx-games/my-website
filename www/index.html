@@ -2113,6 +2113,28 @@
       <p class="note" id="timeDiff"></p>
     </section>
 
+    <section class="discord-presence-slot" id="discordPresenceSlot">
+      <h2>Activity</h2>
+      <div class="discord-presence-summary" id="discordPresenceSummary" aria-live="polite">
+        <span class="discord-status">
+          <i class="discord-status-dot" id="discordStatusDot" data-status="offline" aria-hidden="true"></i>
+          <span id="discordStatusText">Loading...</span>
+        </span>
+        <span class="discord-presence-separator" id="discordStatusSeparator" aria-hidden="true" hidden>•</span>
+        <span class="discord-custom-status" id="discordCustomStatus" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+            aria-hidden="true">
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+          </svg>
+          <span id="discordCustomStatusText"></span>
+        </span>
+      </div>
+      <div class="discord-activities" id="discordPresence" aria-live="polite">
+        <p class="discord-activity-empty">Checking Discord activity...</p>
+      </div>
+    </section>
+    <div class="discord-presence-slot" id="discordPresenceErrorSlot" hidden aria-live="polite"></div>
+
     <section id="projects">
       <h2>Projects</h2>
       <p class="projects-live-note">Fetched from GitHub in real time</p>
@@ -2170,27 +2192,7 @@
       </div>
     </section>
 
-    <section class="discord-presence-slot" id="discordPresenceSlot">
-      <h2>Activity</h2>
-      <div class="discord-presence-summary" id="discordPresenceSummary" aria-live="polite">
-        <span class="discord-status">
-          <i class="discord-status-dot" id="discordStatusDot" data-status="offline" aria-hidden="true"></i>
-          <span id="discordStatusText">Loading...</span>
-        </span>
-        <span class="discord-presence-separator" id="discordStatusSeparator" aria-hidden="true" hidden>•</span>
-        <span class="discord-custom-status" id="discordCustomStatus" hidden>
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
-            aria-hidden="true">
-            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-          </svg>
-          <span id="discordCustomStatusText"></span>
-        </span>
-      </div>
-      <div class="discord-activities" id="discordPresence" aria-live="polite">
-        <p class="discord-activity-empty">Checking Discord activity...</p>
-      </div>
-    </section>
-    <div class="discord-presence-slot" id="discordPresenceErrorSlot" hidden aria-live="polite"></div>
+
 
     <section>
       <h2>Find me</h2>
@@ -2337,7 +2339,7 @@
           <button type="button" id="game-next" aria-label="Next picture">→</button>
         </div>
         <blockquote id="game-quote" hidden>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H5l-4 3 1.5-6A8.5 8.5 0 1 1 21 11.5Z"/><path d="M7 10h8M7 14h5"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" /></svg>
           <p id="game-quote-text"></p>
         </blockquote>
         <div id="game-thumbnails" aria-label="Game pictures"></div>
