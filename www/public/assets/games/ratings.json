@@ -12,7 +12,8 @@
       "platform": "PC",
       "platformSlug": "pc",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "satisfactory": {
     "personal": 5,
@@ -27,7 +28,8 @@
       "platform": "PC",
       "platformSlug": "pc",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "rainbow-six-siege": {
     "personal": 4,
@@ -42,7 +44,8 @@
       "platform": "PC",
       "platformSlug": "pc",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "forza-horizon-6": {
     "personal": 3.5,
@@ -57,7 +60,8 @@
       "platform": "PC",
       "platformSlug": "pc",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "forza-horizon-4": {
     "personal": 4,
@@ -72,7 +76,8 @@
       "platform": "PC",
       "platformSlug": "pc",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "beamng-drive": {
     "personal": 3,
@@ -87,7 +92,8 @@
       "platform": "PC",
       "platformSlug": "pc",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "geometry-dash": {
     "personal": 3.5,
@@ -102,7 +108,8 @@
       "platform": "iOS",
       "platformSlug": "ios-iphoneipad",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "halo-mcc": {
     "personal": 3.5,
@@ -117,7 +124,8 @@
       "platform": "Xbox One",
       "platformSlug": "xbox-one",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "escape-the-backrooms": {
     "personal": 4,
@@ -128,7 +136,8 @@
       "platform": "PS5",
       "platformSlug": "playstation-5",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "backrooms-escape-together": {
     "personal": 4,
@@ -139,7 +148,8 @@
       "platform": "PC",
       "platformSlug": "pc",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "bloons-td-6": {
     "personal": 3,
@@ -154,7 +164,8 @@
       "platform": "iOS",
       "platformSlug": "ios-iphoneipad",
       "checked": "2026-10-04"
-    }
+    },
+    "quote": ""
   },
   "roblox": {
     "personal": 2.5,
@@ -163,6 +174,7 @@
       "score": 6.1,
       "checked": "2026-10-04"
     },
-    "metacritic": null
+    "metacritic": null,
+    "quote": ""
   }
 }

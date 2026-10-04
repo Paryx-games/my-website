@@ -21,6 +21,7 @@ test('published scores include sources, scales, platforms and check dates', asyn
   assert.deepEqual(Object.keys(ratings).sort(), catalogue.map(game => game.id).sort());
   for (const entry of Object.values(ratings)) {
     assert.ok(validPersonalRating(entry.personal));
+    assert.equal(typeof entry.quote, 'string');
     if (entry.imdb !== null) {
       assert.match(entry.imdb.id, /^tt\d+$/);
       assert.ok(entry.imdb.score >= 1 && entry.imdb.score <= 10);
