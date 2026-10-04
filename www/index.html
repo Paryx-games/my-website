@@ -973,6 +973,20 @@
       border-bottom-color: currentColor;
     }
 
+    .repo:hover .prs {
+      border-bottom-color: transparent;
+    }
+
+    .prs > b,
+    .prs > .prs-closed {
+      border-bottom: 1px dotted transparent;
+    }
+
+    .repo:hover .prs > b,
+    .repo:hover .prs > .prs-closed {
+      border-bottom-color: currentColor;
+    }
+
     .custom-tooltip {
       position: fixed;
       z-index: 10000;
@@ -1992,8 +2006,8 @@
           I'm also currently learning more about software engineering beyond just coding, including things like reverse
           engineering, networking, and how software works under the hood.</span><span class="caret" id="aboutCaret"
           aria-hidden="true"></span></p>
-      <p>I make my projects open-source by default because I'd rather share what I learn with the internet.
-        Having the source publicly available also makes my projects easier for people to inspect and trust.</p>
+      <p><span id="aboutOpenSource">I make my projects open-source by default because I'd rather share what I learn with the internet.
+        Having the source publicly available also makes my projects easier for people to inspect and trust.</span></p>
     </section>
 
     <section class="discord-presence-slot" id="discordPresenceSlot">
@@ -2536,15 +2550,19 @@
 
     const initAboutTypewriter = () => {
       const text = $("aboutText");
+      const paragraphs = [text, $("aboutOpenSource")];
       const caret = $("aboutCaret");
-      const full = text.textContent;
+      const full = paragraphs.map((paragraph) => paragraph.textContent.trim().replace(/\s+/g, " "));
       if (reduce) {
         caret.hidden = true;
         return;
       }
-      text.textContent = "";
+      paragraphs.forEach((paragraph) => { paragraph.textContent = ""; });
       const run = async () => {
-        await typeInto(text, full, 6, 8, 20);
+        for (const [index, paragraph] of paragraphs.entries()) {
+          paragraph.after(caret);
+          await typeInto(paragraph, full[index], 6, 8, 20);
+        }
         caret.hidden = true;
       };
       if (!("IntersectionObserver" in window)) {
