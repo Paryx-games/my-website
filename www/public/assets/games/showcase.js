@@ -18,6 +18,10 @@ const image = document.getElementById('game-picture');
 const thumbs = document.getElementById('game-thumbnails');
 let active;
 let pictureIndex = 0;
+let wheelScrollTarget = null;
+let wheelScrollFrame = 0;
+let wheelScrollTime = 0;
+let wheelScrollPosition = 0;
 let opener;
 let closing = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
@@ -105,6 +109,7 @@ if (!reducedMotion.matches && 'IntersectionObserver' in window) {
 }
 
 function showPicture(index) {
+  stopWheelScroll();
   pictureIndex = (index + active.pictures.length) % active.pictures.length;
   image.alt = active.captions[pictureIndex];
   loadGameImage(image, active.pictures[pictureIndex], {
@@ -177,22 +182,63 @@ dialog.addEventListener('cancel', event => { event.preventDefault(); closeShowca
 document.getElementById('game-prev').addEventListener('click', () => showPicture(pictureIndex - 1));
 document.getElementById('game-next').addEventListener('click', () => showPicture(pictureIndex + 1));
 
+function stopWheelScroll() {
+  if (wheelScrollFrame) cancelAnimationFrame(wheelScrollFrame);
+  wheelScrollFrame = 0;
+  wheelScrollTarget = null;
+  wheelScrollTime = 0;
+}
+
+function animateWheelScroll(time) {
+  const elapsed = Math.max(0, Math.min(64, time - wheelScrollTime));
+  wheelScrollTime = time;
+  const maxScroll = Math.max(0, thumbs.scrollWidth - thumbs.clientWidth);
+  wheelScrollTarget = Math.min(maxScroll, wheelScrollTarget);
+  const distance = wheelScrollTarget - wheelScrollPosition;
+  if (Math.abs(distance) <= 2) {
+    thumbs.scrollTo({ left: wheelScrollTarget, behavior: 'instant' });
+    stopWheelScroll();
+    return;
+  }
+  wheelScrollPosition += distance * (1 - Math.exp(-elapsed / 75));
+  thumbs.scrollTo({ left: wheelScrollPosition, behavior: 'instant' });
+  wheelScrollFrame = requestAnimationFrame(animateWheelScroll);
+}
+
 thumbs.addEventListener('wheel', event => {
   // Keep horizontal trackpad gestures and browser zoom native.
-  if (event.ctrlKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+  if (event.ctrlKey) return;
+  if (Math.abs(event.deltaX) >= Math.abs(event.deltaY)) {
+    stopWheelScroll();
+    return;
+  }
   const maxScroll = thumbs.scrollWidth - thumbs.clientWidth;
   if (maxScroll <= 0) return;
-  const style = getComputedStyle(thumbs);
-  // Scroll snapping can leave the first/last thumbnail inset by the strip padding.
-  if (event.deltaY < 0 && thumbs.scrollLeft <= parseFloat(style.paddingLeft) + 1) return;
-  if (event.deltaY > 0 && maxScroll - thumbs.scrollLeft <= parseFloat(style.paddingRight) + 1) return;
+  const start = wheelScrollTarget ?? thumbs.scrollLeft;
   const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? thumbs.clientWidth : 1;
-  const nextScroll = Math.max(0, Math.min(maxScroll, thumbs.scrollLeft + event.deltaY * unit));
+  const nextScroll = Math.max(0, Math.min(maxScroll, start + event.deltaY * unit));
   // Let the popup scroll normally once the strip reaches either end.
-  if (Math.abs(nextScroll - thumbs.scrollLeft) < 1) return;
+  if (Math.abs(nextScroll - start) < 1) return;
   event.preventDefault();
-  thumbs.scrollTo({ left: nextScroll, behavior: 'instant' });
+  if (reducedMotion.matches) {
+    stopWheelScroll();
+    thumbs.scrollTo({ left: nextScroll, behavior: 'instant' });
+    return;
+  }
+  wheelScrollTarget = nextScroll;
+  // Further wheel events update the target of this loop without restarting it.
+  if (!wheelScrollFrame) {
+    thumbs.scrollTo({ left: thumbs.scrollLeft, behavior: 'instant' });
+    wheelScrollPosition = thumbs.scrollLeft;
+    wheelScrollTime = performance.now();
+    wheelScrollFrame = requestAnimationFrame(animateWheelScroll);
+  }
 }, { passive: false });
+thumbs.addEventListener('pointerdown', () => {
+  stopWheelScroll();
+  thumbs.scrollTo({ left: thumbs.scrollLeft, behavior: 'instant' });
+});
+reducedMotion.addEventListener('change', stopWheelScroll);
 dialog.addEventListener('keydown', event => {
   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
     event.preventDefault();
@@ -205,6 +251,7 @@ dialog.addEventListener('click', event => {
   if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeShowcase();
 });
 dialog.addEventListener('close', () => {
+  stopWheelScroll();
   document.body.classList.remove('game-showcase-open');
   opener?.focus({ preventScroll: true });
 });
