@@ -6,6 +6,8 @@
   <link rel="stylesheet" href="/assets/navigation.css">
   <script src="/assets/navigation.js"></script>
   <link rel="stylesheet" href="/assets/site-search.css">
+  <link rel="stylesheet" href="/assets/games/showcase.css">
+  <script src="/assets/games/showcase.js" type="module"></script>
   <script src="/assets/site-search.js" type="module"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1249,8 +1251,11 @@
 
     .profile-details-body {
       display: grid;
+      grid-template-columns: minmax(0, 1fr);
       gap: var(--space-8);
     }
+
+    .profile-details-body > article { min-width: 0; }
 
     .profile-time-badges, .profile-contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem; }
     .profile-skill-icons { display: block; margin: 1rem 0; }
@@ -1999,6 +2004,7 @@
         <a href="/" aria-current="page">Home</a>
         <a href="https://blog.paryx.uk">Blog</a>
         <a href="#projects">Projects</a>
+        <a href="#games">Games</a>
         <a href="#about">About</a>
       </nav>
       <div class="header-actions">
@@ -2011,6 +2017,7 @@
             <a href="/" aria-current="page">Home</a>
             <a href="https://blog.paryx.uk">Blog</a>
             <a href="#projects">Projects</a>
+            <a href="#games">Games</a>
             <a href="#about">About</a>
             <a href="https://blog.paryx.uk/rss.xml">RSS feed</a>
           </nav>
@@ -2146,6 +2153,7 @@
         <a class="profile-skill-icons" href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=lua,python,js,ts,rust,cpp" alt="My Coding Languages" loading="lazy"></a>
         <div class="stack reveal" id="stackLangs"></div>
         <p class="note">ranked by expertise, from best to still improving (in my opinion)</p>
+        <p>If you want to know more about my coding skills, I've made an <a href="#more-details">expanded section covering my experience with specific languages</a>.</p>
       </div>
 
       <div class="stack-group">
@@ -2209,6 +2217,19 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
 </article></div>
     </section>
 
+    <section id="games">
+      <div class="games-heading"><h2>Games</h2><span id="games-count">3</span></div>
+      <div class="games-row" id="favorite-games">
+        <a href="https://www.minecraft.net/en-us/about-minecraft">Minecraft</a>
+        <a href="https://store.steampowered.com/app/526870/Satisfactory/">Satisfactory</a>
+        <a href="https://store.steampowered.com/app/359550/">Rainbow Six Siege</a>
+      </div>
+      <div class="rotation-section">
+        <h3>Games in Rotation</h3>
+        <div class="games-row" id="rotation-games"><p class="note">Forza Horizon 6, Forza Horizon 4, BeamNG.drive, Rainbow Six Siege, Satisfactory, Geometry Dash, Minecraft Java, Roblox, Halo: The Master Chief Collection, Escape the Backrooms, Backrooms: Escape Together, and Bloons TD 6.</p></div>
+      </div>
+    </section>
+
     <section class="tight">
       <h2>Find me</h2>
       <div class="links reveal" id="links"></div>
@@ -2254,6 +2275,20 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
     <section class="site-search-section" data-search-history hidden><div class="site-search-heading"><h3>Recent searches</h3><button type="button" data-clear-history>Clear history</button></div><div class="site-search-history" data-history-list></div></section>
     <section class="site-search-section" data-search-shortcuts><div class="site-search-heading"><h3>Page shortcuts</h3></div><div class="site-search-shortcuts" data-shortcut-list></div></section>
     <div class="search-results"></div>
+  </dialog>
+
+  <dialog id="game-showcase" aria-labelledby="game-title">
+    <div class="game-dialog-heading"><h2 id="game-title">Game showcase</h2><button type="button" id="game-close" aria-label="Close game showcase" autofocus>Close</button></div>
+    <div class="game-showcase-layout">
+      <dl id="game-facts"></dl>
+      <div class="game-gallery">
+        <img id="game-picture" alt="" width="1920" height="1080">
+        <div class="game-gallery-nav"><button type="button" id="game-prev" aria-label="Previous picture">←</button><p id="game-caption" aria-live="polite"></p><button type="button" id="game-next" aria-label="Next picture">→</button></div>
+        <div id="game-thumbnails" aria-label="Game pictures"></div>
+        <p class="game-image-credit">Official game artwork and screenshots from the linked publisher page.</p>
+      </div>
+      <div class="game-description"><p id="game-description"></p><a id="game-website" href="https://www.minecraft.net">Visit game page ↗</a></div>
+    </div>
   </dialog>
 
   <div class="app-toast" id="appToast" role="status" aria-live="polite" aria-atomic="true" hidden>
