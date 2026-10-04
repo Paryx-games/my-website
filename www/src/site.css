@@ -1,4 +1,12 @@
 /* Match the blog shell while keeping staging content and deployments independent. */
+.section-toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+.section-toggle svg { width: 16px; height: 16px; color: var(--color-faint); transition: transform 200ms ease-out; }
+.section-toggle[aria-expanded="false"] svg { transform: rotate(-90deg); }
+.section-body { display: grid; grid-template-rows: 1fr; opacity: 1; transition: grid-template-rows 200ms ease-out, opacity 200ms ease-out; }
+.section-body[data-expanded="false"] { grid-template-rows: 0fr; opacity: 0; transition-duration: 150ms; }
+.section-body-inner { min-height: 0; }
+.section-body[data-expanded="false"] > .section-body-inner, .section-body.is-transitioning > .section-body-inner { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .section-body, .section-toggle svg { transition: none; } }
 :root {
   color-scheme: dark;
   --bg: #080809;
