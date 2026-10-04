@@ -149,6 +149,12 @@
       min-height: 1.1em;
     }
 
+    @media (prefers-reduced-motion: no-preference) {
+      .js #type:not(.is-ready) {
+        visibility: hidden;
+      }
+    }
+
     .hero-name {
       position: relative;
       font-family: "Sora", sans-serif;
@@ -956,6 +962,11 @@
       transition:
         color var(--motion-fast) var(--ease),
         border-color var(--motion-fast) var(--ease);
+    }
+
+    .repo-stat .prs-closed {
+      color: var(--color-faint);
+      font-weight: 400;
     }
 
     .repo:hover .repo-stat {
@@ -1977,10 +1988,12 @@
   <main class="content" id="content">
     <section class="about" id="about">
       <h2>About</h2>
-      <p><span id="aboutText">I'm paryx, a small indie developer who loves coding as a hobby and making new projects.
+      <p><span id="aboutText">I'm paryx, a hobbyist developer who enjoys building tools, websites, and other software projects.
           I'm also currently learning more about software engineering beyond just coding, including things like reverse
           engineering, networking, and how software works under the hood.</span><span class="caret" id="aboutCaret"
           aria-hidden="true"></span></p>
+      <p>I make my projects open-source by default because I'd rather share what I learn with the internet.
+        Having the source publicly available also makes my projects easier for people to inspect and trust.</p>
     </section>
 
     <section class="discord-presence-slot" id="discordPresenceSlot">
@@ -2101,26 +2114,58 @@
             <div class="more-body">
               <article>
                 <h4><span class="mini-icons" data-icons="rust,cplusplus"></span>Rust and C++</h4>
-                <p>I started using C++ around October 2025. Before that I'd only used languages with runtimes, like
-                  Python and JavaScript, so this was my first real dedication to an ahead-of-time compiled language, and
-                  the compiler took some figuring out. I learned the architecture from the docs (with a little help from
-                  ChatGPT) and slowly got the basics down. Most of what I made back then is private, because I felt it
-                  lacked the quality to be worth sharing.</p>
+                <p>I began using C++ around October 2025. Before then, I'd mostly used languages that relied on
+                  runtimes, like Python and JavaScript. This was my first serious experience with an ahead-of-time
+                  compiled language, and progress was slow at first. The compiler and tooling took some figuring out,
+                  but the docs (and a little help from ChatGPT) helped me get the basics down. I didn't publish many
+                  of those projects because they weren't in a state where I wanted to make them public.</p>
                 <p>Then I discovered Rust. I didn't think much of it at first and assumed it was similar to C++ (which,
                   on paper, is true, in a way), but then I learned about the Cargo ecosystem and I was hooked. It's like
                   the Python and JavaScript ecosystems, but for Rust. Since then I've used Rust for a lot of projects,
                   including my <a href="https://github.com/Paryx-games/roblox-manager" target="_blank"
                     rel="noopener noreferrer">Roblox Manager</a>. I forked it (credit to the original author), have
-                  added a lot of features, and am working on a massive v2 rewrite. Most of my other Rust projects are
-                  private, for the same reason.</p>
+                  added a lot of features, and am working on a major v2 rewrite. Most of my other Rust projects were
+                  experimental or never reached a state where I wanted to publish them.</p>
               </article>
               <article>
-                <h4><span class="mini-icons" data-icons="lua"></span>Lua and LuaU</h4>
-                <p>I don't remember much about when I started learning LuaU. It was mostly YouTube tutorials and the
-                  Roblox documentation. I haven't used plain Lua much, but I'm very strong in both. I've made multiple
-                  games with it, though most are unpublished because I'm a neat freak and need everything to be perfect.
-                  I'm more experienced with LuaU (Roblox's version), but most of the skills carry over, since LuaU is a
-                  fork of Lua with extra features.</p>
+                <h4><span class="mini-icons" data-icons="lua"></span>Lua and Luau</h4>
+                <p>I started learning Luau over five or six years ago, mostly through YouTube tutorials and Roblox
+                  documentation. It's my strongest language. I haven't used plain Lua as much, but I'm confident in
+                  both, and most of the skills carry over. I've made multiple games, though most are unpublished
+                  because I tend to want everything to be perfect.</p>
+                <p>One was a partially unfinished tower defense game with purchasing and placement systems, lobby
+                  transfers, matchmaking, and difficulty tiers. I stepped away because it was a lot for a solo
+                  developer: VFX, sound design, art direction, building, and modelling all need attention alongside
+                  the programming.</p>
+                <p>I also ran a small Roblox studio with a few developers joining and leaving over the years. We
+                  raised about 15,000 Robux, which I'm still proud of. Projects included an obby, a large adventure
+                  game, story and testing games, two core games, and plenty of smaller experiments. I'd often get
+                  bored after three or four days, so a lot of those ideas never reached the finish line.</p>
+                <p>I'm proud of what I built on Roblox, but I've gradually moved towards general software projects,
+                  external tools for Roblox development, and learning languages and tooling beyond the platform.
+                  Making Roblox games was fun, but it doesn't fit what I want to focus on anymore.</p>
+                <p>Luau's typing system, compound assignments like <code>+=</code>, and string interpolation are
+                  features I really enjoy. Writing <code>print(`Hello {world}!`)</code> feels much cleaner to me than
+                  concatenating strings or using <code>string.format</code>, though that's personal preference.</p>
+              </article>
+              <article>
+                <h4><span class="mini-icons" data-icons="javascript,typescript,python"></span>JavaScript, TypeScript and Python</h4>
+                <p>I've used all three extensively for scripting and application development. JavaScript and
+                  TypeScript have been my go-to languages for Electron apps, websites, and React projects, with
+                  React being where I've used TypeScript the most.</p>
+                <p>Building Discord bots helped me learn JavaScript much faster. From mid-2025 to early 2026, I
+                  made bots for people in exchange for Robux or money. They were cheap and fairly easy to make,
+                  and I earned around £300. That helped fund my Roblox studio and some personal things.</p>
+                <p>I brought a lot of my JavaScript knowledge into TypeScript, but React was where I started
+                  learning it properly. I like how TypeScript makes larger projects easier to keep reliable.
+                  JavaScript's flexibility is useful, but it also makes it easier to miss edge cases.</p>
+                <p>I've used Python for years and still return to it for scripts, automation, quick tools, and
+                  anything I want to get working without much setup. Its simple syntax and huge package ecosystem
+                  make it convenient, though I now tend to prefer Rust and TypeScript for larger projects where
+                  I want stronger tooling, type safety, and more predictable behaviour.</p>
+                <p>I discovered <code>uv</code> around mid-2025 and now prefer it over using <code>pip</code>
+                  directly. It's fast, handles environments and dependencies cleanly, and makes working with Python
+                  much nicer. I don't use Python as much as I used to, but it's still ridiculously useful to have around.</p>
               </article>
             </div>
           </div>
@@ -2461,6 +2506,7 @@
 
       const type = $("type");
       type.textContent = "";
+      type.classList.add("is-ready");
       caret.hidden = false;
 
       await typeInto(type, HERO_PREFIX, 62, 72);
@@ -3491,7 +3537,7 @@
         <span class="forks" data-tip="Forks">${UI.fork}<b>${forks}</b></span>
         ${detailed ? `<i class="repo-divider" aria-hidden="true"></i>
         <span class="issues repo-stat" data-tip="Issue stats loading">${UI.target}<b>-</b></span>
-        <span class="prs repo-stat" data-tip="Pull request stats loading">${UI.branch}<b>-</b></span>` : ""}
+        <span class="prs repo-stat" data-tip="Pull request stats loading">${UI.branch}<b>-</b><span class="prs-closed" hidden></span></span>` : ""}
       </div>
       <div class="repo-languages" aria-label="Repository language usage"></div>
       <span class="sr-only" role="status"></span>
@@ -3655,7 +3701,11 @@
       }
       if (prs) {
         prs.querySelector("b").textContent = stats.prsOpen;
+        const closed = prs.querySelector(".prs-closed");
+        closed.textContent = `(${stats.prsClosed})`;
+        closed.hidden = false;
         prs.dataset.tip = `${stats.prsOpen} open · ${stats.prsClosed} closed pull requests`;
+        prs.setAttribute("aria-label", prs.dataset.tip);
       }
       applyLanguageData(card, stats.languages);
     };
