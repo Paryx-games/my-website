@@ -1,0 +1,168 @@
+{
+  "minecraft": {
+    "personal": 4.5,
+    "imdb": {
+      "id": "tt2011970",
+      "score": 8.8,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "minecraft",
+      "score": 93,
+      "platform": "PC",
+      "platformSlug": "pc",
+      "checked": "2026-10-04"
+    }
+  },
+  "satisfactory": {
+    "personal": 5,
+    "imdb": {
+      "id": "tt11213158",
+      "score": 8.2,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "satisfactory",
+      "score": 91,
+      "platform": "PC",
+      "platformSlug": "pc",
+      "checked": "2026-10-04"
+    }
+  },
+  "rainbow-six-siege": {
+    "personal": 4,
+    "imdb": {
+      "id": "tt4779020",
+      "score": 7.7,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "tom-clancys-rainbow-six-siege",
+      "score": 79,
+      "platform": "PC",
+      "platformSlug": "pc",
+      "checked": "2026-10-04"
+    }
+  },
+  "forza-horizon-6": {
+    "personal": 3.5,
+    "imdb": {
+      "id": "tt37238735",
+      "score": 8.3,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "forza-horizon-6",
+      "score": 90,
+      "platform": "PC",
+      "platformSlug": "pc",
+      "checked": "2026-10-04"
+    }
+  },
+  "forza-horizon-4": {
+    "personal": 4,
+    "imdb": {
+      "id": "tt8550918",
+      "score": 8.5,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "forza-horizon-4",
+      "score": 88,
+      "platform": "PC",
+      "platformSlug": "pc",
+      "checked": "2026-10-04"
+    }
+  },
+  "beamng-drive": {
+    "personal": 3,
+    "imdb": {
+      "id": "tt18687746",
+      "score": 7.9,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "beamngdrive",
+      "score": null,
+      "platform": "PC",
+      "platformSlug": "pc",
+      "checked": "2026-10-04"
+    }
+  },
+  "geometry-dash": {
+    "personal": 3.5,
+    "imdb": {
+      "id": "tt7053530",
+      "score": 7.4,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "geometry-dash",
+      "score": null,
+      "platform": "iOS",
+      "platformSlug": "ios-iphoneipad",
+      "checked": "2026-10-04"
+    }
+  },
+  "halo-mcc": {
+    "personal": 3.5,
+    "imdb": {
+      "id": "tt4066088",
+      "score": 8.9,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "the-master-chief-collection",
+      "score": 85,
+      "platform": "Xbox One",
+      "platformSlug": "xbox-one",
+      "checked": "2026-10-04"
+    }
+  },
+  "escape-the-backrooms": {
+    "personal": 4,
+    "imdb": null,
+    "metacritic": {
+      "slug": "escape-the-backrooms",
+      "score": null,
+      "platform": "PS5",
+      "platformSlug": "playstation-5",
+      "checked": "2026-10-04"
+    }
+  },
+  "backrooms-escape-together": {
+    "personal": 4,
+    "imdb": null,
+    "metacritic": {
+      "slug": "backrooms-escape-together",
+      "score": null,
+      "platform": "PC",
+      "platformSlug": "pc",
+      "checked": "2026-10-04"
+    }
+  },
+  "bloons-td-6": {
+    "personal": 3,
+    "imdb": {
+      "id": "tt13690164",
+      "score": 7.8,
+      "checked": "2026-10-04"
+    },
+    "metacritic": {
+      "slug": "bloons-td-6",
+      "score": null,
+      "platform": "iOS",
+      "platformSlug": "ios-iphoneipad",
+      "checked": "2026-10-04"
+    }
+  },
+  "roblox": {
+    "personal": 2.5,
+    "imdb": {
+      "id": "tt6667676",
+      "score": 6.1,
+      "checked": "2026-10-04"
+    },
+    "metacritic": null
+  }
+}

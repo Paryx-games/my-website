@@ -1,5 +1,15 @@
 import { games, rotation, catalogue } from './games.js';
 import { loadGameImage } from './load-image.js';
+import { ratingsPanelElement } from './ratings.js';
+
+let ratings = {};
+try {
+  const response = await fetch('/assets/games/ratings.json');
+  if (!response.ok) throw new Error('Ratings unavailable');
+  ratings = await response.json();
+} catch (error) {
+  console.warn('Game ratings could not be loaded.', error);
+}
 
 const cards = document.getElementById('favorite-games');
 const dialog = document.getElementById('game-showcase');
@@ -29,9 +39,11 @@ async function closeShowcase() {
 }
 
 const card = game => {
+  const container = document.createElement('article');
+  container.className = 'game-card';
   const link = document.createElement('a');
   link.href = game.website;
-  link.className = 'game-card';
+  link.className = 'game-card-link';
   link.dataset.game = game.id;
   const cover = document.createElement('span');
   cover.className = 'game-cover';
@@ -62,7 +74,8 @@ const card = game => {
   facts.textContent = `${game.year} · ${game.publisher}`;
   link.append(cover, facts);
   link.setAttribute('aria-haspopup', 'dialog');
-  return link;
+  container.append(link);
+  return container;
 };
 cards.replaceChildren(...games.map(card));
 document.getElementById('games-count').textContent = games.length;
@@ -120,6 +133,9 @@ document.getElementById('games').addEventListener('click', event => {
   title.classList.toggle('sr-only', Boolean(active.logo));
   if (active.logo) loadGameImage(logo, active.logo, { shell: logo.parentElement });
   document.getElementById('game-description').textContent = active.description;
+  document.getElementById('game-ratings').replaceChildren(
+    ratingsPanelElement(ratings[active.id], active.title),
+  );
   const facts = document.getElementById('game-facts');
   facts.replaceChildren();
   for (const [index, [label, value]] of [['Released', active.year], ['Developer', active.developer], ['Publisher', active.publisher], ['Genre', active.genre]].entries()) {
