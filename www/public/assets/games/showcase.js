@@ -41,7 +41,14 @@ const card = game => {
   artwork.width = 600;
   artwork.height = 900;
   const name = document.createElement('strong');
-  name.textContent = game.title;
+  const icon = document.createElement('img');
+  icon.className = 'game-card-icon';
+  icon.src = game.icon;
+  icon.alt = '';
+  icon.width = 16;
+  icon.height = 16;
+  icon.loading = 'lazy';
+  name.append(icon, game.title);
   cover.append(artwork, name);
   const facts = document.createElement('span');
   facts.className = 'game-card-facts';
@@ -52,6 +59,7 @@ const card = game => {
 };
 cards.replaceChildren(...games.map(card));
 document.getElementById('games-count').textContent = games.length;
+document.getElementById('rotation-count').textContent = rotation.length;
 const rotationRoot = document.getElementById('rotation-games');
 if (rotation.length) {
   rotationRoot.replaceChildren(...rotation.map(({ id, title }) => {

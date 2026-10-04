@@ -19,16 +19,19 @@ export const games = [
       "/assets/games/minecraft-7.webp"
     ],
     "captions": [
-      "Building in Minecraft",
-      "Exploring Minecraft biomes",
-      "Survival in Minecraft",
-      "Minecraft — official image 4",
-      "Minecraft — official image 5",
-      "Minecraft — official image 6",
-      "Minecraft — official image 7"
+      "Minecraft screenshot 1",
+      "Minecraft screenshot 2",
+      "Minecraft screenshot 3",
+      "Minecraft screenshot 4",
+      "Minecraft screenshot 5",
+      "Minecraft screenshot 6",
+      "Minecraft screenshot 7"
     ],
     "accent": "#8dcc80",
-    "backdrop": "/assets/games/minecraft-1.webp"
+    "backdrop": "/assets/games/minecraft-hero.webp",
+    "icon": "/assets/games/minecraft-icon.webp",
+    "logo": "/assets/games/minecraft-logo.webp",
+    "artworkSource": "https://www.xbox.com/games/store/minecraft/9MVXMVT8ZKWC"
   },
   {
     "id": "satisfactory",
@@ -51,18 +54,20 @@ export const games = [
       "/assets/games/satisfactory-8.webp"
     ],
     "captions": [
-      "Satisfactory world and factories",
-      "Satisfactory factory building",
-      "Exploring Satisfactory",
-      "Satisfactory — official screenshot 4",
-      "Satisfactory — official screenshot 5",
-      "Satisfactory — official screenshot 6",
-      "Satisfactory — official screenshot 7",
-      "Satisfactory — official screenshot 8"
+      "Satisfactory screenshot 1",
+      "Satisfactory screenshot 2",
+      "Satisfactory screenshot 3",
+      "Satisfactory screenshot 4",
+      "Satisfactory screenshot 5",
+      "Satisfactory screenshot 6",
+      "Satisfactory screenshot 7",
+      "Satisfactory screenshot 8"
     ],
     "accent": "#edb368",
     "backdrop": "/assets/games/satisfactory-hero.webp",
-    "logo": "/assets/games/satisfactory-logo.webp"
+    "logo": "/assets/games/satisfactory-logo.webp",
+    "icon": "/assets/games/satisfactory-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/526870/"
   },
   {
     "id": "rainbow-six-siege",
@@ -85,18 +90,20 @@ export const games = [
       "/assets/games/rainbow-six-siege-8.webp"
     ],
     "captions": [
-      "Rainbow Six Siege gameplay",
-      "Rainbow Six Siege operators",
-      "Rainbow Six Siege tactical combat",
-      "Rainbow Six Siege — official screenshot 4",
-      "Rainbow Six Siege — official screenshot 5",
-      "Rainbow Six Siege — official screenshot 6",
-      "Rainbow Six Siege — official screenshot 7",
-      "Rainbow Six Siege — official screenshot 8"
+      "Rainbow Six Siege screenshot 1",
+      "Rainbow Six Siege screenshot 2",
+      "Rainbow Six Siege screenshot 3",
+      "Rainbow Six Siege screenshot 4",
+      "Rainbow Six Siege screenshot 5",
+      "Rainbow Six Siege screenshot 6",
+      "Rainbow Six Siege screenshot 7",
+      "Rainbow Six Siege screenshot 8"
     ],
     "accent": "#e5c779",
     "backdrop": "/assets/games/rainbow-six-siege-hero.webp",
-    "logo": "/assets/games/rainbow-six-siege-logo.webp"
+    "logo": "/assets/games/rainbow-six-siege-logo.webp",
+    "icon": "/assets/games/rainbow-six-siege-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/359550/"
   }
 ];
 
@@ -160,14 +167,14 @@ export const catalogue = [...games, ...[
     "id": "forza-horizon-6",
     "title": "Forza Horizon 6",
     "captions": [
-      "Forza Horizon 6 — official screenshot 1",
-      "Forza Horizon 6 — official screenshot 2",
-      "Forza Horizon 6 — official screenshot 3",
-      "Forza Horizon 6 — official screenshot 4",
-      "Forza Horizon 6 — official screenshot 5",
-      "Forza Horizon 6 — official screenshot 6",
-      "Forza Horizon 6 — official screenshot 7",
-      "Forza Horizon 6 — official screenshot 8"
+      "Forza Horizon 6 screenshot 1",
+      "Forza Horizon 6 screenshot 2",
+      "Forza Horizon 6 screenshot 3",
+      "Forza Horizon 6 screenshot 4",
+      "Forza Horizon 6 screenshot 5",
+      "Forza Horizon 6 screenshot 6",
+      "Forza Horizon 6 screenshot 7",
+      "Forza Horizon 6 screenshot 8"
     ],
     "genre": "Racing · Simulation · Sports",
     "developer": "Playground Games",
@@ -184,7 +191,10 @@ export const catalogue = [...games, ...[
       "/assets/games/forza-horizon-6-8.webp"
     ],
     "accent": "#f2a5cc",
-    "backdrop": "/assets/games/forza-horizon-6-hero.webp"
+    "backdrop": "/assets/games/forza-horizon-6-hero.webp",
+    "icon": "/assets/games/forza-horizon-6-icon.webp",
+    "logo": "/assets/games/forza-horizon-6-logo.webp",
+    "artworkSource": "https://www.xbox.com/games/store/forza-horizon-6/9N431PX143P8"
   },
   {
     "cover": "/assets/games/forza-horizon-4-cover.webp",
@@ -193,14 +203,14 @@ export const catalogue = [...games, ...[
     "id": "forza-horizon-4",
     "title": "Forza Horizon 4",
     "captions": [
-      "Forza Horizon 4 — official screenshot 1",
-      "Forza Horizon 4 — official screenshot 2",
-      "Forza Horizon 4 — official screenshot 3",
-      "Forza Horizon 4 — official screenshot 4",
-      "Forza Horizon 4 — official screenshot 5",
-      "Forza Horizon 4 — official screenshot 6",
-      "Forza Horizon 4 — official screenshot 7",
-      "Forza Horizon 4 — official screenshot 8"
+      "Forza Horizon 4 screenshot 1",
+      "Forza Horizon 4 screenshot 2",
+      "Forza Horizon 4 screenshot 3",
+      "Forza Horizon 4 screenshot 4",
+      "Forza Horizon 4 screenshot 5",
+      "Forza Horizon 4 screenshot 6",
+      "Forza Horizon 4 screenshot 7",
+      "Forza Horizon 4 screenshot 8"
     ],
     "genre": "Racing",
     "developer": "Playground Games",
@@ -218,7 +228,9 @@ export const catalogue = [...games, ...[
     ],
     "accent": "#df97cb",
     "backdrop": "/assets/games/forza-horizon-4-hero.webp",
-    "logo": "/assets/games/forza-horizon-4-logo.webp"
+    "logo": "/assets/games/forza-horizon-4-logo.webp",
+    "icon": "/assets/games/forza-horizon-4-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/1293830/"
   },
   {
     "cover": "/assets/games/beamng-drive-cover.webp",
@@ -227,14 +239,14 @@ export const catalogue = [...games, ...[
     "id": "beamng-drive",
     "title": "BeamNG.drive",
     "captions": [
-      "BeamNG.drive — official screenshot 1",
-      "BeamNG.drive — official screenshot 2",
-      "BeamNG.drive — official screenshot 3",
-      "BeamNG.drive — official screenshot 4",
-      "BeamNG.drive — official screenshot 5",
-      "BeamNG.drive — official screenshot 6",
-      "BeamNG.drive — official screenshot 7",
-      "BeamNG.drive — official screenshot 8"
+      "BeamNG.drive screenshot 1",
+      "BeamNG.drive screenshot 2",
+      "BeamNG.drive screenshot 3",
+      "BeamNG.drive screenshot 4",
+      "BeamNG.drive screenshot 5",
+      "BeamNG.drive screenshot 6",
+      "BeamNG.drive screenshot 7",
+      "BeamNG.drive screenshot 8"
     ],
     "genre": "Racing · Simulation · Early Access",
     "developer": "BeamNG",
@@ -252,7 +264,9 @@ export const catalogue = [...games, ...[
     ],
     "accent": "#e9a474",
     "backdrop": "/assets/games/beamng-drive-hero.webp",
-    "logo": "/assets/games/beamng-drive-logo.webp"
+    "logo": "/assets/games/beamng-drive-logo.webp",
+    "icon": "/assets/games/beamng-drive-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/284160/"
   },
   {
     "cover": "/assets/games/geometry-dash-cover.webp",
@@ -261,14 +275,14 @@ export const catalogue = [...games, ...[
     "id": "geometry-dash",
     "title": "Geometry Dash",
     "captions": [
-      "Geometry Dash — official screenshot 1",
-      "Geometry Dash — official screenshot 2",
-      "Geometry Dash — official screenshot 3",
-      "Geometry Dash — official screenshot 4",
-      "Geometry Dash — official screenshot 5",
-      "Geometry Dash — official screenshot 6",
-      "Geometry Dash — official screenshot 7",
-      "Geometry Dash — official screenshot 8"
+      "Geometry Dash screenshot 1",
+      "Geometry Dash screenshot 2",
+      "Geometry Dash screenshot 3",
+      "Geometry Dash screenshot 4",
+      "Geometry Dash screenshot 5",
+      "Geometry Dash screenshot 6",
+      "Geometry Dash screenshot 7",
+      "Geometry Dash screenshot 8"
     ],
     "genre": "Action · Indie",
     "developer": "RobTop Games",
@@ -286,7 +300,9 @@ export const catalogue = [...games, ...[
     ],
     "accent": "#a7dd7c",
     "backdrop": "/assets/games/geometry-dash-hero.webp",
-    "logo": "/assets/games/geometry-dash-logo.webp"
+    "logo": "/assets/games/geometry-dash-logo.webp",
+    "icon": "/assets/games/geometry-dash-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/322170/"
   },
   {
     "cover": "/assets/games/halo-mcc-cover.webp",
@@ -295,14 +311,14 @@ export const catalogue = [...games, ...[
     "id": "halo-mcc",
     "title": "Halo: The Master Chief Collection",
     "captions": [
-      "Halo: The Master Chief Collection — official screenshot 1",
-      "Halo: The Master Chief Collection — official screenshot 2",
-      "Halo: The Master Chief Collection — official screenshot 3",
-      "Halo: The Master Chief Collection — official screenshot 4",
-      "Halo: The Master Chief Collection — official screenshot 5",
-      "Halo: The Master Chief Collection — official screenshot 6",
-      "Halo: The Master Chief Collection — official screenshot 7",
-      "Halo: The Master Chief Collection — official screenshot 8"
+      "Halo: The Master Chief Collection screenshot 1",
+      "Halo: The Master Chief Collection screenshot 2",
+      "Halo: The Master Chief Collection screenshot 3",
+      "Halo: The Master Chief Collection screenshot 4",
+      "Halo: The Master Chief Collection screenshot 5",
+      "Halo: The Master Chief Collection screenshot 6",
+      "Halo: The Master Chief Collection screenshot 7",
+      "Halo: The Master Chief Collection screenshot 8"
     ],
     "genre": "Action",
     "developer": "343 Industries, Splash Damage, Ruffian Games, Bungie, Saber Interactive",
@@ -320,7 +336,9 @@ export const catalogue = [...games, ...[
     ],
     "accent": "#93b8cf",
     "backdrop": "/assets/games/halo-mcc-hero.webp",
-    "logo": "/assets/games/halo-mcc-logo.webp"
+    "logo": "/assets/games/halo-mcc-logo.webp",
+    "icon": "/assets/games/halo-mcc-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/976730/"
   },
   {
     "cover": "/assets/games/escape-the-backrooms-cover.webp",
@@ -329,14 +347,14 @@ export const catalogue = [...games, ...[
     "id": "escape-the-backrooms",
     "title": "Escape the Backrooms",
     "captions": [
-      "Escape the Backrooms — official screenshot 1",
-      "Escape the Backrooms — official screenshot 2",
-      "Escape the Backrooms — official screenshot 3",
-      "Escape the Backrooms — official screenshot 4",
-      "Escape the Backrooms — official screenshot 5",
-      "Escape the Backrooms — official screenshot 6",
-      "Escape the Backrooms — official screenshot 7",
-      "Escape the Backrooms — official screenshot 8"
+      "Escape the Backrooms screenshot 1",
+      "Escape the Backrooms screenshot 2",
+      "Escape the Backrooms screenshot 3",
+      "Escape the Backrooms screenshot 4",
+      "Escape the Backrooms screenshot 5",
+      "Escape the Backrooms screenshot 6",
+      "Escape the Backrooms screenshot 7",
+      "Escape the Backrooms screenshot 8"
     ],
     "genre": "Action · Indie",
     "developer": "Fancy Games, Blackbird Interactive",
@@ -354,7 +372,9 @@ export const catalogue = [...games, ...[
     ],
     "accent": "#d4bd7c",
     "backdrop": "/assets/games/escape-the-backrooms-hero.webp",
-    "logo": "/assets/games/escape-the-backrooms-logo.webp"
+    "logo": "/assets/games/escape-the-backrooms-logo.webp",
+    "icon": "/assets/games/escape-the-backrooms-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/1943950/"
   },
   {
     "cover": "/assets/games/backrooms-escape-together-cover.webp",
@@ -363,14 +383,14 @@ export const catalogue = [...games, ...[
     "id": "backrooms-escape-together",
     "title": "Backrooms: Escape Together",
     "captions": [
-      "Backrooms: Escape Together — official screenshot 1",
-      "Backrooms: Escape Together — official screenshot 2",
-      "Backrooms: Escape Together — official screenshot 3",
-      "Backrooms: Escape Together — official screenshot 4",
-      "Backrooms: Escape Together — official screenshot 5",
-      "Backrooms: Escape Together — official screenshot 6",
-      "Backrooms: Escape Together — official screenshot 7",
-      "Backrooms: Escape Together — official screenshot 8"
+      "Backrooms: Escape Together screenshot 1",
+      "Backrooms: Escape Together screenshot 2",
+      "Backrooms: Escape Together screenshot 3",
+      "Backrooms: Escape Together screenshot 4",
+      "Backrooms: Escape Together screenshot 5",
+      "Backrooms: Escape Together screenshot 6",
+      "Backrooms: Escape Together screenshot 7",
+      "Backrooms: Escape Together screenshot 8"
     ],
     "genre": "Action · Adventure · Casual · Indie · Early Access",
     "developer": "Triiodide Studios",
@@ -388,7 +408,9 @@ export const catalogue = [...games, ...[
     ],
     "accent": "#d4bd7c",
     "backdrop": "/assets/games/backrooms-escape-together-hero.webp",
-    "logo": "/assets/games/backrooms-escape-together-logo.webp"
+    "logo": "/assets/games/backrooms-escape-together-logo.webp",
+    "icon": "/assets/games/backrooms-escape-together-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/2141730/"
   },
   {
     "cover": "/assets/games/bloons-td-6-cover.webp",
@@ -397,14 +419,14 @@ export const catalogue = [...games, ...[
     "id": "bloons-td-6",
     "title": "Bloons TD 6",
     "captions": [
-      "Bloons TD 6 — official screenshot 1",
-      "Bloons TD 6 — official screenshot 2",
-      "Bloons TD 6 — official screenshot 3",
-      "Bloons TD 6 — official screenshot 4",
-      "Bloons TD 6 — official screenshot 5",
-      "Bloons TD 6 — official screenshot 6",
-      "Bloons TD 6 — official screenshot 7",
-      "Bloons TD 6 — official screenshot 8"
+      "Bloons TD 6 screenshot 1",
+      "Bloons TD 6 screenshot 2",
+      "Bloons TD 6 screenshot 3",
+      "Bloons TD 6 screenshot 4",
+      "Bloons TD 6 screenshot 5",
+      "Bloons TD 6 screenshot 6",
+      "Bloons TD 6 screenshot 7",
+      "Bloons TD 6 screenshot 8"
     ],
     "genre": "Strategy",
     "developer": "Ninja Kiwi",
@@ -422,7 +444,9 @@ export const catalogue = [...games, ...[
     ],
     "accent": "#8dcbea",
     "backdrop": "/assets/games/bloons-td-6-hero.webp",
-    "logo": "/assets/games/bloons-td-6-logo.webp"
+    "logo": "/assets/games/bloons-td-6-logo.webp",
+    "icon": "/assets/games/bloons-td-6-icon.webp",
+    "artworkSource": "https://store.steampowered.com/app/960090/"
   },
   {
     "id": "roblox",
@@ -445,16 +469,19 @@ export const catalogue = [...games, ...[
       "/assets/games/roblox-8.webp"
     ],
     "captions": [
-      "Roblox community and experiences",
-      "Creating on Roblox",
-      "Roblox experiences",
-      "Roblox — official image 4",
-      "Roblox — official image 5",
-      "Roblox — official image 6",
-      "Roblox — official image 7",
-      "Roblox — official image 8"
+      "Roblox screenshot 1",
+      "Roblox screenshot 2",
+      "Roblox screenshot 3",
+      "Roblox screenshot 4",
+      "Roblox screenshot 5",
+      "Roblox screenshot 6",
+      "Roblox screenshot 7",
+      "Roblox screenshot 8"
     ],
     "accent": "#c4cbd2",
-    "backdrop": "/assets/games/roblox-1.webp"
+    "backdrop": "/assets/games/roblox-hero.webp",
+    "icon": "/assets/games/roblox-icon.webp",
+    "logo": "/assets/games/roblox-logo.webp",
+    "artworkSource": "https://www.xbox.com/games/store/roblox/BQ1TN1T79V9K"
   }
 ]];

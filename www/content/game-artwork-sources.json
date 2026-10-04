@@ -1,0 +1,860 @@
+{
+  "/assets/games/minecraft-cover.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.53095.13850085746326678.06e2dc5c-7997-46e9-a8e6-0e48b57cb13b.419e3c9d-9dd3-4a28-a9f3-a12350215871",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/minecraft-icon.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.6631.13850085746326678.06e2dc5c-7997-46e9-a8e6-0e48b57cb13b.53ca896e-c3c3-460b-b9ee-70cc217b041c",
+    "purpose": "publisher app icon",
+    "width": 128,
+    "height": 128
+  },
+  "/assets/games/minecraft-logo.webp": {
+    "url": "https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/logos/Global-Header_MCCB-Logo_300x51.svg",
+    "purpose": "wordmark",
+    "width": 298,
+    "height": 51
+  },
+  "/assets/games/minecraft-1.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.63804.13850085746326678.06e2dc5c-7997-46e9-a8e6-0e48b57cb13b.62e1159f-9fff-425a-9985-86b9dc4f7e69",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/minecraft-6.webp": {
+    "url": "https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/screenshots/CREATE_BuildAlmostAnything.png",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/minecraft-4.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.47244.13850085746326678.06e2dc5c-7997-46e9-a8e6-0e48b57cb13b.25e7f0ab-9184-421a-8c7a-d1ab2a19aef2",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/minecraft-5.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.18976.13850085746326678.06e2dc5c-7997-46e9-a8e6-0e48b57cb13b.da5e6799-81f8-4970-ac77-f9f065f840bb",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/minecraft-3.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.26021.13850085746326678.06e2dc5c-7997-46e9-a8e6-0e48b57cb13b.3aeca513-685e-4821-be4b-c791d4f33aa8",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/minecraft-7.webp": {
+    "url": "https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/screenshots/PLAYTOGETHERPDPScreenshotRefresh2024_exitingPortal_01.png",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/minecraft-2.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.53164.13850085746326678.06e2dc5c-7997-46e9-a8e6-0e48b57cb13b.8f9caacf-6317-42d9-af7b-7e8ccdc7d567",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 719
+  },
+  "/assets/games/minecraft-hero.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.58378.13850085746326678.826cc014-d610-46af-bdb3-c5c96be4d22c.64287a91-c69e-4723-bb61-03fecd348c2a",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_306f1c5828e3afeccea89f1d1f0e3f954a042bd7.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_6f456011887f970dc230af5e1720065ca3430aae.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_cff8791f06839134d09f4c865758193a7023b92f.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_d3ae27c85447a7eadd25b567d321e480252b2ef9.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_9bd0410b1f4bbc26996d7082e20a0f7cb9002988.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_27d0900a30162e97241d0643b8476d02cd453a05.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_077e7ea98621faeb5b4a73ea0aaa91f41c6f66c9.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/ss_b1104309f1c22c85de6ad6c401e6d889411c14d2.1920x1080.jpg?t=1788349095",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/satisfactory-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/satisfactory-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 155
+  },
+  "/assets/games/satisfactory-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/526870/ee3406fe5ec813b1987ad67e37e5cd6fb4f620e6.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/satisfactory-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/526870/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/rainbow-six-siege-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/2efed3587d876f560cbf3f25d9a72fbd387b74e6/ss_2efed3587d876f560cbf3f25d9a72fbd387b74e6.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/00fb4ac1f236cfd2e364ebfecb599a30b72560fe/ss_00fb4ac1f236cfd2e364ebfecb599a30b72560fe.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/ee34a63203916d39dc50d96c14aefc24dc3ff34e/ss_ee34a63203916d39dc50d96c14aefc24dc3ff34e.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/187841122613ef1059e58d50ee6edd3bec9083e1/ss_187841122613ef1059e58d50ee6edd3bec9083e1.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/7dbe5772037723a59c11ad381e0d6a3b6bc6aaf7/ss_7dbe5772037723a59c11ad381e0d6a3b6bc6aaf7.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/0fa7bb7203d3839f29861c4b5e2436cd2694291b/ss_0fa7bb7203d3839f29861c4b5e2436cd2694291b.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/122463fa746a1b4f3839d01beead0f9a43ce9e47/ss_122463fa746a1b4f3839d01beead0f9a43ce9e47.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/d81c366d2b48c83e6ed138dff8ebd895be84e45d/ss_d81c366d2b48c83e6ed138dff8ebd895be84e45d.1920x1080.jpg?t=1790952963",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/rainbow-six-siege-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/rainbow-six-siege-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/logo.png",
+    "purpose": "wordmark",
+    "width": 282,
+    "height": 58
+  },
+  "/assets/games/rainbow-six-siege-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/359550/624745d333ac54aedb1ee911013e2edb7722550e.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/rainbow-six-siege-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/359550/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/forza-horizon-6-cover.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.29856.14202278764680089.8e4c786a-0a1c-4737-a244-0bdfa34aab7b.64883cac-25a8-4715-a0dc-0dd42b0e5435",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/forza-horizon-6-icon.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.34371.14202278764680089.8e4c786a-0a1c-4737-a244-0bdfa34aab7b.80a395f6-b8a0-4314-904f-0167aff41e99",
+    "purpose": "publisher app icon",
+    "width": 128,
+    "height": 128
+  },
+  "/assets/games/forza-horizon-6-logo.webp": {
+    "url": "https://cdn.forza.net/strapi-uploads/assets/logo_white_fh6_700586c7eb.svg",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 123
+  },
+  "/assets/games/forza-horizon-6-1.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.20879.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.d2ac1c6e-74e9-4a91-9d7a-6966a533c31a",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-4.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.48086.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.ce00c48e-99e2-42e6-a1d2-65eeade1f479",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-6.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.23875.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.bad12690-94d2-40e5-ac1f-d269321d6688",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-3.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.37013.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.182ed2fe-541b-4090-a046-c42ee94ee6b5",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-5.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.27277.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.fe9dceff-4e46-4871-9e7b-b1519bf73b61",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-2.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.51192.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.2d474792-3083-4fd5-8520-6f66962f27da",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-8.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.7530.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.e744973d-4a08-49cd-9de0-de925822b6d5",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-7.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.16800.13547047233571036.9e79112e-954c-4c10-b0fc-2b6f79e6072b.caa6b9ee-5d2f-4308-b3e9-4820e91a1d36",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-6-hero.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.24935.14202278764680089.8e4c786a-0a1c-4737-a244-0bdfa34aab7b.40c11e20-8ff6-4db3-9365-faad9fa06d1a",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_56d3181c30a7975a46c4f2d8391861890508d7ba.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_34be8257854f966bc323eccefc4df91ba6062bfe.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_d2046bdb2f6acdf9b88c3c168e9eaec38495f063.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_e872c3153b246b4f595d7106976c6e63d4185c45.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_6aff9bfcaeb460988148efe3c83448fd93e6641a.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_e88792a0331f460d913ac05203f7c1b12112b14c.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_1b6f2f86ea117a38d5b527e62ab030a930db972f.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/ss_66354376f93c5581628e8564e663104cbb201665.1920x1080.jpg?t=1734336342",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/forza-horizon-4-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/forza-horizon-4-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 127
+  },
+  "/assets/games/forza-horizon-4-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/1293830/7c993f9089d54fe2767efec47b75a7009cdd632e.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/forza-horizon-4-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1293830/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/beamng-drive-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_ae4c258e6f13ddf00ee8e72be8bd0b0fc5e67801.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_ac6c91223f4f12662a9ae7c3a06e2c951a2551f0.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_e55bbb37fa7208d720d15e69c23c8d932283b4fe.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_1b129249ad662d242a81a34ee2fdcdcbe064eb32.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_707b21b512dd1fe58e7ea9dcf63af386dd8dc883.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_50b8ba7ff80d50af3bd6b1b4e326849555a952a2.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_fb30bf82ea7220eb8348f4e893b6ce852c1d1d70.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/ss_9cff66c2f780d440c123c7f6307c3eb72d8aacc0.1920x1080.jpg?t=1785357623",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/beamng-drive-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/beamng-drive-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 61
+  },
+  "/assets/games/beamng-drive-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/284160/34f8997c32b2f463caf2014aab4a95109a896ecc.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/beamng-drive-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/284160/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/geometry-dash-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_f8428bf7ccc0e1412a8d9eee24d5c483df38ab54.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_05cb182b93131a5faf0516232a7ad27c83f2c0e8.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_0e841fa6622be28851d8aa9624bb0d727c533029.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_1e5328e6955e4037c4e1dfbe761dbb34f3d293da.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_267a8eff67ed643e4f1d49054da5102a07b7ffae.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_5aa7c52b6f29b138712c0e89c7f9f2791ec289a9.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_d542f0b64117d289239b068582b7f94f2764063c.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/ss_028ecd756e15877b154a8c9d7ddc784759f18458.1920x1080.jpg?t=1775300400",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/geometry-dash-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/geometry-dash-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 231
+  },
+  "/assets/games/geometry-dash-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/322170/7fb2e71773468dbd98d56c733b604c92f5ab0ad4.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/geometry-dash-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/322170/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/halo-mcc-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_fdaf8ebd7f3c62e08398f39c9bfa486294ea5a0a.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 800,
+    "height": 450
+  },
+  "/assets/games/halo-mcc-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_3a4d84cdabf7e015e4409b4218bcd00ba6aa730f.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 800,
+    "height": 450
+  },
+  "/assets/games/halo-mcc-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_85da13aef2acd210f95f4b43540967f24d7bed6a.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 800,
+    "height": 450
+  },
+  "/assets/games/halo-mcc-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_ce40a85f9f7f3fa0f620a87f8919f3212ab8e46e.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/halo-mcc-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_24bfdbf8483862d9e6f1d2b114a2412e47a41d68.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 800,
+    "height": 450
+  },
+  "/assets/games/halo-mcc-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_62bbd86f4735893ef6cd53206cf8c93f87eb86ec.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/halo-mcc-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_e00d7524d2b4529ef08cd49afde2cf6212ff034e.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 800,
+    "height": 450
+  },
+  "/assets/games/halo-mcc-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/ss_25d03817a7e55b9b1c12b835af457e827ee8a246.1920x1080.jpg?t=1774466074",
+    "purpose": "publisher store screenshot",
+    "width": 800,
+    "height": 450
+  },
+  "/assets/games/halo-mcc-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/halo-mcc-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 125
+  },
+  "/assets/games/halo-mcc-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/976730/196a45d8df1981ff6b6b1872a38dc38f6c22875d.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/halo-mcc-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/976730/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/escape-the-backrooms-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/f660fbae0d7b6aae223449cf102fa575ca1fd297/ss_f660fbae0d7b6aae223449cf102fa575ca1fd297.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/ss_391a7c8a4ff906726977d9d72f82c0336be46bfd.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/ss_bd0c8faa3e219d4a8489a9e9f8c69dae3f5653d1.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/31c55970a7cc9a08c6ff72ba165cc0124e2224f9/ss_31c55970a7cc9a08c6ff72ba165cc0124e2224f9.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/de0d406d4946b22d174bb9ce1e64317516d92b5a/ss_de0d406d4946b22d174bb9ce1e64317516d92b5a.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/7ec4526ee8cf906377d44ff5e0284e2f9191dcaa/ss_7ec4526ee8cf906377d44ff5e0284e2f9191dcaa.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/fcad6110fc59ef9179e72ce0e463a537f727885c/ss_fcad6110fc59ef9179e72ce0e463a537f727885c.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/ss_be8a2441bfd9c6853c9e8091ce0c146ec6bea6ae.1920x1080.jpg?t=1790963343",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/escape-the-backrooms-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/7f91890deae0cf3ac362bc573f2f7ef9b82dfa19/library_capsule.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/escape-the-backrooms-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/1bfa7b906db3433a71cf3c0ab421710ea5b2881b/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 165
+  },
+  "/assets/games/escape-the-backrooms-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/1943950/2bd4431dd3b71ea7fd11cbcef9594f0d09e4079d.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/escape-the-backrooms-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1943950/2f4429b35e6d02d255aedaf1bdddafb2409e6870/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/backrooms-escape-together-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/4caad38e0abc643fc2723b00aa70429fac2e5d16/ss_4caad38e0abc643fc2723b00aa70429fac2e5d16.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/backrooms-escape-together-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/b7fa3a5e0ac4d91e27c4b749c7df671febae2ad6/ss_b7fa3a5e0ac4d91e27c4b749c7df671febae2ad6.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 708
+  },
+  "/assets/games/backrooms-escape-together-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/e112963c6d41dd726e7ded7fbe145cf5746d6941/ss_e112963c6d41dd726e7ded7fbe145cf5746d6941.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/backrooms-escape-together-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/98369599dab566198764604294ebc1c8f4607b62/ss_98369599dab566198764604294ebc1c8f4607b62.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/backrooms-escape-together-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/0597fbc5ca72d52d8e428c460d643632dc124d43/ss_0597fbc5ca72d52d8e428c460d643632dc124d43.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/backrooms-escape-together-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/d93bf0cd11127e49794bfd77edd74d0b7bd7883b/ss_d93bf0cd11127e49794bfd77edd74d0b7bd7883b.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/backrooms-escape-together-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/6642cc8139ae5d1e80d463cea7168fa706d9bbc4/ss_6642cc8139ae5d1e80d463cea7168fa706d9bbc4.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/backrooms-escape-together-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/9247ea4847cf57805188a4271d39a15291097a93/ss_9247ea4847cf57805188a4271d39a15291097a93.1920x1080.jpg?t=1780282746",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/backrooms-escape-together-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/backrooms-escape-together-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/052cfb213fe5b5fc04a23e947cbc6f66537b4a4b/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 151
+  },
+  "/assets/games/backrooms-escape-together-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/2141730/d4b430f9594dcad772f320fe8792b2c94cf99e06.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/backrooms-escape-together-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2141730/ddac8443f674d6a7b5104a98290d22b9d5b5eb4f/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/bloons-td-6-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_c49e84b50f5326a4d44f49f1e56e317682f53789.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_a20e85177d96408281e0672927f8e9137c1f423a.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_c8525f327db944b0c0b9cedeeeca15c5c55797a2.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_4267806278ff810e3dd04a63b732b1b89019d57d.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_4134980ce3fd32fa19b0cb9bc0ecd25674a92a90.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_c8c0cfc3a0c88f497ef7d7c20f30c75a83ef8098.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_ab05c1ce749ecc1a6e76a8efc4d4dd21f534d091.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/ss_cc8f0bb7f660dca501806b1853e62664bd26e30b.1920x1080.jpg?t=1782123772",
+    "purpose": "publisher store screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/bloons-td-6-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/library_600x900.jpg",
+    "purpose": "publisher library cover",
+    "width": 300,
+    "height": 450
+  },
+  "/assets/games/bloons-td-6-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/logo.png",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 344
+  },
+  "/assets/games/bloons-td-6-icon.webp": {
+    "url": "https://shared.akamai.steamstatic.com/community_assets/images/apps/960090/c5f0b67c8beeb6be99abe2ad8db2cada5d5ccff0.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/bloons-td-6-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/960090/library_hero.jpg",
+    "purpose": "publisher library hero",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/roblox-cover.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.3683.68327322396008232.ddd32983-30da-4856-a0ef-70bb8840e88d.cb3ff148-2c1f-4b84-9eea-ff80eda50c2d",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/roblox-icon.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.64577.68327322396008232.c94c16e6-da74-4496-8e30-c6564f83c85d.9a482da9-7019-4173-be8c-1818c83d8668",
+    "purpose": "publisher app icon",
+    "width": 128,
+    "height": 128
+  },
+  "/assets/games/roblox-logo.webp": {
+    "url": "https://about.roblox.com/images/Roblox_Logo_White.svg",
+    "purpose": "wordmark",
+    "width": 600,
+    "height": 111
+  },
+  "/assets/games/roblox-1.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.46533.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.2e61f0cf-ec8a-4c25-bda6-94e8e6cbd95e",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-7.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.53052.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.bfdafc7d-c341-4e45-ac02-c845aaf6459e",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-3.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.57916.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.8e6f19e0-27fe-46c3-a85d-5dddb0decfe1",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-4.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.22752.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.ee72c9cf-ce29-4e04-b4c9-5f3fa2c70d53",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-5.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.52855.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.d2850bf3-9f4b-4004-bfec-322b16eb34fc",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-6.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.49674.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.a207377c-f8e3-4a53-8d12-88121c4ee467",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-2.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.25470.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.28a55094-e7c6-4a0c-bcd8-f6d55f7aa3fa",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-8.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.56398.68327322396008232.8a5665b9-e1df-457b-a92e-f646e6f7ade0.d76480fe-de8f-4091-8537-cf8c9e4f6520",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/roblox-hero.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.15909.68327322396008232.effd08b7-88b7-43b0-b91d-4689a0c70a05.8cb751bd-d0c8-4352-a273-a7bb62dd5c4b",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 720
+  }
+}
