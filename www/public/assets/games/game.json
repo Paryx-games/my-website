@@ -1,14 +1,30 @@
 {
-  "minecraft": { "playtime": { "pc": "", "mobile": "" } },
-  "satisfactory": { "playtime": { "pc": "", "mobile": "" } },
-  "rainbow-six-siege": { "playtime": { "pc": "", "mobile": "" } },
-  "forza-horizon-6": { "playtime": { "pc": "", "mobile": "" } },
-  "forza-horizon-4": { "playtime": { "pc": "", "mobile": "" } },
-  "beamng-drive": { "playtime": { "pc": "", "mobile": "" } },
-  "geometry-dash": { "playtime": { "pc": "", "mobile": "" } },
-  "halo-mcc": { "playtime": { "pc": "", "mobile": "" } },
-  "escape-the-backrooms": { "playtime": { "pc": "", "mobile": "" } },
-  "backrooms-escape-together": { "playtime": { "pc": "", "mobile": "" } },
-  "bloons-td-6": { "playtime": { "pc": "", "mobile": "" } },
-  "roblox": { "playtime": { "pc": "", "mobile": "" } }
+  "minecraft": {
+    "playtime": { "pc": "49671", "mobile": "", "console": "22606" }
+  },
+  "satisfactory": { "playtime": { "pc": "9298", "mobile": "", "console": "" } },
+  "rainbow-six-siege": {
+    "playtime": { "pc": "", "mobile": "", "console": "" }
+  },
+  "forza-horizon-6": {
+    "playtime": { "pc": "1221", "mobile": "", "console": "3405" }
+  },
+  "forza-horizon-4": { "playtime": { "pc": "", "mobile": "", "console": "" } },
+  "beamng-drive": { "playtime": { "pc": "1831", "mobile": "", "console": "" } },
+  "geometry-dash": {
+    "playtime": { "pc": "771", "mobile": "4874", "console": "" }
+  },
+  "halo-mcc": { "playtime": { "pc": "82", "mobile": "", "console": "" } },
+  "escape-the-backrooms": {
+    "playtime": { "pc": "3920", "mobile": "", "console": "" }
+  },
+  "backrooms-escape-together": {
+    "playtime": { "pc": "923", "mobile": "", "console": "" }
+  },
+  "bloons-td-6": {
+    "playtime": { "pc": "340", "mobile": "2350", "console": "" }
+  },
+  "roblox": { "playtime": { "pc": "", "mobile": "", "console": "" } },
+  "pressure": { "playtime": { "pc": "", "mobile": "", "console": "" } },
+  "town": { "playtime": { "pc": "", "mobile": "", "console": "" } }
 }
