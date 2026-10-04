@@ -173,6 +173,23 @@ document.getElementById('game-close').addEventListener('click', closeShowcase);
 dialog.addEventListener('cancel', event => { event.preventDefault(); closeShowcase(); });
 document.getElementById('game-prev').addEventListener('click', () => showPicture(pictureIndex - 1));
 document.getElementById('game-next').addEventListener('click', () => showPicture(pictureIndex + 1));
+
+thumbs.addEventListener('wheel', event => {
+  // Keep horizontal trackpad gestures and browser zoom native.
+  if (event.ctrlKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+  const maxScroll = thumbs.scrollWidth - thumbs.clientWidth;
+  if (maxScroll <= 0) return;
+  const style = getComputedStyle(thumbs);
+  // Scroll snapping can leave the first/last thumbnail inset by the strip padding.
+  if (event.deltaY < 0 && thumbs.scrollLeft <= parseFloat(style.paddingLeft) + 1) return;
+  if (event.deltaY > 0 && maxScroll - thumbs.scrollLeft <= parseFloat(style.paddingRight) + 1) return;
+  const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? thumbs.clientWidth : 1;
+  const nextScroll = Math.max(0, Math.min(maxScroll, thumbs.scrollLeft + event.deltaY * unit));
+  // Let the popup scroll normally once the strip reaches either end.
+  if (Math.abs(nextScroll - thumbs.scrollLeft) < 1) return;
+  event.preventDefault();
+  thumbs.scrollTo({ left: nextScroll, behavior: 'instant' });
+}, { passive: false });
 dialog.addEventListener('keydown', event => {
   if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
     event.preventDefault();
