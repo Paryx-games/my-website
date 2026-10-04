@@ -17,12 +17,15 @@ const detailSource = markdown.slice(markdown.indexOf('<h3>'), markdown.indexOf('
 const articles = [...detailSource.matchAll(/<h3>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3>|$)/g)]
   .map(([, heading, body]) => `<article><h3>${heading.replace(/<br>\s*/g, '')}</h3>\n${marked.parse(body)}</article>`).join('\n')
   .replace(/<img[^>]+src="https:\/\/skillicons\.dev\/[^>]+>/g, '');
-const details = `<section id="more-details" class="profile-details">
-      <h2>More details</h2>
+const details = `<details id="more-details" class="profile-details">
+      <summary>More details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg></summary>
       <div class="profile-details-body">${articles}</div>
-    </section>`;
-if (html.includes('<section id="more-details"')) {
-  html = html.replace(/<section id="more-details"[\s\S]*?<\/section>/, details);
+    </details>`;
+if (html.includes('<details id="more-details"')) {
+  html = html.replace(/<details id="more-details"[\s\S]*?<\/details>/, details);
+} else if (html.includes('<section id="more-details"')) {
+  html = html.replace(/<section id="more-details"[\s\S]*?<\/section>/, '');
+  html = html.replace(/(<div class="stack reveal" id="stackTools"><\/div>\s*<\/div>)/, `$1\n\n    ${details}`);
 } else {
   html = html.replace(/\s*<details class="more">[\s\S]*?<\/details>/, '');
   html = html.replace('    <section class="tight">', `${details}\n\n    <section class="tight">`);

@@ -1252,7 +1252,26 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: var(--space-8);
+      max-width: 68ch;
+      font-size: 0.9375rem;
+      padding: 24px 0 8px 20px;
+      border-left: 1px solid var(--color-border);
     }
+
+    @media (prefers-reduced-motion: reduce) { .profile-details > summary svg { transition: none; } }
+    .stack-intro { color: var(--color-muted); font-size: 0.875rem; line-height: 1.6; margin-bottom: 12px; }
+    .profile-details { margin-top: 32px; border-top: 1px solid var(--color-border); }
+    .profile-details > summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 0; cursor: pointer; list-style: none;
+      color: var(--color-muted); font-size: 0.9375rem; font-weight: 500;
+    }
+    .profile-details > summary::-webkit-details-marker { display: none; }
+    .profile-details > summary:hover, .profile-details[open] > summary { color: var(--color-text); }
+    .profile-details > summary svg { width: 16px; height: 16px; flex: none; transition: transform 160ms var(--ease); }
+    .profile-details[open] > summary svg { transform: rotate(180deg); }
+    .profile-details-body p { font-size: 0.9375rem; line-height: 1.8; color: var(--color-soft); font-weight: 400; }
+    .profile-details-body strong { font-weight: 600; }
 
     .profile-details-body > article { min-width: 0; }
     .about p + p { margin-top: 1.5rem; }
@@ -1261,12 +1280,16 @@
     .profile-language .ico img { opacity: 1; height: 100%; }
     .profile-language .ico svg { opacity: 0; }
     .profile-details-body .profile-language .ico img { height: 100%; max-width: none; }
-    .profile-details-body h3 .ico { width: 24px; height: 24px; }
+    .profile-details-body .ico { width: 14px; height: 14px; }
+    .profile-details-body h3 .ico { width: 18px; height: 18px; }
 
 
     .profile-details-body h3 {
       display: block;
       font-size: var(--text-body);
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 16px;
     }
 
     .profile-details-body p + p { margin-top: var(--space-4); }
@@ -2173,21 +2196,17 @@
 
       <div class="stack-group">
         <h3>Languages</h3>
-        <p>I can code in several languages! I've listed them below and ranked them based on my own level of experience, from strongest to still improving.</p>
+        <p class="stack-intro">Ordered from strongest to still learning.</p>
         <div class="stack reveal" id="stackLangs"></div>
-        <p class="note">ranked by expertise, from best to still improving (in my opinion)</p>
-        <p>If you want to know more about my coding skills, I've made an <a href="#more-details">expanded section covering my experience with specific languages</a>.</p>
       </div>
 
       <div class="stack-group">
         <h3>Tools</h3>
-        <p>I also have skills in a few other tools, listed below.</p>
         <div class="stack reveal" id="stackTools"></div>
       </div>
-    </section>
 
-<section id="more-details" class="profile-details">
-      <h2>More details</h2>
+    <details id="more-details" class="profile-details">
+      <summary>More details <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m4 6 4 4 4-4" /></svg></summary>
       <div class="profile-details-body"><article><h3>
 
 
@@ -2237,7 +2256,10 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
 <p>For Python, I&#39;ve been using it for years and still come back to it regularly for scripts, automation, quick tools, and anything where I want to get something working without much setup. Its huge package ecosystem and simple syntax make it incredibly convenient, although over time I&#39;ve started preferring languages like Rust and TypeScript for larger projects where I want stronger tooling, type safety, and more predictable behaviour.</p>
 <p>Around mid-2025, I also discovered <code>uv</code>, which made working with Python much nicer for me. I now prefer it over using <code>pip</code> directly because it is extremely fast, handles environments and dependencies cleanly, and gives Python projects a much more modern workflow. I still don&#39;t use Python as much as I used to, but it remains one of those languages that is ridiculously useful to have around.</p>
 </article></div>
+    </details>
     </section>
+
+
   </main>
 
   <footer class="site-footer">
@@ -2681,7 +2703,11 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
         if (!walker.currentNode.parentElement.closest('code, pre')) nodes.push(walker.currentNode);
       }
       const names = /\b(JavaScript|TypeScript|Python|Rust|C\+\+|Luau|Lua|Electron|GitHub|Docker|Git|Roblox|Discord)(?=$|[^a-zA-Z])/g;
+      const seenIcons = new WeakMap();
       for (const node of nodes) {
+        const block = node.parentElement.closest('p, h3') || node.parentElement;
+        if (!seenIcons.has(block)) seenIcons.set(block, new Set());
+        const seen = seenIcons.get(block);
         const fragment = document.createDocumentFragment();
         let offset = 0;
         for (const match of node.nodeValue.matchAll(names)) {
@@ -2689,7 +2715,10 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
           const brand = brands.get(match[0]);
           const label = document.createElement('span');
           label.className = 'profile-language';
-          label.innerHTML = ico(brand.key, brand.color);
+          if (!seen.has(brand.key)) {
+            label.innerHTML = ico(brand.key, brand.color);
+            seen.add(brand.key);
+          }
           label.append(match[0]);
           fragment.append(label);
           offset = match.index + match[0].length;
