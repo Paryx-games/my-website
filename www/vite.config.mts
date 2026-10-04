@@ -1,12 +1,9 @@
 import { fileURLToPath } from "node:url";
-import { existsSync } from "node:fs";
 import {
   defineConfig,
   loadEnv,
   type ViteDevServer,
   type PreviewServer,
-  type Plugin,
-  type UserConfig,
 } from "vite";
 
 const projectsApi = (server: ViteDevServer | PreviewServer) => {
@@ -33,13 +30,7 @@ const searchProxy = {
   "/search-index.json": { target: "https://blog.paryx.uk", changeOrigin: true },
 };
 
-export default defineConfig(async ({ mode, command, isPreview }): Promise<UserConfig> => {
-  const editorPath = new URL("./scripts/game-ratings-editor.mjs", import.meta.url);
-  const localPlugins: Plugin[] = [];
-  if (command === "serve" && !isPreview && existsSync(editorPath)) {
-    const { gameRatingsEditor } = await import(editorPath.href);
-    localPlugins.push(gameRatingsEditor());
-  }
+export default defineConfig(({ mode }) => {
   process.env.GITHUB_TOKEN ||= loadEnv(
     mode,
     fileURLToPath(new URL("./", import.meta.url)),
@@ -50,7 +41,6 @@ export default defineConfig(async ({ mode, command, isPreview }): Promise<UserCo
     server: { host: "127.0.0.1", proxy: searchProxy },
     preview: { proxy: searchProxy },
     plugins: [
-      ...localPlugins,
       {
         name: "github-projects-api",
         configureServer: projectsApi,

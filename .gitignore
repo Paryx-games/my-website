@@ -19,7 +19,3 @@ test/previews/triangle-led-front/dist
 
 # operating system files
 .DS_Store
-
-# local game ratings editor (public ratings data stays versioned)
-/www/scripts/game-ratings-editor.*
-/www/tests/game-ratings-editor.test.mjs
