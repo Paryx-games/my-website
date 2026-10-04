@@ -214,6 +214,7 @@ h6 {
 }
 .byline {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
@@ -647,15 +648,14 @@ h6 {
 .listing-intro .deck {
   margin-bottom: 0;
 }
-.featured-banner {
+.summary-banner {
   display: block;
+  margin-bottom: 24px;
 }
 .post-summary {
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: 24px;
+  display: block;
 }
 .post-summary.featured {
   display: block;
@@ -677,12 +677,6 @@ h6 {
 }
 .post-summary.featured .deck {
   font-size: 18px;
-}
-.listing-thumbnail {
-  width: 100%;
-  aspect-ratio: 1.7;
-  object-fit: cover;
-  border-radius: 8px;
 }
 .read-link {
   display: inline-block;
@@ -877,10 +871,7 @@ dialog::backdrop {
   .listing-intro h1 {
     font-size: 30px;
   }
-  .post-summary {
-    display: block;
-  }
-  .listing-thumbnail {
+  .summary-banner {
     margin-bottom: 20px;
   }
   dialog {

@@ -525,18 +525,6 @@ export function Listing({
         </p>
       </header>
       {introduction}
-      {featured?.banner && (
-        <a className="featured-banner" href={`/${featured.slug}`}>
-          <img
-            className="hero-banner"
-            src={featured.banner}
-            alt={featured.bannerAlt ?? featured.title}
-            width="1200"
-            height="340"
-            fetchPriority="high"
-          />
-        </a>
-      )}
       <div className="reading-layout">
         <div className="post-list" data-post-list>
           {posts.length === 0 && (
@@ -565,15 +553,21 @@ function PostSummary({
 }) {
   return (
     <article className={`post-summary ${featured ? 'featured' : ''}`}>
-      {!featured && post.banner && (
-        <a href={`/${post.slug}`} tabIndex={-1} aria-hidden="true">
+      {post.banner && (
+        <a
+          className="summary-banner"
+          href={`/${post.slug}`}
+          tabIndex={-1}
+          aria-hidden="true"
+        >
           <img
-            className="listing-thumbnail"
+            className="hero-banner"
             src={post.banner}
             alt=""
-            width="230"
-            height="130"
-            loading="lazy"
+            width="1200"
+            height="340"
+            loading={featured ? 'eager' : 'lazy'}
+            fetchPriority={featured ? 'high' : undefined}
           />
         </a>
       )}
