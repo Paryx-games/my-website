@@ -6,6 +6,9 @@
 
 # personal guides and maintenance notes (in any directory)
 PERSONAL.md
+PLAYTIME.md
+README.personal.md
+README.local.md
 
 # installed dependencies and package cache
 node_modules
@@ -19,3 +22,17 @@ test/previews/triangle-led-front/dist
 
 # operating system files
 .DS_Store
+.neon
+
+# generated Neon agent tooling and local collector credentials
+/.agents/skills/neon*/
+/skills-lock.json
+/playtime-collector.local.json
+/.playtime-collector-state.json*
+/.test-build/
+/api/.test-build/
+.agents
+
+.vercel
+.env*
+!/api/.env.example

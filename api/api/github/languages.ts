@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   const result = await getRepositoryLanguages(req.query.repo);
 
-  if (result.error) {
+  if (result.error !== undefined) {
     return res.status(result.status).json({ error: result.error });
   }
 

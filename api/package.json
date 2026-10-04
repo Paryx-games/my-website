@@ -2,7 +2,17 @@
 	"name": "paryx-api",
 	"private": true,
 	"type": "module",
+	"scripts": {
+		"typecheck": "tsc --noEmit",
+		"test": "tsc -p tsconfig.test.json && node --test .test-build/tests/*.test.js",
+		"migrate:playtime": "node --env-file=../.env scripts/migrate-playtime.mjs"
+	},
 	"devDependencies": {
-		"@vercel/node": "^5.10.2"
+		"@types/node": "^24.19.1",
+		"@vercel/node": "^5.10.2",
+		"typescript": "^5.9.3"
+	},
+	"dependencies": {
+		"@neondatabase/serverless": "^1.2.0"
 	}
 }

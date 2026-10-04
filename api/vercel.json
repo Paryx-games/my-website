@@ -2,7 +2,9 @@
 	"$schema": "https://openapi.vercel.sh/vercel.json",
 	"cleanUrls": true,
 	"trailingSlash": false,
+	"outputDirectory": "public",
 	"rewrites": [
+		{ "source": "/playtime", "destination": "/api/playtime" },
 		{
 			"source": "/github/languages",
 			"destination": "/api/github/languages"

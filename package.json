@@ -6,6 +6,8 @@
 		"build:triangle-led-front": "vite build --config test/previews/triangle-led-front/vite.config.mts"
 	},
 	"dependencies": {
+		"@neon/config": "^1.8.3",
+		"@neon/env": "^1.5.0",
 		"lil-gui": "^0.21.0",
 		"react": "^19.3.0",
 		"react-dom": "^19.3.0",
