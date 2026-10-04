@@ -326,7 +326,6 @@ h6 {
   top: 24px;
   max-height: calc(100dvh - 48px);
   overflow-y: auto;
-  scrollbar-width: thin;
 }
 .search-form {
   display: flex;
@@ -547,7 +546,6 @@ h6 {
   font-size: 13px;
   line-height: 1.65;
   tab-size: 2;
-  scrollbar-width: thin;
 }
 .prose pre code {
   white-space: pre;

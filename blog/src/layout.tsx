@@ -273,6 +273,7 @@ export function Document({
       <head>
         <meta charSet="utf-8" />
         <link rel="stylesheet" href="/assets/navigation.css" />
+        <link rel="stylesheet" href="/assets/scrollbars.css" />
         <script src="/assets/navigation.js" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{pageTitle}</title>
