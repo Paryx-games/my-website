@@ -2,6 +2,8 @@
 title: 'Verifying commits on GitHub with SSH'
 description: 'I started verifying commits with GitHub SSH signing'
 date: '2026-10-02'
+banner: "https://brand.github.com/_next/static/media/logo-01.a1916c76.png"
+bannerAlt: "GitHub Banner Image"
 authors:
   - paryx
 tags:
