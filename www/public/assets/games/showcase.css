@@ -2,14 +2,14 @@
 .games-heading h3, .rotation-section h3 { font-size: 1rem; }
 .games-heading span { color: var(--color-faint); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
 .games-row { display: flex; flex-wrap: wrap; gap: 14px; }
-.game-card { width: 140px; display: flex; flex-direction: column; gap: 8px; border-radius: 10px; transition: transform 200ms var(--ease); }
+.game-card { width: 140px; display: flex; flex-direction: column; gap: 4px; border-radius: 10px; transition: transform 200ms var(--ease); }
 .game-card.is-pending { opacity: 0; transform: translateY(12px); }
 .game-card.is-revealed { animation: game-card-enter 400ms var(--ease) both; }
-.game-cover { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 10px; background: var(--color-surface); }
-.game-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform 200ms var(--ease), filter 200ms var(--ease); }
-.game-cover strong { position: absolute; bottom: 0; left: 0; right: 0; padding: 9px 10px; background: rgba(8, 8, 9, 0.84); font-size: 0.8rem; line-height: 1.4; }
-.game-card:hover .game-cover img { transform: scale(1.035); filter: brightness(1.1); }
-.game-card-facts, .game-status { color: var(--color-faint); font-size: 0.75rem; line-height: 1.5; }
+.game-cover { display: block; }
+.game-cover img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: contain; background: var(--color-surface); border-radius: 8px; transition: filter 200ms var(--ease); }
+.game-cover strong { display: block; padding-top: 6px; font-size: 0.8rem; line-height: 1.25; letter-spacing: -0.01em; }
+.game-card:hover .game-cover img { filter: brightness(1.1); }
+.game-card-facts { color: var(--color-faint); font-size: 0.7rem; line-height: 1.3; }
 .game-card:focus-visible, #game-showcase button:focus-visible, #game-website:focus-visible { outline: 2px solid var(--game-accent, var(--color-text)); outline-offset: 4px; }
 .rotation-section { margin-top: 2.5rem; }
 .game-showcase-open { overflow: hidden; }

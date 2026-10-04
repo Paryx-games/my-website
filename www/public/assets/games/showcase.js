@@ -54,13 +54,9 @@ cards.replaceChildren(...games.map(card));
 document.getElementById('games-count').textContent = games.length;
 const rotationRoot = document.getElementById('rotation-games');
 if (rotation.length) {
-  rotationRoot.replaceChildren(...rotation.map(({ id, status, title }) => {
+  rotationRoot.replaceChildren(...rotation.map(({ id, title }) => {
     const game = catalogue.find(game => game.id === id);
     const link = card({ ...game, title: title || game.title });
-    const label = document.createElement('span');
-    label.className = 'game-status';
-    label.textContent = status;
-    link.append(label);
     return link;
   }));
 }
