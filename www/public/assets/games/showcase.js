@@ -4,7 +4,6 @@ const cards = document.getElementById('favorite-games');
 const dialog = document.getElementById('game-showcase');
 const title = document.getElementById('game-title');
 const image = document.getElementById('game-picture');
-const caption = document.getElementById('game-caption');
 const thumbs = document.getElementById('game-thumbnails');
 let active;
 let pictureIndex = 0;
@@ -86,7 +85,6 @@ function showPicture(index) {
   image.src = active.pictures[pictureIndex];
   image.alt = active.captions[pictureIndex];
   if (!reducedMotion.matches) image.animate([{ opacity: 0.3, transform: 'scale(1.015)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 280, easing: 'ease-out' });
-  caption.textContent = `${pictureIndex + 1} / ${active.pictures.length} — ${active.captions[pictureIndex]}`;
   [...thumbs.children].forEach((button, index) => button.setAttribute('aria-pressed', String(index === pictureIndex)));
   if (dialog.open) thumbs.children[pictureIndex]?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
 }

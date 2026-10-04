@@ -3,6 +3,7 @@
 <html lang="en">
 
 <head>
+  <link rel="stylesheet" href="/assets/scrollbars.css">
   <link rel="stylesheet" href="/assets/navigation.css">
   <script src="/assets/navigation.js"></script>
   <link rel="stylesheet" href="/assets/site-search.css">
@@ -539,8 +540,6 @@
       overflow-y: auto;
       overscroll-behavior: contain;
       list-style: none;
-      scrollbar-width: thin;
-      scrollbar-color: var(--color-border) transparent;
     }
 
     .tz-opt {
@@ -2293,7 +2292,6 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
         <div class="game-picture-stage">
           <img id="game-picture" alt="" width="1920" height="1080">
           <button type="button" id="game-prev" aria-label="Previous picture">←</button>
-          <p id="game-caption" aria-live="polite"></p>
           <button type="button" id="game-next" aria-label="Next picture">→</button>
         </div>
         <div id="game-thumbnails" aria-label="Game pictures"></div>
