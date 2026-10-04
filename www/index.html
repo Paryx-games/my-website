@@ -2509,7 +2509,6 @@
     const DISCORD_APP_URL = "discord://-/users/1376223581658419243";
     const platform = navigator.userAgentData?.platform || navigator.platform || "";
     const IS_WINDOWS = /windows|win32|win64/i.test(platform) || /windows/i.test(navigator.userAgent);
-    const REPO_CACHE_MS = 36e5;
     const GITHUB_LANGUAGE_COLORS = {
       "C#": "#178600",
       "C++": "#f34b7d",
@@ -3669,51 +3668,8 @@
       }, 1600));
     };
 
-    const fetchJSON = async (url) => {
-      const response = await fetch(url, {
-        headers: url.startsWith("https://api.github.com/")
-          ? { Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2026-03-10" }
-          : undefined
-      });
-
-      if (!response.ok) {
-        let detail = "";
-        try {
-          const body = await response.json();
-          detail = body?.message ? String(body.message) : "";
-        } catch { }
-
-        const remaining = response.headers.get("x-ratelimit-remaining");
-        const reset = response.headers.get("x-ratelimit-reset");
-        const rateLimited = response.status === 403 && remaining === "0";
-        const resetText = rateLimited && reset
-          ? ` Rate limit resets at ${new Date(Number(reset) * 1000).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}.`
-          : "";
-
-        const error = new Error(
-          `GitHub API ${response.status} ${response.statusText || "request failed"}${detail ? `: ${detail}` : ""}${resetText}`
-        );
-        error.status = response.status;
-        error.url = url;
-        error.rateLimited = rateLimited;
-        throw error;
-      }
-
-      return response.json();
-    };
-
-    const fetchPaged = async (url) => {
-      const items = [];
-      let page = 1;
-      for (; ;) {
-        const joiner = url.includes("?") ? "&" : "?";
-        const batch = await fetchJSON(`${url}${joiner}per_page=100&page=${page}`);
-        if (!Array.isArray(batch)) throw new Error("Expected an array");
-        items.push(...batch);
-        if (batch.length < 100) return items;
-        page++;
-      }
-    };
+    let githubProjectsPromise;
+    const fetchGitHubProjects = () => githubProjectsPromise ||= import('/assets/github-projects.js').then(({ getGitHubProjects }) => getGitHubProjects());
 
     const languageBreakdown = (raw) => {
       if (!raw || typeof raw !== "object") return [];
@@ -3729,57 +3685,11 @@
     };
 
     const fetchStats = async ({ owner, name }) => {
-      const key = `repo:v3:${owner}/${name}`;
-      try {
-        const cached = JSON.parse(localStorage.getItem(key));
-        if (cached && Array.isArray(cached.languages) && typeof cached.issuesOpen === "number" && typeof cached.prsOpen === "number" && Date.now() - cached.time < REPO_CACHE_MS) return cached;
-      } catch { }
-
-      const repoUrl = `https://api.github.com/repos/${owner}/${name}`;
-      const [repoResponse, languages, issueItems, pullItems] = await Promise.all([
-        fetch(repoUrl, { headers: { Accept: "application/vnd.github+json", "X-GitHub-Api-Version": "2026-03-10" } }),
-        fetchJSON(`${repoUrl}/languages`).catch(() => null),
-        fetchPaged(`${repoUrl}/issues?state=all`).catch(() => null),
-        fetchPaged(`${repoUrl}/pulls?state=all`).catch(() => null)
-      ]);
-
-      if (!repoResponse.ok) throw new Error(repoResponse.status);
-      const repo = await repoResponse.json();
-      const issues = issueItems?.filter((item) => !item.pull_request) || [];
-      const pulls = pullItems || [];
-      const stats = {
-        time: Date.now(),
-        stars: repo.stargazers_count,
-        forks: repo.forks_count,
-        archived: Boolean(repo.archived),
-        fork: Boolean(repo.fork),
-        parent: repo.fork ? repo.parent?.full_name || null : null,
-        issuesOpen: issues.filter((item) => item.state === "open").length,
-        issuesClosed: issues.filter((item) => item.state === "closed").length,
-        prsOpen: pulls.filter((item) => item.state === "open").length,
-        prsClosed: pulls.filter((item) => item.state === "closed").length,
-        languages: languageBreakdown(languages)
-      };
-
-      try {
-        localStorage.setItem(key, JSON.stringify(stats));
-      } catch { }
-      return stats;
-    };
-
-    const fetchRepoLanguages = async ({ owner, name }) => {
-      const key = `repo:languages:v1:${owner}/${name}`;
-      try {
-        const cached = JSON.parse(localStorage.getItem(key));
-        if (cached && Array.isArray(cached.languages) && Date.now() - cached.time < REPO_CACHE_MS) return cached.languages;
-      } catch { }
-
-      const raw = await fetchJSON(`https://api.github.com/repos/${owner}/${name}/languages`);
-      const languages = languageBreakdown(raw);
-      try {
-        localStorage.setItem(key, JSON.stringify({ time: Date.now(), languages }));
-      } catch { }
-      return languages;
+      const data = await fetchGitHubProjects();
+      const fullName = (owner + '/' + name).toLowerCase();
+      const repo = [...data.pinned, ...data.games, ...data.labs].find(repo => repo.full_name.toLowerCase() === fullName);
+      if (!repo?.stats) throw new Error('GitHub stats unavailable');
+      return { ...repo.stats, time: data.time, languages: languageBreakdown(repo.languageBytes) };
     };
 
     const languageBar = (languages) => languages.map(({ name, percent, color, idle }) => {
@@ -3811,15 +3721,15 @@
       const issues = card.querySelector(".issues");
       const prs = card.querySelector(".prs");
       if (issues) {
-        issues.querySelector("b").textContent = stats.issuesOpen;
-        issues.dataset.tip = `${stats.issuesOpen} open · ${stats.issuesClosed} closed issues`;
+        issues.querySelector("b").textContent = stats.issuesOpen ?? "-";
+        issues.dataset.tip = stats.issuesOpen == null ? "Issue stats unavailable" : `${stats.issuesOpen} open · ${stats.issuesClosed} closed issues`;
       }
       if (prs) {
-        prs.querySelector("b").textContent = stats.prsOpen;
+        prs.querySelector("b").textContent = stats.prsOpen ?? "-";
         const closed = prs.querySelector(".prs-closed");
         closed.textContent = `(${stats.prsClosed})`;
-        closed.hidden = false;
-        prs.dataset.tip = `${stats.prsOpen} open · ${stats.prsClosed} closed pull requests`;
+        closed.hidden = stats.prsClosed == null;
+        prs.dataset.tip = stats.prsOpen == null ? "Pull request stats unavailable" : `${stats.prsOpen} open · ${stats.prsClosed} closed pull requests`;
         prs.setAttribute("aria-label", prs.dataset.tip);
       }
       applyLanguageData(card, stats.languages);
@@ -3886,17 +3796,6 @@
       }
     }));
 
-    const normalizePinnedRepo = (repo) => ({
-      owner: repo.author || repo.owner?.login || CONFIG.githubUser,
-      name: repo.name,
-      description: repo.description || "",
-      language: typeof repo.language === "string" ? repo.language : repo.language?.name || "",
-      stars: Number(repo.stars) || 0,
-      forks: Number(repo.forks) || 0,
-      fork: Boolean(repo.fork),
-      parent: repo.parent?.full_name || null
-    });
-
     const normalizeGitHubRepo = (repo) => ({
       owner: repo.owner?.login || "Paryx-Labs",
       name: repo.name,
@@ -3910,26 +3809,17 @@
     });
 
     const fetchPinnedProjects = async () => {
-      const username = encodeURIComponent(CONFIG.githubUser);
-      const data = await fetchJSON(`https://pinned.berrysauce.dev/get/${username}`);
-      if (!Array.isArray(data) || !data.length) throw new Error("No pinned repositories returned");
-      return data
-        .filter((repo) => repo?.name)
-        .map(normalizePinnedRepo);
+      const data = await fetchGitHubProjects();
+      if (data.errors?.pinned || !data.pinned.length) throw new Error('Pinned repositories unavailable');
+      return data.pinned.map(normalizeGitHubRepo);
     };
 
-    let githubRepoSourcesPromise = null;
-
-    const fetchGitHubRepoSources = () => {
-      if (!githubRepoSourcesPromise) {
-        githubRepoSourcesPromise = Promise.allSettled([
-          fetchPaged(`https://api.github.com/users/${encodeURIComponent(CONFIG.githubUser)}/repos?type=owner&sort=updated&direction=desc`),
-          fetchPaged("https://api.github.com/orgs/Paryx-Labs/repos?type=public&sort=updated&direction=desc")
-        ]).then(([games, labs]) => ({ games, labs }));
-      }
-
-      return githubRepoSourcesPromise;
-    };
+    let githubRepoSourcesPromise;
+    const fetchGitHubRepoSources = () => githubRepoSourcesPromise ||= fetchGitHubProjects()
+      .then(data => Object.fromEntries(['games', 'labs'].map(key => [key, data.errors?.[key]
+        ? { status: 'rejected', reason: new Error(data.errors[key]) }
+        : { status: 'fulfilled', value: data[key] }])) )
+      .catch(error => ({ games: { status: 'rejected', reason: error }, labs: { status: 'rejected', reason: error } }));
 
     const hydratePinnedProjects = (pins, sources) => {
       const reposByName = new Map();
