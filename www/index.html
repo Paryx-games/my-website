@@ -1256,15 +1256,17 @@
     }
 
     .profile-details-body > article { min-width: 0; }
+    .about p + p { margin-top: 1.5rem; }
+    .profile-language { white-space: nowrap; }
+    .profile-language .ico { vertical-align: -0.15em; margin-right: 0.25em; }
+    .profile-language .ico img { opacity: 1; height: 100%; }
+    .profile-language .ico svg { opacity: 0; }
+    .profile-details-body .profile-language .ico img { height: 100%; max-width: none; }
+    .profile-details-body h3 .ico { width: 24px; height: 24px; }
 
-    .profile-time-badges, .profile-contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem; }
-    .profile-skill-icons { display: block; margin: 1rem 0; }
-    .profile-skill-icons img { max-width: 100%; height: auto; }
 
     .profile-details-body h3 {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      display: block;
       font-size: var(--text-body);
     }
 
@@ -2063,7 +2065,6 @@
 
     <section>
       <h2>Time</h2>
-      <div class="profile-time-badges"><a href="https://whattime.to/talk/paryx"><img src="https://whattime.link/u/paryx?style=flat&amp;size=compact&amp;show=name,status,time&amp;theme=dark&amp;accent=7fb2e1&amp;format=12h" alt="paryx on WhatTime.to" loading="lazy"></a> <a href="https://whattime.to"><img src="https://whattime.link/tz/europe/london?style=flat&amp;size=compact&amp;show=name,time&amp;theme=dark&amp;accent=7fb2e1&amp;format=12h" alt="Current time in London" loading="lazy"></a></div>
       <div class="times reveal">
         <div class="time-card">
           <div class="top">
@@ -2144,13 +2145,26 @@
       </div>
     </section>
 
+    <section id="games">
+      <h2>Games</h2>
+      <div class="games-heading"><h3>Favorite games</h3><span id="games-count">3</span></div>
+      <div class="games-row" id="favorite-games">
+        <a href="https://www.minecraft.net/en-us/about-minecraft">Minecraft</a>
+        <a href="https://store.steampowered.com/app/526870/Satisfactory/">Satisfactory</a>
+        <a href="https://store.steampowered.com/app/359550/">Rainbow Six Siege</a>
+      </div>
+      <div class="rotation-section">
+        <h3>Games in Rotation</h3>
+        <div class="games-row" id="rotation-games"><p class="note">Forza Horizon 6, Forza Horizon 4, BeamNG.drive, Rainbow Six Siege, Satisfactory, Geometry Dash, Minecraft Java, Roblox, Halo: The Master Chief Collection, Escape the Backrooms, Backrooms: Escape Together, and Bloons TD 6.</p></div>
+      </div>
+    </section>
+
     <section>
       <h2>Stack</h2>
 
       <div class="stack-group">
         <h3>Languages</h3>
         <p>I can code in several languages! I've listed them below and ranked them based on my own level of experience, from strongest to still improving.</p>
-        <a class="profile-skill-icons" href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=lua,python,js,ts,rust,cpp" alt="My Coding Languages" loading="lazy"></a>
         <div class="stack reveal" id="stackLangs"></div>
         <p class="note">ranked by expertise, from best to still improving (in my opinion)</p>
         <p>If you want to know more about my coding skills, I've made an <a href="#more-details">expanded section covering my experience with specific languages</a>.</p>
@@ -2159,7 +2173,6 @@
       <div class="stack-group">
         <h3>Tools</h3>
         <p>I also have skills in a few other tools, listed below.</p>
-        <a class="profile-skill-icons" href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=cloudflare,discordjs,docker,electron,git,github,mongodb,pnpm,robloxstudio,vscode" alt="My Skills" loading="lazy"></a>
         <div class="stack reveal" id="stackTools"></div>
       </div>
     </section>
@@ -2167,15 +2180,15 @@
 <section id="more-details" class="profile-details">
       <h2>More details</h2>
       <div class="profile-details-body"><article><h3>
-  <img src="https://skillicons.dev/icons?i=rust,cpp" alt="Rust & C++" height="37" align="middle">
+
 
   Rust and C++
 </h3>
-<p>I began using <img src="https://skillicons.dev/icons?i=cpp" alt="C++" height="17.5" align="bottom"> <strong>C++</strong> around October 2025. Before then, I had mostly used languages that relied on runtimes, which were simpler for me while I was still learning. Progress was slow at first and I ran into a lot of issues because this was my first serious experience with an ahead-of-time compiled language, unlike <img src="https://skillicons.dev/icons?i=py" alt="Python" height="17.5" align="bottom"> <strong>Python</strong> or <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" height="17.5" align="bottom"> <strong>JavaScript</strong>. The compiler and tooling were quite fiddly for me to figure out at first. Fortunately, I started learning more about how everything worked from the docs (and with a little bit of help from ChatGPT) and eventually figured out the basics. I didn&#39;t publish many of the projects I made because I felt they lacked quality and weren&#39;t in a state where I wanted to make them public.</p>
-<p>Then I discovered <img src="https://skillicons.dev/icons?i=rust" alt="Rust" height="17.5" align="bottom"> <strong>Rust</strong>. I thought nothing of it at first and assumed it was fairly similar to <img src="https://skillicons.dev/icons?i=cpp" alt="C++" height="17.5" align="bottom"> <strong>C++</strong> (which, on paper, is true, <em>in a way</em>). However, I then learned about the Cargo ecosystem and I was <strong>hooked.</strong> It felt like the Python/JavaScript package ecosystem, but for Rust. Since then, I&#39;ve used Rust for a lot of projects, including my <a href="https://github.com/Paryx-games/roblox-manager">Roblox Manager</a> project, which I originally forked from another developer. Since then, I&#39;ve added a lot of features and am currently working on a major v2 rewrite. I&#39;ve made more projects with Rust too, but this is one of the only public ones, as most of the others were experimental or never reached a state where I wanted to publish them.</p>
+<p>I began using  <strong>C++</strong> around October 2025. Before then, I had mostly used languages that relied on runtimes, which were simpler for me while I was still learning. Progress was slow at first and I ran into a lot of issues because this was my first serious experience with an ahead-of-time compiled language, unlike  <strong>Python</strong> or  <strong>JavaScript</strong>. The compiler and tooling were quite fiddly for me to figure out at first. Fortunately, I started learning more about how everything worked from the docs (and with a little bit of help from ChatGPT) and eventually figured out the basics. I didn&#39;t publish many of the projects I made because I felt they lacked quality and weren&#39;t in a state where I wanted to make them public.</p>
+<p>Then I discovered  <strong>Rust</strong>. I thought nothing of it at first and assumed it was fairly similar to  <strong>C++</strong> (which, on paper, is true, <em>in a way</em>). However, I then learned about the Cargo ecosystem and I was <strong>hooked.</strong> It felt like the Python/JavaScript package ecosystem, but for Rust. Since then, I&#39;ve used Rust for a lot of projects, including my <a href="https://github.com/Paryx-games/roblox-manager">Roblox Manager</a> project, which I originally forked from another developer. Since then, I&#39;ve added a lot of features and am currently working on a major v2 rewrite. I&#39;ve made more projects with Rust too, but this is one of the only public ones, as most of the others were experimental or never reached a state where I wanted to publish them.</p>
 </article>
 <article><h3>
-  <img src="https://skillicons.dev/icons?i=lua" alt="Lua" height="45" align="middle">
+
 
   Lua & Luau
 </h3>
@@ -2202,7 +2215,7 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
 <p>Obviously that&#39;s personal preference, but I just feel like it&#39;s nicer. Moving on!</p>
 </article>
 <article><h3>
-  <img src="https://skillicons.dev/icons?i=js,ts,py" alt="JavaScript, TypeScript & Python" height="45" align="middle">
+
 
   JavaScript, TypeScript and Python
 </h3>
@@ -2217,18 +2230,7 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
 </article></div>
     </section>
 
-    <section id="games">
-      <div class="games-heading"><h2>Games</h2><span id="games-count">3</span></div>
-      <div class="games-row" id="favorite-games">
-        <a href="https://www.minecraft.net/en-us/about-minecraft">Minecraft</a>
-        <a href="https://store.steampowered.com/app/526870/Satisfactory/">Satisfactory</a>
-        <a href="https://store.steampowered.com/app/359550/">Rainbow Six Siege</a>
-      </div>
-      <div class="rotation-section">
-        <h3>Games in Rotation</h3>
-        <div class="games-row" id="rotation-games"><p class="note">Forza Horizon 6, Forza Horizon 4, BeamNG.drive, Rainbow Six Siege, Satisfactory, Geometry Dash, Minecraft Java, Roblox, Halo: The Master Chief Collection, Escape the Backrooms, Backrooms: Escape Together, and Bloons TD 6.</p></div>
-      </div>
-    </section>
+
 
     <section class="tight">
       <h2>Find me</h2>
@@ -2237,7 +2239,6 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
 
     <section>
       <h2>Contact</h2>
-      <div class="profile-contact-links"><a href="https://x.com/paryx_games"><img src="https://cdn.simpleicons.org/x/fff" width="24" alt="x"></a> <a href="https://discord.com"><img src="https://cdn.simpleicons.org/discord/fff" width="24" alt="discord"></a> <a href="mailto:paryx.games@gmail.com"><img src="https://cdn.simpleicons.org/gmail/fff" width="24" alt="email"></a> <a href="https://www.reddit.com/user/Narrow_Proof4204/"><img src="https://cdn.simpleicons.org/reddit/fff" width="24" alt="reddit"></a> <a href="https://www.roblox.com/users/1577142632/profile"><img src="https://cdn.simpleicons.org/roblox/fff" width="24" alt="roblox"></a></div>
       <div class="contacts reveal" id="contacts"></div>
     </section>
   </main>
@@ -2278,16 +2279,28 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
   </dialog>
 
   <dialog id="game-showcase" aria-labelledby="game-title">
-    <div class="game-dialog-heading"><h2 id="game-title">Game showcase</h2><button type="button" id="game-close" aria-label="Close game showcase" autofocus>Close</button></div>
+    <img id="game-backdrop" class="game-backdrop" alt="">
+    <button type="button" id="game-close" aria-label="Close game showcase" autofocus>×</button>
     <div class="game-showcase-layout">
-      <dl id="game-facts"></dl>
+      <aside class="game-sidebar">
+        <h2 id="game-title">Game showcase</h2>
+        <img id="game-logo" alt="" hidden>
+        <div class="game-info-panel">
+          <dl id="game-facts"></dl>
+          <p id="game-description"></p>
+          <a id="game-website" href="https://www.minecraft.net">Visit game page <span aria-hidden="true">↗</span></a>
+        </div>
+      </aside>
       <div class="game-gallery">
-        <img id="game-picture" alt="" width="1920" height="1080">
-        <div class="game-gallery-nav"><button type="button" id="game-prev" aria-label="Previous picture">←</button><p id="game-caption" aria-live="polite"></p><button type="button" id="game-next" aria-label="Next picture">→</button></div>
+        <div class="game-picture-stage">
+          <img id="game-picture" alt="" width="1920" height="1080">
+          <button type="button" id="game-prev" aria-label="Previous picture">←</button>
+          <p id="game-caption" aria-live="polite"></p>
+          <button type="button" id="game-next" aria-label="Next picture">→</button>
+        </div>
         <div id="game-thumbnails" aria-label="Game pictures"></div>
-        <p class="game-image-credit">Official game artwork and screenshots from the linked publisher page.</p>
+        <p class="game-image-credit">Official artwork and screenshots from the linked game page.</p>
       </div>
-      <div class="game-description"><p id="game-description"></p><a id="game-website" href="https://www.minecraft.net">Visit game page ↗</a></div>
     </div>
   </dialog>
 
@@ -2652,6 +2665,34 @@ print(string.format(&quot;Player %s has a score of %d&quot;, player, score))
     };
 
     const initMoreDetails = () => {
+      const root = document.querySelector('.profile-details-body');
+      const brands = new Map([...CONFIG.languages, ...CONFIG.tools].map(([name, key, color]) => [name, { key, color }]));
+      brands.set('Luau', brands.get('Lua'));
+      brands.set('Roblox', { key: 'roblox', color: '#00A2FF' });
+      brands.set('Discord', { key: 'discord', color: '#5865F2' });
+      const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) {
+        if (!walker.currentNode.parentElement.closest('code, pre')) nodes.push(walker.currentNode);
+      }
+      const names = /\b(JavaScript|TypeScript|Python|Rust|C\+\+|Luau|Lua|Electron|GitHub|Docker|Git|Roblox|Discord)(?=$|[^a-zA-Z])/g;
+      for (const node of nodes) {
+        const fragment = document.createDocumentFragment();
+        let offset = 0;
+        for (const match of node.nodeValue.matchAll(names)) {
+          fragment.append(node.nodeValue.slice(offset, match.index));
+          const brand = brands.get(match[0]);
+          const label = document.createElement('span');
+          label.className = 'profile-language';
+          label.innerHTML = ico(brand.key, brand.color);
+          label.append(match[0]);
+          fragment.append(label);
+          offset = match.index + match[0].length;
+        }
+        if (!offset) continue;
+        fragment.append(node.nodeValue.slice(offset));
+        node.replaceWith(fragment);
+      }
       const blocks = document.querySelectorAll('.profile-details-body article > *');
       if (reduce || !('IntersectionObserver' in window)) return;
       const observer = new IntersectionObserver((entries) => {

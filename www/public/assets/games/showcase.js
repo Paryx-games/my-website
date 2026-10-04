@@ -9,6 +9,24 @@ const thumbs = document.getElementById('game-thumbnails');
 let active;
 let pictureIndex = 0;
 let opener;
+let closing = false;
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+const factIcons = [
+  '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h.01M12 15h.01M16 15h.01"/>',
+  '<circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 4a3 3 0 0 1 0 6M17 14a5 5 0 0 1 4 5v2"/>',
+  '<circle cx="12" cy="12" r="9"/><path d="M7 15a6 6 0 1 1 8 2 4 4 0 1 1-1-7 2 2 0 1 1-3 3"/>',
+  '<path d="M7 7h10a4 4 0 0 1 4 3l2 7a2 2 0 0 1-3 2l-4-3H8l-4 3a2 2 0 0 1-3-2l2-7a4 4 0 0 1 4-3Z M7 10v4M5 12h4M16 11h.01M19 13h.01"/>',
+];
+
+async function closeShowcase() {
+  if (closing || !dialog.open) return;
+  closing = true;
+  if (!reducedMotion.matches) {
+    await dialog.animate([{ opacity: 1, transform: 'translateY(0) scale(1)' }, { opacity: 0, transform: 'translateY(8px) scale(0.985)' }], { duration: 180, easing: 'ease-out' }).finished.catch(() => {});
+  }
+  dialog.close();
+  closing = false;
+}
 
 const card = game => {
   const link = document.createElement('a');
@@ -48,12 +66,29 @@ if (rotation.length) {
   }));
 }
 
+if (!reducedMotion.matches && 'IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(entries => {
+    for (const { target, isIntersecting } of entries) {
+      if (!isIntersecting) continue;
+      target.classList.remove('is-pending');
+      target.classList.add('is-revealed');
+      observer.unobserve(target);
+    }
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.game-card').forEach(card => {
+    card.classList.add('is-pending');
+    observer.observe(card);
+  });
+}
+
 function showPicture(index) {
   pictureIndex = (index + active.pictures.length) % active.pictures.length;
   image.src = active.pictures[pictureIndex];
   image.alt = active.captions[pictureIndex];
+  if (!reducedMotion.matches) image.animate([{ opacity: 0.3, transform: 'scale(1.015)' }, { opacity: 1, transform: 'scale(1)' }], { duration: 280, easing: 'ease-out' });
   caption.textContent = `${pictureIndex + 1} / ${active.pictures.length} — ${active.captions[pictureIndex]}`;
   [...thumbs.children].forEach((button, index) => button.setAttribute('aria-pressed', String(index === pictureIndex)));
+  if (dialog.open) thumbs.children[pictureIndex]?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
 }
 
 document.getElementById('games').addEventListener('click', event => {
@@ -63,16 +98,26 @@ document.getElementById('games').addEventListener('click', event => {
   if (!active) return;
   event.preventDefault();
   opener = link;
+  dialog.style.setProperty('--game-accent', active.accent);
+  document.getElementById('game-backdrop').src = active.backdrop || active.cover;
   title.textContent = active.title;
+  const logo = document.getElementById('game-logo');
+  logo.hidden = !active.logo;
+  title.classList.toggle('sr-only', Boolean(active.logo));
+  if (active.logo) logo.src = active.logo;
   document.getElementById('game-description').textContent = active.description;
   const facts = document.getElementById('game-facts');
   facts.replaceChildren();
-  for (const [label, value] of [['Released', active.year], ['Developer', active.developer], ['Publisher', active.publisher], ['Genre', active.genre]]) {
+  for (const [index, [label, value]] of [['Released', active.year], ['Developer', active.developer], ['Publisher', active.publisher], ['Genre', active.genre]].entries()) {
+    const row = document.createElement('div');
+    row.className = 'game-fact';
+    row.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${factIcons[index]}</svg>`;
     const term = document.createElement('dt');
     const detail = document.createElement('dd');
     term.textContent = label;
     detail.textContent = value;
-    facts.append(term, detail);
+    row.append(term, detail);
+    facts.append(row);
   }
   document.getElementById('game-website').href = active.website;
   thumbs.replaceChildren(...active.pictures.map((src, index) => {
@@ -89,11 +134,13 @@ document.getElementById('games').addEventListener('click', event => {
   }));
   showPicture(0);
   dialog.showModal();
+  if (!reducedMotion.matches) dialog.animate([{ opacity: 0, transform: 'translateY(12px) scale(0.985)' }, { opacity: 1, transform: 'translateY(0) scale(1)' }], { duration: 280, easing: 'ease-out' });
   document.body.classList.add('game-showcase-open');
   document.getElementById('game-close').focus();
 });
 
-document.getElementById('game-close').addEventListener('click', () => dialog.close());
+document.getElementById('game-close').addEventListener('click', closeShowcase);
+dialog.addEventListener('cancel', event => { event.preventDefault(); closeShowcase(); });
 document.getElementById('game-prev').addEventListener('click', () => showPicture(pictureIndex - 1));
 document.getElementById('game-next').addEventListener('click', () => showPicture(pictureIndex + 1));
 dialog.addEventListener('keydown', event => {
@@ -105,7 +152,7 @@ dialog.addEventListener('keydown', event => {
 dialog.addEventListener('click', event => {
   if (event.target !== dialog) return;
   const bounds = dialog.getBoundingClientRect();
-  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+  if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) closeShowcase();
 });
 dialog.addEventListener('close', () => {
   document.body.classList.remove('game-showcase-open');

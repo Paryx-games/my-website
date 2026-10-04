@@ -15,7 +15,8 @@ const about = `<section class="about" id="about">
 html = html.replace(/<section class="about" id="about">[\s\S]*?<\/section>/, about);
 const detailSource = markdown.slice(markdown.indexOf('<h3>'), markdown.indexOf('</details>'));
 const articles = [...detailSource.matchAll(/<h3>([\s\S]*?)<\/h3>([\s\S]*?)(?=<h3>|$)/g)]
-  .map(([, heading, body]) => `<article><h3>${heading.replace(/<br>\s*/g, '')}</h3>\n${marked.parse(body)}</article>`).join('\n');
+  .map(([, heading, body]) => `<article><h3>${heading.replace(/<br>\s*/g, '')}</h3>\n${marked.parse(body)}</article>`).join('\n')
+  .replace(/<img[^>]+src="https:\/\/skillicons\.dev\/[^>]+>/g, '');
 const details = `<section id="more-details" class="profile-details">
       <h2>More details</h2>
       <div class="profile-details-body">${articles}</div>

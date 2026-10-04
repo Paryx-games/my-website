@@ -10,11 +10,11 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
   for (const entry of rotation) assert.ok(catalogue.some(game => game.id === entry.id), entry.id);
   for (const game of catalogue) {
     assert.equal(game.pictures.length, game.captions.length);
-    assert.ok(game.pictures.length >= 3, game.title);
+    assert.ok(game.pictures.length >= 7, game.title);
     assert.match(game.year, /^\d{4}$/);
     assert.ok(game.publisher && game.developer && game.description);
     assert.equal(new URL(game.website).protocol, 'https:');
-    for (const asset of [game.cover, ...game.pictures]) {
+    for (const asset of [game.cover, game.backdrop, game.logo, ...game.pictures].filter(Boolean)) {
       await access(new URL(`../public${asset}`, import.meta.url));
     }
   }
