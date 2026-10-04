@@ -56,6 +56,67 @@ document.addEventListener("click", event => {
 });
 revealSection(location.hash);
 
+const sectionRail = document.createElement("nav");
+sectionRail.className = "section-rail";
+sectionRail.setAttribute("aria-label", "Page sections");
+const railSections = [...sectionToggles.keys()];
+const railLinks = railSections.map(section => {
+  const name = section.querySelector("h2")?.textContent || "Section";
+  section.id ||= name.toLowerCase().replace(/\s+/g, "-");
+  const link = document.createElement("a");
+  link.href = `#${section.id}`;
+  link.setAttribute("aria-label", name);
+  const marker = document.createElement("span");
+  marker.className = "section-rail-marker";
+  marker.setAttribute("aria-hidden", "true");
+  const label = document.createElement("span");
+  label.className = "section-rail-label";
+  label.textContent = name;
+  link.append(marker, label);
+  sectionRail.append(link);
+  return link;
+});
+document.body.append(sectionRail);
+
+function highlightRail(index: number | null) {
+  railLinks.forEach((link, position) => {
+    if (index === null) delete link.dataset.distance;
+    else link.dataset.distance = String(Math.abs(index - position));
+  });
+}
+railLinks.forEach((link, index) => {
+  link.addEventListener("mouseenter", () => highlightRail(index));
+  link.addEventListener("focus", () => highlightRail(index));
+});
+sectionRail.addEventListener("mouseleave", () => {
+  const focused = railLinks.indexOf(document.activeElement as HTMLAnchorElement);
+  highlightRail(focused < 0 ? null : focused);
+});
+sectionRail.addEventListener("focusout", event => {
+  if (!sectionRail.contains(event.relatedTarget as Node | null)) highlightRail(null);
+});
+let railFrame = 0;
+function updateRail() {
+  railFrame = 0;
+  const visible = railSections.filter(section => !section.hidden);
+  const anchor = innerHeight * 0.35;
+  const active = [...visible].reverse().find(section => section.getBoundingClientRect().top <= anchor) || visible[0];
+  sectionRail.hidden = !visible.length || (document.getElementById("content")?.getBoundingClientRect().top ?? Infinity) > innerHeight * 0.8;
+  railLinks.forEach((link, index) => {
+    link.hidden = railSections[index].hidden;
+    if (railSections[index] === active) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+}
+function queueRailUpdate() {
+  if (!railFrame) railFrame = requestAnimationFrame(updateRail);
+}
+window.addEventListener("scroll", queueRailUpdate, { passive: true });
+window.addEventListener("resize", queueRailUpdate);
+document.getElementById("content")?.addEventListener("transitionend", queueRailUpdate);
+updateRail();
+revealSection(location.hash);
+
 document.querySelectorAll<HTMLDetailsElement>(".mobile-nav").forEach((menu) => {
   const summary = menu.querySelector("summary");
   menu.addEventListener("keydown", (event) => {
