@@ -32,6 +32,7 @@ test/previews/triangle-led-front/dist
 /.test-build/
 /api/.test-build/
 .agents
+AGENTS.md
 
 .vercel
 .env*
