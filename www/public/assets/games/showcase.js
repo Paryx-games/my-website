@@ -116,7 +116,7 @@ function refreshRemotePlaytime() {
   if (playtimeRefresh || Date.now() - playtimeRefreshedAt < 60_000) return;
   playtimeRefresh = fetchRemotePlaytime().then(response => {
     if (!mergeRemotePlaytime(gameDetails, response, catalogue.map(game => game.id))) return;
-    if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime);
+    if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   }).finally(() => { playtimeRefresh = null; playtimeRefreshedAt = Date.now(); });
 }
 refreshRemotePlaytime();
@@ -171,20 +171,7 @@ function openShowcase(game, link) {
   document.getElementById('game-description').textContent = active.description;
   const quote = typeof ratings[active.id]?.quote === 'string' ? ratings[active.id].quote.trim() : '';
   renderQuote(document.getElementById('game-quote-text'), quote, catalogue);
-  if (active.id === 'roblox') {
-    const link = document.createElement('a');
-    link.href = '#roblox-games';
-    link.className = 'game-quote-link game-roblox-category-link';
-    link.dataset.robloxCategory = '';
-    const icon = document.createElement('img');
-    icon.src = active.icon;
-    icon.alt = '';
-    icon.width = 16;
-    icon.height = 16;
-    link.append(icon, 'Explore Roblox Games');
-    document.getElementById('game-quote-text').append(link);
-  }
-  document.getElementById('game-quote').hidden = !quote && active.id !== 'roblox';
+  document.getElementById('game-quote').hidden = !quote;
   document.getElementById('game-ratings').replaceChildren(
     ratingsPanelElement(ratings[active.id], active.title),
   );
@@ -202,7 +189,7 @@ function openShowcase(game, link) {
     facts.append(row);
   }
   document.getElementById('game-website').href = active.website;
-  renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime);
+  renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   renderRobloxDetails(document.getElementById('game-roblox-details'), active);
   document.querySelector('.game-image-credit').textContent = active.roblox
     ? 'Official experience icon and thumbnails from Roblox.'
