@@ -24,15 +24,15 @@ export const robloxGames = [
       "/assets/games/pressure-9.webp"
     ],
     "captions": [
-      "Pressure — official Roblox thumbnail 1",
-      "Pressure — official Roblox thumbnail 2",
-      "Pressure — official Roblox thumbnail 3",
-      "Pressure — official Roblox thumbnail 4",
-      "Pressure — official Roblox thumbnail 5",
-      "Pressure — official Roblox thumbnail 6",
-      "Pressure — official Roblox thumbnail 7",
-      "Pressure — official Roblox thumbnail 8",
-      "Pressure — official Roblox thumbnail 9"
+      "Pressure - official Roblox thumbnail 1",
+      "Pressure - official Roblox thumbnail 2",
+      "Pressure - official Roblox thumbnail 3",
+      "Pressure - official Roblox thumbnail 4",
+      "Pressure - official Roblox thumbnail 5",
+      "Pressure - official Roblox thumbnail 6",
+      "Pressure - official Roblox thumbnail 7",
+      "Pressure - official Roblox thumbnail 8",
+      "Pressure - official Roblox thumbnail 9"
     ],
     "accent": "#8fb6bd",
     "artworkSource": "https://www.roblox.com/games/12411473842/Pressure",
@@ -78,13 +78,13 @@ export const robloxGames = [
       "/assets/games/town-7.webp"
     ],
     "captions": [
-      "town — official Roblox thumbnail 1",
-      "town — official Roblox thumbnail 2",
-      "town — official Roblox thumbnail 3",
-      "town — official Roblox thumbnail 4",
-      "town — official Roblox thumbnail 5",
-      "town — official Roblox thumbnail 6",
-      "town — official Roblox thumbnail 7"
+      "town - official Roblox thumbnail 1",
+      "town - official Roblox thumbnail 2",
+      "town - official Roblox thumbnail 3",
+      "town - official Roblox thumbnail 4",
+      "town - official Roblox thumbnail 5",
+      "town - official Roblox thumbnail 6",
+      "town - official Roblox thumbnail 7"
     ],
     "accent": "#c9ba98",
     "artworkSource": "https://www.roblox.com/games/4991214437/town",

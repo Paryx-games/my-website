@@ -249,7 +249,7 @@ export function Document({
   children: ReactNode;
 }) {
   const canonical = absoluteUrl(pathname);
-  const pageTitle = title === site.name ? title : `${title} — paryx`;
+  const pageTitle = title === site.name ? title : `${title} - paryx`;
   const schema = post
     ? {
         '@context': 'https://schema.org',
@@ -302,7 +302,7 @@ export function Document({
             <meta property="og:image" content={absoluteUrl(image)} />
             <meta
               property="og:image:alt"
-              content={post ? `${post.title} — paryx` : title}
+              content={post ? `${post.title} - paryx` : title}
             />
             {image.startsWith('/og/') && (
               <>
@@ -313,7 +313,7 @@ export function Document({
             )}
             <meta
               name="twitter:image:alt"
-              content={post ? `${post.title} — paryx` : title}
+              content={post ? `${post.title} - paryx` : title}
             />
             <meta name="twitter:image" content={absoluteUrl(image)} />
           </>

@@ -16,7 +16,7 @@ Hi, welcome to my blog! I'm paryx, and this is where I'll share what I'm working
 
 Expect posts about my projects, coding, experiments, and the things I figure out while building them. Some posts might be a closer look at a project, while others might just be a small update or something useful I've learned.
 
-I want this to be a place where I can talk a bit more about the work behind the finished thing — including the ideas that work out and the ones that don't.
+I want this to be a place where I can talk a bit more about the work behind the finished thing, including the ideas that work out and the ones that don't.
 
 ## Stay a while
 

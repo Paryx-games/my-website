@@ -1,7 +1,7 @@
 // Production identity is deliberately independent of VERCEL_URL / preview hosts.
 export const site = {
   origin: 'https://blog.paryx.uk',
-  name: 'paryx — Blog',
+  name: 'paryx - Blog',
   description:
     'Notes on building things. Software, experiments, and lessons from paryx.',
 };
