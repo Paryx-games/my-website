@@ -10,16 +10,44 @@ This repository contains my personal website, blog, development environments, an
 | [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel |
 | [dev.paryx.uk](https://dev.paryx.uk) | Development preview for upcoming changes | `dev/` | Vercel |
 | [test.paryx.uk](https://test.paryx.uk) | Prototypes and experimental features | `test/` | Vercel |
-| [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel |
+| [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel, Neon |
 | [media.paryx.uk](https://media.paryx.uk) | Static media and assets stored in Cloudflare R2 | N/A | Cloudflare R2 |
 | [rm.paryx.uk](https://rm.paryx.uk) | Website for [Roblox Manager](https://github.com/Paryx-games/roblox-manager) | External | Vercel |
 
-## Playtime
-
-Game playtime flows from a Windows collector through authenticated Vercel API uploads into Neon PostgreSQL. Steam IDs are mapped to the website catalogue, while unmapped games are discarded. The site reads public minute totals without requiring a rebuild and combines them with manual platform values. The collector keeps a persistent upload sequence and pending batch so offline runs can retry safely.
-
-The repository contains the collector, API handlers, SQL migrations, and frontend integration. Runtime credentials and machine-specific setup notes are kept outside the public source.
-
 ## Languages
 
+This is what languages this project uses! This uses one of the APIs under the `api/` tree
+
 ![Languages used across the paryx.uk sites](https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&details=true)
+
+## API
+
+I'm making some of my APIs publicly available in case they're useful for other projects.
+
+> [!NOTE]
+> These APIs may be rate limited to prevent abuse. They run on free-tier infrastructure, so please use them reasonably.
+
+---
+
+### GitHub Languages
+
+Colors are calculated using [GitHub's Linguist](https://github.com/github-linguist/linguist) and any files without valid colors return in the color `#8b949e`, a muted gray.
+
+`GET` [`/github/languages?repo=Paryx-games/roblox-manager`](https://api.paryx.uk/github/languages?repo=Paryx-games/roblox-manager) - Returns the language percentages of a GitHub repository.
+
+**Parameters:**
+
+- `repo` (required) - GitHub repository in `owner/repo` format.
+
+> Only GitHub repositories are supported. GitLab, Bitbucket, and self-hosted Git servers are not supported.
+
+### GitHub Language Bar
+
+`GET` [`/github/languages/bar?repo=git/git&details=true`](https://api.paryx.uk/github/languages/bar?repo=git/git&details=true) - Returns a language bar for a GitHub repository.
+
+**Parameters:**
+
+- `repo` (required) - GitHub repository in `owner/repo` format.
+- `details` (optional) - Set to `true` to include language names and percentages.
+
+---
