@@ -1,30 +1,100 @@
 {
   "minecraft": {
-    "playtime": { "pc": "49671", "mobile": "", "console": "22606" }
+    "playtime": {
+      "pc": "49671",
+      "mobile": "",
+      "console": "22606"
+    }
   },
-  "satisfactory": { "playtime": { "pc": "9298", "mobile": "", "console": "" } },
+  "satisfactory": {
+    "playtime": {
+      "pc": "9298",
+      "mobile": "",
+      "console": ""
+    }
+  },
   "rainbow-six-siege": {
-    "playtime": { "pc": "", "mobile": "", "console": "" }
+    "playtime": {
+      "pc": "8376",
+      "mobile": "",
+      "console": ""
+    }
   },
   "forza-horizon-6": {
-    "playtime": { "pc": "", "mobile": "", "console": "3405" }
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": "3405"
+    }
   },
-  "forza-horizon-4": { "playtime": { "pc": "", "mobile": "", "console": "" } },
-  "beamng-drive": { "playtime": { "pc": "1831", "mobile": "", "console": "" } },
+  "forza-horizon-4": {
+    "playtime": {
+      "pc": "1224",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "beamng-drive": {
+    "playtime": {
+      "pc": "1831",
+      "mobile": "",
+      "console": ""
+    }
+  },
   "geometry-dash": {
-    "playtime": { "pc": "771", "mobile": "4874", "console": "" }
+    "playtime": {
+      "pc": "771",
+      "mobile": "4874",
+      "console": ""
+    }
   },
-  "halo-mcc": { "playtime": { "pc": "82", "mobile": "", "console": "" } },
+  "halo-mcc": {
+    "playtime": {
+      "pc": "82",
+      "mobile": "",
+      "console": ""
+    }
+  },
   "escape-the-backrooms": {
-    "playtime": { "pc": "3920", "mobile": "", "console": "" }
+    "playtime": {
+      "pc": "3920",
+      "mobile": "",
+      "console": ""
+    }
   },
   "backrooms-escape-together": {
-    "playtime": { "pc": "923", "mobile": "", "console": "" }
+    "playtime": {
+      "pc": "923",
+      "mobile": "",
+      "console": ""
+    }
   },
   "bloons-td-6": {
-    "playtime": { "pc": "340", "mobile": "2350", "console": "" }
+    "playtime": {
+      "pc": "340",
+      "mobile": "2350",
+      "console": ""
+    }
   },
-  "roblox": { "playtime": { "pc": "", "mobile": "", "console": "" } },
-  "pressure": { "playtime": { "pc": "14748", "mobile": "", "console": "" } },
-  "town": { "playtime": { "pc": "12534", "mobile": "", "console": "" } }
+  "roblox": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "pressure": {
+    "playtime": {
+      "pc": "14748",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "town": {
+    "playtime": {
+      "pc": "12534",
+      "mobile": "",
+      "console": ""
+    }
+  }
 }
