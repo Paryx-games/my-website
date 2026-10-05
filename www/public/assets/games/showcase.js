@@ -46,6 +46,7 @@ function refreshRobloxStats() {
   robloxRefresh = fetchRobloxStats().then(response => {
     if (mergeRobloxStats(robloxGames, response) && dialog.open && active?.roblox) {
       renderRobloxDetails(document.getElementById('game-roblox-details'), active);
+      document.getElementById('game-description').textContent = active.description;
     }
   }).finally(() => { robloxRefresh = null; robloxRefreshedAt = Date.now(); });
 }

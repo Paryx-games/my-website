@@ -10,6 +10,8 @@ export function mergeRobloxStats(games, response) {
     if (stats.price !== null && (!Number.isSafeInteger(stats.price) || stats.price < 0)) continue;
     game.roblox = { ...game.roblox, ...stats };
     game.developer = stats.creatorName;
+    // Older cached responses may not include a description yet.
+    if (typeof stats.description === 'string') game.description = stats.description;
     changed = true;
   }
   return changed;

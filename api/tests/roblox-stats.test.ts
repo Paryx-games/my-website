@@ -72,10 +72,11 @@ test('a lost refresh lease returns the winning snapshot instead of the obsolete 
 });
 
 test('Roblox fetch includes every badge page and rejects incomplete upstream responses', async () => {
-  const details = Object.values(universes).map(id => ({
+  const details = Object.values(universes).map((id, index) => ({
     id, rootPlaceId: 123, creator: { id: 45, name: 'Creator', type: 'Group', hasVerifiedBadge: true },
     created: timestamp, updated: timestamp, playing: 0, visits: 123, favoritedCount: 12,
     maxPlayers: 50, price: null, universeAvatarType: 'MorphToR15',
+    description: index === 0 ? 'Updated description\n\nWith a second paragraph.' : '',
   }));
   const urls: string[] = [];
   const fetcher = async (input: string | URL | Request) => {
@@ -88,9 +89,13 @@ test('Roblox fetch includes every badge page and rejects incomplete upstream res
   const result = await fetchStats(fetcher as typeof fetch, () => new Date(timestamp));
   assert.equal(result.games.pressure.badgeCount, 2);
   assert.equal(result.games.town.checked, timestamp);
+  assert.equal(result.games.pressure.description, details[0].description);
+  assert.equal(result.games.town.description, '');
   assert.ok(urls.some(url => url.includes('cursor=next%2Bpage')));
   await assert.rejects(fetchStats(async () => new Response('{"data":[]}'), () => new Date(timestamp)));
   await assert.rejects(fetchStats(async () => new Response('', { status: 429 })));
+  (details[0] as Record<string, unknown>).description = null;
+  await assert.rejects(fetchStats(fetcher as typeof fetch, () => new Date(timestamp)));
 });
 
 test('stats endpoint exposes public CORS and rejects writes without touching the database', async () => {

@@ -6,15 +6,26 @@ import { mergeRobloxStats, fetchRobloxStats } from '../public/assets/games/remot
 test('cached Roblox snapshots update counts and creator while preserving artwork and the fetched timestamp', () => {
   const games = structuredClone(robloxGames);
   const fetchedAt = '2026-10-05T12:00:00.000Z';
-  const stats = { ...games[0].roblox, playing: 0, creatorName: 'New creator', checked: fetchedAt };
+  const stats = { ...games[0].roblox, playing: 0, creatorName: 'New creator', checked: fetchedAt, description: 'Fresh description\n\n<script>plain text</script>' };
   const response = { version: 1, fetchedAt, games: { pressure: stats } };
   assert.equal(mergeRobloxStats(games, response), true);
   assert.equal(games[0].roblox.playing, 0);
   assert.equal(games[0].developer, 'New creator');
+  assert.equal(games[0].description, stats.description);
   assert.equal(games[0].roblox.checked, fetchedAt);
   assert.equal(games[0].cover, robloxGames[0].cover);
   assert.equal(mergeRobloxStats(games, response), true);
   assert.equal(games[0].roblox.checked, fetchedAt);
+});
+
+test('empty descriptions clear old content while older caches and malformed descriptions keep the fallback', () => {
+  for (const description of ['', undefined, null, 123]) {
+    const games = structuredClone(robloxGames);
+    const fetchedAt = games[0].roblox.checked;
+    const stats = { ...games[0].roblox, creatorName: games[0].developer, description };
+    assert.equal(mergeRobloxStats(games, { version: 1, fetchedAt, games: { pressure: stats } }), true);
+    assert.equal(games[0].description, description === '' ? '' : robloxGames[0].description);
+  }
 });
 
 test('malformed, mismatched and unavailable stats preserve the bundled fallback', async () => {

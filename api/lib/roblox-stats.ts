@@ -5,7 +5,7 @@ export type RobloxStats = {
   creatorVerified: boolean; creatorName: string; created: string; updated: string;
   playing: number; visits: number; favorites: number; maxPlayers: number;
   upVotes: number; downVotes: number; price: number | null; avatarType: string;
-  badgeCount: number; checked: string;
+  badgeCount: number; checked: string; description: string;
 };
 export type Snapshot = { version: 1; fetchedAt: string; games: Record<string, RobloxStats> };
 export interface StatsStore {
@@ -64,6 +64,7 @@ export async function fetchStats(fetcher = fetch, now = () => new Date()): Promi
     const game = details.data.find((item: { id: number }) => item.id === universeId);
     const vote = votes.data.find((item: { id: number }) => item.id === universeId);
     if (!game || !vote || !['User', 'Group'].includes(game.creator?.type) || typeof game.creator.hasVerifiedBadge !== 'boolean') throw new Error('Incomplete Roblox response');
+    if (typeof game.description !== 'string') throw new Error('Invalid Roblox description');
     games[id] = {
       universeId, placeId: count(game.rootPlaceId), creatorType: game.creator.type,
       creatorId: count(game.creator.id), creatorName: text(game.creator.name), creatorVerified: game.creator.hasVerifiedBadge,
@@ -71,7 +72,7 @@ export async function fetchStats(fetcher = fetch, now = () => new Date()): Promi
       visits: count(game.visits), favorites: count(game.favoritedCount), maxPlayers: count(game.maxPlayers),
       upVotes: count(vote.upVotes), downVotes: count(vote.downVotes),
       price: game.price === null ? null : count(game.price), avatarType: text(game.universeAvatarType),
-      badgeCount: badgeCounts[index], checked: fetchedAt,
+      badgeCount: badgeCounts[index], checked: fetchedAt, description: game.description,
     };
   });
   return { version: 1, fetchedAt, games };

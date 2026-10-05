@@ -16,6 +16,6 @@ The playtime API provides game totals used by the website:
 
 Repeated or older uploads do not add playtime twice. Recorded totals cannot decrease, and games omitted from an upload retain their previous values. The website combines PC totals from the API with independently maintained mobile and console playtime, using a saved fallback when the API is unavailable.
 
-`GET /roblox/stats` provides public stats for Pressure and town, including player counts, visits, favourites, votes, badges, and creator details. Responses contain `{ version: 1, fetchedAt, games }`. The fetch timestamp records when Roblox last supplied the stats and stays unchanged when a cached response is served.
+`GET /roblox/stats` provides public stats for Pressure and town, including descriptions, player counts, visits, favourites, votes, badges, and creator details. Responses contain `{ version: 1, fetchedAt, games }`. Each game's `description` contains its current Roblox description. The fetch timestamp records when Roblox last supplied the stats and stays unchanged when a cached response is served.
 
 Stats are cached for one hour and refreshed on demand. While a refresh is underway, other visitors receive the previous snapshot. If Roblox is unavailable, the last successful stats remain available; the website uses its bundled snapshot when the API has no cached stats. Browser access is supported through public CORS. The endpoint accepts GET and OPTIONS requests.
