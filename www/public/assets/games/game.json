@@ -25,6 +25,6 @@
     "playtime": { "pc": "340", "mobile": "2350", "console": "" }
   },
   "roblox": { "playtime": { "pc": "", "mobile": "", "console": "" } },
-  "pressure": { "playtime": { "pc": "", "mobile": "", "console": "" } },
-  "town": { "playtime": { "pc": "", "mobile": "", "console": "" } }
+  "pressure": { "playtime": { "pc": "14748", "mobile": "", "console": "" } },
+  "town": { "playtime": { "pc": "12246", "mobile": "", "console": "" } }
 }
