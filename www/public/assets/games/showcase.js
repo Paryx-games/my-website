@@ -171,7 +171,20 @@ function openShowcase(game, link) {
   document.getElementById('game-description').textContent = active.description;
   const quote = typeof ratings[active.id]?.quote === 'string' ? ratings[active.id].quote.trim() : '';
   renderQuote(document.getElementById('game-quote-text'), quote, catalogue);
-  document.getElementById('game-quote').hidden = !quote;
+  if (active.id === 'roblox') {
+    const link = document.createElement('a');
+    link.href = '#roblox-games';
+    link.className = 'game-quote-link game-roblox-category-link';
+    link.dataset.robloxCategory = '';
+    const icon = document.createElement('img');
+    icon.src = active.icon;
+    icon.alt = '';
+    icon.width = 16;
+    icon.height = 16;
+    link.append(icon, "Roblox games I've played");
+    document.getElementById('game-quote-text').append(link);
+  }
+  document.getElementById('game-quote').hidden = !quote && active.id !== 'roblox';
   document.getElementById('game-ratings').replaceChildren(
     ratingsPanelElement(ratings[active.id], active.title),
   );
