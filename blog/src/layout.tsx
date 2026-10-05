@@ -225,6 +225,7 @@ function NavLinks() {
         Blog
       </a>
       <a href="https://paryx.uk/#repos">Projects</a>
+      <a href="https://paryx.uk/portfolio">Portfolio</a>
       <a href="https://paryx.uk/#games">Games</a>
       <a href="https://paryx.uk/#content">About</a>
     </>
