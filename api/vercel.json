@@ -4,6 +4,7 @@
 	"trailingSlash": false,
 	"outputDirectory": "public",
 	"rewrites": [
+		{ "source": "/roblox/stats", "destination": "/api/roblox/stats" },
 		{ "source": "/playtime", "destination": "/api/playtime" },
 		{
 			"source": "/github/languages",

@@ -5,6 +5,7 @@ import { renderPlaytime } from './playtime.js';
 import { renderQuote } from './quote-links.js';
 import { renderRobloxDetails } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
+import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
 
 let gameDetails = {};
 try {
@@ -38,6 +39,17 @@ let wheelScrollPosition = 0;
 let opener;
 let closing = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let robloxRefresh;
+let robloxRefreshedAt = 0;
+function refreshRobloxStats() {
+  if (robloxRefresh || Date.now() - robloxRefreshedAt < 60_000) return;
+  robloxRefresh = fetchRobloxStats().then(response => {
+    if (mergeRobloxStats(robloxGames, response) && dialog.open && active?.roblox) {
+      renderRobloxDetails(document.getElementById('game-roblox-details'), active);
+    }
+  }).finally(() => { robloxRefresh = null; robloxRefreshedAt = Date.now(); });
+}
+refreshRobloxStats();
 const factIcons = [
   '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h.01M12 15h.01M16 15h.01"/>',
   '<circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 4a3 3 0 0 1 0 6M17 14a5 5 0 0 1 4 5v2"/>',
@@ -191,6 +203,7 @@ function openShowcase(game, link) {
   const facts = document.getElementById('game-facts');
   facts.replaceChildren();
   for (const [index, [label, value]] of [[active.roblox ? 'Created' : 'Released', active.year], [active.roblox ? 'Creator' : 'Developer', active.developer], [active.roblox ? 'Platform' : 'Publisher', active.roblox ? 'Roblox' : active.publisher], ['Genre', active.genre]].entries()) {
+    if (active.roblox && label === 'Creator') continue;
     const row = document.createElement('div');
     row.className = 'game-fact';
     row.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${factIcons[index]}</svg>`;
@@ -204,6 +217,7 @@ function openShowcase(game, link) {
   document.getElementById('game-website').href = active.website;
   renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   renderRobloxDetails(document.getElementById('game-roblox-details'), active);
+  if (active.roblox) refreshRobloxStats();
   document.querySelector('.game-image-credit').textContent = active.roblox
     ? 'Official experience icon and thumbnails from Roblox.'
     : 'Official artwork and screenshots from the linked game page.';

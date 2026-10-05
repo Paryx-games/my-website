@@ -108,6 +108,12 @@ img.is-loading { opacity: 0 !important; }
 #game-roblox-details h3 { margin: 0 0 12px; color: var(--color-faint); font-size: 0.8rem; }
 #game-roblox-details dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; margin: 0 0 16px; }
 .game-roblox-stat-votes { grid-column: 1 / -1; }
+.game-roblox-creator { grid-column: 1 / -1; }
+#game-roblox-details .game-roblox-creator dd { display: flex; align-items: center; gap: 8px; }
+#game-roblox-details .game-creator-link { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; flex: none; border: 1px solid rgba(150, 165, 180, 0.18); border-radius: 6px; text-decoration: none; }
+.game-creator-link svg { width: 16px; height: 16px; }
+#game-roblox-details .game-creator-link:hover { color: var(--color-text); background: rgba(150, 165, 180, 0.1); }
+.game-creator-link:focus-visible { outline: 2px solid var(--game-accent); outline-offset: 3px; }
 #game-roblox-details dt { color: var(--color-faint); font-size: 0.75rem; margin-bottom: 3px; }
 #game-roblox-details dd { margin: 0; font-size: 0.85rem; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 #game-roblox-details a { color: var(--color-muted); font-size: 0.8rem; text-decoration: underline; }
