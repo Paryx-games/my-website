@@ -81,7 +81,7 @@ export function Byline({ post }: { post: Post }) {
           <span aria-hidden="true"> · </span>
           {post.readingTime}
         </span>
-        {post.updated && post.updated !== post.date && (
+        {post.updated && (
           <span>
             Updated{' '}
             <time dateTime={post.updated}>{formatDate(post.updated)}</time>
