@@ -9,10 +9,11 @@ const preview = ["preview", "development"].includes(
   process.env.VERCEL_ENV ?? "",
 );
 
-test("production and preview builds preserve both pages and their indexing policy", async () => {
+test("production and preview builds preserve all pages and their indexing policy", async () => {
   for (const [page, canonical] of [
     ["index.html", "https://paryx.uk/"],
     ["privacy-policy.html", "https://paryx.uk/privacy-policy"],
+    ["portfolio.html", "https://paryx.uk/portfolio"],
   ]) {
     const html = await readFile(new URL(page, output), "utf8");
     assert.ok(
@@ -47,6 +48,7 @@ test("promotion retains public URLs, identity, privacy content, and the API sour
   assert.ok(!/galaxyCanvas|galaxyQuality|pixel-dust/.test(html));
   const sitemap = await readFile(new URL("sitemap.xml", output), "utf8");
   assert.ok(sitemap.includes("https://paryx.uk/privacy-policy"));
+  assert.ok(sitemap.includes("https://paryx.uk/portfolio"));
   assert.ok(!sitemap.includes("vercel.app"));
   const privacy = await readFile(
     new URL("privacy-policy.html", output),

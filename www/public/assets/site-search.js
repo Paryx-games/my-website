@@ -1,5 +1,11 @@
 export const shortcuts = [
   {
+    title: 'Portfolio',
+    description: 'A space for Roblox projects and featured work.',
+    url: 'https://paryx.uk/portfolio',
+    keywords: 'portfolio roblox projects experiences builds featured',
+  },
+  {
     title: 'Home',
     description: 'The main paryx website.',
     url: 'https://paryx.uk/',

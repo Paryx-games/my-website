@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paryx - Portfolio</title>
+  <meta name="description" content="Paryx's Roblox portfolio. A space for featured projects and a collection of Roblox work.">
+  <link rel="canonical" href="https://paryx.uk/portfolio">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#080809">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo_white.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://paryx.uk/portfolio">
+  <meta property="og:title" content="Paryx - Portfolio">
+  <meta property="og:description" content="A space for Paryx's Roblox projects.">
+  <meta property="og:site_name" content="paryx.uk">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/scrollbars.css">
+  <link rel="stylesheet" href="/assets/navigation.css">
+  <link rel="stylesheet" href="/assets/site-search.css">
+  <script src="/assets/navigation.js"></script>
+  <script src="/assets/site-search.js" type="module"></script>
+  <style>
+    .portfolio { padding: 48px 0 0; }
+    .portfolio h1, .portfolio h2, .portfolio h3, .portfolio p { margin: 0; }
+    .portfolio-intro { padding: 0 0 38px; border-bottom: 1px solid var(--line); }
+    .portfolio-intro h1 { font-size: clamp(30px, 4vw, 42px); font-weight: 600; line-height: 1.2; letter-spacing: -.045em; }
+    .portfolio-intro p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-top: 13px; max-width: 560px; }
+    .portfolio-sections-nav { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 20px 0 0; }
+    .portfolio-sections-nav a { display: inline-flex; min-height: 44px; align-items: center; color: var(--muted); font-size: 13px; }
+    .portfolio-sections-nav a:hover { color: #fff; }
+    .portfolio-section { margin-top: 32px; scroll-margin-top: 24px; }
+    .portfolio-section + .portfolio-section { margin-top: 56px; border-top: 1px solid var(--line); padding-top: 30px; }
+    .portfolio-section-heading { margin-bottom: 22px; }
+    .portfolio-section-heading h2 { font-size: 21px; font-weight: 500; line-height: 1.4; }
+    .portfolio-section-heading p { color: var(--muted); font-size: 13px; line-height: 1.7; margin-top: 7px; max-width: 640px; }
+    .featured-projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .featured-projects[data-count="1"] { grid-template-columns: 1fr; }
+    .project-card { border: 1px solid #303034; background: var(--surface); border-radius: 8px; overflow: hidden; min-width: 0; }
+    .project-banner { position: relative; margin: 0; aspect-ratio: 16 / 8; background: #131416; overflow: hidden; border-bottom: 1px solid #26272b; }
+    .project-banner img { width: 100%; height: 100%; object-fit: cover; }
+    .featured-projects[data-count="1"] .project-banner { aspect-ratio: 3.5 / 1; }
+    .project-copy { padding: 24px; }
+    .project-copy h3 { font-size: 23px; font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; }
+    .project-copy p { font-size: 14px; line-height: 1.8; color: var(--muted); margin-top: 9px; max-width: 720px; overflow-wrap: anywhere; }
+    .project-explore { display: inline-flex; align-items: center; gap: 20px; min-height: 44px; font-size: 12px; font-weight: 500; border: 1px solid #414147; border-radius: 4px; padding: 0 15px; margin-top: 20px; background: #1b1c1f; }
+    .project-explore:hover { border-color: #7d7d86; background: #232428; color: #fff; }
+    .project-explore svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .compact-projects { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-top: 24px; }
+    .compact-projects:first-child { margin-top: 0; }
+    .compact-projects .project-banner { aspect-ratio: 16 / 9; }
+    .compact-projects .project-copy { padding: 19px 20px; }
+    .compact-projects h3 { font-size: 17px; }
+    .compact-projects p { font-size: 12px; line-height: 1.8; }
+    .compact-projects .project-explore { min-height: 40px; margin-top: 13px; background: none; border: 0; padding: 0; gap: 12px; }
+    .compact-projects .project-explore:hover { color: #fff; }
+    .featured-empty { border: 1px solid #2c2d32; border-radius: 8px; overflow: hidden; background: #101113; }
+    .empty-banner { height: clamp(190px, 23vw, 280px); display: grid; place-items: center; background: #131416; border-bottom: 1px solid #292a2f; }
+    .empty-banner svg { width: 48px; height: 48px; color: #56585f; }
+    .empty-copy { padding: 26px 28px 28px; }
+    .empty-copy h3 { font-size: 19px; font-weight: 500; letter-spacing: -.025em; }
+    .empty-copy p { color: var(--muted); font-size: 13px; line-height: 1.8; margin-top: 8px; }
+    .collection-empty { display: flex; align-items: center; justify-content: center; gap: 14px; border: 1px dashed #303136; border-radius: 5px; min-height: 92px; padding: 20px; margin-top: 24px; color: #a2a3ad; font-size: 12px; line-height: 1.7; }
+    .collection-empty svg { width: 22px; height: 22px; color: #757780; flex-shrink: 0; }
+    @media (max-width: 900px) {
+      .compact-projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .project-copy { padding: 20px; }
+      .project-copy h3 { font-size: 21px; }
+      .project-copy p { font-size: 13px; }
+    }
+    @media (max-width: 600px) {
+      .portfolio { padding-top: 28px; }
+      .portfolio-intro { padding-bottom: 28px; }
+      .portfolio-intro p { font-size: 13px; }
+      .portfolio-section { margin-top: 25px; }
+      .portfolio-section-heading { margin-bottom: 18px; }
+      .featured-projects, .compact-projects { grid-template-columns: 1fr; gap: 18px; }
+      .featured-projects[data-count="1"] .project-banner { aspect-ratio: 16 / 9; }
+      .empty-banner { height: 200px; }
+      .empty-copy { padding: 22px; }
+      .empty-copy h3 { font-size: 18px; }
+      .collection-empty { justify-content: flex-start; padding: 20px; min-height: 92px; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .project-explore { transition: background-color 120ms ease, border-color 120ms ease; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#portfolio-content">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="https://paryx.uk">paryx</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="https://blog.paryx.uk">Blog</a>
+        <a href="/#projects">Projects</a>
+        <a href="/portfolio" aria-current="page">Portfolio</a>
+        <a href="/#games">Games</a>
+        <a href="/#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="https://blog.paryx.uk/" data-open-search aria-label="Search paryx">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        </a>
+        <details class="mobile-nav">
+          <summary aria-label="Toggle navigation"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18"/></svg></summary>
+          <nav aria-label="Mobile navigation">
+            <a href="/">Home</a>
+            <a href="https://blog.paryx.uk">Blog</a>
+            <a href="/#projects">Projects</a>
+            <a href="/portfolio" aria-current="page">Portfolio</a>
+            <a href="/#games">Games</a>
+            <a href="/#about">About</a>
+            <a href="https://blog.paryx.uk/rss.xml">RSS feed</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="portfolio-content" class="portfolio">
+      <header class="portfolio-intro">
+        <h1>Portfolio</h1>
+        <p>A space for my Roblox projects, from experiences to the things built around them.</p>
+        <nav class="portfolio-sections-nav" aria-label="Portfolio sections" hidden></nav>
+      </header>
+      <p id="portfolio-status" role="status" hidden></p>
+      <div id="portfolio-sections">
+        <section id="roblox" class="portfolio-section" aria-labelledby="roblox-heading">
+          <div class="portfolio-section-heading"><h2 id="roblox-heading">Roblox</h2></div>
+          <div class="featured-empty">
+            <div class="empty-banner" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><rect x="8" y="11" width="32" height="26" rx="2"/><circle cx="18" cy="20" r="3"/><path d="m9 32 10-8 7 6 7-10 7 8"/></svg>
+            </div>
+            <div class="empty-copy">
+              <h3>No projects shared yet</h3>
+              <p>Projects will appear here as I share them.</p>
+            </div>
+          </div>
+          <div class="collection-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span>More projects will appear below as I share them.</span>
+          </div>
+        </section>
+      </div>
+    </main>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-identity">
+        <a class="footer-brand" href="/">paryx</a>
+        <p>Projects, experiments, and the things I'm building.</p>
+      </div>
+      <nav aria-label="Explore the site">
+        <h2>Explore</h2>
+        <ul><li><a href="/#projects">Projects</a></li><li><a href="/portfolio" aria-current="page">Portfolio</a></li><li><a href="/#about">About me</a></li><li><a href="https://blog.paryx.uk">Blog</a></li></ul>
+      </nav>
+      <nav aria-label="Find paryx elsewhere">
+        <h2>Keep in touch</h2>
+        <ul><li><a href="https://github.com/Paryx-games">GitHub</a></li><li><a href="mailto:paryx@paryx.uk">Email me</a></li><li><a href="https://blog.paryx.uk/rss.xml">Follow via RSS</a></li></ul>
+      </nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 paryx</span><a href="/privacy-policy">Privacy policy</a></div>
+  </footer>
+  </div>
+  <dialog id="search-dialog" aria-labelledby="search-title" data-search-index="/search-index.json">
+    <div class="dialog-header">
+      <h2 id="search-title">Search paryx</h2>
+      <button class="icon-button" type="button" data-close-search aria-label="Close search">×</button>
+    </div>
+    <form class="search-form" action="https://blog.paryx.uk/" method="get" role="search">
+      <label class="sr-only" for="dialog-search">Search paryx</label>
+      <input id="dialog-search" type="search" name="q" placeholder="Search paryx…" autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+    <p class="search-status" role="status" aria-live="polite">Jump to a page, or search pages and published articles.</p>
+    <section class="site-search-section" data-search-history hidden><div class="site-search-heading"><h3>Recent searches</h3><button type="button" data-clear-history>Clear history</button></div><div class="site-search-history" data-history-list></div></section>
+    <section class="site-search-section" data-search-shortcuts><div class="site-search-heading"><h3>Page shortcuts</h3></div><div class="site-search-shortcuts" data-shortcut-list></div></section>
+    <div class="search-results"></div>
+  </dialog>
+
+
+
+  <template id="portfolio-empty-state">
+          <div class="featured-empty">
+            <div class="empty-banner" aria-hidden="true">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><rect x="8" y="11" width="32" height="26" rx="2"/><circle cx="18" cy="20" r="3"/><path d="m9 32 10-8 7 6 7-10 7 8"/></svg>
+            </div>
+            <div class="empty-copy">
+              <h3>No projects shared yet</h3>
+              <p>Projects will appear here as I share them.</p>
+            </div>
+          </div>
+          <div class="collection-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            <span>More projects will appear below as I share them.</span>
+          </div>
+  </template>
+  <script type="module">
+    import { inject } from "@vercel/analytics";
+    import "/src/site.css";
+
+    inject();
+
+    // Content lives in /portfolio.json (source: www/public/portfolio.json).
+    // Projects support size: "large" or "small", title, description, banner,
+    // bannerAlt, url, and buttonLabel. Add more objects to sections as needed.
+    // Large cards appear first, two per desktop row; other cards use the small grid.
+
+    function safeUrl(value) {
+      if (typeof value !== "string" || !value.trim()) return null;
+      const source = value.trim();
+      if (/[\\\u0000-\u0020\u007f]/.test(source)) return null;
+      if (!/^https?:\/\//i.test(source) && !/^\/(?!\/)/.test(source)) return null;
+      try {
+        const url = new URL(source, window.location.origin);
+        return ["http:", "https:"].includes(url.protocol) ? url : null;
+      } catch {
+        return null;
+      }
+    }
+
+    function element(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function arrow() {
+      const namespace = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(namespace, "svg");
+      svg.setAttribute("viewBox", "0 0 24 24");
+      svg.setAttribute("fill", "none");
+      svg.setAttribute("stroke", "currentColor");
+      svg.setAttribute("stroke-width", "1.5");
+      svg.setAttribute("aria-hidden", "true");
+      const path = document.createElementNS(namespace, "path");
+      path.setAttribute("d", "M5 12h14m-6-6 6 6-6 6");
+      svg.append(path);
+      return svg;
+    }
+
+    function projectCard(project, featured) {
+      const card = element("article", "project-card");
+      const banner = element("div", "project-banner");
+      const imageUrl = safeUrl(project.banner);
+      if (imageUrl) {
+        const image = element("img");
+        image.src = imageUrl.href;
+        image.alt = typeof project.bannerAlt === "string" ? project.bannerAlt : "";
+        image.loading = featured ? "eager" : "lazy";
+        image.decoding = "async";
+        image.addEventListener("error", () => image.remove());
+        banner.append(image);
+      } else {
+        banner.setAttribute("aria-hidden", "true");
+      }
+      const copy = element("div", "project-copy");
+      copy.append(element("h3", "", project.title));
+      if (typeof project.description === "string" && project.description.trim()) {
+        copy.append(element("p", "", project.description));
+      }
+      const projectUrl = safeUrl(project.url);
+      if (projectUrl) {
+        const buttonLabel = typeof project.buttonLabel === "string" && project.buttonLabel.trim() ? project.buttonLabel : "Explore";
+        const link = element("a", "project-explore", buttonLabel);
+        link.href = projectUrl.href;
+        link.setAttribute("aria-label", `${buttonLabel} ${project.title}`);
+        if (projectUrl.origin !== window.location.origin) {
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+        }
+        link.append(arrow());
+        copy.append(link);
+      }
+      card.append(banner, copy);
+      return card;
+    }
+
+    function renderPortfolio(sections) {
+      const container = document.getElementById("portfolio-sections");
+      const navigation = document.querySelector(".portfolio-sections-nav");
+      const emptyTemplate = document.getElementById("portfolio-empty-state");
+      const fragment = document.createDocumentFragment();
+      const sectionLinks = document.createDocumentFragment();
+      const usedIds = new Set();
+      let sectionCount = 0;
+
+      for (const config of sections) {
+        if (!config || typeof config.title !== "string" || !config.title.trim()) continue;
+        const baseId = typeof config.id === "string" ? config.id.replace(/[^a-z0-9_-]/gi, "-") : "section";
+        let id = baseId || "section";
+        let suffix = 1;
+        while (usedIds.has(id)) id = `${baseId || "section"}-${suffix++}`;
+        usedIds.add(id);
+        sectionCount++;
+        const section = element("section", "portfolio-section");
+        section.id = id;
+        const headingId = `portfolio-heading-${sectionCount}`;
+        section.setAttribute("aria-labelledby", headingId);
+        const heading = element("div", "portfolio-section-heading");
+        const title = element("h2", "", config.title);
+        title.id = headingId;
+        heading.append(title);
+        if (typeof config.description === "string" && config.description.trim()) {
+          heading.append(element("p", "", config.description));
+        }
+        section.append(heading);
+        const projects = Array.isArray(config.projects) ? config.projects.filter(project =>
+          project && typeof project.title === "string" && project.title.trim()
+        ) : [];
+        if (projects.length === 0) {
+          section.append(emptyTemplate.content.cloneNode(true));
+        } else {
+          const featured = projects.filter(project => project.size === "large");
+          const remaining = projects.filter(project => !featured.includes(project));
+          if (featured.length) {
+            const row = element("div", "featured-projects");
+            row.dataset.count = String(featured.length);
+            featured.forEach(project => row.append(projectCard(project, true)));
+            section.append(row);
+          }
+          if (remaining.length) {
+            const grid = element("div", "compact-projects");
+            remaining.forEach(project => grid.append(projectCard(project, false)));
+            section.append(grid);
+          }
+        }
+        fragment.append(section);
+        const sectionLink = element("a", "", config.title);
+        sectionLink.href = `#${id}`;
+        sectionLinks.append(sectionLink);
+      }
+      container.replaceChildren(fragment);
+      navigation.replaceChildren(sectionLinks);
+      navigation.hidden = sectionCount < 2;
+    }
+
+    async function loadPortfolio() {
+      try {
+        const response = await fetch("/portfolio.json", { signal: AbortSignal.timeout(5000) });
+        if (!response.ok) throw new Error("Portfolio unavailable");
+        const data = await response.json();
+        if (!data || !Array.isArray(data.sections)) throw new Error("Invalid portfolio content");
+        if (typeof data.title === "string" && data.title.trim()) {
+          document.querySelector(".portfolio-intro h1").textContent = data.title;
+          document.title = `Paryx - ${data.title}`;
+        }
+        if (typeof data.description === "string") {
+          const description = document.querySelector(".portfolio-intro p");
+          description.textContent = data.description;
+          description.hidden = !data.description.trim();
+          document.querySelector('meta[name="description"]').content = data.description;
+          document.querySelector('meta[property="og:description"]').content = data.description;
+        }
+        const template = document.getElementById("portfolio-empty-state");
+        for (const [key, selector] of [["title", ".empty-copy h3"], ["description", ".empty-copy p"], ["collectionMessage", ".collection-empty span"]]) {
+          if (typeof data.emptyState?.[key] === "string") template.content.querySelector(selector).textContent = data.emptyState[key];
+        }
+        renderPortfolio(data.sections);
+      } catch {
+        const status = document.getElementById("portfolio-status");
+        status.textContent = "Projects couldn’t be loaded. Please try again later.";
+        status.hidden = false;
+        document.getElementById("portfolio-sections").hidden = true;
+      }
+    }
+    loadPortfolio();
+  </script>
+</body>
+</html>

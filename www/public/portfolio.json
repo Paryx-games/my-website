@@ -1,0 +1,17 @@
+{
+  "title": "Portfolio",
+  "description": "A space for my Roblox projects, from experiences to the things built around them.",
+  "emptyState": {
+    "title": "No projects shared yet",
+    "description": "Projects will appear here as I share them.",
+    "collectionMessage": "More projects will appear below as I share them."
+  },
+  "sections": [
+    {
+      "id": "roblox",
+      "title": "Roblox",
+      "description": "",
+      "projects": []
+    }
+  ]
+}

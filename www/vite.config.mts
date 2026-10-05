@@ -72,6 +72,7 @@ export default defineConfig(({ mode }) => {
       rolldownOptions: {
         input: {
           home: fileURLToPath(new URL("./index.html", import.meta.url)),
+          portfolio: fileURLToPath(new URL("./portfolio.html", import.meta.url)),
           privacy: fileURLToPath(
             new URL("./privacy-policy.html", import.meta.url),
           ),
