@@ -125,11 +125,39 @@ document.getElementById('roblox-games-count').textContent = robloxGames.length;
 
 let playtimeRefresh;
 let playtimeRefreshedAt = 0;
+const PLAYTIME_WINDOW_MS = 12 * 60 * 60 * 1000;
+const PLAYTIME_SNAPSHOT_KEY = 'game-playtime-12h-v1';
+let playtimeIncreases = {};
+try {
+  const saved = JSON.parse(localStorage.getItem(PLAYTIME_SNAPSHOT_KEY));
+  if (saved?.version === 1 && saved.increases && typeof saved.increases === 'object') playtimeIncreases = saved.increases;
+} catch {}
+
+function comparePlaytimeSnapshot(response) {
+  const games = Object.fromEntries(Object.entries(response?.games || {}).flatMap(([id, totals]) =>
+    Number.isSafeInteger(totals?.pc) && totals.pc >= 0 ? [[id, totals.pc]] : [],
+  ));
+  if (!Object.keys(games).length) return;
+  const now = Date.now();
+  let previous;
+  try { previous = JSON.parse(localStorage.getItem(PLAYTIME_SNAPSHOT_KEY)); } catch {}
+  if (previous?.version === 1 && Number.isFinite(previous.capturedAt) && now - previous.capturedAt >= PLAYTIME_WINDOW_MS && previous.games && typeof previous.games === 'object') {
+    playtimeIncreases = Object.fromEntries(Object.entries(games).flatMap(([id, minutes]) => {
+      const oldMinutes = previous.games[id];
+      return Number.isSafeInteger(oldMinutes) && minutes > oldMinutes ? [[id, minutes - oldMinutes]] : [];
+    }));
+  }
+  try {
+    localStorage.setItem(PLAYTIME_SNAPSHOT_KEY, JSON.stringify({ version: 1, capturedAt: now, games, increases: playtimeIncreases }));
+  } catch {}
+}
+
 function refreshRemotePlaytime() {
   if (playtimeRefresh || Date.now() - playtimeRefreshedAt < 60_000) return;
   playtimeRefresh = fetchRemotePlaytime().then(response => {
     if (!mergeRemotePlaytime(gameDetails, response, catalogue.map(game => game.id))) return;
-    if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
+    comparePlaytimeSnapshot(response);
+    if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox', playtimeIncreases[active.id]);
   }).finally(() => { playtimeRefresh = null; playtimeRefreshedAt = Date.now(); });
 }
 refreshRemotePlaytime();
@@ -216,7 +244,7 @@ function openShowcase(game, link) {
     facts.append(row);
   }
   document.getElementById('game-website').href = active.website;
-  renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
+  renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox', playtimeIncreases[active.id]);
   renderRobloxDetails(document.getElementById('game-roblox-details'), active);
   if (active.roblox) refreshRobloxStats();
   document.querySelector('.game-image-credit').textContent = active.roblox
