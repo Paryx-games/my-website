@@ -146,10 +146,10 @@ function comparePlaytimeSnapshot(response) {
       const oldMinutes = previous.games[id];
       return Number.isSafeInteger(oldMinutes) && minutes > oldMinutes ? [[id, minutes - oldMinutes]] : [];
     }));
+    try { localStorage.setItem(PLAYTIME_SNAPSHOT_KEY, JSON.stringify({ version: 1, capturedAt: now, games, increases: playtimeIncreases })); } catch {}
+  } else if (!previous || previous.version !== 1 || !Number.isFinite(previous.capturedAt) || !previous.games || typeof previous.games !== 'object') {
+    try { localStorage.setItem(PLAYTIME_SNAPSHOT_KEY, JSON.stringify({ version: 1, capturedAt: now, games, increases: playtimeIncreases })); } catch {}
   }
-  try {
-    localStorage.setItem(PLAYTIME_SNAPSHOT_KEY, JSON.stringify({ version: 1, capturedAt: now, games, increases: playtimeIncreases }));
-  } catch {}
 }
 
 function refreshRemotePlaytime() {
