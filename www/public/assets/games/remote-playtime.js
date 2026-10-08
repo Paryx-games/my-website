@@ -9,7 +9,15 @@ export function mergeRemotePlaytime(details, response, knownIds) {
     if (!Number.isSafeInteger(minutes) || minutes < 0) continue;
     const totalMinutes = minutes + (id === 'minecraft' ? MINECRAFT_LAUNCHER_MINUTES : 0);
     if (!Number.isSafeInteger(totalMinutes)) continue;
-    details[id] = { ...details[id], playtime: { ...details[id]?.playtime, pc: totalMinutes } };
+    const increase = response.games[id]?.pcIncrease12hMinutes;
+    details[id] = {
+      ...details[id],
+      playtime: {
+        ...details[id]?.playtime,
+        pc: totalMinutes,
+        pcIncrease12hMinutes: Number.isSafeInteger(increase) && increase > 0 ? increase : null,
+      },
+    };
     changed = true;
   }
   return changed;

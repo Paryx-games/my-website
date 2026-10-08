@@ -21,7 +21,7 @@ export function playtimeEntries(playtime) {
   });
 }
 
-export function renderPlaytime(root, playtime, isPlatform = false, increaseMinutes = 0) {
+export function renderPlaytime(root, playtime, isPlatform = false) {
   const icons = {
     pc: '<rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 21h8M12 16v5"/>',
     mobile: '<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>',
@@ -38,6 +38,7 @@ export function renderPlaytime(root, playtime, isPlatform = false, increaseMinut
     value.className = 'game-playtime-value';
     value.textContent = text;
     detail.append(value);
+    const increaseMinutes = playtime?.pcIncrease12hMinutes;
     if (key === 'pc' && Number.isSafeInteger(increaseMinutes) && increaseMinutes > 0) {
       const number = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
       const pill = document.createElement('span');

@@ -21,7 +21,7 @@ export type Upload = { collectorId: string; sequence: number; entries: Entry[] }
 export type PublicPlaytime = {
   version: 1;
   updatedAt: string | null;
-  games: Record<string, { pc: number }>;
+  games: Record<string, { pc: number; pcIncrease12hMinutes?: number }>;
 };
 export type UploadResult = { ok: true; accepted: boolean; replayed: boolean; lastSequence: number };
 export interface PlaytimeStore {

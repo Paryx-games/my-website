@@ -7,11 +7,39 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
   return {
     async read() {
       const rows = await sql`
-        SELECT game_id, SUM(minutes)::text AS minutes, MAX(updated_at) AS updated_at
-        FROM playtime.totals GROUP BY game_id ORDER BY game_id`;
+        WITH current_totals AS (
+          SELECT collector_id, source, game_id, minutes, updated_at
+          FROM playtime.totals
+        ), baseline AS (
+          SELECT DISTINCT ON (collector_id, source, game_id)
+            collector_id, source, game_id, minutes
+          FROM playtime.total_history
+          WHERE recorded_at <= now() - interval '12 hours'
+          ORDER BY collector_id, source, game_id, recorded_at DESC, history_id DESC
+        ), baseline_games AS (
+          SELECT current.game_id,
+            COUNT(*) AS source_count,
+            COUNT(baseline.minutes) AS baseline_count,
+            SUM(baseline.minutes) AS minutes
+          FROM current_totals AS current
+          LEFT JOIN baseline USING (collector_id, source, game_id)
+          GROUP BY current.game_id
+        )
+        SELECT current.game_id, SUM(current.minutes)::text AS minutes,
+          MAX(current.updated_at) AS updated_at,
+          CASE WHEN baseline_games.baseline_count = baseline_games.source_count
+            AND SUM(current.minutes) > baseline_games.minutes
+            THEN (SUM(current.minutes) - baseline_games.minutes)::text
+            ELSE NULL END AS increase_12h_minutes
+        FROM current_totals AS current
+        JOIN baseline_games USING (game_id)
+        GROUP BY current.game_id, baseline_games.baseline_count, baseline_games.source_count, baseline_games.minutes
+        ORDER BY current.game_id`;
       const data: PublicPlaytime = { version: 1, updatedAt: null, games: {} };
       for (const row of rows) {
-        data.games[row.game_id] = { pc: Number(row.minutes) };
+        const game = { pc: Number(row.minutes) } as PublicPlaytime['games'][string];
+        if (row.increase_12h_minutes !== null) game.pcIncrease12hMinutes = Number(row.increase_12h_minutes);
+        data.games[row.game_id] = game;
         const updatedAt = new Date(row.updated_at).toISOString();
         if (!data.updatedAt || updatedAt > data.updatedAt) data.updatedAt = updatedAt;
       }
@@ -35,9 +63,30 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
           FROM accepted CROSS JOIN jsonb_to_recordset(${entries}::jsonb)
             AS entry(game_id text, source text, minutes bigint)
           ON CONFLICT (collector_id, source, game_id) DO UPDATE
-            SET minutes = GREATEST(playtime.totals.minutes, EXCLUDED.minutes), updated_at = now()
-          RETURNING game_id
-        ) SELECT EXISTS(SELECT 1 FROM accepted) AS accepted, COUNT(*)::int AS written FROM written`;
+            SET minutes = EXCLUDED.minutes, updated_at = now()
+            WHERE playtime.totals.minutes < EXCLUDED.minutes
+          RETURNING collector_id, source, game_id, minutes, updated_at
+        ), history_written AS (
+          INSERT INTO playtime.total_history (collector_id, source, game_id, minutes, recorded_at)
+          SELECT collector_id, source, game_id, minutes, updated_at FROM written
+          RETURNING history_id
+        ), pruned_history AS (
+          DELETE FROM playtime.total_history AS old
+          WHERE old.recorded_at < now() - interval '12 hours'
+            AND EXISTS (
+              SELECT 1 FROM playtime.total_history AS newer
+              WHERE newer.collector_id = old.collector_id
+                AND newer.source = old.source
+                AND newer.game_id = old.game_id
+                AND newer.recorded_at <= now() - interval '12 hours'
+                AND (newer.recorded_at, newer.history_id) > (old.recorded_at, old.history_id)
+            )
+          RETURNING history_id
+        )
+        SELECT EXISTS(SELECT 1 FROM accepted) AS accepted,
+          (SELECT COUNT(*)::int FROM written) AS written,
+          (SELECT COUNT(*)::int FROM history_written) AS history_written,
+          (SELECT COUNT(*)::int FROM pruned_history) AS pruned_history`;
       if (result.accepted) return { ok: true, accepted: true, replayed: false, lastSequence: data.sequence };
       // A fresh statement sees the winning sequence even after simultaneous uploads.
       const [collector] = await sql`SELECT last_sequence, payload_hash FROM playtime.collectors WHERE collector_id = ${data.collectorId}`;
