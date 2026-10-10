@@ -14,7 +14,7 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
           SELECT DISTINCT ON (collector_id, source, game_id)
             collector_id, source, game_id, minutes
           FROM playtime.total_history
-          WHERE recorded_at <= now() - interval '12 hours'
+          WHERE recorded_at <= now() - interval '24 hours'
           ORDER BY collector_id, source, game_id, recorded_at DESC, history_id DESC
         ), baseline_games AS (
           SELECT current.game_id,
@@ -30,7 +30,7 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
           CASE WHEN baseline_games.baseline_count = baseline_games.source_count
             AND SUM(current.minutes) > baseline_games.minutes
             THEN (SUM(current.minutes) - baseline_games.minutes)::text
-            ELSE NULL END AS increase_12h_minutes
+            ELSE NULL END AS increase_24h_minutes
         FROM current_totals AS current
         JOIN baseline_games USING (game_id)
         GROUP BY current.game_id, baseline_games.baseline_count, baseline_games.source_count, baseline_games.minutes
@@ -38,7 +38,7 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
       const data: PublicPlaytime = { version: 1, updatedAt: null, games: {} };
       for (const row of rows) {
         const game = { pc: Number(row.minutes) } as PublicPlaytime['games'][string];
-        if (row.increase_12h_minutes !== null) game.pcIncrease12hMinutes = Number(row.increase_12h_minutes);
+        if (row.increase_24h_minutes !== null) game.pcIncrease24hMinutes = Number(row.increase_24h_minutes);
         data.games[row.game_id] = game;
         const updatedAt = new Date(row.updated_at).toISOString();
         if (!data.updatedAt || updatedAt > data.updatedAt) data.updatedAt = updatedAt;
@@ -72,13 +72,13 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
           RETURNING history_id
         ), pruned_history AS (
           DELETE FROM playtime.total_history AS old
-          WHERE old.recorded_at < now() - interval '12 hours'
+          WHERE old.recorded_at < now() - interval '24 hours'
             AND EXISTS (
               SELECT 1 FROM playtime.total_history AS newer
               WHERE newer.collector_id = old.collector_id
                 AND newer.source = old.source
                 AND newer.game_id = old.game_id
-                AND newer.recorded_at <= now() - interval '12 hours'
+                AND newer.recorded_at <= now() - interval '24 hours'
                 AND (newer.recorded_at, newer.history_id) > (old.recorded_at, old.history_id)
             )
           RETURNING history_id

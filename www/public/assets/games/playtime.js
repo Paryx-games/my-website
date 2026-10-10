@@ -38,18 +38,21 @@ export function renderPlaytime(root, playtime, isPlatform = false) {
     value.className = 'game-playtime-value';
     value.textContent = text;
     detail.append(value);
-    const increaseMinutes = playtime?.pcIncrease12hMinutes;
+    const increaseMinutes = playtime?.pcIncrease24hMinutes;
     if (key === 'pc' && Number.isSafeInteger(increaseMinutes) && increaseMinutes > 0) {
       const number = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
       const pill = document.createElement('span');
       pill.className = 'game-playtime-increase';
-      pill.setAttribute('aria-label', `Increased by ${number.format(increaseMinutes / 60)} hours in approximately the last 12 hours`);
+      const tooltip = `+${number.format(increaseMinutes / 60)} hours playtime in last 24 hours`;
+      pill.setAttribute('aria-label', tooltip);
       const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       arrow.setAttribute('viewBox', '0 0 16 16');
       arrow.setAttribute('fill', 'none');
       arrow.setAttribute('aria-hidden', 'true');
       arrow.innerHTML = '<path d="M8 12V4M4.5 7.5 8 4l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>';
       const amount = document.createElement('span');
+      amount.className = 'game-playtime-increase-amount';
+      amount.title = tooltip;
       amount.textContent = `+${number.format(increaseMinutes / 60)} hours`;
       pill.append(arrow, amount);
       detail.append(pill);
