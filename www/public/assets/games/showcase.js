@@ -1,7 +1,7 @@
 import { games, rotation, catalogue, robloxGames } from './games.js';
 import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
-import { renderPlaytime } from './playtime.js';
+import { renderPlaytime, createPlaytimeIncrease } from './playtime.js';
 import { renderQuote } from './quote-links.js';
 import { renderRobloxDetails } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
@@ -99,7 +99,11 @@ const card = game => {
   iconShell.className = 'game-image-shell game-icon-shell';
   iconShell.append(icon);
   loadGameImage(icon, game.icon, { shell: iconShell });
-  name.append(iconShell, game.title);
+  const nameText = document.createElement('span');
+  nameText.textContent = game.title;
+  name.append(iconShell, nameText);
+  const increase = createPlaytimeIncrease(gameDetails[game.id]?.playtime?.pcIncrease24hMinutes, true);
+  if (increase) name.append(increase);
   cover.append(artworkShell, name);
   const facts = document.createElement('span');
   facts.className = 'game-card-facts';
@@ -129,6 +133,12 @@ function refreshRemotePlaytime() {
   if (playtimeRefresh || Date.now() - playtimeRefreshedAt < 60_000) return;
   playtimeRefresh = fetchRemotePlaytime().then(response => {
     if (!mergeRemotePlaytime(gameDetails, response, catalogue.map(game => game.id))) return;
+    document.querySelectorAll('.game-card-link').forEach(link => {
+      const name = link.querySelector('.game-cover strong');
+      name.querySelector('.game-playtime-increase')?.remove();
+      const increase = createPlaytimeIncrease(gameDetails[link.dataset.game]?.playtime?.pcIncrease24hMinutes, true);
+      if (increase) name.append(increase);
+    });
     if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   }).finally(() => { playtimeRefresh = null; playtimeRefreshedAt = Date.now(); });
 }

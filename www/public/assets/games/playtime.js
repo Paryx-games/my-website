@@ -21,6 +21,30 @@ export function playtimeEntries(playtime) {
   });
 }
 
+export function createPlaytimeIncrease(increaseMinutes, compact = false) {
+  if (!Number.isSafeInteger(increaseMinutes) || increaseMinutes <= 0) return null;
+  const number = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const pill = document.createElement('span');
+  pill.className = `game-playtime-increase${compact ? ' game-playtime-increase-compact' : ''}`;
+  const tooltip = `+${number.format(increaseMinutes / 60)} hours playtime in last 24 hours`;
+  pill.setAttribute('aria-label', tooltip);
+  pill.title = tooltip;
+  const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  arrow.setAttribute('viewBox', '0 0 16 16');
+  arrow.setAttribute('fill', 'none');
+  arrow.setAttribute('aria-hidden', 'true');
+  arrow.innerHTML = '<path d="M8 12V4M4.5 7.5 8 4l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>';
+  pill.append(arrow);
+  if (!compact) {
+    const amount = document.createElement('span');
+    amount.className = 'game-playtime-increase-amount';
+    amount.title = tooltip;
+    amount.textContent = `+${number.format(increaseMinutes / 60)} hours`;
+    pill.append(amount);
+  }
+  return pill;
+}
+
 export function renderPlaytime(root, playtime, isPlatform = false) {
   const icons = {
     pc: '<rect x="3" y="3" width="18" height="13" rx="2"/><path d="M8 21h8M12 16v5"/>',
@@ -38,25 +62,8 @@ export function renderPlaytime(root, playtime, isPlatform = false) {
     value.className = 'game-playtime-value';
     value.textContent = text;
     detail.append(value);
-    const increaseMinutes = playtime?.pcIncrease24hMinutes;
-    if (key === 'pc' && Number.isSafeInteger(increaseMinutes) && increaseMinutes > 0) {
-      const number = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-      const pill = document.createElement('span');
-      pill.className = 'game-playtime-increase';
-      const tooltip = `+${number.format(increaseMinutes / 60)} hours playtime in last 24 hours`;
-      pill.setAttribute('aria-label', tooltip);
-      const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      arrow.setAttribute('viewBox', '0 0 16 16');
-      arrow.setAttribute('fill', 'none');
-      arrow.setAttribute('aria-hidden', 'true');
-      arrow.innerHTML = '<path d="M8 12V4M4.5 7.5 8 4l3.5 3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>';
-      const amount = document.createElement('span');
-      amount.className = 'game-playtime-increase-amount';
-      amount.title = tooltip;
-      amount.textContent = `+${number.format(increaseMinutes / 60)} hours`;
-      pill.append(arrow, amount);
-      detail.append(pill);
-    }
+    const increase = key === 'pc' ? createPlaytimeIncrease(playtime?.pcIncrease24hMinutes) : null;
+    if (increase) detail.append(increase);
     row.append(term, detail);
     return row;
   });

@@ -96,6 +96,7 @@ img.is-loading { opacity: 0 !important; }
 .game-playtime-increase { display: inline-flex; align-items: center; gap: 3px; padding: 3px 7px; border: 1px solid rgba(74, 180, 112, 0.28); border-radius: 999px; background: rgba(42, 132, 76, 0.16); color: #8bd6a2; font-size: 0.7rem; font-weight: 600; line-height: 1.2; white-space: nowrap; }
 .game-playtime-increase svg { width: 13px; height: 13px; flex: none; color: inherit; }
 .game-playtime-increase-amount { text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; }
+.game-cover strong .game-playtime-increase-compact { width: 18px; height: 18px; box-sizing: border-box; padding: 0; flex: none; justify-content: center; }
 #game-platform-note { font-size: 0.85rem; line-height: 1.5; }
 #game-playtime dl:not(:empty) + #game-platform-note { margin-top: 12px; }
 .game-platform-warning { display: flex; align-items: flex-start; gap: 8px; margin: 0; color: var(--color-muted); }
