@@ -27,9 +27,17 @@ I'm making some of my APIs publicly available in case they're useful for other p
 > [!NOTE]
 > These APIs may be rate limited to prevent abuse. They run on free-tier infrastructure, so please use them reasonably.
 
+If you find these APIs useful, consider supporting their continued development and hosting on Ko-fi.
+
+<a href="https://ko-fi.com/paryx">
+  <img src="https://storage.ko-fi.com/cdn/brandasset/v2/support_me_on_kofi_dark.png" alt="Support me on Ko-fi" height="44">
+</a>
+
 ---
 
 ### GitHub Languages
+
+> Only GitHub repositories are supported. GitLab, Bitbucket, and self-hosted Git servers are not supported.
 
 Colors are calculated using [GitHub's Linguist](https://github.com/github-linguist/linguist) and any files without valid colors return in the color `#8b949e`, a muted gray.
 
@@ -39,8 +47,6 @@ Colors are calculated using [GitHub's Linguist](https://github.com/github-lingui
 
 - `repo` (required) - GitHub repository in `owner/repo` format.
 
-> Only GitHub repositories are supported. GitLab, Bitbucket, and self-hosted Git servers are not supported.
-
 ### GitHub Language Bar
 
 `GET` [`/github/languages/bar?repo=git/git&details=true`](https://api.paryx.uk/github/languages/bar?repo=git/git&details=true) - Returns a language bar for a GitHub repository.
@@ -49,5 +55,3 @@ Colors are calculated using [GitHub's Linguist](https://github.com/github-lingui
 
 - `repo` (required) - GitHub repository in `owner/repo` format.
 - `details` (optional) - Set to `true` to include language names and percentages.
-
----
