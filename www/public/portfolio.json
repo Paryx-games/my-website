@@ -1,6 +1,6 @@
 {
   "title": "Portfolio",
-  "description": "A space for my Roblox projects, from experiences to the things built around them.",
+  "description": "This is my portfolio to showcase all of my projects in Roblox, coding or other platforms.",
   "emptyState": {
     "title": "No projects shared yet",
     "description": "Projects will appear here as I share them.",
@@ -11,7 +11,72 @@
       "id": "roblox",
       "title": "Roblox",
       "description": "",
-      "projects": []
+      "projects": [
+        {
+          "title": "A core game",
+          "description": "A small recreation of the current state of \"a core game\" made by \"Solaris\" on Roblox.",
+          "size": "small",
+          "gallery": [
+            {
+              "src": "/assets/portfolio/acg/desks.png",
+              "alt": "Control room desks"
+            },
+            {
+              "src": "/assets/portfolio/acg/reactor.png",
+              "alt": "Empty reactor chamber"
+            },
+            {
+              "src": "/assets/portfolio/acg/reactorlasers.png",
+              "alt": "Reactor chamber w/ lasers"
+            },
+            {
+              "src": "/assets/portfolio/acg/reactorgrills.png",
+              "alt": "Reactor grills lining reactor"
+            },
+            {
+              "src": "/assets/portfolio/acg/closeuplaser.png",
+              "alt": "Close up of a laser"
+            }
+          ],
+          "lightAmplified": true,
+          "lowQualityScreenshots": true
+        },
+        {
+          "title": "Far Horizons",
+          "description": "A game made by me and some friends who helped with ideas and programming, however the parts that are shown are built and made by me only. I will never take credit for someone else's work.",
+          "size": "large",
+          "gallery": [
+            {
+              "src": "/assets/portfolio/farhorizons/old_map.png",
+              "alt": "Old map central area that was an experiment"
+            },
+            {
+              "src": "/assets/portfolio/farhorizons/newdocks.png",
+              "alt": "New docks that are unfinished"
+            },
+            {
+              "src": "/assets/portfolio/farhorizons/woodenboats.png",
+              "alt": "Wooden boats that were made entirely in Roblox studio with plugins"
+            },
+            {
+              "src": "/assets/portfolio/farhorizons/cave_old.png",
+              "alt": "Old cave"
+            },
+            {
+              "src": "/assets/portfolio/farhorizons/cave_ores.png",
+              "alt": "Some ores that were made for the old cave"
+            },
+            {
+              "src": "/assets/portfolio/farhorizons/furnace_old.png",
+              "alt": "Furnace that was made for the old map and probably will be reused"
+            },
+            {
+              "src": "/assets/portfolio/farhorizons/wizard_room_unfinished.png",
+              "alt": "Left out from main preview - very unfinished"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
