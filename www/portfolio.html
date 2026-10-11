@@ -57,6 +57,8 @@
     .compact-projects p { font-size: 12px; line-height: 1.8; }
     .compact-projects .project-explore { min-height: 40px; margin-top: 13px; background: none; border: 0; padding: 0; gap: 12px; }
     .compact-projects .project-explore:hover { color: #fff; }
+    .project-copy .project-lighting-note { display: flex; align-items: flex-start; gap: 6px; margin: 0 0 12px; color: #d9b85f; font-size: 11px; line-height: 1.6; }
+    .project-lighting-note svg { width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0; }
     .featured-empty { border: 1px solid #2c2d32; border-radius: 8px; overflow: hidden; background: #101113; }
     .empty-banner { height: clamp(190px, 23vw, 280px); display: grid; place-items: center; background: #131416; border-bottom: 1px solid #292a2f; }
     .empty-banner svg { width: 48px; height: 48px; color: #56585f; }
@@ -205,7 +207,9 @@
 
     // Content lives in /portfolio.json (source: www/public/portfolio.json).
     // Projects support size: "large" or "small", title, description, banner,
-    // bannerAlt, url, and buttonLabel. Add more objects to sections as needed.
+    // bannerAlt, url, buttonLabel, and lightAmplified. Set lightAmplified: true
+    // to show a gold lighting note beneath the image, before the title.
+    // Add more objects to sections as needed.
     // Large cards appear first, two per desktop row; other cards use the small grid.
 
     function safeUrl(value) {
@@ -242,6 +246,24 @@
       return svg;
     }
 
+    function lightingNote() {
+      const note = element("p", "project-lighting-note");
+      const namespace = "http://www.w3.org/2000/svg";
+      const svg = document.createElementNS(namespace, "svg");
+      svg.setAttribute("viewBox", "0 0 24 24");
+      svg.setAttribute("fill", "none");
+      svg.setAttribute("stroke", "currentColor");
+      svg.setAttribute("stroke-width", "1.5");
+      svg.setAttribute("stroke-linecap", "round");
+      svg.setAttribute("stroke-linejoin", "round");
+      svg.setAttribute("aria-hidden", "true");
+      const path = document.createElementNS(namespace, "path");
+      path.setAttribute("d", "M9 18h6m-5 3h4M9 15c0-1-1-2-2-3a6 6 0 1 1 10 0c-1 1-2 2-2 3M12 1v1M3 4l1 1m16-1-1 1M1 10h1m20 0h1");
+      svg.append(path);
+      note.append(svg, element("span", "", "Lighting amplified to make it visible"));
+      return note;
+    }
+
     function projectCard(project, featured) {
       const card = element("article", "project-card");
       const banner = element("div", "project-banner");
@@ -258,6 +280,7 @@
         banner.setAttribute("aria-hidden", "true");
       }
       const copy = element("div", "project-copy");
+      if (project.lightAmplified === true) copy.append(lightingNote());
       copy.append(element("h3", "", project.title));
       if (typeof project.description === "string" && project.description.trim()) {
         copy.append(element("p", "", project.description));
