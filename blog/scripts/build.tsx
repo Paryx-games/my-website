@@ -63,7 +63,7 @@ export async function build({
   await writeFile(
     path.join(output, 'assets/social', 'blog.png'),
     await pageSocialImage({
-      title: 'Notes from the build.',
+      title: 'My blog.',
       description: site.description,
       label: 'Blog',
       domain: 'blog.paryx.uk',

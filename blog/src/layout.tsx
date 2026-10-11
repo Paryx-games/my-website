@@ -388,10 +388,7 @@ export function Document({
                 <a className="footer-brand" href="https://paryx.uk">
                   paryx
                 </a>
-                <p>
-                  Notes from my projects, experiments, and everything I learn
-                  along the way.
-                </p>
+                <p>{site.description}</p>
               </div>
               <nav aria-label="Explore the blog">
                 <h2>Explore</h2>
@@ -571,12 +568,12 @@ export function Listing({
     <main id="main" className="listing">
       <header className="listing-intro">
         <p className="eyebrow">The paryx blog</p>
-        <h1>{title ?? tag ?? 'Notes on building things.'}</h1>
+        <h1>{title ?? tag ?? 'My blog'}</h1>
         <p className="deck">
           {description ??
             (tag
               ? `Articles filed under ${tag}.`
-              : 'Software, experiments, and lessons learned along the way.')}
+              : site.description)}
         </p>
       </header>
       {introduction}

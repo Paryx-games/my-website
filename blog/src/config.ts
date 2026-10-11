@@ -2,8 +2,7 @@
 export const site = {
   origin: 'https://blog.paryx.uk',
   name: 'paryx - Blog',
-  description:
-    'Notes on building things. Software, experiments, and lessons from paryx.',
+  description: 'Blog posts written by me.',
 };
 
 export function absoluteUrl(path: string): string {

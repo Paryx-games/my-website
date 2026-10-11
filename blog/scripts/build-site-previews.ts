@@ -7,15 +7,15 @@ await mkdir(output, { recursive: true });
 for (const page of [
   {
     filename: 'home.png',
-    title: 'Projects & experiments.',
-    description: 'Software, Roblox development, and the things I’m building.',
+    title: 'My website.',
+    description: 'My projects, blog posts, and information about me.',
     label: 'Home',
     domain: 'paryx.uk',
   },
   {
     filename: 'portfolio.png',
-    title: 'Portfolio.',
-    description: 'Roblox builds, code, and other projects by Paryx.',
+    title: 'My portfolio.',
+    description: 'My portfolio for projects in Roblox, coding, and other platforms.',
     label: 'Portfolio',
     domain: 'paryx.uk/portfolio',
   },
