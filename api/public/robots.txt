@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /github/languages/revalidate
+
+Sitemap: https://api.paryx.uk/sitemap.xml
