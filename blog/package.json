@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "tsx scripts/dev.ts",
     "build": "tsx scripts/build.tsx",
+    "build:site-previews": "tsx scripts/build-site-previews.ts",
     "preview": "vite --config vite.config.ts --host 0.0.0.0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

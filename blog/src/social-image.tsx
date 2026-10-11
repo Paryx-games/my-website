@@ -11,6 +11,91 @@ const font = readFile(
   require.resolve('@fontsource/sora/files/sora-latin-600-normal.woff'),
 );
 
+export async function pageSocialImage({
+  title,
+  description,
+  label,
+  domain,
+}: {
+  title: string;
+  description: string;
+  label: string;
+  domain: string;
+}): Promise<Buffer> {
+  const svg = await satori(
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+        height: '100%',
+        background: '#080809',
+        color: '#f4f4f5',
+        fontFamily: 'Sora',
+        borderLeft: '8px solid #ffffff',
+        padding: '48px 64px',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <div style={{ display: 'flex', fontSize: 32, letterSpacing: '-1px' }}>
+          paryx
+        </div>
+        <div style={{ display: 'flex', fontSize: 20, color: '#b6b6bf' }}>
+          {label}
+        </div>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <div
+          style={{
+            display: 'flex',
+            fontSize: 76,
+            lineHeight: 1.12,
+            letterSpacing: '-3px',
+          }}
+        >
+          {title}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            maxWidth: 920,
+            marginTop: 24,
+            fontSize: 26,
+            lineHeight: 1.5,
+            color: '#b6b6bf',
+          }}
+        >
+          {description}
+        </div>
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          paddingTop: 24,
+          borderTop: '1px solid #303034',
+          fontSize: 20,
+          color: '#b6b6bf',
+        }}
+      >
+        {domain}
+      </div>
+    </div>,
+    {
+      width: 1200,
+      height: 630,
+      fonts: [{ name: 'Sora', data: await font, weight: 600, style: 'normal' }],
+    },
+  );
+  return sharp(Buffer.from(svg)).png().toBuffer();
+}
+
 export async function socialImage(
   post: Post,
   bannerPath?: string,

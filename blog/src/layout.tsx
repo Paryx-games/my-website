@@ -236,7 +236,7 @@ export function Document({
   title,
   description = site.description,
   pathname = '/',
-  image,
+  image = '/assets/social/blog.png',
   post,
   noindex = false,
   children,
@@ -280,7 +280,7 @@ export function Document({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{pageTitle}</title>
         <meta name="description" content={description} />
-        <meta name="theme-color" content="#080809" />
+        <meta name="theme-color" content="#ffffff" />
         <link rel="canonical" href={canonical} />
         <meta
           name="robots"
@@ -305,7 +305,8 @@ export function Document({
               property="og:image:alt"
               content={post ? `${post.title} - paryx` : title}
             />
-            {image.startsWith('/og/') && (
+            {(image.startsWith('/og/') ||
+              image.startsWith('/assets/social/')) && (
               <>
                 <meta property="og:image:width" content="1200" />
                 <meta property="og:image:height" content="630" />

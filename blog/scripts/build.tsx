@@ -14,7 +14,7 @@ import { rss, searchIndex, sitemap } from '../src/feeds.js';
 
 import { authors } from '../src/authors.js';
 import { compileArticle } from '../src/article-content.js';
-import { socialImage } from '../src/social-image.js';
+import { pageSocialImage, socialImage } from '../src/social-image.js';
 import { resolveBanner } from '../src/banners.js';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -52,13 +52,23 @@ export async function build({
     'index.html',
     <Document
       title={site.name}
-      image={published[0] ? `/og/${published[0].slug}.png` : undefined}
+      image="/assets/social/blog.png"
       noindex={noindex}
     >
       <Listing posts={posts} allPosts={published} prioritizeFeatured />
     </Document>,
   );
   await mkdir(path.join(output, 'og'), { recursive: true });
+  await mkdir(path.join(output, 'assets/social'), { recursive: true });
+  await writeFile(
+    path.join(output, 'assets/social', 'blog.png'),
+    await pageSocialImage({
+      title: 'Notes from the build.',
+      description: site.description,
+      label: 'Blog',
+      domain: 'blog.paryx.uk',
+    }),
+  );
   for (const post of posts) {
     await writeFile(
       path.join(output, 'og', `${post.slug}.png`),
