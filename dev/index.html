@@ -2159,7 +2159,7 @@
     </div>
     <form class="search-form" action="https://blog.paryx.uk/" method="get" role="search">
       <label class="sr-only" for="dialog-search">Search paryx</label>
-      <input id="dialog-search" type="search" name="q" placeholder="Search paryx…" autocomplete="off">
+      <input id="dialog-search" type="search" name="q" placeholder="Search paryx..." autocomplete="off">
       <button type="submit">Search</button>
     </form>
     <p class="search-status" role="status" aria-live="polite">Jump to a page, or search pages and published articles.</p>
@@ -3764,7 +3764,7 @@
     const loadPinnedProjects = async () => {
       const container = $("repos");
       const note = $("reposNote");
-      note.textContent = "loading pinned repositories…";
+      note.textContent = "loading pinned repositories...";
 
       const [pinsResult, sources] = await Promise.all([
         fetchPinnedProjects()
@@ -3894,8 +3894,8 @@
       otherProjectsLoading = true;
       clearProjectError($("gamesNote"));
       clearProjectError($("labsNote"));
-      $("gamesNote").textContent = "loading public repositories…";
-      $("labsNote").textContent = "loading public repositories…";
+      $("gamesNote").textContent = "loading public repositories...";
+      $("labsNote").textContent = "loading public repositories...";
 
       otherProjectsPromise = (async () => {
         const { games: gamesResult, labs: labsResult } = await fetchGitHubRepoSources();

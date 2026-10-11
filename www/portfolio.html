@@ -19,12 +19,12 @@
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="My portfolio — paryx.uk/portfolio, on a dark background">
+  <meta property="og:image:alt" content="My portfolio - paryx.uk/portfolio, on a dark background">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Paryx - Portfolio">
   <meta name="twitter:description" content="My portfolio for projects in Roblox, coding, and other platforms.">
   <meta name="twitter:image" content="https://paryx.uk/assets/social/portfolio.png">
-  <meta name="twitter:image:alt" content="My portfolio — paryx.uk/portfolio, on a dark background">
+  <meta name="twitter:image:alt" content="My portfolio - paryx.uk/portfolio, on a dark background">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -229,7 +229,7 @@
     </div>
     <form class="search-form" action="https://blog.paryx.uk/" method="get" role="search">
       <label class="sr-only" for="dialog-search">Search paryx</label>
-      <input id="dialog-search" type="search" name="q" placeholder="Search paryx…" autocomplete="off">
+      <input id="dialog-search" type="search" name="q" placeholder="Search paryx..." autocomplete="off">
       <button type="submit">Search</button>
     </form>
     <p class="search-status" role="status" aria-live="polite">Jump to a page, or search pages and published articles.</p>
@@ -243,7 +243,7 @@
   <dialog id="gallery-dialog" aria-labelledby="gallery-title">
     <div class="gallery-stage">
       <img id="gallery-image" alt="">
-      <p id="gallery-error" class="gallery-error" hidden>Image couldn’t be loaded.</p>
+      <p id="gallery-error" class="gallery-error" hidden>Image couldn't be loaded.</p>
       <div class="gallery-overlay">
         <div class="gallery-copy">
           <h2 id="gallery-title"></h2>
@@ -344,7 +344,7 @@
       svg.append(path);
       const tooltip = element("span", "project-note-tooltip", lighting
         ? "The brightness or exposure has been increased to make the scene easier to see."
-        : "These screenshots weren’t taken at the highest quality and may be retaken in the future.");
+        : "These screenshots weren't taken at the highest quality and may be retaken in the future.");
       tooltip.id = `project-image-note-${++imageNoteCount}`;
       tooltip.setAttribute("role", "tooltip");
       note.setAttribute("aria-describedby", tooltip.id);
@@ -571,7 +571,7 @@
         renderPortfolio(data.sections);
       } catch {
         const status = document.getElementById("portfolio-status");
-        status.textContent = "Projects couldn’t be loaded. Please try again later.";
+        status.textContent = "Projects couldn't be loaded. Please try again later.";
         status.hidden = false;
         document.getElementById("portfolio-sections").hidden = true;
       }

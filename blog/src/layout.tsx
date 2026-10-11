@@ -103,7 +103,7 @@ export function Search({ id = 'dialog-search' }: { id?: string }) {
         id={id}
         type="search"
         name="q"
-        placeholder="Search paryx…"
+        placeholder="Search paryx..."
         autoComplete="off"
       />
       <button className="sr-only focus-reveal" type="submit">

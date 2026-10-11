@@ -18,7 +18,7 @@ export function quoteParts(quote, catalogue) {
 export function renderQuote(root, quote, catalogue) {
   root.replaceChildren();
   if (!quote) return;
-  root.append('“');
+  root.append('"');
   for (const part of quoteParts(quote, catalogue)) {
     if (typeof part === 'string') {
       root.append(part);
@@ -38,5 +38,5 @@ export function renderQuote(root, quote, catalogue) {
     link.append(icon, part.text);
     root.append(link);
   }
-  root.append('”');
+  root.append('"');
 }

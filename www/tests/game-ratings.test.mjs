@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { catalogue } from '../public/assets/games/games.js';
 import { validPersonalRating, starMarkup } from '../public/assets/games/ratings.js';
 
-test('personal ratings accept only 1–5 in half-star steps, plus unrated', () => {
+test('personal ratings accept only 1-5 in half-star steps, plus unrated', () => {
   for (let rating = 1; rating <= 5; rating += 0.5) assert.equal(validPersonalRating(rating), true);
   assert.equal(validPersonalRating(null), true);
   for (const invalid of [0, 0.5, 5.5, 1.25, '4.5', undefined, NaN, Infinity]) {

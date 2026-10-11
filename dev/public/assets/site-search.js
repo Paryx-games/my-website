@@ -203,7 +203,7 @@ function setup() {
     }
     const pages = shortcuts.filter((entry) => matches(entry, value));
     results.append(...pages.map((entry) => choice(entry, 'Page')));
-    status.textContent = 'Searching…';
+    status.textContent = 'Searching...';
     try {
       const posts = await loadIndex();
       if (current !== version) return;

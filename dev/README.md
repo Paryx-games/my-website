@@ -4,7 +4,7 @@ The staging environment for [`paryx.uk`](https://paryx.uk).
 
 Visit [`dev.paryx.uk`](https://dev.paryx.uk)
 
-The staging site shares the blog’s minimal dark theme, Sora headings, and responsive navigation while retaining the homepage’s projects, live activity, and contact information.
+The staging site shares the blog's minimal dark theme, Sora headings, and responsive navigation while retaining the homepage's projects, live activity, and contact information.
 
 Changes to the main website are deployed here for testing before being released to production. Content may be unfinished or differ from the live site.
 

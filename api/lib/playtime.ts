@@ -41,7 +41,7 @@ export function validateUpload(body: unknown, collectorId: string): Upload {
   const value = body as Record<string, unknown>;
   if (value.collectorId !== collectorId) throw new Error('Unknown collector');
   if (!Number.isSafeInteger(value.sequence) || (value.sequence as number) < 1) throw new Error('Expected a positive integer sequence');
-  if (!Array.isArray(value.entries) || !value.entries.length || value.entries.length > 5000) throw new Error('Expected 1–5000 playtime entries');
+  if (!Array.isArray(value.entries) || !value.entries.length || value.entries.length > 5000) throw new Error('Expected 1-5000 playtime entries');
   const seen = new Set<string>();
   const entries = value.entries.flatMap((item: unknown): Entry[] => {
     if (!item || typeof item !== 'object' || Array.isArray(item)) throw new Error('Invalid entry');

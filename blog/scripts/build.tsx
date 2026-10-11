@@ -156,7 +156,7 @@ export async function build({
       <main id="main" className="listing-intro">
         <h1>Page not found.</h1>
         <p className="deck">
-          This article may have moved, or hasn’t been published yet.
+          This article may have moved, or hasn't been published yet.
         </p>
         <a className="read-link" href="/">
           Back to the blog ↗

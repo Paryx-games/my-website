@@ -227,7 +227,7 @@ export const catalogue = [
       developer: "Playground Games",
       year: "2018",
       description:
-        "Dynamic seasons change everything at the world’s greatest automotive festival. Go it alone or team up with others to explore beautiful and historic Britain in a shared open world.",
+        "Dynamic seasons change everything at the world's greatest automotive festival. Go it alone or team up with others to explore beautiful and historic Britain in a shared open world.",
       pictures: [
         "/assets/games/forza-horizon-4-1.webp",
         "/assets/games/forza-horizon-4-2.webp",
@@ -339,7 +339,7 @@ export const catalogue = [
         "343 Industries, Splash Damage, Ruffian Games, Bungie, Saber Interactive",
       year: "2014",
       description:
-        "The Master Chief’s iconic journey includes six games, built for PC and collected in a single integrated experience. Whether you’re a long-time fan or meeting Spartan 117 for the first time, The Master Chief Collection is the definitive Halo gaming experience.",
+        "The Master Chief's iconic journey includes six games, built for PC and collected in a single integrated experience. Whether you're a long-time fan or meeting Spartan 117 for the first time, The Master Chief Collection is the definitive Halo gaming experience.",
       pictures: [
         "/assets/games/halo-mcc-1.webp",
         "/assets/games/halo-mcc-2.webp",

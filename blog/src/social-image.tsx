@@ -31,7 +31,6 @@ export async function pageSocialImage({
         background: '#080809',
         color: '#f4f4f5',
         fontFamily: 'Sora',
-        borderLeft: '8px solid #ffffff',
         padding: '48px 64px',
         flexDirection: 'column',
         justifyContent: 'space-between',
