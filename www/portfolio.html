@@ -59,6 +59,38 @@
     .compact-projects .project-explore:hover { color: #fff; }
     .project-copy .project-lighting-note { display: flex; align-items: flex-start; gap: 6px; margin: 0 0 12px; color: #d9b85f; font-size: 11px; line-height: 1.6; }
     .project-lighting-note svg { width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0; }
+    .project-gallery { display: block; width: 100%; padding: 0; color: #fff; cursor: zoom-in; text-align: left; }
+    .project-gallery:focus-visible { outline: 2px solid #dddde5; outline-offset: -3px; }
+    .gallery-preview { display: grid; width: 100%; height: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 3px; }
+    .gallery-preview[data-count="1"] { grid-template-columns: 1fr; grid-template-rows: 1fr; }
+    .gallery-preview[data-count="2"] { grid-template-rows: 1fr; }
+    .gallery-preview[data-count="3"] img:nth-child(3) { grid-column: 2; grid-row: 1 / 3; }
+    .gallery-preview img { min-width: 0; min-height: 0; }
+    .gallery-preview img:nth-child(1) { grid-column: 1; grid-row: 1; }
+    .gallery-preview[data-count="3"] img:nth-child(2) { grid-column: 1; grid-row: 2; }
+    .gallery-count { position: absolute; right: 12px; bottom: 12px; padding: 5px 9px; border-radius: 4px; background: #080809e6; color: #fff; font-size: 11px; pointer-events: none; }
+    #gallery-dialog { width: min(1100px, calc(100% - 32px)); max-width: none; max-height: calc(100dvh - 32px); padding: 0; border: 1px solid #303034; border-radius: 8px; background: #101113; color: #fff; overflow: auto; }
+    #gallery-dialog::backdrop { background: #000d; }
+    .gallery-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; }
+    .gallery-header h2 { margin: 0; font-size: 16px; font-weight: 500; overflow-wrap: anywhere; }
+    .gallery-control { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex-shrink: 0; border: 1px solid #414147; border-radius: 4px; background: #1b1c1f; color: #fff; cursor: pointer; }
+    .gallery-control:hover { background: #292a2f; }
+    .gallery-control svg { width: 20px; height: 20px; }
+    .gallery-stage { position: relative; display: grid; place-items: center; height: min(65dvh, 680px); background: #080809; }
+    .gallery-stage img { width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+    .gallery-stage .gallery-control { position: absolute; top: calc(50% - 22px); background: #101113e6; }
+    #gallery-previous { left: 12px; }
+    #gallery-next { right: 12px; }
+    .gallery-footer { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 16px 20px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .gallery-footer p { margin: 0; }
+    #gallery-position { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+    .gallery-error { position: absolute; padding: 24px; color: var(--muted); font-size: 13px; }
+    body:has(#gallery-dialog[open]) { overflow: hidden; }
+    @media (max-width: 600px) {
+      #gallery-dialog { width: calc(100% - 16px); max-height: calc(100dvh - 16px); }
+      .gallery-header, .gallery-footer { padding: 12px; }
+      .gallery-stage { height: 55dvh; }
+    }
     .featured-empty { border: 1px solid #2c2d32; border-radius: 8px; overflow: hidden; background: #101113; }
     .empty-banner { height: clamp(190px, 23vw, 280px); display: grid; place-items: center; background: #131416; border-bottom: 1px solid #292a2f; }
     .empty-banner svg { width: 48px; height: 48px; color: #56585f; }
@@ -184,6 +216,20 @@
 
 
 
+  <dialog id="gallery-dialog" aria-labelledby="gallery-title">
+    <header class="gallery-header">
+      <h2 id="gallery-title"></h2>
+      <button id="gallery-close" class="gallery-control" type="button" aria-label="Close gallery" autofocus><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>
+    </header>
+    <div class="gallery-stage">
+      <img id="gallery-image" alt="">
+      <p id="gallery-error" class="gallery-error" hidden>Image couldn’t be loaded.</p>
+      <button id="gallery-previous" class="gallery-control" type="button" aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+      <button id="gallery-next" class="gallery-control" type="button" aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+    </div>
+    <footer class="gallery-footer" aria-live="polite" aria-atomic="true"><p id="gallery-caption"></p><p id="gallery-position"></p></footer>
+  </dialog>
+
   <template id="portfolio-empty-state">
           <div class="featured-empty">
             <div class="empty-banner" aria-hidden="true">
@@ -210,6 +256,9 @@
     // bannerAlt, url, buttonLabel, and lightAmplified. Set lightAmplified: true
     // to show a gold lighting note beneath the image, before the title.
     // Add more objects to sections as needed.
+    // Optional gallery: [{ src: "/assets/build.png", alt: "Build screenshot",
+    // caption: "Optional image caption" }]. Strings containing image URLs also work.
+    // Up to four images form the preview; clicking opens the complete gallery.
     // Large cards appear first, two per desktop row; other cards use the small grid.
 
     function safeUrl(value) {
@@ -264,11 +313,79 @@
       return note;
     }
 
+    const galleryDialog = document.getElementById("gallery-dialog");
+    const galleryImage = document.getElementById("gallery-image");
+    let galleryImages = [];
+    let galleryIndex = 0;
+    let galleryTrigger = null;
+
+    function showGalleryImage(index) {
+      galleryIndex = (index + galleryImages.length) % galleryImages.length;
+      const image = galleryImages[galleryIndex];
+      galleryImage.hidden = false;
+      document.getElementById("gallery-error").hidden = true;
+      galleryImage.alt = image.alt;
+      galleryImage.src = image.src;
+      document.getElementById("gallery-caption").textContent = image.caption;
+      document.getElementById("gallery-position").textContent = `${galleryIndex + 1} / ${galleryImages.length}`;
+      for (const id of ["gallery-previous", "gallery-next"]) document.getElementById(id).hidden = galleryImages.length < 2;
+    }
+
+    galleryImage.addEventListener("error", () => {
+      galleryImage.hidden = true;
+      document.getElementById("gallery-error").hidden = false;
+    });
+    document.getElementById("gallery-close").addEventListener("click", () => galleryDialog.close());
+    document.getElementById("gallery-previous").addEventListener("click", () => showGalleryImage(galleryIndex - 1));
+    document.getElementById("gallery-next").addEventListener("click", () => showGalleryImage(galleryIndex + 1));
+    galleryDialog.addEventListener("keydown", event => {
+      if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+        event.preventDefault();
+        showGalleryImage(galleryIndex + (event.key === "ArrowLeft" ? -1 : 1));
+      }
+    });
+    galleryDialog.addEventListener("click", event => {
+      if (event.target !== galleryDialog) return;
+      const bounds = galleryDialog.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) galleryDialog.close();
+    });
+    galleryDialog.addEventListener("close", () => galleryTrigger?.focus());
+
     function projectCard(project, featured) {
       const card = element("article", "project-card");
-      const banner = element("div", "project-banner");
+      const images = (Array.isArray(project.gallery) ? project.gallery : []).flatMap(image => {
+        const config = typeof image === "string" ? { src: image } : image;
+        const url = safeUrl(config?.src);
+        return url ? [{ src: url.href, alt: typeof config.alt === "string" ? config.alt : project.title,
+          caption: typeof config.caption === "string" ? config.caption : "" }] : [];
+      });
+      const banner = element(images.length ? "button" : "div", "project-banner");
       const imageUrl = safeUrl(project.banner);
-      if (imageUrl) {
+      if (images.length) {
+        banner.classList.add("project-gallery");
+        banner.type = "button";
+        banner.setAttribute("aria-label", `Open ${project.title} gallery (${images.length} images)`);
+        banner.setAttribute("aria-haspopup", "dialog");
+        const preview = element("span", "gallery-preview");
+        preview.dataset.count = String(Math.min(images.length, 4));
+        preview.setAttribute("aria-hidden", "true");
+        for (const config of images.slice(0, 4)) {
+          const image = element("img");
+          image.src = config.src;
+          image.alt = "";
+          image.loading = featured ? "eager" : "lazy";
+          image.decoding = "async";
+          preview.append(image);
+        }
+        banner.append(preview, element("span", "gallery-count", `${images.length} ${images.length === 1 ? "photo" : "photos"}`));
+        banner.addEventListener("click", () => {
+          galleryImages = images;
+          galleryTrigger = banner;
+          document.getElementById("gallery-title").textContent = project.title;
+          showGalleryImage(0);
+          galleryDialog.showModal();
+        });
+      } else if (imageUrl) {
         const image = element("img");
         image.src = imageUrl.href;
         image.alt = typeof project.bannerAlt === "string" ? project.bannerAlt : "";
