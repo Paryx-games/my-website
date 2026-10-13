@@ -2,6 +2,7 @@ export function setupDescriptionDisclosure(dialog) {
   const panel = dialog.querySelector('#game-roblox-about');
   const overview = dialog.querySelector('#game-roblox-overview');
   const gallery = dialog.querySelector('.game-gallery');
+  const sidebar = dialog.querySelector('.game-sidebar');
   const content = document.createElement('div');
   content.id = 'game-description-content';
   content.className = 'game-description-content';
@@ -46,13 +47,13 @@ export function setupDescriptionDisclosure(dialog) {
   function update() {
     if (!dialog.open || overview.hidden) return;
     if (!expanded) {
-      // Let the preview reach the bottom of the gallery thumbnails.
+      // Use the taller of the info sidebar and gallery thumbnails.
       // Stacked layouts retain a compact preview below the gallery.
       const galleryBounds = gallery.getBoundingClientRect();
       const panelBounds = panel.getBoundingClientRect();
       const besideGallery = panelBounds.left >= galleryBounds.right - 1;
       const available = besideGallery
-        ? dialog.querySelector('#game-thumbnails').getBoundingClientRect().bottom - panelBounds.top
+        ? Math.max(sidebar.getBoundingClientRect().bottom, dialog.querySelector('#game-thumbnails').getBoundingClientRect().bottom) - panelBounds.top
         : 220;
       limit = Math.max(160, available);
       panel.style.setProperty('--description-preview-height', `${limit}px`);
@@ -91,6 +92,7 @@ export function setupDescriptionDisclosure(dialog) {
   });
   const observer = new ResizeObserver(schedule);
   observer.observe(gallery);
+  observer.observe(sidebar);
   observer.observe(dialog.querySelector('#game-roblox-details'));
   window.addEventListener('resize', schedule);
   return {
