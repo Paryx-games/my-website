@@ -14,19 +14,25 @@ export function setupDescriptionDisclosure(dialog) {
   panel.append(content, button);
   let expanded = false;
   let wideExpansion = false;
+  let overflows = false;
   let limit = 0;
   let frame;
 
   function update() {
     if (!dialog.open || overview.hidden) return;
     if (!expanded) {
-      // Keep the description preview no taller than the gallery image.
-      limit = Math.max(180, dialog.querySelector('.game-picture-stage').getBoundingClientRect().height);
+      // Use the remaining space beside the gallery, with a short preview
+      // when the details panel already reaches the bottom of the gallery.
+      const galleryBounds = gallery.getBoundingClientRect();
+      const panelBounds = panel.getBoundingClientRect();
+      const besideGallery = panelBounds.left >= galleryBounds.right - 1;
+      const available = besideGallery ? galleryBounds.bottom - panelBounds.top : 220;
+      limit = Math.max(160, Math.min(220, available));
       panel.style.setProperty('--description-preview-height', `${limit}px`);
     }
     const padding = parseFloat(getComputedStyle(panel).paddingTop) * 2;
     const naturalHeight = content.scrollHeight + panel.querySelector('h3').offsetHeight + 16 + padding;
-    const overflows = naturalHeight > limit + 1;
+    if (!expanded) overflows = naturalHeight > limit + 1;
     panel.classList.toggle('is-collapsible', overflows);
     panel.classList.toggle('is-expanded', expanded);
     button.hidden = !overflows;
@@ -45,6 +51,8 @@ export function setupDescriptionDisclosure(dialog) {
   button.addEventListener('click', () => {
     expanded = !expanded;
     update();
+    button.focus({ preventScroll: true });
+    if (expanded && wideExpansion) panel.scrollIntoView({ block: 'start', behavior: 'instant' });
     if (!expanded) panel.scrollIntoView({ block: 'nearest', behavior: 'instant' });
   });
   const observer = new ResizeObserver(schedule);
@@ -55,6 +63,7 @@ export function setupDescriptionDisclosure(dialog) {
     content,
     reset() {
       expanded = false;
+      overflows = false;
       overview.append(panel);
       panel.classList.remove('is-expanded', 'is-wide', 'is-collapsible');
       button.hidden = true;
