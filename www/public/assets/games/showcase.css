@@ -123,8 +123,17 @@ img.is-loading { opacity: 0 !important; }
 #game-roblox-about.is-collapsible:not(.is-expanded) .game-description-toggle { position: absolute; bottom: 0; left: 0; margin: 0; }
 .game-description-toggle svg { width: 18px; height: 18px; }
 .is-expanded .game-description-toggle svg { transform: rotate(180deg); }
-#game-roblox-about.is-wide { grid-column: 1 / -1; }
-#game-roblox-about.is-wide .game-description-content { max-width: 85ch; }
+#game-description-popup { width: min(740px, calc(100vw - 32px)); max-height: calc(100svh - 48px); margin: auto; padding: 0; background: #0c1014; color: var(--color-text); border: 1px solid #46505b; border-radius: 12px; overflow: hidden; }
+#game-description-popup[open] { display: flex; flex-direction: column; }
+#game-description-popup::backdrop { background: rgba(3, 5, 8, 0.8); backdrop-filter: blur(8px); }
+#game-description-popup header { display: flex; align-items: center; gap: 20px; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid rgba(150, 165, 180, 0.18); flex: none; }
+#game-description-popup h2 { margin: 0; font-size: 1.1rem; line-height: 1.4; }
+#game-description-popup button { display: inline-flex; align-items: center; gap: 8px; flex: none; min-height: 44px; padding: 8px 12px; border: 1px solid #56606b; border-radius: 6px; background: #10151b; color: inherit; font: inherit; cursor: pointer; }
+#game-description-popup button:hover { background: #202830; border-color: var(--game-accent); }
+#game-description-popup button svg { width: 18px; height: 18px; }
+.game-description-popup-body { padding: 24px; overflow-y: auto; white-space: pre-line; overflow-wrap: anywhere; font-size: 0.9375rem; line-height: 1.7; color: var(--color-muted); }
+#game-description-popup :focus-visible { outline: 2px solid var(--game-accent); outline-offset: -3px; }
+@media (max-width: 560px) { #game-description-popup { width: calc(100vw - 20px); max-height: calc(100svh - 20px); } #game-description-popup header, .game-description-popup-body { padding: 16px; } }
 .is-roblox #game-website { margin-top: 20px; }
 #game-roblox-details h3 { margin: 0 0 12px; color: var(--color-faint); font-size: 0.8rem; }
 #game-roblox-details dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; margin: 0 0 16px; }

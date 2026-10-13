@@ -2,7 +2,6 @@ export function setupDescriptionDisclosure(dialog) {
   const panel = dialog.querySelector('#game-roblox-about');
   const overview = dialog.querySelector('#game-roblox-overview');
   const gallery = dialog.querySelector('.game-gallery');
-  const layout = dialog.querySelector('.game-showcase-layout');
   const content = document.createElement('div');
   content.id = 'game-description-content';
   content.className = 'game-description-content';
@@ -12,8 +11,34 @@ export function setupDescriptionDisclosure(dialog) {
   button.setAttribute('aria-controls', content.id);
   button.innerHTML = '<span>Expand</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
   panel.append(content, button);
+  const popup = document.createElement('dialog');
+  popup.id = 'game-description-popup';
+  popup.setAttribute('aria-labelledby', 'game-description-popup-title');
+  popup.innerHTML = '<header><h2 id="game-description-popup-title"></h2><button type="button" aria-label="Close description">Close <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></header><div class="game-description-popup-body" tabindex="0"></div>';
+  document.body.append(popup);
+  const popupBody = popup.querySelector('.game-description-popup-body');
+  popup.querySelector('button').addEventListener('click', () => popup.close());
+  popup.addEventListener('keydown', event => {
+    if (event.key !== 'Escape') return;
+    event.preventDefault();
+    event.stopPropagation();
+    popup.close();
+  });
+  popup.addEventListener('cancel', event => {
+    event.preventDefault();
+    popup.close();
+  });
+  popup.addEventListener('click', event => {
+    if (event.target !== popup) return;
+    const bounds = popup.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) popup.close();
+  });
+  popup.addEventListener('close', () => {
+    if (dialog.open && !overview.hidden) button.focus({ preventScroll: true });
+  });
+  dialog.addEventListener('close', () => { if (popup.open) popup.close(); });
   let expanded = false;
-  let wideExpansion = false;
+  let popupRequired = false;
   let overflows = false;
   let limit = 0;
   let frame;
@@ -40,21 +65,28 @@ export function setupDescriptionDisclosure(dialog) {
     button.hidden = !overflows;
     button.setAttribute('aria-expanded', String(expanded));
     button.querySelector('span').textContent = expanded ? 'Collapse' : 'Expand';
-    if (!expanded) wideExpansion = naturalHeight > Math.max(limit * 1.6, innerHeight * 0.7);
-    const wide = expanded && wideExpansion;
-    if (wide && panel.parentElement !== layout) layout.append(panel);
-    if (!wide && panel.parentElement !== overview) overview.append(panel);
-    panel.classList.toggle('is-wide', wide);
+    if (!expanded) popupRequired = naturalHeight - limit > Math.max(120, limit * 0.35) || naturalHeight > innerHeight * 0.65;
+    button.setAttribute('aria-controls', popupRequired ? popup.id : content.id);
+    if (popupRequired) button.setAttribute('aria-haspopup', 'dialog');
+    else button.removeAttribute('aria-haspopup');
+    if (popup.open) popupBody.textContent = content.textContent;
   }
   function schedule() {
     cancelAnimationFrame(frame);
     frame = requestAnimationFrame(update);
   }
   button.addEventListener('click', () => {
+    if (!expanded && popupRequired) {
+      popup.querySelector('h2').textContent = `${dialog.querySelector('#game-title').textContent} - About this experience`;
+      popupBody.textContent = content.textContent;
+      popup.style.setProperty('--game-accent', getComputedStyle(dialog).getPropertyValue('--game-accent'));
+      popup.showModal();
+      popupBody.scrollTop = 0;
+      return;
+    }
     expanded = !expanded;
     update();
     button.focus({ preventScroll: true });
-    if (expanded && wideExpansion) panel.scrollIntoView({ block: 'start', behavior: 'instant' });
     if (!expanded) panel.scrollIntoView({ block: 'nearest', behavior: 'instant' });
   });
   const observer = new ResizeObserver(schedule);
@@ -64,10 +96,10 @@ export function setupDescriptionDisclosure(dialog) {
   return {
     content,
     reset() {
+      if (popup.open) popup.close();
       expanded = false;
       overflows = false;
-      overview.append(panel);
-      panel.classList.remove('is-expanded', 'is-wide', 'is-collapsible');
+      panel.classList.remove('is-expanded', 'is-collapsible');
       button.hidden = true;
       schedule();
     },
