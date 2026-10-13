@@ -7,6 +7,7 @@ import { renderRobloxDetails } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
 import { favoriteBadgeElement } from './favorites.js';
+import { setupDescriptionDisclosure } from './description.js';
 
 let gameDetails = {};
 try {
@@ -28,6 +29,7 @@ try {
 
 const cards = document.getElementById('favorite-games');
 const dialog = document.getElementById('game-showcase');
+const descriptionDisclosure = setupDescriptionDisclosure(dialog);
 const title = document.getElementById('game-title');
 const image = document.getElementById('game-picture');
 const thumbs = document.getElementById('game-thumbnails');
@@ -48,6 +50,7 @@ function refreshRobloxStats() {
     if (mergeRobloxStats(robloxGames, response) && dialog.open && active?.roblox) {
       renderRobloxDetails(document.getElementById('game-roblox-details'), active);
       document.getElementById('game-description').textContent = active.description;
+      descriptionDisclosure.update();
     }
   }).finally(() => { robloxRefresh = null; robloxRefreshedAt = Date.now(); });
 }
@@ -182,8 +185,9 @@ function openShowcase(game, link) {
   dialog.classList.toggle('is-roblox', Boolean(active.roblox));
   const description = document.getElementById('game-description');
   const robloxOverview = document.getElementById('game-roblox-overview');
+  descriptionDisclosure.reset();
   robloxOverview.hidden = !active.roblox;
-  if (active.roblox) document.getElementById('game-roblox-about').append(description);
+  if (active.roblox) descriptionDisclosure.content.append(description);
   else document.querySelector('.game-info-panel').insertBefore(description, document.getElementById('game-website'));
   dialog.style.setProperty('--game-accent', active.accent);
   loadGameImage(document.getElementById('game-backdrop'), active.backdrop || active.cover);
@@ -248,6 +252,7 @@ function openShowcase(game, link) {
   }));
   showPicture(0);
   if (!wasOpen) dialog.showModal();
+  descriptionDisclosure.update();
   if (!wasOpen && !reducedMotion.matches) dialog.animate([{ opacity: 0, transform: 'translateY(12px) scale(0.985)' }, { opacity: 1, transform: 'translateY(0) scale(1)' }], { duration: 280, easing: 'ease-out' });
   document.body.classList.add('game-showcase-open');
   document.getElementById('game-close').focus();
