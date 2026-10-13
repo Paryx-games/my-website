@@ -21,13 +21,15 @@ export function setupDescriptionDisclosure(dialog) {
   function update() {
     if (!dialog.open || overview.hidden) return;
     if (!expanded) {
-      // Use the remaining space beside the gallery, with a short preview
-      // when the details panel already reaches the bottom of the gallery.
+      // Let the preview reach the bottom of the gallery thumbnails.
+      // Stacked layouts retain a compact preview below the gallery.
       const galleryBounds = gallery.getBoundingClientRect();
       const panelBounds = panel.getBoundingClientRect();
       const besideGallery = panelBounds.left >= galleryBounds.right - 1;
-      const available = besideGallery ? galleryBounds.bottom - panelBounds.top : 220;
-      limit = Math.max(160, Math.min(220, available));
+      const available = besideGallery
+        ? dialog.querySelector('#game-thumbnails').getBoundingClientRect().bottom - panelBounds.top
+        : 220;
+      limit = Math.max(160, available);
       panel.style.setProperty('--description-preview-height', `${limit}px`);
     }
     const padding = parseFloat(getComputedStyle(panel).paddingTop) * 2;
