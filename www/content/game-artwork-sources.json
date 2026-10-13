@@ -1152,5 +1152,12 @@
     "purpose": "official Roblox experience thumbnail",
     "width": 768,
     "height": 432
+  },
+  "/assets/games/industrialist-logo.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-3ff3336be48be90567c0df6dfde42de2/768/432/Decal/Png/noFilter",
+    "purpose": "Industrialist wordmark from Roblox Creator Store",
+    "sourcePage": "https://create.roblox.com/store/asset/121716193870833",
+    "width": 432,
+    "height": 432
   }
 }

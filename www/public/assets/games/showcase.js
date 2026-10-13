@@ -201,11 +201,20 @@ function openShowcase(game, link) {
   dialog.style.setProperty('--game-accent', active.accent);
   loadGameImage(document.getElementById('game-backdrop'), active.backdrop || active.cover);
   title.textContent = active.title;
+  const titleArtwork = document.getElementById('game-title-artwork');
+  titleArtwork.parentElement.hidden = !active.titleArtwork || Boolean(active.logo);
+  if (active.titleArtwork && !active.logo) loadGameImage(titleArtwork, active.titleArtwork, { shell: titleArtwork.parentElement });
   const logo = document.getElementById('game-logo');
   logo.parentElement.hidden = !active.logo;
   logo.dataset.lightInk = String(active.id === 'forza-horizon-4');
   title.classList.toggle('sr-only', Boolean(active.logo));
-  if (active.logo) loadGameImage(logo, active.logo, { shell: logo.parentElement });
+  if (active.logo) loadGameImage(logo, active.logo, {
+    shell: logo.parentElement,
+    onError: () => {
+      logo.parentElement.hidden = true;
+      title.classList.remove('sr-only');
+    },
+  });
   document.getElementById('game-description').textContent = active.description;
   const quote = typeof ratings[active.id]?.quote === 'string' ? ratings[active.id].quote.trim() : '';
   renderQuote(document.getElementById('game-quote-text'), quote, catalogue);

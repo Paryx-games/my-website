@@ -59,6 +59,7 @@ export const robloxGames = [
   },
   {
     "id": "town",
+    "titleArtwork": "/assets/games/town-icon.webp",
     "title": "town",
     "year": "2020",
     "developer": "DecodeUnicode",
@@ -111,6 +112,7 @@ export const robloxGames = [
   },
   {
     "id": "industrialist",
+    "titleArtwork": "/assets/games/industrialist-logo.png",
     "title": "Industrialist",
     "year": "2022",
     "developer": "Mamytema Studios",
@@ -167,6 +169,7 @@ export const robloxGames = [
   },
   {
     "id": "build-a-boat-for-treasure",
+    "titleArtwork": "/assets/games/build-a-boat-for-treasure-icon.webp",
     "title": "Build a Boat for Treasure",
     "year": "2016",
     "developer": "Chillz Studios",
@@ -216,6 +219,7 @@ export const robloxGames = [
   },
   {
     "id": "nuclear-blast-testing-facility",
+    "titleArtwork": "/assets/games/nuclear-blast-testing-facility-icon.webp",
     "title": "Nuclear Blast Testing Facility",
     "year": "2008",
     "developer": "Ryanblaze",
@@ -269,6 +273,7 @@ export const robloxGames = [
   },
   {
     "id": "a-core-game",
+    "titleArtwork": "/assets/games/a-core-game-icon.webp",
     "title": "a core game",
     "year": "2021",
     "developer": "Solaris Development Group",
