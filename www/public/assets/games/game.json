@@ -92,35 +92,35 @@
   },
   "town": {
     "playtime": {
-      "pc": "12736",
+      "pc": "13672",
       "mobile": "",
       "console": ""
     }
   },
   "industrialist": {
     "playtime": {
-      "pc": "",
+      "pc": "4408",
       "mobile": "",
       "console": ""
     }
   },
   "build-a-boat-for-treasure": {
     "playtime": {
-      "pc": "",
+      "pc": "4122",
       "mobile": "",
-      "console": ""
+      "console": "243"
     }
   },
   "nuclear-blast-testing-facility": {
     "playtime": {
-      "pc": "",
+      "pc": "2346",
       "mobile": "",
       "console": ""
     }
   },
   "a-core-game": {
     "playtime": {
-      "pc": "",
+      "pc": "429",
       "mobile": "",
       "console": ""
     }
