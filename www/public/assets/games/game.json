@@ -96,5 +96,33 @@
       "mobile": "",
       "console": ""
     }
+  },
+  "industrialist": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "build-a-boat-for-treasure": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "nuclear-blast-testing-facility": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "a-core-game": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
   }
 }
