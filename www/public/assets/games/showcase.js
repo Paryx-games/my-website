@@ -6,6 +6,7 @@ import { renderQuote } from './quote-links.js';
 import { renderRobloxDetails } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
+import { favoriteBadgeElement } from './favorites.js';
 
 let gameDetails = {};
 try {
@@ -104,6 +105,7 @@ const card = game => {
   name.append(iconShell, nameText);
   const increase = createPlaytimeIncrease(gameDetails[game.id]?.playtime?.pcIncrease24hMinutes, true);
   if (increase) name.append(increase);
+  if (game.favorite) name.append(favoriteBadgeElement(true));
   cover.append(artworkShell, name);
   const facts = document.createElement('span');
   facts.className = 'game-card-facts';
@@ -137,7 +139,7 @@ function refreshRemotePlaytime() {
       const name = link.querySelector('.game-cover strong');
       name.querySelector('.game-playtime-increase')?.remove();
       const increase = createPlaytimeIncrease(gameDetails[link.dataset.game]?.playtime?.pcIncrease24hMinutes, true);
-      if (increase) name.append(increase);
+      if (increase) name.insertBefore(increase, name.querySelector('.game-favorite'));
     });
     if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   }).finally(() => { playtimeRefresh = null; playtimeRefreshedAt = Date.now(); });
@@ -209,7 +211,7 @@ function openShowcase(game, link) {
   }
   document.getElementById('game-quote').hidden = !quote && active.id !== 'roblox';
   document.getElementById('game-ratings').replaceChildren(
-    ratingsPanelElement(ratings[active.id], active.title),
+    ratingsPanelElement(ratings[active.id], active.title, active.favorite),
   );
   const facts = document.getElementById('game-facts');
   facts.replaceChildren();

@@ -2490,6 +2490,3594 @@
         "https://badges.roblox.com/v1/universes/4367208330/badges?limit=100&sortOrder=Asc",
         "https://badges.roblox.com/v1/universes/4367208330/badges?limit=100&sortOrder=Asc&cursor=eyJrZXkiOiJpZF8ycXpCOGQxUldZVXRJT2tZMXp3QUFBWk1JalVKeHp3QU5UeGhVcU5JWSIsInNvcnRPcmRlciI6IkFzYyIsInBhZ2luZ0RpcmVjdGlvbiI6IkZvcndhcmQiLCJwYWdlTnVtYmVyIjoyLCJkaXNjcmltaW5hdG9yIjoidW5pdmVyc2VJZDo0MzY3MjA4MzMwc29ydEJ5OiIsImNvdW50IjoxMDB9Cjg4ODNkZDlhNmExMTg3ZGVlOGYwYmYwYzQ0MzYzZGQ0ZDNjNmM0NzMxOWY4ZTgwODc2MmFlZDgwOGNhYTY4OWM%3D"
       ]
+    },
+    "https://games.roblox.com/v1/games?universeIds=3448264866": {
+      "url": "https://games.roblox.com/v1/games?universeIds=3448264866",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 3448264866,
+            "rootPlaceId": 9192423027,
+            "name": "Industrialist",
+            "description": "Industrialist is a factory construction and expansion game inspired by Mindustry, Factorio, and other popular industry simulation games.\n\nKey Game Features:\n    • Pollution management: Keep track of your pollution level and keep it under control.\n    • Production lines: Plan, optimize, and upgrade your manufacturing systems.\n    • Economic strategy: Manage money and research new technology.\n    • Immersive mechanics: Engage with immersive and modular machine systems.\n\nThis game has a steep learning curve and complex mechanics. Getting used to these systems will require a lot of practice, so we recommend playing with friends to share discoveries.\n\nDevelopment Status:\nBeta (v1.0). Expect regular updates, possible bugs, and changes while the game is in development.",
+            "sourceName": null,
+            "sourceDescription": null,
+            "creator": {
+              "id": 14554968,
+              "name": "Mamytema Studios",
+              "type": "Group",
+              "isRNVAccount": false,
+              "hasVerifiedBadge": true
+            },
+            "price": null,
+            "allowedGearGenres": [
+              "Tutorial"
+            ],
+            "allowedGearCategories": [],
+            "isGenreEnforced": false,
+            "copyingAllowed": false,
+            "playing": 3744,
+            "visits": 71251003,
+            "maxPlayers": 20,
+            "created": "2022-03-25T16:53:47.307Z",
+            "updated": "2026-09-04T16:43:18.521Z",
+            "studioAccessToApisAllowed": false,
+            "createVipServersAllowed": false,
+            "universeAvatarType": "MorphToR15",
+            "genre": "Building",
+            "genre_l1": "Simulation",
+            "genre_l2": "Tycoon",
+            "untranslated_genre_l1": "simulation",
+            "isAllGenre": false,
+            "isFavoritedByUser": false,
+            "favoritedCount": 359489,
+            "canonicalUrlPath": "/games/9192423027/Industrialist",
+            "isContentRestricted": false
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v1/games/votes?universeIds=3448264866": {
+      "url": "https://games.roblox.com/v1/games/votes?universeIds=3448264866",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 3448264866,
+            "upVotes": 132509,
+            "downVotes": 7016
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v2/games/3448264866/media": {
+      "url": "https://games.roblox.com/v2/games/3448264866/media",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "assetTypeId": 86,
+            "assetType": "GamePreviewVideo",
+            "imageId": 118789136333104,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": "",
+            "videoId": "120044943967170"
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 118789136333104,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 112586257046923,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 110873041579457,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 88279728731687,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 92463111397818,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 107990371672321,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": false,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 15524543964,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 14824069842,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 14824061657,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/icons?universeIds=3448264866&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/icons?universeIds=3448264866&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 3448264866,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-bc39967e17bc364dd8baf2a201731a64/512/512/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/3448264866/thumbnails?thumbnailIds=118789136333104,112586257046923,110873041579457,88279728731687,92463111397818,15524543964,14824069842,14824061657&size=768x432&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/3448264866/thumbnails?thumbnailIds=118789136333104,112586257046923,110873041579457,88279728731687,92463111397818,15524543964,14824069842,14824061657&size=768x432&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 118789136333104,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-a4c06752aa35093170a57a34f42d8628/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 112586257046923,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-f226e91d90f35507a96ffb8cecf7ab95/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 110873041579457,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-4c0982e62286c788094f0e880f5b265a/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 88279728731687,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-7d4312d8f0712ac380a6fcb4e30b2abe/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 92463111397818,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-9326d5d109d9e6194ad387bb0a903aa3/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 15524543964,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-a2718f141f849626445b91d0a14f27a1/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 14824069842,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-af6af48485b1ce57d9a65d77645a9509/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 14824061657,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-fa319903164a24baade5cbaddacfae5e/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://badges.roblox.com/v1/universes/3448264866/badges?limit=100&sortOrder=Asc": {
+      "url": "https://badges.roblox.com/v1/universes/3448264866/badges?limit=100&sortOrder=Asc",
+      "status": 200,
+      "data": {
+        "previousPageCursor": null,
+        "nextPageCursor": null,
+        "data": [
+          {
+            "id": 2151272708,
+            "name": "Forlorn Hope",
+            "description": "Amidst the choking shroud of pollution, you've become the harbinger of the forlorn hope. A world relinquished to haze, trading vibrant life for industrial decay. Your triumph bears witness to the sacrifices of nature, drowned in the relentless tide of progress.",
+            "displayName": "Forlorn Hope",
+            "displayDescription": "Amidst the choking shroud of pollution, you've become the harbinger of the forlorn hope. A world relinquished to haze, trading vibrant life for industrial decay. Your triumph bears witness to the sacrifices of nature, drowned in the relentless tide of progress.",
+            "enabled": true,
+            "iconImageId": 15360337053,
+            "displayIconImageId": 15360337053,
+            "created": "2023-08-31T09:59:40.69+00:00",
+            "updated": "2023-11-15T05:49:56.141+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 11,
+              "awardedCount": 15614,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151274617,
+            "name": "Power² ",
+            "description": "build a modular diesel engine with 800 torque (place down a modular info panel to check its current torque)",
+            "displayName": "Power² ",
+            "displayDescription": "build a modular diesel engine with 800 torque (place down a modular info panel to check its current torque)",
+            "enabled": true,
+            "iconImageId": 14646951788,
+            "displayIconImageId": 14646951788,
+            "created": "2023-08-31T10:59:04.25+00:00",
+            "updated": "2023-09-09T15:07:49.89+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 76,
+              "awardedCount": 37557,
+              "winRatePercentage": 0.003
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151290802,
+            "name": "Collaboration ",
+            "description": "Have someone join you in your world",
+            "displayName": "Collaboration ",
+            "displayDescription": "Have someone join you in your world",
+            "enabled": true,
+            "iconImageId": 14637937947,
+            "displayIconImageId": 14637937947,
+            "created": "2023-08-31T18:57:29.367+00:00",
+            "updated": "2023-08-31T18:57:29.367+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 5574,
+              "awardedCount": 3067144,
+              "winRatePercentage": 0.19
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151290823,
+            "name": "Roller Copper",
+            "description": "Roll a copper plate into wires",
+            "displayName": "Roller Copper",
+            "displayDescription": "Roll a copper plate into wires",
+            "enabled": true,
+            "iconImageId": 14646884626,
+            "displayIconImageId": 14646884626,
+            "created": "2023-08-31T18:58:30.987+00:00",
+            "updated": "2023-09-09T12:23:17.623+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1140,
+              "awardedCount": 631167,
+              "winRatePercentage": 0.039
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151290857,
+            "name": "Pollution? Never heard of it",
+            "description": "Unlock scrubber without reaching pollution of 4%",
+            "displayName": "Pollution? Never heard of it",
+            "displayDescription": "Unlock scrubber without reaching pollution of 4%",
+            "enabled": true,
+            "iconImageId": 14637955695,
+            "displayIconImageId": 14637955695,
+            "created": "2023-08-31T18:59:39.157+00:00",
+            "updated": "2023-09-03T15:40:53.187+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2,
+              "awardedCount": 12828,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151338937,
+            "name": "World Development",
+            "description": "Meet the one and only mamytema in a world.",
+            "displayName": "World Development",
+            "displayDescription": "Meet the one and only mamytema in a world.",
+            "enabled": true,
+            "iconImageId": 15360337206,
+            "displayIconImageId": 15360337206,
+            "created": "2023-09-01T16:02:59.61+00:00",
+            "updated": "2023-11-15T05:50:00.02+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 932,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151338942,
+            "name": "Side Character",
+            "description": "Meet any other developer.",
+            "displayName": "Side Character",
+            "displayDescription": "Meet any other developer.",
+            "enabled": true,
+            "iconImageId": 15360337135,
+            "displayIconImageId": 15360337135,
+            "created": "2023-09-01T16:03:08.33+00:00",
+            "updated": "2023-11-15T05:49:58.109+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1,
+              "awardedCount": 825,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151338951,
+            "name": "Certified Engineering Course",
+            "description": "Place down advanced intersection pipe",
+            "displayName": "Certified Engineering Course",
+            "displayDescription": "Place down advanced intersection pipe",
+            "enabled": true,
+            "iconImageId": 14646786763,
+            "displayIconImageId": 14646786763,
+            "created": "2023-09-01T16:03:21.403+00:00",
+            "updated": "2023-09-02T19:18:50.26+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1165,
+              "awardedCount": 813901,
+              "winRatePercentage": 0.04
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151338957,
+            "name": "The Cat..",
+            "description": "Encounter the cat..",
+            "displayName": "The Cat..",
+            "displayDescription": "Encounter the cat..",
+            "enabled": true,
+            "iconImageId": 14646787934,
+            "displayIconImageId": 14646787934,
+            "created": "2023-09-01T16:03:29.52+00:00",
+            "updated": "2023-09-02T19:19:50.757+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 169,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151338984,
+            "name": "Who left this here?",
+            "description": "Find the secret music playing object",
+            "displayName": "Who left this here?",
+            "displayDescription": "Find the secret music playing object",
+            "enabled": true,
+            "iconImageId": 14646793918,
+            "displayIconImageId": 14646793918,
+            "created": "2023-09-01T16:04:08.5+00:00",
+            "updated": "2023-09-02T19:20:22.8+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 230,
+              "awardedCount": 232318,
+              "winRatePercentage": 0.008
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151379274,
+            "name": "No Vision",
+            "description": "Reach 100% pollution.",
+            "displayName": "No Vision",
+            "displayDescription": "Reach 100% pollution.",
+            "enabled": true,
+            "iconImageId": 15360337093,
+            "displayIconImageId": 15360337093,
+            "created": "2023-09-02T09:38:11.717+00:00",
+            "updated": "2023-11-15T05:49:57.116+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 320,
+              "awardedCount": 188241,
+              "winRatePercentage": 0.011
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151379278,
+            "name": "Fresh World!",
+            "description": "start a new world",
+            "displayName": "Fresh World!",
+            "displayDescription": "start a new world",
+            "enabled": true,
+            "iconImageId": 14655084002,
+            "displayIconImageId": 14655084002,
+            "created": "2023-09-02T09:38:19.453+00:00",
+            "updated": "2023-09-02T19:22:09.483+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 9327,
+              "awardedCount": 5886134,
+              "winRatePercentage": 0.318
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151379289,
+            "name": "Power at Home",
+            "description": "fill HV battery to its full capacity",
+            "displayName": "Power at Home",
+            "displayDescription": "fill HV battery to its full capacity",
+            "enabled": true,
+            "iconImageId": 14655085482,
+            "displayIconImageId": 14655085482,
+            "created": "2023-09-02T09:38:31.557+00:00",
+            "updated": "2023-09-02T19:23:48.487+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 165,
+              "awardedCount": 186590,
+              "winRatePercentage": 0.006
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151379298,
+            "name": "Ignorance",
+            "description": "Reach 100% pollution without buying a pollution meter",
+            "displayName": "Ignorance",
+            "displayDescription": "Reach 100% pollution without buying a pollution meter",
+            "enabled": true,
+            "iconImageId": 14655087264,
+            "displayIconImageId": 14655087264,
+            "created": "2023-09-02T09:38:45.127+00:00",
+            "updated": "2023-09-02T19:24:20.68+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 47,
+              "awardedCount": 27171,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151379309,
+            "name": "American Dream",
+            "description": "Place down an oil rig",
+            "displayName": "American Dream",
+            "displayDescription": "Place down an oil rig",
+            "enabled": true,
+            "iconImageId": 14655090282,
+            "displayIconImageId": 14655090282,
+            "created": "2023-09-02T09:39:06.45+00:00",
+            "updated": "2024-11-05T13:59:58.879+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1223,
+              "awardedCount": 946481,
+              "winRatePercentage": 0.042
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151444742,
+            "name": "Benchmark",
+            "description": "Place down a power rate calculator",
+            "displayName": "Benchmark",
+            "displayDescription": "Place down a power rate calculator",
+            "enabled": true,
+            "iconImageId": 14669019508,
+            "displayIconImageId": 14669019508,
+            "created": "2023-09-03T10:53:54.6+00:00",
+            "updated": "2023-09-03T15:47:04.12+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 299,
+              "awardedCount": 354387,
+              "winRatePercentage": 0.01
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151444747,
+            "name": "Millionaire",
+            "description": "Achieve 1 million money",
+            "displayName": "Millionaire",
+            "displayDescription": "Achieve 1 million money",
+            "enabled": true,
+            "iconImageId": 14669020872,
+            "displayIconImageId": 14669020872,
+            "created": "2023-09-03T10:54:04.933+00:00",
+            "updated": "2023-09-03T15:53:19.803+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 451,
+              "awardedCount": 336237,
+              "winRatePercentage": 0.015
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151444752,
+            "name": "Research Monopoly",
+            "description": "Achieve 150,000 RP",
+            "displayName": "Research Monopoly",
+            "displayDescription": "Achieve 150,000 RP",
+            "enabled": true,
+            "iconImageId": 14669021883,
+            "displayIconImageId": 14669021883,
+            "created": "2023-09-03T10:54:11.333+00:00",
+            "updated": "2023-09-03T15:54:15.16+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 151,
+              "awardedCount": 195736,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151444753,
+            "name": "Quality Certified",
+            "description": "Refine diesel into its best variant (Refined Diesel)",
+            "displayName": "Quality Certified",
+            "displayDescription": "Refine diesel into its best variant (Refined Diesel)",
+            "enabled": true,
+            "iconImageId": 14669022732,
+            "displayIconImageId": 14669022732,
+            "created": "2023-09-03T10:54:17.763+00:00",
+            "updated": "2023-09-09T12:23:47.077+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 136,
+              "awardedCount": 127618,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151444758,
+            "name": "Humble Beginings",
+            "description": "Have 2,000$",
+            "displayName": "Humble Beginings",
+            "displayDescription": "Have 2,000$",
+            "enabled": true,
+            "iconImageId": 14669023736,
+            "displayIconImageId": 14669023736,
+            "created": "2023-09-03T10:54:25.34+00:00",
+            "updated": "2023-09-09T12:24:33.59+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3243,
+              "awardedCount": 2094717,
+              "winRatePercentage": 0.111
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151504997,
+            "name": "Industrial Revolution",
+            "description": "Place down a coal power plant",
+            "displayName": "Industrial Revolution",
+            "displayDescription": "Place down a coal power plant",
+            "enabled": true,
+            "iconImageId": 14682229651,
+            "displayIconImageId": 14682229651,
+            "created": "2023-09-04T14:48:07.41+00:00",
+            "updated": "2023-09-09T12:24:57.393+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1664,
+              "awardedCount": 1199612,
+              "winRatePercentage": 0.057
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151505003,
+            "name": "Green",
+            "description": "Place down a tier 2 solar panel",
+            "displayName": "Green",
+            "displayDescription": "Place down a tier 2 solar panel",
+            "enabled": true,
+            "iconImageId": 14682231059,
+            "displayIconImageId": 14682231059,
+            "created": "2023-09-04T14:48:15.18+00:00",
+            "updated": "2023-09-09T12:25:29.77+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1414,
+              "awardedCount": 975307,
+              "winRatePercentage": 0.048
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151505005,
+            "name": "Unlimited Power",
+            "description": "Have PowerRateCalculator2 show 3,000k power/s",
+            "displayName": "Unlimited Power",
+            "displayDescription": "Have PowerRateCalculator2 show 3,000k power/s",
+            "enabled": true,
+            "iconImageId": 14682231959,
+            "displayIconImageId": 14682231959,
+            "created": "2023-09-04T14:48:21.72+00:00",
+            "updated": "2023-09-09T12:28:21.903+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 82,
+              "awardedCount": 61713,
+              "winRatePercentage": 0.003
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151505009,
+            "name": "When Update?",
+            "description": "Reach the model cap in your world",
+            "displayName": "When Update?",
+            "displayDescription": "Reach the model cap in your world",
+            "enabled": true,
+            "iconImageId": 14682232787,
+            "displayIconImageId": 14682232787,
+            "created": "2023-09-04T14:48:28.097+00:00",
+            "updated": "2023-09-09T12:29:33.893+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3,
+              "awardedCount": 36762,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151505018,
+            "name": "Copper",
+            "description": "Place down a CopperDrill",
+            "displayName": "Copper",
+            "displayDescription": "Place down a CopperDrill",
+            "enabled": true,
+            "iconImageId": 14682233558,
+            "displayIconImageId": 14682233558,
+            "created": "2023-09-04T14:48:33.997+00:00",
+            "updated": "2023-09-09T12:32:32.057+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3495,
+              "awardedCount": 2035402,
+              "winRatePercentage": 0.119
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151559574,
+            "name": "Iron",
+            "description": "Place down an iron drill",
+            "displayName": "Iron",
+            "displayDescription": "Place down an iron drill",
+            "enabled": true,
+            "iconImageId": 14693827923,
+            "displayIconImageId": 14693827923,
+            "created": "2023-09-05T19:16:37.33+00:00",
+            "updated": "2023-09-09T12:33:00.497+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2240,
+              "awardedCount": 1333749,
+              "winRatePercentage": 0.076
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151559587,
+            "name": "Hard earned cash",
+            "description": "Earn your first money, be it 1$ or a million",
+            "displayName": "Hard earned cash",
+            "displayDescription": "Earn your first money, be it 1$ or a million",
+            "enabled": true,
+            "iconImageId": 14693830938,
+            "displayIconImageId": 14693830938,
+            "created": "2023-09-05T19:17:05.03+00:00",
+            "updated": "2023-09-13T18:39:16.513+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 4895,
+              "awardedCount": 2970449,
+              "winRatePercentage": 0.167
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151559592,
+            "name": "Coal",
+            "description": "Place down a coal drill",
+            "displayName": "Coal",
+            "displayDescription": "Place down a coal drill",
+            "enabled": true,
+            "iconImageId": 14693831832,
+            "displayIconImageId": 14693831832,
+            "created": "2023-09-05T19:17:13.59+00:00",
+            "updated": "2023-09-13T18:39:46.52+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 6730,
+              "awardedCount": 4173052,
+              "winRatePercentage": 0.23
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151559595,
+            "name": "Farming Simulator",
+            "description": "Harvest 1 tree",
+            "displayName": "Farming Simulator",
+            "displayDescription": "Harvest 1 tree",
+            "enabled": true,
+            "iconImageId": 14693832345,
+            "displayIconImageId": 14693832345,
+            "created": "2023-09-05T19:17:20.723+00:00",
+            "updated": "2023-09-13T18:41:09.117+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1014,
+              "awardedCount": 788726,
+              "winRatePercentage": 0.035
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151559598,
+            "name": "Diesel Punk",
+            "description": "make your first power with a modular diesel generator",
+            "displayName": "Diesel Punk",
+            "displayDescription": "make your first power with a modular diesel generator",
+            "enabled": true,
+            "iconImageId": 14693833070,
+            "displayIconImageId": 14693833070,
+            "created": "2023-09-05T19:17:27.767+00:00",
+            "updated": "2023-09-13T18:44:05.517+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 211,
+              "awardedCount": 153204,
+              "winRatePercentage": 0.007
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151892350,
+            "name": "Steam Punk",
+            "description": "make steam using boiler",
+            "displayName": "Steam Punk",
+            "displayDescription": "make steam using boiler",
+            "enabled": true,
+            "iconImageId": 14767916259,
+            "displayIconImageId": 14767916259,
+            "created": "2023-09-13T18:27:11.08+00:00",
+            "updated": "2023-09-13T18:45:50.1+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 684,
+              "awardedCount": 553703,
+              "winRatePercentage": 0.023
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151892356,
+            "name": "Gas Punk",
+            "description": "place down a natural gas well",
+            "displayName": "Gas Punk",
+            "displayDescription": "place down a natural gas well",
+            "enabled": true,
+            "iconImageId": 14767917076,
+            "displayIconImageId": 14767917076,
+            "created": "2023-09-13T18:27:17.647+00:00",
+            "updated": "2023-09-13T18:51:20.303+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 253,
+              "awardedCount": 215512,
+              "winRatePercentage": 0.009
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151892358,
+            "name": "Liquid Natural Gas",
+            "description": "sell at least 1L of liquid natural gas (LNG)",
+            "displayName": "Liquid Natural Gas",
+            "displayDescription": "sell at least 1L of liquid natural gas (LNG)",
+            "enabled": true,
+            "iconImageId": 14767917716,
+            "displayIconImageId": 14767917716,
+            "created": "2023-09-13T18:27:23.533+00:00",
+            "updated": "2023-09-13T18:52:27.57+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 184,
+              "awardedCount": 124851,
+              "winRatePercentage": 0.006
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151892362,
+            "name": "Chair Manufactory",
+            "description": "sell at least 1 chair",
+            "displayName": "Chair Manufactory",
+            "displayDescription": "sell at least 1 chair",
+            "enabled": true,
+            "iconImageId": 14767918516,
+            "displayIconImageId": 14767918516,
+            "created": "2023-09-13T18:27:29.217+00:00",
+            "updated": "2023-09-13T18:52:48.363+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 391,
+              "awardedCount": 318271,
+              "winRatePercentage": 0.013
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2151892365,
+            "name": "Water Inc",
+            "description": "sell at least 1L of water",
+            "displayName": "Water Inc",
+            "displayDescription": "sell at least 1L of water",
+            "enabled": true,
+            "iconImageId": 14767919113,
+            "displayIconImageId": 14767919113,
+            "created": "2023-09-13T18:27:34.83+00:00",
+            "updated": "2023-09-13T18:53:02.853+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 600,
+              "awardedCount": 426780,
+              "winRatePercentage": 0.02
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2152755779,
+            "name": "I Exist!",
+            "description": "Place down a pretty forgotten machine.",
+            "displayName": "I Exist!",
+            "displayDescription": "Place down a pretty forgotten machine.",
+            "enabled": true,
+            "iconImageId": 14952053435,
+            "displayIconImageId": 14952053435,
+            "created": "2023-10-02T20:19:51.86+00:00",
+            "updated": "2023-10-13T07:00:19.34+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 464,
+              "awardedCount": 345698,
+              "winRatePercentage": 0.016
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2152755781,
+            "name": "Operation Green",
+            "description": "Reach -40% pollution",
+            "displayName": "Operation Green",
+            "displayDescription": "Reach -40% pollution",
+            "enabled": true,
+            "iconImageId": 14952055540,
+            "displayIconImageId": 14952055540,
+            "created": "2023-10-02T20:20:08.553+00:00",
+            "updated": "2023-10-13T07:01:24.9+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 445,
+              "awardedCount": 318022,
+              "winRatePercentage": 0.015
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2152756195,
+            "name": "Plastics",
+            "description": "make plastic pellets",
+            "displayName": "Plastics",
+            "displayDescription": "make plastic pellets",
+            "enabled": true,
+            "iconImageId": 14952212762,
+            "displayIconImageId": 14952212762,
+            "created": "2023-10-02T20:46:15.657+00:00",
+            "updated": "2023-10-20T16:04:03.233+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 180,
+              "awardedCount": 160002,
+              "winRatePercentage": 0.006
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2152756200,
+            "name": "Gearing the game up",
+            "description": "Build a Gear",
+            "displayName": "Gearing the game up",
+            "displayDescription": "Build a Gear",
+            "enabled": true,
+            "iconImageId": 14952213668,
+            "displayIconImageId": 14952213668,
+            "created": "2023-10-02T20:46:26+00:00",
+            "updated": "2023-10-20T16:04:22.683+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 473,
+              "awardedCount": 358723,
+              "winRatePercentage": 0.016
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2152756202,
+            "name": "Just one more step!",
+            "description": "Sell a product that can easily be upgraded",
+            "displayName": "Just one more step!",
+            "displayDescription": "Sell a product that can easily be upgraded",
+            "enabled": true,
+            "iconImageId": 14952214941,
+            "displayIconImageId": 14952214941,
+            "created": "2023-10-02T20:46:39.457+00:00",
+            "updated": "2023-10-20T16:04:56.893+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 277,
+              "awardedCount": 250823,
+              "winRatePercentage": 0.009
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2153448883,
+            "name": "Gearbox",
+            "description": null,
+            "displayName": "Gearbox",
+            "displayDescription": null,
+            "enabled": true,
+            "iconImageId": 15112332171,
+            "displayIconImageId": 15112332171,
+            "created": "2023-10-19T18:17:55.067+00:00",
+            "updated": "2023-10-20T16:17:42.013+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 114,
+              "awardedCount": 105691,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2153448888,
+            "name": "Neutralized",
+            "description": null,
+            "displayName": "Neutralized",
+            "displayDescription": null,
+            "enabled": true,
+            "iconImageId": 15112333483,
+            "displayIconImageId": 15112333483,
+            "created": "2023-10-19T18:18:06.76+00:00",
+            "updated": "2023-10-21T18:25:54.207+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 15,
+              "awardedCount": 10995,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2153448890,
+            "name": "Every drop matters!",
+            "description": "convert a product into another product using a certain process to achieve maximum efficiency",
+            "displayName": "Every drop matters!",
+            "displayDescription": "convert a product into another product using a certain process to achieve maximum efficiency",
+            "enabled": true,
+            "iconImageId": 15112334459,
+            "displayIconImageId": 15112334459,
+            "created": "2023-10-19T18:18:16.497+00:00",
+            "updated": "2023-10-21T18:27:22.777+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 172,
+              "awardedCount": 101395,
+              "winRatePercentage": 0.006
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2153448893,
+            "name": "Insanity",
+            "description": "Sell 1 gearbox in under 100% pollution on Insane difficulty",
+            "displayName": "Insanity",
+            "displayDescription": "Sell 1 gearbox in under 100% pollution on Insane difficulty",
+            "enabled": true,
+            "iconImageId": 15112335603,
+            "displayIconImageId": 15112335603,
+            "created": "2023-10-19T18:18:26.873+00:00",
+            "updated": "2023-12-15T13:50:55.248+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 454,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2153448899,
+            "name": "(Im)possible",
+            "description": "Sell 1 gearbox in under 100% pollution on Impossible difficulty",
+            "displayName": "(Im)possible",
+            "displayDescription": "Sell 1 gearbox in under 100% pollution on Impossible difficulty",
+            "enabled": true,
+            "iconImageId": 15112336538,
+            "displayIconImageId": 15112336538,
+            "created": "2023-10-19T18:18:36.31+00:00",
+            "updated": "2023-12-15T18:04:27.159+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 592,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3858375982763927,
+            "name": "That's it?",
+            "description": "Reach -1% pollution on Hard difficulty.",
+            "displayName": "That's it?",
+            "displayDescription": "Reach -1% pollution on Hard difficulty.",
+            "enabled": true,
+            "iconImageId": 15637987458,
+            "displayIconImageId": 15637987458,
+            "created": "2023-12-15T07:10:10.725+00:00",
+            "updated": "2026-02-10T22:53:38.167+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3,
+              "awardedCount": 5351,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2167657058034353,
+            "name": "Christmas 2023",
+            "description": "Produce at least 1 present",
+            "displayName": "Christmas 2023",
+            "displayDescription": "Produce at least 1 present",
+            "enabled": true,
+            "iconImageId": 15640192918,
+            "displayIconImageId": 15640192918,
+            "created": "2023-12-15T13:54:58.824+00:00",
+            "updated": "2023-12-23T16:58:06.608+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 2328,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 4051897227500578,
+            "name": "GOLD!",
+            "description": "Sell at least 1 gold ingot",
+            "displayName": "GOLD!",
+            "displayDescription": "Sell at least 1 gold ingot",
+            "enabled": true,
+            "iconImageId": 16227538710,
+            "displayIconImageId": 16227538710,
+            "created": "2024-02-03T16:24:43.41+00:00",
+            "updated": "2024-02-03T16:24:43.41+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 59,
+              "awardedCount": 57527,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1640952538292011,
+            "name": "What a waste",
+            "description": "???",
+            "displayName": "What a waste",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 16227543058,
+            "displayIconImageId": 16227543058,
+            "created": "2024-02-03T16:25:00.135+00:00",
+            "updated": "2024-02-03T16:33:35.984+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1,
+              "awardedCount": 1993,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1615484251767613,
+            "name": "Purple Money",
+            "description": "???",
+            "displayName": "Purple Money",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 16227546454,
+            "displayIconImageId": 16227546454,
+            "created": "2024-02-03T16:25:14.646+00:00",
+            "updated": "2024-02-03T16:25:14.646+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 58,
+              "awardedCount": 29224,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3030304417197250,
+            "name": "I paid for it and I use it!",
+            "description": "???",
+            "displayName": "I paid for it and I use it!",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 16841656551,
+            "displayIconImageId": 16841656551,
+            "created": "2024-03-23T16:03:10.379+00:00",
+            "updated": "2024-03-23T16:03:10.379+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 6,
+              "awardedCount": 1846,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 814973153988325,
+            "name": "Are you sure that truck is acid proof?",
+            "description": "???",
+            "displayName": "Are you sure that truck is acid proof?",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 16841664684,
+            "displayIconImageId": 16841664684,
+            "created": "2024-03-23T16:03:42.82+00:00",
+            "updated": "2024-03-23T16:03:42.82+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2,
+              "awardedCount": 3663,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 184286768716383,
+            "name": "Fancy Copper",
+            "description": "???",
+            "displayName": "Fancy Copper",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 16841668105,
+            "displayIconImageId": 16841668105,
+            "created": "2024-03-23T16:03:56.586+00:00",
+            "updated": "2024-03-23T16:03:56.586+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1,
+              "awardedCount": 1410,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1865899408445857,
+            "name": "Extraction Effort",
+            "description": "Place down an Oil Fracking Tower",
+            "displayName": "Extraction Effort",
+            "displayDescription": "Place down an Oil Fracking Tower",
+            "enabled": true,
+            "iconImageId": 16841675966,
+            "displayIconImageId": 16841675966,
+            "created": "2024-03-23T16:04:32.852+00:00",
+            "updated": "2024-03-23T16:04:32.852+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 104,
+              "awardedCount": 76519,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 999983850980330,
+            "name": "Heavy Duty",
+            "description": "Place down an HV Pole. Also unlocks Sandbox mode.",
+            "displayName": "Heavy Duty",
+            "displayDescription": "Place down an HV Pole. Also unlocks Sandbox mode.",
+            "enabled": true,
+            "iconImageId": 16841679308,
+            "displayIconImageId": 16841679308,
+            "created": "2024-03-23T16:04:50.438+00:00",
+            "updated": "2024-03-23T16:11:59.077+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 143,
+              "awardedCount": 115630,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2650289364393089,
+            "name": "Where's the tutorial?",
+            "description": "place down a LogicAssembler",
+            "displayName": "Where's the tutorial?",
+            "displayDescription": "place down a LogicAssembler",
+            "enabled": true,
+            "iconImageId": 17445079380,
+            "displayIconImageId": 17445079380,
+            "created": "2024-05-10T12:51:46.123+00:00",
+            "updated": "2024-05-10T12:51:46.123+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 14,
+              "awardedCount": 10755,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1152556558141045,
+            "name": "Logic Genius",
+            "description": "sell 10 8x64x Microchips",
+            "displayName": "Logic Genius",
+            "displayDescription": "sell 10 8x64x Microchips",
+            "enabled": true,
+            "iconImageId": 17445083938,
+            "displayIconImageId": 17445083938,
+            "created": "2024-05-10T12:52:16.068+00:00",
+            "updated": "2024-05-10T12:52:16.068+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1,
+              "awardedCount": 4027,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1180981379469162,
+            "name": "Power selling!",
+            "description": "sell a lithium battery pack",
+            "displayName": "Power selling!",
+            "displayDescription": "sell a lithium battery pack",
+            "enabled": true,
+            "iconImageId": 17445089331,
+            "displayIconImageId": 17445089331,
+            "created": "2024-05-10T12:52:51.831+00:00",
+            "updated": "2024-05-10T12:52:51.831+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 19,
+              "awardedCount": 23196,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3010191455762019,
+            "name": "Still possible!",
+            "description": "win impossible²",
+            "displayName": "Still possible!",
+            "displayDescription": "win impossible²",
+            "enabled": true,
+            "iconImageId": 17445093519,
+            "displayIconImageId": 17445093519,
+            "created": "2024-05-10T12:53:14.367+00:00",
+            "updated": "2024-05-10T12:53:14.367+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 144,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2499294612754805,
+            "name": "Safety Last",
+            "description": ">40 RPM change on modular turbine at any given time.",
+            "displayName": "Safety Last",
+            "displayDescription": ">40 RPM change on modular turbine at any given time.",
+            "enabled": true,
+            "iconImageId": 112862888493402,
+            "displayIconImageId": 112862888493402,
+            "created": "2024-10-09T20:00:59.441+00:00",
+            "updated": "2025-04-12T17:05:15.183+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 5,
+              "awardedCount": 5158,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3319000651294509,
+            "name": "How did we get here?",
+            "description": "???",
+            "displayName": "How did we get here?",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 114321465565276,
+            "displayIconImageId": 114321465565276,
+            "created": "2024-10-09T20:01:43.382+00:00",
+            "updated": "2024-10-11T19:58:32.998+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 49,
+              "awardedCount": 33869,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2130726165430248,
+            "name": "Mass Production",
+            "description": "Place down a foundry",
+            "displayName": "Mass Production",
+            "displayDescription": "Place down a foundry",
+            "enabled": true,
+            "iconImageId": 110611390109009,
+            "displayIconImageId": 110611390109009,
+            "created": "2024-10-09T20:01:55.732+00:00",
+            "updated": "2024-10-11T20:02:32.131+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 81,
+              "awardedCount": 53170,
+              "winRatePercentage": 0.003
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 4227616394603758,
+            "name": "Power Fever",
+            "description": "Make >270MMF/s with a modular turbine.",
+            "displayName": "Power Fever",
+            "displayDescription": "Make >270MMF/s with a modular turbine.",
+            "enabled": true,
+            "iconImageId": 96634979261873,
+            "displayIconImageId": 96634979261873,
+            "created": "2024-10-09T20:02:13.691+00:00",
+            "updated": "2024-10-11T20:08:34.228+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2,
+              "awardedCount": 2501,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 4119854850772384,
+            "name": "Efficiency",
+            "description": "Use distilled water to heat a boiler.",
+            "displayName": "Efficiency",
+            "displayDescription": "Use distilled water to heat a boiler.",
+            "enabled": true,
+            "iconImageId": 92058755715345,
+            "displayIconImageId": 92058755715345,
+            "created": "2024-10-09T20:02:23.127+00:00",
+            "updated": "2024-10-11T20:16:29.333+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 9,
+              "awardedCount": 7454,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1626911033381885,
+            "name": "Heavy Rock",
+            "description": "Produce Powdered Tungsten.",
+            "displayName": "Heavy Rock",
+            "displayDescription": "Produce Powdered Tungsten.",
+            "enabled": true,
+            "iconImageId": 73262446772166,
+            "displayIconImageId": 73262446772166,
+            "created": "2024-10-11T19:50:25.664+00:00",
+            "updated": "2024-10-11T20:21:30.803+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 6,
+              "awardedCount": 4902,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3690428393496648,
+            "name": "Bedrock",
+            "description": "Reach the current max depth of the MineshaftDrill.",
+            "displayName": "Bedrock",
+            "displayDescription": "Reach the current max depth of the MineshaftDrill.",
+            "enabled": true,
+            "iconImageId": 90084344738675,
+            "displayIconImageId": 90084344738675,
+            "created": "2024-10-11T19:50:43.261+00:00",
+            "updated": "2024-10-11T20:24:32.526+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 14,
+              "awardedCount": 11163,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3425112419521701,
+            "name": "Little John",
+            "description": "???",
+            "displayName": "Little John",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 115463361278448,
+            "displayIconImageId": 115463361278448,
+            "created": "2024-10-11T19:51:13.224+00:00",
+            "updated": "2024-10-11T20:42:41.676+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 356,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1065094643719343,
+            "name": "Synced and ready!",
+            "description": "Sync a turbine using the Coal Power Plant",
+            "displayName": "Synced and ready!",
+            "displayDescription": "Sync a turbine using the Coal Power Plant",
+            "enabled": true,
+            "iconImageId": 78462141381614,
+            "displayIconImageId": 78462141381614,
+            "created": "2024-10-11T19:51:23.34+00:00",
+            "updated": "2026-02-10T23:06:07.795+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 41,
+              "awardedCount": 23087,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 4213326512100053,
+            "name": "Superheated",
+            "description": "???",
+            "displayName": "Superheated",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 84479983000901,
+            "displayIconImageId": 84479983000901,
+            "created": "2024-10-11T19:51:35.59+00:00",
+            "updated": "2024-10-11T22:38:49.28+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1,
+              "awardedCount": 1839,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1145101632612240,
+            "name": "2024 Christmas",
+            "description": "Buy anything from the limited time store during the 2024 Christmas event.",
+            "displayName": "2024 Christmas",
+            "displayDescription": "Buy anything from the limited time store during the 2024 Christmas event.",
+            "enabled": true,
+            "iconImageId": 129610645023121,
+            "displayIconImageId": 129610645023121,
+            "created": "2024-12-20T13:35:48.89+00:00",
+            "updated": "2024-12-20T13:35:48.89+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 5868,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2328132871580028,
+            "name": "Research Madness",
+            "description": "Reach 1000 RP/s",
+            "displayName": "Research Madness",
+            "displayDescription": "Reach 1000 RP/s",
+            "enabled": true,
+            "iconImageId": 104959402655697,
+            "displayIconImageId": 104959402655697,
+            "created": "2025-11-12T21:57:09.346+00:00",
+            "updated": "2025-11-14T11:46:25.358+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 16,
+              "awardedCount": 4601,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1568101223240208,
+            "name": "Problem for the Future Generations",
+            "description": "Store literally anything in the underground waste facility. Lets hope future generations will know how to deal with it... right..?",
+            "displayName": "Problem for the Future Generations",
+            "displayDescription": "Store literally anything in the underground waste facility. Lets hope future generations will know how to deal with it... right..?",
+            "enabled": true,
+            "iconImageId": 113815148990008,
+            "displayIconImageId": 113815148990008,
+            "created": "2025-11-12T21:57:20.921+00:00",
+            "updated": "2025-11-14T11:45:33.424+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 8,
+              "awardedCount": 2531,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1421959464961557,
+            "name": "Xenon pit",
+            "description": "How will we reach the power quota now?!",
+            "displayName": "Xenon pit",
+            "displayDescription": "How will we reach the power quota now?!",
+            "enabled": true,
+            "iconImageId": 114175532667924,
+            "displayIconImageId": 114175532667924,
+            "created": "2025-11-12T21:57:37.39+00:00",
+            "updated": "2025-11-14T11:43:41.807+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3,
+              "awardedCount": 936,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 2141135164286384,
+            "name": "Just like Brand New!",
+            "description": "Fully repair a nuclear reactor after a period of maintenance. Why does it even like to break this much in the first place?",
+            "displayName": "Just like Brand New!",
+            "displayDescription": "Fully repair a nuclear reactor after a period of maintenance. Why does it even like to break this much in the first place?",
+            "enabled": true,
+            "iconImageId": 111356239052065,
+            "displayIconImageId": 111356239052065,
+            "created": "2025-11-12T21:57:52.66+00:00",
+            "updated": "2025-11-14T11:41:01.16+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 3,
+              "awardedCount": 2028,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3607786866123423,
+            "name": "Liquidation",
+            "description": "Clean up a disaster!",
+            "displayName": "Liquidation",
+            "displayDescription": "Clean up a disaster!",
+            "enabled": true,
+            "iconImageId": 123891055986426,
+            "displayIconImageId": 123891055986426,
+            "created": "2025-11-12T21:58:04.315+00:00",
+            "updated": "2025-11-14T11:37:55.958+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 5,
+              "awardedCount": 824,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 4503298506904453,
+            "name": "Safety First!",
+            "description": "???",
+            "displayName": "Safety First!",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 131902448969438,
+            "displayIconImageId": 131902448969438,
+            "created": "2025-11-13T19:43:39.724+00:00",
+            "updated": "2025-11-14T11:35:18.912+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1,
+              "awardedCount": 582,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1733608618564268,
+            "name": "How did we get here²?",
+            "description": "???",
+            "displayName": "How did we get here²?",
+            "displayDescription": "???",
+            "enabled": true,
+            "iconImageId": 132065094196993,
+            "displayIconImageId": 132065094196993,
+            "created": "2025-11-13T19:43:56.956+00:00",
+            "updated": "2025-11-14T11:34:07.779+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 1,
+              "awardedCount": 15,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 896635727177671,
+            "name": "Long term operations",
+            "description": "Operate the reactor at running temperatures for 10 total hours. Truly a skill worthy operator you are!",
+            "displayName": "Long term operations",
+            "displayDescription": "Operate the reactor at running temperatures for 10 total hours. Truly a skill worthy operator you are!",
+            "enabled": true,
+            "iconImageId": 123162746829510,
+            "displayIconImageId": 123162746829510,
+            "created": "2025-11-13T19:44:35.604+00:00",
+            "updated": "2025-11-14T11:32:42.929+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 4,
+              "awardedCount": 931,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 4268702382946863,
+            "name": "What's the purpose?",
+            "description": "Produce 1.32GMF/s using the Nuclear Power Plant.",
+            "displayName": "What's the purpose?",
+            "displayDescription": "Produce 1.32GMF/s using the Nuclear Power Plant.",
+            "enabled": true,
+            "iconImageId": 102039971270920,
+            "displayIconImageId": 102039971270920,
+            "created": "2025-11-13T19:44:52.346+00:00",
+            "updated": "2025-11-14T11:31:59.334+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 900,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3541654718830581,
+            "name": "A disaster",
+            "description": "Have a very unfortunate disaster. Good for coin flips!",
+            "displayName": "A disaster",
+            "displayDescription": "Have a very unfortunate disaster. Good for coin flips!",
+            "enabled": true,
+            "iconImageId": 125754942122058,
+            "displayIconImageId": 125754942122058,
+            "created": "2025-11-13T19:45:09.071+00:00",
+            "updated": "2025-11-14T11:28:08.529+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2,
+              "awardedCount": 896,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3403267940741676,
+            "name": "One man's trash is another man's treasure",
+            "description": "Reprocess used fuel into a MOX fuel rod",
+            "displayName": "One man's trash is another man's treasure",
+            "displayDescription": "Reprocess used fuel into a MOX fuel rod",
+            "enabled": true,
+            "iconImageId": 77796210966143,
+            "displayIconImageId": 77796210966143,
+            "created": "2025-11-14T11:49:14.145+00:00",
+            "updated": "2025-11-14T11:54:36.71+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 355,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3443837675395313,
+            "name": "Beep Boop Beep",
+            "description": "Complete the Research Station 4 logic minigame with your built circuit.",
+            "displayName": "Beep Boop Beep",
+            "displayDescription": "Complete the Research Station 4 logic minigame with your built circuit.",
+            "enabled": true,
+            "iconImageId": 81199193373925,
+            "displayIconImageId": 81199193373925,
+            "created": "2025-11-14T11:59:04.826+00:00",
+            "updated": "2025-11-14T11:59:04.826+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 50,
+              "awardedCount": 23482,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 852826226112572,
+            "name": "Even the turbine?",
+            "description": "Find out that the turbines are NOT made out of solid mamytemium.",
+            "displayName": "Even the turbine?",
+            "displayDescription": "Find out that the turbines are NOT made out of solid mamytemium.",
+            "enabled": true,
+            "iconImageId": 135544241107539,
+            "displayIconImageId": 135544241107539,
+            "created": "2025-11-14T12:00:51.024+00:00",
+            "updated": "2025-11-14T12:00:51.024+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 303,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1195095260649956,
+            "name": "Nuclear Energy",
+            "description": "Place down a Nuclear Power Plant. Truly an engineering marvel! No worries, it is 108% safe.",
+            "displayName": "Nuclear Energy",
+            "displayDescription": "Place down a Nuclear Power Plant. Truly an engineering marvel! No worries, it is 108% safe.",
+            "enabled": true,
+            "iconImageId": 136348212861932,
+            "displayIconImageId": 136348212861932,
+            "created": "2025-11-14T12:09:27.189+00:00",
+            "updated": "2025-11-14T12:09:27.189+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 22,
+              "awardedCount": 7296,
+              "winRatePercentage": 0.001
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1420330798730512,
+            "name": "Voices of the Void",
+            "description": "Obtain an RP/s bonus from the satellite dishes and satellite dish controller.",
+            "displayName": "Voices of the Void",
+            "displayDescription": "Obtain an RP/s bonus from the satellite dishes and satellite dish controller.",
+            "enabled": true,
+            "iconImageId": 133028074640255,
+            "displayIconImageId": 133028074640255,
+            "created": "2025-11-14T12:10:56.87+00:00",
+            "updated": "2025-11-14T12:10:56.87+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 214,
+              "awardedCount": 106500,
+              "winRatePercentage": 0.007
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1099710827798497,
+            "name": "Wasteland",
+            "description": "Anyone else taste metal? Nah you're just cooked. Hope your eyes don't hurt!",
+            "displayName": "Wasteland",
+            "displayDescription": "Anyone else taste metal? Nah you're just cooked. Hope your eyes don't hurt!",
+            "enabled": true,
+            "iconImageId": 91744308155960,
+            "displayIconImageId": 91744308155960,
+            "created": "2025-11-14T12:14:50.893+00:00",
+            "updated": "2025-11-14T12:17:21.902+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 87,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1309098348459441,
+            "name": "A wall",
+            "description": "Who ordered this many reinforced concrete blocks?",
+            "displayName": "A wall",
+            "displayDescription": "Who ordered this many reinforced concrete blocks?",
+            "enabled": true,
+            "iconImageId": 99021037780689,
+            "displayIconImageId": 99021037780689,
+            "created": "2025-11-14T15:47:11.064+00:00",
+            "updated": "2025-11-14T15:47:11.064+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 59,
+              "awardedCount": 17655,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 1773651846392249,
+            "name": "Cryogenics",
+            "description": "Just don't freeze your fingers off!",
+            "displayName": "Cryogenics",
+            "displayDescription": "Just don't freeze your fingers off!",
+            "enabled": true,
+            "iconImageId": 116052658473954,
+            "displayIconImageId": 116052658473954,
+            "created": "2025-11-14T15:49:53.512+00:00",
+            "updated": "2025-11-14T15:49:53.512+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 63,
+              "awardedCount": 27249,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          },
+          {
+            "id": 3517156316373051,
+            "name": "Christmas 2025",
+            "description": "Fire a shell at the north pole!",
+            "displayName": "Christmas 2025",
+            "displayDescription": "Fire a shell at the north pole!",
+            "enabled": true,
+            "iconImageId": 88092867786805,
+            "displayIconImageId": 88092867786805,
+            "created": "2025-12-20T17:49:54.585+00:00",
+            "updated": "2025-12-20T17:49:54.585+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 16954,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 3448264866,
+              "name": "Industrialist",
+              "rootPlaceId": 9192423027
+            }
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v1/games?universeIds=210851291": {
+      "url": "https://games.roblox.com/v1/games?universeIds=210851291",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 210851291,
+            "rootPlaceId": 537413528,
+            "name": "Build A Boat For Treasure",
+            "description": "Build your ship and set sail for your adventure!\r\n\r\nLiked the game? Don't forget to leave a Thumbs Up(👍) and Favorite(🌟) . Thank you!\r\n\r\nDon't forget to check out our group!\r\nhttps://www.roblox.com/My/Groups.aspx?gid=2782840\r\n\r\nGroup Perks:\r\n✨Member✨\r\n--- 25% more gold!\r\n💫Mega Member💫\r\n--- 300% more health!\r\n--- 25% more gold!\r\n🌟Royal Member🌟\r\n--- +4 Barrels Of TNT!\r\n--- 300% more health!\r\n--- 25% more gold!",
+            "sourceName": null,
+            "sourceDescription": null,
+            "creator": {
+              "id": 2782840,
+              "name": "Chillz Studios",
+              "type": "Group",
+              "isRNVAccount": false,
+              "hasVerifiedBadge": true
+            },
+            "price": null,
+            "allowedGearGenres": [
+              "Adventure"
+            ],
+            "allowedGearCategories": [],
+            "isGenreEnforced": true,
+            "copyingAllowed": false,
+            "playing": 15223,
+            "visits": 5226022785,
+            "maxPlayers": 7,
+            "created": "2016-11-02T15:36:44.187Z",
+            "updated": "2026-10-09T19:52:38.404Z",
+            "studioAccessToApisAllowed": false,
+            "createVipServersAllowed": false,
+            "universeAvatarType": "MorphToR15",
+            "genre": "Adventure",
+            "genre_l1": "Simulation",
+            "genre_l2": "Sandbox",
+            "untranslated_genre_l1": "simulation",
+            "isAllGenre": false,
+            "isFavoritedByUser": false,
+            "favoritedCount": 8544515,
+            "canonicalUrlPath": "/games/537413528/Build-A-Boat-For-Treasure",
+            "isContentRestricted": false
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v1/games/votes?universeIds=210851291": {
+      "url": "https://games.roblox.com/v1/games/votes?universeIds=210851291",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 210851291,
+            "upVotes": 3662460,
+            "downVotes": 259413
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v2/games/210851291/media": {
+      "url": "https://games.roblox.com/v2/games/210851291/media",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 98565990645845,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 5821711862,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 6289703612,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 6285656500,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 3876873281,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/icons?universeIds=210851291&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/icons?universeIds=210851291&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 210851291,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-88172459d6aec8bf28e99556fc0562a8/512/512/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/210851291/thumbnails?thumbnailIds=98565990645845,5821711862,6289703612,6285656500,3876873281&size=768x432&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/210851291/thumbnails?thumbnailIds=98565990645845,5821711862,6289703612,6285656500,3876873281&size=768x432&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 98565990645845,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-b83341c8eb8ca0288d8757b7a84d6683/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 5821711862,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-0a2c97e9d061349d71aca36f421c9a78/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 6289703612,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-c099e582608844b28f03526e0a1b33eb/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 6285656500,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-d9b6ed8d13d310ae17b772c7d9c74b31/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 3876873281,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-45783af10bd3a245c789a6b5c117c661/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://badges.roblox.com/v1/universes/210851291/badges?limit=100&sortOrder=Asc": {
+      "url": "https://badges.roblox.com/v1/universes/210851291/badges?limit=100&sortOrder=Asc",
+      "status": 200,
+      "data": {
+        "previousPageCursor": null,
+        "nextPageCursor": null,
+        "data": [
+          {
+            "id": 851853565,
+            "name": "Master Boater!",
+            "description": "Owners of this badge have proven themselves worthy by sailing their way to the end of the game!",
+            "displayName": "Master Boater!",
+            "displayDescription": "Owners of this badge have proven themselves worthy by sailing their way to the end of the game!",
+            "enabled": true,
+            "iconImageId": 5088654125,
+            "displayIconImageId": 5088654125,
+            "created": "2017-06-05T01:52:17.68+00:00",
+            "updated": "2020-05-25T20:27:16.983+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 8822,
+              "awardedCount": 71818189,
+              "winRatePercentage": 0.04
+            },
+            "awardingUniverse": {
+              "id": 210851291,
+              "name": "Build A Boat For Treasure",
+              "rootPlaceId": 537413528
+            }
+          },
+          {
+            "id": 1523822849,
+            "name": "Treasure Hunter!",
+            "description": "Receive this badge by completing 10 stages!",
+            "displayName": "Treasure Hunter!",
+            "displayDescription": "Receive this badge by completing 10 stages!",
+            "enabled": true,
+            "iconImageId": 5087917105,
+            "displayIconImageId": 5087917105,
+            "created": "2018-03-18T19:26:05.42+00:00",
+            "updated": "2020-11-24T23:54:53.483+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 13697,
+              "awardedCount": 120538470,
+              "winRatePercentage": 0.062
+            },
+            "awardingUniverse": {
+              "id": 210851291,
+              "name": "Build A Boat For Treasure",
+              "rootPlaceId": 537413528
+            }
+          },
+          {
+            "id": 2124488541,
+            "name": "Treasure Expert!",
+            "description": "Receive this badge by completing 20 stages!",
+            "displayName": "Treasure Expert!",
+            "displayDescription": "Receive this badge by completing 20 stages!",
+            "enabled": true,
+            "iconImageId": 5088329829,
+            "displayIconImageId": 5088329829,
+            "created": "2019-10-05T19:29:31.577+00:00",
+            "updated": "2020-11-24T23:55:07.467+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 8281,
+              "awardedCount": 64215471,
+              "winRatePercentage": 0.037
+            },
+            "awardingUniverse": {
+              "id": 210851291,
+              "name": "Build A Boat For Treasure",
+              "rootPlaceId": 537413528
+            }
+          },
+          {
+            "id": 2124541479,
+            "name": "Treasure Master!",
+            "description": "Receive this badge by completing 30 stages!",
+            "displayName": "Treasure Master!",
+            "displayDescription": "Receive this badge by completing 30 stages!",
+            "enabled": true,
+            "iconImageId": 5088796652,
+            "displayIconImageId": 5088796652,
+            "created": "2020-05-25T21:03:56.35+00:00",
+            "updated": "2020-12-04T16:22:34.897+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 5611,
+              "awardedCount": 35180946,
+              "winRatePercentage": 0.025
+            },
+            "awardingUniverse": {
+              "id": 210851291,
+              "name": "Build A Boat For Treasure",
+              "rootPlaceId": 537413528
+            }
+          },
+          {
+            "id": 2124634305,
+            "name": "Challenge Winner!",
+            "description": "Placed 1st in a player vs player challenge!",
+            "displayName": "Challenge Winner!",
+            "displayDescription": "Placed 1st in a player vs player challenge!",
+            "enabled": true,
+            "iconImageId": 6096654095,
+            "displayIconImageId": 6096654095,
+            "created": "2020-11-09T17:50:16.103+00:00",
+            "updated": "2021-12-06T23:04:53.657+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 495,
+              "awardedCount": 4703707,
+              "winRatePercentage": 0.002
+            },
+            "awardingUniverse": {
+              "id": 210851291,
+              "name": "Build A Boat For Treasure",
+              "rootPlaceId": 537413528
+            }
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v1/games?universeIds=27761886": {
+      "url": "https://games.roblox.com/v1/games?universeIds=27761886",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 27761886,
+            "rootPlaceId": 6153709,
+            "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+            "description": "✨ NEW! 2X EXP ON WEEKENDS! (EST) ✨\n\n⭐ JOIN OUR GROUP FOR EXCLUSIVE ACCESS TO THE FREE REBEL 'SPY' TEAM! ⭐\n👍 THUMBS UP AND FAVOURITE FOR MORE UPDATES! 👍\n\nBuild 325: Nuke rework, drifting vehicles, music for every area, global leaderboards, emote wheel, custom crosshairs, server list, facility tour, and lots of fixes. More content coming very soon!\n\n🗒️ Update Log 🗒️\nhttps://devforum.roblox.com/t/1224395\n\n❗ EXPLOITERS WILL BE BANNED ❗\n\nAttention: You receive 50% less exp in private servers!\n\nWelcome to the NBTF! The 1# Nuke Testing Facility on Roblox.\nResearch, test, and launch nukes in a top secret facility located in REDACTED.\nWill you defend the facility against raiders who threaten to destroy the facility?\nBe a raider yourself?\nOr simply be a civilian accidentally stumbling into the facility while on an adventure?",
+            "sourceName": null,
+            "sourceDescription": null,
+            "creator": {
+              "id": 1702041,
+              "name": "Ryanblaze",
+              "type": "User",
+              "isRNVAccount": false,
+              "hasVerifiedBadge": true
+            },
+            "price": null,
+            "allowedGearGenres": [
+              "War"
+            ],
+            "allowedGearCategories": [],
+            "isGenreEnforced": true,
+            "copyingAllowed": false,
+            "playing": 145,
+            "visits": 43690315,
+            "maxPlayers": 54,
+            "created": "2008-12-10T00:24:50.193Z",
+            "updated": "2026-10-06T16:58:20.711Z",
+            "studioAccessToApisAllowed": false,
+            "createVipServersAllowed": false,
+            "universeAvatarType": "MorphToR15",
+            "genre": "Military",
+            "genre_l1": "Roleplay & Avatar Sim",
+            "genre_l2": "",
+            "untranslated_genre_l1": "roleplay_and_avatar_sim",
+            "isAllGenre": false,
+            "isFavoritedByUser": false,
+            "favoritedCount": 231059,
+            "canonicalUrlPath": "/games/6153709/Nuclear-Blast-Testing-Facility",
+            "isContentRestricted": false
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v1/games/votes?universeIds=27761886": {
+      "url": "https://games.roblox.com/v1/games/votes?universeIds=27761886",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 27761886,
+            "upVotes": 75506,
+            "downVotes": 9976
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v2/games/27761886/media": {
+      "url": "https://games.roblox.com/v2/games/27761886/media",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 124057887042505,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 76662668248974,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 108812103139462,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 14580083717,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 14580128054,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 14579357471,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": "Protect the energy core"
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 14579632049,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": "Or destroy it"
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/icons?universeIds=27761886&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/icons?universeIds=27761886&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 27761886,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-c3f4fb03a173c7a22e59906ec8467d6b/512/512/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/27761886/thumbnails?thumbnailIds=124057887042505,76662668248974,108812103139462,14580083717,14580128054,14579357471,14579632049&size=768x432&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/27761886/thumbnails?thumbnailIds=124057887042505,76662668248974,108812103139462,14580083717,14580128054,14579357471,14579632049&size=768x432&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 124057887042505,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-180062707e36cc5f82a2af0791daf7d4/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 76662668248974,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-3956bfeab69ffa9de06dc5778f0cb204/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 108812103139462,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-594cfa28b531b2c57f45ddd2d4459d2f/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 14580083717,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-ec171dc081e92e07a39668d8f52222f4/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 14580128054,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-95f8a65c981135756bf968d33bc5d60c/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 14579357471,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-e436a096481a87270ca46b4776f0c0e4/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 14579632049,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-4ba14d900c47e4a64ae14c8bc4fe3c9b/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://badges.roblox.com/v1/universes/27761886/badges?limit=100&sortOrder=Asc": {
+      "url": "https://badges.roblox.com/v1/universes/27761886/badges?limit=100&sortOrder=Asc",
+      "status": 200,
+      "data": {
+        "previousPageCursor": null,
+        "nextPageCursor": null,
+        "data": [
+          {
+            "id": 2124530521,
+            "name": "Met the Creator, Ryanblaze",
+            "description": "You've met me in game before!",
+            "displayName": "Met the Creator, Ryanblaze",
+            "displayDescription": "You've met me in game before!",
+            "enabled": true,
+            "iconImageId": 11103734509,
+            "displayIconImageId": 11103734509,
+            "created": "2020-04-27T17:38:30.253+00:00",
+            "updated": "2022-09-28T05:45:33.077+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 33340,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 2124887396,
+            "name": "Find The Santa Hat",
+            "description": "This player found and wore a Santa Hat during the holiday events in NBTF!",
+            "displayName": "Find The Santa Hat",
+            "displayDescription": "This player found and wore a Santa Hat during the holiday events in NBTF!",
+            "enabled": true,
+            "iconImageId": 8347605980,
+            "displayIconImageId": 8347605980,
+            "created": "2021-12-24T18:58:51.82+00:00",
+            "updated": "2022-12-23T01:14:04.95+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 6901,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 2128769670,
+            "name": "Welcome to the facility!",
+            "description": "Visited NBTF for the first time.",
+            "displayName": "Welcome to the facility!",
+            "displayDescription": "Visited NBTF for the first time.",
+            "enabled": true,
+            "iconImageId": 11103552950,
+            "displayIconImageId": 11103552950,
+            "created": "2022-09-28T04:44:40.617+00:00",
+            "updated": "2022-09-28T04:44:40.617+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 2156,
+              "awardedCount": 7503544,
+              "winRatePercentage": 0.882
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 2128769773,
+            "name": "Who's the boss?",
+            "description": "Achieved promotion rank 5 on a team!",
+            "displayName": "Who's the boss?",
+            "displayDescription": "Achieved promotion rank 5 on a team!",
+            "enabled": true,
+            "iconImageId": 11103606194,
+            "displayIconImageId": 11103606194,
+            "created": "2022-09-28T05:03:19.973+00:00",
+            "updated": "2024-04-29T22:41:01.311+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 52,
+              "awardedCount": 56918,
+              "winRatePercentage": 0.021
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 2145221767,
+            "name": "Bunker Escape",
+            "description": "You survived the core overload explosion by escaping to the bunker!",
+            "displayName": "Bunker Escape",
+            "displayDescription": "You survived the core overload explosion by escaping to the bunker!",
+            "enabled": true,
+            "iconImageId": 13354230208,
+            "displayIconImageId": 13354230208,
+            "created": "2023-05-05T22:37:04.283+00:00",
+            "updated": "2023-05-05T22:41:11.597+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 11,
+              "awardedCount": 114719,
+              "winRatePercentage": 0.005
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 2145221868,
+            "name": "Down With The Ship",
+            "description": "Die to the Core Overload event explosion while playing on the facility side.",
+            "displayName": "Down With The Ship",
+            "displayDescription": "Die to the Core Overload event explosion while playing on the facility side.",
+            "enabled": true,
+            "iconImageId": 13354256454,
+            "displayIconImageId": 13354256454,
+            "created": "2023-05-05T22:41:00.293+00:00",
+            "updated": "2023-05-05T23:05:38.343+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 11,
+              "awardedCount": 168982,
+              "winRatePercentage": 0.004
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 2145222114,
+            "name": "Mission Complete",
+            "description": "Witness the Core Overload event until the end while playing on the rebellion side",
+            "displayName": "Mission Complete",
+            "displayDescription": "Witness the Core Overload event until the end while playing on the rebellion side",
+            "enabled": true,
+            "iconImageId": 13354321944,
+            "displayIconImageId": 13354321944,
+            "created": "2023-05-05T22:51:10.66+00:00",
+            "updated": "2023-05-05T23:05:06.617+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 15,
+              "awardedCount": 87102,
+              "winRatePercentage": 0.006
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 4059682225939806,
+            "name": "Boss.jpg",
+            "description": "You killed a moderator in a boss battle event!",
+            "displayName": "Boss.jpg",
+            "displayDescription": "You killed a moderator in a boss battle event!",
+            "enabled": true,
+            "iconImageId": 17333308269,
+            "displayIconImageId": 17333308269,
+            "created": "2024-04-29T22:26:24.519+00:00",
+            "updated": "2024-04-29T22:40:10.982+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 157,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 3781416322218480,
+            "name": "I am the captain now",
+            "description": "You reached promotion rank 10 in on a team!",
+            "displayName": "I am the captain now",
+            "displayDescription": "You reached promotion rank 10 in on a team!",
+            "enabled": true,
+            "iconImageId": 103865031751590,
+            "displayIconImageId": 103865031751590,
+            "created": "2024-10-01T04:28:46.173+00:00",
+            "updated": "2024-10-01T04:31:47.106+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 8,
+              "awardedCount": 3987,
+              "winRatePercentage": 0.003
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          },
+          {
+            "id": 4421785955960931,
+            "name": "Celestial Shard Collector",
+            "description": "You collected a celestial shard during the 2024 Halloween Event!",
+            "displayName": "Celestial Shard Collector",
+            "displayDescription": "You collected a celestial shard during the 2024 Halloween Event!",
+            "enabled": true,
+            "iconImageId": 119186340534978,
+            "displayIconImageId": 119186340534978,
+            "created": "2024-10-26T05:06:24.028+00:00",
+            "updated": "2025-12-20T23:52:20.666+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 11792,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 27761886,
+              "name": "☢️ Nuclear Blast Testing Facility 💣 (NEW UPDATES)",
+              "rootPlaceId": 6153709
+            }
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v1/games?universeIds=2473499480": {
+      "url": "https://games.roblox.com/v1/games?universeIds=2473499480",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 2473499480,
+            "rootPlaceId": 6576912941,
+            "name": "A Core Game",
+            "description": "!! An update to the game is in the works. Some content is still raw, and unfinished. !!\n\n⚠️ Game servers may be susceptible to \"migrating\", aka restarting often due to being outdated. Please be aware of that at all times, especially during early releases. This will not usually be in effect though.\n\nBuried deep within an undisclosed mountain range, there's a facility which is (quite literally) just as dumb as it can possibly get. And whoever owns this place? Yeah they seem a little paranoid for a place owned by a lava lamp company.\n\n\"A Core Game\", or ACG, is supposed to be an accurate representation of your average \"core game\" on Roblox. Even though this has changed over the past few years, the game still takes inspiration from a few titles of the same genre.\n\nGroup: https://www.roblox.com/groups/9486047/Solaris-Development-Group#!/about\nTags: core game reactor acg facility simulation meltdown 0.6 sci-fi solaris",
+            "sourceName": null,
+            "sourceDescription": null,
+            "creator": {
+              "id": 9486047,
+              "name": "Solaris Development Group",
+              "type": "Group",
+              "isRNVAccount": false,
+              "hasVerifiedBadge": false
+            },
+            "price": null,
+            "allowedGearGenres": [
+              "SciFi"
+            ],
+            "allowedGearCategories": [],
+            "isGenreEnforced": false,
+            "copyingAllowed": false,
+            "playing": 12,
+            "visits": 11429730,
+            "maxPlayers": 24,
+            "created": "2021-03-27T19:14:26.913Z",
+            "updated": "2026-10-13T17:02:14.056Z",
+            "studioAccessToApisAllowed": false,
+            "createVipServersAllowed": false,
+            "universeAvatarType": "MorphToR15",
+            "genre": "Sci-Fi",
+            "genre_l1": "Simulation",
+            "genre_l2": "",
+            "untranslated_genre_l1": "simulation",
+            "isAllGenre": false,
+            "isFavoritedByUser": false,
+            "favoritedCount": 81816,
+            "canonicalUrlPath": "/games/6576912941/A-Core-Game",
+            "isContentRestricted": false
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v1/games/votes?universeIds=2473499480": {
+      "url": "https://games.roblox.com/v1/games/votes?universeIds=2473499480",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "id": 2473499480,
+            "upVotes": 29562,
+            "downVotes": 2878
+          }
+        ]
+      }
+    },
+    "https://games.roblox.com/v2/games/2473499480/media": {
+      "url": "https://games.roblox.com/v2/games/2473499480/media",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 81415136987755,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 121196147176171,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 95056904411210,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 110310999566633,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          },
+          {
+            "assetTypeId": 1,
+            "assetType": "Image",
+            "imageId": 109868770844397,
+            "videoHash": null,
+            "videoTitle": null,
+            "approved": true,
+            "altText": ""
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/icons?universeIds=2473499480&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/icons?universeIds=2473499480&returnPolicy=PlaceHolder&size=512x512&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 2473499480,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-c0e15d5a28096a516d6b13ac5ff736f9/512/512/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://thumbnails.roblox.com/v1/games/2473499480/thumbnails?thumbnailIds=81415136987755,121196147176171,95056904411210,110310999566633,109868770844397&size=768x432&format=Png&isCircular=false": {
+      "url": "https://thumbnails.roblox.com/v1/games/2473499480/thumbnails?thumbnailIds=81415136987755,121196147176171,95056904411210,110310999566633,109868770844397&size=768x432&format=Png&isCircular=false",
+      "status": 200,
+      "data": {
+        "data": [
+          {
+            "targetId": 81415136987755,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-d5c87db1b7635c49ec18a664bd1d5a90/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 121196147176171,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-b70cb2019861057d401efceac75c6a6f/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 95056904411210,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-fe52616e9a68f6c533b431bd3236cb47/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 110310999566633,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-3701100d0039ca4c90c988d7826da782/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          },
+          {
+            "targetId": 109868770844397,
+            "state": "Completed",
+            "imageUrl": "https://tr.rbxcdn.com/180DAY-b1ea4c475aaa4d90f0fb3c65d69277d1/768/432/Image/Png/noFilter",
+            "version": "TN3"
+          }
+        ]
+      }
+    },
+    "https://badges.roblox.com/v1/universes/2473499480/badges?limit=100&sortOrder=Asc": {
+      "url": "https://badges.roblox.com/v1/universes/2473499480/badges?limit=100&sortOrder=Asc",
+      "status": 200,
+      "data": {
+        "previousPageCursor": null,
+        "nextPageCursor": null,
+        "data": [
+          {
+            "id": 2124730994,
+            "name": "Welcome",
+            "description": "Welcome to ACG!!!!!!",
+            "displayName": "Welcome",
+            "displayDescription": "Welcome to ACG!!!!!!",
+            "enabled": true,
+            "iconImageId": 76482502671879,
+            "displayIconImageId": 76482502671879,
+            "created": "2021-04-27T16:53:15.43+00:00",
+            "updated": "2026-01-02T14:00:03.906+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 208,
+              "awardedCount": 2184826,
+              "winRatePercentage": 0.674
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124730995,
+            "name": "Operator Incompetence",
+            "description": "The containment field couldn't take the heat and exploded, marking the beginning of a meltdown.",
+            "displayName": "Operator Incompetence",
+            "displayDescription": "The containment field couldn't take the heat and exploded, marking the beginning of a meltdown.",
+            "enabled": true,
+            "iconImageId": 94321289588695,
+            "displayIconImageId": 94321289588695,
+            "created": "2021-04-27T16:53:26.083+00:00",
+            "updated": "2026-01-02T13:37:12.55+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 58,
+              "awardedCount": 1209288,
+              "winRatePercentage": 0.188
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124730997,
+            "name": "Fast Reflexes",
+            "description": "Successfully stop a meltdown from beginning even when it looks like all the odds are against you.",
+            "displayName": "Fast Reflexes",
+            "displayDescription": "Successfully stop a meltdown from beginning even when it looks like all the odds are against you.",
+            "enabled": true,
+            "iconImageId": 73141072923764,
+            "displayIconImageId": 73141072923764,
+            "created": "2021-04-27T16:54:12.947+00:00",
+            "updated": "2026-01-02T13:33:36.192+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 9,
+              "awardedCount": 169507,
+              "winRatePercentage": 0.029
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124730996,
+            "name": "Emergency Protocols",
+            "description": "Successfully shut down the reactor during the shutdown phase of the meltdown.. you've prevented a disaster of catastrophic scale, yay!.. now just hope you're not fired.",
+            "displayName": "Emergency Protocols",
+            "displayDescription": "Successfully shut down the reactor during the shutdown phase of the meltdown.. you've prevented a disaster of catastrophic scale, yay!.. now just hope you're not fired.",
+            "enabled": true,
+            "iconImageId": 77149396535912,
+            "displayIconImageId": 77149396535912,
+            "created": "2021-04-27T16:53:38.46+00:00",
+            "updated": "2026-01-02T13:35:07.878+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 15,
+              "awardedCount": 617822,
+              "winRatePercentage": 0.049
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124748013,
+            "name": "Locked In",
+            "description": "Survive the meltdown by evacuating to a bunker.. now hope someone will find you.",
+            "displayName": "Locked In",
+            "displayDescription": "Survive the meltdown by evacuating to a bunker.. now hope someone will find you.",
+            "enabled": true,
+            "iconImageId": 128259310074099,
+            "displayIconImageId": 128259310074099,
+            "created": "2021-05-19T20:23:57.223+00:00",
+            "updated": "2026-01-02T13:32:52.761+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 19,
+              "awardedCount": 680831,
+              "winRatePercentage": 0.062
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124730999,
+            "name": "Self-Destruct",
+            "description": "Sometimes you still lose.",
+            "displayName": "Self-Destruct",
+            "displayDescription": "Sometimes you still lose.",
+            "enabled": true,
+            "iconImageId": 7222698991,
+            "displayIconImageId": 7222698991,
+            "created": "2021-04-27T16:54:31.393+00:00",
+            "updated": "2024-11-26T23:34:38.567+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 26218,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124731001,
+            "name": "Explosive Lever",
+            "description": "Pulling that perhaps wasn't the best idea?\n(Nonfunctional for now)",
+            "displayName": "Explosive Lever",
+            "displayDescription": "Pulling that perhaps wasn't the best idea?\n(Nonfunctional for now)",
+            "enabled": true,
+            "iconImageId": 7222718090,
+            "displayIconImageId": 7222718090,
+            "created": "2021-04-27T16:54:56.91+00:00",
+            "updated": "2026-01-03T12:47:26.12+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 735252,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124748012,
+            "name": "Why would you do that?",
+            "description": "Attempt to activate the Emergency Cooling Discharge very late into the Meltdown.",
+            "displayName": "Why would you do that?",
+            "displayDescription": "Attempt to activate the Emergency Cooling Discharge very late into the Meltdown.",
+            "enabled": true,
+            "iconImageId": 98075790557360,
+            "displayIconImageId": 98075790557360,
+            "created": "2021-05-19T20:23:46.813+00:00",
+            "updated": "2026-01-03T12:50:38.524+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 5,
+              "awardedCount": 32196,
+              "winRatePercentage": 0.016
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124800613,
+            "name": "Hey, wanna see me speedrun?",
+            "description": "Activate the shutdown system very early in the meltdown.",
+            "displayName": "Hey, wanna see me speedrun?",
+            "displayDescription": "Activate the shutdown system very early in the meltdown.",
+            "enabled": true,
+            "iconImageId": 10182054619,
+            "displayIconImageId": 10182054619,
+            "created": "2021-08-07T18:50:14.52+00:00",
+            "updated": "2026-01-03T12:36:36.787+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 6863,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124832124,
+            "name": "Miscalculated",
+            "description": "You either did this on purpose, or you really are just unlucky.",
+            "displayName": "Miscalculated",
+            "displayDescription": "You either did this on purpose, or you really are just unlucky.",
+            "enabled": true,
+            "iconImageId": 10182086006,
+            "displayIconImageId": 10182086006,
+            "created": "2021-09-26T17:11:36.383+00:00",
+            "updated": "2026-01-02T10:37:22.35+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 9,
+              "awardedCount": 134843,
+              "winRatePercentage": 0.029
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124930612,
+            "name": "\"Freezedown\"",
+            "description": "Cause the reactor to stall and deactivate due to extremely low temperatures.",
+            "displayName": "\"Freezedown\"",
+            "displayDescription": "Cause the reactor to stall and deactivate due to extremely low temperatures.",
+            "enabled": true,
+            "iconImageId": 10182103632,
+            "displayIconImageId": 10182103632,
+            "created": "2022-02-11T20:25:56.533+00:00",
+            "updated": "2022-07-10T20:48:48.2+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 41,
+              "awardedCount": 493878,
+              "winRatePercentage": 0.133
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124930614,
+            "name": "Seriously?",
+            "description": "Meet the shutdown requirements very early in the meltdown but refuse to activate it.",
+            "displayName": "Seriously?",
+            "displayDescription": "Meet the shutdown requirements very early in the meltdown but refuse to activate it.",
+            "enabled": true,
+            "iconImageId": 10182118686,
+            "displayIconImageId": 10182118686,
+            "created": "2022-02-11T20:27:04.91+00:00",
+            "updated": "2026-01-03T12:45:55.006+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 74131,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124930616,
+            "name": "The 4th Key",
+            "description": "Do not tell anyone.",
+            "displayName": "The 4th Key",
+            "displayDescription": "Do not tell anyone.",
+            "enabled": true,
+            "iconImageId": 10182530426,
+            "displayIconImageId": 10182530426,
+            "created": "2022-02-11T20:28:10.99+00:00",
+            "updated": "2025-06-21T14:45:04.523+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 24,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124930623,
+            "name": "Countdown",
+            "description": "You were there when it hit zero.",
+            "displayName": "Countdown",
+            "displayDescription": "You were there when it hit zero.",
+            "enabled": true,
+            "iconImageId": 72170750074182,
+            "displayIconImageId": 72170750074182,
+            "created": "2022-02-11T20:35:19.11+00:00",
+            "updated": "2026-01-02T21:36:16.03+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 1530,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2124931207,
+            "name": "Out of Protocol",
+            "description": "Keep the reactor in operation above 3000C without shield rupturing for 10 minutes.",
+            "displayName": "Out of Protocol",
+            "displayDescription": "Keep the reactor in operation above 3000C without shield rupturing for 10 minutes.",
+            "enabled": true,
+            "iconImageId": 12203865205,
+            "displayIconImageId": 12203865205,
+            "created": "2022-02-12T12:20:31.43+00:00",
+            "updated": "2026-01-02T21:37:25.379+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 227,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2127814781,
+            "name": "Daybreak",
+            "description": "Be in the reactor chamber while the reactor is starting up, congratulations.",
+            "displayName": "Daybreak",
+            "displayDescription": "Be in the reactor chamber while the reactor is starting up, congratulations.",
+            "enabled": true,
+            "iconImageId": 98498156190981,
+            "displayIconImageId": 98498156190981,
+            "created": "2022-08-03T17:11:42.917+00:00",
+            "updated": "2026-01-12T17:38:56.21+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 6,
+              "awardedCount": 15770,
+              "winRatePercentage": 0.019
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2127814800,
+            "name": "[1.1.0] No Giving Up",
+            "description": "Successfully shut down the reactor during the evacuation phase of the meltdown... now just hope you're not gonna die from all that radiation exposure.",
+            "displayName": "[1.1.0] No Giving Up",
+            "displayDescription": "Successfully shut down the reactor during the evacuation phase of the meltdown... now just hope you're not gonna die from all that radiation exposure.",
+            "enabled": true,
+            "iconImageId": 12203880208,
+            "displayIconImageId": 12203880208,
+            "created": "2022-08-03T17:12:38.967+00:00",
+            "updated": "2026-05-03T01:26:45.919+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 1,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2127814809,
+            "name": "[1.1.0] \"Solaris Evacuation Services\"",
+            "description": "Successfully survive the meltdown via helicopter evac.",
+            "displayName": "[1.1.0] \"Solaris Evacuation Services\"",
+            "displayDescription": "Successfully survive the meltdown via helicopter evac.",
+            "enabled": true,
+            "iconImageId": 12203880105,
+            "displayIconImageId": 12203880105,
+            "created": "2022-08-03T17:13:12.28+00:00",
+            "updated": "2026-02-21T19:10:28.01+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 2,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2127814832,
+            "name": "Can't rely on corporate...",
+            "description": "Successfully escape to topside during meltdown and survive the explosion.",
+            "displayName": "Can't rely on corporate...",
+            "displayDescription": "Successfully escape to topside during meltdown and survive the explosion.",
+            "enabled": true,
+            "iconImageId": 95514359751775,
+            "displayIconImageId": 95514359751775,
+            "created": "2022-08-03T17:14:47.493+00:00",
+            "updated": "2026-01-12T17:38:23.651+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 29,
+              "awardedCount": 26056,
+              "winRatePercentage": 0.094
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2146966706,
+            "name": "AI Slop",
+            "description": "Successfully stop the expected destruction of the facility due to a malfunction in CFOAI.",
+            "displayName": "AI Slop",
+            "displayDescription": "Successfully stop the expected destruction of the facility due to a malfunction in CFOAI.",
+            "enabled": true,
+            "iconImageId": 13705442041,
+            "displayIconImageId": 13705442041,
+            "created": "2023-06-10T04:09:01.973+00:00",
+            "updated": "2026-01-02T21:36:53.659+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 1,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2146966727,
+            "name": "Your PTSD Is Not Work Related",
+            "description": "Successfully survive an unintentional self-destruction event.",
+            "displayName": "Your PTSD Is Not Work Related",
+            "displayDescription": "Successfully survive an unintentional self-destruction event.",
+            "enabled": true,
+            "iconImageId": 115570957057530,
+            "displayIconImageId": 115570957057530,
+            "created": "2023-06-10T04:09:48.113+00:00",
+            "updated": "2026-01-02T21:36:45.211+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 127,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2146966759,
+            "name": "Contingency Measures",
+            "description": "Experience intentional, site-command authorized activation of the facility's self-destruct system.",
+            "displayName": "Contingency Measures",
+            "displayDescription": "Experience intentional, site-command authorized activation of the facility's self-destruct system.",
+            "enabled": true,
+            "iconImageId": 13705454293,
+            "displayIconImageId": 13705454293,
+            "created": "2023-06-10T04:10:53.483+00:00",
+            "updated": "2026-01-02T21:36:35.761+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 0,
+              "awardedCount": 1518,
+              "winRatePercentage": 0.0
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          },
+          {
+            "id": 2146966808,
+            "name": "Facility Upkeep",
+            "description": "Repair an electronical sub-system or a physical failure in the facility using the many tools provided to you.",
+            "displayName": "Facility Upkeep",
+            "displayDescription": "Repair an electronical sub-system or a physical failure in the facility using the many tools provided to you.",
+            "enabled": true,
+            "iconImageId": 13705467524,
+            "displayIconImageId": 13705467524,
+            "created": "2023-06-10T04:13:02.987+00:00",
+            "updated": "2026-01-02T21:36:27.337+00:00",
+            "statistics": {
+              "pastDayAwardedCount": 4,
+              "awardedCount": 5780,
+              "winRatePercentage": 0.013
+            },
+            "awardingUniverse": {
+              "id": 2473499480,
+              "name": "A Core Game",
+              "rootPlaceId": 6576912941
+            }
+          }
+        ]
+      }
     }
   }
 }

@@ -1,7 +1,7 @@
 import { robloxGames } from './roblox-games.js';
 export { robloxGames };
 
-export const games = [
+const favoriteGames = [
   {
     id: "minecraft",
     title: "Minecraft",
@@ -113,6 +113,11 @@ export const games = [
   },
 ];
 
+export const games = [
+  ...favoriteGames.map(game => ({ ...game, favorite: true })),
+  ...robloxGames.filter(game => game.favorite),
+];
+
 export const rotation = [
   {
     id: "forza-horizon-6",
@@ -166,7 +171,7 @@ export const rotation = [
 ];
 
 export const catalogue = [
-  ...robloxGames,
+  ...robloxGames.filter(game => !game.favorite),
   ...games,
   ...[
     {

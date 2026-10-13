@@ -1,5 +1,9 @@
 export const HOUR_MS = 3_600_000;
-export const universes = { pressure: 4367208330, town: 1718755273 };
+export const universes = {
+  pressure: 4367208330, town: 1718755273, industrialist: 3448264866,
+  'build-a-boat-for-treasure': 210851291, 'nuclear-blast-testing-facility': 27761886,
+  'a-core-game': 2473499480,
+};
 export type RobloxStats = {
   universeId: number; placeId: number; creatorType: 'Group' | 'User'; creatorId: number;
   creatorVerified: boolean; creatorName: string; created: string; updated: string;

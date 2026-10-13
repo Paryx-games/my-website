@@ -1,3 +1,5 @@
+import { favoriteBadgeElement } from './favorites.js';
+
 export function validPersonalRating(value) {
   return value === null || (typeof value === 'number' && Number.isFinite(value) && value >= 1 && value <= 5 && Number.isInteger(value * 2));
 }
@@ -72,11 +74,17 @@ function sourceRatingElement(source, label, score, scale, url, context, checked)
   return row;
 }
 
-export function ratingsPanelElement(rating, title) {
+export function ratingsPanelElement(rating, title, favorite = false) {
   const panel = document.createElement('section');
   panel.className = 'game-ratings-panel';
   panel.setAttribute('aria-label', `${title} ratings`);
-  panel.append(personalRatingElement(rating?.personal ?? null),
-    imdbRatingElement(rating?.imdb), metacriticRatingElement(rating?.metacritic));
+  panel.append(personalRatingElement(rating?.personal ?? null));
+  if (favorite) {
+    const row = document.createElement('div');
+    row.className = 'game-favorite-row';
+    row.append(favoriteBadgeElement());
+    panel.append(row);
+  }
+  panel.append(imdbRatingElement(rating?.imdb), metacriticRatingElement(rating?.metacritic));
   return panel;
 }

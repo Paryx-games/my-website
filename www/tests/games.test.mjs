@@ -5,14 +5,15 @@ import { games, catalogue, rotation, robloxGames } from '../public/assets/games/
 const sources = JSON.parse(await readFile(new URL('../content/game-artwork-sources.json', import.meta.url), 'utf8'));
 
 test('favorites and rotation resolve to complete galleries with local artwork', async () => {
-  assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege']);
+  assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege', 'pressure', 'industrialist']);
+  assert.ok(games.every(game => game.favorite));
   assert.equal(rotation.length, 12);
   assert.equal(new Set(catalogue.map(game => game.id)).size, catalogue.length);
-  assert.deepEqual(robloxGames.map(game => game.id), ['pressure', 'town']);
+  assert.deepEqual(robloxGames.map(game => game.id), ['pressure', 'town', 'industrialist', 'build-a-boat-for-treasure', 'nuclear-blast-testing-facility', 'a-core-game']);
   for (const entry of rotation) assert.ok(catalogue.some(game => game.id === entry.id), entry.id);
   for (const game of catalogue) {
     assert.equal(game.pictures.length, game.captions.length);
-    assert.ok(game.pictures.length >= 7, game.title);
+    assert.ok(game.pictures.length >= (game.roblox ? 1 : 7), game.title);
     assert.match(game.year, /^\d{4}$/);
     assert.ok(game.publisher && game.developer && game.description);
     assert.equal(new URL(game.website).protocol, 'https:');
