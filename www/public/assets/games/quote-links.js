@@ -15,6 +15,22 @@ export function quoteParts(quote, catalogue) {
   return parts;
 }
 
+export function gameLinkElement(game, text = game.title) {
+  const link = document.createElement('a');
+  link.className = 'game-quote-link';
+  link.href = `#game-card-${game.id}`;
+  link.dataset.quoteGame = game.id;
+  link.setAttribute('aria-haspopup', 'dialog');
+  const icon = document.createElement('img');
+  icon.src = game.icon;
+  icon.alt = '';
+  icon.width = 16;
+  icon.height = 16;
+  icon.addEventListener('error', () => { icon.hidden = true; });
+  link.append(icon, text);
+  return link;
+}
+
 export function renderQuote(root, quote, catalogue) {
   root.replaceChildren();
   if (!quote) return;
@@ -24,19 +40,7 @@ export function renderQuote(root, quote, catalogue) {
       root.append(part);
       continue;
     }
-    const link = document.createElement('a');
-    link.className = 'game-quote-link';
-    link.href = `#game-card-${part.game.id}`;
-    link.dataset.quoteGame = part.game.id;
-    link.setAttribute('aria-haspopup', 'dialog');
-    const icon = document.createElement('img');
-    icon.src = part.game.icon;
-    icon.alt = '';
-    icon.width = 16;
-    icon.height = 16;
-    icon.addEventListener('error', () => { icon.hidden = true; });
-    link.append(icon, part.text);
-    root.append(link);
+    root.append(gameLinkElement(part.game, part.text));
   }
   root.append('"');
 }

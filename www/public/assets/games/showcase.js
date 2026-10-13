@@ -2,8 +2,8 @@ import { games, rotation, catalogue, robloxGames } from './games.js';
 import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
 import { renderPlaytime, createPlaytimeIncrease } from './playtime.js';
-import { renderQuote } from './quote-links.js';
-import { renderRobloxDetails } from './roblox-details.js';
+import { renderQuote, gameLinkElement } from './quote-links.js';
+import { renderRobloxDetails, creatorDetailElement } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
 import { favoriteBadgeElement } from './favorites.js';
@@ -49,6 +49,7 @@ function refreshRobloxStats() {
   robloxRefresh = fetchRobloxStats().then(response => {
     if (mergeRobloxStats(robloxGames, response) && dialog.open && active?.roblox) {
       renderRobloxDetails(document.getElementById('game-roblox-details'), active);
+      renderGameFacts(active);
       document.getElementById('game-description').textContent = active.description;
       descriptionDisclosure.update();
     }
@@ -225,20 +226,7 @@ function openShowcase(game, link) {
   document.getElementById('game-ratings').replaceChildren(
     ratingsPanelElement(ratings[active.id], active.title, active.favorite),
   );
-  const facts = document.getElementById('game-facts');
-  facts.replaceChildren();
-  for (const [index, [label, value]] of [[active.roblox ? 'Created' : 'Released', active.year], [active.roblox ? 'Creator' : 'Developer', active.developer], [active.roblox ? 'Platform' : 'Publisher', active.roblox ? 'Roblox' : active.publisher], ['Genre', active.genre]].entries()) {
-    if (active.roblox && label === 'Creator') continue;
-    const row = document.createElement('div');
-    row.className = 'game-fact';
-    row.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${factIcons[index]}</svg>`;
-    const term = document.createElement('dt');
-    const detail = document.createElement('dd');
-    term.textContent = label;
-    detail.textContent = value;
-    row.append(term, detail);
-    facts.append(row);
-  }
+  renderGameFacts(active);
   document.getElementById('game-website').href = active.website;
   renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   renderRobloxDetails(document.getElementById('game-roblox-details'), active);
@@ -265,6 +253,24 @@ function openShowcase(game, link) {
   document.body.classList.add('game-showcase-open');
   document.getElementById('game-close').focus();
   refreshRemotePlaytime();
+}
+
+function renderGameFacts(game) {
+  const facts = document.getElementById('game-facts');
+  facts.replaceChildren();
+  for (const [index, [label, value]] of [[game.roblox ? 'Created' : 'Released', game.year], [game.roblox ? 'Creator & Publisher (Roblox)' : 'Developer', game.developer], [game.roblox ? 'Platform' : 'Publisher', game.roblox ? 'Roblox' : game.publisher], ['Genre', game.genre]].entries()) {
+    const row = document.createElement('div');
+    row.className = 'game-fact';
+    row.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${factIcons[index]}</svg>`;
+    const term = document.createElement('dt');
+    term.textContent = label;
+    const detail = game.roblox && index === 1 ? creatorDetailElement(game) : document.createElement('dd');
+    if (game.roblox && index === 1) row.classList.add('game-creator-fact');
+    else if (game.roblox && index === 2) detail.append(gameLinkElement(catalogue.find(game => game.id === 'roblox')));
+    else detail.textContent = value;
+    row.append(term, detail);
+    facts.append(row);
+  }
 }
 
 document.getElementById('games').addEventListener('click', event => {

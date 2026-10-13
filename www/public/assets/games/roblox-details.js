@@ -1,18 +1,5 @@
-export function renderRobloxDetails(root, game) {
-  root.replaceChildren();
-  root.hidden = !game.roblox;
-  if (!game.roblox) return;
+export function creatorDetailElement(game) {
   const data = game.roblox;
-  const heading = document.createElement('h3');
-  heading.textContent = 'Roblox details';
-  const list = document.createElement('dl');
-  const number = value => new Intl.NumberFormat('en-GB').format(value);
-  const date = value => new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(value));
-  const totalVotes = data.upVotes + data.downVotes;
-  const creatorRow = document.createElement('div');
-  creatorRow.className = 'game-roblox-creator';
-  const creatorTerm = document.createElement('dt');
-  creatorTerm.textContent = 'Creator';
   const creatorDetail = document.createElement('dd');
   const creatorName = document.createElement('span');
   creatorName.textContent = data.creatorName || game.developer;
@@ -28,8 +15,20 @@ export function renderRobloxDetails(root, game) {
   creator.title = label;
   creator.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M10 14 21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>';
   creatorDetail.append(creatorName, creator);
-  creatorRow.append(creatorTerm, creatorDetail);
-  list.append(creatorRow);
+  return creatorDetail;
+}
+
+export function renderRobloxDetails(root, game) {
+  root.replaceChildren();
+  root.hidden = !game.roblox;
+  if (!game.roblox) return;
+  const data = game.roblox;
+  const heading = document.createElement('h3');
+  heading.textContent = 'Roblox details';
+  const list = document.createElement('dl');
+  const number = value => new Intl.NumberFormat('en-GB').format(value);
+  const date = value => new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'UTC' }).format(new Date(value));
+  const totalVotes = data.upVotes + data.downVotes;
   for (const [label, value] of [
     ['Created', date(data.created)], ['Updated', date(data.updated)],
     ['Playing', number(data.playing)], ['Visits', number(data.visits)],
