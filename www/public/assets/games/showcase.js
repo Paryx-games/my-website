@@ -91,7 +91,14 @@ const card = game => {
   artwork.width = game.roblox ? 512 : 600;
   artwork.height = game.roblox ? 512 : 900;
   artworkShell.append(artwork);
-  loadGameImage(artwork, game.cover, { shell: artworkShell });
+  loadGameImage(artwork, game.cover, {
+    shell: artworkShell,
+    onReady: () => {
+      if (Math.abs(artwork.naturalWidth / artwork.naturalHeight - 2 / 3) < 0.04) return;
+      artworkShell.classList.add('has-cover-fill');
+      artworkShell.style.setProperty('--cover-art', `url("${game.cover}")`);
+    },
+  });
   const name = document.createElement('strong');
   const icon = document.createElement('img');
   icon.className = 'game-card-icon';
