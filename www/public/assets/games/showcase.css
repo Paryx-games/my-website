@@ -9,6 +9,8 @@
 .game-cover img { display: block; width: 100%; height: auto; aspect-ratio: 2 / 3; object-fit: cover; border-radius: 8px; transition: filter 200ms var(--ease); }
 .game-cover-image > img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; object-fit: contain; z-index: 1; }
 .game-cover-image.has-cover-fill::before { content: ''; position: absolute; inset: -16px; background-image: var(--cover-art); background-position: center; background-size: cover; filter: blur(14px) brightness(0.75); pointer-events: none; }
+.game-cover-image.has-cover-fill > img { mask-image: linear-gradient(to bottom, transparent 12%, #000 30%, #000 70%, transparent 88%); }
+.game-card-square .game-cover-image { aspect-ratio: 1; }
 .game-card-roblox .game-cover strong .game-card-icon { aspect-ratio: auto; }
 .game-cover strong { display: flex; align-items: start; gap: 5px; padding-top: 8px; font-size: 0.85rem; line-height: 1.35; letter-spacing: -0.01em; }
 .game-cover strong .game-card-icon { width: 12px; height: 12px; aspect-ratio: auto; border-radius: 2px; }

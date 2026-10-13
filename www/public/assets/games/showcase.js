@@ -72,13 +72,14 @@ async function closeShowcase() {
   closing = false;
 }
 
-const card = game => {
+const card = (game, portrait = true) => {
   const container = document.createElement('article');
   container.className = 'game-card';
   const link = document.createElement('a');
   link.href = game.website;
   link.className = 'game-card-link';
   if (game.roblox) container.classList.add('game-card-roblox');
+  if (!portrait) container.classList.add('game-card-square');
   link.dataset.game = game.id;
   if (!document.getElementById(`game-card-${game.id}`)) link.id = `game-card-${game.id}`;
   const cover = document.createElement('span');
@@ -94,7 +95,7 @@ const card = game => {
   loadGameImage(artwork, game.cover, {
     shell: artworkShell,
     onReady: () => {
-      if (Math.abs(artwork.naturalWidth / artwork.naturalHeight - 2 / 3) < 0.04) return;
+      if (!portrait || Math.abs(artwork.naturalWidth / artwork.naturalHeight - 2 / 3) < 0.04) return;
       artworkShell.classList.add('has-cover-fill');
       artworkShell.style.setProperty('--cover-art', `url("${game.cover}")`);
     },
@@ -125,7 +126,7 @@ const card = game => {
   container.append(link);
   return container;
 };
-cards.replaceChildren(...games.map(card));
+cards.replaceChildren(...games.map(game => card(game)));
 document.getElementById('games-count').textContent = games.length;
 document.getElementById('rotation-count').textContent = rotation.length;
 const rotationRoot = document.getElementById('rotation-games');
@@ -136,7 +137,7 @@ if (rotation.length) {
     return link;
   }));
 }
-document.getElementById('roblox-games-list').replaceChildren(...robloxGames.map(card));
+document.getElementById('roblox-games-list').replaceChildren(...robloxGames.map(game => card(game, false)));
 document.getElementById('roblox-games-count').textContent = robloxGames.length;
 
 let playtimeRefresh;
