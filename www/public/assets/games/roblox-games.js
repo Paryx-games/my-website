@@ -112,7 +112,7 @@ export const robloxGames = [
   },
   {
     "id": "industrialist",
-    "titleArtwork": "/assets/games/industrialist-logo.png",
+    "logo": "/assets/games/industrialist-logo.png",
     "title": "Industrialist",
     "year": "2022",
     "developer": "Mamytema Studios",

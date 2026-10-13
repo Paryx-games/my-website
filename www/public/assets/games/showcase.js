@@ -205,6 +205,7 @@ function openShowcase(game, link) {
   titleArtwork.parentElement.hidden = !active.titleArtwork || Boolean(active.logo);
   if (active.titleArtwork && !active.logo) loadGameImage(titleArtwork, active.titleArtwork, { shell: titleArtwork.parentElement });
   const logo = document.getElementById('game-logo');
+  logo.dataset.game = active.id;
   logo.parentElement.hidden = !active.logo;
   logo.dataset.lightInk = String(active.id === 'forza-horizon-4');
   title.classList.toggle('sr-only', Boolean(active.logo));
