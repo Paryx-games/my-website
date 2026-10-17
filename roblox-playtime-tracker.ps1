@@ -51,6 +51,32 @@ function Write-RobloxTrackerLeave {
     Write-RobloxTrackerMessage $message $EventLog
 }
 
+function Get-RobloxUploadSummary {
+    param($State, [hashtable]$Names, [hashtable]$Attempted)
+    $initial = -not $State.ContainsKey('LastUploadTotals')
+    $snapshot = @{}
+    $changes = [Collections.Generic.List[string]]::new()
+    foreach ($entry in ($State.Totals.GetEnumerator() | Sort-Object Key)) {
+        $minutes = [long][Math]::Floor([double]$entry.Value / 60.0)
+        $snapshot[$entry.Key] = $minutes
+        $previous = if (-not $initial -and $State.LastUploadTotals.ContainsKey($entry.Key)) {
+            [long]$State.LastUploadTotals[$entry.Key]
+        } else { 0L }
+        $increase = [Math]::Max(0L, $minutes - $previous)
+        if ($increase -eq 0) { continue }
+        $name = Get-RobloxTrackerName $entry.Key $Names $Attempted
+        $changes.Add([string]::Format(
+            [Globalization.CultureInfo]::InvariantCulture,
+            '+{0:0.00} hours on {1}',
+            $increase / 60.0,
+            $name
+        ))
+    }
+    $label = if ($initial) { 'current tracked totals' } else { 'new tracked time' }
+    $description = if ($changes.Count) { "$label`: $($changes -join ', ')" } else { 'no new whole Roblox minutes' }
+    return [pscustomobject]@{ Description = $description; Totals = $snapshot }
+}
+
 function Invoke-RobloxTracker {
     param([string]$Logs, [string]$Path, [int]$UploadInterval, [bool]$Offline, [bool]$SinglePoll)
     $hash = [Security.Cryptography.SHA256]::Create()
@@ -95,6 +121,8 @@ function Invoke-RobloxTracker {
         }
         $lastUpload = 0L
         $uploadProcess = $null
+        $uploadReported = $true
+        $uploadSnapshot = @{}
         $floor = $now
         $gameNames = @{}
         $nameAttempts = @{}
@@ -168,17 +196,36 @@ function Invoke-RobloxTracker {
             }
             $state.UpdatedAt = $now
             Save-RobloxTrackerState $Path $state
+            if ($null -ne $uploadProcess -and $uploadProcess.HasExited -and -not $uploadReported) {
+                $uploadReported = $true
+                if ($uploadProcess.ExitCode -eq 0) {
+                    $state.LastUploadTotals = $uploadSnapshot
+                    Save-RobloxTrackerState $Path $state
+                    Write-RobloxTrackerMessage 'UPLOAD check finished successfully.' $eventLog
+                }
+                else {
+                    Write-RobloxTrackerMessage 'UPLOAD check failed; it will retry on the next interval.' $eventLog
+                }
+            }
             if (-not $Offline -and ($now - $lastUpload) -ge ($UploadInterval * 1000) -and ($null -eq $uploadProcess -or $uploadProcess.HasExited)) {
-                $lastUpload = $now
                 $oldPath = $env:ROBLOX_STATE_PATH
                 try {
                     $env:ROBLOX_STATE_PATH = $Path
                     if ($null -ne $uploadProcess) { $uploadProcess.Dispose() }
                     $engine = (Get-Process -Id $PID).Path
                     $script = Join-Path $PSScriptRoot 'playtime-collector.ps1'
+                    $summary = Get-RobloxUploadSummary $state $gameNames $nameAttempts
                     $uploadProcess = Start-Process -FilePath $engine -ArgumentList @('-NoProfile', '-NonInteractive', '-File', ('"' + $script + '"')) -WindowStyle Hidden -PassThru
+                    $lastUpload = $now
+                    $uploadSnapshot = $summary.Totals
+                    $uploadReported = $false
+                    Write-RobloxTrackerMessage "UPLOAD triggered: $($summary.Description)." $eventLog
                 }
-                catch { Write-Warning 'Playtime upload failed; saved totals will retry on the next upload interval.' }
+                catch {
+                    $uploadProcess = $null
+                    Write-RobloxTrackerMessage 'UPLOAD could not start; it will retry on the next interval.' $eventLog
+                    $lastUpload = $now
+                }
                 finally { $env:ROBLOX_STATE_PATH = $oldPath }
             }
             if ($SinglePoll) { break }
