@@ -2213,11 +2213,17 @@
           <p id="contributions-summary" role="status">Loading GitHub contributions...</p>
           <a href="https://github.com/Paryx-games?tab=overview" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
         </div>
-        <div class="contributions-calendar" id="contributions-calendar" tabindex="0" role="region" aria-label="Contribution calendar, scroll to see the full year"></div>
+        <div class="contributions-calendar" id="contributions-calendar" role="region" aria-label="Contribution calendar"></div>
         <div class="contributions-footer" id="contributions-footer">
-          <span id="contributions-updated">GitHub activity</span>
+          <span id="contributions-updated" role="status"></span>
           <span class="contributions-legend" aria-label="Contribution intensity from less to more">Less <i data-level="0"></i><i data-level="1"></i><i data-level="2"></i><i data-level="3"></i><i data-level="4"></i> More</span>
         </div>
+        <div id="contributions-selection" class="contributions-selection" hidden>
+          <p id="contributions-selection-summary" role="status"></p>
+          <a id="contributions-selection-link" target="_blank" rel="noopener noreferrer">View activity on GitHub ↗</a>
+          <button id="contributions-clear" type="button">Clear selection</button>
+        </div>
+        <div id="contributions-tooltip" class="contributions-tooltip" role="tooltip" hidden></div>
       </div>
       <div class="repos reveal" id="repos"></div>
       <nav class="project-links" aria-label="More projects"><a href="/projects">All projects &rarr;</a><a href="/projects#development">Recent activity</a><a href="/projects/changelog">Changelog</a></nav>
