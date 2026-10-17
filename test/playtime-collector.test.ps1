@@ -34,7 +34,7 @@ try {
     Assert-Equal $script:UploadCount 1 'Initial upload'
     Assert-Equal $script:LastUpload.entries.Count 3 'All sources included'
     Assert-Equal $script:LastUpload.entries[0].minutes 125 'Minutes are not converted to hours'
-    $initialLog = Get-Content -LiteralPath (Join-Path $directory 'roblox-events.log') -Raw
+    $initialLog = Get-Content -LiteralPath (Join-Path $directory 'game-time-collector.log') -Raw
     if ($initialLog -notmatch 'initial totals: .* hours on Minecraft, .* hours on town, .* hours on Satisfactory') {
         throw 'The first acknowledged upload must log readable game totals.'
     }
@@ -53,7 +53,7 @@ try {
     Assert-Equal $state.Pending.sequence 3 'Pending sequence persisted before upload'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:LastUpload.sequence 3 'Retry uses the original sequence'
-    $eventLog = Get-Content -LiteralPath (Join-Path $directory 'roblox-events.log') -Raw
+    $eventLog = Get-Content -LiteralPath (Join-Path $directory 'game-time-collector.log') -Raw
     if ($eventLog -notmatch 'UPLOAD acknowledged: \+0\.05 hours on town, \+0\.02 hours on Satisfactory\.') {
         throw 'Acknowledged per-game changes must share the event log.'
     }
@@ -69,6 +69,6 @@ try {
     Write-Output 'Collector tests passed: minute units, unchanged data, offline retry, Steam identifiers and sequence recovery.'
 } finally {
     $env:PLAYTIME_UPLOAD_TOKEN = $oldToken
-    foreach ($path in @($config, $stateFile, (Join-Path $directory 'roblox-events.log'))) { if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path } }
+    foreach ($path in @($config, $stateFile, (Join-Path $directory 'game-time-collector.log'))) { if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path } }
     Remove-Item -LiteralPath $directory
 }

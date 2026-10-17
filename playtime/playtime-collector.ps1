@@ -492,7 +492,7 @@ function Send-CollectorPending {
         }
         elseif ($changes.Count) { $changes -join ', ' }
         else { 'no new whole game minutes' }
-        $eventLog = Join-Path ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Path))) 'roblox-events.log'
+        $eventLog = Join-Path ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Path))) 'game-time-collector.log'
         Write-PlaytimeEvent "${status}: $summary." $eventLog
         Write-Output 'Playtime upload acknowledged.'
         return

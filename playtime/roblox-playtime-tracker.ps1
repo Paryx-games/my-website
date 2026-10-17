@@ -111,7 +111,7 @@ function Invoke-RobloxTracker {
         $floor = $now
         $gameNames = @{}
         $nameAttempts = @{}
-        $eventLog = Join-Path ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Path))) 'roblox-events.log'
+        $eventLog = Join-Path ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Path))) 'game-time-collector.log'
         $cataloguePath = Join-Path $PSScriptRoot '..\www\public\assets\games\roblox-games.js'
         $catalogue = (Get-Content -LiteralPath $cataloguePath -Raw) -replace '^\s*export const robloxGames = ', '' -replace ';\s*$', ''
         foreach ($game in ($catalogue | ConvertFrom-Json)) {
