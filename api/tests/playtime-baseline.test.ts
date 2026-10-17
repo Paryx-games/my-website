@@ -45,6 +45,15 @@ test('unknown universes are retained and exposed without editing a backend allow
   }
 });
 
+test('the Roblox platform total combines its experience playtime across all reported platforms', () => {
+  const data = composePlaytime([
+    ...baselines,
+    { game_id: 'pressure', pc: 10, mobile: 120, console: 180, universe_id: '1234' },
+  ], []);
+  assert.deepEqual(data.games.pressure, { pc: 10, mobile: 120, console: 180 });
+  assert.deepEqual(data.games.roblox, { pc: 15616, mobile: 120, console: 423 });
+});
+
 test('migration snapshot matches every numeric platform value in the frozen backup', () => {
   const root = new URL('../../../', import.meta.url);
   const backup = JSON.parse(readFileSync(new URL('www/public/assets/games/game.json', root), 'utf8'));

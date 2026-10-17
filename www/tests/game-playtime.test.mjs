@@ -19,3 +19,12 @@ test('minute formatting handles exact hours and rounding across hour boundaries'
   assert.equal(formatMinutes(59.5), '1 hour');
   assert.equal(formatMinutes(121), '2 hours 1 minute');
 });
+
+test('Roblox playtime adds PC, mobile, and console minutes into a platform total', () => {
+  assert.deepEqual(playtimeEntries({ pc: '60', mobile: '120', console: '30' }, true), [
+    ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '2 hours'], ['console', 'Console', '30 minutes'], ['total', 'Total', '3 hours 30 minutes'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '60', mobile: '120+', console: '' }, true), [
+    ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '120+'], ['total', 'Total', '1 hour'],
+  ]);
+});

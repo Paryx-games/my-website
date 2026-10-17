@@ -41,9 +41,18 @@ export function composePlaytime(baselines: Baseline[], totals: Total[]): PublicP
     }
     data.games[id] = game;
   }
-  const robloxIds = new Set([...universeGames.values(), ...[...groups.keys()].filter(id => id.startsWith('roblox-'))]);
+  const robloxIds = new Set([
+    ...universeGames.values(),
+    ...[...groups.keys()].filter(id => id.startsWith('roblox-')),
+    ...(baselineById.has('roblox') ? ['roblox'] : []),
+  ]);
   if (robloxIds.size) {
-    data.games.roblox = { ...data.games.roblox, pc: [...robloxIds].reduce((sum, id) => sum + (data.games[id]?.pc ?? 0), 0) };
+    const platformTotal = (platform: 'pc' | 'mobile' | 'console') => [...robloxIds].reduce((sum, id) => sum + (data.games[id]?.[platform] ?? 0), 0);
+    const hasPlatformTotal = (platform: 'mobile' | 'console') => [...robloxIds].some(id => data.games[id]?.[platform] != null);
+    data.games.roblox = { ...data.games.roblox, pc: platformTotal('pc') };
+    for (const platform of ['mobile', 'console'] as const) {
+      if (hasPlatformTotal(platform)) data.games.roblox[platform] = platformTotal(platform);
+    }
     const increase = [...robloxIds].reduce((sum, id) => sum + (data.games[id]?.pcIncrease24hMinutes ?? 0), 0);
     if (increase > 0) data.games.roblox.pcIncrease24hMinutes = increase;
   }
