@@ -1,6 +1,20 @@
 .games-heading { display: flex; align-items: baseline; gap: 12px; }
 .games-heading h3, .rotation-section h3 { font-size: 1rem; }
 .games-heading span { color: var(--color-faint); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.game-sort { position: relative; margin-left: auto; align-self: center; }
+.game-sort > summary { display: flex; align-items: center; gap: 6px; min-height: 36px; padding: 4px 0 4px 10px; color: var(--color-muted); font-size: 0.8rem; cursor: pointer; list-style: none; }
+.game-sort > summary::-webkit-details-marker { display: none; }
+.game-sort > summary::after { display: none; }
+.game-sort > summary svg { width: 16px; height: 16px; transition: transform 180ms var(--ease); }
+.game-sort[open] > summary svg { transform: rotate(180deg); }
+.game-sort > summary:hover, .game-sort[open] > summary { color: var(--color-text); }
+.game-sort-options { position: absolute; top: 100%; right: 0; z-index: 10; width: 210px; max-width: calc(100vw - 40px); margin: 4px 0 0; padding: 6px; border: 1px solid var(--color-border); border-radius: 8px; background: var(--color-surface); box-shadow: 0 4px 12px rgb(0 0 0 / 12%), 0 16px 32px rgb(0 0 0 / 12%); }
+.game-sort-options label { display: flex; align-items: center; gap: 10px; min-height: 36px; padding: 6px 10px; border-radius: 4px; color: var(--color-muted); font-size: 0.85rem; cursor: pointer; }
+.game-sort-options label:hover, .game-sort-options label:focus-within { background: var(--color-bg); color: var(--color-text); }
+.game-sort-options label:has(:checked) { color: var(--color-text); }
+.game-sort-options input { margin: 0; accent-color: var(--color-text); }
+.game-sort-options hr { margin: 6px 4px; border: 0; border-top: 1px solid var(--color-border); }
+@media (prefers-reduced-motion: reduce) { .game-sort > summary svg { transition: none; } }
 .games-row { display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px 12px; }
 .game-card { width: 144px; display: flex; flex-direction: column; border-radius: 8px; transition: transform 200ms var(--ease); }
 .game-card.is-pending { opacity: 0; transform: translateY(12px); }

@@ -8,6 +8,7 @@ import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
 import { favoriteBadgeElement } from './favorites.js';
 import { setupDescriptionDisclosure } from './description.js';
+import { setupGameSort } from './sort.js';
 
 let gameDetails = {};
 try {
@@ -47,7 +48,9 @@ let robloxRefreshedAt = 0;
 function refreshRobloxStats() {
   if (robloxRefresh || Date.now() - robloxRefreshedAt < 60_000) return;
   robloxRefresh = fetchRobloxStats().then(response => {
-    if (mergeRobloxStats(robloxGames, response) && dialog.open && active?.roblox) {
+    if (!mergeRobloxStats(robloxGames, response)) return;
+    sortSections.forEach(apply => apply());
+    if (dialog.open && active?.roblox) {
       renderRobloxDetails(document.getElementById('game-roblox-details'), active);
       renderGameFacts(active);
       document.getElementById('game-description').textContent = active.description;
@@ -141,12 +144,22 @@ if (rotation.length) {
 document.getElementById('roblox-games-list').replaceChildren(...robloxGames.map(game => card(game, false)));
 document.getElementById('roblox-games-count').textContent = robloxGames.length;
 
+const sortSections = [
+  [cards, games],
+  [rotationRoot, rotation.map(({ id, title }) => {
+    const game = catalogue.find(game => game.id === id);
+    return title ? { ...game, title } : game;
+  })],
+  [document.getElementById('roblox-games-list'), robloxGames],
+].map(([root, games]) => setupGameSort(root, games, () => gameDetails, () => ratings));
+
 let playtimeRefresh;
 let playtimeRefreshedAt = 0;
 function refreshRemotePlaytime() {
   if (playtimeRefresh || Date.now() - playtimeRefreshedAt < 60_000) return;
   playtimeRefresh = fetchRemotePlaytime().then(response => {
     if (!mergeRemotePlaytime(gameDetails, response, catalogue.map(game => game.id))) return;
+    sortSections.forEach(apply => apply());
     document.querySelectorAll('.game-card-link').forEach(link => {
       const name = link.querySelector('.game-cover strong');
       name.querySelector('.game-playtime-increase')?.remove();
