@@ -35,7 +35,11 @@ test('unknown universes are retained and exposed without editing a backend allow
   const data = composePlaytime(baselines, [total('10767441669', 'roblox', 10)]);
   assert.equal(data.games['roblox-10767441669'].pc, 10);
   assert.equal(data.games.roblox.pc, 15616);
-  assert.equal(data.games['roblox-10767441669'].pcIncrease24hMinutes, undefined);
+  assert.equal(data.games['roblox-10767441669'].pcIncrease24hMinutes, 10);
+  assert.equal(data.games.roblox.pcIncrease24hMinutes, 10);
+  const known = composePlaytime(baselines, [total('1718755273', 'roblox', 5)]);
+  assert.equal(known.games.town.pcIncrease24hMinutes, 5);
+  assert.equal(known.games.roblox.pcIncrease24hMinutes, 5);
   for (const id of ['town', '0', '-1', '1.5', '9007199254740992']) {
     assert.throws(() => validateUpload({ collectorId: 'pc', sequence: 1, entries: [{ ...entries[0], gameId: id }] }, 'pc'));
   }

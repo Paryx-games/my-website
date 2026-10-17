@@ -8,6 +8,8 @@ The API stores cumulative counters per collector, source, and game. Steam uses l
 
 Roblox PC totals are baseline minutes plus tracked minutes. Steam and Minecraft PC totals use the greater of the baseline and the launcher lifetime total. Minecraft's existing 30,000-minute launcher estimate is included on the server. Mobile and console baselines are returned without modification. The Roblox platform total sums the tracked experiences and their known baselines; it is not a complete historical account total.
 
+For 24-hour increases, a new Roblox counter uses zero when no older history row exists. Its time is all from the current tracking window. Once a history row is at least 24 hours old, the API uses that row as the rolling baseline. The Roblox platform increase sums the experience increases.
+
 GET responses use version 2 because PC minutes already include the baseline. The browser accepts versions 1 and 2, applying the old Minecraft adjustment only to version 1. Deploy the website and API together. Older website builds retain their frozen fallback when they encounter version 2.
 
 ## Adding Roblox games

@@ -34,8 +34,8 @@ export function composePlaytime(baselines: Baseline[], totals: Total[]): PublicP
     const game: PublicPlaytime['games'][string] = { pc: calculate(false) };
     if (baseline?.mobile != null) game.mobile = Number(baseline.mobile);
     if (baseline?.console != null) game.console = Number(baseline.console);
-    // A new counter has no trustworthy rolling-day reference yet.
-    if (rows.length && rows.every(row => row.baseline_minutes !== null)) {
+    // Roblox counters start at zero when tracking begins, so a missing older snapshot is a known zero.
+    if (rows.length && rows.every(row => row.baseline_minutes !== null || row.source === 'roblox')) {
       const increase = game.pc - calculate(true);
       if (increase > 0) game.pcIncrease24hMinutes = increase;
     }
@@ -44,6 +44,8 @@ export function composePlaytime(baselines: Baseline[], totals: Total[]): PublicP
   const robloxIds = new Set([...universeGames.values(), ...[...groups.keys()].filter(id => id.startsWith('roblox-'))]);
   if (robloxIds.size) {
     data.games.roblox = { ...data.games.roblox, pc: [...robloxIds].reduce((sum, id) => sum + (data.games[id]?.pc ?? 0), 0) };
+    const increase = [...robloxIds].reduce((sum, id) => sum + (data.games[id]?.pcIncrease24hMinutes ?? 0), 0);
+    if (increase > 0) data.games.roblox.pcIncrease24hMinutes = increase;
   }
   return data;
 }
