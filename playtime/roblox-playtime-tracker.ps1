@@ -10,6 +10,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'collectors\roblox-state.ps1')
+. (Join-Path $PSScriptRoot 'collectors\event-log.ps1')
 
 function Get-RobloxTrackerName {
     param([string]$UniverseId, [hashtable]$Names, [hashtable]$Attempted)
@@ -29,17 +30,6 @@ function Get-RobloxTrackerName {
     return 'Unknown experience'
 }
 
-function Write-RobloxTrackerMessage {
-    param([string]$Message, [string]$EventLog)
-    Write-Host $Message
-    try {
-        [void][IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($EventLog))
-        $line = '{0} {1}{2}' -f [DateTimeOffset]::Now.ToString('o'), $Message, [Environment]::NewLine
-        [IO.File]::AppendAllText($EventLog, $line, [Text.UTF8Encoding]::new($false))
-    }
-    catch { Write-Warning 'Could not save the Roblox event log.' }
-}
-
 function Write-RobloxTrackerLeave {
     param($State, $Session, [string]$Reason, [hashtable]$Names, [hashtable]$Attempted, [string]$EventLog)
     $name = Get-RobloxTrackerName $Session.UniverseId $Names $Attempted
@@ -48,7 +38,7 @@ function Write-RobloxTrackerLeave {
         ' - {0:N1}s' -f [Math]::Max(0.0, ([double]$State.Totals[$Session.UniverseId] - [double]$Session.StartedTotal))
     } else { '' }
     $message = "LEFT   {0} - place {1}, universe {2}{3} ({4})" -f $name, $place, $Session.UniverseId, $duration, $Reason
-    Write-RobloxTrackerMessage $message $EventLog
+    Write-PlaytimeEvent $message $EventLog
 }
 
 function Get-RobloxUploadSummary {
@@ -65,12 +55,7 @@ function Get-RobloxUploadSummary {
         $increase = [Math]::Max(0L, $minutes - $previous)
         if ($increase -eq 0) { continue }
         $name = Get-RobloxTrackerName $entry.Key $Names $Attempted
-        $changes.Add([string]::Format(
-            [Globalization.CultureInfo]::InvariantCulture,
-            '+{0:0.00} hours on {1}',
-            $increase / 60.0,
-            $name
-        ))
+        $changes.Add((Format-PlaytimeHours $increase $name))
     }
     $label = if ($initial) { 'current tracked totals' } else { 'new tracked time' }
     $description = if ($changes.Count) { "$label`: $($changes -join ', ')" } else { 'no new whole Roblox minutes' }
@@ -127,7 +112,7 @@ function Invoke-RobloxTracker {
         $gameNames = @{}
         $nameAttempts = @{}
         $eventLog = Join-Path ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Path))) 'roblox-events.log'
-        $cataloguePath = Join-Path $PSScriptRoot 'www\public\assets\games\roblox-games.js'
+        $cataloguePath = Join-Path $PSScriptRoot '..\www\public\assets\games\roblox-games.js'
         $catalogue = (Get-Content -LiteralPath $cataloguePath -Raw) -replace '^\s*export const robloxGames = ', '' -replace ';\s*$', ''
         foreach ($game in ($catalogue | ConvertFrom-Json)) {
             $gameNames[[string]$game.roblox.universeId] = [string]$game.title
@@ -182,7 +167,7 @@ function Invoke-RobloxTracker {
                 if ($event.Kind -eq 'join' -and $state.Active.ContainsKey($client)) {
                     $name = Get-RobloxTrackerName $event.UniverseId $gameNames $nameAttempts
                     $message = "JOINED {0} - place {1}, universe {2}" -f $name, $event.PlaceId, $event.UniverseId
-                    Write-RobloxTrackerMessage $message $eventLog
+                    Write-PlaytimeEvent $message $eventLog
                 }
             }
             $players = @(Get-Process -Name RobloxPlayerBeta -ErrorAction SilentlyContinue)
@@ -201,10 +186,10 @@ function Invoke-RobloxTracker {
                 if ($uploadProcess.ExitCode -eq 0) {
                     $state.LastUploadTotals = $uploadSnapshot
                     Save-RobloxTrackerState $Path $state
-                    Write-RobloxTrackerMessage 'UPLOAD check finished successfully.' $eventLog
+                    Write-PlaytimeEvent 'UPLOAD check finished successfully.' $eventLog
                 }
                 else {
-                    Write-RobloxTrackerMessage 'UPLOAD check failed; it will retry on the next interval.' $eventLog
+                    Write-PlaytimeEvent 'UPLOAD check failed; it will retry on the next interval.' $eventLog
                 }
             }
             if (-not $Offline -and ($now - $lastUpload) -ge ($UploadInterval * 1000) -and ($null -eq $uploadProcess -or $uploadProcess.HasExited)) {
@@ -219,11 +204,11 @@ function Invoke-RobloxTracker {
                     $lastUpload = $now
                     $uploadSnapshot = $summary.Totals
                     $uploadReported = $false
-                    Write-RobloxTrackerMessage "UPLOAD triggered: $($summary.Description)." $eventLog
+                    Write-PlaytimeEvent "UPLOAD triggered: $($summary.Description)." $eventLog
                 }
                 catch {
                     $uploadProcess = $null
-                    Write-RobloxTrackerMessage 'UPLOAD could not start; it will retry on the next interval.' $eventLog
+                    Write-PlaytimeEvent 'UPLOAD could not start; it will retry on the next interval.' $eventLog
                     $lastUpload = $now
                 }
                 finally { $env:ROBLOX_STATE_PATH = $oldPath }

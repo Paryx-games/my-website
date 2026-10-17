@@ -6,13 +6,20 @@ $ErrorActionPreference = 'Stop'
 $taskName = 'Paryx Roblox Playtime Tracker'
 $script = Join-Path $PSScriptRoot 'roblox-playtime-tracker.ps1'
 $launcher = Join-Path $PSScriptRoot 'run-roblox-playtime-hidden.vbs'
+$legacyRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
+$legacyScript = Join-Path $legacyRoot 'roblox-playtime-tracker.ps1'
+$legacyLauncher = Join-Path $legacyRoot 'run-roblox-playtime-hidden.vbs'
 $executable = Join-Path $env:WINDIR 'System32\wscript.exe'
 $arguments = '"' + $launcher + '"'
 $existing = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 if ($null -ne $existing) {
     $managed = @($existing.Actions | Where-Object {
-        ($_.Execute -eq $executable -and $_.Arguments -eq $arguments) -or
-        ($_.Arguments -eq ('-NoProfile -NonInteractive -WindowStyle Hidden -File "' + $script + '"') -and
+        ((Split-Path $_.Execute -Leaf) -eq 'wscript.exe' -and
+            $_.Arguments -in @($arguments, ('"' + $legacyLauncher + '"'))) -or
+        ($_.Arguments -in @(
+            ('-NoProfile -NonInteractive -WindowStyle Hidden -File "' + $script + '"'),
+            ('-NoProfile -NonInteractive -WindowStyle Hidden -File "' + $legacyScript + '"')
+        ) -and
             (Split-Path $_.Execute -Leaf) -in @('pwsh.exe', 'powershell.exe'))
     })
     if ($managed.Count -ne @($existing.Actions).Count) {
@@ -21,11 +28,28 @@ if ($null -ne $existing) {
 }
 $wasRunning = $null -ne $existing -and $existing.State -eq 'Running'
 $oldTracker = if ($wasRunning) {
-    @(Get-CimInstance Win32_Process | Where-Object {
-        $_.Name -in @('pwsh.exe', 'powershell.exe') -and
-        $_.CommandLine -like "*-File `"$script`"*"
+    $processes = @(Get-CimInstance Win32_Process)
+    $launcherPids = @($processes | Where-Object {
+        $_.Name -eq 'wscript.exe' -and $null -ne $_.CommandLine -and
+        ($_.CommandLine.Contains($launcher) -or $_.CommandLine.Contains($legacyLauncher))
+    } | Select-Object -ExpandProperty ProcessId)
+    @($processes | Where-Object {
+        $_.ParentProcessId -in $launcherPids -and $_.Name -in @('pwsh.exe', 'powershell.exe') -and $null -ne $_.CommandLine -and
+        ($_.CommandLine.Contains($script) -or $_.CommandLine.Contains($legacyScript))
     } | Select-Object -ExpandProperty ProcessId)
 } else { @() }
+$collectorTask = Get-ScheduledTask -TaskName 'Playtime Collector' -ErrorAction SilentlyContinue
+if ($null -ne $collectorTask) {
+    $collectorLauncher = '"' + (Join-Path $PSScriptRoot 'run-playtime-hidden.vbs') + '"'
+    $legacyCollectorLauncher = '"' + (Join-Path $legacyRoot 'run-playtime-hidden.vbs') + '"'
+    $knownActions = @($collectorTask.Actions | Where-Object {
+        (Split-Path $_.Execute -Leaf) -eq 'wscript.exe' -and
+        $_.Arguments -in @($collectorLauncher, $legacyCollectorLauncher)
+    })
+    if ($knownActions.Count -ne @($collectorTask.Actions).Count) {
+        throw 'The existing hourly collector task has an unexpected action. It was left unchanged.'
+    }
+}
 if ($wasRunning) { Stop-ScheduledTask -TaskName $taskName }
 $identity = [Security.Principal.WindowsIdentity]::GetCurrent().Name
 $action = New-ScheduledTaskAction -Execute $executable -Argument $arguments -WorkingDirectory $PSScriptRoot

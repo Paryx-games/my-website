@@ -1,13 +1,14 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-. (Join-Path $PSScriptRoot '..\playtime-collector.ps1')
+. (Join-Path $PSScriptRoot '..\playtime\playtime-collector.ps1')
 function Assert-Equal($actual, $expected, $message) {
     if ($actual -ne $expected) { throw "$message (expected $expected, got $actual)" }
 }
 function Get-SteamPlaytime { return @([pscustomobject]@{ GameId = '526870'; Minutes = $script:SteamMinutes }) }
 function Get-ModrinthPlaytime { return @([pscustomobject]@{ GameId = 'minecraft'; Minutes = 125 }) }
-function Get-RobloxPlaytime { return @([pscustomobject]@{ GameId = '1718755273'; Minutes = 2 }) }
+function Get-RobloxPlaytime { return @([pscustomobject]@{ GameId = '1718755273'; Minutes = $script:RobloxMinutes }) }
 $script:SteamMinutes = 60
+$script:RobloxMinutes = 2
 $script:UploadCount = 0
 $script:FailOnce = $false
 $script:ConflictOnce = $false
@@ -33,11 +34,17 @@ try {
     Assert-Equal $script:UploadCount 1 'Initial upload'
     Assert-Equal $script:LastUpload.entries.Count 3 'All sources included'
     Assert-Equal $script:LastUpload.entries[0].minutes 125 'Minutes are not converted to hours'
+    $initialLog = Get-Content -LiteralPath (Join-Path $directory 'roblox-events.log') -Raw
+    if ($initialLog -notmatch 'initial totals: .* hours on Minecraft, .* hours on town, .* hours on Satisfactory') {
+        throw 'The first acknowledged upload must log readable game totals.'
+    }
+    Assert-Equal (Get-PlaytimeGameName steam 284160) 'BeamNG.drive' 'Steam names follow the website catalogue'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:UploadCount 1 'Unchanged snapshots are skipped'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile -Force | Out-Null
     Assert-Equal $script:UploadCount 2 'Forced refresh resends unchanged totals'
     $script:SteamMinutes = 61
+    $script:RobloxMinutes = 5
     $script:FailOnce = $true
     $failed = $false
     try { Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null } catch { $failed = $true }
@@ -46,6 +53,10 @@ try {
     Assert-Equal $state.Pending.sequence 3 'Pending sequence persisted before upload'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:LastUpload.sequence 3 'Retry uses the original sequence'
+    $eventLog = Get-Content -LiteralPath (Join-Path $directory 'roblox-events.log') -Raw
+    if ($eventLog -notmatch 'UPLOAD acknowledged: \+0\.05 hours on town, \+0\.02 hours on Satisfactory\.') {
+        throw 'Acknowledged per-game changes must share the event log.'
+    }
     $state = Get-Content -LiteralPath $stateFile -Raw | ConvertFrom-Json
     Assert-Equal ($null -eq $state.Pending) $true 'Acknowledged pending batch cleared'
     $script:SteamMinutes = 62
@@ -58,6 +69,6 @@ try {
     Write-Output 'Collector tests passed: minute units, unchanged data, offline retry, Steam identifiers and sequence recovery.'
 } finally {
     $env:PLAYTIME_UPLOAD_TOKEN = $oldToken
-    foreach ($path in @($config, $stateFile)) { if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path } }
+    foreach ($path in @($config, $stateFile, (Join-Path $directory 'roblox-events.log'))) { if (Test-Path -LiteralPath $path) { Remove-Item -LiteralPath $path } }
     Remove-Item -LiteralPath $directory
 }

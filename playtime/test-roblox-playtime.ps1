@@ -82,7 +82,7 @@ function Invoke-RobloxPlaytimeTest {
     param([string]$Logs, [string]$Output, [int]$Duration)
     [void][IO.Directory]::CreateDirectory($Output)
     $games = @{}
-    $cataloguePath = Join-Path $PSScriptRoot 'www\public\assets\games\roblox-games.js'
+    $cataloguePath = Join-Path $PSScriptRoot '..\www\public\assets\games\roblox-games.js'
     $catalogue = (Get-Content -LiteralPath $cataloguePath -Raw) -replace '^\s*export const robloxGames = ', '' -replace ';\s*$', ''
     foreach ($game in ($catalogue | ConvertFrom-Json)) {
         $games[[string]$game.roblox.universeId] = @{ Id = $game.id; Title = $game.title }

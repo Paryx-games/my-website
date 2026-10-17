@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string]$ConfigPath = (Join-Path $PSScriptRoot 'playtime-collector.local.json'),
+    [string]$ConfigPath = (Join-Path $PSScriptRoot '..\playtime-collector.local.json'),
     [string]$StatePath = (Join-Path $env:LOCALAPPDATA 'Paryx\PlaytimeCollector\state.json'),
     [switch]$DryRun,
     [switch]$ForceUpload
@@ -9,6 +9,7 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 . (Join-Path $PSScriptRoot 'collectors\roblox-state.ps1')
+. (Join-Path $PSScriptRoot 'collectors\event-log.ps1')
 
 function ConvertFrom-SteamVdf {
     [CmdletBinding()]
@@ -437,12 +438,62 @@ function Send-CollectorPending {
             continue
         }
 
+        $hadPrevious = $null -ne $State.PSObject.Properties['LastUploadedMinutes']
+        $previous = @{}
+        if ($hadPrevious) {
+            if ($State.LastUploadedMinutes -is [Collections.IDictionary]) {
+                foreach ($entry in $State.LastUploadedMinutes.GetEnumerator()) { $previous[$entry.Key] = [long]$entry.Value }
+            }
+            else {
+                foreach ($property in $State.LastUploadedMinutes.PSObject.Properties) { $previous[$property.Name] = [long]$property.Value }
+            }
+        }
+        $next = @{}
+        foreach ($entry in $previous.GetEnumerator()) { $next[$entry.Key] = $entry.Value }
+        $changes = [Collections.Generic.List[string]]::new()
+        $initialTotals = [Collections.Generic.List[string]]::new()
+        $pendingEntries = @($State.Pending.entries)
+        foreach ($entry in $pendingEntries) {
+            $key = '{0}:{1}' -f $entry.source, $entry.gameId
+            $minutes = [long]$entry.minutes
+            if ($previous.ContainsKey($key)) {
+                $increase = [Math]::Max(0L, $minutes - $previous[$key])
+            }
+            elseif ($hadPrevious -and $entry.source -eq 'roblox') {
+                $increase = $minutes
+            }
+            else { $increase = 0L }
+            if ($increase -gt 0 -or -not $hadPrevious) {
+                try { $name = Get-PlaytimeGameName $entry.source $entry.gameId }
+                catch { $name = "$($entry.source) $($entry.gameId)" }
+                if ($increase -gt 0) { $changes.Add((Format-PlaytimeHours $increase $name)) }
+                if (-not $hadPrevious -and ($entry.source -ne 'steam' -or -not $name.StartsWith('Steam app '))) {
+                    $initialTotals.Add([string]::Format(
+                        [Globalization.CultureInfo]::InvariantCulture,
+                        '{0:0.00} hours on {1}',
+                        $minutes / 60.0,
+                        $name
+                    ))
+                }
+            }
+            $next[$key] = $minutes
+        }
+        $State | Add-Member -NotePropertyName LastUploadedMinutes -NotePropertyValue $next -Force
         $State.LastPayloadHash = $State.PendingHash
         $State.Pending = $null
         $State.PendingHash = ''
 
         Save-CollectorState -Path $Path -State $State
 
+        $status = if ($response.replayed) { 'UPLOAD replay acknowledged' } else { 'UPLOAD acknowledged' }
+        $summary = if (-not $hadPrevious) {
+            if ($initialTotals.Count) { "initial totals: $($initialTotals -join ', ')" }
+            else { "initial snapshot of $($pendingEntries.Count) game counters" }
+        }
+        elseif ($changes.Count) { $changes -join ', ' }
+        else { 'no new whole game minutes' }
+        $eventLog = Join-Path ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Path))) 'roblox-events.log'
+        Write-PlaytimeEvent "${status}: $summary." $eventLog
         Write-Output 'Playtime upload acknowledged.'
         return
     }

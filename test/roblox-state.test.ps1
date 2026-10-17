@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-. (Join-Path $PSScriptRoot '..\collectors\roblox-state.ps1')
+. (Join-Path $PSScriptRoot '..\playtime\collectors\roblox-state.ps1')
 function Assert-Near($Actual, $Expected, $Message) {
     if ([Math]::Abs($Actual - $Expected) -gt 0.001) { throw "$Message (expected $Expected, got $Actual)" }
 }
