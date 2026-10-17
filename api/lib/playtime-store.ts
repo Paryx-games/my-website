@@ -1,12 +1,14 @@
 import { neon } from '@neondatabase/serverless';
 import { createHash } from 'node:crypto';
-import type { PlaytimeStore, PublicPlaytime, Upload } from './playtime.js';
+import type { PlaytimeStore, Upload } from './playtime.js';
+import { composePlaytime, type Baseline, type Total } from './playtime-baseline.js';
 
 export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
   const sql = neon(databaseUrl);
   return {
     async read() {
-      const rows = await sql`
+      const [rows, baselines] = await sql.transaction([
+        sql`
         WITH current_totals AS (
           SELECT collector_id, source, game_id, minutes, updated_at
           FROM playtime.totals
@@ -16,34 +18,14 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
           FROM playtime.total_history
           WHERE recorded_at <= now() - interval '24 hours'
           ORDER BY collector_id, source, game_id, recorded_at DESC, history_id DESC
-        ), baseline_games AS (
-          SELECT current.game_id,
-            COUNT(*) AS source_count,
-            COUNT(baseline.minutes) AS baseline_count,
-            SUM(baseline.minutes) AS minutes
-          FROM current_totals AS current
-          LEFT JOIN baseline USING (collector_id, source, game_id)
-          GROUP BY current.game_id
         )
-        SELECT current.game_id, SUM(current.minutes)::text AS minutes,
-          MAX(current.updated_at) AS updated_at,
-          CASE WHEN baseline_games.baseline_count = baseline_games.source_count
-            AND SUM(current.minutes) > baseline_games.minutes
-            THEN (SUM(current.minutes) - baseline_games.minutes)::text
-            ELSE NULL END AS increase_24h_minutes
+        SELECT current.game_id, current.source, current.minutes::text AS minutes,
+          current.updated_at, baseline.minutes::text AS baseline_minutes
         FROM current_totals AS current
-        JOIN baseline_games USING (game_id)
-        GROUP BY current.game_id, baseline_games.baseline_count, baseline_games.source_count, baseline_games.minutes
-        ORDER BY current.game_id`;
-      const data: PublicPlaytime = { version: 1, updatedAt: null, games: {} };
-      for (const row of rows) {
-        const game = { pc: Number(row.minutes) } as PublicPlaytime['games'][string];
-        if (row.increase_24h_minutes !== null) game.pcIncrease24hMinutes = Number(row.increase_24h_minutes);
-        data.games[row.game_id] = game;
-        const updatedAt = new Date(row.updated_at).toISOString();
-        if (!data.updatedAt || updatedAt > data.updatedAt) data.updatedAt = updatedAt;
-      }
-      return data;
+        LEFT JOIN baseline USING (collector_id, source, game_id)`,
+        sql`SELECT game_id, pc, mobile, console, universe_id::text FROM playtime.baselines`,
+      ]);
+      return composePlaytime(baselines as Baseline[], rows as Total[]);
     },
     async upload(data: Upload) {
       const entries = JSON.stringify(data.entries.map(entry => ({ game_id: entry.gameId, source: entry.source, minutes: entry.minutes })));

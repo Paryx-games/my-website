@@ -1,19 +1,21 @@
-// Roughly the playtime from the Minecraft Launcher; this estimate is not completely accurate.
-const MINECRAFT_LAUNCHER_MINUTES = 30_000;
+import { robloxGames } from './roblox-games.js';
 
 export function mergeRemotePlaytime(details, response, knownIds) {
-  if (response?.version !== 1 || !response.games || typeof response.games !== 'object' || Array.isArray(response.games)) return false;
+  if (![1, 2].includes(response?.version) || !response.games || typeof response.games !== 'object' || Array.isArray(response.games)) return false;
   let changed = false;
   for (const id of knownIds) {
-    const minutes = response.games[id]?.pc;
+    const universe = robloxGames.find(game => game.id === id)?.roblox.universeId;
+    const remote = response.games[id] ?? (universe ? response.games[`roblox-${universe}`] : undefined);
+    const minutes = remote?.pc;
     if (!Number.isSafeInteger(minutes) || minutes < 0) continue;
-    const totalMinutes = minutes + (id === 'minecraft' ? MINECRAFT_LAUNCHER_MINUTES : 0);
+    const totalMinutes = minutes + (response.version === 1 && id === 'minecraft' ? 30_000 : 0);
     if (!Number.isSafeInteger(totalMinutes)) continue;
-    const increase = response.games[id]?.pcIncrease24hMinutes;
+    const increase = remote?.pcIncrease24hMinutes;
     details[id] = {
       ...details[id],
       playtime: {
         ...details[id]?.playtime,
+        ...Object.fromEntries(['mobile', 'console'].filter(platform => Number.isSafeInteger(remote[platform]) && remote[platform] >= 0).map(platform => [platform, remote[platform]])),
         pc: totalMinutes,
         pcIncrease24hMinutes: Number.isSafeInteger(increase) && increase > 0 ? increase : null,
       },

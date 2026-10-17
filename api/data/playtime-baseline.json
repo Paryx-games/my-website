@@ -1,0 +1,83 @@
+[
+  {
+    "gameId": "minecraft",
+    "pc": 49671,
+    "console": 22606
+  },
+  {
+    "gameId": "satisfactory",
+    "pc": 9298
+  },
+  {
+    "gameId": "rainbow-six-siege",
+    "pc": 8376
+  },
+  {
+    "gameId": "forza-horizon-6",
+    "console": 3405
+  },
+  {
+    "gameId": "forza-horizon-4",
+    "pc": 1224
+  },
+  {
+    "gameId": "beamng-drive",
+    "pc": 1831
+  },
+  {
+    "gameId": "geometry-dash",
+    "pc": 771,
+    "mobile": 4874
+  },
+  {
+    "gameId": "halo-mcc",
+    "pc": 82
+  },
+  {
+    "gameId": "escape-the-backrooms",
+    "pc": 3920
+  },
+  {
+    "gameId": "backrooms-escape-together",
+    "pc": 923
+  },
+  {
+    "gameId": "bloons-td-6",
+    "pc": 340,
+    "mobile": 2350
+  },
+  {
+    "gameId": "roblox"
+  },
+  {
+    "gameId": "pressure",
+    "pc": 14748,
+    "universeId": 4367208330
+  },
+  {
+    "gameId": "town",
+    "pc": 15606,
+    "universeId": 1718755273
+  },
+  {
+    "gameId": "industrialist",
+    "pc": 4408,
+    "universeId": 3448264866
+  },
+  {
+    "gameId": "build-a-boat-for-treasure",
+    "pc": 4122,
+    "console": 243,
+    "universeId": 210851291
+  },
+  {
+    "gameId": "nuclear-blast-testing-facility",
+    "pc": 2346,
+    "universeId": 27761886
+  },
+  {
+    "gameId": "a-core-game",
+    "pc": 429,
+    "universeId": 2473499480
+  }
+]

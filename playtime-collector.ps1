@@ -8,6 +8,7 @@ param(
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'collectors\roblox-state.ps1')
 
 function ConvertFrom-SteamVdf {
     [CmdletBinding()]
@@ -337,11 +338,12 @@ function Get-CollectorEntries {
     $entries = [Collections.Generic.List[object]]::new()
     $seen = [Collections.Generic.HashSet[string]]::new()
 
-    foreach ($source in @('steam', 'modrinth')) {
+    foreach ($source in @('steam', 'modrinth', 'roblox')) {
         try {
             $result = @(switch ($source) {
                     'steam' { Get-SteamPlaytime }
                     'modrinth' { Get-ModrinthPlaytime }
+                    'roblox' { Get-RobloxPlaytime }
                 })
         }
         catch {
@@ -552,7 +554,7 @@ function Invoke-PlaytimeCollector {
         }
 
         if ($null -ne $state.Pending) {
-            $activeEntries = @($state.Pending.entries | Where-Object { $_.source -in @('steam', 'modrinth') })
+            $activeEntries = @($state.Pending.entries | Where-Object { $_.source -in @('steam', 'modrinth', 'roblox') })
             if ($activeEntries.Count -ne @($state.Pending.entries).Count) {
                 $state.LastPayloadHash = ''
                 $state.PendingHash = ''

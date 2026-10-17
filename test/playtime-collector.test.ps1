@@ -6,6 +6,7 @@ function Assert-Equal($actual, $expected, $message) {
 }
 function Get-SteamPlaytime { return @([pscustomobject]@{ GameId = '526870'; Minutes = $script:SteamMinutes }) }
 function Get-ModrinthPlaytime { return @([pscustomobject]@{ GameId = 'minecraft'; Minutes = 125 }) }
+function Get-RobloxPlaytime { return @([pscustomobject]@{ GameId = '1718755273'; Minutes = 2 }) }
 $script:SteamMinutes = 60
 $script:UploadCount = 0
 $script:FailOnce = $false
@@ -30,7 +31,7 @@ try {
     [IO.File]::WriteAllText($config, '{"Endpoint":"http://127.0.0.1:9999/playtime","CollectorId":"test-pc"}')
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:UploadCount 1 'Initial upload'
-    Assert-Equal $script:LastUpload.entries.Count 2 'Both sources included'
+    Assert-Equal $script:LastUpload.entries.Count 3 'All sources included'
     Assert-Equal $script:LastUpload.entries[0].minutes 125 'Minutes are not converted to hours'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:UploadCount 1 'Unchanged snapshots are skipped'

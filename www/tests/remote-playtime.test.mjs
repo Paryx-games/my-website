@@ -1,6 +1,22 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { mergeRemotePlaytime, fetchRemotePlaytime } from '../public/assets/games/remote-playtime.js';
+import { robloxGames } from '../public/assets/games/roblox-games.js';
+
+test('baseline-inclusive responses apply platform totals without adding Minecraft time again', () => {
+  const local = {};
+  mergeRemotePlaytime(local, { version: 2, games: { minecraft: { pc: 49671, console: 22606 } } }, ['minecraft']);
+  assert.deepEqual(local.minecraft.playtime, { pc: 49671, console: 22606, pcIncrease24hMinutes: null });
+});
+
+test('a newly catalogued universe resolves stored time without backend mappings', () => {
+  robloxGames.push({ id: 'new-test-game', roblox: { universeId: 10767441669 } });
+  try {
+    const local = {};
+    mergeRemotePlaytime(local, { version: 2, games: { 'roblox-10767441669': { pc: 10 } } }, ['new-test-game']);
+    assert.equal(local['new-test-game'].playtime.pc, 10);
+  } finally { robloxGames.pop(); }
+});
 
 test('remote PC totals preserve manual console/mobile values and accept zero', () => {
   const local = { minecraft: { playtime: { pc: 100, mobile: 5, console: 60 } } };

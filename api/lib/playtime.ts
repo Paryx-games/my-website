@@ -6,7 +6,7 @@ export const gameIds = new Set([
   'escape-the-backrooms', 'backrooms-escape-together', 'bloons-td-6',
   'roblox', 'pressure', 'town',
 ]);
-export const sources = new Set(['steam', 'modrinth']);
+export const sources = new Set(['steam', 'modrinth', 'roblox']);
 export const steamAppIds: Record<number, string> = {
   526870: 'satisfactory', 359550: 'rainbow-six-siege', 2483190: 'forza-horizon-6',
   1293830: 'forza-horizon-4', 284160: 'beamng-drive', 322170: 'geometry-dash',
@@ -19,9 +19,9 @@ export const MAX_MINUTES = 100_000_000;
 export type Entry = { gameId: string; source: string; minutes: number };
 export type Upload = { collectorId: string; sequence: number; entries: Entry[] };
 export type PublicPlaytime = {
-  version: 1;
+  version: 1 | 2;
   updatedAt: string | null;
-  games: Record<string, { pc: number; pcIncrease24hMinutes?: number }>;
+  games: Record<string, { pc: number; mobile?: number; console?: number; pcIncrease24hMinutes?: number }>;
 };
 export type UploadResult = { ok: true; accepted: boolean; replayed: boolean; lastSequence: number };
 export interface PlaytimeStore {
@@ -56,6 +56,10 @@ export function validateUpload(body: unknown, collectorId: string): Upload {
       if (entry.source === 'steam' && /^\d+$/.test(entry.gameId)) {
         const appId = Number(entry.gameId);
         gameId = Number.isSafeInteger(appId) && Object.hasOwn(steamAppIds, appId) ? steamAppIds[appId] : undefined;
+      } else if (entry.source === 'roblox') {
+        // Keep every universe, even before it is added to the website catalogue.
+        if (!/^[1-9]\d{0,15}$/.test(entry.gameId) || !Number.isSafeInteger(Number(entry.gameId))) throw new Error('Expected a Roblox universe ID');
+        gameId = entry.gameId;
       } else gameId = gameIds.has(entry.gameId) ? entry.gameId : undefined;
     }
     // Unmapped games do not invalidate the rest of a full library upload.

@@ -9,31 +9,14 @@ param(
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
-function ConvertFrom-RobloxSessionLine {
-    param([string]$Line)
-
-    if ($Line -notmatch '^(?<time>\d{4}-\d\d-\d\dT[^,]+),') { return }
-    $timestamp = [DateTimeOffset]::MinValue
-    if (-not [DateTimeOffset]::TryParse($Matches.time, [ref]$timestamp)) { return }
-
-    # Use the engine's completed join report, not launch requests or game-authored output.
-    if ($Line -match '\[FLog::GameJoinLoadTime\] Report game_join_loadtime:.*?placeid:(?<place>\d+),.*?universeid:(?<universe>\d+),') {
-        return [pscustomobject]@{
-            Kind = 'join'; At = $timestamp
-            PlaceId = $Matches.place; UniverseId = $Matches.universe
-        }
-    }
-    if ($Line -match '\[DFLog::NetworkClient\] Client:Disconnect|\[FLog::SingleSurfaceApp\] shutDown:') {
-        return [pscustomobject]@{ Kind = 'leave'; At = $timestamp }
-    }
-}
+. (Join-Path $PSScriptRoot 'collectors\roblox-log.ps1')
 
 function Close-RobloxTestSession {
     param($Tracker, [string]$Client, [DateTimeOffset]$At, [string]$Reason)
     if (-not $Tracker.Active.ContainsKey($Client)) { return }
     $session = $Tracker.Active[$Client]
     $session.EndedAt = $At.ToUniversalTime().ToString('o')
-    $session.Seconds = [Math]::Max(0, ($At - [DateTimeOffset]::Parse($session.StartedAt)).TotalSeconds)
+    $session.Seconds = [Math]::Max(0.0, ($At - [DateTimeOffset]::Parse($session.StartedAt)).TotalSeconds)
     $session.EndReason = $Reason
     $Tracker.Active.Remove($Client)
     Write-Host ("LEFT   {0} - {1:N1}s ({2})" -f $session.Title, $session.Seconds, $Reason)
@@ -67,31 +50,10 @@ function Add-RobloxTestEvent {
     Write-Host ("JOINED {0} - place {1}, universe {2}" -f $title, $Event.PlaceId, $Event.UniverseId)
 }
 
-function Read-RobloxTestLog {
-    param([string]$Path, $Cursor)
-    $stream = [IO.File]::Open($Path, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete)
-    try {
-        if ($stream.Length -lt $Cursor.Offset) { $Cursor.Offset = 0L; $Cursor.Partial = '' }
-        [void]$stream.Seek($Cursor.Offset, [IO.SeekOrigin]::Begin)
-        $reader = [IO.StreamReader]::new($stream)
-        try {
-            $chunk = $Cursor.Partial + $reader.ReadToEnd()
-            $Cursor.Offset = $stream.Position
-            $lines = $chunk.Split([char]10)
-            $Cursor.Partial = $lines[$lines.Length - 1]
-            for ($index = 0; $index -lt $lines.Length - 1; $index++) {
-                ConvertFrom-RobloxSessionLine $lines[$index].TrimEnd([char]13)
-            }
-        }
-        finally { $reader.Dispose() }
-    }
-    finally { $stream.Dispose() }
-}
-
 function Save-RobloxTestReport {
     param($Tracker, [string]$Directory, [DateTimeOffset]$At)
     foreach ($session in $Tracker.Active.Values) {
-        $session.Seconds = [Math]::Max(0, ($At - [DateTimeOffset]::Parse($session.StartedAt)).TotalSeconds)
+        $session.Seconds = [Math]::Max(0.0, ($At - [DateTimeOffset]::Parse($session.StartedAt)).TotalSeconds)
     }
     $totals = @($Tracker.Sessions | Group-Object UniverseId | ForEach-Object {
         $seconds = ($_.Group | Measure-Object Seconds -Sum).Sum
@@ -149,7 +111,7 @@ function Invoke-RobloxPlaytimeTest {
                 foreach ($file in (Get-ChildItem -LiteralPath $Logs -Filter '*_Player_*_last.log' -File | Where-Object Name -NotMatch 'CrashHandler')) {
                     if (-not $cursors.ContainsKey($file.FullName)) { $cursors[$file.FullName] = @{ Offset = 0L; Partial = '' } }
                     try {
-                        foreach ($event in @(Read-RobloxTestLog $file.FullName $cursors[$file.FullName])) {
+                        foreach ($event in @(Read-RobloxLogEvents $file.FullName $cursors[$file.FullName])) {
                             $events.Add([pscustomobject]@{ Client = $file.FullName; Event = $event })
                         }
                     }

@@ -46,14 +46,14 @@ try {
     $cursor = @{ Offset = 0L; Partial = '' }
     $line = New-JoinLine '2026-10-17T12:03:00Z' '999' '888'
     [IO.File]::WriteAllText($path, $line.Substring(0, 45))
-    Assert-Equal @(Read-RobloxTestLog $path $cursor).Count 0 'Partial line waits for completion'
+    Assert-Equal @(Read-RobloxLogEvents $path $cursor).Count 0 'Partial line waits for completion'
     [IO.File]::AppendAllText($path, $line.Substring(45) + "`n")
-    $events = @(Read-RobloxTestLog $path $cursor)
+    $events = @(Read-RobloxLogEvents $path $cursor)
     Assert-Equal $events.Count 1 'Completed line parsed once'
     Assert-Equal $events[0].UniverseId '888' 'Unknown universe preserved'
-    Assert-Equal @(Read-RobloxTestLog $path $cursor).Count 0 'Repeated poll does not replay events'
+    Assert-Equal @(Read-RobloxLogEvents $path $cursor).Count 0 'Repeated poll does not replay events'
     [IO.File]::WriteAllText($path, "2026-10-17T12:04:00Z,1 [FLog::SingleSurfaceApp] shutDown: (stage:UGCGame).`n")
-    Assert-Equal @(Read-RobloxTestLog $path $cursor)[0].Kind 'leave' 'Truncated log cursor resets'
+    Assert-Equal @(Read-RobloxLogEvents $path $cursor)[0].Kind 'leave' 'Truncated log cursor resets'
     Add-RobloxTestEvent $tracker 'client' $events[0]
     Assert-Equal $tracker.Sessions[2].GameId '' 'Unknown experience remains unmapped'
     Assert-Equal $tracker.Active.Count 1 'Unknown experience still tracked'
