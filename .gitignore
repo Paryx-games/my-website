@@ -9,6 +9,7 @@ PERSONAL.md
 PLAYTIME.md
 README.personal.md
 README.local.md
+docs/
 
 # installed dependencies and package cache
 node_modules
