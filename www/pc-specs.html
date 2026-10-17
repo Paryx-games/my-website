@@ -73,9 +73,9 @@
       <header class="pc-page-intro">
         <a class="pc-back-link" href="/#pc-specs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h14"/></svg>Back to home</a>
         <h1>PC specs</h1>
-        <p>The setup I use for my games, projects, and everything in between.</p>
       </header>
-      <div class="pc-terminal" data-pc-terminal="full" role="region" aria-label="My PC hardware and software specifications">
+      <!-- pc-terminal:start -->
+<div class="pc-terminal" data-pc-terminal="full" role="region" aria-label="My PC hardware and software specifications">
   <div class="pc-terminal-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3m6 0h4"/></svg><span>PowerShell</span><span class="pc-terminal-window-mark" aria-hidden="true"></span></div>
   <div class="pc-terminal-inner">
     <p class="pc-prompt">PS ~&gt; <span>fastfetch</span></p>
@@ -128,11 +128,10 @@
     </div>
   </div>
 </div>
-      <p class="pc-snapshot">Hardware snapshot <span aria-hidden="true">/</span> <time data-pc-updated datetime="2026-10-17">17 October 2026</time></p>
-      <p class="pc-detail-note">A closer look at my hardware, with specifications recorded by HWiNFO and Fastfetch. Interface capabilities are labelled separately from the recorded configuration.</p>
+<!-- pc-terminal:end -->
       <!-- pc-details:start -->
 <div id="pc-hardware-details" class="pc-hardware-details">
-<section class="pc-detail-group" aria-labelledby="pc-detail-processor"><h2 id="pc-detail-processor">Processor</h2><p>My 9800X3D has eight cores, sixteen threads, and 96 MB of L3 cache.</p><dl><div data-pc-field="detail-processor-0"><dt>Model</dt><dd>AMD Ryzen 7 9800X3D</dd></div>
+<section class="pc-detail-group" aria-labelledby="pc-detail-processor"><h2 id="pc-detail-processor">Processor</h2><dl><div data-pc-field="detail-processor-0"><dt>Model</dt><dd>AMD Ryzen 7 9800X3D</dd></div>
 <div data-pc-field="detail-processor-1"><dt>Code name</dt><dd>Granite Ridge</dd></div>
 <div data-pc-field="detail-processor-2"><dt>Manufacturing process</dt><dd>4 nm</dd></div>
 <div data-pc-field="detail-processor-3"><dt>Socket</dt><dd>AM5</dd></div>
@@ -142,7 +141,7 @@
 <div data-pc-field="detail-processor-7"><dt>L1 cache</dt><dd>8 x 48 KB data / 8 x 32 KB instruction</dd></div>
 <div data-pc-field="detail-processor-8"><dt>L2 / L3 cache</dt><dd>8 MB / 96 MB</dd></div>
 <div data-pc-field="detail-processor-9"><dt>Thermal design power</dt><dd>120 W</dd></div></dl></section>
-<section class="pc-detail-group" aria-labelledby="pc-detail-graphics"><h2 id="pc-detail-graphics">Graphics</h2><p>A discrete RTX 5070 Ti with Hynix GDDR7 memory and Resizable BAR enabled.</p><dl><div data-pc-field="detail-graphics-0"><dt>Model</dt><dd>NVIDIA GeForce RTX 5070 Ti</dd></div>
+<section class="pc-detail-group" aria-labelledby="pc-detail-graphics"><h2 id="pc-detail-graphics">Graphics</h2><dl><div data-pc-field="detail-graphics-0"><dt>Model</dt><dd>NVIDIA GeForce RTX 5070 Ti</dd></div>
 <div data-pc-field="detail-graphics-1"><dt>Chip</dt><dd>GB203-200</dd></div>
 <div data-pc-field="detail-graphics-2"><dt>VRAM</dt><dd>16 GB GDDR7 / Hynix</dd></div>
 <div data-pc-field="detail-graphics-3"><dt>Memory bus</dt><dd>256-bit</dd></div>
@@ -153,7 +152,7 @@
 <div data-pc-field="detail-graphics-8"><dt>ROPs / texture units</dt><dd>96 / 280</dd></div>
 <div data-pc-field="detail-graphics-9"><dt>Rated power limit</dt><dd>300 W</dd></div>
 <div data-pc-field="detail-graphics-10"><dt>Resizable BAR</dt><dd>Enabled / 16 GB</dd></div></dl></section>
-<section class="pc-detail-group" aria-labelledby="pc-detail-ram"><h2 id="pc-detail-ram">Memory</h2><p>Two matching Kingston modules running in dual channel. DDR5-6000 is the effective transfer rate.</p><dl><div data-pc-field="detail-ram-0"><dt>Capacity</dt><dd>32 GB / 2 x 16 GB</dd></div>
+<section class="pc-detail-group" aria-labelledby="pc-detail-ram"><h2 id="pc-detail-ram">Memory</h2><dl><div data-pc-field="detail-ram-0"><dt>Capacity</dt><dd>32 GB / 2 x 16 GB</dd></div>
 <div data-pc-field="detail-ram-1"><dt>Modules</dt><dd>Kingston KF560C30-16</dd></div>
 <div data-pc-field="detail-ram-2"><dt>DRAM manufacturer</dt><dd>SK Hynix</dd></div>
 <div data-pc-field="detail-ram-3"><dt>Type</dt><dd>DDR5 SDRAM / unbuffered DIMM</dd></div>
@@ -163,20 +162,20 @@
 <div data-pc-field="detail-ram-7"><dt>Channels</dt><dd>Dual channel</dd></div>
 <div data-pc-field="detail-ram-8"><dt>Ranks per module</dt><dd>Single rank</dd></div>
 <div data-pc-field="detail-ram-9"><dt>ECC</dt><dd>Non-ECC</dd></div></dl></section>
-<section class="pc-detail-group" aria-labelledby="pc-detail-motherboard"><h2 id="pc-detail-motherboard">Motherboard and firmware</h2><p>The motherboard and firmware versions reported in my hardware snapshot.</p><dl><div data-pc-field="detail-motherboard-0"><dt>Model</dt><dd>ASUS ROG STRIX B850-E GAMING WIFI</dd></div>
+<section class="pc-detail-group" aria-labelledby="pc-detail-motherboard"><h2 id="pc-detail-motherboard">Motherboard and firmware</h2><dl><div data-pc-field="detail-motherboard-0"><dt>Model</dt><dd>ASUS ROG STRIX B850-E GAMING WIFI</dd></div>
 <div data-pc-field="detail-motherboard-1"><dt>PCIe capability</dt><dd>PCIe 5.0 supported</dd></div>
 <div data-pc-field="detail-motherboard-2"><dt>USB capability</dt><dd>USB 3.2 supported</dd></div>
 <div data-pc-field="detail-motherboard-3"><dt>BIOS vendor</dt><dd>American Megatrends Inc.</dd></div>
 <div data-pc-field="detail-motherboard-4"><dt>BIOS version</dt><dd>1066</dd></div>
 <div data-pc-field="detail-motherboard-5"><dt>BIOS date</dt><dd>13 June 2025</dd></div>
 <div data-pc-field="detail-motherboard-6"><dt>AGESA</dt><dd>ComboAm5PI 1.2.0.3e</dd></div></dl></section>
-<section class="pc-detail-group" aria-labelledby="pc-detail-ssd"><h2 id="pc-detail-ssd">Storage</h2><p>My main 2 TB NVMe SSD. Capacity describes the drive, rather than current free space.</p><dl><div data-pc-field="detail-ssd-0"><dt>Model</dt><dd>WD_BLACK SN850X 2000GB</dd></div>
+<section class="pc-detail-group" aria-labelledby="pc-detail-ssd"><h2 id="pc-detail-ssd">Storage</h2><dl><div data-pc-field="detail-ssd-0"><dt>Model</dt><dd>WD_BLACK SN850X 2000GB</dd></div>
 <div data-pc-field="detail-ssd-1"><dt>Capacity</dt><dd>2 TB / approximately 1.82 TiB</dd></div>
 <div data-pc-field="detail-ssd-2"><dt>Recorded interface</dt><dd>PCIe 4.0 x4</dd></div>
 <div data-pc-field="detail-ssd-3"><dt>NVMe capability</dt><dd>NVMe 1.4 supported</dd></div>
 <div data-pc-field="detail-ssd-4"><dt>Firmware</dt><dd>620361WD</dd></div>
 <div data-pc-field="detail-ssd-5"><dt>File system</dt><dd>NTFS</dd></div></dl></section>
-<section class="pc-detail-group" aria-labelledby="pc-detail-screens"><h2 id="pc-detail-screens">Displays</h2><p>A high-refresh 1440p main display and a secondary 1080p monitor.</p><dl><div data-pc-field="detail-screens-0"><dt>Main monitor</dt><dd>LG UltraGear / 27 inch</dd></div>
+<section class="pc-detail-group" aria-labelledby="pc-detail-screens"><h2 id="pc-detail-screens">Displays</h2><dl><div data-pc-field="detail-screens-0"><dt>Main monitor</dt><dd>LG UltraGear / 27 inch</dd></div>
 <div data-pc-field="detail-screens-1"><dt>Main resolution</dt><dd>2560 x 1440</dd></div>
 <div data-pc-field="detail-screens-2"><dt>Main refresh rate</dt><dd>180 Hz</dd></div>
 <div data-pc-field="detail-screens-3"><dt>DisplayPort capability</dt><dd>Supported on the LG display</dd></div>
@@ -191,7 +190,6 @@
     <div class="footer-main">
       <div class="footer-identity">
         <a class="footer-brand" href="/">paryx</a>
-        <p>My projects, blog posts, and information about me.</p>
       </div>
       <nav aria-label="Explore the site">
         <h2>Explore</h2>

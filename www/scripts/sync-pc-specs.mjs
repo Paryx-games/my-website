@@ -23,14 +23,10 @@ const terminal = `<div class="pc-terminal" data-pc-terminal="full" role="region"
 for (const filename of ['index.html', 'pc-specs.html']) {
   const file = new URL(filename, root);
   let html = await readFile(file, 'utf8');
-  const start = html.indexOf('<div class="pc-terminal"');
-  const end = html.indexOf(filename === 'index.html' ? '<p class="pc-section-note">' : '<p class="pc-snapshot">', start);
-  if (start < 0 || end < 0) throw new Error(`Missing PC terminal in ${filename}`);
-  html = html.slice(0, start) + terminal + '\n      ' + html.slice(end);
-  const snapshotDate = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${specs.updatedAt}T00:00:00Z`));
-  html = html.replace(/<time data-pc-updated datetime="[^"]+">[^<]+<\/time>/g, `<time data-pc-updated datetime="${escape(specs.updatedAt)}">${snapshotDate}</time>`);
+  if (!html.includes('<!-- pc-terminal:start -->') || !html.includes('<!-- pc-terminal:end -->')) throw new Error(`Missing PC terminal in ${filename}`);
+  html = html.replace(/<!-- pc-terminal:start -->[\s\S]*?<!-- pc-terminal:end -->/, `<!-- pc-terminal:start -->\n${terminal}\n<!-- pc-terminal:end -->`);
   if (filename === 'pc-specs.html') {
-    const details = `<div id="pc-hardware-details" class="pc-hardware-details">\n${specs.details.map(group => `<section class="pc-detail-group" aria-labelledby="pc-detail-${escape(group.id)}"><h2 id="pc-detail-${escape(group.id)}">${escape(group.title)}</h2><p>${escape(group.description)}</p><dl>${rows(group.fields)}</dl></section>`).join('\n')}\n</div>`;
+    const details = `<div id="pc-hardware-details" class="pc-hardware-details">\n${specs.details.map(group => `<section class="pc-detail-group" aria-labelledby="pc-detail-${escape(group.id)}"><h2 id="pc-detail-${escape(group.id)}">${escape(group.title)}</h2><dl>${rows(group.fields)}</dl></section>`).join('\n')}\n</div>`;
     html = html.replace(/<!-- pc-details:start -->[\s\S]*?<!-- pc-details:end -->/, `<!-- pc-details:start -->\n${details}\n<!-- pc-details:end -->`);
   }
   await writeFile(file, html);

@@ -624,14 +624,6 @@
       font-size: var(--text-small);
     }
 
-    .projects-live-note {
-      margin-top: calc(var(--space-4) * -0.7);
-      margin-bottom: var(--space-4);
-      color: var(--color-faint);
-      font-size: 0.75rem;
-      line-height: 1.5;
-    }
-
     .repos {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
@@ -2128,7 +2120,8 @@
 
     <section id="pc-specs">
       <h2>PC specs</h2>
-      <div class="pc-terminal" data-pc-terminal="full" role="region" aria-label="My PC hardware and software specifications">
+      <!-- pc-terminal:start -->
+<div class="pc-terminal" data-pc-terminal="full" role="region" aria-label="My PC hardware and software specifications">
   <div class="pc-terminal-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3m6 0h4"/></svg><span>PowerShell</span><span class="pc-terminal-window-mark" aria-hidden="true"></span></div>
   <div class="pc-terminal-inner">
     <p class="pc-prompt">PS ~&gt; <span>fastfetch</span></p>
@@ -2181,7 +2174,8 @@
     </div>
   </div>
 </div>
-      <p class="pc-section-note"><span>Hardware snapshot / <time data-pc-updated datetime="2026-10-17">17 October 2026</time></span><a href="/pc-specs">Full PC specs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></p>
+<!-- pc-terminal:end -->
+      <p class="pc-section-note"><a href="/pc-specs">Full PC specs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></p>
     </section>
 
     <section class="discord-presence-slot" id="discordPresenceSlot">
@@ -2371,7 +2365,6 @@
     <div class="footer-main">
       <div class="footer-identity">
         <a class="footer-brand" href="/">paryx</a>
-        <p>My projects, blog posts, and information about me.</p>
       </div>
       <nav aria-label="Explore the site">
         <h2>Explore</h2>
@@ -3987,7 +3980,7 @@
       const user = encodeURIComponent(CONFIG.githubUser);
       note.innerHTML = fallback
         ? `showing fallback projects · <a href="https://github.com/${user}?tab=repositories" target="_blank" rel="noopener noreferrer">view on GitHub</a>`
-        : `<a href="https://github.com/${user}?tab=repositories" target="_blank" rel="noopener noreferrer">view on GitHub</a>`;
+        : '';
 
       refreshRepoCards(container, projects);
     };

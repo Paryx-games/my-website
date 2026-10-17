@@ -31,7 +31,7 @@
 .pc-facts dt::after { content: ":"; }
 .pc-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .pc-palette { display: flex; width: 192px; max-width: 100%; height: 14px; margin-top: 24px; background: linear-gradient(to right, #343941 0 12.5%, #d75f5f 12.5% 25%, #73a968 25% 37.5%, #d0b566 37.5% 50%, #0078d6 50% 62.5%, #af87bb 62.5% 75%, #65b4bd 75% 87.5%, #d5d8dd 87.5%); }
-.pc-section-note, .pc-snapshot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin: 13px 0 0; color: var(--muted, #b6b6bf); font: 12px/1.7 var(--font-sans, "Inter", sans-serif); }
+.pc-section-note { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin: 13px 0 0; color: var(--muted, #b6b6bf); font: 12px/1.7 var(--font-sans, "Inter", sans-serif); }
 .pc-section-note a { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; margin-left: auto; color: #ececee; text-decoration: underline; text-underline-offset: 4px; }
 .pc-section-note a:hover { color: #fff; }
 .pc-section-note a svg { width: 15px; height: 15px; }
@@ -42,15 +42,13 @@
 .pc-hardware-details { margin-top: 42px; }
 .pc-detail-group { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 2fr); gap: 12px 36px; padding: 30px 0; border-top: 1px solid var(--line); }
 .pc-detail-group h2 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
-.pc-detail-group > p { grid-column: 1; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
-.pc-detail-group > dl { grid-column: 2; grid-row: 1 / span 2; margin: 0; }
+.pc-detail-group > dl { grid-column: 2; grid-row: 1; margin: 0; }
 .pc-detail-group dl > div { display: grid; grid-template-columns: minmax(110px, 1fr) minmax(0, 1.8fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid #24262c; font-size: 13px; line-height: 1.7; }
 .pc-detail-group dt { color: var(--muted); }
 .pc-detail-group dd { margin: 0; overflow-wrap: anywhere; }
 .pc-specs-page { max-width: 1120px; padding: 48px 0 0; }
 .pc-page-intro { margin-bottom: 30px; }
 .pc-page-intro h1 { margin: 12px 0; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; font-weight: 600; letter-spacing: -.045em; }
-.pc-page-intro p { margin: 0; max-width: 620px; color: var(--muted); font-size: 14px; line-height: 1.8; }
 .pc-back-link { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; color: var(--muted); font-size: 12px; }
 .pc-back-link svg { width: 15px; height: 15px; }
 .pc-back-link:hover { color: #fff; }
@@ -58,7 +56,6 @@
 .pc-specs-page .pc-terminal-inner { padding: 28px 30px 32px; }
 .pc-specs-page .pc-logo { font-size: 12px; }
 .pc-specs-page .pc-fetch { gap: 36px; }
-.pc-detail-note { margin: 28px 0 0; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.8; max-width: 720px; }
 @media (max-width: 900px) {
   .pc-specs-page .pc-fetch { grid-template-columns: 1fr; }
   .pc-specs-page .pc-logo { display: none; }
@@ -72,7 +69,7 @@
   .pc-terminal-bar { padding: 9px 16px; }
   .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
   .pc-detail-group { display: block; padding: 24px 0; }
-  .pc-detail-group > p { margin: 10px 0 14px; }
+  .pc-detail-group > dl { margin-top: 14px; }
   .pc-section-note { gap: 4px; }
   .pc-section-note a { width: 100%; margin-left: 0; }
 }

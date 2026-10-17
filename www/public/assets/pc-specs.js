@@ -29,14 +29,6 @@ async function loadSpecs() {
           : field.value;
       }
     }
-    const date = new Date(`${specs.updatedAt}T00:00:00Z`);
-    if (!Number.isNaN(date.getTime())) {
-      const label = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' }).format(date);
-      for (const time of document.querySelectorAll('[data-pc-updated]')) {
-        time.dateTime = specs.updatedAt;
-        time.textContent = label;
-      }
-    }
   } catch (error) {
     // Keep the complete static snapshot available if the data file cannot load.
     console.warn('PC specs could not be refreshed; showing the saved snapshot.', error);
