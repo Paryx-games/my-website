@@ -32,7 +32,10 @@ export function renderContributions(root, data) {
   const calendar = root.querySelector('#contributions-calendar');
   calendar.replaceChildren(svg);
   calendar.scrollLeft = calendar.scrollWidth;
-  root.querySelector('#contributions-summary').textContent = `${data.total.toLocaleString('en-GB')} contributions in the last year`;
+  const allTime = Number.isSafeInteger(data.allTime) && data.allTime >= 0
+    ? ` - ${data.allTime.toLocaleString('en-GB')} contributions in total across GitHub`
+    : '';
+  root.querySelector('#contributions-summary').textContent = `${data.total.toLocaleString('en-GB')} contributions in the last year${allTime}`;
   root.querySelector('#contributions-updated').textContent = data.stale ? 'Showing the last available snapshot' : 'GitHub activity';
 }
 

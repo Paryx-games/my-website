@@ -1,6 +1,7 @@
 const QUERY = `query Contributions {
   user(login: "Paryx-games") {
     contributionsCollection {
+      contributionYears
       contributionCalendar {
         totalContributions
         weeks { contributionDays { date weekday contributionCount contributionLevel } }
@@ -31,16 +32,42 @@ export function normalizeCalendar(calendar) {
 
 export async function fetchContributions({ token = process.env.GITHUB_TOKEN, request = fetch, now = Date.now } = {}) {
   if (!token) throw new Error('GitHub contributions are not configured');
-  const response = await request('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'User-Agent': 'paryx-website' },
-    body: JSON.stringify({ query: QUERY }),
-    signal: AbortSignal.timeout(20000),
-  });
-  if (!response.ok) throw new Error('GitHub contributions unavailable');
-  const body = await response.json();
-  if (body.errors?.length) throw new Error('GitHub contributions unavailable');
-  return { ...normalizeCalendar(body.data?.user?.contributionsCollection?.contributionCalendar), fetchedAt: new Date(now()).toISOString() };
+  const signal = AbortSignal.timeout(20000);
+  const query = async (document) => {
+    const response = await request('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'User-Agent': 'paryx-website' },
+      body: JSON.stringify({ query: document }),
+      signal,
+    });
+    if (!response.ok) throw new Error('GitHub contributions unavailable');
+    const body = await response.json();
+    if (body.errors?.length || !body.data?.user) throw new Error('GitHub contributions unavailable');
+    return body.data.user;
+  };
+  const fetchedAt = new Date(now());
+  const user = await query(QUERY);
+  const collection = user.contributionsCollection;
+  const calendar = normalizeCalendar(collection?.contributionCalendar);
+  const years = collection.contributionYears;
+  if (!Array.isArray(years) || years.length > 100 || new Set(years).size !== years.length ||
+      years.some(year => !Number.isInteger(year) || year < 2008 || year > fetchedAt.getUTCFullYear()) ||
+      (!years.length && calendar.total > 0)) throw new Error('Invalid contribution years');
+  let allTime = 0;
+  if (years.length) {
+    const fields = years.map(year => {
+      const to = year === fetchedAt.getUTCFullYear() ? fetchedAt.toISOString() : `${year}-12-31T23:59:59Z`;
+      return `year${year}: contributionsCollection(from: "${year}-01-01T00:00:00Z", to: "${to}") { contributionCalendar { totalContributions } }`;
+    }).join('\n');
+    const history = await query(`query ContributionTotals { user(login: "Paryx-games") { ${fields} } }`);
+    for (const year of years) {
+      const total = history[`year${year}`]?.contributionCalendar?.totalContributions;
+      if (!Number.isSafeInteger(total) || total < 0) throw new Error('Invalid annual contribution total');
+      allTime += total;
+    }
+    if (!Number.isSafeInteger(allTime)) throw new Error('Invalid all-time contribution total');
+  }
+  return { ...calendar, allTime, fetchedAt: fetchedAt.toISOString() };
 }
 
 export function createContributionsHandler({ load = fetchContributions, configured = () => Boolean(process.env.GITHUB_TOKEN), now = Date.now } = {}) {

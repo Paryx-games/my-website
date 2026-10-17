@@ -22,13 +22,23 @@ test('calendar preserves partial-week alignment and rejects malformed provider d
 
 test('GitHub credentials stay upstream and partial GraphQL errors are rejected', async () => {
   let headers;
+  const queries = [];
   const request = async (_url, options) => {
     headers = options.headers;
-    return { ok: true, json: async () => ({ data: { user: { contributionsCollection: { contributionCalendar: calendar } } } }) };
+    const query = JSON.parse(options.body).query;
+    queries.push(query);
+    const user = query.includes('query ContributionTotals')
+      ? { year2026: { contributionCalendar: { totalContributions: 40 } }, year2025: { contributionCalendar: { totalContributions: 10 } } }
+      : { contributionsCollection: { contributionCalendar: calendar, contributionYears: [2026, 2025] } };
+    return { ok: true, json: async () => ({ data: { user } }) };
   };
-  const data = await fetchContributions({ token: 'test-only-secret', request, now: () => 0 });
+  const data = await fetchContributions({ token: 'test-only-secret', request, now: () => Date.parse('2026-10-17T12:00:00Z') });
   assert.equal(headers.Authorization, 'Bearer test-only-secret');
   assert.equal(data.total, 7);
+  assert.equal(data.allTime, 50);
+  assert.equal(queries.length, 2);
+  assert.match(queries[1], /from: "2025-01-01T00:00:00Z", to: "2025-12-31T23:59:59Z"/);
+  assert.match(queries[1], /to: "2026-10-17T12:00:00.000Z"/);
   assert.ok(!JSON.stringify(data).includes('test-only-secret'));
   await assert.rejects(fetchContributions({ token: 'test-only-secret', request: async () => ({ ok: true, json: async () => ({ errors: [{ message: 'private upstream detail' }], data: {} }) }) }));
 });
