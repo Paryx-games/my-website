@@ -21,6 +21,12 @@ This is what languages this project uses! This uses one of the APIs under the `a
 
 ![Languages used across the paryx.uk sites](https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&details=true)
 
+## Why Some Websites Are Private
+
+Some websites, for example my [Code Interpreter](https://codeinterpreter.paryx.uk), have a closed-source backend (I may release the frontend soon, but it's highly unpolished right now) due to significant security risks. It runs on a VPS that I manage myself, which means I need to keep security standards high.
+
+Security is a massive priority for code interpretation, since if code escapes the sandbox, it could access my VPS. I've removed as much private data as possible, but anything could happen. That's why I've decided to keep the backend closed source for now.
+
 ## API
 
 I'm making some of my APIs publicly available in case they're useful for other projects.
