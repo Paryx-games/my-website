@@ -49,7 +49,7 @@ async function initChangelog() {
       const heading = element("h2", "change-title"); heading.append(externalLink(entry.title, entry.url)); row.append(heading);
       if (entry.kind === "release") {
         row.append(element("p", "change-context", entry.tag || ""));
-        const notes = element("div", "release-notes", entry.body || "No release notes were provided for this release.");
+        const notes = window.renderChangelogMarkdown(entry.body || "No release notes were provided for this release.", "release-notes");
         row.append(notes);
         row.append(externalLink("View release on GitHub ↗", entry.url, "history-source"));
       } else {
@@ -59,7 +59,7 @@ async function initChangelog() {
         const body = entry.body?.trim();
         if (body) {
           const details = element("details", "commit-details");
-          details.append(element("summary", "", "Commit details"), element("div", "commit-body", body)); row.append(details);
+          details.append(element("summary", "", "Commit details"), window.renderChangelogMarkdown(body, "commit-body")); row.append(details);
         }
       }
       return row;
