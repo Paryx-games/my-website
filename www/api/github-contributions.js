@@ -54,20 +54,22 @@ export async function fetchContributions({ token = process.env.GITHUB_TOKEN, req
       years.some(year => !Number.isInteger(year) || year < 2008 || year > fetchedAt.getUTCFullYear()) ||
       (!years.length && calendar.total > 0)) throw new Error('Invalid contribution years');
   let allTime = 0;
+  const yearCalendars = [];
   if (years.length) {
     const fields = years.map(year => {
       const to = year === fetchedAt.getUTCFullYear() ? fetchedAt.toISOString() : `${year}-12-31T23:59:59Z`;
-      return `year${year}: contributionsCollection(from: "${year}-01-01T00:00:00Z", to: "${to}") { contributionCalendar { totalContributions } }`;
+      return `year${year}: contributionsCollection(from: "${year}-01-01T00:00:00Z", to: "${to}") { contributionCalendar { totalContributions weeks { contributionDays { date weekday contributionCount contributionLevel } } } }`;
     }).join('\n');
     const history = await query(`query ContributionTotals { user(login: "Paryx-games") { ${fields} } }`);
     for (const year of years) {
-      const total = history[`year${year}`]?.contributionCalendar?.totalContributions;
-      if (!Number.isSafeInteger(total) || total < 0) throw new Error('Invalid annual contribution total');
-      allTime += total;
+      const annual = normalizeCalendar(history[`year${year}`]?.contributionCalendar);
+      if (annual.weeks.flat().some(day => !day.date.startsWith(`${year}-`))) throw new Error('Invalid annual contribution day');
+      allTime += annual.total;
+      yearCalendars.push({ year, ...annual });
     }
     if (!Number.isSafeInteger(allTime)) throw new Error('Invalid all-time contribution total');
   }
-  return { ...calendar, allTime, fetchedAt: fetchedAt.toISOString() };
+  return { ...calendar, allTime, years: yearCalendars, fetchedAt: fetchedAt.toISOString() };
 }
 
 export function createContributionsHandler({ load = fetchContributions, configured = () => Boolean(process.env.GITHUB_TOKEN), now = Date.now } = {}) {

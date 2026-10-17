@@ -1,5 +1,9 @@
 # Website APIs
 
+## GitHub contributions
+
+`GET /api/github-contributions` returns `{ version, username, total, weeks, allTime, years, fetchedAt }`. `weeks` and `total` describe the most recent 365 days. `allTime` is the sum of GitHub's calendar-year totals, and `years` contains `{ year, version, username, total, weeks }` for each year with contributions. Each week contains days with `{ date, weekday, count, level }`. The endpoint uses the server-side GitHub token and caches successful snapshots for 15 minutes; a stale snapshot may be returned during upstream failures.
+
 ## GitHub projects
 
 `GET /api/github-projects` returns `{ version, time, pinned, games, labs, errors }`.

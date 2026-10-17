@@ -11,13 +11,44 @@ export function contributionRange(days, anchor, end) {
   return { from, to, total: days.filter(day => day.date >= from && day.date <= to).reduce((sum, day) => sum + day.count, 0) };
 }
 
+export function allTimeCalendar(years, today = new Date().toISOString().slice(0, 10)) {
+  const contributions = new Map(years.flatMap(({ weeks }) => weeks.flat()).map(day => [day.date, day]));
+  const firstYear = years.length ? Math.min(...years.map(({ year }) => year)) : new Date(`${today}T00:00:00Z`).getUTCFullYear();
+  const start = new Date(`${firstYear}-01-01T00:00:00Z`);
+  start.setUTCDate(start.getUTCDate() - start.getUTCDay());
+  const days = [];
+  for (const date = start; date.toISOString().slice(0, 10) <= today; date.setUTCDate(date.getUTCDate() + 1)) {
+    const key = date.toISOString().slice(0, 10);
+    days.push(contributions.get(key) || { date: key, weekday: date.getUTCDay(), count: 0, level: 0 });
+  }
+  const weeks = [];
+  for (let index = 0; index < days.length; index += 7) weeks.push(days.slice(index, index + 7));
+  return { weeks, total: years.reduce((total, year) => total + year.total, 0) };
+}
+
 export function renderContributions(root, data) {
-  if (data?.version !== 1 || !Number.isSafeInteger(data.total) || data.total < 0 || !Array.isArray(data.weeks) || !data.weeks.length || data.weeks.length > 54) throw new Error('Invalid contributions');
+  if (data?.version !== 1 || !Number.isSafeInteger(data.total) || data.total < 0 || !Array.isArray(data.weeks) || !data.weeks.length || data.weeks.length > 54 || !Number.isSafeInteger(data.allTime) || data.allTime < 0 || !Array.isArray(data.years)) throw new Error('Invalid contributions');
+  const allTime = allTimeCalendar(data.years, data.fetchedAt?.slice(0, 10));
+  const periods = new Map([
+    ['all', allTime],
+    ['last-year', { weeks: data.weeks, total: data.total }],
+    ...data.years.map(year => [`year:${year.year}`, year]),
+  ]);
+  const periodSelect = root.querySelector('#contributions-period');
+  periodSelect.replaceChildren(
+    new Option('All time', 'all'),
+    new Option('Last year', 'last-year'),
+    ...data.years.toSorted((a, b) => b.year - a.year).map(({ year }) => new Option(String(year), `year:${year}`)),
+  );
+  periodSelect.disabled = false;
+  periodSelect.value = 'all';
+  periodSelect.onchange = () => paint(periods.get(periodSelect.value));
+  function paint(period) {
   const step = 13;
-  const width = 30 + data.weeks.length * step;
+  const width = 30 + period.weeks.length * step;
   const svg = element('svg', { viewBox: `0 0 ${width} 122`, width, height: 122, role: 'group', 'aria-label': 'GitHub contributions. Use arrow keys to move between days, Enter to select, Shift+Enter to select a range, and Escape to clear.' });
   const dateFormat = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'UTC' });
-  const days = data.weeks.flat();
+  const days = period.weeks.flat();
   const squares = [];
   const tooltip = root.querySelector('#contributions-tooltip');
   const selection = root.querySelector('#contributions-selection');
@@ -58,7 +89,7 @@ export function renderContributions(root, data) {
     squares.find(square => square.getAttribute('tabindex') === '0')?.focus();
   };
   let previousMonth;
-  data.weeks.forEach((week, index) => {
+  period.weeks.forEach((week, index) => {
     if (!Array.isArray(week) || !week.length || week.length > 7) throw new Error('Invalid contribution week');
     const first = new Date(`${week[0].date}T00:00:00Z`);
     const month = first.getUTCMonth();
@@ -101,8 +132,11 @@ export function renderContributions(root, data) {
   squares.at(-1).setAttribute('tabindex', '0');
   calendar.onscroll = hideTooltip;
   calendar.scrollLeft = calendar.scrollWidth;
-  root.querySelector('#contributions-summary').textContent = `${data.total.toLocaleString('en-GB')} contributions in the last year`;
+  const periodName = periodSelect.selectedOptions[0].textContent;
+  root.querySelector('#contributions-summary').textContent = `${period.total.toLocaleString('en-GB')} contributions ${periodName === 'All time' ? 'in total' : `in ${periodName.toLowerCase()}`}`;
   root.querySelector('#contributions-updated').textContent = data.stale ? 'Showing saved activity' : '';
+  }
+  paint(periods.get('all'));
 }
 
 const root = typeof document === 'undefined' ? null : document.getElementById('github-contributions');
@@ -112,6 +146,7 @@ if (root) {
     .then(data => renderContributions(root, data))
     .catch(() => {
       root.querySelector('#contributions-summary').textContent = 'GitHub contributions are currently unavailable.';
+      root.querySelector('#contributions-period').disabled = true;
       root.querySelector('#contributions-calendar').textContent = 'Open my GitHub profile to view contribution activity.';
     });
 }

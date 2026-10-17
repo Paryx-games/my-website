@@ -7,8 +7,10 @@
 .contributions-header, .contributions-footer { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
 .contributions-header { margin-bottom: 12px; font-size: 14px; }
 .contributions-header a { color: var(--color-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.contributions-period-label { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--color-muted); font-size: 12px; }
+.contributions-period-label select { min-height: 34px; padding: 4px 30px 4px 10px; border: 1px solid var(--color-border); border-radius: 5px; background: var(--color-bg); color: var(--color-text); font: inherit; }
 .contributions-calendar { min-height: 122px; overflow-x: auto; scrollbar-width: thin; }
-.contributions-calendar svg { display: block; width: 100%; min-width: 650px; height: auto; max-width: none; }
+.contributions-calendar svg { display: block; width: auto; min-width: 650px; height: auto; max-width: none; }
 .contributions-calendar text { fill: var(--color-muted); font: 10px var(--font-sans); }
 .contributions [data-level="0"] { fill: #161b22; background: #161b22; }
 .contributions [data-level="1"] { fill: #0e4429; background: #0e4429; }

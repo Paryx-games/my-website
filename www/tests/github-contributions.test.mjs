@@ -28,7 +28,13 @@ test('GitHub credentials stay upstream and partial GraphQL errors are rejected',
     const query = JSON.parse(options.body).query;
     queries.push(query);
     const user = query.includes('query ContributionTotals')
-      ? { year2026: { contributionCalendar: { totalContributions: 40 } }, year2025: { contributionCalendar: { totalContributions: 10 } } }
+      ? {
+          year2026: { contributionCalendar: { ...calendar, totalContributions: 40 } },
+          year2025: { contributionCalendar: { totalContributions: 10, weeks: [{ contributionDays: [
+            { date: '2025-10-16', weekday: 4, contributionCount: 4, contributionLevel: 'SECOND_QUARTILE' },
+            { date: '2025-10-17', weekday: 5, contributionCount: 6, contributionLevel: 'THIRD_QUARTILE' },
+          ] }] } },
+        }
       : { contributionsCollection: { contributionCalendar: calendar, contributionYears: [2026, 2025] } };
     return { ok: true, json: async () => ({ data: { user } }) };
   };
@@ -36,6 +42,9 @@ test('GitHub credentials stay upstream and partial GraphQL errors are rejected',
   assert.equal(headers.Authorization, 'Bearer test-only-secret');
   assert.equal(data.total, 7);
   assert.equal(data.allTime, 50);
+  assert.deepEqual(data.years.map(({ year, total }) => [year, total]), [[2026, 40], [2025, 10]]);
+  assert.equal(data.years[0].weeks[0][0].date, '2026-10-16');
+  assert.match(queries[1], /contributionDays \{ date weekday contributionCount contributionLevel \}/);
   assert.equal(queries.length, 2);
   assert.match(queries[1], /from: "2025-01-01T00:00:00Z", to: "2025-12-31T23:59:59Z"/);
   assert.match(queries[1], /to: "2026-10-17T12:00:00.000Z"/);
