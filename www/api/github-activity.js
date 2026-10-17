@@ -36,6 +36,103 @@ const date = (value) =>
     ? value
     : null;
 
+const publicHistoryCaches = new WeakMap();
+async function publicHistory(
+  item,
+  { request, now, cursor, releaseCursor, includeCommits, includeReleases },
+) {
+  let cache = publicHistoryCaches.get(request);
+  if (!cache) {
+    cache = new Map();
+    publicHistoryCaches.set(request, cache);
+  }
+  const key = JSON.stringify([
+    item.repo,
+    cursor,
+    releaseCursor,
+    includeCommits,
+    includeReleases,
+  ]);
+  const cached = cache.get(key);
+  if (cached && now() - cached.time < 600000) return cached.data;
+  const base = `https://api.github.com/repos/${item.repo}`;
+  const read = async (path) => {
+    const response = await request(`${base}${path}`, {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "paryx-website",
+      },
+      signal: AbortSignal.timeout(15000),
+    });
+    if (!response.ok) throw new Error("Public history unavailable");
+    return response.json();
+  };
+  const metadata = await read("");
+  if (metadata.private !== false) throw new Error("Public history unavailable");
+  const page = (value) =>
+    /^rest-\d+$/.test(value || "") ? Number(value.slice(5)) : 1;
+  const commitPage = page(cursor);
+  const releasesPage = page(releaseCursor);
+  const [commits, releases] = await Promise.all([
+    includeCommits
+      ? read(
+          `/commits?${new URLSearchParams({ sha: metadata.default_branch, per_page: "30", page: String(commitPage) })}`,
+        )
+      : [],
+    includeReleases ? read(`/releases?per_page=20&page=${releasesPage}`) : [],
+  ]);
+  if (!Array.isArray(commits) || !Array.isArray(releases))
+    throw new Error("Public history unavailable");
+  const data = {
+    isPrivate: false,
+    description: metadata.description,
+    defaultBranchRef: {
+      target: {
+        history: {
+          nodes: commits.map((entry) => ({
+            oid: entry.sha,
+            messageHeadline: entry.commit.message.split("\n")[0],
+            messageBody: entry.commit.message
+              .split("\n")
+              .slice(1)
+              .join("\n")
+              .trim(),
+            committedDate: entry.commit.committer.date,
+            url: entry.html_url,
+            author: {
+              name: entry.commit.author.name,
+              user: entry.author ? { login: entry.author.login } : null,
+            },
+          })),
+          pageInfo: {
+            hasNextPage: commits.length === 30,
+            endCursor: `rest-${commitPage + 1}`,
+          },
+        },
+      },
+    },
+    releases: {
+      nodes: releases.map((entry) => ({
+        id: String(entry.id),
+        name: entry.name,
+        tagName: entry.tag_name,
+        publishedAt: entry.published_at,
+        url: entry.html_url,
+        description: entry.body,
+        isDraft: entry.draft,
+        author: entry.author,
+      })),
+      pageInfo: {
+        hasNextPage: releases.length === 20,
+        endCursor: `rest-${releasesPage + 1}`,
+      },
+    },
+  };
+  if (cache.size >= 64) cache.delete(cache.keys().next().value);
+  cache.set(key, { time: now(), data });
+  return data;
+}
+
 export function normalizeEvent(event) {
   if (
     event?.public !== true ||
@@ -137,6 +234,9 @@ export async function fetchActivity({
   const paging = Boolean(cursor || releaseCursor);
   const includeCommits = !paging || Boolean(cursor);
   const includeReleases = !paging || Boolean(releaseCursor);
+  const restPaging = [cursor, releaseCursor].some((value) =>
+    /^rest-\d+$/.test(value || ""),
+  );
   const headers = {
     Authorization: `Bearer ${token}`,
     Accept: "application/vnd.github+json",
@@ -175,18 +275,20 @@ export async function fetchActivity({
       })
       .join("\n")}
   }`;
-  const resultPromise = json("https://api.github.com/graphql", {
-    method: "POST",
-    body: JSON.stringify({
-      query,
-      variables: {
-        cursor: cursor || null,
-        releaseCursor: releaseCursor || null,
-        commits: includeCommits,
-        releases: includeReleases,
-      },
-    }),
-  });
+  const resultPromise = restPaging
+    ? Promise.resolve({ data: {} })
+    : json("https://api.github.com/graphql", {
+        method: "POST",
+        body: JSON.stringify({
+          query,
+          variables: {
+            cursor: cursor || null,
+            releaseCursor: releaseCursor || null,
+            commits: includeCommits,
+            releases: includeReleases,
+          },
+        }),
+      });
   const eventsPromise = project
     ? Promise.resolve([])
     : json(
@@ -199,10 +301,13 @@ export async function fetchActivity({
   if (
     result.status !== "fulfilled" ||
     !result.value.data ||
-    result.value.errors?.length
+    result.value.errors?.some((error) => !/^p\d+$/.test(error.path?.[0] || ""))
   )
     throw new Error("GitHub activity unavailable");
   const errors = {};
+  const failedAliases = new Set(
+    (result.value.errors || []).map((error) => error.path[0]),
+  );
   const events =
     eventResult.status === "fulfilled" && Array.isArray(eventResult.value)
       ? eventResult.value.map(normalizeEvent).filter(Boolean)
@@ -211,7 +316,21 @@ export async function fetchActivity({
     errors.events = "Public activity is temporarily unavailable";
   const projects = [];
   for (const [index, item] of selected.entries()) {
-    const repo = result.value.data[`p${index}`];
+    let repo = result.value.data[`p${index}`];
+    if (restPaging || failedAliases.has(`p${index}`)) {
+      try {
+        repo = await publicHistory(item, {
+          request,
+          now,
+          cursor,
+          releaseCursor,
+          includeCommits,
+          includeReleases,
+        });
+      } catch {
+        repo = null;
+      }
+    }
     if (!repo || repo.isPrivate !== false) {
       errors[item.id] = "Public project history unavailable";
       continue;

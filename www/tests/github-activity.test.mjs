@@ -93,6 +93,55 @@ test("real HTTP GitHub queries return public history, author attribution, pagina
   );
 });
 
+test("one restricted GraphQL repository uses cached public HTTP history without blocking other projects", async (t) => {
+  const publicRequests = [];
+  const server = createServer((req, res) => {
+    req.headers["x-fixture-deny-repo"] = "roblox-shortcuts";
+    if (req.url.startsWith("/repos/"))
+      publicRequests.push({
+        path: req.url,
+        authorization: req.headers.authorization,
+      });
+    fixture(req, res);
+  });
+  server.listen(0, "127.0.0.1");
+  await once(server, "listening");
+  t.after(
+    () =>
+      new Promise((resolve) => {
+        server.close(resolve);
+        server.closeAllConnections();
+      }),
+  );
+  const request = (url, options) => {
+    const target = new URL(url);
+    return fetch(
+      `http://127.0.0.1:${server.address().port}${target.pathname}${target.search}`,
+      options,
+    );
+  };
+  const data = await fetchActivity({ token: "fixture-only", request });
+  assert.deepEqual(data.errors, {});
+  assert.equal(data.projects.length, 4);
+  assert.equal(
+    data.projects.find((project) => project.id === "roblox-shortcuts")
+      .commits[0].title,
+    "feat: public history fallback",
+  );
+  assert.equal(publicRequests.length, 3);
+  assert.ok(publicRequests.every((call) => call.authorization === undefined));
+  await fetchActivity({ token: "fixture-only", request });
+  assert.equal(publicRequests.length, 3);
+  const older = await fetchActivity({
+    token: "fixture-only",
+    request,
+    project: "roblox-shortcuts",
+    cursor: "rest-2",
+  });
+  assert.equal(older.projects[0].commits.length, 1);
+  assert.ok(publicRequests.at(-1).path.includes("page=2"));
+});
+
 test("private repositories and partial GraphQL responses cannot enter a public cached snapshot", async () => {
   const request = async (url) => ({
     ok: true,

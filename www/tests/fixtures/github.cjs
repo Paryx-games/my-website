@@ -30,6 +30,32 @@ module.exports = async function github(req, res) {
         payload: {},
       },
     ]);
+  if (
+    req.method === "GET" &&
+    req.url.startsWith("/repos/Paryx-Labs/roblox-shortcuts")
+  ) {
+    if (req.url === "/repos/Paryx-Labs/roblox-shortcuts")
+      return send(200, {
+        private: false,
+        default_branch: "main",
+        description: "Public shortcut utility",
+      });
+    if (req.url.includes("/releases?")) return send(200, []);
+    if (req.url.includes("/commits?"))
+      return send(200, [
+        {
+          sha: "fallback",
+          html_url:
+            "https://github.com/Paryx-Labs/roblox-shortcuts/commit/fallback",
+          author: { login: "Paryx-games" },
+          commit: {
+            message: "feat: public history fallback",
+            author: { name: "paryx" },
+            committer: { date: "2026-10-17T10:00:00Z" },
+          },
+        },
+      ]);
+  }
   if (req.url !== "/graphql" || req.method !== "POST")
     return send(501, {
       error: "This GitHub route is outside the fixture contract",
@@ -48,11 +74,20 @@ module.exports = async function github(req, res) {
   )
     return send(400, { message: "Required repository fields missing" });
   const data = {};
+  const errors = [];
   for (const match of input.query.matchAll(
     /(p\d+): repository\(owner: "([^"]+)", name: "([^"]+)"\)/g,
   )) {
     const [, alias, owner, name] = match;
     const repo = `${owner}/${name}`;
+    if (req.headers["x-fixture-deny-repo"] === name) {
+      data[alias] = null;
+      errors.push({
+        message: "Resource not accessible by integration",
+        path: [alias, "pullRequests"],
+      });
+      continue;
+    }
     const pageInfo = { hasNextPage: false, endCursor: null };
     const next = input.variables.cursor;
     data[alias] = {
@@ -141,7 +176,7 @@ module.exports = async function github(req, res) {
         : {}),
     };
   }
-  return send(200, { data });
+  return send(200, { data, ...(errors.length ? { errors } : {}) });
 };
 
 if (require.main === module)
