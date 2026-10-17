@@ -13,6 +13,8 @@
   <script src="/assets/games/showcase.js" type="module"></script>
   <script src="/assets/site-search.js" type="module"></script>
   <script src="/assets/github-contributions.js" type="module"></script>
+  <link rel="stylesheet" href="/assets/pc-specs.css">
+  <script src="/assets/pc-specs.js" type="module"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Paryx - Home</title>
@@ -2048,7 +2050,7 @@
       <nav class="desktop-nav" aria-label="Main navigation">
         <a href="/" aria-current="page">Home</a>
         <a href="https://blog.paryx.uk">Blog</a>
-        <a href="#projects">Projects</a>
+        <a href="/projects">Projects</a>
         <a href="/portfolio">Portfolio</a>
         <a href="#games">Games</a>
         <a href="#about">About</a>
@@ -2062,7 +2064,7 @@
           <nav aria-label="Mobile navigation">
             <a href="/" aria-current="page">Home</a>
             <a href="https://blog.paryx.uk">Blog</a>
-            <a href="#projects">Projects</a>
+            <a href="/projects">Projects</a>
             <a href="/portfolio">Portfolio</a>
             <a href="#games">Games</a>
             <a href="#about">About</a>
@@ -2125,6 +2127,31 @@
       <p class="note" id="timeDiff"></p>
     </section>
 
+    <section id="pc-specs">
+      <h2>PC specs</h2>
+      <div class="pc-terminal" data-pc-terminal="summary" role="region" aria-label="My PC specifications">
+        <div class="pc-terminal-bar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3m6 0h4"/></svg><span>PowerShell</span><span class="pc-terminal-window-mark" aria-hidden="true"></span></div>
+        <div class="pc-terminal-inner">
+          <p class="pc-prompt">PS ~&gt; <span>fastfetch</span></p>
+          <div class="pc-fetch">
+            <div class="pc-output">
+              <p class="pc-identity">paryx <span>@</span> paryx</p>
+              <dl class="pc-facts">
+              <div data-pc-field="cpu"><dt>CPU</dt><dd>AMD Ryzen 7 9800X3D / 8 cores, 16 threads</dd></div>
+              <div data-pc-field="gpu"><dt>GPU</dt><dd>NVIDIA GeForce RTX 5070 Ti / 16 GB GDDR7</dd></div>
+              <div data-pc-field="memory"><dt>Memory</dt><dd>32 GB Kingston DDR5-6000 / 2 x 16 GB</dd></div>
+              <div data-pc-field="storage"><dt>Storage</dt><dd>2 TB WD_BLACK SN850X NVMe SSD</dd></div>
+              <div data-pc-field="display"><dt>Display</dt><dd>LG UltraGear / 27 inch / 2560 x 1440 / 180 Hz</dd></div>
+              <div data-pc-field="os"><dt>OS</dt><dd>Windows 11 Home / x86_64</dd></div>
+              </dl>
+              <div class="pc-palette" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="pc-section-note"><span>Hardware snapshot / <time data-pc-updated datetime="2026-10-17">17 October 2026</time></span><a href="/pc-specs">Full PC specs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></a></p>
+    </section>
+
     <section class="discord-presence-slot" id="discordPresenceSlot">
       <h2>Activity</h2>
       <div class="discord-presence-summary" id="discordPresenceSummary" aria-live="polite">
@@ -2149,6 +2176,7 @@
 
     <section id="projects">
       <h2>Projects</h2>
+      <p class="note"><a href="/projects">Explore all projects, recent activity, and changelogs &rarr;</a></p>
       <div class="contributions" id="github-contributions" aria-label="GitHub contributions">
         <div class="contributions-header">
           <p id="contributions-summary" role="status">Loading GitHub contributions...</p>
@@ -2310,7 +2338,7 @@
       </div>
       <nav aria-label="Explore the site">
         <h2>Explore</h2>
-        <ul><li><a href="#projects">Projects</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="#about">About me</a></li><li><a href="https://blog.paryx.uk">Blog</a></li></ul>
+        <ul><li><a href="/projects">Projects</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="#about">About me</a></li><li><a href="https://blog.paryx.uk">Blog</a></li></ul>
       </nav>
       <nav aria-label="Find paryx elsewhere">
         <h2>Keep in touch</h2>

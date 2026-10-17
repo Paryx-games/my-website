@@ -14,6 +14,9 @@ test("production and preview builds preserve all pages and their indexing policy
     ["index.html", "https://paryx.uk/"],
     ["privacy-policy.html", "https://paryx.uk/privacy-policy"],
     ["portfolio.html", "https://paryx.uk/portfolio"],
+    ["projects.html", "https://paryx.uk/projects"],
+    ["changelog.html", "https://paryx.uk/projects/changelog"],
+    ["pc-specs.html", "https://paryx.uk/pc-specs"],
   ]) {
     const html = await readFile(new URL(page, output), "utf8");
     assert.ok(

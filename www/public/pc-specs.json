@@ -1,0 +1,40 @@
+{
+  "updatedAt": "2026-10-17",
+  "identity": "paryx @ paryx",
+  "groups": [
+    {
+      "id": "hardware",
+      "title": "Hardware",
+      "fields": [
+        { "id": "cpu", "label": "CPU", "value": "AMD Ryzen 7 9800X3D", "summary": "AMD Ryzen 7 9800X3D / 8 cores, 16 threads" },
+        { "id": "cores", "label": "CPU cores", "value": "8 cores / 16 threads" },
+        { "id": "cache", "label": "CPU cache", "value": "96 MB L3 / 8 MB L2" },
+        { "id": "gpu", "label": "GPU", "value": "NVIDIA GeForce RTX 5070 Ti", "summary": "NVIDIA GeForce RTX 5070 Ti / 16 GB GDDR7" },
+        { "id": "vram", "label": "VRAM", "value": "16 GB GDDR7 / 256-bit" },
+        { "id": "gpu-bus", "label": "GPU bus", "value": "PCIe 5.0 x16" },
+        { "id": "memory", "label": "Memory", "value": "32 GB Kingston DDR5-6000 / 2 x 16 GB" },
+        { "id": "timings", "label": "RAM timings", "value": "CL30 / 30-36-36-80 / dual channel" },
+        { "id": "board", "label": "Board", "value": "ASUS ROG STRIX B850-E GAMING WIFI" },
+        { "id": "storage", "label": "Storage", "value": "2 TB WD_BLACK SN850X NVMe SSD" },
+        { "id": "storage-bus", "label": "SSD bus", "value": "PCIe 4.0 x4" }
+      ]
+    },
+    {
+      "id": "displays",
+      "title": "Displays",
+      "fields": [
+        { "id": "display", "label": "Display", "value": "LG UltraGear / 27 inch / 2560 x 1440 / 180 Hz" },
+        { "id": "display-secondary", "label": "Display 2", "value": "Dell P2317H / 23 inch / 1920 x 1080 / 60 Hz" }
+      ]
+    },
+    {
+      "id": "software",
+      "title": "Software",
+      "fields": [
+        { "id": "os", "label": "OS", "value": "Windows 11 Home / x86_64" },
+        { "id": "terminal", "label": "Terminal", "value": "Windows Terminal 1.24.11911.0" },
+        { "id": "shell", "label": "Shell", "value": "PowerShell 7.6.6" }
+      ]
+    }
+  ]
+}

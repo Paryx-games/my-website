@@ -14,8 +14,20 @@ export const shortcuts = [
   {
     title: 'Projects',
     description: 'Tools, software, and experiments.',
-    url: 'https://paryx.uk/#projects',
-    keywords: 'roblox manager rust tools software code',
+    url: 'https://paryx.uk/projects',
+    keywords: 'roblox manager rust tools software code commits activity github repositories',
+  },
+  {
+    title: 'Project changelogs',
+    description: 'Release history and commits across my projects.',
+    url: 'https://paryx.uk/projects/changelog',
+    keywords: 'releases changelog features breaking changes commits',
+  },
+  {
+    title: 'PC specs',
+    description: 'My PC hardware and setup.',
+    url: 'https://paryx.uk/pc-specs',
+    keywords: 'computer hardware ryzen 9800x3d rtx 5070 ti ram ddr5 fastfetch',
   },
   {
     title: 'About me',

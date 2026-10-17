@@ -9,17 +9,35 @@ import {
 
 const projectsApi = (server: ViteDevServer | PreviewServer) => {
   server.middlewares.use(async (req, res, next) => {
-    if (req.url?.split("?")[0] !== "/api/github-projects") return next();
+    const route = req.url?.split("?")[0];
+    if (route === "/projects/changelog") {
+      req.url = req.url?.replace("/projects/changelog", "/changelog.html");
+      return next();
+    }
+    if (
+      ![
+        "/api/github-projects",
+        "/api/github-activity",
+        "/api/github-contributions",
+      ].includes(route || "")
+    )
+      return next();
     const { default: handler } = await import(
-      new URL("./api/github-projects.js", import.meta.url).href
+      new URL(`.${route}.js`, import.meta.url).href
     );
-    await handler(req, {
+    const response = {
       status: (status: number) => {
         res.statusCode = status;
+        return response;
       },
       setHeader: res.setHeader.bind(res),
       send: (body: string) => res.end(body),
-    });
+      json: (body: unknown) => {
+        res.setHeader("Content-Type", "application/json; charset=utf-8");
+        res.end(JSON.stringify(body));
+      },
+    };
+    await handler(req, response);
   });
 };
 
@@ -128,7 +146,14 @@ export default defineConfig(({ mode }) => {
       rolldownOptions: {
         input: {
           home: fileURLToPath(new URL("./index.html", import.meta.url)),
-          portfolio: fileURLToPath(new URL("./portfolio.html", import.meta.url)),
+          portfolio: fileURLToPath(
+            new URL("./portfolio.html", import.meta.url),
+          ),
+          projects: fileURLToPath(new URL("./projects.html", import.meta.url)),
+          changelog: fileURLToPath(
+            new URL("./changelog.html", import.meta.url),
+          ),
+          pcSpecs: fileURLToPath(new URL("./pc-specs.html", import.meta.url)),
           privacy: fileURLToPath(
             new URL("./privacy-policy.html", import.meta.url),
           ),

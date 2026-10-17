@@ -1,0 +1,67 @@
+.pc-terminal {
+  --pc-key: #0078d6;
+  --pc-identity: #4dabf7;
+  border: 1px solid #303137;
+  border-radius: 8px;
+  background: #050505;
+  color: #e2e3e7;
+  overflow: hidden;
+  min-width: 0;
+  box-shadow: 0 2px 4px #0003, 0 12px 28px #0002;
+  font-family: Consolas, "Cascadia Code", "Liberation Mono", monospace;
+  font-size: 13px;
+  line-height: 1.75;
+  font-variant-numeric: tabular-nums;
+}
+.pc-terminal-bar { display: flex; align-items: center; gap: 10px; padding: 10px 18px; border-bottom: 1px solid #27292f; background: #14161a; color: #c2c5ce; font-size: 12px; }
+.pc-terminal-bar svg { width: 17px; height: 17px; color: #a8adb8; }
+.pc-terminal-window-mark { margin-left: auto; width: 12px; height: 9px; border: 1px solid #686d78; border-radius: 1px; }
+.pc-terminal-inner { padding: 22px 24px 24px; }
+.pc-prompt { margin: 0 0 23px; color: #949ba8; overflow-wrap: anywhere; }
+.pc-prompt span { color: #dce0e7; }
+.pc-fetch { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; gap: 28px; }
+.pc-logo { margin: 7px 0 0; padding: 0; color: var(--pc-key); background: none; border: 0; font: inherit; line-height: 1.25; user-select: none; }
+.pc-output { min-width: 0; }
+.pc-identity { display: block; margin: 0 0 8px; padding-bottom: 8px; width: fit-content; border-bottom: 1px dashed #686d78; color: var(--pc-identity); font-weight: 700; }
+.pc-identity span { color: #e2e3e7; }
+.pc-facts { display: grid; gap: 3px; margin: 0; }
+.pc-facts + .pc-facts { margin-top: 22px; }
+.pc-facts > div { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 8px; }
+.pc-facts dt { margin: 0; color: var(--pc-key); font-weight: 700; }
+.pc-facts dt::after { content: ":"; }
+.pc-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
+.pc-palette { display: flex; width: 192px; max-width: 100%; height: 14px; margin-top: 24px; background: linear-gradient(to right, #343941 0 12.5%, #d75f5f 12.5% 25%, #73a968 25% 37.5%, #d0b566 37.5% 50%, #0078d6 50% 62.5%, #af87bb 62.5% 75%, #65b4bd 75% 87.5%, #d5d8dd 87.5%); }
+.pc-section-note, .pc-snapshot { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 20px; margin: 13px 0 0; color: var(--muted, #b6b6bf); font: 12px/1.7 var(--font-sans, "Inter", sans-serif); }
+.pc-section-note a { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; margin-left: auto; color: #ececee; text-decoration: underline; text-underline-offset: 4px; }
+.pc-section-note a:hover { color: #fff; }
+.pc-section-note a svg { width: 15px; height: 15px; }
+.pc-terminal[data-pc-terminal="summary"] .pc-fetch { grid-template-columns: 1fr; }
+.pc-terminal[data-pc-terminal="summary"] .pc-logo { display: none; }
+.pc-terminal[data-pc-terminal="summary"] .pc-facts > div { grid-template-columns: 75px minmax(0, 1fr); }
+.pc-terminal[data-pc-terminal="summary"] .pc-prompt { margin-bottom: 18px; }
+.pc-specs-page { max-width: 1120px; padding: 48px 0 0; }
+.pc-page-intro { margin-bottom: 30px; }
+.pc-page-intro h1 { margin: 12px 0; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; font-weight: 600; letter-spacing: -.045em; }
+.pc-page-intro p { margin: 0; max-width: 620px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.pc-back-link { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; color: var(--muted); font-size: 12px; }
+.pc-back-link svg { width: 15px; height: 15px; }
+.pc-back-link:hover { color: #fff; }
+.pc-specs-page .pc-terminal { font-size: 13px; }
+.pc-specs-page .pc-terminal-inner { padding: 28px 30px 32px; }
+.pc-specs-page .pc-logo { font-size: 12px; }
+.pc-specs-page .pc-fetch { gap: 36px; }
+.pc-detail-note { margin: 28px 0 0; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; line-height: 1.8; max-width: 720px; }
+@media (max-width: 900px) {
+  .pc-specs-page .pc-fetch { grid-template-columns: 1fr; }
+  .pc-specs-page .pc-logo { display: none; }
+}
+@media (max-width: 600px) {
+  .pc-specs-page { padding-top: 28px; }
+  .pc-terminal, .pc-specs-page .pc-terminal { font-size: 12px; }
+  .pc-terminal-inner, .pc-specs-page .pc-terminal-inner { padding: 19px 16px 22px; }
+  .pc-terminal-bar { padding: 9px 16px; }
+  .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
+  .pc-terminal[data-pc-terminal="summary"] .pc-facts > div { grid-template-columns: 63px minmax(0, 1fr); }
+  .pc-section-note { gap: 4px; }
+  .pc-section-note a { width: 100%; margin-left: 0; }
+}

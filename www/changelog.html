@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Paryx - Project changelog</title>
+  <meta name="description" content="Explore release history, features, breaking changes, and commits across my projects.">
+  <link rel="canonical" href="https://paryx.uk/projects/changelog">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#080809">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo_white.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://paryx.uk/projects/changelog">
+  <meta property="og:title" content="Paryx - Project changelog">
+  <meta property="og:description" content="Explore release history, features, breaking changes, and commits across my projects.">
+  <meta property="og:site_name" content="paryx.uk">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:image" content="https://paryx.uk/assets/social/home.png">
+  <meta property="og:image:alt" content="paryx.uk">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Paryx - Project changelog">
+  <meta name="twitter:description" content="Explore release history, features, breaking changes, and commits across my projects.">
+  <meta name="twitter:image" content="https://paryx.uk/assets/social/home.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/scrollbars.css">
+  <link rel="stylesheet" href="/assets/navigation.css">
+  <link rel="stylesheet" href="/assets/site-search.css">
+  <link rel="stylesheet" href="/assets/projects-page.css">
+  <script src="/assets/navigation.js"></script>
+  <script src="/assets/site-search.js" type="module"></script>
+</head>
+<body data-page="changelog">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="https://paryx.uk">paryx</a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="https://blog.paryx.uk">Blog</a>
+        <a href="/projects">Projects</a>
+        <a href="/portfolio">Portfolio</a>
+        <a href="/#games">Games</a>
+        <a href="/#about">About</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-button" href="https://blog.paryx.uk/" data-open-search aria-label="Search paryx">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+        </a>
+        <details class="mobile-nav">
+          <summary aria-label="Toggle navigation"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18"/></svg></summary>
+          <nav aria-label="Mobile navigation">
+            <a href="/">Home</a>
+            <a href="https://blog.paryx.uk">Blog</a>
+            <a href="/projects">Projects</a>
+            <a href="/portfolio">Portfolio</a>
+            <a href="/#games">Games</a>
+            <a href="/#about">About</a>
+            <a href="https://blog.paryx.uk/rss.xml">RSS feed</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+    <main id="main-content" class="projects-page">
+      <header class="page-intro">
+        <p class="eyebrow">Projects / Changelog</p>
+        <h1>Follow the changes.</h1>
+        <p>Releases, features, fixes, and breaking changes across my projects, pulled directly from GitHub.</p>
+        <nav class="page-subnav" aria-label="Project navigation"><a href="/projects">← All projects</a><a href="/projects#development">Live development</a></nav>
+      </header>
+      <div class="changelog-layout">
+        <aside class="changelog-sidebar" aria-label="Choose project">
+          <label class="project-choice" for="changelog-project">Project<select id="changelog-project"><option>Loading projects...</option></select></label>
+          <p>Release notes and commits are listed together. Other contributors' commits appear in grey, with their names alongside mine.</p>
+          <p>Only public GitHub history is shown.</p>
+        </aside>
+        <section aria-labelledby="history-project-title">
+          <header class="history-project-intro">
+            <h2 id="history-project-title">Project history</h2>
+            <p id="history-project-description"></p>
+            <p id="history-project-source"></p>
+          </header>
+          <div id="history-controls" class="changelog-tools">
+            <label class="search-field" for="changelog-search">Search loaded history<input id="changelog-search" type="search" placeholder="Feature, version, author, or commit" autocomplete="off"></label>
+            <div class="segmented-controls" role="group" aria-label="Filter project changes">
+              <button type="button" data-change-filter="all" aria-pressed="true">All changes</button>
+              <button type="button" data-change-filter="releases" aria-pressed="false">Releases</button>
+              <button type="button" data-change-filter="features" aria-pressed="false">Features</button>
+              <button type="button" data-change-filter="breaking" aria-pressed="false">Breaking changes</button>
+              <button type="button" data-change-filter="commits" aria-pressed="false">Commits</button>
+            </div>
+          </div>
+          <div class="history-status-row"><p id="changelog-status" class="page-state" role="status" data-stale="false">Loading project history...</p><button id="history-retry" type="button">Retry</button></div>
+          <p id="history-count" class="history-count" role="status"></p>
+          <p id="history-empty" class="page-state" hidden></p>
+          <ol id="changelog-entries" class="changelog-entries" aria-label="Project changes"></ol>
+          <button id="history-more" class="quiet-button" type="button" hidden>Load older history</button>
+        </section>
+      </div>
+      <noscript><p class="page-state">JavaScript is needed to explore project history. <a href="https://github.com/Paryx-games">Browse my projects on GitHub.</a></p></noscript>
+    </main>
+    <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-identity">
+        <a class="footer-brand" href="/">paryx</a>
+        <p>My projects, blog posts, and information about me.</p>
+      </div>
+      <nav aria-label="Explore the site">
+        <h2>Explore</h2>
+        <ul><li><a href="/projects">Projects</a></li><li><a href="/portfolio">Portfolio</a></li><li><a href="/#about">About me</a></li><li><a href="https://blog.paryx.uk">Blog</a></li></ul>
+      </nav>
+      <nav aria-label="Find paryx elsewhere">
+        <h2>Keep in touch</h2>
+        <ul><li><a href="https://github.com/Paryx-games">GitHub</a></li><li><a href="mailto:paryx@paryx.uk">Email me</a></li><li><a href="https://blog.paryx.uk/rss.xml">Follow via RSS</a></li></ul>
+      </nav>
+    </div>
+    <div class="footer-bottom"><span>© 2026 paryx</span><a href="/privacy-policy">Privacy policy</a></div>
+  </footer>
+  </div>
+  <dialog id="search-dialog" aria-labelledby="search-title" data-search-index="/search-index.json">
+    <div class="dialog-header">
+      <h2 id="search-title">Search paryx</h2>
+      <button class="icon-button" type="button" data-close-search aria-label="Close search">×</button>
+    </div>
+    <form class="search-form" action="https://blog.paryx.uk/" method="get" role="search">
+      <label class="sr-only" for="dialog-search">Search paryx</label>
+      <input id="dialog-search" type="search" name="q" placeholder="Search paryx..." autocomplete="off">
+      <button type="submit">Search</button>
+    </form>
+    <p class="search-status" role="status" aria-live="polite">Jump to a page, or search pages and published articles.</p>
+    <section class="site-search-section" data-search-history hidden><div class="site-search-heading"><h3>Recent searches</h3><button type="button" data-clear-history>Clear history</button></div><div class="site-search-history" data-history-list></div></section>
+    <section class="site-search-section" data-search-shortcuts><div class="site-search-heading"><h3>Page shortcuts</h3></div><div class="site-search-shortcuts" data-shortcut-list></div></section>
+    <div class="search-results"></div>
+  </dialog>
+  <script type="module">
+    import { inject } from "@vercel/analytics";
+    import "/src/site.css";
+    inject();
+  </script>
+  <script type="module" src="/assets/changelog.js"></script>
+</body>
+</html>

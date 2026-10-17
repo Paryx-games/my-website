@@ -8,6 +8,10 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/projects/changelog",
+      "destination": "/changelog"
+    },
+    {
       "source": "/search-index.json",
       "destination": "https://blog.paryx.uk/search-index.json"
     }

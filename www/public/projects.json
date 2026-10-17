@@ -1,0 +1,26 @@
+{
+  "account": "Paryx-games",
+  "authors": ["Paryx-games"],
+  "projects": [
+    {
+      "id": "roblox-manager",
+      "repo": "Paryx-games/roblox-manager",
+      "title": "Roblox Manager"
+    },
+    {
+      "id": "sheet-player",
+      "repo": "Paryx-games/sheet-player",
+      "title": "Sheet Player"
+    },
+    {
+      "id": "my-website",
+      "repo": "Paryx-games/my-website",
+      "title": "My Website"
+    },
+    {
+      "id": "roblox-shortcuts",
+      "repo": "Paryx-Labs/roblox-shortcuts",
+      "title": "Roblox Shortcuts"
+    }
+  ]
+}
