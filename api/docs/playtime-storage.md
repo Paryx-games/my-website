@@ -20,7 +20,7 @@ Steam continues to use the existing server-side AppId mapping. Source-specific e
 
 ## Tracker behavior
 
-The production runner is `roblox-playtime-tracker.ps1`. Shared modules under `collectors/` contain the log parser and durable counters; the live test uses that same parser. The runner checkpoints every two seconds and starts a separate uploader every five minutes so network failures do not block tracking. The normal one-shot collector also reads these counters.
+The production runner is `roblox-playtime-tracker.ps1`. Shared modules under `collectors/` contain the log parser and durable counters; the live test uses that same parser. The visible runner prints joined and left games with their place and universe IDs, using catalogue names or a Roblox name lookup. The hidden task writes the same events to `%LOCALAPPDATA%\Paryx\PlaytimeCollector\roblox-events.log`; use `Get-Content "$env:LOCALAPPDATA\Paryx\PlaytimeCollector\roblox-events.log" -Wait` to follow them in a console. The runner checkpoints every two seconds and starts a separate uploader every five minutes so network failures do not block tracking. The normal one-shot collector also reads these counters.
 
 The tracker follows one Roblox player at a time. Connected time includes AFK time. Multiple simultaneous players are not counted while their identities are ambiguous. Disconnects close sessions, teleports change place while retaining universe totals, and duplicate log events are ignored. Process crashes use the last checkpoint rather than counting an offline interval. Sleep and restart gaps are excluded. Time during tracker downtime cannot be recovered accurately.
 
@@ -28,6 +28,6 @@ State and upload credentials remain local. Only universe IDs and cumulative minu
 
 ## Verification
 
-Apply the migration before releasing API version 2, then deploy the API and website. On Windows, `install-roblox-playtime-tracker.ps1 -StartNow` registers and starts the hidden tracker at login for the current account. The installer leaves an unrelated task with the same name unchanged. For a local tracking-only check, run `roblox-playtime-tracker.ps1 -NoUpload` instead. The installer is not run by builds or migrations.
+Apply the migration before releasing API version 2, then deploy the API and website. On Windows, `install-roblox-playtime-tracker.ps1 -StartNow` registers and starts the tracker at login for the current account through `run-roblox-playtime-hidden.vbs`, which keeps the PowerShell window hidden. The installer leaves an unrelated task with the same name unchanged and upgrades the previous PowerShell task if present. For a visible tracking-only check with join and leave messages, run `roblox-playtime-tracker.ps1 -NoUpload`. The installer is not run by builds or migrations.
 
 Run the API and website tests, the collector tests, `test/roblox-playtime.test.ps1`, and `test/roblox-state.test.ps1`. Database integration tests use an isolated migrated Neon branch through `TEST_DATABASE_URL`. They verify transactional uploads, replay handling, source aggregation, and baseline-inclusive reads. The live test remains available for checking future Roblox client log changes.

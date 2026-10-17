@@ -57,7 +57,11 @@ function Update-RobloxTrackedEvent {
         if ($other -ne $Client) { Add-RobloxTrackedTime $State $other $at; $State.Active.Remove($other) }
     }
     $start = [Math]::Max($Floor, $at)
-    $State.Active[$Client] = @{ UniverseId = $Event.UniverseId; At = $start; Floor = $start }
+    $previousTotal = if ($State.Totals.ContainsKey($Event.UniverseId)) { [double]$State.Totals[$Event.UniverseId] } else { 0.0 }
+    $State.Active[$Client] = @{
+        UniverseId = $Event.UniverseId; PlaceId = $Event.PlaceId
+        At = $start; Floor = $start; StartedTotal = $previousTotal
+    }
 }
 
 function Get-RobloxPlaytime {
