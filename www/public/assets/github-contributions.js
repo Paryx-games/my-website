@@ -17,7 +17,7 @@ export function renderContributions(root, data) {
     if (!Array.isArray(week) || !week.length || week.length > 7) throw new Error('Invalid contribution week');
     const first = new Date(`${week[0].date}T00:00:00Z`);
     const month = first.getUTCMonth();
-    if (month !== previousMonth && index < data.weeks.length - 2) {
+    if (month !== previousMonth && index <= data.weeks.length - 2) {
       svg.append(element('text', { x: 30 + index * step, y: 11 }, new Intl.DateTimeFormat('en-GB', { month: 'short', timeZone: 'UTC' }).format(first)));
       previousMonth = month;
     }

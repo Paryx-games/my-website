@@ -86,6 +86,11 @@
   outline: 1px solid var(--muted);
   outline-offset: 2px;
 }
+@media (min-width: 1001px) and (pointer: fine) {
+  main:has(> .chapter-rail) {
+    padding-left: 48px;
+  }
+}
 @media (max-width: 1000px), (pointer: coarse) {
   .chapter-rail {
     display: none;
