@@ -49,7 +49,10 @@ test('migration snapshot matches every numeric platform value in the frozen back
   const root = new URL('../../../', import.meta.url);
   const backup = JSON.parse(readFileSync(new URL('www/public/assets/games/game.json', root), 'utf8'));
   const snapshot = JSON.parse(readFileSync(new URL('api/data/playtime-baseline.json', root), 'utf8')) as { gameId: string; pc?: number; mobile?: number; console?: number }[];
-  assert.equal(snapshot.length, Object.keys(backup).length);
+  const frozenIds = new Set(snapshot.map(row => row.gameId));
+  for (const [id, entry] of Object.entries(backup)) {
+    if (!frozenIds.has(id)) assert.deepEqual(entry, { playtime: { pc: '', mobile: '', console: '' } });
+  }
   for (const row of snapshot) {
     for (const platform of ['pc', 'mobile', 'console'] as const) {
       const raw = backup[row.gameId].playtime[platform];

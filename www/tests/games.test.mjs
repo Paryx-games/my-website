@@ -7,7 +7,7 @@ const sources = JSON.parse(await readFile(new URL('../content/game-artwork-sourc
 test('favorites and rotation resolve to complete galleries with local artwork', async () => {
   assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege', 'pressure', 'industrialist']);
   assert.ok(games.every(game => game.favorite));
-  assert.equal(rotation.length, 12);
+  assert.equal(rotation.length, 18);
   assert.equal(new Set(catalogue.map(game => game.id)).size, catalogue.length);
   assert.deepEqual(robloxGames.map(game => game.id), ['pressure', 'town', 'industrialist', 'build-a-boat-for-treasure', 'nuclear-blast-testing-facility', 'a-core-game']);
   for (const entry of rotation) assert.ok(catalogue.some(game => game.id === entry.id), entry.id);

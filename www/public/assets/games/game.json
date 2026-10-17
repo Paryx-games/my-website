@@ -124,5 +124,47 @@
       "mobile": "",
       "console": ""
     }
+  },
+  "cities-skylines": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "planet-coaster": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "planet-coaster-2": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "planet-zoo": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "upload-labs": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "sektori": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": ""
+    }
   }
 }

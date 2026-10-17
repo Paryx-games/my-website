@@ -51,6 +51,16 @@ test('library uploads discard unmapped games, map Steam app IDs and allow entire
   assert.deepEqual(validateUpload({ ...payload, entries: [{ source: 'steam', appId: 999999999, minutes: 500 }] }, 'test-pc').entries, []);
   assert.throws(() => validateUpload({ ...payload, entries: [{ source: 'steam', appId: 526870, minutes: -1 }] }, 'test-pc'));
 });
+test('new Steam games resolve to catalogue IDs while Planet Coaster stays manual', () => {
+  const tracked = [
+    [255710, 'cities-skylines'], [2688950, 'planet-coaster-2'], [703080, 'planet-zoo'],
+    [3606890, 'upload-labs'], [2105620, 'sektori'],
+  ] as const;
+  const entries = tracked.map(([appId]) => ({ source: 'steam', appId, minutes: 120 }));
+  const upload = validateUpload({ ...payload, entries: [...entries, { source: 'steam', appId: 493340, minutes: 60 }] }, 'test-pc');
+  assert.deepEqual(upload.entries, tracked.map(([, gameId]) => ({ source: 'steam', gameId, minutes: 120 })));
+});
+
 test('public reads expose totals with caching and CORS, without requiring authentication', async () => {
   const handler = makeHandler({ DATABASE_URL: 'test' }, () => store);
   const { output, res } = response();

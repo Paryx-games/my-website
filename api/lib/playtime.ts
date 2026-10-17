@@ -5,6 +5,7 @@ export const gameIds = new Set([
   'forza-horizon-4', 'beamng-drive', 'geometry-dash', 'halo-mcc',
   'escape-the-backrooms', 'backrooms-escape-together', 'bloons-td-6',
   'roblox', 'pressure', 'town',
+  'cities-skylines', 'planet-coaster-2', 'planet-zoo', 'upload-labs', 'sektori',
 ]);
 export const sources = new Set(['steam', 'modrinth', 'roblox']);
 export const steamAppIds: Record<number, string> = {
@@ -12,6 +13,8 @@ export const steamAppIds: Record<number, string> = {
   1293830: 'forza-horizon-4', 284160: 'beamng-drive', 322170: 'geometry-dash',
   976730: 'halo-mcc', 1943950: 'escape-the-backrooms',
   2141730: 'backrooms-escape-together', 960090: 'bloons-td-6',
+  255710: 'cities-skylines', 2688950: 'planet-coaster-2', 703080: 'planet-zoo',
+  3606890: 'upload-labs', 2105620: 'sektori',
 };
 export const MAX_UPLOAD_BYTES = 512 * 1024;
 export const MAX_MINUTES = 100_000_000;

@@ -1159,5 +1159,425 @@
     "sourcePage": "https://create.roblox.com/store/asset/121716193870833",
     "width": 432,
     "height": 432
+  },
+  "/assets/games/cities-skylines-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/library_600x900_2x.jpg?t=1791468493",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/cities-skylines-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/library_hero.jpg?t=1791468493",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/cities-skylines-icon.webp": {
+    "url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/255710/6cf7b10dd29db28448ef79698ed2118a03617d63.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/cities-skylines-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/logo.png",
+    "purpose": "publisher branding",
+    "width": 600,
+    "height": 338
+  },
+  "/assets/games/cities-skylines-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_0754001c88ad4dbfff92faf9a97e8d87cf3f8840.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/cities-skylines-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_e0f842c9327df9defabf120b6c59e1ba42f54a75.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/cities-skylines-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_b5a4b72062b8c4ad677b242963e88c2e624cb1f9.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/cities-skylines-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_39f74526167020dfae4156945f24e7e49d5eedf8.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/cities-skylines-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_a4ebf2b3ad46e620d99fa471708d68b28ea4d7d1.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/cities-skylines-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_013b26f27484941d4edbd406f8df5b5238f120df.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/cities-skylines-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_e90299bea1faee761c11c5242c4e6e89f3ef7fb9.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/cities-skylines-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/ss_79130723c29cdd89f6169514bc4aad03aa58e823.1920x1080.jpg?t=1791468493",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/library_600x900_2x.jpg?t=1782480201",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/planet-coaster-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/library_hero.jpg?t=1782480201",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/planet-coaster-icon.webp": {
+    "url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/493340/1b2f29e743dd3048f21fefd9642d86a5f5123968.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/planet-coaster-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/logo.png",
+    "purpose": "publisher branding",
+    "width": 600,
+    "height": 338
+  },
+  "/assets/games/planet-coaster-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_e3661fafe7f2e701ef91528e7b803857a418f6dd.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_a8e5a30dec8285b1d461d2b3d3b3870dfbc1c4d0.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_3622fa354b6700fff396a302ff76322d4595ae82.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_b69df02e9c0ef568218fbf0b1b61f5dfa429cdfc.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_848aa7a653d107895fe2eea95a2d9a4c5bd2b1e7.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_81f9b81c1174606e0eb7903d69e5234a9c6ad822.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_c5a1cddfbc503d93a1baa146de3345471196b7db.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/493340/ss_499c81e0f683d124bec2bdfbf8a07726261a2410.1920x1080.jpg?t=1782480201",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/library_600x900_2x.jpg?t=1788781169",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/planet-coaster-2-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/library_hero.jpg?t=1788781169",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/planet-coaster-2-icon.webp": {
+    "url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/2688950/0f7e7ea0c26a500eee998120c7c04c9d7f43ffc0.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/planet-coaster-2-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/logo.png",
+    "purpose": "publisher branding",
+    "width": 600,
+    "height": 338
+  },
+  "/assets/games/planet-coaster-2-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/2db68c93e41c8cd7312b9236010872219e5fefbe/ss_2db68c93e41c8cd7312b9236010872219e5fefbe.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/ccbef6cc0e61fe7430e9bc7e96d2aad73114c189/ss_ccbef6cc0e61fe7430e9bc7e96d2aad73114c189.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/cfa227deee1269e277c1e10db955ae53ce5b6b72/ss_cfa227deee1269e277c1e10db955ae53ce5b6b72.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/587c98479eb40f66f0d2cdd43778293159a639f6/ss_587c98479eb40f66f0d2cdd43778293159a639f6.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/5316a510d8f950e5494c5d2ebbf8175a53987477/ss_5316a510d8f950e5494c5d2ebbf8175a53987477.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/a8328a36f34eb8011659df5dd2b9cf8b4da494b2/ss_a8328a36f34eb8011659df5dd2b9cf8b4da494b2.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/397bcd3c8874c1a968b7728c8aff8517f159c8c4/ss_397bcd3c8874c1a968b7728c8aff8517f159c8c4.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-coaster-2-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2688950/1945305f7c1eb70b917e9ba4084ea6caa81a6e88/ss_1945305f7c1eb70b917e9ba4084ea6caa81a6e88.1920x1080.jpg?t=1788781169",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/library_600x900_2x.jpg?t=1765896213",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/planet-zoo-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/library_hero.jpg?t=1765896213",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/planet-zoo-icon.webp": {
+    "url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/703080/68c7a610498955f547b0ece0aff081d23f2025b5.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/planet-zoo-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/logo.png",
+    "purpose": "publisher branding",
+    "width": 600,
+    "height": 338
+  },
+  "/assets/games/planet-zoo-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_fac76f23b1b655dd0459db1a443bc8adb02e4279.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_275f9a046ba89aa45944a940b4a5c1baaf50c81e.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_6a247086e998d16983a109f2ab9567b16ddd6ec1.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_37ad5481dcb9ba88f42ef718d0a98450a878ec34.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_c57319ad1fcc446a6a241b279a8477f7b741cd76.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_80cb8f59aed7f52334556b26632dad78b3f3cdba.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_41bb0f354ae0223c82d0c35116c1f4dbb0236333.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/planet-zoo-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/703080/ss_b63dffff1cd4a46f08f9cbccac81265336bbd852.1920x1080.jpg?t=1765896213",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/upload-labs-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/847029681ebb59e73a67f697840dbe6bbf575917/library_capsule_2x.jpg?t=1775915574",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/upload-labs-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/f654270cece8c5845fcc312271ac072cbf225de5/library_hero.jpg?t=1775915574",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/upload-labs-icon.webp": {
+    "url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/3606890/5c68ccf4c818c2120966aa23ca1fbb4890d31060.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/upload-labs-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/93b3fb78b1c6efc64089b7f2ef493a53aaaabecd/header.jpg?t=1775915574",
+    "purpose": "publisher branding",
+    "width": 460,
+    "height": 215
+  },
+  "/assets/games/upload-labs-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/30ba9d584c07c6cc982e7d22cfb5dd52c6d3b067/ss_30ba9d584c07c6cc982e7d22cfb5dd52c6d3b067.1920x1080.jpg?t=1775915574",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/upload-labs-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/258ec3e83e1bd1e21e60cb3eb8a6e3fcc856a5f5/ss_258ec3e83e1bd1e21e60cb3eb8a6e3fcc856a5f5.1920x1080.jpg?t=1775915574",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/upload-labs-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/1f4e7d365bb96571730e84917088e383b736144b/ss_1f4e7d365bb96571730e84917088e383b736144b.1920x1080.jpg?t=1775915574",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/upload-labs-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/952b76a47e3fd63eab5b5eb87beba6168dd0debe/ss_952b76a47e3fd63eab5b5eb87beba6168dd0debe.1920x1080.jpg?t=1775915574",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/upload-labs-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/4130b3c357a62f5e898f60e897bc59026cc75423/ss_4130b3c357a62f5e898f60e897bc59026cc75423.1920x1080.jpg?t=1775915574",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/upload-labs-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3606890/b44efcb2641ef7da45c1f20dd1b85da6377e6ea9/ss_b44efcb2641ef7da45c1f20dd1b85da6377e6ea9.1920x1080.jpg?t=1775915574",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/b1f8281ba3152c88fe618f239dba8e3456d8cdd9/library_600x900_2x.jpg?t=1779080450",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/sektori-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/efa911f371ea101398d19a6b56f579b4a20bf33c/library_hero.jpg?t=1779080450",
+    "purpose": "publisher hero artwork",
+    "width": 1280,
+    "height": 413
+  },
+  "/assets/games/sektori-icon.webp": {
+    "url": "https://shared.fastly.steamstatic.com/community_assets/images/apps/2105620/cffe555c68ffd3798dcabea653d727bf710a039e.jpg",
+    "purpose": "publisher app icon",
+    "width": 32,
+    "height": 32
+  },
+  "/assets/games/sektori-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/logo.png",
+    "purpose": "publisher branding",
+    "width": 600,
+    "height": 338
+  },
+  "/assets/games/sektori-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/5ef5fdebceeb8afe881edd2f03e50b12afde7358/ss_5ef5fdebceeb8afe881edd2f03e50b12afde7358.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/a28ac128308a0e5d07714eba77144da1f182ce6d/ss_a28ac128308a0e5d07714eba77144da1f182ce6d.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/019cc559445296b49894bad7e45218c2ba06c528/ss_019cc559445296b49894bad7e45218c2ba06c528.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/ace0fb5612bd71085e3292858451ee9eab39306d/ss_ace0fb5612bd71085e3292858451ee9eab39306d.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/2e215f5f249b1e686f418423ce0f844e5e21df87/ss_2e215f5f249b1e686f418423ce0f844e5e21df87.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/9ba97d06fc91339f75937113bfdbb3947c5b2b9c/ss_9ba97d06fc91339f75937113bfdbb3947c5b2b9c.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/9cc4f5c2bd547d8ae56ad86eb1a19fcd59443e33/ss_9cc4f5c2bd547d8ae56ad86eb1a19fcd59443e33.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
+  },
+  "/assets/games/sektori-8.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2105620/dd9dd03684fbb13a33b02dc4038292349b873b3a/ss_dd9dd03684fbb13a33b02dc4038292349b873b3a.1920x1080.jpg?t=1779080450",
+    "purpose": "publisher screenshot",
+    "width": 1280,
+    "height": 720
   }
 }
