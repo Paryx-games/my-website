@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { authors, type Author } from './authors.js';
 import { absoluteUrl, formatDate, site } from './config.js';
 import { tagSlug, relatedPosts, seriesPosts, type Post } from './content.js';
@@ -484,6 +484,26 @@ export function Article({
 }) {
   return (
     <main id="main">
+      {!!post.headings?.length && (
+        <nav
+          className="chapter-rail"
+          aria-label="Post chapters"
+          style={{ '--chapter-count': post.headings.length } as CSSProperties}
+        >
+          {post.headings.map((heading) => (
+            <a
+              key={heading.id}
+              href={`#${heading.id}`}
+              aria-label={heading.title}
+            >
+              <span className="chapter-rail-marker" aria-hidden="true" />
+              <span className="chapter-rail-label" aria-hidden="true">
+                {heading.title}
+              </span>
+            </a>
+          ))}
+        </nav>
+      )}
       {post.banner && (
         <img
           className="hero-banner"
@@ -571,9 +591,7 @@ export function Listing({
         <h1>{title ?? tag ?? 'My blog'}</h1>
         <p className="deck">
           {description ??
-            (tag
-              ? `Articles filed under ${tag}.`
-              : site.description)}
+            (tag ? `Articles filed under ${tag}.` : site.description)}
         </p>
       </header>
       {introduction}

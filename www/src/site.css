@@ -1,4 +1,19 @@
 /* Match the blog shell while keeping staging content and deployments independent. */
+.contributions { margin: 0 0 24px; padding: 16px; border: 1px solid var(--color-border); border-radius: 8px; }
+.contributions-header, .contributions-footer { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.contributions-header { margin-bottom: 12px; font-size: 14px; }
+.contributions-header a { color: var(--color-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.contributions-calendar { min-height: 122px; overflow-x: auto; scrollbar-width: thin; }
+.contributions-calendar svg { display: block; max-width: none; }
+.contributions-calendar text { fill: var(--color-muted); font: 10px var(--font-sans); }
+.contributions [data-level="0"] { fill: #161b22; background: #161b22; }
+.contributions [data-level="1"] { fill: #0e4429; background: #0e4429; }
+.contributions [data-level="2"] { fill: #006d32; background: #006d32; }
+.contributions [data-level="3"] { fill: #26a641; background: #26a641; }
+.contributions [data-level="4"] { fill: #39d353; background: #39d353; }
+.contributions-footer { color: var(--color-muted); font-size: 11px; margin-top: 8px; }
+.contributions-legend { display: inline-flex; align-items: center; gap: 4px; }
+.contributions-legend i { width: 11px; height: 11px; border-radius: 2px; }
 .section-toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 .section-toggle svg { width: 16px; height: 16px; color: var(--color-faint); transition: transform 200ms ease-out; }
 .section-toggle[aria-expanded="false"] svg { transform: rotate(-90deg); }

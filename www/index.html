@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/assets/games/showcase.css">
   <script src="/assets/games/showcase.js" type="module"></script>
   <script src="/assets/site-search.js" type="module"></script>
+  <script src="/assets/github-contributions.js" type="module"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Paryx - Home</title>
@@ -2148,6 +2149,17 @@
 
     <section id="projects">
       <h2>Projects</h2>
+      <div class="contributions" id="github-contributions" aria-label="GitHub contributions">
+        <div class="contributions-header">
+          <p id="contributions-summary" role="status">Loading GitHub contributions...</p>
+          <a href="https://github.com/Paryx-games?tab=overview" target="_blank" rel="noopener noreferrer">View on GitHub ↗</a>
+        </div>
+        <div class="contributions-calendar" id="contributions-calendar" tabindex="0" role="region" aria-label="Contribution calendar, scroll to see the full year"></div>
+        <div class="contributions-footer" id="contributions-footer">
+          <span id="contributions-updated">GitHub activity</span>
+          <span class="contributions-legend" aria-label="Contribution intensity from less to more">Less <i data-level="0"></i><i data-level="1"></i><i data-level="2"></i><i data-level="3"></i><i data-level="4"></i> More</span>
+        </div>
+      </div>
       <p class="projects-live-note">Fetched from GitHub in real time</p>
       <div class="repos reveal" id="repos"></div>
       <p class="note" id="reposNote"></p>

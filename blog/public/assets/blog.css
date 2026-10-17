@@ -15,6 +15,88 @@
   color: var(--text);
   background: var(--bg);
 }
+.chapter-rail {
+  position: fixed;
+  z-index: 4;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.chapter-rail a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 44px;
+  height: min(22px, calc(80vh / var(--chapter-count)));
+  text-decoration: none;
+}
+.chapter-rail-marker {
+  display: block;
+  width: 8px;
+  height: 2px;
+  background: #48484e;
+  transform-origin: left;
+  transition:
+    transform 150ms ease-out,
+    background-color 150ms ease-out;
+}
+.chapter-rail a[aria-current='location'] .chapter-rail-marker {
+  transform: scaleX(2);
+  background: var(--muted);
+}
+.chapter-rail a[data-distance='0'] .chapter-rail-marker {
+  transform: scaleX(4);
+  background: var(--text);
+}
+.chapter-rail a[data-distance='1'] .chapter-rail-marker {
+  transform: scaleX(3);
+  background: #777780;
+}
+.chapter-rail a[data-distance='2'] .chapter-rail-marker {
+  transform: scaleX(2);
+}
+.chapter-rail a[data-distance='3'] .chapter-rail-marker {
+  transform: scaleX(1.5);
+}
+.chapter-rail-label {
+  position: absolute;
+  left: 44px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.75rem;
+  width: max-content;
+  max-width: 250px;
+  opacity: 0;
+  transform: translateX(-4px);
+  pointer-events: none;
+  transition:
+    opacity 120ms ease-out,
+    transform 120ms ease-out;
+}
+.chapter-rail a[data-distance='0'] .chapter-rail-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+.chapter-rail a:focus-visible {
+  outline: 1px solid var(--muted);
+  outline-offset: 2px;
+}
+@media (max-width: 1000px), (pointer: coarse) {
+  .chapter-rail {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-rail-marker,
+  .chapter-rail-label {
+    transition: none;
+  }
+}
 * {
   box-sizing: border-box;
 }

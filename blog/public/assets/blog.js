@@ -34,3 +34,51 @@ document.querySelectorAll('.mobile-nav').forEach((menu) => {
     if (!menu.contains(event.target)) menu.open = false;
   });
 });
+
+const chapterRail = document.querySelector('.chapter-rail');
+if (chapterRail) {
+  const links = [...chapterRail.querySelectorAll('a')];
+  const chapters = links.map((link) =>
+    document.getElementById(decodeURIComponent(link.hash.slice(1))),
+  );
+  const highlight = (index) => {
+    links.forEach((link, position) => {
+      if (index === null) delete link.dataset.distance;
+      else link.dataset.distance = String(Math.abs(index - position));
+    });
+  };
+  links.forEach((link, index) => {
+    link.addEventListener('mouseenter', () => highlight(index));
+    link.addEventListener('focus', () => highlight(index));
+  });
+  chapterRail.addEventListener('mouseleave', () => {
+    const focused = links.indexOf(document.activeElement);
+    highlight(focused < 0 ? null : focused);
+  });
+  chapterRail.addEventListener('focusout', (event) => {
+    if (!chapterRail.contains(event.relatedTarget)) highlight(null);
+  });
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    const atBottom =
+      scrollY + innerHeight >= document.documentElement.scrollHeight - 2;
+    let active = 0;
+    chapters.forEach((chapter, index) => {
+      if (chapter && chapter.getBoundingClientRect().top <= innerHeight * 0.35)
+        active = index;
+    });
+    if (atBottom) active = links.length - 1;
+    links.forEach((link, index) => {
+      if (index === active) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  const schedule = () => {
+    if (!frame) frame = requestAnimationFrame(update);
+  };
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('hashchange', schedule);
+  update();
+}
