@@ -35,10 +35,18 @@
 .pc-section-note a { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; margin-left: auto; color: #ececee; text-decoration: underline; text-underline-offset: 4px; }
 .pc-section-note a:hover { color: #fff; }
 .pc-section-note a svg { width: 15px; height: 15px; }
-.pc-terminal[data-pc-terminal="summary"] .pc-fetch { grid-template-columns: 1fr; }
-.pc-terminal[data-pc-terminal="summary"] .pc-logo { display: none; }
-.pc-terminal[data-pc-terminal="summary"] .pc-facts > div { grid-template-columns: 75px minmax(0, 1fr); }
-.pc-terminal[data-pc-terminal="summary"] .pc-prompt { margin-bottom: 18px; }
+#pc-specs .pc-logo { font-size: 10px; }
+#pc-specs .pc-fetch { gap: 22px; }
+#pc-specs .pc-terminal { font-size: 12px; }
+#pc-specs .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
+.pc-hardware-details { margin-top: 42px; }
+.pc-detail-group { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 2fr); gap: 12px 36px; padding: 30px 0; border-top: 1px solid var(--line); }
+.pc-detail-group h2 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
+.pc-detail-group > p { grid-column: 1; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.pc-detail-group > dl { grid-column: 2; grid-row: 1 / span 2; margin: 0; }
+.pc-detail-group dl > div { display: grid; grid-template-columns: minmax(110px, 1fr) minmax(0, 1.8fr); gap: 12px; padding: 10px 0; border-bottom: 1px solid #24262c; font-size: 13px; line-height: 1.7; }
+.pc-detail-group dt { color: var(--muted); }
+.pc-detail-group dd { margin: 0; overflow-wrap: anywhere; }
 .pc-specs-page { max-width: 1120px; padding: 48px 0 0; }
 .pc-page-intro { margin-bottom: 30px; }
 .pc-page-intro h1 { margin: 12px 0; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; font-weight: 600; letter-spacing: -.045em; }
@@ -54,6 +62,8 @@
 @media (max-width: 900px) {
   .pc-specs-page .pc-fetch { grid-template-columns: 1fr; }
   .pc-specs-page .pc-logo { display: none; }
+  #pc-specs .pc-fetch { grid-template-columns: 1fr; }
+  #pc-specs .pc-logo { display: none; }
 }
 @media (max-width: 600px) {
   .pc-specs-page { padding-top: 28px; }
@@ -61,7 +71,8 @@
   .pc-terminal-inner, .pc-specs-page .pc-terminal-inner { padding: 19px 16px 22px; }
   .pc-terminal-bar { padding: 9px 16px; }
   .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
-  .pc-terminal[data-pc-terminal="summary"] .pc-facts > div { grid-template-columns: 63px minmax(0, 1fr); }
+  .pc-detail-group { display: block; padding: 24px 0; }
+  .pc-detail-group > p { margin: 10px 0 14px; }
   .pc-section-note { gap: 4px; }
   .pc-section-note a { width: 100%; margin-left: 0; }
 }

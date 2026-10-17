@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/sync-profile.mjs && vite",
-    "build": "node scripts/sync-profile.mjs && vite build",
+    "dev": "node scripts/sync-profile.mjs && node scripts/sync-pc-specs.mjs && node scripts/sync-social.mjs && vite",
+    "build": "node scripts/sync-profile.mjs && node scripts/sync-pc-specs.mjs && node scripts/sync-social.mjs && vite build",
     "sync:profile": "node scripts/sync-profile.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",

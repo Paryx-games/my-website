@@ -60,6 +60,24 @@ export async function build({
   );
   await mkdir(path.join(output, 'og'), { recursive: true });
   await mkdir(path.join(output, 'assets/social'), { recursive: true });
+  const listingImage = async (
+    slug: string,
+    title: string,
+    description: string,
+    label: string,
+  ) => {
+    const image = `/og/${slug}.png`;
+    await writeFile(
+      path.join(output, image.slice(1)),
+      await pageSocialImage({
+        title,
+        description,
+        label,
+        domain: 'blog.paryx.uk',
+      }),
+    );
+    return image;
+  };
   await writeFile(
     path.join(output, 'assets/social', 'blog.png'),
     await pageSocialImage({
@@ -91,12 +109,19 @@ export async function build({
     );
   }
   for (const tag of [...new Set(posts.flatMap((post) => post.tags))]) {
+    const image = await listingImage(
+      `tag-${tagSlug(tag)}`,
+      `${tag} articles`,
+      `Articles about ${tag} from my blog.`,
+      'Topic',
+    );
     await page(
       `tags/${tagSlug(tag)}.html`,
       <Document
         title={`${tag} articles`}
         description={`Articles about ${tag} from paryx.`}
         pathname={`/tags/${tagSlug(tag)}`}
+        image={image}
         noindex={noindex}
       >
         <Listing
@@ -108,12 +133,19 @@ export async function build({
     );
   }
   for (const author of Object.values(authors)) {
+    const image = await listingImage(
+      `author-${author.id}`,
+      `${author.name}'s articles`,
+      author.bio || `Articles by ${author.name}.`,
+      'Author',
+    );
     await page(
       `authors/${author.id}.html`,
       <Document
         title={`${author.name}'s articles`}
         description={author.bio}
         pathname={`/authors/${author.id}`}
+        image={image}
         noindex={noindex}
       >
         <Listing
@@ -133,12 +165,19 @@ export async function build({
   ]) {
     const parts = seriesPosts(published, slug);
     const title = parts[0].series!.title;
+    const image = await listingImage(
+      `series-${slug}`,
+      title,
+      `Read ${title}, an article series from my blog.`,
+      'Series',
+    );
     await page(
       `series/${slug}.html`,
       <Document
         title={title}
         description={`Read ${title}, an article series from paryx.`}
         pathname={`/series/${slug}`}
+        image={image}
         noindex={noindex}
       >
         <Listing
@@ -152,7 +191,16 @@ export async function build({
   }
   await page(
     '404.html',
-    <Document title="Page not found" noindex>
+    <Document
+      title="Page not found"
+      image={await listingImage(
+        'not-found',
+        'Page not found.',
+        'This page may have moved, or has not been published yet.',
+        '404',
+      )}
+      noindex
+    >
       <main id="main" className="listing-intro">
         <h1>Page not found.</h1>
         <p className="deck">

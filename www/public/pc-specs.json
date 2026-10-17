@@ -6,34 +6,404 @@
       "id": "hardware",
       "title": "Hardware",
       "fields": [
-        { "id": "cpu", "label": "CPU", "value": "AMD Ryzen 7 9800X3D", "summary": "AMD Ryzen 7 9800X3D / 8 cores, 16 threads" },
-        { "id": "cores", "label": "CPU cores", "value": "8 cores / 16 threads" },
-        { "id": "cache", "label": "CPU cache", "value": "96 MB L3 / 8 MB L2" },
-        { "id": "gpu", "label": "GPU", "value": "NVIDIA GeForce RTX 5070 Ti", "summary": "NVIDIA GeForce RTX 5070 Ti / 16 GB GDDR7" },
-        { "id": "vram", "label": "VRAM", "value": "16 GB GDDR7 / 256-bit" },
-        { "id": "gpu-bus", "label": "GPU bus", "value": "PCIe 5.0 x16" },
-        { "id": "memory", "label": "Memory", "value": "32 GB Kingston DDR5-6000 / 2 x 16 GB" },
-        { "id": "timings", "label": "RAM timings", "value": "CL30 / 30-36-36-80 / dual channel" },
-        { "id": "board", "label": "Board", "value": "ASUS ROG STRIX B850-E GAMING WIFI" },
-        { "id": "storage", "label": "Storage", "value": "2 TB WD_BLACK SN850X NVMe SSD" },
-        { "id": "storage-bus", "label": "SSD bus", "value": "PCIe 4.0 x4" }
+        {
+          "id": "cpu",
+          "label": "CPU",
+          "value": "AMD Ryzen 7 9800X3D",
+          "summary": "AMD Ryzen 7 9800X3D / 8 cores, 16 threads"
+        },
+        {
+          "id": "cores",
+          "label": "CPU cores",
+          "value": "8 cores / 16 threads"
+        },
+        {
+          "id": "cache",
+          "label": "CPU cache",
+          "value": "96 MB L3 / 8 MB L2"
+        },
+        {
+          "id": "gpu",
+          "label": "GPU",
+          "value": "NVIDIA GeForce RTX 5070 Ti",
+          "summary": "NVIDIA GeForce RTX 5070 Ti / 16 GB GDDR7"
+        },
+        {
+          "id": "vram",
+          "label": "VRAM",
+          "value": "16 GB GDDR7 / 256-bit"
+        },
+        {
+          "id": "gpu-bus",
+          "label": "GPU bus",
+          "value": "PCIe 5.0 x16"
+        },
+        {
+          "id": "memory",
+          "label": "Memory",
+          "value": "32 GB Kingston DDR5-6000 / 2 x 16 GB"
+        },
+        {
+          "id": "timings",
+          "label": "RAM timings",
+          "value": "CL30 / 30-36-36-80 / dual channel"
+        },
+        {
+          "id": "board",
+          "label": "Board",
+          "value": "ASUS ROG STRIX B850-E GAMING WIFI"
+        },
+        {
+          "id": "storage",
+          "label": "Storage",
+          "value": "2 TB WD_BLACK SN850X NVMe SSD"
+        },
+        {
+          "id": "storage-bus",
+          "label": "SSD bus",
+          "value": "PCIe 4.0 x4"
+        }
       ]
     },
     {
       "id": "displays",
       "title": "Displays",
       "fields": [
-        { "id": "display", "label": "Display", "value": "LG UltraGear / 27 inch / 2560 x 1440 / 180 Hz" },
-        { "id": "display-secondary", "label": "Display 2", "value": "Dell P2317H / 23 inch / 1920 x 1080 / 60 Hz" }
+        {
+          "id": "display",
+          "label": "Display",
+          "value": "LG UltraGear / 27 inch / 2560 x 1440 / 180 Hz"
+        },
+        {
+          "id": "display-secondary",
+          "label": "Display 2",
+          "value": "Dell P2317H / 23 inch / 1920 x 1080 / 60 Hz"
+        }
       ]
     },
     {
       "id": "software",
       "title": "Software",
       "fields": [
-        { "id": "os", "label": "OS", "value": "Windows 11 Home / x86_64" },
-        { "id": "terminal", "label": "Terminal", "value": "Windows Terminal 1.24.11911.0" },
-        { "id": "shell", "label": "Shell", "value": "PowerShell 7.6.6" }
+        {
+          "id": "os",
+          "label": "OS",
+          "value": "Windows 11 Home / x86_64"
+        },
+        {
+          "id": "terminal",
+          "label": "Terminal",
+          "value": "Windows Terminal 1.24.11911.0"
+        },
+        {
+          "id": "shell",
+          "label": "Shell",
+          "value": "PowerShell 7.6.6"
+        }
+      ]
+    }
+  ],
+  "details": [
+    {
+      "id": "processor",
+      "title": "Processor",
+      "description": "My 9800X3D has eight cores, sixteen threads, and 96 MB of L3 cache.",
+      "fields": [
+        {
+          "id": "detail-processor-0",
+          "label": "Model",
+          "value": "AMD Ryzen 7 9800X3D"
+        },
+        {
+          "id": "detail-processor-1",
+          "label": "Code name",
+          "value": "Granite Ridge"
+        },
+        {
+          "id": "detail-processor-2",
+          "label": "Manufacturing process",
+          "value": "4 nm"
+        },
+        {
+          "id": "detail-processor-3",
+          "label": "Socket",
+          "value": "AM5"
+        },
+        {
+          "id": "detail-processor-4",
+          "label": "Cores / threads",
+          "value": "8 / 16"
+        },
+        {
+          "id": "detail-processor-5",
+          "label": "Base clock",
+          "value": "4.70 GHz"
+        },
+        {
+          "id": "detail-processor-6",
+          "label": "Reported boost limit",
+          "value": "5.25 GHz"
+        },
+        {
+          "id": "detail-processor-7",
+          "label": "L1 cache",
+          "value": "8 x 48 KB data / 8 x 32 KB instruction"
+        },
+        {
+          "id": "detail-processor-8",
+          "label": "L2 / L3 cache",
+          "value": "8 MB / 96 MB"
+        },
+        {
+          "id": "detail-processor-9",
+          "label": "Thermal design power",
+          "value": "120 W"
+        }
+      ]
+    },
+    {
+      "id": "graphics",
+      "title": "Graphics",
+      "description": "A discrete RTX 5070 Ti with Hynix GDDR7 memory and Resizable BAR enabled.",
+      "fields": [
+        {
+          "id": "detail-graphics-0",
+          "label": "Model",
+          "value": "NVIDIA GeForce RTX 5070 Ti"
+        },
+        {
+          "id": "detail-graphics-1",
+          "label": "Chip",
+          "value": "GB203-200"
+        },
+        {
+          "id": "detail-graphics-2",
+          "label": "VRAM",
+          "value": "16 GB GDDR7 / Hynix"
+        },
+        {
+          "id": "detail-graphics-3",
+          "label": "Memory bus",
+          "value": "256-bit"
+        },
+        {
+          "id": "detail-graphics-4",
+          "label": "Recorded interface",
+          "value": "PCIe 5.0 x16 / 32.0 GT/s"
+        },
+        {
+          "id": "detail-graphics-5",
+          "label": "Unified shaders",
+          "value": "8,960"
+        },
+        {
+          "id": "detail-graphics-6",
+          "label": "Ray tracing cores",
+          "value": "70"
+        },
+        {
+          "id": "detail-graphics-7",
+          "label": "Tensor cores",
+          "value": "280"
+        },
+        {
+          "id": "detail-graphics-8",
+          "label": "ROPs / texture units",
+          "value": "96 / 280"
+        },
+        {
+          "id": "detail-graphics-9",
+          "label": "Rated power limit",
+          "value": "300 W"
+        },
+        {
+          "id": "detail-graphics-10",
+          "label": "Resizable BAR",
+          "value": "Enabled / 16 GB"
+        }
+      ]
+    },
+    {
+      "id": "ram",
+      "title": "Memory",
+      "description": "Two matching Kingston modules running in dual channel. DDR5-6000 is the effective transfer rate.",
+      "fields": [
+        {
+          "id": "detail-ram-0",
+          "label": "Capacity",
+          "value": "32 GB / 2 x 16 GB"
+        },
+        {
+          "id": "detail-ram-1",
+          "label": "Modules",
+          "value": "Kingston KF560C30-16"
+        },
+        {
+          "id": "detail-ram-2",
+          "label": "DRAM manufacturer",
+          "value": "SK Hynix"
+        },
+        {
+          "id": "detail-ram-3",
+          "label": "Type",
+          "value": "DDR5 SDRAM / unbuffered DIMM"
+        },
+        {
+          "id": "detail-ram-4",
+          "label": "Effective rate",
+          "value": "6000 MT/s"
+        },
+        {
+          "id": "detail-ram-5",
+          "label": "Recorded memory clock",
+          "value": "Approximately 3000 MHz"
+        },
+        {
+          "id": "detail-ram-6",
+          "label": "Current timings",
+          "value": "30-36-36-80 / CL30"
+        },
+        {
+          "id": "detail-ram-7",
+          "label": "Channels",
+          "value": "Dual channel"
+        },
+        {
+          "id": "detail-ram-8",
+          "label": "Ranks per module",
+          "value": "Single rank"
+        },
+        {
+          "id": "detail-ram-9",
+          "label": "ECC",
+          "value": "Non-ECC"
+        }
+      ]
+    },
+    {
+      "id": "motherboard",
+      "title": "Motherboard and firmware",
+      "description": "The motherboard and firmware versions reported in my hardware snapshot.",
+      "fields": [
+        {
+          "id": "detail-motherboard-0",
+          "label": "Model",
+          "value": "ASUS ROG STRIX B850-E GAMING WIFI"
+        },
+        {
+          "id": "detail-motherboard-1",
+          "label": "PCIe capability",
+          "value": "PCIe 5.0 supported"
+        },
+        {
+          "id": "detail-motherboard-2",
+          "label": "USB capability",
+          "value": "USB 3.2 supported"
+        },
+        {
+          "id": "detail-motherboard-3",
+          "label": "BIOS vendor",
+          "value": "American Megatrends Inc."
+        },
+        {
+          "id": "detail-motherboard-4",
+          "label": "BIOS version",
+          "value": "1066"
+        },
+        {
+          "id": "detail-motherboard-5",
+          "label": "BIOS date",
+          "value": "13 June 2025"
+        },
+        {
+          "id": "detail-motherboard-6",
+          "label": "AGESA",
+          "value": "ComboAm5PI 1.2.0.3e"
+        }
+      ]
+    },
+    {
+      "id": "ssd",
+      "title": "Storage",
+      "description": "My main 2 TB NVMe SSD. Capacity describes the drive, rather than current free space.",
+      "fields": [
+        {
+          "id": "detail-ssd-0",
+          "label": "Model",
+          "value": "WD_BLACK SN850X 2000GB"
+        },
+        {
+          "id": "detail-ssd-1",
+          "label": "Capacity",
+          "value": "2 TB / approximately 1.82 TiB"
+        },
+        {
+          "id": "detail-ssd-2",
+          "label": "Recorded interface",
+          "value": "PCIe 4.0 x4"
+        },
+        {
+          "id": "detail-ssd-3",
+          "label": "NVMe capability",
+          "value": "NVMe 1.4 supported"
+        },
+        {
+          "id": "detail-ssd-4",
+          "label": "Firmware",
+          "value": "620361WD"
+        },
+        {
+          "id": "detail-ssd-5",
+          "label": "File system",
+          "value": "NTFS"
+        }
+      ]
+    },
+    {
+      "id": "screens",
+      "title": "Displays",
+      "description": "A high-refresh 1440p main display and a secondary 1080p monitor.",
+      "fields": [
+        {
+          "id": "detail-screens-0",
+          "label": "Main monitor",
+          "value": "LG UltraGear / 27 inch"
+        },
+        {
+          "id": "detail-screens-1",
+          "label": "Main resolution",
+          "value": "2560 x 1440"
+        },
+        {
+          "id": "detail-screens-2",
+          "label": "Main refresh rate",
+          "value": "180 Hz"
+        },
+        {
+          "id": "detail-screens-3",
+          "label": "DisplayPort capability",
+          "value": "Supported on the LG display"
+        },
+        {
+          "id": "detail-screens-4",
+          "label": "Colour-depth capability",
+          "value": "10 bits per primary colour on the LG display"
+        },
+        {
+          "id": "detail-screens-5",
+          "label": "Secondary monitor",
+          "value": "Dell P2317H / 23 inch"
+        },
+        {
+          "id": "detail-screens-6",
+          "label": "Secondary resolution",
+          "value": "1920 x 1080"
+        },
+        {
+          "id": "detail-screens-7",
+          "label": "Secondary refresh rate",
+          "value": "60 Hz"
+        }
       ]
     }
   ]

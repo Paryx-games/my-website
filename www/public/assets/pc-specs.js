@@ -10,7 +10,7 @@ async function loadSpecs() {
       throw new Error('PC specs have an invalid format');
     }
     const fields = new Map();
-    for (const group of specs.groups) {
+    for (const group of [...specs.groups, ...(specs.details || [])]) {
       if (!Array.isArray(group.fields)) throw new Error('PC specs have an invalid group');
       for (const field of group.fields) {
         if (typeof field.id !== 'string' || typeof field.label !== 'string' || typeof field.value !== 'string') {
