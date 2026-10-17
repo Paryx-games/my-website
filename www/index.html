@@ -2036,6 +2036,7 @@
 
 
   </style>
+  <link rel="stylesheet" href="/src/site.css">
 </head>
 
 <body>
@@ -2698,24 +2699,33 @@
         caret.hidden = true;
         return;
       }
-      const prepared = paragraphs.map(prepareRichText);
-      const run = async () => {
-        for (const [index, paragraph] of paragraphs.entries()) {
-          paragraph.after(caret);
-          await typePreparedText(prepared[index], caret);
+      document.fonts.ready.then(() => {
+        for (const paragraph of paragraphs) {
+          paragraph.append(caret);
+          const block = paragraph.closest("p");
+          block.style.minHeight = `${Math.ceil(block.getBoundingClientRect().height)}px`;
         }
-        caret.hidden = true;
-      };
-      if (!("IntersectionObserver" in window)) {
-        run();
-        return;
-      }
-      const observer = new IntersectionObserver((entries) => {
-        if (!entries.some(({ isIntersecting }) => isIntersecting)) return;
-        observer.disconnect();
-        run();
-      }, { threshold: 0.45 });
-      observer.observe(text.closest(".about"));
+        text.after(caret);
+
+        const prepared = paragraphs.map(prepareRichText);
+        const run = async () => {
+          for (const [index, paragraph] of paragraphs.entries()) {
+            paragraph.after(caret);
+            await typePreparedText(prepared[index], caret);
+          }
+          caret.hidden = true;
+        };
+        if (!("IntersectionObserver" in window)) {
+          run();
+          return;
+        }
+        const observer = new IntersectionObserver((entries) => {
+          if (!entries.some(({ isIntersecting }) => isIntersecting)) return;
+          observer.disconnect();
+          run();
+        }, { threshold: 0.45 });
+        observer.observe(text.closest(".about"));
+      });
     };
 
     const prepareRichText = (root) => {
@@ -2731,8 +2741,10 @@
     const typePreparedText = async (nodes, caret, base = 6, jitter = 8) => {
       for (const [node, value] of nodes) {
         node.parentNode.insertBefore(caret, node);
+        const typed = document.createTextNode("");
+        node.parentNode.insertBefore(typed, caret);
         for (const char of value) {
-          node.parentNode.insertBefore(makeTypedChar(char), caret);
+          typed.appendData(char);
           const pause = /[.!?]/.test(char) ? 36 : /[,;]/.test(char) ? 16 : 0;
           await sleep(base + Math.random() * jitter + pause);
         }

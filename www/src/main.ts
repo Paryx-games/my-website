@@ -1,5 +1,4 @@
 import { inject } from "@vercel/analytics";
-import "./site.css";
 
 inject();
 
