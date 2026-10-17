@@ -1,5 +1,9 @@
 /* Match the blog shell while keeping staging content and deployments independent. */
-.contributions { margin: 0 0 24px; padding: 16px; border: 1px solid var(--color-border); border-radius: 8px; }
+.contributions { position: relative; margin: 0 0 12px; padding: 24px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; }
+.contributions p { margin: 0; }
+.project-links { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 16px; font-size: 14px; }
+.project-links a { color: var(--color-muted); text-decoration: underline; text-underline-offset: 3px; }
+.project-links a:hover { color: var(--color-text); }
 .contributions-header, .contributions-footer { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
 .contributions-header { margin-bottom: 12px; font-size: 14px; }
 .contributions-header a { color: var(--color-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
