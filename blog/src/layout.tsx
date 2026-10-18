@@ -224,7 +224,7 @@ function NavLinks() {
       <a href="/" aria-current="page">
         Blog
       </a>
-      <a href="https://paryx.uk/projects">Projects</a>
+      <a href="https://paryx.uk/#projects">Projects</a>
       <a href="https://paryx.uk/portfolio">Portfolio</a>
       <a href="https://paryx.uk/#games">Games</a>
       <a href="https://paryx.uk/#content">About</a>
@@ -399,7 +399,7 @@ export function Document({
                     <a href="/authors/paryx">About the author</a>
                   </li>
                   <li>
-                    <a href="https://paryx.uk/projects">My projects</a>
+                    <a href="https://paryx.uk/#projects">My projects</a>
                   </li>
                 </ul>
               </nav>

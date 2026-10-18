@@ -10,6 +10,11 @@ import {
 const projectsApi = (server: ViteDevServer | PreviewServer) => {
   server.middlewares.use(async (req, res, next) => {
     const route = req.url?.split("?")[0];
+    if (route === "/projects" || route === "/projects.html") {
+      res.writeHead(307, { Location: "/#projects" });
+      res.end();
+      return;
+    }
     if (route === "/projects/changelog") {
       req.url = req.url?.replace("/projects/changelog", "/changelog.html");
       return next();
@@ -69,6 +74,11 @@ export default defineConfig(({ mode }) => {
               new URL("./public/portfolio.json", import.meta.url),
               "utf8",
             ),
+          );
+          const portfolioData = JSON.stringify(config).replace(/</g, "\\u003c");
+          html = html.replace(
+            '<script type="application/json" id="portfolio-data"></script>',
+            () => `<script type="application/json" id="portfolio-data">${portfolioData}</script>`,
           );
           const escape = (value: string) =>
             value.replace(
@@ -149,7 +159,6 @@ export default defineConfig(({ mode }) => {
           portfolio: fileURLToPath(
             new URL("./portfolio.html", import.meta.url),
           ),
-          projects: fileURLToPath(new URL("./projects.html", import.meta.url)),
           changelog: fileURLToPath(
             new URL("./changelog.html", import.meta.url),
           ),
