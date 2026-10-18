@@ -1,19 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { uniqueRepositories, languageShares, githubUrl } from "../public/assets/projects-page.js";
+import { githubUrl } from "../public/assets/projects-page.js";
 import { classifyChange, historyEntries, mergeHistory } from "../public/assets/changelog.js";
-
-test("project lists keep every repository while deduplicating featured entries case-insensitively", () => {
-  const data = { pinned: [{ full_name: "Paryx-games/Tool", description: "pinned" }], games: [{ full_name: "paryx-games/tool", description: "complete" }, { full_name: "Paryx-games/other" }], labs: [{ full_name: "Paryx-Labs/lab" }] };
-  const repositories = uniqueRepositories(data);
-  assert.equal(repositories.length, 3);
-  assert.equal(repositories[0].description, "complete");
-});
-
-test("language shares exclude invalid and zero values and sort by actual usage", () => {
-  assert.deepEqual(languageShares({ Rust: 75, TypeScript: 25, Empty: 0, Invalid: "50", Missing: null }), [{ name: "Rust", percent: 75 }, { name: "TypeScript", percent: 25 }]);
-  assert.deepEqual(languageShares({}), []);
-});
 
 test("GitHub links reject executable and lookalike host URLs", () => {
   assert.equal(githubUrl("javascript:alert(1)"), null);

@@ -14,7 +14,7 @@ export const shortcuts = [
   {
     title: 'Projects',
     description: 'Tools, software, and experiments.',
-    url: 'https://paryx.uk/projects',
+    url: 'https://paryx.uk/#projects',
     keywords: 'roblox manager rust tools software code commits activity github repositories',
   },
   {

@@ -9,12 +9,20 @@ const preview = ["preview", "development"].includes(
   process.env.VERCEL_ENV ?? "",
 );
 
+test("the standalone projects page is removed while the homepage projects section remains", async () => {
+  await assert.rejects(access(new URL("projects.html", output)), { code: "ENOENT" });
+  const html = await readFile(new URL("index.html", output), "utf8");
+  assert.ok(html.includes('id="projects"'));
+  assert.ok(html.includes('href="/#projects"'));
+  const sitemap = await readFile(new URL("sitemap.xml", output), "utf8");
+  assert.ok(!sitemap.includes("<loc>https://paryx.uk/projects</loc>"));
+});
+
 test("production and preview builds preserve all pages and their indexing policy", async () => {
   for (const [page, canonical] of [
     ["index.html", "https://paryx.uk/"],
     ["privacy-policy.html", "https://paryx.uk/privacy-policy"],
     ["portfolio.html", "https://paryx.uk/portfolio"],
-    ["projects.html", "https://paryx.uk/projects"],
     ["changelog.html", "https://paryx.uk/projects/changelog"],
     ["pc-specs.html", "https://paryx.uk/pc-specs"],
   ]) {
