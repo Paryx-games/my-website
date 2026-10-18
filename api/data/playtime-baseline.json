@@ -79,5 +79,67 @@
     "gameId": "a-core-game",
     "pc": 429,
     "universeId": 2473499480
+  },
+  {
+    "gameId": "jujutsu-shenanigans",
+    "pc": 2823,
+    "universeId": 3508322461
+  },
+  {
+    "gameId": "doors",
+    "pc": 2064,
+    "universeId": 2440500124
+  },
+  {
+    "gameId": "the-strongest-battlegrounds",
+    "pc": 4753,
+    "universeId": 3808081382
+  },
+  {
+    "gameId": "notoriety",
+    "pc": 870,
+    "universeId": 16680835
+  },
+  {
+    "gameId": "blox-fruits",
+    "pc": 10349,
+    "universeId": 994732206
+  },
+  {
+    "gameId": "scp-roleplay",
+    "pc": 3798,
+    "universeId": 1742264997
+  },
+  {
+    "gameId": "car-crushers-2",
+    "pc": 804,
+    "console": 2199,
+    "universeId": 274816972
+  },
+  {
+    "gameId": "cook-burgers",
+    "pc": 2211,
+    "universeId": 1073273083
+  },
+  {
+    "gameId": "unseen-liminality",
+    "pc": 862,
+    "universeId": 9885372266
+  },
+  {
+    "gameId": "apeirophobia",
+    "pc": 1662,
+    "universeId": 3761186887
+  },
+  {
+    "gameId": "islands",
+    "pc": 5043,
+    "universeId": 1659645941
+  },
+  {
+    "gameId": "bee-swarm-simulator",
+    "pc": 3877,
+    "console": 11791,
+    "universeId": 601130232
   }
 ]
