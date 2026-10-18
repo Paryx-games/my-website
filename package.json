@@ -1,4 +1,6 @@
 {
+	"name": "paryx-workspace-root",
+	"private": true,
 	"scripts": {
 		"dev:new-hero": "vite --config test/previews/new-hero/vite.config.mts",
 		"build:new-hero": "vite build --config test/previews/new-hero/vite.config.mts",
