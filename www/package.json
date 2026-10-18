@@ -6,6 +6,7 @@
     "dev": "node scripts/sync-profile.mjs && node scripts/sync-pc-specs.mjs && node scripts/sync-social.mjs && vite",
     "build": "node scripts/sync-profile.mjs && node scripts/sync-pc-specs.mjs && node scripts/sync-social.mjs && vite build",
     "sync:profile": "node scripts/sync-profile.mjs",
+    "import:roblox": "node scripts/import-roblox-games.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs"
