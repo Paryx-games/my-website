@@ -75,6 +75,11 @@ export default defineConfig(({ mode }) => {
               "utf8",
             ),
           );
+          const portfolioData = JSON.stringify(config).replace(/</g, "\\u003c");
+          html = html.replace(
+            '<script type="application/json" id="portfolio-data"></script>',
+            () => `<script type="application/json" id="portfolio-data">${portfolioData}</script>`,
+          );
           const escape = (value: string) =>
             value.replace(
               /[&<>"']/g,

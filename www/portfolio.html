@@ -24,7 +24,7 @@
   <meta name="twitter:description" content="My Roblox projects, coding work, and featured creations.">
   <meta name="twitter:image" content="https://paryx.uk/assets/social/portfolio.png">
   <meta name="twitter:image:alt" content="Paryx&#39;s portfolio on a dark background">
-  <meta name="theme-color" content="#ffffff">
+  <meta name="theme-color" content="#080809">
   <link rel="icon" type="image/svg+xml" href="/assets/logo_white.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,8 +53,8 @@
     .project-card { border: 1px solid #303034; background: var(--surface); border-radius: 8px; overflow: hidden; min-width: 0; }
     .project-banner { position: relative; margin: 0; aspect-ratio: 16 / 8; background: #131416; overflow: hidden; border-bottom: 1px solid #26272b; }
     .project-banner img { width: 100%; height: 100%; object-fit: cover; }
-    .featured-projects[data-count="1"] .project-banner { aspect-ratio: 3.5 / 1; }
-    .project-copy { padding: 24px; }
+    .featured-projects[data-count="1"] .project-banner { aspect-ratio: 16 / 7; }
+    .project-copy { padding: 26px; }
     .project-copy h3 { font-size: 23px; font-weight: 500; line-height: 1.4; overflow-wrap: anywhere; }
     .project-copy p { font-size: 14px; line-height: 1.8; color: var(--muted); margin-top: 9px; max-width: 720px; overflow-wrap: anywhere; }
     .project-explore { display: inline-flex; align-items: center; gap: 20px; min-height: 44px; font-size: 12px; font-weight: 500; border: 1px solid #414147; border-radius: 4px; padding: 0 15px; margin-top: 20px; background: #1b1c1f; }
@@ -156,7 +156,7 @@
       <nav class="desktop-nav" aria-label="Main navigation">
         <a href="/">Home</a>
         <a href="https://blog.paryx.uk">Blog</a>
-        <a href="/projects">Projects</a>
+        <a href="/#projects">Projects</a>
         <a href="/portfolio" aria-current="page">Portfolio</a>
         <a href="/#games">Games</a>
         <a href="/#about">About</a>
@@ -170,7 +170,7 @@
           <nav aria-label="Mobile navigation">
             <a href="/">Home</a>
             <a href="https://blog.paryx.uk">Blog</a>
-            <a href="/projects">Projects</a>
+            <a href="/#projects">Projects</a>
             <a href="/portfolio" aria-current="page">Portfolio</a>
             <a href="/#games">Games</a>
             <a href="/#about">About</a>
@@ -182,27 +182,11 @@
     <main id="portfolio-content" class="portfolio">
       <header class="portfolio-intro">
         <h1>Portfolio</h1>
+        <p id="portfolio-description"></p>
         <nav class="portfolio-sections-nav" aria-label="Portfolio sections" hidden></nav>
       </header>
       <p id="portfolio-status" role="status" hidden></p>
-      <div id="portfolio-sections">
-        <section id="roblox" class="portfolio-section" aria-labelledby="roblox-heading">
-          <div class="portfolio-section-heading"><h2 id="roblox-heading">Roblox</h2></div>
-          <div class="featured-empty">
-            <div class="empty-banner" aria-hidden="true">
-              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><rect x="8" y="11" width="32" height="26" rx="2"/><circle cx="18" cy="20" r="3"/><path d="m9 32 10-8 7 6 7-10 7 8"/></svg>
-            </div>
-            <div class="empty-copy">
-              <h3>No projects shared yet</h3>
-              <p>Projects will appear here as I share them.</p>
-            </div>
-          </div>
-          <div class="collection-empty">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-            <span>More projects will appear below as I share them.</span>
-          </div>
-        </section>
-      </div>
+      <div id="portfolio-sections" aria-busy="true"></div>
     </main>
   <footer class="site-footer">
     <div class="footer-main">
@@ -211,7 +195,7 @@
       </div>
       <nav aria-label="Explore the site">
         <h2>Explore</h2>
-        <ul><li><a href="/projects">Projects</a></li><li><a href="/portfolio" aria-current="page">Portfolio</a></li><li><a href="/#about">About me</a></li><li><a href="https://blog.paryx.uk">Blog</a></li></ul>
+        <ul><li><a href="/#projects">Projects</a></li><li><a href="/portfolio" aria-current="page">Portfolio</a></li><li><a href="/#about">About me</a></li><li><a href="https://blog.paryx.uk">Blog</a></li></ul>
       </nav>
       <nav aria-label="Find paryx elsewhere">
         <h2>Keep in touch</h2>
@@ -271,13 +255,14 @@
             <span>More projects will appear below as I share them.</span>
           </div>
   </template>
+  <script type="application/json" id="portfolio-data"></script>
   <script type="module">
     import { inject } from "@vercel/analytics";
     import "/src/site.css";
 
     inject();
 
-    // Content lives in /portfolio.json (source: www/public/portfolio.json).
+    // Content is embedded from public/portfolio.json by Vite.
     // Projects support size: "large" or "small", title, description, banner,
     // bannerAlt, url, buttonLabel, lightAmplified, and lowQualityScreenshots.
     // Set either flag to true to show its image note before the title.
@@ -418,7 +403,7 @@
       const images = (Array.isArray(project.gallery) ? project.gallery : []).flatMap(image => {
         const config = typeof image === "string" ? { src: image } : image;
         const url = safeUrl(config?.src);
-        return url ? [{ src: url.href, alt: typeof config.alt === "string" ? config.alt : project.title,
+        return url ? [{ src: url.href, preview: safeUrl(config.preview)?.href || url.href, alt: typeof config.alt === "string" ? config.alt : project.title,
           caption: typeof config.caption === "string" ? config.caption : "" }] : [];
       });
       const banner = element(images.length ? "button" : "div", "project-banner");
@@ -433,7 +418,7 @@
         preview.setAttribute("aria-hidden", "true");
         for (const config of images.slice(0, 6)) {
           const image = element("img");
-          image.src = config.src;
+          image.src = config.preview;
           image.alt = "";
           image.loading = featured ? "eager" : "lazy";
           image.decoding = "async";
@@ -546,18 +531,16 @@
       navigation.hidden = sectionCount < 2;
     }
 
-    async function loadPortfolio() {
+    function loadPortfolio() {
       try {
-        const response = await fetch("/portfolio.json", { signal: AbortSignal.timeout(5000) });
-        if (!response.ok) throw new Error("Portfolio unavailable");
-        const data = await response.json();
+        const data = JSON.parse(document.getElementById("portfolio-data").textContent);
         if (!data || !Array.isArray(data.sections)) throw new Error("Invalid portfolio content");
         if (typeof data.title === "string" && data.title.trim()) {
           document.querySelector(".portfolio-intro h1").textContent = data.title;
           document.title = `Paryx - ${data.title}`;
         }
         if (typeof data.description === "string") {
-          const description = document.querySelector(".portfolio-intro p");
+          const description = document.getElementById("portfolio-description");
           description.textContent = data.description;
           description.hidden = !data.description.trim();
           document.querySelector('meta[name="description"]').content = data.description;
@@ -568,11 +551,14 @@
           if (typeof data.emptyState?.[key] === "string") template.content.querySelector(selector).textContent = data.emptyState[key];
         }
         renderPortfolio(data.sections);
+        document.getElementById("portfolio-status").hidden = true;
       } catch {
         const status = document.getElementById("portfolio-status");
         status.textContent = "Projects couldn't be loaded. Please try again later.";
         status.hidden = false;
         document.getElementById("portfolio-sections").hidden = true;
+      } finally {
+        document.getElementById("portfolio-sections").setAttribute("aria-busy", "false");
       }
     }
     loadPortfolio();

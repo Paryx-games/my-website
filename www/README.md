@@ -10,4 +10,4 @@ The Games section uses a shared catalogue for card artwork, screenshot galleries
 
 Playtime is stored in minutes and formatted into hours and minutes for display. PC totals are loaded in the background from the playtime API; manual values remain the fallback when a game has no API data or the service is unavailable. Mobile and console totals remain independent of collector uploads.
 
-The [Portfolio](https://paryx.uk/portfolio) is a space for Roblox work, with large featured projects followed by a compact project collection. No projects have been shared there yet.
+My [Portfolio](https://paryx.uk/portfolio) shows Roblox work through featured projects, compact project cards, and screenshot galleries. Coding projects are listed on the homepage.

@@ -19,23 +19,28 @@
           "gallery": [
             {
               "src": "/assets/portfolio/acg/desks.png",
-              "alt": "Control room desks"
+              "alt": "Control room desks",
+              "preview": "/assets/portfolio/acg/desks.preview.webp"
             },
             {
               "src": "/assets/portfolio/acg/reactor.png",
-              "alt": "Empty reactor chamber"
+              "alt": "Empty reactor chamber",
+              "preview": "/assets/portfolio/acg/reactor.preview.webp"
             },
             {
               "src": "/assets/portfolio/acg/reactorlasers.png",
-              "alt": "Reactor chamber w/ lasers"
+              "alt": "Reactor chamber w/ lasers",
+              "preview": "/assets/portfolio/acg/reactorlasers.preview.webp"
             },
             {
               "src": "/assets/portfolio/acg/reactorgrills.png",
-              "alt": "Reactor grills lining reactor"
+              "alt": "Reactor grills lining reactor",
+              "preview": "/assets/portfolio/acg/reactorgrills.preview.webp"
             },
             {
               "src": "/assets/portfolio/acg/closeuplaser.png",
-              "alt": "Close up of a laser"
+              "alt": "Close up of a laser",
+              "preview": "/assets/portfolio/acg/closeuplaser.preview.webp"
             }
           ],
           "lightAmplified": true,
@@ -48,31 +53,38 @@
           "gallery": [
             {
               "src": "/assets/portfolio/farhorizons/old_map.png",
-              "alt": "Old map central area that was an experiment"
+              "alt": "Old map central area that was an experiment",
+              "preview": "/assets/portfolio/farhorizons/old_map.preview.webp"
             },
             {
               "src": "/assets/portfolio/farhorizons/newdocks.png",
-              "alt": "New docks that are unfinished"
+              "alt": "New docks that are unfinished",
+              "preview": "/assets/portfolio/farhorizons/newdocks.preview.webp"
             },
             {
               "src": "/assets/portfolio/farhorizons/woodenboats.png",
-              "alt": "Wooden boats that were made entirely in Roblox studio with plugins"
+              "alt": "Wooden boats that were made entirely in Roblox studio with plugins",
+              "preview": "/assets/portfolio/farhorizons/woodenboats.preview.webp"
             },
             {
               "src": "/assets/portfolio/farhorizons/cave_old.png",
-              "alt": "Old cave"
+              "alt": "Old cave",
+              "preview": "/assets/portfolio/farhorizons/cave_old.preview.webp"
             },
             {
               "src": "/assets/portfolio/farhorizons/cave_ores.png",
-              "alt": "Some ores that were made for the old cave"
+              "alt": "Some ores that were made for the old cave",
+              "preview": "/assets/portfolio/farhorizons/cave_ores.preview.webp"
             },
             {
               "src": "/assets/portfolio/farhorizons/furnace_old.png",
-              "alt": "Furnace that was made for the old map and probably will be reused"
+              "alt": "Furnace that was made for the old map and probably will be reused",
+              "preview": "/assets/portfolio/farhorizons/furnace_old.preview.webp"
             },
             {
               "src": "/assets/portfolio/farhorizons/wizard_room_unfinished.png",
-              "alt": "Left out from main preview - very unfinished"
+              "alt": "Left out from main preview - very unfinished",
+              "preview": "/assets/portfolio/farhorizons/wizard_room_unfinished.preview.webp"
             }
           ]
         }
