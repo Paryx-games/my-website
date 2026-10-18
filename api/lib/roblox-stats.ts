@@ -3,6 +3,19 @@ export const universes = {
   pressure: 4367208330, town: 1718755273, industrialist: 3448264866,
   'build-a-boat-for-treasure': 210851291, 'nuclear-blast-testing-facility': 27761886,
   'a-core-game': 2473499480,
+  'jujutsu-shenanigans': 3508322461,
+  'doors': 2440500124,
+  'the-strongest-battlegrounds': 3808081382,
+  'notoriety': 16680835,
+  'blox-fruits': 994732206,
+  'scp-roleplay': 1742264997,
+  'car-crushers-2': 274816972,
+  'cook-burgers': 1073273083,
+  'unseen-liminality': 9885372266,
+  'apeirophobia': 3761186887,
+  'islands': 1659645941,
+  'bee-swarm-simulator': 601130232,
+  'oakridge-nuclear-power-station': 5417936082,
 };
 export type RobloxStats = {
   universeId: number; placeId: number; creatorType: 'Group' | 'User'; creatorId: number;
