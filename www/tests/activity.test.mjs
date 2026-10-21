@@ -3,11 +3,11 @@ import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 import { runInNewContext } from "node:vm";
 
-const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
-const start = html.indexOf("    const isCodingActivity =");
-const end = html.indexOf("    const averageActivityColor =", start);
+const source = await readFile(new URL("../src/home.js", import.meta.url), "utf8");
+const start = source.indexOf("const isCodingActivity =");
+const end = source.indexOf("const averageActivityColor =", start);
 const { type, card } = runInNewContext(
-  `${html.slice(start, end)}\n({ type: discordActivityType, card: discordActivityCard });`,
+  `${source.slice(start, end)}\n({ type: discordActivityType, card: discordActivityCard });`,
   {
     esc: (value) =>
       String(value).replace(

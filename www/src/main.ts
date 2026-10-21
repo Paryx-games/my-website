@@ -1,6 +1,4 @@
-import { inject } from "@vercel/analytics";
-
-inject();
+import "./analytics.js";
 
 const sectionToggles = new Map<HTMLElement, (expanded: boolean) => void>();
 document.querySelectorAll<HTMLElement>("#content > section").forEach((section, index) => {

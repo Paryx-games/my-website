@@ -6,6 +6,7 @@ import { runInNewContext } from "node:vm";
 const root = new URL("../", import.meta.url);
 const config = JSON.parse(await readFile(new URL("public/portfolio.json", root), "utf8"));
 const source = await readFile(new URL("portfolio.html", root), "utf8");
+const script = await readFile(new URL("src/portfolio.js", root), "utf8");
 
 test("the built portfolio includes its content without a separate data request", async () => {
   const html = await readFile(new URL("dist/portfolio.html", root), "utf8");
@@ -34,7 +35,7 @@ test("portfolio startup renders embedded content and updates the actual intro pa
     getElementById: id => nodes.get(id) || null,
     querySelector: selector => selector === ".portfolio-intro h1" || selector.startsWith("meta[") ? {} : null,
   };
-  const loader = source.slice(source.indexOf("    function loadPortfolio()"), source.indexOf("    loadPortfolio();"));
+  const loader = script.slice(script.indexOf("function loadPortfolio()"), script.indexOf("loadPortfolio();"));
   assert.ok(loader, "The portfolio loader must be available");
   runInNewContext(`${loader}\nloadPortfolio();`, { document, renderPortfolio: value => { sections = value; } });
   assert.equal(JSON.stringify(sections), JSON.stringify(config.sections));
