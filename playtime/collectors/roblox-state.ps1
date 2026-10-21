@@ -37,6 +37,7 @@ function Add-RobloxTrackedTime {
     $session = $State.Active[$Client]
     $end = [Math]::Max($session.Floor, $At)
     $delta = ($end - $session.At) / 1000.0
+    if ($delta -lt 0) { Write-Verbose "The clock moved back by $([Math]::Abs($delta))s for client $Client." }
     $id = $session.UniverseId
     if (-not $State.Totals.ContainsKey($id)) { $State.Totals[$id] = 0.0 }
     $State.Totals[$id] = [Math]::Max(0.0, $State.Totals[$id] + $delta)
@@ -46,9 +47,9 @@ function Add-RobloxTrackedTime {
 function Update-RobloxTrackedEvent {
     param($State, [string]$Client, $Event, [long]$Floor)
     $at = $Event.At.ToUnixTimeMilliseconds()
-    if ($at -lt $State.StartedAt) { return }
+    if ($at -lt $State.StartedAt) { Write-Verbose "Ignoring a $($Event.Kind) event for $Client from before tracking started."; return }
     if (-not $State.ContainsKey('LastEvents')) { $State.LastEvents = @{} }
-    if ($State.LastEvents.ContainsKey($Client) -and $at -le $State.LastEvents[$Client]) { return }
+    if ($State.LastEvents.ContainsKey($Client) -and $at -le $State.LastEvents[$Client]) { Write-Verbose "Ignoring a duplicate or out-of-order $($Event.Kind) event for $Client."; return }
     $State.LastEvents[$Client] = $at
     Add-RobloxTrackedTime $State $Client $at
     if ($Event.Kind -eq 'leave') { $State.Active.Remove($Client); return }
@@ -68,10 +69,10 @@ function Get-RobloxPlaytime {
     $path = if ($env:ROBLOX_STATE_PATH) { $env:ROBLOX_STATE_PATH } else { Join-Path $env:LOCALAPPDATA 'Paryx\PlaytimeCollector\roblox-state.json' }
     if (-not (Test-Path -LiteralPath $path)) { return @() }
     $state = ConvertTo-RobloxHashtable (Get-Content -LiteralPath $path -Raw | ConvertFrom-Json)
-    if ($state.Version -ne 1 -or $state.Totals -isnot [hashtable]) { throw 'Unsupported Roblox tracker state.' }
+    if ($state.Version -ne 1 -or $state.Totals -isnot [hashtable]) { throw "Unsupported Roblox tracker state in '$path'." }
     foreach ($entry in $state.Totals.GetEnumerator()) {
         $seconds = [double]$entry.Value
-        if ($entry.Key -notmatch '^[1-9]\d*$' -or [double]::IsNaN($seconds) -or [double]::IsInfinity($seconds) -or $seconds -lt 0) { throw 'Invalid Roblox tracker counter.' }
+        if ($entry.Key -notmatch '^[1-9]\d*$' -or [double]::IsNaN($seconds) -or [double]::IsInfinity($seconds) -or $seconds -lt 0) { throw "Invalid Roblox tracker counter '$($entry.Key)' in '$path'." }
         [pscustomobject]@{ GameId = $entry.Key; Minutes = [long][Math]::Floor($seconds / 60.0) }
     }
 }
