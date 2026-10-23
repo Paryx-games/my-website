@@ -1,5 +1,3 @@
-import "./analytics.js";
-
 const sectionToggles = new Map<HTMLElement, (expanded: boolean) => void>();
 document.querySelectorAll<HTMLElement>("#content > section").forEach((section, index) => {
   const heading = section.querySelector<HTMLHeadingElement>(":scope > h2");

@@ -48,11 +48,37 @@ If you find these APIs useful, consider supporting their continued development a
 
 Colors are calculated using [GitHub's Linguist](https://github.com/github-linguist/linguist) and any files without valid colors return in the color `#8b949e`, a muted gray.
 
-`GET` [`/github/languages?repo=Paryx-games/roblox-manager`](https://api.paryx.uk/github/languages?repo=Paryx-games/roblox-manager) - Returns the language percentages of a GitHub repository.
+`GET` [`/github/languages/repo?repo=Paryx-games/roblox-manager`](https://api.paryx.uk/github/languages/repo?repo=Paryx-games/roblox-manager) - Returns the language percentages of one GitHub repository.
 
 **Parameters:**
 
 - `repo` (required) - GitHub repository in `owner/repo` format.
+
+### GitHub User Languages
+
+`GET` [`/github/languages/user?user=Paryx-games`](https://api.paryx.uk/github/languages/user?user=Paryx-games) - Aggregates language percentages across the user's public, non-fork, non-archived GitHub repositories.
+
+**Parameters:**
+
+- `user` (required) - GitHub username.
+
+Both structured language endpoints return the same response shape:
+
+```json
+{
+  "repository": "Paryx-games",
+  "totalBytes": 123456,
+  "languages": [
+    {
+      "language": "TypeScript",
+      "bytes": 90000,
+      "percentage": 72.9
+    }
+  ]
+}
+```
+
+The previous `/github/languages?repo=owner/repo` route remains available as a compatibility alias for the repository endpoint.
 
 ### GitHub Language Bar
 

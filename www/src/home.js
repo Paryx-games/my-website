@@ -1,3 +1,5 @@
+import { getGitHubProjects } from "./github-projects.js";
+
 const CONFIG = {
   githubUser: "Paryx-games",
   myTimeZone: "Europe/London",
@@ -1647,12 +1649,7 @@ const onRepoClick = async (event) => {
   );
 };
 
-let githubProjectsPromise;
-const GITHUB_PROJECTS_MODULE = "/assets/github-projects.js";
-const fetchGitHubProjects = () =>
-  (githubProjectsPromise ||= import(
-    /* @vite-ignore */ GITHUB_PROJECTS_MODULE
-  ).then(({ getGitHubProjects }) => getGitHubProjects()));
+const fetchGitHubProjects = getGitHubProjects;
 
 const languageBreakdown = (raw) => {
   if (!raw || typeof raw !== "object") return [];

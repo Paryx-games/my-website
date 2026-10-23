@@ -1,4 +1,3 @@
-import "./analytics.js";
 import "./site.css";
 
 // Content is embedded from public/portfolio.json by Vite.
