@@ -48,19 +48,19 @@ If you find these APIs useful, consider supporting their continued development a
 
 Colors are calculated using [GitHub's Linguist](https://github.com/github-linguist/linguist) and any files without valid colors return in the color `#8b949e`, a muted gray.
 
-`GET` [`/github/languages/repo?repo=Paryx-games/roblox-manager`](https://api.paryx.uk/github/languages/repo?repo=Paryx-games/roblox-manager) - Returns the language percentages of one GitHub repository.
+`GET` [`/github/languages?target=Paryx-games/roblox-manager`](https://api.paryx.uk/github/languages?target=Paryx-games/roblox-manager) - Automatically detects and returns the language percentages of one GitHub repository.
 
 **Parameters:**
 
-- `repo` (required) - GitHub repository in `owner/repo` format.
+- `target` (required) - GitHub username, organization name, or repository in `owner/repo` format.
 
-### GitHub User Languages
+Examples:
 
-`GET` [`/github/languages/user?user=Paryx-games`](https://api.paryx.uk/github/languages/user?user=Paryx-games) - Aggregates language percentages across the user's public, non-fork, non-archived GitHub repositories.
+- [`/github/languages?target=Paryx-games`](https://api.paryx.uk/github/languages?target=Paryx-games) - Aggregates a user's public repositories.
+- [`/github/languages?target=Paryx-Labs`](https://api.paryx.uk/github/languages?target=Paryx-Labs) - Aggregates an organization's public repositories.
+- [`/github/languages?target=Paryx-games/roblox-manager`](https://api.paryx.uk/github/languages?target=Paryx-games/roblox-manager) - Returns one repository's languages.
 
-**Parameters:**
-
-- `user` (required) - GitHub username.
+The explicit `/github/languages/repo?repo=...` and `/github/languages/user?user=...` routes remain available. The previous `/github/languages?repo=owner/repo` query also remains available as a compatibility alias.
 
 Both structured language endpoints return the same response shape:
 
@@ -82,9 +82,11 @@ The previous `/github/languages?repo=owner/repo` route remains available as a co
 
 ### GitHub Language Bar
 
-`GET` [`/github/languages/bar?repo=git/git&details=true`](https://api.paryx.uk/github/languages/bar?repo=git/git&details=true) - Returns a language bar for a GitHub repository.
+`GET` [`/github/languages/bar?target=git/git&details=true`](https://api.paryx.uk/github/languages/bar?target=git/git&details=true) - Returns a language bar for a repository, user, or organization.
 
 **Parameters:**
 
-- `repo` (required) - GitHub repository in `owner/repo` format.
+- `target` (required) - GitHub username, organization name, or repository in `owner/repo` format.
 - `details` (optional) - Set to `true` to include language names and percentages.
+
+The previous `repo` query parameter remains available as a compatibility alias.

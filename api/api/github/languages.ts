@@ -1,14 +1,14 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import {
-  getRepositoryLanguageCacheTag,
-  getRepositoryLanguages,
+  getTargetLanguages,
 } from "../../lib/languages.js";
 
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
-  const result = await getRepositoryLanguages(req.query.repo);
+  const target = req.query.target ?? req.query.repo;
+  const result = await getTargetLanguages(target);
 
   if (result.error !== undefined) {
     return res.status(result.status).json({ error: result.error });
@@ -20,7 +20,7 @@ export default async function handler(
   );
   res.setHeader(
     "Vercel-Cache-Tag",
-    getRepositoryLanguageCacheTag(result.data.repository),
+    `github-languages-${result.data.repository.toLowerCase().replaceAll("/", "-")}`,
   );
 
   return res.status(200).json(result.data);

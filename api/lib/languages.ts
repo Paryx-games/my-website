@@ -115,17 +115,39 @@ export async function getUserLanguages(
   }
 
   try {
+    return await getOwnerLanguages(user);
+  } catch {
+    return { error: "Failed to fetch user languages", status: 500 };
+  }
+}
+
+export async function getOwnerLanguages(
+  owner: unknown,
+): Promise<RepositoryLanguagesResult> {
+  if (typeof owner !== "string" || !/^[a-zA-Z0-9-]+$/.test(owner)) {
+    return {
+      error: "Expected ?user=github-username",
+      status: 400,
+    };
+  }
+  try {
     const languageMaps: Record<string, number>[] = [];
     for (let page = 1; ; page += 1) {
-      const repositoriesResponse = await fetch(
-        `https://api.github.com/users/${user}/repos?type=owner&per_page=100&page=${page}`,
+      let repositoriesResponse = await fetch(
+        `https://api.github.com/users/${owner}/repos?type=owner&per_page=100&page=${page}`,
         { headers: githubRequestHeaders() },
       );
+      if (repositoriesResponse.status === 404) {
+        repositoriesResponse = await fetch(
+          `https://api.github.com/orgs/${owner}/repos?type=all&per_page=100&page=${page}`,
+          { headers: githubRequestHeaders() },
+        );
+      }
       if (!repositoriesResponse.ok) {
         return {
           error:
             repositoriesResponse.status === 404
-              ? "User not found"
+              ? "GitHub user or organization not found"
               : "GitHub API request failed",
           status: repositoriesResponse.status,
         };
@@ -158,8 +180,22 @@ export async function getUserLanguages(
       }
       if (repositories.length < 100) break;
     }
-    return { data: languageResult(user, languageMaps), status: 200 };
+    return { data: languageResult(owner, languageMaps), status: 200 };
   } catch {
-    return { error: "Failed to fetch user languages", status: 500 };
+    return { error: "Failed to fetch owner languages", status: 500 };
   }
+}
+
+export async function getTargetLanguages(
+  target: unknown,
+): Promise<RepositoryLanguagesResult> {
+  if (typeof target !== "string" || !target) {
+    return {
+      error: "Expected ?target=username or ?target=owner/repository",
+      status: 400,
+    };
+  }
+  return target.includes("/")
+    ? getRepositoryLanguages(target)
+    : getUserLanguages(target);
 }

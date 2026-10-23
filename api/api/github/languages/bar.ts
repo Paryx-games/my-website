@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getLanguageColor } from "../../../lib/language-colors.js";
 import {
   getRepositoryLanguageCacheTag,
-  getRepositoryLanguages,
+  getTargetLanguages,
 } from "../../../lib/languages.js";
 
 const BAR_WIDTH = 600;
@@ -80,7 +80,7 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
-  const result = await getRepositoryLanguages(req.query.repo);
+  const result = await getTargetLanguages(req.query.target ?? req.query.repo);
 
   if (result.error !== undefined) {
     return res.status(result.status).json({ error: result.error });
