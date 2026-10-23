@@ -24,10 +24,11 @@
 .contributions [data-level="3"] { fill: #26a641; background: #26a641; }
 .contributions [data-level="4"] { fill: #39d353; background: #39d353; }
 .contributions-footer { color: var(--color-muted); font-size: 11px; margin-top: 8px; }
-.contributions-footer-tools { display: flex; flex: 1 1 100%; align-items: center; justify-content: flex-start; flex-wrap: wrap; gap: 22px; }
+.contributions-footer-tools { display: grid; flex: 1 1 100%; grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 32px; }
+.contributions-legend-container { display: flex; justify-content: flex-end; }
 .contributions-legend { display: inline-flex; align-items: center; gap: 4px; }
 .contributions-legend i { width: 11px; height: 11px; border-radius: 2px; }
-.contributions-language-bar { display: flex; width: clamp(180px, 30vw, 360px); height: 10px; border-radius: 3px; background: var(--color-border); transform: scaleX(0); transform-origin: left; transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1); }
+.contributions-language-bar { display: flex; width: clamp(240px, 40vw, 520px); height: 10px; border-radius: 3px; background: var(--color-border); transform: scaleX(0); transform-origin: left; transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1); }
 .contributions-language-bar.is-ready { transform: scaleX(1); }
 .contributions-language-segment { position: relative; display: block; min-width: 2px; height: 100%; flex: none; outline: none; }
 .contributions-language-segment:first-child { border-radius: 3px 0 0 3px; }
@@ -46,7 +47,7 @@
 .contributions-selection { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px 16px; padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--color-border); font-size: 12px; }
 .contributions-selection p { flex-basis: 100%; font-size: 14px; }
 .contributions-selection a, .contributions-selection button { color: var(--color-muted); padding: 0; text-decoration: underline; text-underline-offset: 3px; }
-@media (max-width: 600px) { .contributions { padding: 16px; } .contributions-footer-tools { width: 100%; justify-content: space-between; } }
+@media (max-width: 600px) { .contributions { padding: 16px; } .contributions-footer-tools { width: 100%; column-gap: 20px; } .contributions-language-bar { width: 100%; } }
 .section-toggle { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0; font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 .section-toggle svg { width: 16px; height: 16px; color: var(--color-faint); transition: transform 200ms ease-out; }
 .section-toggle[aria-expanded="false"] svg { transform: rotate(-90deg); }
