@@ -16,6 +16,10 @@ type LanguageBarOptions = {
   includeDetails: boolean;
 };
 
+function queryValue(value: string | string[] | undefined): string | undefined {
+  return Array.isArray(value) ? value[0] : value;
+}
+
 function escapeXml(value: string): string {
   return value
     .replaceAll("&", "&amp;")
@@ -80,7 +84,8 @@ export default async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
-  const result = await getTargetLanguages(req.query.target ?? req.query.repo);
+  const target = queryValue(req.query.target) ?? queryValue(req.query.repo);
+  const result = await getTargetLanguages(target);
 
   if (result.error !== undefined) {
     return res.status(result.status).json({ error: result.error });
@@ -99,7 +104,7 @@ export default async function handler(
 
   return res.status(200).send(
     createLanguageBar(result.data.repository, result.data.languages, {
-      includeDetails: req.query.details === "true",
+      includeDetails: queryValue(req.query.details)?.toLowerCase() === "true",
     }),
   );
 }

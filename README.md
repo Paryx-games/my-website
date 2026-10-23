@@ -19,7 +19,7 @@ This repository contains my personal website, blog, development environments, an
 
 This is what languages this project uses! This uses one of the APIs under the `api/` tree
 
-![Languages used across the paryx.uk sites](https://api.paryx.uk/github/languages/bar?repo=Paryx-games/my-website&details=true)
+![Languages used across the paryx.uk sites](https://api.paryx.uk/github/languages/bar?target=Paryx-games&details=true)
 
 ## Why Some Websites Are Private
 
