@@ -24,6 +24,14 @@
 			"destination": "/api/github/languages"
 		},
 		{
+			"source": "/github/languages/repo",
+			"destination": "/api/github/languages/repo"
+		},
+		{
+			"source": "/github/languages/user",
+			"destination": "/api/github/languages/user"
+		},
+		{
 			"source": "/github/languages/bar",
 			"destination": "/api/github/languages/bar"
 		},

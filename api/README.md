@@ -6,6 +6,13 @@ Visit [api.paryx.uk](https://api.paryx.uk).
 
 The service provides backend functionality and language statistics for public GitHub repositories. Language breakdowns are available as structured data and visual bars, with colours based on GitHub Linguist and optional language names and percentages.
 
+Language endpoints:
+
+- `GET /github/languages/repo?repo=owner/repository` returns the language breakdown for one public repository.
+- `GET /github/languages/user?user=username` aggregates language bytes across the user's non-fork, non-archived public repositories.
+- Both structured endpoints return `{ repository, totalBytes, languages }`; the user response uses the GitHub username in the `repository` field for response compatibility.
+- The existing `GET /github/languages?repo=owner/repository` route remains available as a compatibility alias for the repository endpoint.
+
 Repository statistics are cached to keep responses fast and can be refreshed when a repository changes.
 
 The playtime API provides game totals used by the website:
