@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { normalizeCalendar, fetchContributions, createContributionsHandler } from '../api/github-contributions.js';
+import {
+  normalizeCalendar, fetchContributions, createContributionsHandler,
+} from '../api/github-contributions.js';
+import {
+  aggregateRepositoryLanguages, contributionMonthHeadings, contributionWeekX, contributionYearBoundaries,
+} from '../public/assets/github-contributions.js';
 
 const calendar = {
   totalContributions: 7,
@@ -18,6 +23,41 @@ test('calendar preserves partial-week alignment and rejects malformed provider d
   for (const extra of [{ weekday: 0 }, { date: '2026-02-30' }, { contributionCount: -1 }, { contributionLevel: 'OTHER' }, { date: '2026-10-16' }]) {
     assert.throws(() => normalizeCalendar({ ...calendar, weeks: [{ contributionDays: [calendar.weeks[0].contributionDays[0], { ...calendar.weeks[0].contributionDays[1], ...extra }] }] }));
   }
+});
+
+test('all-time month headings start with the first contribution year and retain the full timeline', () => {
+  const weeks = [
+    [{ date: '2024-12-29' }],
+    [{ date: '2025-01-01' }],
+    [{ date: '2025-02-02' }],
+    [{ date: '2025-12-28' }],
+    [{ date: '2026-01-01' }],
+  ];
+  assert.deepEqual(contributionMonthHeadings(weeks, 2025), [
+    { index: 1, label: 'Jan' },
+    { index: 2, label: 'Feb' },
+    { index: 3, label: 'Dec' },
+    { index: 4, label: 'Jan' },
+  ]);
+  assert.deepEqual(contributionYearBoundaries(weeks), [1, 4]);
+  assert.deepEqual([0, 1, 2, 4].map(index => contributionWeekX(index, [1, 4])), [30, 55, 68, 106]);
+});
+
+test('profile language breakdown combines account and organisation Linguist bytes', () => {
+  const languages = aggregateRepositoryLanguages({
+    version: 1,
+    games: [
+      { languageBytes: { TypeScript: 700, Rust: 300 }, languageColors: { TypeScript: '#3178c6', Rust: '#dea584' } },
+      { languageBytes: { TypeScript: 300, Python: 200 } },
+    ],
+    labs: [{ languageBytes: { Rust: 200, Python: 100 } }],
+  });
+  assert.deepEqual(languages, [
+    { name: 'TypeScript', bytes: 1000, color: '#3178c6', percentage: 1000 / 1800 * 100 },
+    { name: 'Rust', bytes: 500, color: '#dea584', percentage: 500 / 1800 * 100 },
+    { name: 'Python', bytes: 300, color: '#8b949e', percentage: 300 / 1800 * 100 },
+  ]);
+  assert.throws(() => aggregateRepositoryLanguages({ version: 2 }));
 });
 
 test('GitHub credentials stay upstream and partial GraphQL errors are rejected', async () => {

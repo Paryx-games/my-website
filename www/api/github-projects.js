@@ -22,7 +22,7 @@ export const PROJECTS_QUERY = `
     parent { nameWithOwner isPrivate }
     primaryLanguage { name }
     languages(first: 100, orderBy: {field: SIZE, direction: DESC}) {
-      edges { size node { name } }
+      edges { size node { name color } }
       pageInfo { hasNextPage endCursor }
     }
     issuesOpen: issues(states: [OPEN]) { totalCount }
@@ -36,6 +36,12 @@ const publicRepos = (nodes) =>
   (nodes || []).filter((repo) => repo?.isPrivate === false);
 const languageBytes = (edges) =>
   Object.fromEntries((edges || []).map((edge) => [edge.node.name, edge.size]));
+const languageColors = (edges) =>
+  Object.fromEntries(
+    (edges || [])
+      .filter((edge) => typeof edge.node.color === "string")
+      .map((edge) => [edge.node.name, edge.node.color]),
+  );
 const normalize = (repo) => {
   const parent =
     repo.parent?.isPrivate === false ? repo.parent.nameWithOwner : null;
@@ -52,6 +58,7 @@ const normalize = (repo) => {
     fork: repo.isFork,
     parent: parent ? { full_name: parent } : null,
     languageBytes: languageBytes(repo.languages?.edges),
+    languageColors: languageColors(repo.languages?.edges),
     stats: {
       stars: repo.stargazerCount,
       forks: repo.forkCount,
@@ -153,6 +160,7 @@ export async function fetchProjects({
                   size
                   node {
                     name
+                    color
                   }
                 }
                 pageInfo {

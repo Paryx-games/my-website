@@ -4,7 +4,7 @@ import {
   fetchProjects,
   createProjectsHandler,
 } from "../api/github-projects.js";
-import { createProjectsClient } from "../public/assets/github-projects.js";
+import { createProjectsClient } from "../src/github-projects.js";
 
 const repo = (name, extra = {}) => ({
   name,
@@ -20,7 +20,7 @@ const repo = (name, extra = {}) => ({
   languages: {
     edges: [
       { size: 75, node: { name: "Rust" } },
-      { size: 25, node: { name: "TypeScript" } },
+      { size: 25, node: { name: "TypeScript", color: "#3178c6" } },
     ],
     pageInfo: { hasNextPage: false },
   },
@@ -85,6 +85,7 @@ test("one GitHub query returns all card data and filters private repositories an
   assert.equal(data.games[0].stats.prsClosed, 41);
   assert.equal(data.games[0].stats.parent, "upstream/project");
   assert.deepEqual(data.games[0].languageBytes, { Rust: 75, TypeScript: 25 });
+  assert.deepEqual(data.games[0].languageColors, { TypeScript: "#3178c6" });
   assert.equal(data.labs[0].parent, null);
   assert.ok(!JSON.stringify(data).includes("secret"));
   assert.ok(!JSON.stringify(data).includes("server-only-token"));
