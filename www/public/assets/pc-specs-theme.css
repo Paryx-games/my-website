@@ -1,0 +1,313 @@
+/*
+ * Restyles /pc-specs to match the home page theme.
+ * Load AFTER /assets/pc-specs.css on the PC specs page only.
+ * Everything is scoped to .pc-specs-page so the terminal on the home page,
+ * which shares pc-specs.css, is not affected.
+ */
+
+:root {
+    --color-bg: #080809;
+    --color-surface: #101113;
+    --color-text: #ececee;
+    --color-soft: #c9c9ce;
+    --color-muted: #b6b6bf;
+    --color-faint: #92929d;
+    --color-line: #29292e;
+    --color-hover: rgba(255, 255, 255, 0.06);
+    --color-border: #29292e;
+    --color-border-hover: #3a3a40;
+    --color-border-strong: #55555c;
+    --pc-radius: 10px;
+    --pc-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --pc-fast: 0.22s;
+    --pc-mono: ui-monospace, "Cascadia Code", "Cascadia Mono", Consolas, "SFMono-Regular", Menlo, monospace;
+}
+
+html,
+body {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+body .pc-specs-page {
+    width: min(760px, 100% - 3rem);
+    margin: 0 auto;
+    padding: 3rem 0 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Page intro */
+
+body .pc-specs-page .pc-page-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+}
+
+body .pc-specs-page .pc-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: color var(--pc-fast) var(--pc-ease);
+}
+
+body .pc-specs-page .pc-back-link svg {
+    width: 15px;
+    height: 15px;
+    transition: transform var(--pc-fast) var(--pc-ease);
+}
+
+body .pc-specs-page .pc-back-link:hover {
+    color: var(--color-text);
+}
+
+body .pc-specs-page .pc-back-link:hover svg {
+    transform: translateX(-3px);
+}
+
+body .pc-specs-page .pc-page-intro h1 {
+    margin: 0;
+    color: var(--color-text);
+    font-family: "Sora", "Inter", system-ui, sans-serif;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+}
+
+/* Terminal */
+
+body .pc-specs-page .pc-terminal {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: var(--pc-radius);
+    background: var(--color-surface);
+    box-shadow: none;
+    transition: border-color var(--pc-fast) var(--pc-ease);
+}
+
+body .pc-specs-page .pc-terminal:hover {
+    border-color: var(--color-border-hover);
+}
+
+body .pc-specs-page .pc-terminal .pc-terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-muted);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 0.8125rem;
+}
+
+body .pc-specs-page .pc-terminal .pc-terminal-bar svg {
+    width: 15px;
+    height: 15px;
+    flex: none;
+}
+
+body .pc-specs-page .pc-terminal .pc-terminal-window-mark {
+    width: 11px;
+    height: 11px;
+    margin-left: auto;
+    border: 1.5px solid var(--color-faint);
+    border-radius: 2px;
+    background: transparent;
+}
+
+body .pc-specs-page .pc-terminal .pc-terminal-inner {
+    padding: 1.5rem;
+    background: transparent;
+    color: var(--color-soft);
+    font-family: var(--pc-mono);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+}
+
+body .pc-specs-page .pc-terminal .pc-prompt {
+    margin: 0 0 1.5rem;
+    color: var(--color-faint);
+}
+
+body .pc-specs-page .pc-terminal .pc-prompt span {
+    color: var(--color-text);
+}
+
+body .pc-specs-page .pc-terminal .pc-fetch {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 2rem;
+}
+
+body .pc-specs-page .pc-terminal .pc-logo {
+    margin: 0;
+    color: var(--color-border-strong);
+    font-family: var(--pc-mono);
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    user-select: none;
+}
+
+body .pc-specs-page .pc-terminal .pc-output {
+    min-width: 0;
+}
+
+body .pc-specs-page .pc-terminal .pc-identity {
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+body .pc-specs-page .pc-terminal .pc-identity span {
+    color: var(--color-faint);
+    font-weight: 400;
+}
+
+body .pc-specs-page .pc-terminal .pc-facts {
+    margin: 0 0 1rem;
+}
+
+body .pc-specs-page .pc-terminal .pc-facts>div {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+}
+
+body .pc-specs-page .pc-terminal .pc-facts dt {
+    margin: 0;
+    color: var(--color-muted);
+    font-weight: 400;
+}
+
+body .pc-specs-page .pc-terminal .pc-facts dd {
+    margin: 0;
+    color: var(--color-text);
+    overflow-wrap: anywhere;
+}
+
+body .pc-specs-page .pc-terminal .pc-palette {
+    margin-top: 1.25rem;
+    opacity: 0.85;
+}
+
+/* Hardware detail cards */
+
+body .pc-specs-page .pc-hardware-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 0.75rem;
+    margin: 0;
+}
+
+body .pc-specs-page .pc-hardware-details .pc-detail-group {
+    min-width: 0;
+    margin: 0;
+    padding: 1rem 1.5rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--pc-radius);
+    background: var(--color-surface);
+    transition:
+        border-color var(--pc-fast) var(--pc-ease),
+        background-color var(--pc-fast) var(--pc-ease);
+}
+
+body .pc-specs-page .pc-hardware-details .pc-detail-group:hover {
+    border-color: var(--color-border-hover);
+    background: #111114;
+}
+
+body .pc-specs-page .pc-hardware-details .pc-detail-group h2 {
+    margin: 0 0 0.5rem;
+    color: var(--color-muted);
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    text-transform: none;
+}
+
+body .pc-specs-page .pc-hardware-details .pc-detail-group dl {
+    margin: 0;
+}
+
+body .pc-specs-page .pc-hardware-details .pc-detail-group dl>div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.15rem 1rem;
+    padding: 0.55rem 0;
+    border-top: 1px solid var(--color-border);
+}
+
+body .pc-specs-page .pc-hardware-details .pc-detail-group dt {
+    margin: 0;
+    color: var(--color-faint);
+    font-size: 0.8125rem;
+    font-weight: 400;
+}
+
+body .pc-specs-page .pc-hardware-details .pc-detail-group dd {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 400;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+}
+
+/* Small screens */
+
+@media (max-width: 640px) {
+    body .pc-specs-page {
+        gap: 2rem;
+        padding-top: 2rem;
+    }
+
+    body .pc-specs-page .pc-terminal .pc-terminal-inner {
+        padding: 1.1rem;
+    }
+
+    body .pc-specs-page .pc-terminal .pc-fetch {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    body .pc-specs-page .pc-terminal .pc-logo {
+        display: none;
+    }
+
+    body .pc-specs-page .pc-terminal .pc-facts>div {
+        grid-template-columns: 6.25rem minmax(0, 1fr);
+    }
+
+    body .pc-specs-page .pc-hardware-details {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    body .pc-specs-page .pc-terminal,
+    body .pc-specs-page .pc-back-link,
+    body .pc-specs-page .pc-back-link svg,
+    body .pc-specs-page .pc-hardware-details .pc-detail-group {
+        transition: none;
+    }
+}

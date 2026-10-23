@@ -117,6 +117,24 @@ function Invoke-RobloxTracker {
         foreach ($game in ($catalogue | ConvertFrom-Json)) {
             $gameNames[[string]$game.roblox.universeId] = [string]$game.title
         }
+        if (-not $state.ContainsKey('Games')) { $state.Games = @{} }
+        $knownUniverseIds = @($state.Totals.Keys) + @($state.Active.Values | ForEach-Object { [string]$_.UniverseId }) |
+            Sort-Object -Unique
+        foreach ($universeId in $knownUniverseIds) {
+            if (-not $state.Games.ContainsKey($universeId)) {
+                $name = Get-RobloxTrackerName $universeId $gameNames $nameAttempts
+                $state.Games[$universeId] = @{ Name = $name; PlaceIds = @() }
+            }
+            elseif ([string]::IsNullOrWhiteSpace([string]$state.Games[$universeId].Name) -or $state.Games[$universeId].Name -eq 'Unknown experience') {
+                $name = Get-RobloxTrackerName $universeId $gameNames $nameAttempts
+                $state.Games[$universeId].Name = $name
+            }
+            foreach ($active in @($state.Active.Values | Where-Object { [string]$_.UniverseId -eq $universeId })) {
+                if ([string]$active.PlaceId -notin @($state.Games[$universeId].PlaceIds)) {
+                    $state.Games[$universeId].PlaceIds = @($state.Games[$universeId].PlaceIds) + [string]$active.PlaceId
+                }
+            }
+        }
         Write-Output "Roblox tracker active. State: $Path"
         do {
             $now = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
@@ -166,6 +184,7 @@ function Invoke-RobloxTracker {
                 }
                 if ($event.Kind -eq 'join' -and $state.Active.ContainsKey($client)) {
                     $name = Get-RobloxTrackerName $event.UniverseId $gameNames $nameAttempts
+                    $state.Games[$event.UniverseId].Name = $name
                     $message = "JOINED {0} - place {1}, universe {2}" -f $name, $event.PlaceId, $event.UniverseId
                     Write-PlaytimeEvent $message $eventLog
                 }
@@ -186,7 +205,7 @@ function Invoke-RobloxTracker {
                 if ($uploadProcess.ExitCode -eq 0) {
                     $state.LastUploadTotals = $uploadSnapshot
                     Save-RobloxTrackerState $Path $state
-                    Write-PlaytimeEvent 'UPLOAD check finished successfully.' $eventLog
+                    Write-PlaytimeCheck 'check finished successfully.' $eventLog
                 }
                 else {
                     Write-PlaytimeEvent 'UPLOAD check failed; it will retry on the next interval.' $eventLog

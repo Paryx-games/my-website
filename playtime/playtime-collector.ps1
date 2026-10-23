@@ -381,11 +381,22 @@ function Get-CollectorEntries {
                 throw "Duplicate $source entry for $id."
             }
 
-            $entries.Add([pscustomobject][ordered]@{
+            $entry = [ordered]@{
                     gameId  = $id
                     source  = $source
                     minutes = [long]$number
-                })
+                }
+            if ($source -eq 'roblox' -and $null -ne $item.PSObject.Properties['Name']) {
+                $name = [string]$item.Name
+                $placeIds = @($item.PlaceIds)
+                if ([string]::IsNullOrWhiteSpace($name) -or $name.Length -gt 200 -or
+                    $placeIds.Count -gt 1000 -or
+                    @($placeIds | Where-Object { [string]$_ -notmatch '^[1-9]\d{0,15}$' }).Count) {
+                    throw "Invalid Roblox metadata for universe $id."
+                }
+                $entry.metadata = [ordered]@{ name = $name.Trim(); placeIds = @($placeIds | ForEach-Object { [string]$_ }) }
+            }
+            $entries.Add([pscustomobject]$entry)
         }
     }
 

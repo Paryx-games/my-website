@@ -18,6 +18,8 @@ try {
     Assert-Near $state.Totals['123'] 59 'Late disconnect corrects provisional time'
     $join.At = [DateTimeOffset]::FromUnixTimeMilliseconds(61000)
     Update-RobloxTrackedEvent $state 'client' $join 0
+    if ($state.Games['123'].PlaceIds -notcontains '456') { throw 'Observed Roblox place IDs must be retained.' }
+    $state.Games['123'].Name = 'Test experience'
     Add-RobloxTrackedTime $state 'client' 62500
     Save-RobloxTrackerState $path $state
     $restored = ConvertTo-RobloxHashtable (Get-Content -LiteralPath $path -Raw | ConvertFrom-Json)
@@ -25,6 +27,9 @@ try {
     $env:ROBLOX_STATE_PATH = $path
     $entries = @(Get-RobloxPlaytime)
     Assert-Near $entries[0].Minutes 1 'Floor only after all sessions are accumulated'
+    if ($entries[0].Name -ne 'Test experience' -or $entries[0].PlaceIds -notcontains '456') {
+        throw 'Roblox experience names and place IDs must be emitted with uploaded totals.'
+    }
     $restored.Active.client.At = 100000
     $restored.Active.client.Floor = 100000
     Add-RobloxTrackedTime $restored 'client' 102000

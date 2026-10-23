@@ -20,7 +20,7 @@ function request(method: string, body?: unknown, authorization?: string) {
   return { method, body, headers: { authorization } } as VercelRequest;
 }
 const store: PlaytimeStore = {
-  async read() { return { version: 1, updatedAt: null, games: { minecraft: { pc: 125 } } }; },
+  async read() { return { version: 1, updatedAt: null, games: { minecraft: { pc: 125 } }, robloxGames: {} }; },
   async upload(data: Upload) { return { ok: true, accepted: true, replayed: false, lastSequence: data.sequence }; },
 };
 test('bearer authentication rejects malformed and wrong tokens', () => {
@@ -38,6 +38,20 @@ test('upload validation accepts cumulative minutes and rejects malformed fields 
     { ...payload, entries: [{ ...payload.entries[0], source: 'unknown' }] },
     { ...payload, entries: [{ ...payload.entries[0], platform: 'console' }] }, { ...payload, secret: true },
   ]) assert.throws(() => validateUpload(value, 'test-pc'));
+});
+test('Roblox uploads preserve experience names and observed place IDs, including uncatalogued universes', () => {
+  const entry = {
+    gameId: '9876543210123', source: 'roblox', minutes: 125,
+    metadata: { name: 'Unlisted experience', placeIds: ['123456789', '987654321'] },
+  };
+  assert.deepEqual(validateUpload({ ...payload, entries: [entry] }, 'test-pc').entries, [entry]);
+  for (const metadata of [
+    { name: '', placeIds: [] }, { name: 'Experience', placeIds: ['0'] },
+    { name: 'Experience', placeIds: ['123', '123'] }, { name: 'Experience', placeIds: [], extra: true },
+  ]) {
+    assert.throws(() => validateUpload({ ...payload, entries: [{ ...entry, metadata }] }, 'test-pc'));
+  }
+  assert.throws(() => validateUpload({ ...payload, entries: [{ ...payload.entries[0], metadata: entry.metadata }] }, 'test-pc'));
 });
 test('library uploads discard unmapped games, map Steam app IDs and allow entirely unmapped batches', () => {
   const mixed = validateUpload({ ...payload, entries: [
@@ -66,7 +80,7 @@ test('public reads expose totals with caching and CORS, without requiring authen
   const { output, res } = response();
   await handler(request('GET'), res);
   assert.equal(output.status, 200);
-  assert.deepEqual(output.body, { version: 1, updatedAt: null, games: { minecraft: { pc: 125 } } });
+  assert.deepEqual(output.body, { version: 1, updatedAt: null, games: { minecraft: { pc: 125 } }, robloxGames: {} });
   assert.equal(output.headers['Access-Control-Allow-Origin'], '*');
   assert.match(output.headers['Cache-Control'], /s-maxage=60/);
 });

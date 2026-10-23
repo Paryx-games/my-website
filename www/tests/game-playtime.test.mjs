@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { playtimeEntries, formatMinutes } from '../public/assets/games/playtime.js';
+import { playtimeEntries, formatMinutes, robloxPlaytimeBreakdown } from '../public/assets/games/playtime.js';
 
 test('playtime converts numeric minutes, preserves estimates and hides unspecified platforms', () => {
   assert.deepEqual(playtimeEntries({ pc: 125, mobile: 1 }), [['pc', 'PC', '2 hours 5 minutes'], ['mobile', 'Mobile', '1 minute']]);
@@ -18,6 +18,13 @@ test('minute formatting handles exact hours and rounding across hour boundaries'
   assert.equal(formatMinutes(60), '1 hour');
   assert.equal(formatMinutes(59.5), '1 hour');
   assert.equal(formatMinutes(121), '2 hours 1 minute');
+});
+
+test('Roblox breakdown uses dotted-tooltip copy in hours and minutes and rejects missing values', () => {
+  assert.equal(robloxPlaytimeBreakdown({ listedPcMinutes: 125, unlistedPcMinutes: 60 }),
+    'Listed games: 2 hours 5 minutes\nNon-listed games: 1 hour');
+  assert.equal(robloxPlaytimeBreakdown({ listedPcMinutes: -1, unlistedPcMinutes: 60 }), null);
+  assert.equal(robloxPlaytimeBreakdown({ listedPcMinutes: 60 }), null);
 });
 
 test('Roblox playtime adds PC, mobile, and console minutes into a platform total', () => {

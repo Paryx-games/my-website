@@ -18,6 +18,9 @@ node_modules
 # builds
 dist/
 
+# dumps of info for the website
+dumps/
+
 # generated preview builds
 test/previews/triangle-led-front/dist
 

@@ -18,6 +18,23 @@ test('a newly catalogued universe resolves stored time without backend mappings'
   } finally { robloxGames.pop(); }
 });
 
+test('Roblox playtime records a listed and non-listed breakdown without changing platform totals', () => {
+  const local = {};
+  const listed = robloxGames[0];
+  const total = 480;
+  assert.ok(mergeRemotePlaytime(local, {
+    version: 2,
+    games: {
+      roblox: { pc: total },
+      [listed.id]: { pc: 135 },
+      'roblox-9876543210123': { pc: 345 },
+    },
+  }, ['roblox']));
+  assert.deepEqual(local.roblox.playtime, {
+    pc: total, pcIncrease24hMinutes: null, listedPcMinutes: 135, unlistedPcMinutes: 345,
+  });
+});
+
 test('remote PC totals preserve manual console/mobile values and accept zero', () => {
   const local = { minecraft: { playtime: { pc: 100, mobile: 5, console: 60 } } };
   assert.ok(mergeRemotePlaytime(local, { version: 1, games: { minecraft: { pc: 0 }, unknown: { pc: 123 } } }, ['minecraft']));

@@ -1,13 +1,13 @@
 import { neon } from '@neondatabase/serverless';
 import { createHash } from 'node:crypto';
 import type { PlaytimeStore, Upload } from './playtime.js';
-import { composePlaytime, type Baseline, type Total } from './playtime-baseline.js';
+import { composePlaytime, type Baseline, type RobloxGameMetadata, type Total } from './playtime-baseline.js';
 
 export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
   const sql = neon(databaseUrl);
   return {
     async read() {
-      const [rows, baselines] = await sql.transaction([
+      const [rows, baselines, robloxMetadata] = await sql.transaction([
         sql`
         WITH current_totals AS (
           SELECT collector_id, source, game_id, minutes, updated_at
@@ -24,11 +24,14 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
         FROM current_totals AS current
         LEFT JOIN baseline USING (collector_id, source, game_id)`,
         sql`SELECT game_id, pc, mobile, console, universe_id::text FROM playtime.baselines`,
+        sql`SELECT universe_id, name, place_ids FROM playtime.roblox_games`,
       ]);
-      return composePlaytime(baselines as Baseline[], rows as Total[]);
+      return composePlaytime(baselines as Baseline[], rows as Total[], robloxMetadata as RobloxGameMetadata[]);
     },
     async upload(data: Upload) {
-      const entries = JSON.stringify(data.entries.map(entry => ({ game_id: entry.gameId, source: entry.source, minutes: entry.minutes })));
+      const entries = JSON.stringify(data.entries.map(entry => ({
+        game_id: entry.gameId, source: entry.source, minutes: entry.minutes, metadata: entry.metadata ?? null,
+      })));
       const fingerprint = createHash('sha256').update(JSON.stringify([...data.entries].sort((a, b) => `${a.source}:${a.gameId}`.localeCompare(`${b.source}:${b.gameId}`)))).digest('hex');
       // Lock/update the collector's sequence and apply its entire batch in one statement.
       const [result] = await sql`
@@ -52,6 +55,25 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
           INSERT INTO playtime.total_history (collector_id, source, game_id, minutes, recorded_at)
           SELECT collector_id, source, game_id, minutes, updated_at FROM written
           RETURNING history_id
+        ), roblox_metadata_written AS (
+          INSERT INTO playtime.roblox_games AS existing (collector_id, universe_id, name, place_ids)
+          SELECT accepted.collector_id, entry.game_id, entry.metadata->>'name',
+            COALESCE(entry.metadata->'placeIds', '[]'::jsonb)
+          FROM accepted CROSS JOIN jsonb_to_recordset(${entries}::jsonb)
+            AS entry(game_id text, source text, minutes bigint, metadata jsonb)
+          WHERE entry.source = 'roblox' AND entry.metadata IS NOT NULL
+          ON CONFLICT (collector_id, universe_id) DO UPDATE
+            SET name = EXCLUDED.name,
+              place_ids = (
+                SELECT COALESCE(jsonb_agg(place_id ORDER BY place_id), '[]'::jsonb)
+                FROM (
+                  SELECT jsonb_array_elements_text(existing.place_ids) AS place_id
+                  UNION
+                  SELECT jsonb_array_elements_text(EXCLUDED.place_ids) AS place_id
+                ) AS merged
+              ),
+              updated_at = now()
+          RETURNING universe_id
         ), pruned_history AS (
           DELETE FROM playtime.total_history AS old
           WHERE old.recorded_at < now() - interval '24 hours'

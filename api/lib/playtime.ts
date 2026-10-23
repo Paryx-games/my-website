@@ -19,12 +19,14 @@ export const steamAppIds: Record<number, string> = {
 export const MAX_UPLOAD_BYTES = 512 * 1024;
 export const MAX_MINUTES = 100_000_000;
 
-export type Entry = { gameId: string; source: string; minutes: number };
+export type RobloxMetadata = { name: string; placeIds: string[] };
+export type Entry = { gameId: string; source: string; minutes: number; metadata?: RobloxMetadata };
 export type Upload = { collectorId: string; sequence: number; entries: Entry[] };
 export type PublicPlaytime = {
   version: 1 | 2;
   updatedAt: string | null;
   games: Record<string, { pc: number; mobile?: number; console?: number; pcIncrease24hMinutes?: number }>;
+  robloxGames: Record<string, { universeId: string; name: string; placeIds: string[] }>;
 };
 export type UploadResult = { ok: true; accepted: boolean; replayed: boolean; lastSequence: number };
 export interface PlaytimeStore {
@@ -68,11 +70,25 @@ export function validateUpload(body: unknown, collectorId: string): Upload {
     // Unmapped games do not invalidate the rest of a full library upload.
     if (!gameId) return [];
     if (!Number.isSafeInteger(entry.minutes) || (entry.minutes as number) < 0 || (entry.minutes as number) > MAX_MINUTES) throw new Error('Expected nonnegative whole minutes');
-    if (Object.keys(entry).some(key => !['gameId', 'appId', 'source', 'minutes'].includes(key))) throw new Error('Unexpected entry field');
+    let metadata: RobloxMetadata | undefined;
+    if (entry.metadata !== undefined) {
+      if (entry.source !== 'roblox' || !entry.metadata || typeof entry.metadata !== 'object' || Array.isArray(entry.metadata)) throw new Error('Expected Roblox metadata');
+      const value = entry.metadata as Record<string, unknown>;
+      if (typeof value.name !== 'string' || !value.name.trim() || value.name.length > 200) throw new Error('Expected a Roblox game name');
+      if (!Array.isArray(value.placeIds) || value.placeIds.length > 1000 ||
+          value.placeIds.some(placeId => typeof placeId !== 'string' || !/^[1-9]\d{0,15}$/.test(placeId) || !Number.isSafeInteger(Number(placeId)))) {
+        throw new Error('Expected Roblox place IDs');
+      }
+      if (new Set(value.placeIds).size !== value.placeIds.length || Object.keys(value).some(key => !['name', 'placeIds'].includes(key))) {
+        throw new Error('Invalid Roblox metadata');
+      }
+      metadata = { name: value.name.trim(), placeIds: [...value.placeIds] as string[] };
+    }
+    if (Object.keys(entry).some(key => !['gameId', 'appId', 'source', 'minutes', 'metadata'].includes(key))) throw new Error('Unexpected entry field');
     const key = `${entry.source}:${gameId}`;
     if (seen.has(key)) throw new Error('Duplicate source/game entry');
     seen.add(key);
-    return [{ gameId, source: entry.source, minutes: entry.minutes as number }];
+    return [{ gameId, source: entry.source, minutes: entry.minutes as number, ...(metadata ? { metadata } : {}) }];
   });
   if (Object.keys(value).some(key => !['collectorId', 'sequence', 'entries'].includes(key))) throw new Error('Unexpected upload field');
   return { collectorId, sequence: value.sequence as number, entries };

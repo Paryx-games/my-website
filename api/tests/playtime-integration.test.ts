@@ -36,14 +36,17 @@ test('Neon uploads are atomic, replay-safe, cumulative and ordered under concurr
     })).sort((a, b) => a.game_id.localeCompare(b.game_id)));
     const universe = '9876543210123';
     const prior = before.games[`roblox-${universe}`]?.pc ?? 0;
-    await store.upload({ collectorId, sequence: 5, entries: [{ gameId: universe, source: 'roblox', minutes: 3 }] });
-    await store.upload({ collectorId, sequence: 5, entries: [{ gameId: universe, source: 'roblox', minutes: 3 }] });
+    const metadata = { name: 'Future Roblox experience', placeIds: ['123456789'] };
+    await store.upload({ collectorId, sequence: 5, entries: [{ gameId: universe, source: 'roblox', minutes: 3, metadata }] });
+    await store.upload({ collectorId, sequence: 5, entries: [{ gameId: universe, source: 'roblox', minutes: 3, metadata }] });
     const after = await store.read();
     assert.equal(after.games[`roblox-${universe}`].pc, prior + 3);
+    assert.deepEqual(after.robloxGames[universe], { universeId: universe, name: metadata.name, placeIds: metadata.placeIds });
     assert.equal(after.games.minecraft.console, 22606);
   } finally {
     await sql.transaction([
       sql`DELETE FROM playtime.totals WHERE collector_id = ${collectorId}`,
+      sql`DELETE FROM playtime.roblox_games WHERE collector_id = ${collectorId}`,
       sql`DELETE FROM playtime.collectors WHERE collector_id = ${collectorId}`,
     ]);
   }

@@ -6,7 +6,7 @@ function Assert-Equal($actual, $expected, $message) {
 }
 function Get-SteamPlaytime { return @([pscustomobject]@{ GameId = '526870'; Minutes = $script:SteamMinutes }) }
 function Get-ModrinthPlaytime { return @([pscustomobject]@{ GameId = 'minecraft'; Minutes = 125 }) }
-function Get-RobloxPlaytime { return @([pscustomobject]@{ GameId = '1718755273'; Minutes = $script:RobloxMinutes }) }
+function Get-RobloxPlaytime { return @([pscustomobject]@{ GameId = '1718755273'; Minutes = $script:RobloxMinutes; Name = 'town'; PlaceIds = @('1718755273') }) }
 $script:SteamMinutes = 60
 $script:RobloxMinutes = 2
 $script:UploadCount = 0
@@ -26,14 +26,26 @@ $directory = Join-Path ([IO.Path]::GetTempPath()) ("paryx-collector-test-" + [Gu
 [IO.Directory]::CreateDirectory($directory) | Out-Null
 $config = Join-Path $directory 'config.json'
 $stateFile = Join-Path $directory 'state.json'
+$eventLogPath = Join-Path $directory 'game-time-collector.log'
 $oldToken = $env:PLAYTIME_UPLOAD_TOKEN
 try {
     $env:PLAYTIME_UPLOAD_TOKEN = 'test-only-collector-token'
     [IO.File]::WriteAllText($config, '{"Endpoint":"http://127.0.0.1:9999/playtime","CollectorId":"test-pc"}')
+    Write-PlaytimeCheck 'check finished successfully.' $eventLogPath
+    $checkLines = @(Get-Content -LiteralPath $eventLogPath)
+    if ($checkLines[0] -notmatch '^\d{4}-\d{2}-\d{2}T\S+ CHECK check finished successfully\.$') {
+        throw 'A successful upload check must be logged with its own CHECK state.'
+    }
+    Write-PlaytimeCheck 'check finished successfully.' $eventLogPath
+    $checkLines = @(Get-Content -LiteralPath $eventLogPath)
+    Assert-Equal $checkLines.Count 1 'Repeated upload check is deduplicated'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:UploadCount 1 'Initial upload'
     Assert-Equal $script:LastUpload.entries.Count 3 'All sources included'
     Assert-Equal $script:LastUpload.entries[0].minutes 125 'Minutes are not converted to hours'
+    $robloxUpload = $script:LastUpload.entries | Where-Object source -eq roblox
+    Assert-Equal $robloxUpload.metadata.name 'town' 'Roblox game names are uploaded'
+    Assert-Equal $robloxUpload.metadata.placeIds[0] '1718755273' 'Roblox place IDs are uploaded'
     $initialLog = Get-Content -LiteralPath (Join-Path $directory 'game-time-collector.log') -Raw
     if ($initialLog -notmatch 'initial totals: .* hours on Minecraft, .* hours on town, .* hours on Satisfactory') {
         throw 'The first acknowledged upload must log readable game totals.'

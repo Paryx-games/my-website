@@ -53,6 +53,14 @@ function Update-RobloxTrackedEvent {
     $State.LastEvents[$Client] = $at
     Add-RobloxTrackedTime $State $Client $at
     if ($Event.Kind -eq 'leave') { $State.Active.Remove($Client); return }
+    if (-not $State.ContainsKey('Games')) { $State.Games = @{} }
+    if (-not $State.Games.ContainsKey($Event.UniverseId)) {
+        $State.Games[$Event.UniverseId] = @{ Name = ''; PlaceIds = @() }
+    }
+    $game = $State.Games[$Event.UniverseId]
+    if ($Event.PlaceId -notin @($game.PlaceIds)) {
+        $game.PlaceIds = @($game.PlaceIds) + [string]$Event.PlaceId
+    }
     # The collector follows one player. A replacement log/client cannot overlap its predecessor.
     foreach ($other in @($State.Active.Keys)) {
         if ($other -ne $Client) { Add-RobloxTrackedTime $State $other $at; $State.Active.Remove($other) }
@@ -73,6 +81,12 @@ function Get-RobloxPlaytime {
     foreach ($entry in $state.Totals.GetEnumerator()) {
         $seconds = [double]$entry.Value
         if ($entry.Key -notmatch '^[1-9]\d*$' -or [double]::IsNaN($seconds) -or [double]::IsInfinity($seconds) -or $seconds -lt 0) { throw "Invalid Roblox tracker counter '$($entry.Key)' in '$path'." }
-        [pscustomobject]@{ GameId = $entry.Key; Minutes = [long][Math]::Floor($seconds / 60.0) }
+        $game = if ($state.Games -is [hashtable] -and $state.Games.ContainsKey($entry.Key)) { $state.Games[$entry.Key] } else { $null }
+        $result = [ordered]@{ GameId = $entry.Key; Minutes = [long][Math]::Floor($seconds / 60.0) }
+        if ($null -ne $game -and -not [string]::IsNullOrWhiteSpace($game.Name)) {
+            $result.Name = [string]$game.Name
+            $result.PlaceIds = @($game.PlaceIds | ForEach-Object { [string]$_ })
+        }
+        [pscustomobject]$result
     }
 }

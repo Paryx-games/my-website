@@ -9,6 +9,12 @@ export function formatMinutes(value) {
   return parts.join(' ');
 }
 
+export function robloxPlaytimeBreakdown(playtime) {
+  if (!Number.isSafeInteger(playtime?.listedPcMinutes) || playtime.listedPcMinutes < 0 ||
+      !Number.isSafeInteger(playtime?.unlistedPcMinutes) || playtime.unlistedPcMinutes < 0) return null;
+  return `Listed games: ${formatMinutes(playtime.listedPcMinutes)}\nNon-listed games: ${formatMinutes(playtime.unlistedPcMinutes)}`;
+}
+
 export function playtimeEntries(playtime, includeTotal = false) {
   const entries = [['pc', 'PC'], ['mobile', 'Mobile'], ['console', 'Console']].flatMap(([key, label]) => {
     const raw = playtime?.[key];
@@ -72,6 +78,15 @@ export function renderPlaytime(root, playtime, isPlatform = false) {
     const value = document.createElement('span');
     value.className = 'game-playtime-value';
     value.textContent = text;
+    if (key === 'pc' && isPlatform) {
+      const breakdown = robloxPlaytimeBreakdown(playtime);
+      if (breakdown) {
+        value.classList.add('game-playtime-roblox-breakdown');
+        value.title = breakdown;
+        value.setAttribute('aria-label', `${text}. ${breakdown.replace('\n', '. ')}`);
+        value.tabIndex = 0;
+      }
+    }
     detail.append(value);
     const increase = key === 'pc' ? createPlaytimeIncrease(playtime?.pcIncrease24hMinutes) : null;
     if (increase) detail.append(increase);

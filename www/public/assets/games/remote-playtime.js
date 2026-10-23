@@ -20,6 +20,16 @@ export function mergeRemotePlaytime(details, response, knownIds) {
         pcIncrease24hMinutes: Number.isSafeInteger(increase) && increase > 0 ? increase : null,
       },
     };
+    if (id === 'roblox') {
+      const listedMinutes = robloxGames.reduce((sum, game) => {
+        const remoteGame = response.games[game.id] ?? response.games[`roblox-${game.roblox.universeId}`];
+        return Number.isSafeInteger(remoteGame?.pc) && remoteGame.pc >= 0 ? sum + remoteGame.pc : sum;
+      }, 0);
+      if (Number.isSafeInteger(remote.pc) && remote.pc >= listedMinutes) {
+        details[id].playtime.listedPcMinutes = listedMinutes;
+        details[id].playtime.unlistedPcMinutes = remote.pc - listedMinutes;
+      }
+    }
     changed = true;
   }
   return changed;

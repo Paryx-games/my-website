@@ -39,6 +39,19 @@
 #pc-specs .pc-fetch { gap: 22px; }
 #pc-specs .pc-terminal { font-size: 12px; }
 #pc-specs .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
+.home-pc-parts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 24px; }
+.home-pc-part { display: grid; grid-template-columns: 36px minmax(0, 1fr) auto; align-items: center; gap: 12px; min-width: 0; padding: 4px 0; }
+.home-pc-part-icon { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid var(--color-border, #29292e); border-radius: 8px; color: var(--color-muted, #b6b6bf); }
+.home-pc-part:hover .home-pc-part-icon { border-color: var(--color-border-hover, #3a3a40); color: var(--color-text, #ececee); }
+.home-pc-part-icon svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.home-pc-part-title { min-width: 0; }
+.home-pc-part-title a { display: inline-flex; align-items: center; gap: 5px; max-width: 100%; color: var(--color-text, #ececee); font-size: 0.875rem; line-height: 1.4; text-decoration: none; text-wrap: pretty; }
+.home-pc-part-title a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.home-pc-part-title a svg { flex: none; width: 12px; height: 12px; fill: none; stroke: var(--color-faint, #92929d); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.home-pc-part-title p { margin: 3px 0 0; color: var(--color-faint, #92929d); font-size: 0.75rem; line-height: 1.5; }
+.home-pc-part-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; }
+.home-pc-part-price b { font-size: 0.8125rem; font-weight: 400; }
+.home-pc-part-price span { color: var(--color-faint, #92929d); font-size: 0.6875rem; }
 .pc-hardware-details { margin-top: 42px; }
 .pc-detail-group { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 2fr); gap: 12px 36px; padding: 30px 0; border-top: 1px solid var(--line); }
 .pc-detail-group h2 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
@@ -64,6 +77,8 @@
 }
 @media (max-width: 600px) {
   .pc-specs-page { padding-top: 28px; }
+  .home-pc-parts { grid-template-columns: minmax(0, 1fr); }
+  .home-pc-part { padding: 12px; }
   .pc-terminal, .pc-specs-page .pc-terminal { font-size: 12px; }
   .pc-terminal-inner, .pc-specs-page .pc-terminal-inner { padding: 19px 16px 22px; }
   .pc-terminal-bar { padding: 9px 16px; }

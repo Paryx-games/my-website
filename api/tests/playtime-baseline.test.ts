@@ -37,6 +37,12 @@ test('unknown universes are retained and exposed without editing a backend allow
   assert.equal(data.games.roblox.pc, 15616);
   assert.equal(data.games['roblox-10767441669'].pcIncrease24hMinutes, 10);
   assert.equal(data.games.roblox.pcIncrease24hMinutes, 10);
+  const named = composePlaytime(baselines, [total('10767441669', 'roblox', 10)], [
+    { universe_id: '10767441669', name: 'Unlisted experience', place_ids: ['456'] },
+  ]);
+  assert.deepEqual(named.robloxGames['10767441669'], {
+    universeId: '10767441669', name: 'Unlisted experience', placeIds: ['456'],
+  });
   const known = composePlaytime(baselines, [total('1718755273', 'roblox', 5)]);
   assert.equal(known.games.town.pcIncrease24hMinutes, 5);
   assert.equal(known.games.roblox.pcIncrease24hMinutes, 5);

@@ -1,6 +1,67 @@
 {
   "updatedAt": "2026-10-17",
   "identity": "paryx @ paryx",
+  "homeParts": [
+    {
+      "id": "cpu",
+      "name": "AMD Ryzen 7 9800X3D",
+      "href": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html",
+      "description": "8 cores / 16 threads / 96 MB L3 cache",
+      "price": "$479",
+      "priceNote": "launch MSRP",
+      "icon": "cpu"
+    },
+    {
+      "id": "gpu",
+      "name": "NVIDIA GeForce RTX 5070 Ti",
+      "href": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/",
+      "description": "MSI GeForce RTX 5070 Ti VENTUS/SHADOW/INSPIRE 3X OC / 16 GB GDDR7",
+      "price": "$749",
+      "priceNote": "launch MSRP",
+      "icon": "gpu"
+    },
+    {
+      "id": "memory",
+      "name": "Kingston 32 GB DDR5-6000",
+      "href": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memory",
+      "description": "2 x 16 GB / CL30 / dual channel",
+      "price": "No MSRP",
+      "icon": "memory"
+    },
+    {
+      "id": "board",
+      "name": "ASUS ROG STRIX B850-E GAMING WIFI",
+      "href": "https://rog.asus.com/motherboards/rog-strix/rog-strix-b850-e-gaming-wifi/",
+      "description": "AM5 / PCIe 5.0 / BIOS 1066",
+      "price": "$309",
+      "priceNote": "launch MSRP",
+      "icon": "board"
+    },
+    {
+      "id": "storage",
+      "name": "WD_BLACK SN850X 2 TB",
+      "href": "https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd",
+      "description": "NVMe SSD / PCIe 4.0 x4",
+      "price": "No MSRP",
+      "icon": "storage"
+    },
+    {
+      "id": "display",
+      "name": "LG UltraGear 27 inch",
+      "href": "https://www.lg.com/uk/gaming-monitors/",
+      "description": "2560 x 1440 / 180 Hz",
+      "price": "No MSRP",
+      "icon": "display"
+    },
+    {
+      "id": "display-secondary",
+      "name": "Dell P2317H 23 inch",
+      "href": "https://www.dell.com/support/home/en-uk/product-support/product/dell-p2317h-monitor/overview",
+      "description": "1920 x 1080 / 60 Hz",
+      "price": "No MSRP",
+      "icon": "display"
+    }
+  ],
   "groups": [
     {
       "id": "hardware",
