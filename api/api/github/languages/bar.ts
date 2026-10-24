@@ -22,6 +22,48 @@ type LanguageFilter = {
   limit: number;
 };
 
+const LANGUAGE_ALIASES: Record<string, string> = {
+  js: "javascript",
+  ts: "typescript",
+  py: "python",
+  pyth: "python",
+  rb: "ruby",
+  golang: "go",
+  cpp: "c++",
+  cxx: "c++",
+  cs: "c#",
+  csharp: "c#",
+  ps: "powershell",
+  pwsh: "powershell",
+  sh: "shell",
+  htm: "html",
+  md: "markdown",
+  yml: "yaml",
+  asm: "assembly",
+  kt: "kotlin",
+  kts: "kotlin",
+  sw: "swift",
+  objc: "objective-c",
+  "objc++": "objective-c++",
+  clj: "clojure",
+  cljs: "clojurescript",
+  ex: "elixir",
+  erl: "erlang",
+  fsharp: "f#",
+  fs: "f#",
+  hs: "haskell",
+  jl: "julia",
+  pl: "perl",
+  rlang: "r",
+  gql: "graphql",
+  ipynb: "jupyter notebook",
+  vim: "vim script",
+  vuejs: "vue",
+  sveltejs: "svelte",
+  docker: "dockerfile",
+  make: "makefile",
+};
+
 function queryValue(value: string | string[] | undefined): string | undefined {
   return Array.isArray(value) ? value[0] : value;
 }
@@ -36,7 +78,14 @@ function queryList(
     .map((item) => item.trim())
     .filter(Boolean);
   if (!values.length) return { error: `${name} must contain at least one language` };
-  return { values: new Set(values.map((item) => item.toLocaleLowerCase("en-US"))) };
+  return {
+    values: new Set(
+      values.map((item) => {
+        const normalized = item.toLocaleLowerCase("en-US");
+        return LANGUAGE_ALIASES[normalized] || normalized;
+      }),
+    ),
+  };
 }
 
 function languageFilter(req: VercelRequest): LanguageFilter | { error: string } {

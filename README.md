@@ -36,6 +36,8 @@ I'm making some of my APIs publicly available in case they're useful for other p
 
 If you find these APIs useful, consider supporting their continued development and hosting on Ko-fi.
 
+See the [GitHub language reference](api/docs/github-language-reference.md) for canonical language names, URL-encoded values, and supported short names for the language bar filters.
+
 <a href="https://ko-fi.com/paryx">
   <img src="https://storage.ko-fi.com/cdn/brandasset/v2/support_me_on_kofi_dark.png" alt="Support me on Ko-fi" height="44">
 </a>

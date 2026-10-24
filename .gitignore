@@ -10,6 +10,8 @@ PLAYTIME.md
 README.personal.md
 README.local.md
 docs/
+!api/docs/
+!api/docs/github-language-reference.md
 
 # installed dependencies and package cache
 node_modules
