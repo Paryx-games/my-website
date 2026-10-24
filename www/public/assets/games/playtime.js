@@ -67,7 +67,7 @@ export function renderPlaytime(root, playtime, isPlatform = false) {
     console: '<path d="M7 7h10a4 4 0 0 1 4 3l2 7a2 2 0 0 1-3 2l-4-3H8l-4 3a2 2 0 0 1-3-2l2-7a4 4 0 0 1 4-3Z M7 10v4M5 12h4M16 11h.01M19 13h.01"/>',
     total: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
   };
-  const entries = playtimeEntries(playtime, isPlatform);
+  const entries = playtimeEntries(playtime, true);
   const rows = entries.map(([key, label, text]) => {
     const row = document.createElement('div');
     row.className = 'game-playtime-row';

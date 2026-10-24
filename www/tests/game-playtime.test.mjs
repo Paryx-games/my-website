@@ -27,9 +27,12 @@ test('Roblox breakdown uses dotted-tooltip copy in hours and minutes and rejects
   assert.equal(robloxPlaytimeBreakdown({ listedPcMinutes: 60 }), null);
 });
 
-test('Roblox playtime adds PC, mobile, and console minutes into a platform total', () => {
+test('playtime adds PC, mobile, and console minutes into a total for any game', () => {
   assert.deepEqual(playtimeEntries({ pc: '60', mobile: '120', console: '30' }, true), [
     ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '2 hours'], ['console', 'Console', '30 minutes'], ['total', 'Total', '3 hours 30 minutes'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '49671', console: '22606' }, true), [
+    ['pc', 'PC', '827 hours 51 minutes'], ['console', 'Console', '376 hours 46 minutes'], ['total', 'Total', '1,204 hours 37 minutes'],
   ]);
   assert.deepEqual(playtimeEntries({ pc: '60', mobile: '120+', console: '' }, true), [
     ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '120+'], ['total', 'Total', '1 hour'],
