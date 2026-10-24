@@ -1530,10 +1530,6 @@ const connectLanyardSocket = () => {
     }
 
     if (message?.op === 1) {
-      const heartbeatInterval = Math.min(
-        60000,
-        Math.max(1000, Number(message?.d?.heartbeat_interval) || 30000),
-      );
       socket.send(
         JSON.stringify({
           op: 2,
@@ -1546,7 +1542,7 @@ const connectLanyardSocket = () => {
         if (socket.readyState === WebSocket.OPEN) {
           socket.send(JSON.stringify({ op: 3 }));
         }
-      }, heartbeatInterval);
+      }, 30000);
       return;
     }
 

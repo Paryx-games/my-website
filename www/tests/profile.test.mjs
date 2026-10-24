@@ -5,7 +5,26 @@ import { marked } from 'marked';
 
 const source = (await readFile(new URL('../content/profile.md', import.meta.url), 'utf8')).replace(/\r\n/g, '\n');
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-const plain = text => text.replace(/<\/?[a-z][^>]*>/gi, '').replace(/&(amp|lt|gt|quot|#(?:x[0-9a-f]+|\d+));/gi, (_, entity) => entity.startsWith('#') ? String.fromCodePoint(entity[1].toLowerCase() === 'x' ? parseInt(entity.slice(2), 16) : Number(entity.slice(1))) : ({ amp: '&', lt: '<', gt: '>', quot: '"' })[entity]);
+const stripTags = text => {
+  let result = '';
+  let index = 0;
+  while (index < text.length) {
+    const start = text.indexOf('<', index);
+    if (start === -1) {
+      result += text.slice(index);
+      break;
+    }
+    result += text.slice(index, start);
+    const end = text.indexOf('>', start + 1);
+    if (end === -1) {
+      result += text.slice(start);
+      break;
+    }
+    index = end + 1;
+  }
+  return result;
+};
+const plain = text => stripTags(text).replace(/&(amp|lt|gt|quot|#(?:x[0-9a-f]+|\d+));/gi, (_, entity) => entity.startsWith('#') ? String.fromCodePoint(entity[1].toLowerCase() === 'x' ? parseInt(entity.slice(2), 16) : Number(entity.slice(1))) : ({ amp: '&', lt: '<', gt: '>', quot: '"' })[entity]);
 
 test('profile experience preserves every README paragraph, code example and image', () => {
   const details = source.slice(source.indexOf('<h3>'), source.indexOf('</details>'));
