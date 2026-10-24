@@ -41,7 +41,7 @@ export function createPlaytimeIncrease(increaseMinutes, compact = false) {
   const number = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   const pill = document.createElement('span');
   pill.className = `game-playtime-increase${compact ? ' game-playtime-increase-compact' : ''}`;
-  const tooltip = `+${number.format(increaseMinutes / 60)} hours playtime in last 24 hours`;
+  const tooltip = `+${formatMinutes(increaseMinutes)} playtime in last 24 hours`;
   pill.setAttribute('aria-label', tooltip);
   pill.title = tooltip;
   const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
