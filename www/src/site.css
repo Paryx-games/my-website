@@ -120,11 +120,13 @@ img {
   height: auto;
 }
 .external-link-icon {
-  width: 14px;
-  height: 14px;
+  width: 0.9em;
+  height: 0.9em;
   display: inline-block;
   max-width: none;
-  vertical-align: -0.18em;
+  margin-inline-start: 0.22em;
+  vertical-align: -0.08em;
+  flex: none;
 }
 [hidden] {
   display: none !important;
