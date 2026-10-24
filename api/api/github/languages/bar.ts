@@ -61,7 +61,7 @@ function createLanguageBar(
 
           return [
             `<circle cx="${x + 5}" cy="${y - 4}" r="5" fill="${getLanguageColor(language)}"/>`,
-            `<text x="${x + 17}" y="${y}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14"><tspan font-weight="600" fill="#f0f6fc">${escapeXml(language)}</tspan><tspan dx="6" fill="#8b949e">${percentage.toFixed(1)}%</tspan></text>`,
+            `<text x="${x + 17}" y="${y}" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="14"><tspan font-weight="600" fill="#f0f6fc">${escapeXml(language)}</tspan><tspan dx="6" fill="#8b949e">&#160;${percentage.toFixed(1)}%</tspan></text>`,
           ].join("");
         })
         .join("")

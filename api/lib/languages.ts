@@ -48,11 +48,13 @@ function languageResult(
   return {
     repository: name,
     totalBytes,
-    languages: [...totals].map(([language, bytes]) => ({
-      language,
-      bytes,
-      percentage: totalBytes === 0 ? 0 : (bytes / totalBytes) * 100,
-    })),
+    languages: [...totals]
+      .map(([language, bytes]) => ({
+        language,
+        bytes,
+        percentage: totalBytes === 0 ? 0 : (bytes / totalBytes) * 100,
+      }))
+      .sort((a, b) => b.bytes - a.bytes || a.language.localeCompare(b.language)),
   };
 }
 
