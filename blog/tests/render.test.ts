@@ -81,8 +81,8 @@ test('article SEO escapes JSON-LD and supplies production URLs and semantic date
       noindex: true,
     }),
   );
-  assert.ok(html.includes('https://blog.paryx.uk/example'));
-  assert.ok(html.includes('https://blog.paryx.uk/banner.webp'));
+  assert.match(html, /https:\/\/blog\.paryx\.uk\/example(?:<|["\s])/);
+  assert.match(html, /https:\/\/blog\.paryx\.uk\/banner\.webp(?:<|["\s])/);
   assert.ok(html.includes('noindex, nofollow'));
   assert.ok(html.includes('\\u003c/script>'));
   assert.ok(html.includes('BlogPosting'));

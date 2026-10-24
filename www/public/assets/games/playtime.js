@@ -83,7 +83,7 @@ export function renderPlaytime(root, playtime, isPlatform = false) {
       if (breakdown) {
         value.classList.add('game-playtime-roblox-breakdown');
         value.title = breakdown;
-        value.setAttribute('aria-label', `${text}. ${breakdown.replace('\n', '. ')}`);
+        value.setAttribute('aria-label', `${text}. ${breakdown.replaceAll('\n', '. ')}`);
         value.tabIndex = 0;
       }
     }

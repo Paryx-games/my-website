@@ -641,17 +641,36 @@ const renderZone = () => {
   $("tzReset").hidden = !manual;
 };
 
-const clockMarkup = (value, previous = value) =>
-  [...value]
-    .map((char, index) => {
-      if (!/\d/.test(char))
-        return `<span class="clock-sep">${esc(char)}</span>`;
-      const old = previous[index];
-      if (old === char || !/\d/.test(old))
-        return `<span class="slot-digit">${char}</span>`;
-      return `<span class="slot-digit"><span class="slot-track"><span>${old}</span><span>${char}</span></span></span>`;
-    })
-    .join("");
+const clockContent = (value, previous = value) => {
+  const fragment = document.createDocumentFragment();
+  [...value].forEach((char, index) => {
+    if (!/\d/.test(char)) {
+      const separator = document.createElement("span");
+      separator.className = "clock-sep";
+      separator.textContent = char;
+      fragment.append(separator);
+      return;
+    }
+
+    const digit = document.createElement("span");
+    digit.className = "slot-digit";
+    const old = previous[index];
+    if (old === char || !/\d/.test(old)) {
+      digit.textContent = char;
+    } else {
+      const track = document.createElement("span");
+      track.className = "slot-track";
+      const oldDigit = document.createElement("span");
+      oldDigit.textContent = old;
+      const newDigit = document.createElement("span");
+      newDigit.textContent = char;
+      track.append(oldDigit, newDigit);
+      digit.append(track);
+    }
+    fragment.append(digit);
+  });
+  return fragment;
+};
 
 const setSlotClock = (element, value) => {
   if (reduce) {
@@ -660,10 +679,10 @@ const setSlotClock = (element, value) => {
   }
   const previous = element.dataset.value;
   element.dataset.value = value;
-  element.innerHTML = clockMarkup(value, previous || value);
+  element.replaceChildren(clockContent(value, previous || value));
   if (!previous || previous === value) return;
   setTimeout(() => {
-    if (element.dataset.value === value) element.innerHTML = clockMarkup(value);
+    if (element.dataset.value === value) element.replaceChildren(clockContent(value));
   }, 400);
 };
 
@@ -1511,7 +1530,10 @@ const connectLanyardSocket = () => {
     }
 
     if (message?.op === 1) {
-      const heartbeatInterval = Number(message?.d?.heartbeat_interval) || 30000;
+      const heartbeatInterval = Math.min(
+        60000,
+        Math.max(1000, Number(message?.d?.heartbeat_interval) || 30000),
+      );
       socket.send(
         JSON.stringify({
           op: 2,

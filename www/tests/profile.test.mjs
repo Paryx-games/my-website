@@ -5,7 +5,7 @@ import { marked } from 'marked';
 
 const source = (await readFile(new URL('../content/profile.md', import.meta.url), 'utf8')).replace(/\r\n/g, '\n');
 const html = await readFile(new URL('../index.html', import.meta.url), 'utf8');
-const plain = text => text.replace(/<[^>]+>/g, '').replace(/&(amp|lt|gt|quot|#(?:x[0-9a-f]+|\d+));/gi, (_, entity) => entity.startsWith('#') ? String.fromCodePoint(entity[1].toLowerCase() === 'x' ? parseInt(entity.slice(2), 16) : Number(entity.slice(1))) : ({ amp: '&', lt: '<', gt: '>', quot: '"' })[entity]);
+const plain = text => text.replace(/<\/?[a-z][^>]*>/gi, '').replace(/&(amp|lt|gt|quot|#(?:x[0-9a-f]+|\d+));/gi, (_, entity) => entity.startsWith('#') ? String.fromCodePoint(entity[1].toLowerCase() === 'x' ? parseInt(entity.slice(2), 16) : Number(entity.slice(1))) : ({ amp: '&', lt: '<', gt: '>', quot: '"' })[entity]);
 
 test('profile experience preserves every README paragraph, code example and image', () => {
   const details = source.slice(source.indexOf('<h3>'), source.indexOf('</details>'));
@@ -18,8 +18,15 @@ test('profile experience preserves every README paragraph, code example and imag
   const actualCode = [...html.matchAll(/<pre[^>]*><code[^>]*>([\s\S]*?)<\/code><\/pre>/g)].map(([, code]) => plain(code));
   assert.deepEqual(actualCode, expectedCode, 'syntax highlighting must preserve every character of the examples');
   for (const [, url] of source.matchAll(/<img src="([^"]+)"/g)) {
-    if (url.includes('media.paryx.uk')) assert.ok(html.includes(url), `missing project image: ${url}`);
+    if (new URL(url).hostname === 'media.paryx.uk') {
+      assert.ok(
+        [...html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)].some(
+          ([, sourceUrl]) => sourceUrl === url,
+        ),
+        `missing project image: ${url}`,
+      );
+    }
   }
-  assert.ok(!html.includes('https://skillicons.dev'));
-  assert.ok(!html.includes('https://whattime.'));
+  assert.doesNotMatch(html, /skillicons\.dev/);
+  assert.doesNotMatch(html, /whattime\./);
 });

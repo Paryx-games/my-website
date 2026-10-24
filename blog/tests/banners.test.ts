@@ -65,8 +65,8 @@ test('remote banners are validated, saved locally and shared by pages and social
         createElement(Listing, { posts: [post], allPosts: [post] }),
       ),
     ]) {
-      assert.ok(html.includes(post.banner));
-      assert.ok(!html.includes('images.example.com'));
+      assert.match(html, new RegExp(post.banner.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+      assert.doesNotMatch(html, /images\.example\.com/);
     }
     assert.equal(
       (await sharp(await socialImage(post, filename)).metadata()).width,

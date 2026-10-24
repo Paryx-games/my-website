@@ -8,7 +8,7 @@ test("site pages avoid executable inline scripts under the strict CSP", async ()
   const pages = (await readdir(root)).filter((file) => file.endsWith(".html"));
   for (const page of pages) {
     const html = await readFile(new URL(page, root), "utf8");
-    for (const [, attributes, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
+    for (const [, attributes, body] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi)) {
       if (/\btype=["']application\/json["']/i.test(attributes)) continue;
       assert.equal(body.trim(), "", `${page} has executable inline JavaScript`);
     }

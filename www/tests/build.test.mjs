@@ -8,6 +8,10 @@ const output = new URL("dist/", root);
 const preview = ["preview", "development"].includes(
   process.env.VERCEL_ENV ?? "",
 );
+const hasUrl = (text, expected) =>
+  [...text.matchAll(/https?:\/\/[^<"\s]+/g)].some(
+    ([url]) => url === expected,
+  );
 
 test("the standalone projects page is removed while the homepage projects section remains", async () => {
   await assert.rejects(access(new URL("projects.html", output)), { code: "ENOENT" });
@@ -28,7 +32,7 @@ test("production and preview builds preserve all pages and their indexing policy
   ]) {
     const html = await readFile(new URL(page, output), "utf8");
     assert.ok(
-      html.includes(`rel="canonical" href="${canonical}"`),
+      hasUrl(html, canonical),
       `${page} canonical`,
     );
     assert.ok(
@@ -47,7 +51,7 @@ test("production and preview builds preserve all pages and their indexing policy
   }
   const robots = await readFile(new URL("robots.txt", output), "utf8");
   assert.ok(robots.includes(preview ? "Disallow: /" : "Allow: /"));
-  if (!preview) assert.ok(robots.includes("https://paryx.uk/sitemap.xml"));
+  if (!preview) assert.match(robots, /https:\/\/paryx\.uk\/sitemap\.xml(?:\s|$)/);
 });
 
 test("promotion retains public URLs, identity, privacy content, and the API source", async () => {
@@ -58,8 +62,8 @@ test("promotion retains public URLs, identity, privacy content, and the API sour
   assert.ok(html.includes('id="about"'));
   assert.ok(!/galaxyCanvas|galaxyQuality|pixel-dust/.test(html));
   const sitemap = await readFile(new URL("sitemap.xml", output), "utf8");
-  assert.ok(sitemap.includes("https://paryx.uk/privacy-policy"));
-  assert.ok(sitemap.includes("https://paryx.uk/portfolio"));
+  assert.ok(hasUrl(sitemap, "https://paryx.uk/privacy-policy"));
+  assert.ok(hasUrl(sitemap, "https://paryx.uk/portfolio"));
   assert.ok(!sitemap.includes("vercel.app"));
   const privacy = await readFile(
     new URL("privacy-policy.html", output),

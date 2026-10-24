@@ -50,8 +50,8 @@ test('drafts are excluded from public lists, search, RSS and sitemap', () => {
   assert.equal(searchIndex(posts).length, 1);
   assert.equal(searchIndex(posts)[0].authors[0], 'paryx');
   for (const feed of [rss(posts), sitemap(posts)]) {
-    assert.ok(feed.includes('https://blog.paryx.uk/published'));
-    assert.ok(!feed.includes('secret'));
+    assert.match(feed, /https:\/\/blog\.paryx\.uk\/published(?:<|["\s])/);
+    assert.doesNotMatch(feed, /secret/);
   }
   assert.ok(rss(posts).includes('A title &amp; more'));
   assert.ok(rss(posts).includes('A &lt;description&gt;'));

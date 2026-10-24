@@ -61,9 +61,9 @@ test('series follow part order rather than dates and keep draft-only series out 
     ['first', 'second'],
   );
   const xml = sitemap([first, second, draft]);
-  assert.ok(xml.includes('https://blog.paryx.uk/series/example-series'));
-  assert.ok(xml.includes('https://blog.paryx.uk/authors/paryx'));
-  assert.ok(!xml.includes('secret-series'));
+  assert.match(xml, /https:\/\/blog\.paryx\.uk\/series\/example-series(?:<|["\s])/);
+  assert.match(xml, /https:\/\/blog\.paryx\.uk\/authors\/paryx(?:<|["\s])/);
+  assert.doesNotMatch(xml, /secret-series/);
   for (const metadata of [
     'series: nope',
     series(0),
