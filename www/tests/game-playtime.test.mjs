@@ -35,6 +35,6 @@ test('playtime adds PC, mobile, and console minutes into a total for any game', 
     ['pc', 'PC', '827 hours 51 minutes'], ['console', 'Console', '376 hours 46 minutes'], ['total', 'Total', '1,204 hours 37 minutes'],
   ]);
   assert.deepEqual(playtimeEntries({ pc: '60', mobile: '120+', console: '' }, true), [
-    ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '120+'], ['total', 'Total', '1 hour'],
+    ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '120+'],
   ]);
 });
