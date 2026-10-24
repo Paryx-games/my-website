@@ -13,19 +13,12 @@ This repository contains my personal website, blog, development environments, an
 | [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel, Neon | Open source ✅
 | [media.paryx.uk](https://media.paryx.uk) | Static media and assets stored in Cloudflare R2 | N/A | Cloudflare R2 | N/A
 | [rm.paryx.uk](https://rm.paryx.uk) | Website for [Roblox Manager](https://github.com/Paryx-games/roblox-manager) | External | Vercel | Open source ✅
-| [codeinterpreter.paryx.uk](https://codeinterpreter.paryx.uk) | Code interpreter using Vite frontend and a private backend. | N/A | Vercel & Backend | Closed source ❌
 
 ## Languages
 
 This is what languages this project uses! This uses one of the APIs under the `api/` tree
 
 ![Languages used across the paryx.uk sites](https://api.paryx.uk/github/languages/bar?target=Paryx-games&details=true)
-
-## Why Some Websites Are Private
-
-Some websites, for example my [Code Interpreter](https://codeinterpreter.paryx.uk), have a closed-source backend (I may release the frontend soon, but it's highly unpolished right now) due to significant security risks. It runs on a VPS that I manage myself, which means I need to keep security standards high.
-
-Security is a massive priority for code interpretation, since if code escapes the sandbox, it could access my VPS. I've removed as much private data as possible, but anything could happen. That's why I've decided to keep the backend closed source for now.
 
 ## API
 
