@@ -4,7 +4,7 @@ import {
   normalizeCalendar, fetchContributions, createContributionsHandler,
 } from '../api/github-contributions.js';
 import {
-  aggregateRepositoryLanguages, contributionMonthHeadings, contributionWeekX, contributionYearBoundaries,
+  aggregateRepositoryLanguages, normalizeLanguageEndpoint, contributionMonthHeadings, contributionWeekX, contributionYearBoundaries,
 } from '../public/assets/github-contributions.js';
 
 const calendar = {
@@ -58,6 +58,21 @@ test('profile language breakdown combines account and organisation Linguist byte
     { name: 'Python', bytes: 300, color: '#8b949e', percentage: 300 / 1800 * 100 },
   ]);
   assert.throws(() => aggregateRepositoryLanguages({ version: 2 }));
+});
+
+test('language endpoint data is rendered without repository re-aggregation', () => {
+  assert.deepEqual(normalizeLanguageEndpoint({
+    repository: 'Paryx-games',
+    totalBytes: 1000,
+    languages: [
+      { language: 'TypeScript', bytes: 700, percentage: 70 },
+      { language: 'Rust', bytes: 300, percentage: 30 },
+    ],
+  }), [
+    { name: 'TypeScript', bytes: 700, color: '#8b949e', percentage: 70 },
+    { name: 'Rust', bytes: 300, color: '#8b949e', percentage: 30 },
+  ]);
+  assert.throws(() => normalizeLanguageEndpoint({ repository: 'Paryx-games', totalBytes: 1, languages: null }));
 });
 
 test('GitHub credentials stay upstream and partial GraphQL errors are rejected', async () => {

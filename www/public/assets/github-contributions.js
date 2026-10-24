@@ -82,6 +82,22 @@ export function aggregateRepositoryLanguages(data) {
   }));
 }
 
+export function normalizeLanguageEndpoint(data) {
+  if (!data || typeof data.repository !== 'string' || !Number.isSafeInteger(data.totalBytes) ||
+      data.totalBytes < 0 || !Array.isArray(data.languages)) throw new Error('Invalid language data');
+  return data.languages.flatMap(language => {
+    if (!language || typeof language.language !== 'string' || !Number.isSafeInteger(language.bytes) ||
+        language.bytes <= 0 || typeof language.percentage !== 'number' || !Number.isFinite(language.percentage) ||
+        language.percentage < 0) return [];
+    return [{
+      name: language.language,
+      bytes: language.bytes,
+      color: '#8b949e',
+      percentage: language.percentage,
+    }];
+  });
+}
+
 export function renderContributions(root, data) {
   if (data?.version !== 1 || !Number.isSafeInteger(data.total) || data.total < 0 || !Array.isArray(data.weeks) || !data.weeks.length || data.weeks.length > 54 || !Number.isSafeInteger(data.allTime) || data.allTime < 0 || !Array.isArray(data.years)) throw new Error('Invalid contributions');
   const allTime = allTimeCalendar(data.years, data.fetchedAt?.slice(0, 10));
@@ -243,9 +259,9 @@ if (root) {
       root.querySelector('#contributions-calendar').textContent = 'Open my GitHub profile to view contribution activity.';
     });
   const languageBar = root.querySelector('#contributions-language-bar');
-  fetch('/api/github-projects', { signal: AbortSignal.timeout(25000) })
+  fetch('https://api.paryx.uk/github/languages?target=Paryx-games', { signal: AbortSignal.timeout(25000) })
     .then(response => { if (!response.ok) throw new Error('Repository languages unavailable'); return response.json(); })
-    .then(aggregateRepositoryLanguages)
+    .then(normalizeLanguageEndpoint)
     .then(languages => {
       renderLanguageBar(languageBar, languages);
       if (!languages.length) {

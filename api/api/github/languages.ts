@@ -11,9 +11,11 @@ export default async function handler(
   const result = await getTargetLanguages(target);
 
   if (result.error !== undefined) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     return res.status(result.status).json({ error: result.error });
   }
 
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=3600, stale-while-revalidate=86400",
