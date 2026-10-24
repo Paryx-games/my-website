@@ -119,6 +119,13 @@ img {
   max-width: 100%;
   height: auto;
 }
+.external-link-icon {
+  width: 14px;
+  height: 14px;
+  display: inline-block;
+  max-width: none;
+  vertical-align: -0.18em;
+}
 [hidden] {
   display: none !important;
 }

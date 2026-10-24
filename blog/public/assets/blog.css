@@ -827,10 +827,11 @@ h6 {
   text-decoration: underline;
 }
 .external-link-icon {
-  width: 1em;
-  height: 1em;
+  width: 14px;
+  height: 14px;
   display: inline-block;
-  vertical-align: -0.12em;
+  max-width: none;
+  vertical-align: -0.18em;
 }
 .empty-state {
   color: var(--muted);
