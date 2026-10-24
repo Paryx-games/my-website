@@ -36,7 +36,7 @@ function queryList(
     .map((item) => item.trim())
     .filter(Boolean);
   if (!values.length) return { error: `${name} must contain at least one language` };
-  return { values: new Set(values) };
+  return { values: new Set(values.map((item) => item.toLocaleLowerCase("en-US"))) };
 }
 
 function languageFilter(req: VercelRequest): LanguageFilter | { error: string } {
@@ -125,9 +125,9 @@ function filterLanguages(
   const include = filter.include;
   const exclude = filter.exclude;
   const selected = include
-    ? languages.filter(({ language }) => include.has(language))
+    ? languages.filter(({ language }) => include.has(language.toLocaleLowerCase("en-US")))
     : exclude
-      ? languages.filter(({ language }) => !exclude.has(language))
+      ? languages.filter(({ language }) => !exclude.has(language.toLocaleLowerCase("en-US")))
       : languages;
   const shown = selected.slice(0, filter.limit);
   const otherBytes = languages

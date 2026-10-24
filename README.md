@@ -95,3 +95,4 @@ The previous `/github/languages?repo=owner/repo` route remains available as a co
 The previous `repo` query parameter remains available as a compatibility alias.
 
 `include` and `exclude` cannot be used together. The API returns an error if both are supplied.
+Language names are matched case-insensitively, so `rust`, `Rust`, and `RuSt` are equivalent.
