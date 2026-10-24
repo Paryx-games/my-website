@@ -33,11 +33,19 @@ function Write-PlaytimeCheck {
 
 function Format-PlaytimeHours {
     param([long]$Minutes, [string]$Game)
+    $duration = Format-PlaytimeDuration $Minutes
+    return [string]::Format('+{0} on {1}', $duration, $Game)
+}
+
+function Format-PlaytimeDuration {
+    param([long]$Minutes)
+    $hours = [Math]::Floor($Minutes / 60)
+    $remainingMinutes = $Minutes % 60
     return [string]::Format(
         [Globalization.CultureInfo]::InvariantCulture,
-        '+{0:0.00} hours on {1}',
-        $Minutes / 60.0,
-        $Game
+        '{0}h {1:00}m',
+        $hours,
+        $remainingMinutes
     )
 }
 

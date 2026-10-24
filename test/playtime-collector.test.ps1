@@ -47,12 +47,14 @@ try {
     Assert-Equal $robloxUpload.metadata.name 'town' 'Roblox game names are uploaded'
     Assert-Equal $robloxUpload.metadata.placeIds[0] '1718755273' 'Roblox place IDs are uploaded'
     $initialLog = Get-Content -LiteralPath (Join-Path $directory 'game-time-collector.log') -Raw
-    if ($initialLog -notmatch 'initial totals: .* hours on Minecraft, .* hours on town, .* hours on Satisfactory') {
+    if ($initialLog -notmatch 'initial totals: .*h \d{2}m on Minecraft, .*h \d{2}m on town, .*h \d{2}m on Satisfactory') {
         throw 'The first acknowledged upload must log readable game totals.'
     }
+    $logAfterInitialUpload = $initialLog
     Assert-Equal (Get-PlaytimeGameName steam 284160) 'BeamNG.drive' 'Steam names follow the website catalogue'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:UploadCount 1 'Unchanged snapshots are skipped'
+    Assert-Equal (Get-Content -LiteralPath (Join-Path $directory 'game-time-collector.log') -Raw) $logAfterInitialUpload 'Unchanged snapshots do not log'
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile -Force | Out-Null
     Assert-Equal $script:UploadCount 2 'Forced refresh resends unchanged totals'
     $script:SteamMinutes = 61
@@ -66,7 +68,7 @@ try {
     Invoke-PlaytimeCollector -Configuration $config -StateFile $stateFile | Out-Null
     Assert-Equal $script:LastUpload.sequence 3 'Retry uses the original sequence'
     $eventLog = Get-Content -LiteralPath (Join-Path $directory 'game-time-collector.log') -Raw
-    if ($eventLog -notmatch 'UPLOAD acknowledged: \+0\.05 hours on town, \+0\.02 hours on Satisfactory\.') {
+    if ($eventLog -notmatch 'UPLOAD acknowledged: \+0h 03m on town \(total: 0h 05m\), \+0h 01m on Satisfactory \(total: 1h 01m\)\.') {
         throw 'Acknowledged per-game changes must share the event log.'
     }
     $state = Get-Content -LiteralPath $stateFile -Raw | ConvertFrom-Json

@@ -59,7 +59,7 @@ function Get-RobloxUploadSummary {
     }
     $label = if ($initial) { 'current tracked totals' } else { 'new tracked time' }
     $description = if ($changes.Count) { "$label`: $($changes -join ', ')" } else { 'no new whole Roblox minutes' }
-    return [pscustomobject]@{ Description = $description; Totals = $snapshot }
+    return [pscustomobject]@{ Description = $description; Totals = $snapshot; HasChanges = $changes.Count -gt 0 }
 }
 
 function Invoke-RobloxTracker {
@@ -205,7 +205,6 @@ function Invoke-RobloxTracker {
                 if ($uploadProcess.ExitCode -eq 0) {
                     $state.LastUploadTotals = $uploadSnapshot
                     Save-RobloxTrackerState $Path $state
-                    Write-PlaytimeCheck 'check finished successfully.' $eventLog
                 }
                 else {
                     Write-PlaytimeEvent 'UPLOAD check failed; it will retry on the next interval.' $eventLog
@@ -223,7 +222,6 @@ function Invoke-RobloxTracker {
                     $lastUpload = $now
                     $uploadSnapshot = $summary.Totals
                     $uploadReported = $false
-                    Write-PlaytimeEvent "UPLOAD triggered: $($summary.Description)." $eventLog
                 }
                 catch {
                     $uploadProcess = $null

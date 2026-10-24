@@ -477,12 +477,14 @@ function Send-CollectorPending {
             if ($increase -gt 0 -or -not $hadPrevious) {
                 try { $name = Get-PlaytimeGameName $entry.source $entry.gameId }
                 catch { $name = "$($entry.source) $($entry.gameId)" }
-                if ($increase -gt 0) { $changes.Add((Format-PlaytimeHours $increase $name)) }
+                if ($increase -gt 0) {
+                    $changes.Add(('{0} (total: {1})' -f (Format-PlaytimeHours $increase $name), (Format-PlaytimeDuration $minutes)))
+                }
                 if (-not $hadPrevious -and ($entry.source -ne 'steam' -or -not $name.StartsWith('Steam app '))) {
                     $initialTotals.Add([string]::Format(
                         [Globalization.CultureInfo]::InvariantCulture,
-                        '{0:0.00} hours on {1}',
-                        $minutes / 60.0,
+                        '{0} on {1}',
+                        (Format-PlaytimeDuration $minutes),
                         $name
                     ))
                 }
@@ -502,9 +504,11 @@ function Send-CollectorPending {
             else { "initial snapshot of $($pendingEntries.Count) game counters" }
         }
         elseif ($changes.Count) { $changes -join ', ' }
-        else { 'no new whole game minutes' }
+        else { $null }
         $eventLog = Join-Path ([IO.Path]::GetDirectoryName([IO.Path]::GetFullPath($Path))) 'game-time-collector.log'
-        Write-PlaytimeEvent "${status}: $summary." $eventLog
+        if ($null -ne $summary) {
+            Write-PlaytimeEvent "${status}: $summary." $eventLog
+        }
         Write-Output 'Playtime upload acknowledged.'
         return
     }
