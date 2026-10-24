@@ -88,5 +88,10 @@ The previous `/github/languages?repo=owner/repo` route remains available as a co
 
 - `target` (required) - GitHub username, organization name, or repository in `owner/repo` format.
 - `details` (optional) - Set to `true` to include language names and percentages.
+- `limit` (optional) - Number of named languages to display, from 1 to 100. Remaining languages are grouped under gray `Other`.
+- `include` (optional) - Comma-separated language names to display. All other languages are grouped under gray `Other`.
+- `exclude` (optional) - Comma-separated language names to group under gray `Other`; all remaining languages are displayed.
 
 The previous `repo` query parameter remains available as a compatibility alias.
+
+`include` and `exclude` cannot be used together. The API returns an error if both are supplied.

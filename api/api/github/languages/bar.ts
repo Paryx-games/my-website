@@ -16,8 +16,46 @@ type LanguageBarOptions = {
   includeDetails: boolean;
 };
 
+type LanguageFilter = {
+  include?: Set<string>;
+  exclude?: Set<string>;
+  limit: number;
+};
+
 function queryValue(value: string | string[] | undefined): string | undefined {
   return Array.isArray(value) ? value[0] : value;
+}
+
+function queryList(
+  value: string | string[] | undefined,
+  name: string,
+): { values?: Set<string>; error?: string } {
+  if (value === undefined) return {};
+  const values = (Array.isArray(value) ? value : [value])
+    .flatMap((item) => item.split(","))
+    .map((item) => item.trim())
+    .filter(Boolean);
+  if (!values.length) return { error: `${name} must contain at least one language` };
+  return { values: new Set(values) };
+}
+
+function languageFilter(req: VercelRequest): LanguageFilter | { error: string } {
+  const include = queryList(req.query.include, "include");
+  const exclude = queryList(req.query.exclude, "exclude");
+  if (include.error) return { error: include.error };
+  if (exclude.error) return { error: exclude.error };
+  if (include.values && exclude.values) {
+    return { error: "include and exclude cannot be used together" };
+  }
+  const rawLimit = queryValue(req.query.limit);
+  if (rawLimit !== undefined && !/^(?:[1-9]|[1-9]\d|100)$/.test(rawLimit)) {
+    return { error: "limit must be an integer between 1 and 100" };
+  }
+  return {
+    ...(include.values ? { include: include.values } : {}),
+    ...(exclude.values ? { exclude: exclude.values } : {}),
+    limit: rawLimit === undefined ? 100 : Number(rawLimit),
+  };
 }
 
 function escapeXml(value: string): string {
@@ -31,7 +69,7 @@ function escapeXml(value: string): string {
 
 function createLanguageBar(
   repository: string,
-  languages: { language: string; percentage: number }[],
+  languages: { language: string; bytes: number; percentage: number }[],
   options: LanguageBarOptions,
 ): string {
   const visibleLanguages = languages.filter(({ percentage }) => percentage > 0);
@@ -80,10 +118,40 @@ function createLanguageBar(
   ].join("");
 }
 
+function filterLanguages(
+  languages: { language: string; bytes: number; percentage: number }[],
+  filter: LanguageFilter,
+) {
+  const include = filter.include;
+  const exclude = filter.exclude;
+  const selected = include
+    ? languages.filter(({ language }) => include.has(language))
+    : exclude
+      ? languages.filter(({ language }) => !exclude.has(language))
+      : languages;
+  const shown = selected.slice(0, filter.limit);
+  const otherBytes = languages
+    .filter(({ language }) => !shown.some((shownLanguage) => shownLanguage.language === language))
+    .reduce((sum, language) => sum + language.bytes, 0);
+  const totalBytes = languages.reduce((sum, language) => sum + language.bytes, 0);
+  if (otherBytes > 0) {
+    shown.push({
+      language: "Other",
+      bytes: otherBytes,
+      percentage: totalBytes ? (otherBytes / totalBytes) * 100 : 0,
+    });
+  }
+  return shown;
+}
+
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
+  const filter = languageFilter(req);
+  if ("error" in filter) {
+    return res.status(400).json({ error: filter.error });
+  }
   const target = queryValue(req.query.target) ?? queryValue(req.query.repo);
   const result = await getTargetLanguages(target);
 
@@ -103,7 +171,7 @@ export default async function handler(
   res.setHeader("X-Content-Type-Options", "nosniff");
 
   return res.status(200).send(
-    createLanguageBar(result.data.repository, result.data.languages, {
+    createLanguageBar(result.data.repository, filterLanguages(result.data.languages, filter), {
       includeDetails: queryValue(req.query.details)?.toLowerCase() === "true",
     }),
   );

@@ -12,6 +12,7 @@ Language endpoints:
 - `GET /github/languages/repo?repo=owner/repository` returns the language breakdown for one public repository.
 - `GET /github/languages/user?user=username` aggregates language bytes across the user's or organization's non-fork, non-archived public repositories.
 - `GET /github/languages/bar?target=username`, `/github/languages/bar?target=organization`, or `/github/languages/bar?target=owner/repository` returns the same breakdown as an SVG language bar. The legacy `repo` query parameter remains supported.
+- The language bar accepts `limit=1..100`, `include=Language1,Language2`, or `exclude=Language1,Language2`. Unshown languages are combined into a gray `Other` segment. `include` and `exclude` cannot be combined.
 - Both structured endpoints return `{ repository, totalBytes, languages }`; the user response uses the GitHub username in the `repository` field for response compatibility.
 - The existing `GET /github/languages?repo=owner/repository` route remains available as a compatibility alias for the repository endpoint.
 
