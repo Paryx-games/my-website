@@ -1,7 +1,10 @@
+import { getLanguageColor } from "./language-colors.js";
+
 export type RepositoryLanguage = {
   language: string;
   bytes: number;
   percentage: number;
+  color: string;
 };
 
 export type RepositoryLanguages = {
@@ -53,6 +56,7 @@ function languageResult(
         language,
         bytes,
         percentage: totalBytes === 0 ? 0 : (bytes / totalBytes) * 100,
+        color: getLanguageColor(language),
       }))
       .sort((a, b) => b.bytes - a.bytes || a.language.localeCompare(b.language)),
   };

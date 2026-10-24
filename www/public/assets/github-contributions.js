@@ -88,11 +88,11 @@ export function normalizeLanguageEndpoint(data) {
   return data.languages.flatMap(language => {
     if (!language || typeof language.language !== 'string' || !Number.isSafeInteger(language.bytes) ||
         language.bytes <= 0 || typeof language.percentage !== 'number' || !Number.isFinite(language.percentage) ||
-        language.percentage < 0) return [];
+        language.percentage < 0 || typeof language.color !== 'string' || !/^#[\da-f]{6}$/i.test(language.color)) return [];
     return [{
       name: language.language,
       bytes: language.bytes,
-      color: '#8b949e',
+      color: language.color,
       percentage: language.percentage,
     }];
   });

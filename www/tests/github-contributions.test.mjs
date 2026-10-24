@@ -65,12 +65,12 @@ test('language endpoint data is rendered without repository re-aggregation', () 
     repository: 'Paryx-games',
     totalBytes: 1000,
     languages: [
-      { language: 'TypeScript', bytes: 700, percentage: 70 },
-      { language: 'Rust', bytes: 300, percentage: 30 },
+      { language: 'TypeScript', bytes: 700, percentage: 70, color: '#3178c6' },
+      { language: 'Rust', bytes: 300, percentage: 30, color: '#dea584' },
     ],
   }), [
-    { name: 'TypeScript', bytes: 700, color: '#8b949e', percentage: 70 },
-    { name: 'Rust', bytes: 300, color: '#8b949e', percentage: 30 },
+    { name: 'TypeScript', bytes: 700, color: '#3178c6', percentage: 70 },
+    { name: 'Rust', bytes: 300, color: '#dea584', percentage: 30 },
   ]);
   assert.throws(() => normalizeLanguageEndpoint({ repository: 'Paryx-games', totalBytes: 1, languages: null }));
 });
