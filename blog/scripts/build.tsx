@@ -31,6 +31,7 @@ export async function build({
   await rm(output, { recursive: true, force: true, maxRetries: 3 });
   await mkdir(output, { recursive: true });
   await cp(path.join(root, 'public'), output, { recursive: true });
+  await cp(path.join(root, '..', '.shared'), path.join(output, '.shared'), { recursive: true });
   const banners = new Map<string, string | undefined>();
   for (const post of posts)
     banners.set(
@@ -207,7 +208,7 @@ export async function build({
           This article may have moved, or hasn't been published yet.
         </p>
         <a className="read-link" href="/">
-          Back to the blog ↗
+          Back to the blog <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
         </a>
       </main>
     </Document>,

@@ -1,7 +1,14 @@
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import type { CSSProperties, ReactNode } from 'react';
 import { authors, type Author } from './authors.js';
 import { absoluteUrl, formatDate, site } from './config.js';
 import { tagSlug, relatedPosts, seriesPosts, type Post } from './content.js';
+
+const sharedTopbar = readFileSync(
+  fileURLToPath(new URL('../../.shared/components/topbar.html', import.meta.url)),
+  'utf8',
+);
 
 export function Tags({ tags }: { tags: string[] }) {
   return (
@@ -35,7 +42,7 @@ function PostLinks({ post }: { post: Post }) {
     <div className="post-links">
       {post.repository && (
         <a href={post.repository}>
-          View repository <span aria-hidden="true">↗</span>
+          View repository <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
         </a>
       )}
       {!!post.relatedProjects?.length && (
@@ -45,7 +52,7 @@ function PostLinks({ post }: { post: Post }) {
             {post.relatedProjects.map((project) => (
               <li key={`${project.name}-${project.url}`}>
                 <a href={project.url}>
-                  {project.name} <span aria-hidden="true">↗</span>
+                  {project.name} <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
                 </a>
               </li>
             ))}
@@ -158,7 +165,7 @@ export function Sidebar({ posts, post }: { posts: Post[]; post?: Post }) {
         </div>
       </section>
       <a className="rss-link" href="/rss.xml">
-        Follow via RSS <span aria-hidden="true">↗</span>
+        Follow via RSS <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
       </a>
     </aside>
   );
@@ -166,69 +173,15 @@ export function Sidebar({ posts, post }: { posts: Post[]; post?: Post }) {
 
 export function Header() {
   return (
-    <header className="site-header">
-      <a className="brand" href="https://paryx.uk">
-        paryx
-      </a>
-      <nav className="desktop-nav" aria-label="Main navigation">
-        <NavLinks />
-      </nav>
-      <div className="header-actions">
-        <a
-          className="icon-button"
-          href="/"
-          data-open-search
-          aria-label="Search paryx"
-        >
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            aria-hidden="true"
-          >
-            <circle cx="10.5" cy="10.5" r="6.5" />
-            <path d="m16 16 5 5" />
-          </svg>
-        </a>
-        <details className="mobile-nav">
-          <summary aria-label="Toggle navigation">
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              aria-hidden="true"
-            >
-              <path d="M3 5h18M3 12h18M3 19h18" />
-            </svg>
-          </summary>
-          <nav aria-label="Mobile navigation">
-            <NavLinks />
-            <a href="/rss.xml">RSS feed</a>
-          </nav>
-        </details>
-      </div>
-    </header>
-  );
-}
-
-function NavLinks() {
-  return (
-    <>
-      <a href="https://paryx.uk">Home</a>
-      <a href="/" aria-current="page">
-        Blog
-      </a>
-      <a href="https://paryx.uk/#projects">Projects</a>
-      <a href="https://paryx.uk/portfolio">Portfolio</a>
-      <a href="https://paryx.uk/#games">Games</a>
-      <a href="https://paryx.uk/#content">About</a>
-    </>
+    <header
+      className="site-header"
+      dangerouslySetInnerHTML={{
+        __html: sharedTopbar
+          .replaceAll('{{HOME_CURRENT}}', '')
+          .replaceAll('{{BLOG_CURRENT}}', 'aria-current="page"')
+          .replaceAll('{{SEARCH_HREF}}', '/'),
+      }}
+    />
   );
 }
 
@@ -648,7 +601,7 @@ function PostSummary({ post, lead = false }: { post: Post; lead?: boolean }) {
         <p className="deck">{post.description}</p>
         <Byline post={post} />
         <a className="read-link" href={`/${post.slug}`}>
-          Read article <span aria-hidden="true">↗</span>
+          Read article <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
           <span className="sr-only">: {post.title}</span>
         </a>
       </div>
@@ -752,12 +705,12 @@ export function AuthorProfile({ author }: { author: Author }) {
         <ul>
           {author.url && (
             <li>
-              <a href={author.url}>Website ↗</a>
+              <a href={author.url}>Website <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" /></a>
             </li>
           )}
           {author.projects?.map((project) => (
             <li key={project.url}>
-              <a href={project.url}>{project.name} ↗</a>
+              <a href={project.url}>{project.name} <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" /></a>
             </li>
           ))}
         </ul>

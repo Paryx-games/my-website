@@ -98,6 +98,7 @@
 .release-notes { max-height: 560px; overflow: auto; scrollbar-width: thin; padding-right: 8px; }
 .history-source { font-size: 11px; color: #b8bac5; }
 .history-source:hover { color: #fff; text-decoration: underline; }
+.external-link-icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.12em; }
 .change-kind.is-release { color: #a6d6ba; }
 .change-breaking { color: #e8b591; }
 .change-feature { color: #c6c9d7; }

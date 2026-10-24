@@ -54,6 +54,11 @@ const searchProxy = {
   "/search-index.json": { target: "https://blog.paryx.uk", changeOrigin: true },
 };
 
+const topbar = readFileSync(
+  new URL("../.shared/components/topbar.html", import.meta.url),
+  "utf8",
+);
+
 export default defineConfig(({ mode }) => {
   process.env.GITHUB_TOKEN ||= loadEnv(
     mode,
@@ -126,6 +131,19 @@ export default defineConfig(({ mode }) => {
         },
       },
       {
+        name: "shared-topbar",
+        transformIndexHtml(html, context) {
+          if (!context.filename.endsWith("index.html")) return html;
+          return html.replace(
+            '<header class="site-header">\n      <!-- shared-topbar -->\n    </header>',
+            `<header class="site-header">${topbar
+              .replaceAll("{{HOME_CURRENT}}", 'aria-current="page"')
+              .replaceAll("{{BLOG_CURRENT}}", "")
+              .replaceAll("{{SEARCH_HREF}}", "https://blog.paryx.uk/")}</header>`,
+          );
+        },
+      },
+      {
         name: "github-projects-api",
         configureServer: projectsApi,
         configurePreviewServer: projectsApi,
@@ -141,6 +159,13 @@ export default defineConfig(({ mode }) => {
             : html;
         },
         generateBundle() {
+          this.emitFile({
+            type: "asset",
+            fileName: ".shared/icons/link.svg",
+            source: readFileSync(
+              new URL("../.shared/icons/link.svg", import.meta.url),
+            ),
+          });
           if (preview) {
             this.emitFile({
               type: "asset",

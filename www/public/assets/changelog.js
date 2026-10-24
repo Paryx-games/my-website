@@ -51,7 +51,7 @@ async function initChangelog() {
         row.append(element("p", "change-context", entry.tag || ""));
         const notes = window.renderChangelogMarkdown(entry.body || "No release notes were provided for this release.", "release-notes");
         row.append(notes);
-        row.append(externalLink("View release on GitHub ↗", entry.url, "history-source"));
+        row.append(externalLink("View release on GitHub", entry.url, "history-source", true));
       } else {
         const context = element("p", "change-context");
         context.append(element("span", "commit-sha", (entry.sha || entry.id).slice(0, 7)), document.createTextNode(` · ${entry.author || "Unknown author"}${entry.own === false ? " · Collaborator" : ""}`));
@@ -90,7 +90,7 @@ async function initChangelog() {
       document.getElementById("history-project-title").textContent = chosen.title;
       document.getElementById("history-project-description").textContent = chosen.description || chosen.repo;
       const source = document.getElementById("history-project-source");
-      source.replaceChildren(externalLink(`${chosen.repo} ↗`, `https://github.com/${chosen.repo}`));
+      source.replaceChildren(externalLink(chosen.repo, `https://github.com/${chosen.repo}`, "", true));
     }
     render();
     try {

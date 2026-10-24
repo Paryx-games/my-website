@@ -826,6 +826,12 @@ h6 {
 .read-link:hover {
   text-decoration: underline;
 }
+.external-link-icon {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: -0.12em;
+}
 .empty-state {
   color: var(--muted);
   line-height: 1.7;

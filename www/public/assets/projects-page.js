@@ -12,10 +12,18 @@ export function githubUrl(value) {
   } catch { return null; }
 }
 
-export function externalLink(text, url, className = "") {
+export function externalLink(text, url, className = "", showIcon = false) {
   const link = element("a", className, text);
   const safe = githubUrl(url);
   if (safe) { link.href = safe; link.target = "_blank"; link.rel = "noopener noreferrer"; }
+  if (showIcon) {
+    const icon = document.createElement("img");
+    icon.className = "external-link-icon";
+    icon.src = "/.shared/icons/link.svg";
+    icon.alt = "";
+    icon.setAttribute("aria-hidden", "true");
+    link.append(icon);
+  }
   return link;
 }
 
@@ -37,4 +45,3 @@ export async function loadProjectConfig() {
   if (!Array.isArray(data?.projects)) throw new Error("Invalid project configuration");
   return data;
 }
-
