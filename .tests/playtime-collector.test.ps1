@@ -1,22 +1,23 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-. (Join-Path $PSScriptRoot '..\playtime\playtime-collector.ps1')
+. (Join-Path $PSScriptRoot '..\.playtime\playtime-collector.ps1')
 function Assert-Equal($actual, $expected, $message) {
     if ($actual -ne $expected) { throw "$message (expected $expected, got $actual)" }
 }
 function Get-SteamPlaytime { return @([pscustomobject]@{ GameId = '526870'; Minutes = $script:SteamMinutes }) }
 function Get-ModrinthPlaytime { return @([pscustomobject]@{ GameId = 'minecraft'; Minutes = 125 }) }
-function Get-RobloxPlaytime { return @([pscustomobject]@{ GameId = '1718755273'; Minutes = $script:RobloxMinutes; Name = 'town'; PlaceIds = @('1718755273') }) }
+function Get-RobloxPlaytime { return @([pscustomobject]@{ GameId = '1718755273'; Minutes = $script:RobloxMinutes; Name = 'town'; PlaceIds = $script:RobloxPlaceIds }) }
 $script:SteamMinutes = 60
 $script:RobloxMinutes = 2
 $script:UploadCount = 0
 $script:FailOnce = $false
 $script:ConflictOnce = $false
 $script:LastUpload = $null
+$script:RobloxPlaceIds = @('1718755273')
 function Invoke-RestMethod {
     param($Uri, $Method, $ContentType, $Headers, $Body, $TimeoutSec)
     $script:UploadCount++
-    Assert-Equal $Headers.Authorization 'Bearer test-only-collector-token' 'Bearer token'
+    Assert-Equal $Headers.Authorization "Bearer $env:PLAYTIME_UPLOAD_TOKEN" 'Collector sends the configured bearer token'
     $script:LastUpload = $Body | ConvertFrom-Json
     if ($script:FailOnce) { $script:FailOnce = $false; throw 'Simulated offline' }
     if ($script:ConflictOnce) { $script:ConflictOnce = $false; return [pscustomobject]@{ok=$true;accepted=$false;replayed=$false;lastSequence=100} }
@@ -46,6 +47,10 @@ try {
     $robloxUpload = $script:LastUpload.entries | Where-Object source -eq roblox
     Assert-Equal $robloxUpload.metadata.name 'town' 'Roblox game names are uploaded'
     Assert-Equal $robloxUpload.metadata.placeIds[0] '1718755273' 'Roblox place IDs are uploaded'
+    $script:RobloxPlaceIds = @()
+    $emptyPlaceIds = @(Get-CollectorEntries | Where-Object source -eq roblox)
+    Assert-Equal $emptyPlaceIds[0].metadata.placeIds.Count 0 'Roblox games without place IDs remain uploadable'
+    $script:RobloxPlaceIds = @('1718755273')
     $initialLog = Get-Content -LiteralPath (Join-Path $directory 'game-time-collector.log') -Raw
     if ($initialLog -notmatch 'initial totals: .*h \d{2}m on Minecraft, .*h \d{2}m on town, .*h \d{2}m on Satisfactory') {
         throw 'The first acknowledged upload must log readable game totals.'

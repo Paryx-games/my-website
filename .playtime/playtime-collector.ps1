@@ -388,13 +388,18 @@ function Get-CollectorEntries {
                 }
             if ($source -eq 'roblox' -and $null -ne $item.PSObject.Properties['Name']) {
                 $name = [string]$item.Name
-                $placeIds = @($item.PlaceIds)
+                $placeIds = [Collections.Generic.List[string]]::new()
+                foreach ($placeId in @($item.PlaceIds)) {
+                    if ($null -ne $placeId -and -not [string]::IsNullOrWhiteSpace([string]$placeId)) {
+                        $placeIds.Add([string]$placeId)
+                    }
+                }
                 if ([string]::IsNullOrWhiteSpace($name) -or $name.Length -gt 200 -or
                     $placeIds.Count -gt 1000 -or
-                    @($placeIds | Where-Object { [string]$_ -notmatch '^[1-9]\d{0,15}$' }).Count) {
+                    @($placeIds | Where-Object { $_ -notmatch '^[1-9]\d{0,15}$' }).Count) {
                     throw "Invalid Roblox metadata for universe $id."
                 }
-                $entry.metadata = [ordered]@{ name = $name.Trim(); placeIds = @($placeIds | ForEach-Object { [string]$_ }) }
+                $entry.metadata = [ordered]@{ name = $name.Trim(); placeIds = @($placeIds.ToArray()) }
             }
             $entries.Add([pscustomobject]$entry)
         }

@@ -1,6 +1,6 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
-. (Join-Path $PSScriptRoot '..\playtime\test-roblox-playtime.ps1')
+. (Join-Path $PSScriptRoot '..\.playtime\test-roblox-playtime.ps1')
 
 function Assert-Equal($Actual, $Expected, [string]$Message) {
     if ($Actual -ne $Expected) { throw "$Message (expected $Expected, got $Actual)" }

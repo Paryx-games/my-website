@@ -9,16 +9,20 @@ $launcher = Join-Path $PSScriptRoot 'run-roblox-playtime-hidden.vbs'
 $legacyRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $legacyScript = Join-Path $legacyRoot 'roblox-playtime-tracker.ps1'
 $legacyLauncher = Join-Path $legacyRoot 'run-roblox-playtime-hidden.vbs'
+$preDotDirectory = Join-Path $legacyRoot 'playtime'
+$preDotScript = Join-Path $preDotDirectory 'roblox-playtime-tracker.ps1'
+$preDotLauncher = Join-Path $preDotDirectory 'run-roblox-playtime-hidden.vbs'
 $executable = Join-Path $env:WINDIR 'System32\wscript.exe'
 $arguments = '"' + $launcher + '"'
 $existing = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue
 if ($null -ne $existing) {
     $managed = @($existing.Actions | Where-Object {
         ((Split-Path $_.Execute -Leaf) -eq 'wscript.exe' -and
-            $_.Arguments -in @($arguments, ('"' + $legacyLauncher + '"'))) -or
+            $_.Arguments -in @($arguments, ('"' + $legacyLauncher + '"'), ('"' + $preDotLauncher + '"'))) -or
         ($_.Arguments -in @(
             ('-NoProfile -NonInteractive -WindowStyle Hidden -File "' + $script + '"'),
-            ('-NoProfile -NonInteractive -WindowStyle Hidden -File "' + $legacyScript + '"')
+            ('-NoProfile -NonInteractive -WindowStyle Hidden -File "' + $legacyScript + '"'),
+            ('-NoProfile -NonInteractive -WindowStyle Hidden -File "' + $preDotScript + '"')
         ) -and
             (Split-Path $_.Execute -Leaf) -in @('pwsh.exe', 'powershell.exe'))
     })
