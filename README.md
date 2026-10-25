@@ -21,11 +21,11 @@ Archived websites may return in the future. Closed websites have been retired an
 
 </details>
 
-| Site | Purpose | Directory | Platform | Visibility
-| --- | --- | --- | --- | ---
-| [paryx.uk](https://paryx.uk) | Main website, projects, and links | `www/` | Vercel | Open source ✅
-| [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel | Open source ✅
-| [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel, Neon | Open source ✅
+| Site | Purpose | Directory | Platform | Visibility |
+| --- | --- | --- | --- | --- |
+| [paryx.uk](https://paryx.uk) | Main website, projects, and links | `www/` | Vercel | Open source ✅ |
+| [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel | Open source ✅ |
+| [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel, Neon | Open source ✅ |
 
 ## Languages
 
