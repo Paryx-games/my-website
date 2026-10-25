@@ -2,15 +2,30 @@
 
 Source for [paryx.uk](https://paryx.uk) and its related sites.
 
-This repository contains my personal website, blog, and supporting services. It's where I build and document projects, and write about things I've learned along the way.
+This repository contains my personal website, blog, and supporting services. I use it to build projects, document my work, and write about what I learn.
+
+The table lists the subdomains that are currently online. The dropdown contains subdomains and websites that have been archived or closed.
+
+<details>
+<summary> Archived or closed websites </summary>
+
+Archived websites may return in the future. Closed websites have been retired and will not return in their current form, although they may be replaced by something new.
+
+| Site | Purpose | Directory | Visibility |
+| --- | --- | --- | --- |
+| [dev.paryx.uk](https://dev.paryx.uk) | Development preview for upcoming changes | `.archive/dev/` | Archived |
+| [test.paryx.uk](https://test.paryx.uk) | Prototypes and experimental features | `.archive/test/` | Archived |
+| [codeinterpreter.paryx.uk](https://codeinterpreter.paryx.uk) | Code interpreter using Vite frontend and a private backend. | `🔒` | Closed |
+
+---
+
+</details>
 
 | Site | Purpose | Directory | Platform | Visibility
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | ---
 | [paryx.uk](https://paryx.uk) | Main website, projects, and links | `www/` | Vercel | Open source ✅
 | [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel | Open source ✅
 | [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel, Neon | Open source ✅
-| [media.paryx.uk](https://media.paryx.uk) | Static media and assets stored in Cloudflare R2 | N/A | Cloudflare R2 | N/A
-| [rm.paryx.uk](https://rm.paryx.uk) | Website for [Roblox Manager](https://github.com/Paryx-games/roblox-manager) | External | Vercel | Open source ✅
 
 ## Languages
 
