@@ -13,7 +13,7 @@ const total = (game_id: string, source: string, minutes: number, baseline: numbe
   game_id, source, minutes: String(minutes), baseline_minutes: baseline === null ? null : String(baseline), updated_at: '2026-10-17T12:00:00Z',
 });
 
-test('frozen baselines are available before any uploads and are never added twice', () => {
+test('frozen baselines are available before uploads and Minecraft uploads are added once', () => {
   const first = composePlaytime(baselines, []);
   assert.equal(first.version, 2);
   assert.equal(first.games.town.pc, 15606);
@@ -22,7 +22,7 @@ test('frozen baselines are available before any uploads and are never added twic
     const data = composePlaytime(baselines, [total('1718755273', 'roblox', 12, 2), total('minecraft', 'modrinth', 20000, 19671), total('satisfactory', 'steam', 9300, 9290)]);
     assert.equal(data.games.town.pc, 15618);
     assert.equal(data.games.town.pcIncrease24hMinutes, 10);
-    assert.equal(data.games.minecraft.pc, 50000);
+    assert.equal(data.games.minecraft.pc, 69671);
     assert.equal(data.games.minecraft.pcIncrease24hMinutes, 329);
     assert.equal(data.games.satisfactory.pc, 9300);
     assert.equal(data.games.satisfactory.pcIncrease24hMinutes, 2);

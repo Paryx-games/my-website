@@ -4,9 +4,6 @@ export type Baseline = { game_id: string; pc: number; mobile: number | null; con
 export type Total = { game_id: string; source: string; minutes: string; baseline_minutes: string | null; updated_at: string };
 export type RobloxGameMetadata = { universe_id: string; name: string; place_ids: string[] };
 
-// This estimate used to be applied by the browser. Lifetime launcher totals already include the backup's other minutes.
-const MINECRAFT_LAUNCHER_MINUTES = 30_000;
-
 export function composePlaytime(baselines: Baseline[], totals: Total[], robloxMetadata: RobloxGameMetadata[] = []): PublicPlaytime {
   const data: PublicPlaytime = { version: 2, updatedAt: null, games: {}, robloxGames: {} };
   data.robloxGames = Object.fromEntries(robloxMetadata.map(game => [
@@ -33,7 +30,9 @@ export function composePlaytime(baselines: Baseline[], totals: Total[], robloxMe
         if (row.source === 'roblox') tracked += minutes;
         else absolute += minutes;
       }
-      if (id === 'minecraft' && rows.some(row => row.source === 'modrinth')) absolute += MINECRAFT_LAUNCHER_MINUTES;
+      if (id === 'minecraft' && rows.some(row => row.source === 'modrinth')) {
+        return Number(baseline?.pc ?? 0) + absolute + tracked;
+      }
       return Math.max(Number(baseline?.pc ?? 0), absolute) + tracked;
     };
     const game: PublicPlaytime['games'][string] = { pc: calculate(false) };
