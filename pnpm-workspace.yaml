@@ -5,6 +5,4 @@ packages:
   - .
   - api
   - blog
-  - dev
-  - test
   - www

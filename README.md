@@ -2,14 +2,12 @@
 
 Source for [paryx.uk](https://paryx.uk) and its related sites.
 
-This repository contains my personal website, blog, development environments, and supporting services. It's where I build and experiment with new ideas, document projects, and write about things I've learned along the way.
+This repository contains my personal website, blog, and supporting services. It's where I build and document projects, and write about things I've learned along the way.
 
 | Site | Purpose | Directory | Platform | Visibility
 | --- | --- | --- | --- | --- |
 | [paryx.uk](https://paryx.uk) | Main website, projects, and links | `www/` | Vercel | Open source ✅
 | [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel | Open source ✅
-| [dev.paryx.uk](https://dev.paryx.uk) | Development preview for upcoming changes | `dev/` | Vercel | Open source ✅
-| [test.paryx.uk](https://test.paryx.uk) | Prototypes and experimental features | `test/` | Vercel | Open source ✅
 | [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel, Neon | Open source ✅
 | [media.paryx.uk](https://media.paryx.uk) | Static media and assets stored in Cloudflare R2 | N/A | Cloudflare R2 | N/A
 | [rm.paryx.uk](https://rm.paryx.uk) | Website for [Roblox Manager](https://github.com/Paryx-games/roblox-manager) | External | Vercel | Open source ✅

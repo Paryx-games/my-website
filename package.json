@@ -1,12 +1,6 @@
 {
 	"name": "paryx-workspace-root",
 	"private": true,
-	"scripts": {
-		"dev:new-hero": "vite --config test/previews/new-hero/vite.config.mts",
-		"build:new-hero": "vite build --config test/previews/new-hero/vite.config.mts",
-		"dev:triangle-led-front": "vite --config test/previews/triangle-led-front/vite.config.mts",
-		"build:triangle-led-front": "vite build --config test/previews/triangle-led-front/vite.config.mts"
-	},
 	"dependencies": {
 		"@neon/config": "^1.8.3",
 		"@neon/env": "^1.5.0",

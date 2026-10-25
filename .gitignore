@@ -23,9 +23,6 @@ dist/
 # dumps of info for the website
 .dumps/
 
-# generated preview builds
-test/previews/triangle-led-front/dist
-
 # operating system files
 .DS_Store
 .neon

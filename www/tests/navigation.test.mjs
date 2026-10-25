@@ -57,13 +57,13 @@ function harness(origin = "https://paryx.uk/") {
   return { root, events, timers, click, reset };
 }
 
-test("all independent deployments ship identical navigation assets", async () => {
+test("active independent deployments ship identical navigation assets", async () => {
   for (const file of ["navigation.js", "navigation.css", "site-search.js", "site-search.css"]) {
     const main = await readFile(
       new URL(`../public/assets/${file}`, import.meta.url),
       "utf8",
     );
-    for (const project of ["dev", "blog"])
+    for (const project of ["blog"])
       assert.equal(
         await readFile(
           new URL(`../../${project}/public/assets/${file}`, import.meta.url),
@@ -91,7 +91,7 @@ test("cross-domain and internal document navigation starts the bar", () => {
     for (const href of [
       "https://paryx.uk/privacy-policy",
       "https://blog.paryx.uk/an-article",
-      "https://dev.paryx.uk/",
+      "https://api.paryx.uk/",
     ]) {
       reset();
       click(href);
