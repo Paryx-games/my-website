@@ -1,7 +1,7 @@
 import { games, rotation, catalogue, robloxGames } from './games.js';
 import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
-import { renderPlaytime, createPlaytimeIncrease } from './playtime.js';
+import { renderLastPlayed, renderPlaytime, createPlaytimeIncrease } from './playtime.js';
 import { renderQuote, gameLinkElement } from './quote-links.js';
 import { renderRobloxDetails, creatorDetailElement } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
@@ -166,7 +166,10 @@ function refreshRemotePlaytime() {
       const increase = createPlaytimeIncrease(gameDetails[link.dataset.game]?.playtime?.pcIncrease24hMinutes, true);
       if (increase) name.insertBefore(increase, name.querySelector('.game-favorite'));
     });
-    if (dialog.open && active) renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
+    if (dialog.open && active) {
+      renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
+      renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
+    }
   }).finally(() => { playtimeRefresh = null; playtimeRefreshedAt = Date.now(); });
 }
 refreshRemotePlaytime();
@@ -251,6 +254,7 @@ function openShowcase(game, link) {
   );
   renderGameFacts(active);
   document.getElementById('game-website').href = active.website;
+  renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
   renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   renderRobloxDetails(document.getElementById('game-roblox-details'), active);
   if (active.roblox) refreshRobloxStats();
@@ -277,6 +281,14 @@ function openShowcase(game, link) {
   document.getElementById('game-close').focus();
   refreshRemotePlaytime();
 }
+
+window.addEventListener('paryx:timezonechange', () => {
+  if (dialog.open && active) renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
+});
+
+setInterval(() => {
+  if (dialog.open && active) renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
+}, 60_000);
 
 function renderGameFacts(game) {
   const facts = document.getElementById('game-facts');

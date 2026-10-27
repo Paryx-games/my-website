@@ -22,6 +22,7 @@ test('frozen baselines are available before uploads and Minecraft uploads are ad
     const data = composePlaytime(baselines, [total('1718755273', 'roblox', 12, 2), total('minecraft', 'modrinth', 20000, 19671), total('satisfactory', 'steam', 9300, 9290)]);
     assert.equal(data.games.town.pc, 15618);
     assert.equal(data.games.town.pcIncrease24hMinutes, 10);
+    assert.equal(data.games.town.lastPlayedAt, '2026-10-17T12:00:00.000Z');
     assert.equal(data.games.minecraft.pc, 69671);
     assert.equal(data.games.minecraft.pcIncrease24hMinutes, 329);
     assert.equal(data.games.satisfactory.pc, 9300);

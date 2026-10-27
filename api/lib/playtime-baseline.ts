@@ -35,7 +35,16 @@ export function composePlaytime(baselines: Baseline[], totals: Total[], robloxMe
       }
       return Math.max(Number(baseline?.pc ?? 0), absolute) + tracked;
     };
-    const game: PublicPlaytime['games'][string] = { pc: calculate(false) };
+    const lastPlayedAt = rows.length
+      ? rows.reduce((latest, row) => {
+        const updatedAt = new Date(row.updated_at).toISOString();
+        return !latest || updatedAt > latest ? updatedAt : latest;
+      }, null as string | null)
+      : null;
+    const game: PublicPlaytime['games'][string] = {
+      pc: calculate(false),
+      ...(lastPlayedAt ? { lastPlayedAt } : {}),
+    };
     if (baseline?.mobile != null) game.mobile = Number(baseline.mobile);
     if (baseline?.console != null) game.console = Number(baseline.console);
     // Roblox counters start at zero when tracking begins, so a missing older snapshot is a known zero.
@@ -53,7 +62,16 @@ export function composePlaytime(baselines: Baseline[], totals: Total[], robloxMe
   if (robloxIds.size) {
     const platformTotal = (platform: 'pc' | 'mobile' | 'console') => [...robloxIds].reduce((sum, id) => sum + (data.games[id]?.[platform] ?? 0), 0);
     const hasPlatformTotal = (platform: 'mobile' | 'console') => [...robloxIds].some(id => data.games[id]?.[platform] != null);
-    data.games.roblox = { ...data.games.roblox, pc: platformTotal('pc') };
+    const lastPlayedAt = [...robloxIds]
+      .map(id => data.games[id]?.lastPlayedAt)
+      .filter((value): value is string => typeof value === 'string')
+      .sort()
+      .at(-1) ?? null;
+    data.games.roblox = {
+      ...data.games.roblox,
+      pc: platformTotal('pc'),
+      ...(lastPlayedAt ? { lastPlayedAt } : {}),
+    };
     for (const platform of ['mobile', 'console'] as const) {
       if (hasPlatformTotal(platform)) data.games.roblox[platform] = platformTotal(platform);
     }

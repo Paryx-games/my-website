@@ -9,6 +9,56 @@ export function formatMinutes(value) {
   return parts.join(' ');
 }
 
+function playtimeTimeZone() {
+  const selected = globalThis.__paryxTimeZone;
+  if (typeof selected === 'string' && selected) return selected;
+  return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+}
+
+export function formatLastPlayed(value, now = Date.now()) {
+  if (typeof value !== 'string') return 'No data';
+  const timestamp = Date.parse(value);
+  if (!Number.isFinite(timestamp)) return 'No data';
+  const elapsed = Math.max(0, now - timestamp);
+  if (elapsed <= 5 * 60 * 1000) return 'now';
+  const minutes = Math.floor(elapsed / 60000);
+  if (minutes < 60) return `${minutes} minute${minutes === 1 ? '' : 's'} ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours} hour${hours === 1 ? '' : 's'} ago`;
+  const days = Math.floor(hours / 24);
+  return `${days} day${days === 1 ? '' : 's'} ago`;
+}
+
+export function renderLastPlayed(root, value, now = Date.now()) {
+  if (!root) return;
+  const display = root.querySelector('#game-last-played-value');
+  if (!display) return;
+  const text = formatLastPlayed(value, now);
+  display.textContent = text;
+  display.classList.toggle('game-last-played-value-muted', text === 'No data');
+  if (text === 'No data') {
+    display.removeAttribute('title');
+    display.removeAttribute('aria-label');
+    display.removeAttribute('tabindex');
+    return;
+  }
+  const date = new Date(value);
+  const timeZone = playtimeTimeZone();
+  const precise = new Intl.DateTimeFormat('en-GB', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone,
+    timeZoneName: 'short',
+  }).format(date);
+  display.title = precise;
+  display.setAttribute('aria-label', `${text}. ${precise}`);
+  display.tabIndex = 0;
+}
+
 export function robloxPlaytimeBreakdown(playtime) {
   if (!Number.isSafeInteger(playtime?.listedPcMinutes) || playtime.listedPcMinutes < 0 ||
       !Number.isSafeInteger(playtime?.unlistedPcMinutes) || playtime.unlistedPcMinutes < 0) return null;

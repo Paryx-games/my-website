@@ -11,6 +11,7 @@ export function mergeRemotePlaytime(details, response, knownIds) {
     const totalMinutes = minutes + (response.version === 1 && id === 'minecraft' ? 30_000 : 0);
     if (!Number.isSafeInteger(totalMinutes)) continue;
     const increase = remote?.pcIncrease24hMinutes;
+    const lastPlayedAt = remote?.lastPlayedAt;
     details[id] = {
       ...details[id],
       playtime: {
@@ -18,6 +19,7 @@ export function mergeRemotePlaytime(details, response, knownIds) {
         ...Object.fromEntries(['mobile', 'console'].filter(platform => Number.isSafeInteger(remote[platform]) && remote[platform] >= 0).map(platform => [platform, remote[platform]])),
         pc: totalMinutes,
         pcIncrease24hMinutes: Number.isSafeInteger(increase) && increase > 0 ? increase : null,
+        ...(typeof lastPlayedAt === 'string' && !Number.isNaN(Date.parse(lastPlayedAt)) ? { lastPlayedAt } : {}),
       },
     };
     if (id === 'roblox') {

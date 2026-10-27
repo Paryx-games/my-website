@@ -1,6 +1,14 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { playtimeEntries, formatMinutes, robloxPlaytimeBreakdown } from '../public/assets/games/playtime.js';
+import { playtimeEntries, formatLastPlayed, formatMinutes, robloxPlaytimeBreakdown } from '../public/assets/games/playtime.js';
+
+test('last played uses no data, now, and elapsed relative labels', () => {
+  const now = Date.parse('2026-10-27T12:00:00Z');
+  assert.equal(formatLastPlayed(undefined, now), 'No data');
+  assert.equal(formatLastPlayed('2026-10-27T11:57:00Z', now), 'now');
+  assert.equal(formatLastPlayed('2026-10-27T10:30:00Z', now), '1 hour ago');
+  assert.equal(formatLastPlayed('2026-10-22T12:00:00Z', now), '5 days ago');
+});
 
 test('playtime converts numeric minutes, preserves estimates and hides unspecified platforms', () => {
   assert.deepEqual(playtimeEntries({ pc: 125, mobile: 1 }), [['pc', 'PC', '2 hours 5 minutes'], ['mobile', 'Mobile', '1 minute']]);

@@ -25,7 +25,7 @@ export type Upload = { collectorId: string; sequence: number; entries: Entry[] }
 export type PublicPlaytime = {
   version: 1 | 2;
   updatedAt: string | null;
-  games: Record<string, { pc: number; mobile?: number; console?: number; pcIncrease24hMinutes?: number }>;
+  games: Record<string, { pc: number; mobile?: number; console?: number; pcIncrease24hMinutes?: number; lastPlayedAt?: string | null }>;
   robloxGames: Record<string, { universeId: string; name: string; placeIds: string[] }>;
 };
 export type UploadResult = { ok: true; accepted: boolean; replayed: boolean; lastSequence: number };

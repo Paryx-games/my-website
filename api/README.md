@@ -22,7 +22,7 @@ The playtime API provides game totals used by the website:
 
 - `POST /playtime` authenticates a collector using a bearer token and accepts cumulative whole-minute totals from Steam, Modrinth, and every Roblox universe the collector observes. Roblox entries can also retain the experience name and observed place IDs.
 - Steam app IDs are accepted as numeric `appId` values or numeric strings in `gameId`. The backend maps supported IDs to the website catalogue and ignores unmapped games individually.
-- `GET /playtime` returns public game/platform totals, saved Roblox experience names and place IDs, and an update timestamp, with a short CDN cache and browser CORS support. PC totals include `pcIncrease24hMinutes` after the API has a 24-hour historical baseline.
+- `GET /playtime` returns public game/platform totals, saved Roblox experience names and place IDs, and an update timestamp, with a short CDN cache and browser CORS support. Each tracked game may also include `lastPlayedAt`, the ISO timestamp of its latest accepted cumulative increase. PC totals include `pcIncrease24hMinutes` after the API has a 24-hour historical baseline.
 
 Repeated or older uploads do not add playtime twice. Recorded totals cannot decrease, and games omitted from an upload retain their previous values. Genuine increases are stored in Neon history in the same transaction as the current total and used to calculate the shared 24-hour change. History keeps the latest pre-window baseline and newer changes. The website combines PC totals from the API with independently maintained mobile and console playtime, using a saved fallback when the API is unavailable.
 

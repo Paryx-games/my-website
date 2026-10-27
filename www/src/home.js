@@ -561,6 +561,7 @@ const initScrollButton = () => {
 const browserZone = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
 let yourZone = browserZone;
 let manual = false;
+globalThis.__paryxTimeZone = yourZone;
 
 const zoneParts = (tz) => {
   const parts = tz.split("/");
@@ -711,6 +712,8 @@ const setYourZone = (tz) => {
     return;
   }
   yourZone = next;
+  globalThis.__paryxTimeZone = yourZone;
+  window.dispatchEvent(new CustomEvent("paryx:timezonechange", { detail: { timeZone: yourZone } }));
   manual = Boolean(tz) && tz !== browserZone;
   renderZone();
   tick();
