@@ -110,7 +110,7 @@ img.is-loading { opacity: 0 !important; }
 .game-fact svg { grid-row: 1 / 3; width: 24px; height: 24px; align-self: center; color: var(--color-muted); }
 #game-facts dt, #game-last-played h3 { color: var(--color-faint); font-size: 0.8rem; margin: 0 0 2px; font-weight: 400; }
 #game-facts dd, #game-last-played p { margin: 0; font-size: 0.9rem; line-height: 1.3; font-weight: 500; }
-#game-last-played p { text-align: right; font-variant-numeric: tabular-nums; }
+#game-last-played p { text-align: left; font-variant-numeric: tabular-nums; }
 #game-last-played-value:not(.game-last-played-value-muted) { text-decoration: underline dotted; text-underline-offset: 3px; cursor: help; }
 #game-last-played-value:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 2px; }
 .game-last-played-value-muted { color: var(--color-muted); }
