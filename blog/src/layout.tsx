@@ -319,6 +319,9 @@ export function Document({
         <script src="/assets/blog.js" defer />
         <link rel="stylesheet" href="/assets/site-search.css" />
         <script src="/assets/site-search.js" type="module" />
+        {process.env.VITE_SENTRY_DSN && (
+          <script src="/assets/sentry.js" type="module" />
+        )}
         {schema && (
           <script
             type="application/ld+json"

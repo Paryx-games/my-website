@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { getRepositoryLanguageCacheTag } from "../../../lib/languages.js";
+import { captureApiException, withSentry } from "../../../lib/sentry.js";
 
 const MAX_REQUEST_BODY_BYTES = 1_000_000;
 
@@ -59,7 +60,7 @@ async function readRequestBody(
   return Buffer.concat(chunks);
 }
 
-export default async function handler(
+async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
@@ -151,7 +152,10 @@ export default async function handler(
     }
 
     return res.status(204).end();
-  } catch {
+  } catch (error) {
+    await captureApiException(error, "/api/github/languages/revalidate");
     return res.status(502).json({ error: "Failed to invalidate language cache" });
   }
 }
+
+export default withSentry(handler, "/api/github/languages/revalidate");

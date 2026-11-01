@@ -312,6 +312,8 @@ export async function fetchActivity({
     eventResult.status === "fulfilled" && Array.isArray(eventResult.value)
       ? eventResult.value.map(normalizeEvent).filter(Boolean)
       : [];
+  if (eventResult.status === "rejected")
+    await captureApiException(eventResult.reason, "/api/github-activity");
   if (eventResult.status === "rejected" || !Array.isArray(eventResult.value))
     errors.events = "Public activity is temporarily unavailable";
   const projects = [];
@@ -327,7 +329,8 @@ export async function fetchActivity({
           includeCommits,
           includeReleases,
         });
-      } catch {
+      } catch (error) {
+        await captureApiException(error, "/api/github-activity");
         repo = null;
       }
     }
@@ -487,11 +490,13 @@ export function createActivityHandler({
       if (Object.keys(data.errors || {}).length && entry.data)
         return fallback();
       return send(200, data);
-    } catch {
+    } catch (error) {
+      await captureApiException(error, "/api/github-activity");
       entry.retryAt = now() + 30000;
       return fallback();
     }
   };
 }
 
-export default createActivityHandler();
+export default withSentry(createActivityHandler(), "/api/github-activity");
+import { captureApiException, withSentry } from "./sentry.js";

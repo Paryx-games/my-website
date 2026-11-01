@@ -1,3 +1,5 @@
+import { captureApiException, withSentry } from "./sentry.js";
+
 const USER_ID_PATTERN = /^\d{17,20}$/;
 
 const send = (res, status, body) => {
@@ -13,7 +15,7 @@ const numericTimestamp = (value) => {
   return timestamp < 1e12 ? timestamp * 1000 : timestamp;
 };
 
-export default async function handler(req, res) {
+async function handler(req, res) {
   if (req.method !== "GET") {
     res.setHeader("Allow", "GET");
     return send(res, 405, { error: "Method not allowed" });
@@ -87,7 +89,10 @@ export default async function handler(req, res) {
       spotify,
       activities
     });
-  } catch {
+  } catch (error) {
+    await captureApiException(error, "/api/discord-status");
     return send(res, 502, { error: "Discord presence provider unavailable" });
   }
 }
+
+export default withSentry(handler, "/api/discord-status");

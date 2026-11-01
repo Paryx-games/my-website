@@ -16,6 +16,7 @@ import { authors } from '../src/authors.js';
 import { compileArticle } from '../src/article-content.js';
 import { pageSocialImage, socialImage } from '../src/social-image.js';
 import { resolveBanner } from '../src/banners.js';
+import { build as buildAssets, loadEnv } from 'vite';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'dist');
@@ -23,6 +24,11 @@ const output = path.join(root, 'dist');
 export async function build({
   development = false,
 }: { development?: boolean } = {}) {
+  const sentryDsn =
+    process.env.VITE_SENTRY_DSN ||
+    loadEnv(development ? 'development' : 'production', root, 'VITE_')
+      .VITE_SENTRY_DSN;
+  if (sentryDsn) process.env.VITE_SENTRY_DSN = sentryDsn;
   const posts = await loadPosts(path.join(root, 'content/posts'), development);
   const compiled = new Map<string, string>();
   for (const post of posts) compiled.set(post.slug, await compileArticle(post));
@@ -223,6 +229,27 @@ export async function build({
     path.join(output, 'robots.txt'),
     `User-agent: *\n${noindex ? 'Disallow: /' : 'Allow: /'}\n\nSitemap: ${site.origin}/sitemap.xml\n`,
   );
+  if (sentryDsn) {
+    const sentryEnvironment =
+      process.env.VERCEL_ENV ?? (development ? 'development' : 'production');
+    await buildAssets({
+      configFile: false,
+      define: {
+        'process.env.VITE_SENTRY_DSN': JSON.stringify(sentryDsn),
+        'process.env.VITE_SENTRY_ENVIRONMENT':
+          JSON.stringify(sentryEnvironment),
+      },
+      build: {
+        outDir: output,
+        emptyOutDir: false,
+        lib: {
+          entry: path.join(root, 'src/sentry.ts'),
+          formats: ['es'],
+          fileName: () => 'assets/sentry.js',
+        },
+      },
+    });
+  }
   console.log(
     `Built ${posts.length} article(s), ${published.length} published, into blog/dist.`,
   );

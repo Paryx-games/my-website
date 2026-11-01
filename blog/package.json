@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@mdx-js/mdx": "^3.1.1",
+    "@sentry/browser": "^11.10.0",
     "@vercel/analytics": "^2.0.1",
     "gray-matter": "^4.0.3",
     "react": "^19.2.0",

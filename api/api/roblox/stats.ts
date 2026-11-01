@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { fetchStats, readStats, type StatsStore } from '../../lib/roblox-stats.js';
 import { createStatsStore } from '../../lib/roblox-stats-store.js';
+import { captureApiException, withSentry } from '../../lib/sentry.js';
 
 export function makeHandler(environment: { DATABASE_URL?: string }, storeFactory = createStatsStore, refresh = fetchStats) {
   let store: StatsStore | undefined;
@@ -21,9 +22,10 @@ export function makeHandler(environment: { DATABASE_URL?: string }, storeFactory
     try {
       store ||= storeFactory(environment.DATABASE_URL);
       return res.status(200).json(await readStats(store, refresh, randomUUID()));
-    } catch {
+    } catch (error) {
+      await captureApiException(error, '/api/roblox/stats');
       return res.status(503).json({ error: 'Roblox stats temporarily unavailable' });
     }
   };
 }
-export default makeHandler(process.env);
+export default withSentry(makeHandler(process.env), '/api/roblox/stats');

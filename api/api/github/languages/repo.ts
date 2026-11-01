@@ -1,10 +1,11 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { withSentry } from "../../../lib/sentry.js";
 import {
   getRepositoryLanguageCacheTag,
   getRepositoryLanguages,
 } from "../../../lib/languages.js";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+async function handler(req: VercelRequest, res: VercelResponse) {
   const result = await getRepositoryLanguages(req.query.repo);
   if (result.error !== undefined) {
     return res.status(result.status).json({ error: result.error });
@@ -19,3 +20,5 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   );
   return res.status(200).json(result.data);
 }
+
+export default withSentry(handler, "/api/github/languages/repo");

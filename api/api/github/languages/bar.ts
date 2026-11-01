@@ -1,4 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { withSentry } from "../../../lib/sentry.js";
 import { getLanguageColor } from "../../../lib/language-colors.js";
 import {
   getRepositoryLanguageCacheTag,
@@ -193,7 +194,7 @@ function filterLanguages(
   return shown;
 }
 
-export default async function handler(
+async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
@@ -225,3 +226,5 @@ export default async function handler(
     }),
   );
 }
+
+export default withSentry(handler, "/api/github/languages/bar");

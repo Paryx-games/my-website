@@ -1,6 +1,7 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { authenticated, validateUpload, MAX_UPLOAD_BYTES, type PlaytimeStore } from '../lib/playtime.js';
 import { createPlaytimeStore } from '../lib/playtime-store.js';
+import { captureApiException, withSentry } from '../lib/sentry.js';
 
 type Environment = { DATABASE_URL?: string; PLAYTIME_UPLOAD_TOKEN?: string; PLAYTIME_COLLECTOR_ID?: string };
 export function makeHandler(environment: Environment, storeFactory = createPlaytimeStore) {
@@ -39,9 +40,10 @@ export function makeHandler(environment: Environment, storeFactory = createPlayt
       const data = await store.read();
       res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
       return res.status(200).json(data);
-    } catch {
+    } catch (error) {
+      await captureApiException(error, '/api/playtime');
       return res.status(503).json({ error: 'Playtime temporarily unavailable' });
     }
   };
 }
-export default makeHandler(process.env);
+export default withSentry(makeHandler(process.env), '/api/playtime');

@@ -9,3 +9,5 @@ Articles bring together project stories, engineering ideas, and practical discov
 The design keeps the focus on reading, with a dark background, wide banners, and spacious typography across desktop, tablet, and phone.
 
 Follow new articles through the [RSS feed](https://blog.paryx.uk/rss.xml).
+
+Browser exceptions are reported to Sentry when the public `VITE_SENTRY_DSN` build variable is configured. The DSN is embedded in the static browser bundle. See the [privacy policy](https://paryx.uk/privacy-policy) for the exact event fields and exclusions.

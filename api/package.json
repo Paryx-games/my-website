@@ -13,6 +13,7 @@
 		"typescript": "^5.9.3"
 	},
 	"dependencies": {
-		"@neondatabase/serverless": "^1.2.0"
+		"@neondatabase/serverless": "^1.2.0",
+		"@sentry/node": "^11.10.0"
 	}
 }

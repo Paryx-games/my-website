@@ -20,5 +20,9 @@
     "marked": "^18.0.14",
     "typescript": "^5.8.3",
     "vite": "^8.3.0"
+  },
+  "dependencies": {
+    "@sentry/browser": "^11.10.0",
+    "@sentry/node": "^11.10.0"
   }
 }

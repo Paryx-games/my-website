@@ -243,10 +243,12 @@ export function createProjectsHandler({
           pending = null;
         });
       return send(200, await pending);
-    } catch {
+    } catch (error) {
+      await captureApiException(error, "/api/github-projects");
       return send(502, { error: "GitHub project data unavailable" });
     }
   };
 }
 
-export default createProjectsHandler();
+export default withSentry(createProjectsHandler(), "/api/github-projects");
+import { captureApiException, withSentry } from "./sentry.js";

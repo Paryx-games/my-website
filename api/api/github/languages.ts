@@ -1,9 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
+import { withSentry } from "../../lib/sentry.js";
 import {
   getTargetLanguages,
 } from "../../lib/languages.js";
 
-export default async function handler(
+async function handler(
   req: VercelRequest,
   res: VercelResponse,
 ) {
@@ -27,3 +28,5 @@ export default async function handler(
 
   return res.status(200).json(result.data);
 }
+
+export default withSentry(handler, "/api/github/languages");

@@ -60,12 +60,16 @@ const topbar = readFileSync(
 );
 
 export default defineConfig(({ mode }) => {
-  process.env.GITHUB_TOKEN ||= loadEnv(
-    mode,
-    fileURLToPath(new URL("./", import.meta.url)),
-    "GITHUB_",
-  ).GITHUB_TOKEN;
+  const root = fileURLToPath(new URL("./", import.meta.url));
+  const environment = loadEnv(mode, root, "");
+  process.env.GITHUB_TOKEN ||= loadEnv(mode, root, "GITHUB_").GITHUB_TOKEN;
+  const sentryDsn = environment.VITE_SENTRY_DSN;
+  const sentryEnvironment = process.env.VERCEL_ENV || mode;
   return {
+    define: {
+      "import.meta.env.VITE_SENTRY_ENVIRONMENT":
+        JSON.stringify(sentryEnvironment),
+    },
     appType: "mpa",
     server: { host: "127.0.0.1", proxy: searchProxy },
     preview: { proxy: searchProxy },
@@ -144,6 +148,20 @@ export default defineConfig(({ mode }) => {
         },
       },
       {
+        name: "sentry-error-monitoring",
+        apply: "serve",
+        transformIndexHtml: {
+          order: "pre",
+          handler(html) {
+            if (!sentryDsn) return html;
+            return html.replace(
+              "</head>",
+              '  <script type="module" src="/src/sentry.ts"></script>\n</head>',
+            );
+          },
+        },
+      },
+      {
         name: "github-projects-api",
         configureServer: projectsApi,
         configurePreviewServer: projectsApi,
@@ -158,21 +176,45 @@ export default defineConfig(({ mode }) => {
               )
             : html;
         },
-        generateBundle() {
-          this.emitFile({
-            type: "asset",
-            fileName: ".shared/icons/link.svg",
-            source: readFileSync(
-              new URL("../.shared/icons/link.svg", import.meta.url),
-            ),
-          });
-          if (preview) {
+        generateBundle: {
+          order: "post",
+          handler(_options, bundle) {
+            const sentryChunk = Object.values(bundle).find(
+              (output) =>
+                output.type === "chunk" && output.fileName.includes("sentry"),
+            );
+            if (sentryChunk) {
+              for (const output of Object.values(bundle)) {
+                if (
+                  output.type !== "asset" ||
+                  !output.fileName.endsWith(".html")
+                )
+                  continue;
+                const html =
+                  typeof output.source === "string"
+                    ? output.source
+                    : Buffer.from(output.source).toString("utf8");
+                output.source = html.replace(
+                  "</head>",
+                  `  <script type="module" src="/${sentryChunk.fileName}"></script>\n</head>`,
+                );
+              }
+            }
             this.emitFile({
               type: "asset",
-              fileName: "robots.txt",
-              source: "User-agent: *\nDisallow: /\n",
+              fileName: ".shared/icons/link.svg",
+              source: readFileSync(
+                new URL("../.shared/icons/link.svg", import.meta.url),
+              ),
             });
-          }
+            if (preview) {
+              this.emitFile({
+                type: "asset",
+                fileName: "robots.txt",
+                source: "User-agent: *\nDisallow: /\n",
+              });
+            }
+          },
         },
       },
     ],
@@ -191,6 +233,13 @@ export default defineConfig(({ mode }) => {
           privacy: fileURLToPath(
             new URL("./privacy-policy.html", import.meta.url),
           ),
+          ...(sentryDsn
+            ? {
+                sentry: fileURLToPath(
+                  new URL("./src/sentry.ts", import.meta.url),
+                ),
+              }
+            : {}),
         },
       },
     },

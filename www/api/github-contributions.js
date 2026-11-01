@@ -1,3 +1,5 @@
+import { captureApiException, withSentry } from "./sentry.js";
+
 const QUERY = `query Contributions {
   user(login: "Paryx-games") {
     contributionsCollection {
@@ -87,11 +89,15 @@ export function createContributionsHandler({ load = fetchContributions, configur
     try {
       pending ||= load().then(data => { cached = data; fetchedAt = now(); return data; }).finally(() => { pending = null; });
       return send(200, await pending);
-    } catch {
+    } catch (error) {
+      await captureApiException(error, "/api/github-contributions");
       if (cached) return send(200, { ...cached, stale: true });
       return send(502, { error: 'GitHub contributions unavailable' });
     }
   };
 }
 
-export default createContributionsHandler();
+export default withSentry(
+  createContributionsHandler(),
+  "/api/github-contributions",
+);
