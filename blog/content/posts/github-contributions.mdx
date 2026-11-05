@@ -1,0 +1,107 @@
+---
+title: 'What GitHub Tracks as Contributions'
+description: 'A short guide to what GitHub shows on your profile and what actually counts as a contribution, from commits and pull requests to issues, discussions and reviews.'
+date: '2026-10-04'
+updated: '2026-11-05'
+banner: "https://media.paryx.uk/images/contrib%20graph.png"
+bannerAlt: "GitHub Contribution graph (dark mode)"
+featured: false
+authors:
+  - paryx
+tags:
+  - GitHub
+  - Git
+  - Contributions
+  - Commits
+  - Pull Requests
+  - Issues
+  - Repositories
+slug: gh-contributions
+---
+
+Everyone knows the green squares, but what actually puts a square there? Under the graph, GitHub shows a contribution activity timeline that lists what someone has done. I went through a number of profiles and wrote down every type of entry I could find, then checked the rules against GitHub's docs.
+
+> [!NOTE]
+> I do not know the full list of timeline entries. This is based on around 5 to 15 profiles with consistent activity going back to 2016-2018, so GitHub may still show more than what is covered here. In the entries below, `x` stands for a number.
+
+## Account milestones
+
+These are one-off events that only appear once on a profile.
+
+- Joined GitHub
+- Joined the ____ organisation
+- Created their first repository
+- Opened their first issue on GitHub in owner/repo
+- Opened their first pull request on GitHub in owner/repo
+- Opened their first pull request on GitHub in a private repository
+
+> [!NOTE]
+> The private repository milestone probably applies to a first issue too, but I have not found a verified text string for that on anyone's profile yet.
+
+## Code and repositories
+
+- Created x commit(s) in x repository(s)
+- Created x repository(s)
+
+## Pull requests
+
+- Opened x pull request(s) in x repository(s)
+- Created a pull request in owner/repo that received x comment(s)
+- Opened x other pull request(s) in x repository(s)
+- Reviewed x pull requests in x repository(s)
+
+## Issues
+
+- Created an issue in owner/repo that received x comment(s)
+- Opened x other issue(s) in x repository(s)
+
+## Discussions
+
+- Started x discussion(s) in x repository(s)
+- Answered x discussion(s) in x repository(s)
+
+## Why some entries say "other"
+
+From what I saw, pull requests and issues that received comments get their own line, with the repository named and the comment count shown. The "other" entries are a catch-all for everything else, across any repositories, and only cover items with no comments.
+
+## What counts as a contribution
+
+GitHub's docs split contributions into two groups. Creating a repository and forking a repository always count. Opening an issue, proposing a pull request, submitting a review, opening or answering a discussion and making a commit only sometimes count. I have seen answered discussions on timelines, but I did not see forks, so I do not know how those are worded.
+
+Issues, pull requests and discussions count if they were opened in a standalone repository, not a fork. GitHub also limits how many of them it displays, so a very busy profile may not show everything.
+
+Commits are stricter. All of these must be true:
+
+- The email on the commit is linked to your GitHub account
+- It was made in a standalone repository, not a fork
+- It was made on the default branch (or `gh-pages` for project sites)
+
+On top of that, at least one of these must also be true:
+
+- You are a collaborator on the repository or a member of the organisation that owns it
+- You have forked the repository
+- You have opened a pull request or issue in the repository
+
+> [!IMPORTANT]
+> If the email on your commits is not linked to your account, the commits exist but your profile will not show them.
+
+## Dates and time zones
+
+Your profile uses the author date of a commit, which is when it was first created. A commit from a pull request keeps the day you made it, not the day it was merged. Rebasing or amending can change the commit date inside the repository, but not the date on your profile. When commits are rebased, both the original author and the person who rebased them get credit.
+
+Commits use the time zone in the commit timestamp. Pull requests and issues opened on GitHub use your browser's time zone.
+
+## Private contributions
+
+You can choose to show your private contributions on your profile. They show up as a count, like `x contributions in private repositories`. I believe this covers anything from the lists above, just done in a private repository, and it does not count as a milestone. The exception is a first pull request (possibly first issue too), which still gets its own milestone line.
+
+People without access to those repositories only see how many contributions you made each day, with no details. Contributions shared from GitHub Enterprise Server are treated as private too. You can manage this in GitHub's [private contribution settings](https://docs.github.com/en/account-and-profile/how-tos/contribution-settings/manage-visibility-settings-for-private-contributions-and-achievements).
+
+> [!TIP]
+> If you merged multiple personal accounts, issues, pull requests and discussions from the old account will not be attributed to the new one.
+
+## Wrapping up
+
+Most of the counting rules come from GitHub's [profile contributions reference](https://docs.github.com/en/account-and-profile/reference/profile-contributions-reference). If your own squares are missing, GitHub also has a page on [troubleshooting missing contributions](https://docs.github.com/en/account-and-profile/how-tos/contribution-settings/troubleshooting-missing-contributions).
+
+That is everything I have found so far. If you spot an entry type that is not on this list, contact me at paryx@paryx.uk or DM me on Discord at `paryx.games`.
