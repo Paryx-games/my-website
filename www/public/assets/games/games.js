@@ -174,6 +174,11 @@ export const rotation = [
   { id: "planet-zoo", status: "In rotation" },
   { id: "upload-labs", status: "In rotation" },
   { id: "sektori", status: "In rotation" },
+  { id: "fortnite", status: "In rotation" },
+  { id: "among-us", status: "In rotation" },
+  { id: "minecraft-dungeons", status: "In rotation" },
+  { id: "forza-horizon-5", status: "In rotation" },
+  { id: "rocket-league", status: "In rotation" },
 ];
 
 export const catalogue = [

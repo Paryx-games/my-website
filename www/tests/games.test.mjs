@@ -7,10 +7,11 @@ const sources = JSON.parse(await readFile(new URL('../content/game-artwork-sourc
 test('favorites and rotation resolve to complete galleries with local artwork', async () => {
   assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege', 'pressure', 'industrialist']);
   assert.ok(games.every(game => game.favorite));
-  assert.equal(rotation.length, 18);
+  assert.equal(rotation.length, 23);
   assert.equal(new Set(catalogue.map(game => game.id)).size, catalogue.length);
   for (const id of ['fortnite', 'among-us', 'minecraft-dungeons', 'forza-horizon-5', 'rocket-league']) {
     assert.ok(catalogue.some(game => game.id === id), id);
+    assert.ok(rotation.some(game => game.id === id), `${id} must be shown in the games section`);
   }
   assert.deepEqual(robloxGames.map(game => game.id), ['pressure', 'town', 'industrialist', 'build-a-boat-for-treasure', 'nuclear-blast-testing-facility', 'a-core-game', 'jujutsu-shenanigans', 'doors', 'the-strongest-battlegrounds', 'notoriety', 'blox-fruits', 'scp-roleplay', 'car-crushers-2', 'cook-burgers', 'unseen-liminality', 'apeirophobia', 'islands', 'bee-swarm-simulator', 'oakridge-nuclear-power-station']);
   for (const entry of rotation) assert.ok(catalogue.some(game => game.id === entry.id), entry.id);
