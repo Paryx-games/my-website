@@ -2,6 +2,7 @@
 title: 'Putting my game playtime on my website'
 description: 'How a Windows PowerShell collector, an authenticated Vercel API, and Neon PostgreSQL keep my game playtime up to date without rebuilding the site.'
 date: '2026-10-05'
+updated: '2026-11-05'
 authors:
   - paryx
 tags:
@@ -47,7 +48,7 @@ For Steam, the script finds the installation and active user's local data, parse
 
 Each game becomes a record:
 
-```powershell
+```powershell title="playtime-collector.ps1"
 [pscustomobject]@{
     GameId  = $appId
     Minutes = $minutes
@@ -71,7 +72,7 @@ FROM instances;
 
 Those counters are in seconds, so they are converted to whole minutes before upload:
 
-```powershell
+```powershell title="playtime-collector.ps1"
 $minutes = [long][Math]::Floor($seconds / 60.0)
 
 [pscustomobject]@{
@@ -94,7 +95,7 @@ The [collector source](https://github.com/Paryx-games/my-website/blob/8e63e3c9cb
 
 The backend filters the collector's library against a mapping of games on the website:
 
-```typescript
+```typescript title="api/lib/playtime.ts"
 export const steamAppIds: Record<number, string> = {
   526870: 'satisfactory',
   1293830: 'forza-horizon-4',
@@ -122,7 +123,42 @@ Unmapped games are skipped individually before storage, so they do not reject ma
 
 ## Public reads, private uploads
 
-`POST /playtime` requires a bearer token in the `Authorization` header, checked against a private Vercel environment variable before database access. Missing or incorrect tokens get a `401` response.
+<ApiEndpoint method="POST" path="/playtime" />
+
+This endpoint requires a bearer token in the `Authorization` header, checked against a private Vercel environment variable before database access. Missing or incorrect tokens get a `401` response.
+
+With the request body saved as `upload.json` and the bearer token in `PLAYTIME_TOKEN`, the same upload works from either shell:
+
+<CodeGroup>
+  <CodeTab label="PowerShell">
+
+```powershell title="upload.ps1"
+$headers = @{
+    Authorization = "Bearer $env:PLAYTIME_TOKEN"
+}
+
+Invoke-RestMethod `
+    -Uri "https://api.paryx.uk/playtime" `
+    -Method Post `
+    -Headers $headers `
+    -ContentType "application/json" `
+    -InFile "upload.json"
+```
+
+  </CodeTab>
+  <CodeTab label="Bash">
+
+```bash title="upload.sh"
+curl --fail-with-body \
+    --request POST \
+    --url "https://api.paryx.uk/playtime" \
+    --header "Authorization: Bearer ${PLAYTIME_TOKEN}" \
+    --header "Content-Type: application/json" \
+    --data-binary "@upload.json"
+```
+
+  </CodeTab>
+</CodeGroup>
 
 The token comparison uses fixed-length hashes:
 
@@ -143,7 +179,9 @@ export function authenticated(header: unknown, token: string): boolean {
 
 The collector stores a DPAPI-protected token locally, decrypts it under the Windows account running the task, and sends the underlying bearer token over HTTPS.
 
-`GET /playtime` exposes game totals and an update timestamp to the website.
+<ApiEndpoint method="GET" path="/playtime" />
+
+This endpoint exposes game totals and an update timestamp to the website.
 
 <Callout type="important">
 

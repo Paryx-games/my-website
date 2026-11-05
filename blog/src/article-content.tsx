@@ -10,6 +10,33 @@ import { rehypeGithubAlerts } from './github-alerts.js';
 import type { Post } from './content.js';
 
 type Node = DefaultTreeAdapterMap['node'];
+type CodeTreeNode = {
+  type?: string;
+  meta?: string | null;
+  data?: { hProperties?: Record<string, unknown> };
+  children?: CodeTreeNode[];
+};
+
+function remarkCodeTitles() {
+  return (tree: CodeTreeNode) => {
+    function visit(node: CodeTreeNode) {
+      if (node.type === 'code' && node.meta) {
+        const title = node.meta.match(
+          /(?:^|\s)title=(?:"([^"]+)"|'([^']+)')(?:\s|$)/,
+        );
+        const filename = (title?.[1] ?? title?.[2])?.trim();
+        if (filename && filename.length <= 160 && !/[\r\n]/.test(filename)) {
+          node.data ??= {};
+          node.data.hProperties ??= {};
+          node.data.hProperties['data-filename'] = filename;
+        }
+      }
+      node.children?.forEach(visit);
+    }
+    visit(tree);
+  };
+}
+
 function text(node: Node): string {
   if (node.nodeName === '#text')
     return (node as DefaultTreeAdapterMap['textNode']).value;
@@ -51,7 +78,7 @@ export async function compileArticle(post: Post) {
   const { default: Content } = await evaluate(post.content, {
     ...runtime,
     format: post.extension === '.md' ? 'md' : 'mdx',
-    remarkPlugins: [remarkGfm],
+    remarkPlugins: [remarkCodeTitles, remarkGfm],
     rehypePlugins: [
       rehypeGithubAlerts,
       rehypeSlug,

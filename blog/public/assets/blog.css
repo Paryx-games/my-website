@@ -610,20 +610,136 @@ h6 {
 .code-toolbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 10px 16px 0;
   font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
-.code-toolbar span {
+.code-toolbar-labels {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  min-width: 0;
+}
+.code-toolbar-labels span {
   font-family: monospace;
+}
+.code-filename {
+  color: #dedee8;
+  overflow-wrap: anywhere;
 }
 .code-toolbar button {
   padding: 2px 5px;
   min-height: 28px;
+  flex: 0 0 auto;
 }
 .code-toolbar button:hover {
   color: #fff;
+}
+.code-group {
+  border: 1px solid #24252b;
+  border-radius: 8px;
+  background: #101215;
+  margin: 22px 0 28px;
+  overflow: hidden;
+}
+.code-group-tabs {
+  display: none;
+  gap: 4px;
+  overflow-x: auto;
+  border-bottom: 1px solid #24252b;
+  padding: 8px 12px 0;
+  scrollbar-width: thin;
+}
+.code-group[data-enhanced] .code-group-tabs {
+  display: flex;
+}
+.code-group-tabs button {
+  flex: 0 0 auto;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  padding: 7px 8px 8px;
+  min-height: 36px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.code-group-tabs button[aria-selected='true'] {
+  border-bottom-color: #98d4ff;
+  color: #f0f0f5;
+}
+.code-group-tabs button:hover {
+  color: #fff;
+}
+.code-group-tabs button:focus-visible {
+  outline: 2px solid #98d4ff;
+  outline-offset: -2px;
+}
+.code-tab-panel[hidden] {
+  display: none;
+}
+.code-tab-heading {
+  margin: 0;
+  padding: 12px 16px 0;
+  color: #dedee8;
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 500;
+}
+.code-group[data-enhanced] .code-tab-heading {
+  display: none;
+}
+.code-group .code-block {
+  border: 0;
+  border-radius: 0;
+  margin: 0;
+}
+.code-group .code-toolbar {
+  padding-top: 8px;
+}
+.api-endpoint {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  max-width: 100%;
+  margin: 2px 0;
+  padding: 5px 9px;
+  border: 1px solid #303138;
+  border-radius: 5px;
+  background: #141519;
+  vertical-align: middle;
+  line-height: 1.5;
+}
+.api-endpoint-method {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+}
+.api-endpoint-get {
+  color: #a7dfaa;
+}
+.api-endpoint-post {
+  color: #98d4ff;
+}
+.api-endpoint-put,
+.api-endpoint-patch {
+  color: #f0d699;
+}
+.api-endpoint-delete {
+  color: #ff9a9a;
+}
+.api-endpoint-head,
+.api-endpoint-options {
+  color: #c3b0ef;
+}
+.api-endpoint-path {
+  min-width: 0;
+  color: #e0e0eb;
+  font-family: monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
 }
 .prose pre {
   max-width: 100%;

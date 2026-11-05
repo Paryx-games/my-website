@@ -2,7 +2,9 @@ import {
   Children,
   isValidElement,
   type ComponentProps,
+  type ReactElement,
   type ReactNode,
+  useId,
 } from 'react';
 
 export type CalloutType = 'note' | 'tip' | 'important' | 'warning' | 'caution';
@@ -98,12 +100,18 @@ export function Figure({
 
 function CodeBlock({ children, ...props }: ComponentProps<'pre'>) {
   const code = Children.toArray(children).find(isValidElement);
-  const className = code && (code.props as { className?: string }).className;
+  const codeProps = code?.props as
+    { className?: string; 'data-filename'?: string } | undefined;
+  const className = codeProps?.className;
   const language = className?.match(/language-([\w+-]+)/)?.[1] ?? 'text';
+  const filename = codeProps?.['data-filename'];
   return (
     <div className="code-block">
       <div className="code-toolbar">
-        <span>{language}</span>
+        <div className="code-toolbar-labels">
+          <span>{language}</span>
+          {filename && <span className="code-filename">{filename}</span>}
+        </div>
         <button type="button" data-copy aria-label={`Copy ${language} code`}>
           Copy
         </button>
@@ -118,6 +126,121 @@ function CodeBlock({ children, ...props }: ComponentProps<'pre'>) {
         aria-live="polite"
       />
     </div>
+  );
+}
+
+type CodeTabProps = { label: string; children: ReactNode };
+
+export function CodeTab({ label, children }: CodeTabProps) {
+  return (
+    <section className="code-tab-fallback">
+      <h3 className="code-tab-heading">{label}</h3>
+      {children}
+    </section>
+  );
+}
+
+export function CodeGroup({ children }: { children: ReactNode }) {
+  const tabs = Children.toArray(children).filter(
+    (child): child is ReactElement<CodeTabProps> =>
+      isValidElement<CodeTabProps>(child) &&
+      typeof child.props.label === 'string',
+  );
+  const id = useId();
+
+  if (!tabs.length)
+    throw new Error('CodeGroup requires at least one CodeTab child.');
+
+  const entries = tabs.map((tab, index) => {
+    const label = tab.props.label.trim();
+    if (!label) throw new Error('CodeTab requires a non-empty label.');
+    return {
+      label,
+      content: tab.props.children,
+      tabId: `code-tab-${id}-${index}`,
+      panelId: `code-panel-${id}-${index}`,
+    };
+  });
+
+  return (
+    <div className="code-group" data-code-group>
+      <div
+        className="code-group-tabs"
+        role="tablist"
+        aria-label="Code examples"
+      >
+        {entries.map((entry, index) => (
+          <button
+            key={entry.tabId}
+            id={entry.tabId}
+            type="button"
+            role="tab"
+            aria-selected={index === 0}
+            aria-controls={entry.panelId}
+            tabIndex={index === 0 ? 0 : -1}
+            data-code-tab
+          >
+            {entry.label}
+          </button>
+        ))}
+      </div>
+      {entries.map((entry) => (
+        <section
+          key={entry.panelId}
+          id={entry.panelId}
+          role="tabpanel"
+          aria-labelledby={entry.tabId}
+          className="code-tab-panel"
+          data-code-panel
+        >
+          <h3 className="code-tab-heading">{entry.label}</h3>
+          {entry.content}
+        </section>
+      ))}
+    </div>
+  );
+}
+
+const endpointMethods = {
+  GET: 'get',
+  POST: 'post',
+  PUT: 'put',
+  PATCH: 'patch',
+  DELETE: 'delete',
+  HEAD: 'head',
+  OPTIONS: 'options',
+} as const;
+
+export function ApiEndpoint({
+  method,
+  path,
+}: {
+  method: keyof typeof endpointMethods;
+  path: string;
+}) {
+  if (!Object.hasOwn(endpointMethods, method))
+    throw new Error(`Unsupported API method: ${String(method)}`);
+  if (
+    typeof path !== 'string' ||
+    !path.startsWith('/') ||
+    path.startsWith('//') ||
+    /[\s?#]/.test(path) ||
+    [...path].some((character) => {
+      const codePoint = character.charCodeAt(0);
+      return codePoint < 32 || codePoint === 127;
+    })
+  )
+    throw new Error('ApiEndpoint path must be a URL path starting with "/".');
+
+  return (
+    <span className="api-endpoint">
+      <span
+        className={`api-endpoint-method api-endpoint-${endpointMethods[method]}`}
+      >
+        {method}
+      </span>
+      <code className="api-endpoint-path">{path}</code>
+    </span>
   );
 }
 
@@ -143,6 +266,9 @@ function heading(level: 1 | 2 | 3 | 4 | 5 | 6) {
 
 export const mdxComponents = {
   Callout,
+  CodeGroup,
+  CodeTab,
+  ApiEndpoint,
   blockquote: ({
     children,
     'data-callout': type,

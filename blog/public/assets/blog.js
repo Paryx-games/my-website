@@ -1,3 +1,41 @@
+document.querySelectorAll('[data-code-group]').forEach((group) => {
+  const tabs = [...group.querySelectorAll('[data-code-tab]')];
+  const panels = [...group.querySelectorAll('[data-code-panel]')];
+  if (!tabs.length || !panels.length) return;
+
+  const select = (selectedTab) => {
+    tabs.forEach((tab) => {
+      const active = tab === selectedTab;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+    });
+    panels.forEach((panel) => {
+      panel.hidden = panel.id !== selectedTab.getAttribute('aria-controls');
+    });
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener('click', () => select(tab));
+    tab.addEventListener('keydown', (event) => {
+      let nextIndex;
+      if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+      else if (event.key === 'ArrowLeft')
+        nextIndex = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      tabs[nextIndex].focus();
+      select(tabs[nextIndex]);
+    });
+  });
+
+  const initiallySelected =
+    tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') ?? tabs[0];
+  group.setAttribute('data-enhanced', '');
+  select(initiallySelected);
+});
+
 document.querySelectorAll('[data-copy]').forEach((button) => {
   button.addEventListener('click', async () => {
     const block = button.closest('.code-block');
