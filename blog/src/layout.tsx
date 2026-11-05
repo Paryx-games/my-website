@@ -6,7 +6,9 @@ import { absoluteUrl, formatDate, site } from './config.js';
 import { tagSlug, relatedPosts, seriesPosts, type Post } from './content.js';
 
 const sharedTopbar = readFileSync(
-  fileURLToPath(new URL('../../.shared/components/topbar.html', import.meta.url)),
+  fileURLToPath(
+    new URL('../../.shared/components/topbar.html', import.meta.url),
+  ),
   'utf8',
 );
 
@@ -42,7 +44,13 @@ function PostLinks({ post }: { post: Post }) {
     <div className="post-links">
       {post.repository && (
         <a href={post.repository}>
-          View repository <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
+          View repository{' '}
+          <img
+            className="external-link-icon"
+            src="/.shared/icons/link.svg"
+            alt=""
+            aria-hidden="true"
+          />
         </a>
       )}
       {!!post.relatedProjects?.length && (
@@ -52,7 +60,13 @@ function PostLinks({ post }: { post: Post }) {
             {post.relatedProjects.map((project) => (
               <li key={`${project.name}-${project.url}`}>
                 <a href={project.url}>
-                  {project.name} <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
+                  {project.name}{' '}
+                  <img
+                    className="external-link-icon"
+                    src="/.shared/icons/link.svg"
+                    alt=""
+                    aria-hidden="true"
+                  />
                 </a>
               </li>
             ))}
@@ -140,7 +154,10 @@ export function Sidebar({ posts, post }: { posts: Post[]; post?: Post }) {
           data-visible-count="7"
         >
           {[...counts]
-            .sort(([a], [b]) => a.localeCompare(b))
+            .sort(
+              ([tagA, countA], [tagB, countB]) =>
+                countB - countA || tagA.localeCompare(tagB),
+            )
             .map(([tag, count]) => (
               <a
                 className="category"
@@ -187,7 +204,13 @@ export function Sidebar({ posts, post }: { posts: Post[]; post?: Post }) {
         </div>
       </section>
       <a className="rss-link" href="/rss.xml">
-        Follow via RSS <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
+        Follow via RSS{' '}
+        <img
+          className="external-link-icon"
+          src="/.shared/icons/link.svg"
+          alt=""
+          aria-hidden="true"
+        />
       </a>
     </aside>
   );
@@ -626,7 +649,13 @@ function PostSummary({ post, lead = false }: { post: Post; lead?: boolean }) {
         <p className="deck">{post.description}</p>
         <Byline post={post} />
         <a className="read-link" href={`/${post.slug}`}>
-          Read article <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" />
+          Read article{' '}
+          <img
+            className="external-link-icon"
+            src="/.shared/icons/link.svg"
+            alt=""
+            aria-hidden="true"
+          />
           <span className="sr-only">: {post.title}</span>
         </a>
       </div>
@@ -730,12 +759,28 @@ export function AuthorProfile({ author }: { author: Author }) {
         <ul>
           {author.url && (
             <li>
-              <a href={author.url}>Website <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" /></a>
+              <a href={author.url}>
+                Website{' '}
+                <img
+                  className="external-link-icon"
+                  src="/.shared/icons/link.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </a>
             </li>
           )}
           {author.projects?.map((project) => (
             <li key={project.url}>
-              <a href={project.url}>{project.name} <img className="external-link-icon" src="/.shared/icons/link.svg" alt="" aria-hidden="true" /></a>
+              <a href={project.url}>
+                {project.name}{' '}
+                <img
+                  className="external-link-icon"
+                  src="/.shared/icons/link.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+              </a>
             </li>
           ))}
         </ul>

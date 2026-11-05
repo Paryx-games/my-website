@@ -140,21 +140,31 @@ test('CodeGroup has accessible tab relationships and an all-snippet static fallb
   assert.ok(html.includes('/api/playtime'));
 });
 
-test('Sidebar renders every category in alphabetical order with a hidden progressive-enhancement toggle', () => {
-  const post = parsePost(
-    [
-      '---',
-      'title: Sidebar categories',
-      'description: Sidebar category fallback test',
-      'date: "2026-10-04"',
-      'authors: [paryx]',
-      'tags: [TypeScript, CSS, Accessibility, JavaScript, Web, Testing, Design, Performance]',
-      '---',
-      'Body',
-    ].join('\n'),
-    'sidebar-categories.md',
-  );
-  const html = renderToStaticMarkup(createElement(Sidebar, { posts: [post] }));
+test('Sidebar sorts categories by post count, then alphabetically, with a hidden progressive-enhancement toggle', () => {
+  const posts = [
+    parsePost(
+      [
+        '---',
+        'title: Sidebar categories',
+        'description: Sidebar category fallback test',
+        'date: "2026-10-04"',
+        'authors: [paryx]',
+        'tags: [TypeScript, CSS, Accessibility, JavaScript, Web, Testing, Design, Performance]',
+        '---',
+        'Body',
+      ].join('\n'),
+      'sidebar-categories.md',
+    ),
+    parsePost(
+      '---\ntitle: Sidebar categories 2\ndescription: Sidebar category order test\ndate: "2026-10-03"\nauthors: [paryx]\ntags: [CSS, Performance, TypeScript, GitHub]\n---\nBody',
+      'sidebar-categories-2.md',
+    ),
+    parsePost(
+      '---\ntitle: Sidebar categories 3\ndescription: Sidebar category order test\ndate: "2026-10-02"\nauthors: [paryx]\ntags: [Performance, CSS, GitHub, Accessibility]\n---\nBody',
+      'sidebar-categories-3.md',
+    ),
+  ];
+  const html = renderToStaticMarkup(createElement(Sidebar, { posts }));
   const categoryLinks = [
     ...html.matchAll(
       /<a\b(?=[^>]*class="category")(?=[^>]*data-category-item="true")[^>]*href="([^"]+)"/g,
@@ -162,13 +172,14 @@ test('Sidebar renders every category in alphabetical order with a hidden progres
   ].map(([, href]) => href);
 
   assert.deepEqual(categoryLinks, [
-    '/tags/accessibility',
     '/tags/css',
+    '/tags/performance',
+    '/tags/accessibility',
+    '/tags/github',
+    '/tags/typescript',
     '/tags/design',
     '/tags/javascript',
-    '/tags/performance',
     '/tags/testing',
-    '/tags/typescript',
     '/tags/web',
   ]);
   assert.match(html, /class="category" href="\/"/);
