@@ -128,19 +128,41 @@ export function Sidebar({ posts, post }: { posts: Post[]; post?: Post }) {
   return (
     <aside className="sidebar" aria-label="Explore the blog">
       {post && <Contents post={post} />}
-      <section>
+      <section className="category-section">
         <h2>Categories</h2>
         <a className="category" href="/">
           All posts <span>{posts.length}</span>
         </a>
-        {[...counts]
-          .sort(([a], [b]) => a.localeCompare(b))
-          .map(([tag, count]) => (
-            <a className="category" href={`/tags/${tagSlug(tag)}`} key={tag}>
-              {tag}
-              <span>{count}</span>
-            </a>
-          ))}
+        <div
+          className="category-list"
+          id="blog-category-items"
+          data-category-list
+          data-visible-count="7"
+        >
+          {[...counts]
+            .sort(([a], [b]) => a.localeCompare(b))
+            .map(([tag, count]) => (
+              <a
+                className="category"
+                href={`/tags/${tagSlug(tag)}`}
+                key={tag}
+                data-category-item
+              >
+                {tag}
+                <span>{count}</span>
+              </a>
+            ))}
+        </div>
+        <button
+          className="category-toggle"
+          type="button"
+          aria-controls="blog-category-items"
+          aria-expanded="false"
+          data-category-toggle
+          hidden
+        >
+          Show more
+        </button>
       </section>
       <section>
         <h2>Recent posts</h2>

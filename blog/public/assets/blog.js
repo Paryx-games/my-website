@@ -36,6 +36,41 @@ document.querySelectorAll('[data-code-group]').forEach((group) => {
   select(initiallySelected);
 });
 
+document.querySelectorAll('[data-category-list]').forEach((list) => {
+  const section = list.closest('.category-section');
+  const toggle = section?.querySelector('[data-category-toggle]');
+  const items = [...list.querySelectorAll('[data-category-item]')];
+  const visibleCount = Number(list.dataset.visibleCount);
+  const collapsedHeight = 280;
+  if (
+    !toggle ||
+    !Number.isInteger(visibleCount) ||
+    items.length <= visibleCount
+  )
+    return;
+
+  const setExpanded = (expanded, animate = false) => {
+    items.forEach((item, index) => {
+      const isExtra = index >= visibleCount;
+      item.hidden = isExtra && !expanded;
+      if (isExtra && expanded && animate) item.dataset.revealed = '';
+      else delete item.dataset.revealed;
+    });
+    if (expanded) delete list.dataset.collapsed;
+    else list.dataset.collapsed = '';
+    list.style.maxHeight = expanded ? 'none' : `${collapsedHeight}px`;
+    toggle.setAttribute('aria-expanded', String(expanded));
+    toggle.textContent = expanded ? 'Show less' : 'Show more';
+  };
+
+  setExpanded(false);
+  list.style.maxHeight = `${collapsedHeight}px`;
+  toggle.hidden = false;
+  toggle.addEventListener('click', () => {
+    setExpanded(toggle.getAttribute('aria-expanded') !== 'true', true);
+  });
+});
+
 document.querySelectorAll('[data-copy]').forEach((button) => {
   button.addEventListener('click', async () => {
     const block = button.closest('.code-block');

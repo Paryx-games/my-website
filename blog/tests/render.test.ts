@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeHighlight from 'rehype-highlight';
 import { ApiEndpoint, mdxComponents } from '../src/components.js';
-import { Document } from '../src/layout.js';
+import { Document, Sidebar } from '../src/layout.js';
 import { parsePost } from '../src/content.js';
 import { compileArticle } from '../src/article-content.js';
 
@@ -138,6 +138,46 @@ test('CodeGroup has accessible tab relationships and an all-snippet static fallb
   assert.ok(!html.includes('hidden=""'));
   assert.ok(html.includes('api-endpoint-get'));
   assert.ok(html.includes('/api/playtime'));
+});
+
+test('Sidebar renders every category in alphabetical order with a hidden progressive-enhancement toggle', () => {
+  const post = parsePost(
+    [
+      '---',
+      'title: Sidebar categories',
+      'description: Sidebar category fallback test',
+      'date: "2026-10-04"',
+      'authors: [paryx]',
+      'tags: [TypeScript, CSS, Accessibility, JavaScript, Web, Testing, Design, Performance]',
+      '---',
+      'Body',
+    ].join('\n'),
+    'sidebar-categories.md',
+  );
+  const html = renderToStaticMarkup(createElement(Sidebar, { posts: [post] }));
+  const categoryLinks = [
+    ...html.matchAll(
+      /<a\b(?=[^>]*class="category")(?=[^>]*data-category-item="true")[^>]*href="([^"]+)"/g,
+    ),
+  ].map(([, href]) => href);
+
+  assert.deepEqual(categoryLinks, [
+    '/tags/accessibility',
+    '/tags/css',
+    '/tags/design',
+    '/tags/javascript',
+    '/tags/performance',
+    '/tags/testing',
+    '/tags/typescript',
+    '/tags/web',
+  ]);
+  assert.match(html, /class="category" href="\/"/);
+  assert.ok(html.includes('data-visible-count="7"'));
+  assert.ok(html.includes('aria-controls="blog-category-items"'));
+  assert.ok(html.includes('aria-expanded="false"'));
+  assert.match(html, /data-category-toggle="true"[^>]*hidden=""/);
+  assert.ok(html.includes('>Show more</button>'));
+  assert.ok(!/data-category-item="true"[^>]*hidden/.test(html));
 });
 
 test('ApiEndpoint rejects unsupported methods and malformed paths', () => {
