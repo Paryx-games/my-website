@@ -30,6 +30,21 @@ test('frozen baselines are available before uploads and Minecraft uploads are ad
   }
 });
 
+test('new Epic and Xbox titles expose the supplied platform baselines', () => {
+  const data = composePlaytime([
+    { game_id: 'fortnite', pc: 43889, mobile: null, console: 6896, universe_id: null },
+    { game_id: 'among-us', pc: 2661, mobile: null, console: null, universe_id: null },
+    { game_id: 'minecraft-dungeons', pc: 0, mobile: null, console: 2989, universe_id: null },
+    { game_id: 'forza-horizon-5', pc: 0, mobile: null, console: 768, universe_id: null },
+    { game_id: 'rocket-league', pc: 693, mobile: null, console: null, universe_id: null },
+  ], []);
+  assert.deepEqual(data.games.fortnite, { pc: 43889, console: 6896 });
+  assert.deepEqual(data.games['among-us'], { pc: 2661 });
+  assert.deepEqual(data.games['minecraft-dungeons'], { pc: 0, console: 2989 });
+  assert.deepEqual(data.games['forza-horizon-5'], { pc: 0, console: 768 });
+  assert.deepEqual(data.games['rocket-league'], { pc: 693 });
+});
+
 test('unknown universes are retained and exposed without editing a backend allowlist', () => {
   const entries = [{ gameId: '10767441669', source: 'roblox', minutes: 10 }];
   assert.deepEqual(validateUpload({ collectorId: 'pc', sequence: 1, entries }, 'pc').entries, entries);

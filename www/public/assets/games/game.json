@@ -257,5 +257,40 @@
       "mobile": "",
       "console": ""
     }
+  },
+  "fortnite": {
+    "playtime": {
+      "pc": "43889",
+      "mobile": "",
+      "console": "6896"
+    }
+  },
+  "among-us": {
+    "playtime": {
+      "pc": "2661",
+      "mobile": "",
+      "console": ""
+    }
+  },
+  "minecraft-dungeons": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": "2989"
+    }
+  },
+  "forza-horizon-5": {
+    "playtime": {
+      "pc": "",
+      "mobile": "",
+      "console": "768"
+    }
+  },
+  "rocket-league": {
+    "playtime": {
+      "pc": "693",
+      "mobile": "",
+      "console": ""
+    }
   }
 }

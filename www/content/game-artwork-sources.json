@@ -2155,5 +2155,311 @@
     "purpose": "official Roblox thumbnail",
     "width": 768,
     "height": 432
+  },
+  "/assets/games/fortnite-cover.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.52548.70702278257994163.f7265b8a-f10e-49c4-8115-73c4d800af63.a0e057ff-c216-4206-a6b9-65bfc7d54fb0",
+    "purpose": "publisher poster",
+    "width": 1440,
+    "height": 2160
+  },
+  "/assets/games/fortnite-icon.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.39991.70702278257994163.e25e1cb1-ae4e-49b9-bbeb-a8db9942f1e6.20bdd72b-6007-4ed4-8e77-6e8cb2fa1fde",
+    "purpose": "publisher app icon",
+    "width": 1080,
+    "height": 1080
+  },
+  "/assets/games/fortnite-1.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.2743.70702278257994163.f7265b8a-f10e-49c4-8115-73c4d800af63.df1e6419-5c56-45d9-8608-4e8e3c63b143",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/fortnite-2.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.64559.70702278257994163.6ab6a41a-6171-4f9c-8286-5fb819aa68f0.7bb605f7-66f4-40eb-b7fd-c967219d0edd",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/fortnite-3.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.22883.70702278257994163.9901058e-2917-4db0-80e8-f5bb89ec1b23.d26d6d6a-fba4-4d48-9fd9-f7cadab9792f",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/fortnite-4.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.34340.70702278257994163.9020fde9-23f7-404c-9b79-758e4925f789.0c0292e4-9c8b-458e-9e25-a18f85240901",
+    "purpose": "publisher screenshot",
+    "width": 3840,
+    "height": 2160
+  },
+  "/assets/games/fortnite-5.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.52694.70702278257994163.69677d4c-f0b7-4b9d-9b9a-a607bc348656.bea494a3-7936-4394-afb9-657c7a357b4a",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/fortnite-6.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.60584.70702278257994163.c945029a-4946-44ef-b5c7-b072f07eb636.30903f94-131c-4a06-b912-93a3f847a74e",
+    "purpose": "publisher screenshot",
+    "width": 3840,
+    "height": 2160
+  },
+  "/assets/games/fortnite-7.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.30681.70702278257994163.c945029a-4946-44ef-b5c7-b072f07eb636.6e6dc827-6c42-4e3b-af68-29f8892be5d7",
+    "purpose": "publisher screenshot",
+    "width": 3840,
+    "height": 2160
+  },
+  "/assets/games/fortnite-hero.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.45321.70702278257994163.82153f73-d018-4d23-bb4f-14433178e3a6.4199f993-ace7-4a87-8ca0-a18d07e6d9cc",
+    "purpose": "publisher hero artwork",
+    "width": 3840,
+    "height": 2160
+  },
+  "/assets/games/minecraft-dungeons-cover.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.2957.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.dbf4f170-baf6-45ca-a7d8-6fadaba1e8b1",
+    "purpose": "publisher poster",
+    "width": 720,
+    "height": 1080
+  },
+  "/assets/games/minecraft-dungeons-icon.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.45275.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.11115897-ede5-444b-b624-6b01c23fcdf1",
+    "purpose": "publisher app icon",
+    "width": 300,
+    "height": 300
+  },
+  "/assets/games/minecraft-dungeons-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1672970/library_hero.jpg",
+    "purpose": "publisher hero artwork",
+    "width": 1920,
+    "height": 620
+  },
+  "/assets/games/minecraft-dungeons-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1672970/logo.png",
+    "purpose": "publisher branding",
+    "width": 640,
+    "height": 161
+  },
+  "/assets/games/minecraft-dungeons-1.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.40438.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.e4e77244-5d52-427d-b050-4c0a3e33dc6c",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/minecraft-dungeons-2.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.50562.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.ea3245c0-3ee8-43a1-8938-28a73942e4ca",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/minecraft-dungeons-3.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.10401.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.f5f646c8-c982-40c3-ace8-d66a3caae121",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/minecraft-dungeons-4.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.29807.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.939aa7a0-f2c8-4e39-9178-ab1cfdf1aaaa",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/minecraft-dungeons-5.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.5008.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.fd451238-193a-461d-8516-3df777f63b8d",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/minecraft-dungeons-6.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.51296.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.289e5ea7-fe4e-43b5-a251-3ef6a4f80dc1",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/minecraft-dungeons-7.webp": {
+    "url": "https://store-images.s-microsoft.com/image/apps.17914.14089602043039621.efe46bfe-4de2-4879-a22b-f3b08650221c.5659b1d7-478f-4a0a-884f-ced4a89ab4d1",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/among-us-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/library_600x900_2x.jpg",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/among-us-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/library_hero.jpg",
+    "purpose": "publisher hero artwork",
+    "width": 1920,
+    "height": 620
+  },
+  "/assets/games/among-us-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/logo.png",
+    "purpose": "publisher branding",
+    "width": 640,
+    "height": 360
+  },
+  "/assets/games/among-us-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_b7374128e5b786a302a716bca038d604b00ffe46.1920x1080.jpg?t=1793821899",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/among-us-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_719484b5e0314cc2ae43793786448e032056a31d.1920x1080.jpg?t=1793821899",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/among-us-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_ffd9c8926cbd7fce3ca5e5efb4399c47bb196bc8.1920x1080.jpg?t=1793821899",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/among-us-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_1fbd9dc9fd6a2710d233a088ef426a6d78fcf884.1920x1080.jpg?t=1793821899",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/among-us-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_9d11502fa973580a82b532b25f1901b8425c28f9.1920x1080.jpg?t=1793821899",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/among-us-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_17be75e178e3520c986504504ada8535de19cc0d.1920x1080.jpg?t=1793821899",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/among-us-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/945360/ss_a1872c1c594ad4e5885d248516919d85243d9c1f.1920x1080.jpg?t=1793821899",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/forza-horizon-5-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/library_600x900_2x.jpg",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/forza-horizon-5-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/library_hero.jpg",
+    "purpose": "publisher hero artwork",
+    "width": 1920,
+    "height": 620
+  },
+  "/assets/games/forza-horizon-5-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/logo.png",
+    "purpose": "publisher branding",
+    "width": 640,
+    "height": 360
+  },
+  "/assets/games/forza-horizon-5-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_cf56e25a0290556ba83229eb0ab370d10be0407c.1920x1080.jpg?t=1788546569",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/forza-horizon-5-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_00f0090174380eeaf8753bd3d1028b6772c3aebf.1920x1080.jpg?t=1788546569",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/forza-horizon-5-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_b65236b365315ebb6da6114ce42cd74b59cab3c8.1920x1080.jpg?t=1788546569",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/forza-horizon-5-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_0a13a7ccd38e7c3e6a5f1720050732833b53b6a8.1920x1080.jpg?t=1788546569",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/forza-horizon-5-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_3654a5988db68f9b47740f9f6a9299682c365599.1920x1080.jpg?t=1788546569",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/forza-horizon-5-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_0bc32360d32b21abdf889422385cd753862dd73e.1920x1080.jpg?t=1788546569",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/forza-horizon-5-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_1da0673f82eccc3c9d222237dec40e36bf10eef3.1920x1080.jpg?t=1788546569",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/rocket-league-cover.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/library_600x900_2x.jpg",
+    "purpose": "publisher poster",
+    "width": 600,
+    "height": 900
+  },
+  "/assets/games/rocket-league-hero.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/library_hero.jpg",
+    "purpose": "publisher hero artwork",
+    "width": 1920,
+    "height": 620
+  },
+  "/assets/games/rocket-league-logo.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/logo.png",
+    "purpose": "publisher branding",
+    "width": 640,
+    "height": 360
+  },
+  "/assets/games/rocket-league-1.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/4fa01c320d22f31d78fd9fcb27dbd3bd8871b903/ss_4fa01c320d22f31d78fd9fcb27dbd3bd8871b903.1920x1080.jpg?t=1791210513",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/rocket-league-2.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/23e7d4fcf10475923be9078e55b449b7fc9792d9/ss_23e7d4fcf10475923be9078e55b449b7fc9792d9.1920x1080.jpg?t=1791210513",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/rocket-league-3.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/41bd974bde088dc623fae68db333f5b8bb42700e/ss_41bd974bde088dc623fae68db333f5b8bb42700e.1920x1080.jpg?t=1791210513",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/rocket-league-4.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/c63c0fca3829cc9977efcc7d3402809592c27e16/ss_c63c0fca3829cc9977efcc7d3402809592c27e16.1920x1080.jpg?t=1791210513",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/rocket-league-5.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/94c1a6af68435a14550fa4e40e6f98c3e44d29a4/ss_94c1a6af68435a14550fa4e40e6f98c3e44d29a4.1920x1080.jpg?t=1791210513",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/rocket-league-6.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/e98f1fa5f2ac54b30c010c34b238e882847fa45b/ss_e98f1fa5f2ac54b30c010c34b238e882847fa45b.1920x1080.jpg?t=1791210513",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
+  },
+  "/assets/games/rocket-league-7.webp": {
+    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/a74d82e5f820e6656e27b907ec252aa3ddb9bbb4/ss_a74d82e5f820e6656e27b907ec252aa3ddb9bbb4.1920x1080.jpg?t=1791210513",
+    "purpose": "publisher screenshot",
+    "width": 1920,
+    "height": 1080
   }
 }

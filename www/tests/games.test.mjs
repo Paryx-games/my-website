@@ -9,6 +9,9 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
   assert.ok(games.every(game => game.favorite));
   assert.equal(rotation.length, 18);
   assert.equal(new Set(catalogue.map(game => game.id)).size, catalogue.length);
+  for (const id of ['fortnite', 'among-us', 'minecraft-dungeons', 'forza-horizon-5', 'rocket-league']) {
+    assert.ok(catalogue.some(game => game.id === id), id);
+  }
   assert.deepEqual(robloxGames.map(game => game.id), ['pressure', 'town', 'industrialist', 'build-a-boat-for-treasure', 'nuclear-blast-testing-facility', 'a-core-game', 'jujutsu-shenanigans', 'doors', 'the-strongest-battlegrounds', 'notoriety', 'blox-fruits', 'scp-roleplay', 'car-crushers-2', 'cook-burgers', 'unseen-liminality', 'apeirophobia', 'islands', 'bee-swarm-simulator', 'oakridge-nuclear-power-station']);
   for (const entry of rotation) assert.ok(catalogue.some(game => game.id === entry.id), entry.id);
   for (const game of catalogue) {
@@ -17,7 +20,7 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
     assert.match(game.year, /^\d{4}$/);
     assert.ok(game.publisher && game.developer && game.description);
     assert.equal(new URL(game.website).protocol, 'https:');
-    assert.ok(game.icon && (game.roblox || game.logo) && game.artworkSource, game.title);
+    assert.ok(game.icon && (game.roblox || game.logo || game.titleArtwork) && game.artworkSource, game.title);
     const steamId = game.website.match(/\/app\/(\d+)/)?.[1];
     if (steamId && sources[game.icon].url.includes('community_assets')) {
       assert.ok(sources[game.icon].url.includes(`/apps/${steamId}/`), `${game.title}: icon must belong to this game's app ID`);
@@ -30,7 +33,7 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
       assert.match(game.website, /^https:\/\/www\.roblox\.com\/games\//);
       assert.ok(game.roblox.upVotes >= 0 && game.roblox.downVotes >= 0);
     }
-    for (const asset of [game.cover, game.icon, game.backdrop, game.logo, ...game.pictures].filter(Boolean)) {
+    for (const asset of [game.cover, game.icon, game.backdrop, game.logo, game.titleArtwork, ...game.pictures].filter(Boolean)) {
       await access(new URL(`../public${asset}`, import.meta.url));
       assert.ok(sources[asset]?.url?.startsWith('https://') || (sources[asset]?.suppliedBy === 'user' && sources[asset]?.originalFileName), `missing artwork source: ${asset}`);
     }

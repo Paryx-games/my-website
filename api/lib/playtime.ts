@@ -6,6 +6,7 @@ export const gameIds = new Set([
   'escape-the-backrooms', 'backrooms-escape-together', 'bloons-td-6',
   'roblox', 'pressure', 'town',
   'cities-skylines', 'planet-coaster-2', 'planet-zoo', 'upload-labs', 'sektori',
+  'fortnite', 'among-us', 'minecraft-dungeons', 'forza-horizon-5', 'rocket-league',
 ]);
 export const sources = new Set(['steam', 'modrinth', 'roblox']);
 export const steamAppIds: Record<number, string> = {

@@ -146,5 +146,26 @@
     "gameId": "oakridge-nuclear-power-station",
     "pc": 547,
     "universeId": 5417936082
+  },
+  {
+    "gameId": "fortnite",
+    "pc": 43889,
+    "console": 6896
+  },
+  {
+    "gameId": "among-us",
+    "pc": 2661
+  },
+  {
+    "gameId": "minecraft-dungeons",
+    "console": 2989
+  },
+  {
+    "gameId": "forza-horizon-5",
+    "console": 768
+  },
+  {
+    "gameId": "rocket-league",
+    "pc": 693
   }
 ]

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { makeHandler } from '../api/playtime.js';
-import { authenticated, validateUpload, type PlaytimeStore, type Upload } from '../lib/playtime.js';
+import { authenticated, gameIds, sources, validateUpload, type PlaytimeStore, type Upload } from '../lib/playtime.js';
 
 const token = 'test-only-token-not-used-in-production';
 const payload = { collectorId: 'test-pc', sequence: 1, entries: [{ gameId: 'minecraft', source: 'modrinth', minutes: 125 }] };
@@ -73,6 +73,12 @@ test('new Steam games resolve to catalogue IDs while Planet Coaster stays manual
   const entries = tracked.map(([appId]) => ({ source: 'steam', appId, minutes: 120 }));
   const upload = validateUpload({ ...payload, entries: [...entries, { source: 'steam', appId: 493340, minutes: 60 }] }, 'test-pc');
   assert.deepEqual(upload.entries, tracked.map(([, gameId]) => ({ source: 'steam', gameId, minutes: 120 })));
+});
+test('Xbox and Epic tracked games have baseline IDs without adding unsupported upload sources', () => {
+  for (const id of ['fortnite', 'among-us', 'minecraft-dungeons', 'forza-horizon-5', 'rocket-league']) {
+    assert.ok(gameIds.has(id), id);
+  }
+  assert.deepEqual([...sources].sort(), ['modrinth', 'roblox', 'steam']);
 });
 
 test('public reads expose totals with caching and CORS, without requiring authentication', async () => {
