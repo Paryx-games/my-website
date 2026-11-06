@@ -1,5 +1,29 @@
-import { robloxGames } from './roblox-games.js';
-export { robloxGames };
+import { robloxGames as sourceRobloxGames } from './roblox-games.js';
+
+const robloxGamesOrder = [
+  "blox-fruits",
+  "the-strongest-battlegrounds",
+  "doors",
+  "jujutsu-shenanigans",
+  "bee-swarm-simulator",
+  "build-a-boat-for-treasure",
+  "islands",
+  "car-crushers-2",
+  "pressure",
+  "town",
+  "industrialist",
+  "scp-roleplay",
+  "notoriety",
+  "cook-burgers",
+  "nuclear-blast-testing-facility",
+  "apeirophobia",
+  "unseen-liminality",
+  "oakridge-nuclear-power-station",
+  "a-core-game",
+];
+const robloxGamesOrderIndex = new Map(robloxGamesOrder.map((id, index) => [id, index]));
+export const robloxGames = [...sourceRobloxGames].sort((a, b) =>
+  (robloxGamesOrderIndex.get(a.id) ?? Infinity) - (robloxGamesOrderIndex.get(b.id) ?? Infinity));
 
 const favoriteGames = [
   {
@@ -115,74 +139,63 @@ const favoriteGames = [
 
 export const games = [
   ...favoriteGames.map(game => ({ ...game, favorite: true })),
-  ...robloxGames.filter(game => game.favorite),
 ];
 
 export const rotation = [
-  {
-    id: "forza-horizon-6",
-    status: "In rotation",
-  },
-  {
-    id: "forza-horizon-4",
-    status: "In rotation",
-  },
-  {
-    id: "beamng-drive",
-    status: "In rotation",
-  },
-  {
-    id: "rainbow-six-siege",
-    status: "In rotation",
-  },
-  {
-    id: "satisfactory",
-    status: "In rotation",
-  },
-  {
-    id: "geometry-dash",
-    status: "In rotation",
-  },
-  {
-    id: "minecraft",
-    status: "In rotation",
-    title: "Minecraft",
-  },
-  {
-    id: "roblox",
-    status: "In rotation",
-  },
-  {
-    id: "halo-mcc",
-    status: "In rotation",
-  },
-  {
-    id: "escape-the-backrooms",
-    status: "In rotation",
-  },
-  {
-    id: "backrooms-escape-together",
-    status: "In rotation",
-  },
-  {
-    id: "bloons-td-6",
-    status: "In rotation",
-  },
+  { id: "minecraft", status: "In rotation", title: "Minecraft" },
+  { id: "minecraft-dungeons", status: "In rotation" },
+  { id: "geometry-dash", status: "In rotation" },
+  { id: "among-us", status: "In rotation" },
+  { id: "roblox", status: "In rotation" },
+  { id: "rainbow-six-siege", status: "In rotation" },
+  { id: "fortnite", status: "In rotation" },
+  { id: "satisfactory", status: "In rotation" },
+  { id: "bloons-td-6", status: "In rotation" },
+  { id: "escape-the-backrooms", status: "In rotation" },
+  { id: "backrooms-escape-together", status: "In rotation" },
   { id: "cities-skylines", status: "In rotation" },
+  { id: "forza-horizon-6", status: "In rotation" },
+  { id: "forza-horizon-5", status: "In rotation" },
+  { id: "forza-horizon-4", status: "In rotation" },
+  { id: "rocket-league", status: "In rotation" },
+  { id: "beamng-drive", status: "In rotation" },
   { id: "planet-coaster", status: "In rotation" },
   { id: "planet-coaster-2", status: "In rotation" },
   { id: "planet-zoo", status: "In rotation" },
   { id: "upload-labs", status: "In rotation" },
+  { id: "halo-mcc", status: "In rotation" },
   { id: "sektori", status: "In rotation" },
-  { id: "fortnite", status: "In rotation" },
-  { id: "among-us", status: "In rotation" },
-  { id: "minecraft-dungeons", status: "In rotation" },
-  { id: "forza-horizon-5", status: "In rotation" },
-  { id: "rocket-league", status: "In rotation" },
 ];
 
+const catalogueOrder = [
+  "minecraft",
+  "minecraft-dungeons",
+  "geometry-dash",
+  "among-us",
+  "roblox",
+  "rainbow-six-siege",
+  "fortnite",
+  "satisfactory",
+  "bloons-td-6",
+  "escape-the-backrooms",
+  "backrooms-escape-together",
+  "cities-skylines",
+  "forza-horizon-6",
+  "forza-horizon-5",
+  "forza-horizon-4",
+  "rocket-league",
+  "beamng-drive",
+  "planet-coaster",
+  "planet-coaster-2",
+  "planet-zoo",
+  "upload-labs",
+  "halo-mcc",
+  "sektori",
+  ...robloxGamesOrder,
+];
+const catalogueOrderIndex = new Map(catalogueOrder.map((id, index) => [id, index]));
+
 export const catalogue = [
-  ...robloxGames.filter(game => !game.favorite),
   ...games,
   ...[
     {
@@ -910,4 +923,5 @@ export const catalogue = [
       artworkSource: "https://store.steampowered.com/app/252950/",
     },
   ],
-];
+  ...robloxGames,
+].sort((a, b) => (catalogueOrderIndex.get(a.id) ?? Infinity) - (catalogueOrderIndex.get(b.id) ?? Infinity));

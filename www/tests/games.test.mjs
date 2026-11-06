@@ -5,15 +5,39 @@ import { games, catalogue, rotation, robloxGames } from '../public/assets/games/
 const sources = JSON.parse(await readFile(new URL('../content/game-artwork-sources.json', import.meta.url), 'utf8'));
 
 test('favorites and rotation resolve to complete galleries with local artwork', async () => {
-  assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege', 'pressure', 'industrialist']);
+  assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege']);
   assert.ok(games.every(game => game.favorite));
   assert.equal(rotation.length, 23);
+  assert.deepEqual(rotation.slice(0, 7).map(game => game.id), [
+    'minecraft', 'minecraft-dungeons', 'geometry-dash', 'among-us', 'roblox', 'rainbow-six-siege', 'fortnite',
+  ]);
+  assert.deepEqual(rotation.slice(12, 17).map(game => game.id), [
+    'forza-horizon-6', 'forza-horizon-5', 'forza-horizon-4', 'rocket-league', 'beamng-drive',
+  ]);
   assert.equal(new Set(catalogue.map(game => game.id)).size, catalogue.length);
+  assert.deepEqual(catalogue.slice(0, 8).map(game => game.id), [
+    'minecraft', 'minecraft-dungeons', 'geometry-dash', 'among-us', 'roblox', 'rainbow-six-siege', 'fortnite', 'satisfactory',
+  ]);
+  const catalogueIds = catalogue.map(game => game.id);
+  assert.deepEqual(catalogueIds.slice(catalogueIds.indexOf('forza-horizon-6'), catalogueIds.indexOf('beamng-drive')), [
+    'forza-horizon-6', 'forza-horizon-5', 'forza-horizon-4', 'rocket-league',
+  ]);
+  assert.deepEqual(catalogue.slice(-5).map(game => game.id), [
+    'nuclear-blast-testing-facility', 'apeirophobia', 'unseen-liminality', 'oakridge-nuclear-power-station', 'a-core-game',
+  ]);
+  assert.ok(catalogue.slice(23).every(game => game.roblox));
+  assert.deepEqual(catalogue.slice(23).map(game => game.id), robloxGames.map(game => game.id));
+  assert.ok(games.every(game => !game.roblox), 'Roblox experiences belong in the Roblox Games section');
   for (const id of ['fortnite', 'among-us', 'minecraft-dungeons', 'forza-horizon-5', 'rocket-league']) {
     assert.ok(catalogue.some(game => game.id === id), id);
     assert.ok(rotation.some(game => game.id === id), `${id} must be shown in the games section`);
   }
-  assert.deepEqual(robloxGames.map(game => game.id), ['pressure', 'town', 'industrialist', 'build-a-boat-for-treasure', 'nuclear-blast-testing-facility', 'a-core-game', 'jujutsu-shenanigans', 'doors', 'the-strongest-battlegrounds', 'notoriety', 'blox-fruits', 'scp-roleplay', 'car-crushers-2', 'cook-burgers', 'unseen-liminality', 'apeirophobia', 'islands', 'bee-swarm-simulator', 'oakridge-nuclear-power-station']);
+  assert.deepEqual(robloxGames.map(game => game.id), [
+    'blox-fruits', 'the-strongest-battlegrounds', 'doors', 'jujutsu-shenanigans', 'bee-swarm-simulator',
+    'build-a-boat-for-treasure', 'islands', 'car-crushers-2', 'pressure', 'town', 'industrialist',
+    'scp-roleplay', 'notoriety', 'cook-burgers', 'nuclear-blast-testing-facility', 'apeirophobia',
+    'unseen-liminality', 'oakridge-nuclear-power-station', 'a-core-game',
+  ]);
   for (const entry of rotation) assert.ok(catalogue.some(game => game.id === entry.id), entry.id);
   for (const game of catalogue) {
     assert.equal(game.pictures.length, game.captions.length);
