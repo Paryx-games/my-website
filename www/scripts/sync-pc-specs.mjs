@@ -19,14 +19,15 @@ const homeParts = specs.homeParts.map(part => {
   if (!fields.has(part.id) || !icons[part.icon]) {
     throw new Error(`Homepage PC part references an unknown field or icon: ${part.id}`);
   }
-  for (const key of ['name', 'href', 'description', 'price']) {
+  for (const key of ['name', 'href', 'description', 'launchYear', 'price']) {
     if (typeof part[key] !== 'string' || !part[key].trim()) {
       throw new Error(`Homepage PC part ${part.id} is missing ${key}`);
     }
   }
-  const priceNote = part.priceNote
-    ? `<span>${escape(part.priceNote)}</span>`
-    : '';
+  const priceNote = [
+    part.priceNote ? `<span>${escape(part.priceNote)}</span>` : '',
+    `<span>Launched ${escape(part.launchYear)}</span>`,
+  ].filter(Boolean).join('');
   return `<article class="home-pc-part">
   <span class="home-pc-part-icon" aria-hidden="true"><svg viewBox="0 0 24 24">${icons[part.icon]}</svg></span>
   <div class="home-pc-part-title">
