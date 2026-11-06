@@ -42,7 +42,7 @@ test('Neon uploads are atomic, replay-safe, cumulative and ordered under concurr
     const after = await store.read();
     assert.equal(after.games[`roblox-${universe}`].pc, prior + 3);
     assert.deepEqual(after.robloxGames[universe], { universeId: universe, name: metadata.name, placeIds: metadata.placeIds });
-    assert.equal(after.games.minecraft.console, 22606);
+    assert.equal(after.games.minecraft.console, 42322);
   } finally {
     await sql.transaction([
       sql`DELETE FROM playtime.totals WHERE collector_id = ${collectorId}`,

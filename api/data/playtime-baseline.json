@@ -2,7 +2,7 @@
   {
     "gameId": "minecraft",
     "pc": 49671,
-    "console": 22606
+    "console": 42322
   },
   {
     "gameId": "satisfactory",
@@ -47,7 +47,9 @@
     "mobile": 2350
   },
   {
-    "gameId": "roblox"
+    "gameId": "roblox",
+    "pc": 25454,
+    "console": 3780
   },
   {
     "gameId": "pressure",
@@ -82,7 +84,7 @@
   },
   {
     "gameId": "jujutsu-shenanigans",
-    "pc": 2823,
+    "pc": 4023,
     "universeId": 3508322461
   },
   {
