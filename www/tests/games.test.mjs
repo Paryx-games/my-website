@@ -5,7 +5,7 @@ import { games, catalogue, rotation, robloxGames } from '../public/assets/games/
 const sources = JSON.parse(await readFile(new URL('../content/game-artwork-sources.json', import.meta.url), 'utf8'));
 
 test('favorites and rotation resolve to complete galleries with local artwork', async () => {
-  assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege']);
+  assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege', 'pressure', 'industrialist']);
   assert.ok(games.every(game => game.favorite));
   assert.equal(rotation.length, 23);
   assert.deepEqual(rotation.slice(0, 7).map(game => game.id), [
@@ -27,7 +27,7 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
   ]);
   assert.ok(catalogue.slice(23).every(game => game.roblox));
   assert.deepEqual(catalogue.slice(23).map(game => game.id), robloxGames.map(game => game.id));
-  assert.ok(games.every(game => !game.roblox), 'Roblox experiences belong in the Roblox Games section');
+  assert.deepEqual(games.filter(game => game.roblox).map(game => game.id), robloxGames.filter(game => game.favorite).map(game => game.id));
   for (const id of ['fortnite', 'among-us', 'minecraft-dungeons', 'forza-horizon-5', 'rocket-league']) {
     assert.ok(catalogue.some(game => game.id === id), id);
     assert.ok(rotation.some(game => game.id === id), `${id} must be shown in the games section`);

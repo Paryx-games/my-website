@@ -144,6 +144,7 @@ const favoriteGames = [
 
 export const games = [
   ...favoriteGames.map((game) => ({ ...game, favorite: true })),
+  ...robloxGames.filter((game) => game.favorite),
 ];
 
 export const rotation = [
@@ -203,7 +204,7 @@ const catalogueOrderIndex = new Map(
 );
 
 export const catalogue = [
-  ...games,
+  ...games.filter((game) => !game.roblox),
   ...[
     {
       cover: "/assets/games/forza-horizon-6-cover.webp",
