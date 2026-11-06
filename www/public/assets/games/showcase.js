@@ -6,7 +6,7 @@ import { renderQuote, gameLinkElement } from './quote-links.js';
 import { renderRobloxDetails, creatorDetailElement } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
-import { favoriteBadgeElement } from './favorites.js';
+import { favoriteBadgeElement, robloxBadgeElement } from './favorites.js';
 import { setupDescriptionDisclosure } from './description.js';
 import { setupGameSort } from './sort.js';
 
@@ -120,7 +120,10 @@ const card = (game, portrait = true) => {
   name.append(iconShell, nameText);
   const increase = createPlaytimeIncrease(gameDetails[game.id]?.playtime?.pcIncrease24hMinutes, true);
   if (increase) name.append(increase);
-  if (game.favorite) name.append(favoriteBadgeElement(true));
+  if (game.favorite) {
+    if (game.roblox) name.append(robloxBadgeElement());
+    name.append(favoriteBadgeElement(true));
+  }
   cover.append(artworkShell, name);
   const facts = document.createElement('span');
   facts.className = 'game-card-facts';

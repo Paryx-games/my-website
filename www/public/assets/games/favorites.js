@@ -12,3 +12,17 @@ export function favoriteBadgeElement(compact = false) {
   if (!compact) badge.append('Favorite game');
   return badge;
 }
+
+export function robloxBadgeElement() {
+  const badge = document.createElement('span');
+  badge.className = 'game-roblox-badge';
+  badge.title = 'This is a Roblox game';
+  badge.setAttribute('aria-label', badge.title);
+  const logo = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  logo.setAttribute('viewBox', '0 0 24 24');
+  logo.setAttribute('fill', 'currentColor');
+  logo.setAttribute('aria-hidden', 'true');
+  logo.innerHTML = '<path fill-rule="evenodd" d="M5.3 0 0 18.7 18.7 24 24 5.3 5.3 0Zm5.2 8.6 5.3 1.5-1.5 5.3L9 13.9l1.5-5.3Z" clip-rule="evenodd"/>';
+  badge.append(logo);
+  return badge;
+}
