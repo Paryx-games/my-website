@@ -76,12 +76,17 @@ export function playtimeEntries(playtime, includeTotal = false) {
     return [];
   });
   if (includeTotal) {
+    const pc = playtime?.pc;
+    const pcMinutes = typeof pc === 'number'
+      ? pc
+      : typeof pc === 'string' && /^\d+(?:\.\d+)?$/.test(pc.trim()) ? Number(pc.trim()) : null;
     const minutes = ['pc', 'mobile', 'console'].map(key => {
       const raw = playtime?.[key];
       return typeof raw === 'number' ? raw : typeof raw === 'string' && /^\d+(?:\.\d+)?$/.test(raw.trim()) ? Number(raw.trim()) : null;
     }).filter(value => value !== null && Number.isSafeInteger(Math.round(value)) && value >= 0);
     const total = minutes.reduce((sum, value) => sum + value, 0);
-    if (minutes.length > 1 && Number.isSafeInteger(total)) entries.push(['total', 'Total', formatMinutes(total)]);
+    if (pcMinutes !== null && Number.isSafeInteger(Math.round(pcMinutes)) && pcMinutes >= 0 &&
+        minutes.length > 1 && Number.isSafeInteger(total)) entries.push(['total', 'Total', formatMinutes(total)]);
   }
   return entries;
 }

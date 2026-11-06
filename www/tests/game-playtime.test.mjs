@@ -35,7 +35,7 @@ test('Roblox breakdown uses dotted-tooltip copy in hours and minutes and rejects
   assert.equal(robloxPlaytimeBreakdown({ listedPcMinutes: 60 }), null);
 });
 
-test('playtime adds PC, mobile, and console minutes into a total for any game', () => {
+test('playtime shows a total only when PC and another platform have numeric values', () => {
   assert.deepEqual(playtimeEntries({ pc: '60', mobile: '120', console: '30' }, true), [
     ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '2 hours'], ['console', 'Console', '30 minutes'], ['total', 'Total', '3 hours 30 minutes'],
   ]);
@@ -44,5 +44,23 @@ test('playtime adds PC, mobile, and console minutes into a total for any game', 
   ]);
   assert.deepEqual(playtimeEntries({ pc: '60', mobile: '120+', console: '' }, true), [
     ['pc', 'PC', '1 hour'], ['mobile', 'Mobile', '120+'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '', mobile: '60', console: '120' }, true), [
+    ['mobile', 'Mobile', '1 hour'], ['console', 'Console', '2 hours'],
+  ]);
+  assert.deepEqual(playtimeEntries({ mobile: '60', console: '120' }, true), [
+    ['mobile', 'Mobile', '1 hour'], ['console', 'Console', '2 hours'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '120+ hours', mobile: '60', console: '120' }, true), [
+    ['pc', 'PC', '120+ hours'], ['mobile', 'Mobile', '1 hour'], ['console', 'Console', '2 hours'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '60', mobile: '', console: '' }, true), [
+    ['pc', 'PC', '1 hour'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '', mobile: '60', console: '' }, true), [
+    ['mobile', 'Mobile', '1 hour'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '', mobile: '', console: '60' }, true), [
+    ['console', 'Console', '1 hour'],
   ]);
 });
