@@ -7,7 +7,7 @@ export const shortcuts = [
   },
   {
     title: 'Home',
-    description: 'The main paryx website.',
+    description: 'My main website.',
     url: 'https://paryx.uk/',
     keywords: 'website home',
   },

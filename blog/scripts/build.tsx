@@ -126,7 +126,7 @@ export async function build({
       `tags/${tagSlug(tag)}.html`,
       <Document
         title={`${tag} articles`}
-        description={`Articles about ${tag} from paryx.`}
+        description={`Articles about ${tag} from my blog.`}
         pathname={`/tags/${tagSlug(tag)}`}
         image={image}
         noindex={noindex}
@@ -182,7 +182,7 @@ export async function build({
       `series/${slug}.html`,
       <Document
         title={title}
-        description={`Read ${title}, an article series from paryx.`}
+        description={`Read ${title}, an article series from my blog.`}
         pathname={`/series/${slug}`}
         image={image}
         noindex={noindex}

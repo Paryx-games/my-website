@@ -117,14 +117,14 @@ export function Search({ id = 'dialog-search' }: { id?: string }) {
   return (
     <form className="search-form" action="/" role="search">
       <label className="sr-only" htmlFor={id}>
-        Search paryx
+        Search my website
       </label>
       <span aria-hidden="true">⌕</span>
       <input
         id={id}
         type="search"
         name="q"
-        placeholder="Search paryx..."
+        placeholder="Search my website..."
         autoComplete="off"
       />
       <button className="sr-only focus-reveal" type="submit">
@@ -431,7 +431,7 @@ export function Document({
           data-search-index="/search-index.json"
         >
           <div className="dialog-header">
-            <h2 id="search-title">Search paryx</h2>
+            <h2 id="search-title">Search my website</h2>
             <button
               className="icon-button"
               type="button"

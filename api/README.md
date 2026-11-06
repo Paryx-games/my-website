@@ -1,6 +1,6 @@
 # api.paryx.uk
 
-The API service for [paryx.uk](https://paryx.uk) and other Paryx projects.
+The API service for [paryx.uk](https://paryx.uk) and my other projects.
 
 Visit [api.paryx.uk](https://api.paryx.uk).
 

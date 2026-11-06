@@ -25,7 +25,7 @@ Archived websites may return in the future. Closed websites have been retired an
 | --- | --- | --- | --- | --- |
 | [paryx.uk](https://paryx.uk) | Main website, projects, and links | `www/` | Vercel | Open source ✅ |
 | [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel | Open source ✅ |
-| [api.paryx.uk](https://api.paryx.uk) | APIs and services used by Paryx projects | `api/` | Vercel, Neon | Open source ✅ |
+| [api.paryx.uk](https://api.paryx.uk) | APIs and services used by my projects | `api/` | Vercel, Neon | Open source ✅ |
 | [admin.paryx.uk](https://admin.paryx.uk) | Admin website used for the backend | `🔒` | Vercel | Closed Source ❌ |
 
 ## Languages
