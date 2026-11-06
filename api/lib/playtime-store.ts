@@ -23,7 +23,9 @@ export function createPlaytimeStore(databaseUrl: string): PlaytimeStore {
           current.updated_at, baseline.minutes::text AS baseline_minutes
         FROM current_totals AS current
         LEFT JOIN baseline USING (collector_id, source, game_id)`,
-        sql`SELECT game_id, pc, mobile, console, universe_id::text FROM playtime.baselines`,
+        sql`SELECT game_id, pc, mobile, console, universe_id::text,
+          pc_last_played_at, mobile_last_played_at, console_last_played_at
+          FROM playtime.baselines`,
         sql`SELECT universe_id, name, place_ids FROM playtime.roblox_games`,
       ]);
       return composePlaytime(baselines as Baseline[], rows as Total[], robloxMetadata as RobloxGameMetadata[]);

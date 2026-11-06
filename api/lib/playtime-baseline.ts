@@ -1,6 +1,15 @@
 import type { PublicPlaytime } from './playtime.js';
 
-export type Baseline = { game_id: string; pc: number; mobile: number | null; console: number | null; universe_id: string | null };
+export type Baseline = {
+  game_id: string;
+  pc: number;
+  mobile: number | null;
+  console: number | null;
+  universe_id: string | null;
+  pc_last_played_at: string | null;
+  mobile_last_played_at: string | null;
+  console_last_played_at: string | null;
+};
 export type Total = { game_id: string; source: string; minutes: string; baseline_minutes: string | null; updated_at: string };
 export type RobloxGameMetadata = { universe_id: string; name: string; place_ids: string[] };
 
@@ -41,9 +50,23 @@ export function composePlaytime(baselines: Baseline[], totals: Total[], robloxMe
         return !latest || updatedAt > latest ? updatedAt : latest;
       }, null as string | null)
       : null;
+    const lastPlayedAtByPlatform = baseline ? Object.fromEntries(
+      ([
+        ['pc', baseline.pc_last_played_at],
+        ['mobile', baseline.mobile_last_played_at],
+        ['console', baseline.console_last_played_at],
+      ] as const)
+        .filter((entry): entry is readonly ['pc' | 'mobile' | 'console', string] => typeof entry[1] === 'string')
+        .map(([platform, value]) => [platform, new Date(value).toISOString()]),
+    ) as Partial<Record<'pc' | 'mobile' | 'console', string>> : {};
+    const latestPlayedAt = [
+      lastPlayedAt,
+      ...Object.values(lastPlayedAtByPlatform),
+    ].filter((value): value is string => value !== null).sort().at(-1) ?? null;
     const game: PublicPlaytime['games'][string] = {
       pc: calculate(false),
-      ...(lastPlayedAt ? { lastPlayedAt } : {}),
+      ...(latestPlayedAt ? { lastPlayedAt: latestPlayedAt } : {}),
+      ...(Object.keys(lastPlayedAtByPlatform).length ? { lastPlayedAtByPlatform } : {}),
     };
     if (baseline?.mobile != null) game.mobile = Number(baseline.mobile);
     if (baseline?.console != null) game.console = Number(baseline.console);

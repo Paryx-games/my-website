@@ -60,6 +60,29 @@ test('remote last-played dates do not replace a newer Steam snapshot', () => {
   assert.equal(local.satisfactory.playtime.lastPlayedAt, '2026-11-06T12:21:10Z');
 });
 
+test('remote platform last-played dates merge without replacing manual overrides', () => {
+  const local = {
+    fortnite: {
+      playtime: {
+        lastPlayedAtOverride: { pc: '2025-05-05T12:00:00Z', console: '2024-09-22T12:00:00Z' },
+      },
+    },
+  };
+  mergeRemotePlaytime(local, {
+    version: 2,
+    games: {
+      fortnite: {
+        pc: 43889,
+        lastPlayedAtByPlatform: { pc: '2025-05-05T12:00:00Z', console: '2024-09-22T12:00:00Z', mobile: 'invalid' },
+      },
+    },
+  }, ['fortnite']);
+  assert.deepEqual(local.fortnite.playtime.lastPlayedAtOverride, {
+    pc: '2025-05-05T12:00:00Z',
+    console: '2024-09-22T12:00:00Z',
+  });
+});
+
 test('Minecraft adds the launcher estimate to the API total without accumulating it on refresh', () => {
   const local = { minecraft: { playtime: { mobile: 5, console: 60 } }, satisfactory: { playtime: {} } };
   const response = { version: 1, games: { minecraft: { pc: 15054 }, satisfactory: { pc: 0 } } };

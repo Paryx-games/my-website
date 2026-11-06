@@ -17,6 +17,14 @@ export function mergeRemotePlaytime(details, response, knownIds) {
       (latest, value) => !latest || Date.parse(value) > Date.parse(latest) ? value : latest,
       null,
     );
+    const remotePlatformDates = remote?.lastPlayedAtByPlatform;
+    const lastPlayedAtOverride = remotePlatformDates && typeof remotePlatformDates === 'object' && !Array.isArray(remotePlatformDates)
+      ? Object.fromEntries(
+        ['pc', 'mobile', 'console']
+          .filter(platform => typeof remotePlatformDates[platform] === 'string' && Number.isFinite(Date.parse(remotePlatformDates[platform])))
+          .map(platform => [platform, remotePlatformDates[platform]]),
+      )
+      : {};
     details[id] = {
       ...details[id],
       playtime: {
@@ -25,6 +33,12 @@ export function mergeRemotePlaytime(details, response, knownIds) {
         pc: totalMinutes,
         pcIncrease24hMinutes: Number.isSafeInteger(increase) && increase > 0 ? increase : null,
         ...(lastPlayedAt ? { lastPlayedAt } : {}),
+        ...(Object.keys(lastPlayedAtOverride).length ? {
+          lastPlayedAtOverride: {
+            ...lastPlayedAtOverride,
+            ...details[id]?.playtime?.lastPlayedAtOverride,
+          },
+        } : {}),
       },
     };
     if (id === 'roblox') {
