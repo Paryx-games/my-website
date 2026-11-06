@@ -1,7 +1,7 @@
 import { games, rotation, catalogue, robloxGames } from './games.js';
 import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
-import { renderLastPlayed, renderPlaytime, createPlaytimeIncrease } from './playtime.js';
+import { renderLastPlayed, renderPlaytime, createPlaytimeIncrease, resolveLastPlayedAt } from './playtime.js';
 import { renderQuote, gameLinkElement } from './quote-links.js';
 import { renderRobloxDetails, creatorDetailElement } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
@@ -170,7 +170,7 @@ function refreshRemotePlaytime() {
       if (increase) name.insertBefore(increase, name.querySelector('.game-favorite'));
     });
     if (dialog.open && active) {
-      renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
+      renderLastPlayed(document.getElementById('game-last-played'), resolveLastPlayedAt(gameDetails[active.id]?.playtime));
       renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
     }
   }).finally(() => { playtimeRefresh = null; playtimeRefreshedAt = Date.now(); });
@@ -257,7 +257,7 @@ function openShowcase(game, link) {
   );
   renderGameFacts(active);
   document.getElementById('game-website').href = active.website;
-  renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
+  renderLastPlayed(document.getElementById('game-last-played'), resolveLastPlayedAt(gameDetails[active.id]?.playtime));
   renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   renderRobloxDetails(document.getElementById('game-roblox-details'), active);
   if (active.roblox) refreshRobloxStats();
@@ -286,11 +286,11 @@ function openShowcase(game, link) {
 }
 
 window.addEventListener('paryx:timezonechange', () => {
-  if (dialog.open && active) renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
+  if (dialog.open && active) renderLastPlayed(document.getElementById('game-last-played'), resolveLastPlayedAt(gameDetails[active.id]?.playtime));
 });
 
 setInterval(() => {
-  if (dialog.open && active) renderLastPlayed(document.getElementById('game-last-played'), gameDetails[active.id]?.playtime?.lastPlayedAt);
+  if (dialog.open && active) renderLastPlayed(document.getElementById('game-last-played'), resolveLastPlayedAt(gameDetails[active.id]?.playtime));
 }, 60_000);
 
 function renderGameFacts(game) {

@@ -3,6 +3,7 @@ import { access, readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { games, catalogue, rotation, robloxGames } from '../public/assets/games/games.js';
 const sources = JSON.parse(await readFile(new URL('../content/game-artwork-sources.json', import.meta.url), 'utf8'));
+const playtime = JSON.parse(await readFile(new URL('../public/assets/games/game.json', import.meta.url), 'utf8'));
 
 test('favorites and rotation resolve to complete galleries with local artwork', async () => {
   assert.deepEqual(games.map(game => game.id), ['minecraft', 'satisfactory', 'rainbow-six-siege', 'pressure', 'industrialist']);
@@ -62,5 +63,22 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
       await access(new URL(`../public${asset}`, import.meta.url));
       assert.ok(sources[asset]?.url?.startsWith('https://') || (sources[asset]?.suppliedBy === 'user' && sources[asset]?.originalFileName), `missing artwork source: ${asset}`);
     }
+  }
+});
+
+test('manual last-played dates match the requested baselines and all saved timestamps are valid', () => {
+  assert.deepEqual(playtime.fortnite.playtime.lastPlayedAtOverride, {
+    pc: '2025-05-05T12:00:00Z',
+    console: '2024-09-22T12:00:00Z',
+  });
+  assert.deepEqual(playtime['among-us'].playtime.lastPlayedAtOverride, { pc: '2025-08-02T12:00:00Z' });
+  assert.deepEqual(playtime['forza-horizon-5'].playtime.lastPlayedAtOverride, { console: '2024-12-06T12:00:00Z' });
+  assert.deepEqual(playtime['minecraft-dungeons'].playtime.lastPlayedAtOverride, { console: '2024-07-14T12:00:00Z' });
+  for (const game of Object.values(playtime)) {
+    const timestamps = [
+      game.playtime.lastPlayedAt,
+      ...Object.values(game.playtime.lastPlayedAtOverride ?? {}),
+    ].filter(value => value !== undefined);
+    assert.ok(timestamps.every(value => typeof value === 'string' && Number.isFinite(Date.parse(value))));
   }
 });

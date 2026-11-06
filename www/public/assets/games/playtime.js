@@ -29,6 +29,17 @@ export function formatLastPlayed(value, now = Date.now()) {
   return `${days} day${days === 1 ? '' : 's'} ago`;
 }
 
+export function resolveLastPlayedAt(playtime) {
+  const overrides = playtime?.lastPlayedAtOverride;
+  const manualDates = overrides && typeof overrides === 'object' && !Array.isArray(overrides)
+    ? Object.values(overrides).filter(value => typeof value === 'string' && Number.isFinite(Date.parse(value)))
+    : [];
+  if (manualDates.length) return manualDates.reduce((latest, value) => Date.parse(value) > Date.parse(latest) ? value : latest);
+  return typeof playtime?.lastPlayedAt === 'string' && Number.isFinite(Date.parse(playtime.lastPlayedAt))
+    ? playtime.lastPlayedAt
+    : undefined;
+}
+
 export function renderLastPlayed(root, value, now = Date.now()) {
   if (!root) return;
   const display = root.querySelector('#game-last-played-value');

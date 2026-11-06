@@ -45,6 +45,21 @@ test('remote PC totals preserve manual console/mobile values and accept zero', (
     assert.equal(local.minecraft.playtime.pc, 30000);
   }
 });
+
+test('remote last-played dates do not replace a newer Steam snapshot', () => {
+  const local = { satisfactory: { playtime: { lastPlayedAt: '2026-11-05T22:40:34Z' } } };
+  mergeRemotePlaytime(local, {
+    version: 2,
+    games: { satisfactory: { pc: 100, lastPlayedAt: '2026-10-10T12:21:10Z' } },
+  }, ['satisfactory']);
+  assert.equal(local.satisfactory.playtime.lastPlayedAt, '2026-11-05T22:40:34Z');
+  mergeRemotePlaytime(local, {
+    version: 2,
+    games: { satisfactory: { pc: 110, lastPlayedAt: '2026-11-06T12:21:10Z' } },
+  }, ['satisfactory']);
+  assert.equal(local.satisfactory.playtime.lastPlayedAt, '2026-11-06T12:21:10Z');
+});
+
 test('Minecraft adds the launcher estimate to the API total without accumulating it on refresh', () => {
   const local = { minecraft: { playtime: { mobile: 5, console: 60 } }, satisfactory: { playtime: {} } };
   const response = { version: 1, games: { minecraft: { pc: 15054 }, satisfactory: { pc: 0 } } };

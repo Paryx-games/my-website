@@ -10,6 +10,8 @@ The Games section uses a shared catalogue for card artwork, screenshot galleries
 
 Playtime is stored in minutes and formatted into hours and minutes for display. PC totals are loaded in the background from the playtime API; manual values remain the fallback when a game has no API data or the service is unavailable. Mobile and console totals remain independent of collector uploads.
 
+Each game's `www/public/assets/games/game.json` entry can set `playtime.lastPlayedAtOverride` with platform-keyed ISO timestamps (`pc`, `mobile`, or `console`). When overrides exist, the showcase displays the newest override instead of the fetched last-played timestamp.
+
 My [Portfolio](https://paryx.uk/portfolio) shows Roblox work through featured projects, compact project cards, and screenshot galleries. Coding projects are listed on the homepage.
 
 Browser exceptions are reported to Sentry when the public `VITE_SENTRY_DSN` build variable is configured. Serverless API exceptions are reported when `SENTRY_DSN` is configured; `SENTRY_ENVIRONMENT` can override the deployment environment label. The browser DSN is embedded in the site bundle. See the [privacy policy](https://paryx.uk/privacy-policy) for the exact event fields and exclusions.
