@@ -11,7 +11,7 @@
 .contributions-header a { color: var(--color-muted); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .contributions-period-label { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--color-muted); font-size: 12px; }
 .contributions-period-label select { min-height: 34px; padding: 4px 30px 4px 10px; border: 1px solid var(--color-border); border-radius: 5px; background: var(--color-bg); color: var(--color-text); font: inherit; }
-.contributions-calendar { min-height: 140px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--color-border-strong) var(--color-surface); }
+.contributions-calendar { min-height: 116px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--color-border-strong) var(--color-surface); }
 .contributions-calendar::-webkit-scrollbar { height: 8px; }
 .contributions-calendar::-webkit-scrollbar-track { background: var(--color-surface); border-radius: 4px; }
 .contributions-calendar::-webkit-scrollbar-thumb { background: var(--color-border-strong); border: 2px solid var(--color-surface); border-radius: 4px; }

@@ -123,7 +123,8 @@ export function renderContributions(root, data, { periodCache = new Map(), loadP
     const yearBoundaries = key === 'all' ? contributionYearBoundaries(weeks) : [];
     const yearGaps = yearBoundaries.filter(index => index > 0).length;
     const width = 30 + weeks.length * CONTRIBUTION_COLUMN_STEP + yearGaps * CONTRIBUTION_YEAR_GAP;
-    const svg = element('svg', { viewBox: `0 0 ${width} 140`, width, height: 140, role: 'group', 'aria-label': 'GitHub contributions. Use arrow keys to move between days, Enter to select, Shift+Enter to select a range, and Escape to clear.' });
+    const height = key === 'all' ? 140 : 116;
+    const svg = element('svg', { viewBox: `0 0 ${width} ${height}`, width, height, role: 'group', 'aria-label': 'GitHub contributions. Use arrow keys to move between days, Enter to select, Shift+Enter to select a range, and Escape to clear.' });
     const dateFormat = new Intl.DateTimeFormat('en-GB', { dateStyle: 'long', timeZone: 'UTC' });
     const days = weeks.flat();
     const squares = [];
