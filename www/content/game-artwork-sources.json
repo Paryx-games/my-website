@@ -2354,11 +2354,11 @@
     "width": 1920,
     "height": 620
   },
-  "/assets/games/forza-horizon-5-logo.webp": {
-    "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/logo.png",
-    "purpose": "publisher branding",
-    "width": 640,
-    "height": 360
+  "/assets/games/forza-horizon-5-logo.png": {
+    "url": "https://www.awd-it.co.uk/media/.renditions/wysiwyg/Forza_Logo_White.png",
+    "purpose": "white wordmark, recolored from source artwork",
+    "width": 635,
+    "height": 134
   },
   "/assets/games/forza-horizon-5-1.webp": {
     "url": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/ss_cf56e25a0290556ba83229eb0ab370d10be0407c.1920x1080.jpg?t=1788546569",

@@ -1,4 +1,4 @@
-import { robloxGames as sourceRobloxGames } from './roblox-games.js';
+import { robloxGames as sourceRobloxGames } from "./roblox-games.js";
 
 const robloxGamesOrder = [
   "blox-fruits",
@@ -21,9 +21,14 @@ const robloxGamesOrder = [
   "oakridge-nuclear-power-station",
   "a-core-game",
 ];
-const robloxGamesOrderIndex = new Map(robloxGamesOrder.map((id, index) => [id, index]));
-export const robloxGames = [...sourceRobloxGames].sort((a, b) =>
-  (robloxGamesOrderIndex.get(a.id) ?? Infinity) - (robloxGamesOrderIndex.get(b.id) ?? Infinity));
+const robloxGamesOrderIndex = new Map(
+  robloxGamesOrder.map((id, index) => [id, index]),
+);
+export const robloxGames = [...sourceRobloxGames].sort(
+  (a, b) =>
+    (robloxGamesOrderIndex.get(a.id) ?? Infinity) -
+    (robloxGamesOrderIndex.get(b.id) ?? Infinity),
+);
 
 const favoriteGames = [
   {
@@ -138,7 +143,7 @@ const favoriteGames = [
 ];
 
 export const games = [
-  ...favoriteGames.map(game => ({ ...game, favorite: true })),
+  ...favoriteGames.map((game) => ({ ...game, favorite: true })),
 ];
 
 export const rotation = [
@@ -193,7 +198,9 @@ const catalogueOrder = [
   "sektori",
   ...robloxGamesOrder,
 ];
-const catalogueOrderIndex = new Map(catalogueOrder.map((id, index) => [id, index]));
+const catalogueOrderIndex = new Map(
+  catalogueOrder.map((id, index) => [id, index]),
+);
 
 export const catalogue = [
   ...games,
@@ -541,7 +548,8 @@ export const catalogue = [
       publisher: "Paradox Interactive",
       genre: "Simulation · Management",
       website: "https://store.steampowered.com/app/255710/",
-      description: "Build a city from its first roads to a sprawling metropolis. Plan neighbourhoods, manage services, and keep traffic moving as the population grows.",
+      description:
+        "Build a city from its first roads to a sprawling metropolis. Plan neighbourhoods, manage services, and keep traffic moving as the population grows.",
       cover: "/assets/games/cities-skylines-cover.webp",
       pictures: [
         "/assets/games/cities-skylines-1.webp",
@@ -551,7 +559,7 @@ export const catalogue = [
         "/assets/games/cities-skylines-5.webp",
         "/assets/games/cities-skylines-6.webp",
         "/assets/games/cities-skylines-7.webp",
-        "/assets/games/cities-skylines-8.webp"
+        "/assets/games/cities-skylines-8.webp",
       ],
       captions: [
         "Cities: Skylines screenshot 1",
@@ -561,13 +569,13 @@ export const catalogue = [
         "Cities: Skylines screenshot 5",
         "Cities: Skylines screenshot 6",
         "Cities: Skylines screenshot 7",
-        "Cities: Skylines screenshot 8"
+        "Cities: Skylines screenshot 8",
       ],
       accent: "#8fc8dc",
       backdrop: "/assets/games/cities-skylines-hero.webp",
       icon: "/assets/games/cities-skylines-icon.webp",
       logo: "/assets/games/cities-skylines-logo.webp",
-      artworkSource: "https://store.steampowered.com/app/255710/"
+      artworkSource: "https://store.steampowered.com/app/255710/",
     },
     {
       id: "planet-coaster",
@@ -577,7 +585,8 @@ export const catalogue = [
       publisher: "Frontier Developments, Aspyr (Mac)",
       genre: "Simulation · Management",
       website: "https://store.steampowered.com/app/493340/",
-      description: "Design roller coasters, shape scenery, and manage a theme park. Build each attraction and keep visitors happy as the park expands.",
+      description:
+        "Design roller coasters, shape scenery, and manage a theme park. Build each attraction and keep visitors happy as the park expands.",
       cover: "/assets/games/planet-coaster-cover.webp",
       pictures: [
         "/assets/games/planet-coaster-1.webp",
@@ -587,7 +596,7 @@ export const catalogue = [
         "/assets/games/planet-coaster-5.webp",
         "/assets/games/planet-coaster-6.webp",
         "/assets/games/planet-coaster-7.webp",
-        "/assets/games/planet-coaster-8.webp"
+        "/assets/games/planet-coaster-8.webp",
       ],
       captions: [
         "Planet Coaster screenshot 1",
@@ -597,13 +606,13 @@ export const catalogue = [
         "Planet Coaster screenshot 5",
         "Planet Coaster screenshot 6",
         "Planet Coaster screenshot 7",
-        "Planet Coaster screenshot 8"
+        "Planet Coaster screenshot 8",
       ],
       accent: "#8abedd",
       backdrop: "/assets/games/planet-coaster-hero.webp",
       icon: "/assets/games/planet-coaster-icon.webp",
       logo: "/assets/games/planet-coaster-logo.webp",
-      artworkSource: "https://store.steampowered.com/app/493340/"
+      artworkSource: "https://store.steampowered.com/app/493340/",
     },
     {
       id: "planet-coaster-2",
@@ -613,7 +622,8 @@ export const catalogue = [
       publisher: "Frontier Developments",
       genre: "Simulation · Management",
       website: "https://store.steampowered.com/app/2688950/",
-      description: "Create a theme park with roller coasters, water slides, and pools. Design attractions, manage facilities, and share parks with friends.",
+      description:
+        "Create a theme park with roller coasters, water slides, and pools. Design attractions, manage facilities, and share parks with friends.",
       cover: "/assets/games/planet-coaster-2-cover.webp",
       pictures: [
         "/assets/games/planet-coaster-2-1.webp",
@@ -623,7 +633,7 @@ export const catalogue = [
         "/assets/games/planet-coaster-2-5.webp",
         "/assets/games/planet-coaster-2-6.webp",
         "/assets/games/planet-coaster-2-7.webp",
-        "/assets/games/planet-coaster-2-8.webp"
+        "/assets/games/planet-coaster-2-8.webp",
       ],
       captions: [
         "Planet Coaster 2 screenshot 1",
@@ -633,13 +643,13 @@ export const catalogue = [
         "Planet Coaster 2 screenshot 5",
         "Planet Coaster 2 screenshot 6",
         "Planet Coaster 2 screenshot 7",
-        "Planet Coaster 2 screenshot 8"
+        "Planet Coaster 2 screenshot 8",
       ],
       accent: "#79cbd1",
       backdrop: "/assets/games/planet-coaster-2-hero.webp",
       icon: "/assets/games/planet-coaster-2-icon.webp",
       logo: "/assets/games/planet-coaster-2-logo.webp",
-      artworkSource: "https://store.steampowered.com/app/2688950/"
+      artworkSource: "https://store.steampowered.com/app/2688950/",
     },
     {
       id: "planet-zoo",
@@ -649,7 +659,8 @@ export const catalogue = [
       publisher: "Frontier Developments",
       genre: "Simulation · Management",
       website: "https://store.steampowered.com/app/703080/",
-      description: "Build habitats for animals with individual needs and behaviours. Manage a zoo, support conservation, and design spaces for wildlife and visitors.",
+      description:
+        "Build habitats for animals with individual needs and behaviours. Manage a zoo, support conservation, and design spaces for wildlife and visitors.",
       cover: "/assets/games/planet-zoo-cover.webp",
       pictures: [
         "/assets/games/planet-zoo-1.webp",
@@ -659,7 +670,7 @@ export const catalogue = [
         "/assets/games/planet-zoo-5.webp",
         "/assets/games/planet-zoo-6.webp",
         "/assets/games/planet-zoo-7.webp",
-        "/assets/games/planet-zoo-8.webp"
+        "/assets/games/planet-zoo-8.webp",
       ],
       captions: [
         "Planet Zoo screenshot 1",
@@ -669,13 +680,13 @@ export const catalogue = [
         "Planet Zoo screenshot 5",
         "Planet Zoo screenshot 6",
         "Planet Zoo screenshot 7",
-        "Planet Zoo screenshot 8"
+        "Planet Zoo screenshot 8",
       ],
       accent: "#9ac381",
       backdrop: "/assets/games/planet-zoo-hero.webp",
       icon: "/assets/games/planet-zoo-icon.webp",
       logo: "/assets/games/planet-zoo-logo.webp",
-      artworkSource: "https://store.steampowered.com/app/703080/"
+      artworkSource: "https://store.steampowered.com/app/703080/",
     },
     {
       id: "upload-labs",
@@ -685,7 +696,8 @@ export const catalogue = [
       publisher: "EnigmaDev Studios",
       genre: "Simulation · Management",
       website: "https://store.steampowered.com/app/3606890/",
-      description: "Build a computer system from interconnected nodes. Route files through downloads, processing, and uploads while improving the efficiency of the network.",
+      description:
+        "Build a computer system from interconnected nodes. Route files through downloads, processing, and uploads while improving the efficiency of the network.",
       cover: "/assets/games/upload-labs-cover.webp",
       pictures: [
         "/assets/games/upload-labs-1.webp",
@@ -694,7 +706,7 @@ export const catalogue = [
         "/assets/games/upload-labs-4.webp",
         "/assets/games/upload-labs-5.webp",
         "/assets/games/upload-labs-6.webp",
-        "/assets/games/upload-labs-hero.webp"
+        "/assets/games/upload-labs-hero.webp",
       ],
       captions: [
         "Upload Labs screenshot 1",
@@ -703,13 +715,13 @@ export const catalogue = [
         "Upload Labs screenshot 4",
         "Upload Labs screenshot 5",
         "Upload Labs screenshot 6",
-        "Upload Labs official artwork"
+        "Upload Labs official artwork",
       ],
       accent: "#9caedb",
       backdrop: "/assets/games/upload-labs-hero.webp",
       icon: "/assets/games/upload-labs-icon.webp",
       logo: "/assets/games/upload-labs-logo.webp",
-      artworkSource: "https://store.steampowered.com/app/3606890/"
+      artworkSource: "https://store.steampowered.com/app/3606890/",
     },
     {
       id: "sektori",
@@ -719,7 +731,8 @@ export const catalogue = [
       publisher: "Kimmo Factor Oy",
       genre: "Arcade · Twin-stick shooter",
       website: "https://store.steampowered.com/app/2105620/",
-      description: "Fight through shifting arenas in a twin-stick shooter driven by techno music. Dodge enemies, collect upgrades, and survive increasingly intense waves.",
+      description:
+        "Fight through shifting arenas in a twin-stick shooter driven by techno music. Dodge enemies, collect upgrades, and survive increasingly intense waves.",
       cover: "/assets/games/sektori-cover.webp",
       pictures: [
         "/assets/games/sektori-1.webp",
@@ -729,7 +742,7 @@ export const catalogue = [
         "/assets/games/sektori-5.webp",
         "/assets/games/sektori-6.webp",
         "/assets/games/sektori-7.webp",
-        "/assets/games/sektori-8.webp"
+        "/assets/games/sektori-8.webp",
       ],
       captions: [
         "Sektori screenshot 1",
@@ -739,13 +752,13 @@ export const catalogue = [
         "Sektori screenshot 5",
         "Sektori screenshot 6",
         "Sektori screenshot 7",
-        "Sektori screenshot 8"
+        "Sektori screenshot 8",
       ],
       accent: "#e89b78",
       backdrop: "/assets/games/sektori-hero.webp",
       icon: "/assets/games/sektori-icon.webp",
       logo: "/assets/games/sektori-logo.webp",
-      artworkSource: "https://store.steampowered.com/app/2105620/"
+      artworkSource: "https://store.steampowered.com/app/2105620/",
     },
     {
       id: "fortnite",
@@ -884,7 +897,7 @@ export const catalogue = [
       accent: "#e897b6",
       backdrop: "/assets/games/forza-horizon-5-hero.webp",
       icon: "/assets/games/forza-horizon-5-cover.webp",
-      logo: "/assets/games/forza-horizon-5-logo.webp",
+      logo: "/assets/games/forza-horizon-5-logo.png",
       artworkSource: "https://store.steampowered.com/app/1551360/",
     },
     {
@@ -924,4 +937,8 @@ export const catalogue = [
     },
   ],
   ...robloxGames,
-].sort((a, b) => (catalogueOrderIndex.get(a.id) ?? Infinity) - (catalogueOrderIndex.get(b.id) ?? Infinity));
+].sort(
+  (a, b) =>
+    (catalogueOrderIndex.get(a.id) ?? Infinity) -
+    (catalogueOrderIndex.get(b.id) ?? Infinity),
+);
