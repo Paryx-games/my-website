@@ -1,14 +1,12 @@
 import { captureApiException, withSentry } from "./sentry.js";
 
-const QUERY = `query Contributions {
+const CALENDAR_FIELDS = `contributionCalendar {
+  totalContributions
+  weeks { contributionDays { date weekday contributionCount contributionLevel } }
+}`;
+const YEARS_QUERY = `query ContributionYears {
   user(login: "Paryx-games") {
-    contributionsCollection {
-      contributionYears
-      contributionCalendar {
-        totalContributions
-        weeks { contributionDays { date weekday contributionCount contributionLevel } }
-      }
-    }
+    contributionsCollection { contributionYears }
   }
 }`;
 const LEVELS = ['NONE', 'FIRST_QUARTILE', 'SECOND_QUARTILE', 'THIRD_QUARTILE', 'FOURTH_QUARTILE'];
@@ -32,10 +30,8 @@ export function normalizeCalendar(calendar) {
   return { version: 1, username: 'Paryx-games', total: calendar.totalContributions, weeks };
 }
 
-export async function fetchContributions({ token = process.env.GITHUB_TOKEN, request = fetch, now = Date.now } = {}) {
-  if (!token) throw new Error('GitHub contributions are not configured');
-  const signal = AbortSignal.timeout(20000);
-  const query = async (document) => {
+async function createGitHubQuery({ token, request, signal }) {
+  return async document => {
     const response = await request('https://api.github.com/graphql', {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', 'User-Agent': 'paryx-website' },
@@ -47,37 +43,89 @@ export async function fetchContributions({ token = process.env.GITHUB_TOKEN, req
     if (body.errors?.length || !body.data?.user) throw new Error('GitHub contributions unavailable');
     return body.data.user;
   };
-  const fetchedAt = new Date(now());
-  const user = await query(QUERY);
-  const collection = user.contributionsCollection;
-  const calendar = normalizeCalendar(collection?.contributionCalendar);
-  const years = collection.contributionYears;
-  if (!Array.isArray(years) || years.length > 100 || new Set(years).size !== years.length ||
-      years.some(year => !Number.isInteger(year) || year < 2008 || year > fetchedAt.getUTCFullYear()) ||
-      (!years.length && calendar.total > 0)) throw new Error('Invalid contribution years');
-  let allTime = 0;
-  const yearCalendars = [];
-  if (years.length) {
-    const fields = years.map(year => {
-      const to = year === fetchedAt.getUTCFullYear() ? fetchedAt.toISOString() : `${year}-12-31T23:59:59Z`;
-      return `year${year}: contributionsCollection(from: "${year}-01-01T00:00:00Z", to: "${to}") { contributionCalendar { totalContributions weeks { contributionDays { date weekday contributionCount contributionLevel } } } }`;
-    }).join('\n');
-    const history = await query(`query ContributionTotals { user(login: "Paryx-games") { ${fields} } }`);
-    for (const year of years) {
-      const annual = normalizeCalendar(history[`year${year}`]?.contributionCalendar);
-      if (annual.weeks.flat().some(day => !day.date.startsWith(`${year}-`))) throw new Error('Invalid annual contribution day');
-      allTime += annual.total;
-      yearCalendars.push({ year, ...annual });
-    }
-    if (!Number.isSafeInteger(allTime)) throw new Error('Invalid all-time contribution total');
-  }
-  return { ...calendar, allTime, years: yearCalendars, fetchedAt: fetchedAt.toISOString() };
 }
 
-export function createContributionsHandler({ load = fetchContributions, configured = () => Boolean(process.env.GITHUB_TOKEN), now = Date.now } = {}) {
-  let cached;
-  let fetchedAt = 0;
-  let pending;
+function validateYears(years, fetchedAt) {
+  if (!Array.isArray(years) || years.length > 100 || new Set(years).size !== years.length ||
+      years.some(year => !Number.isInteger(year) || year < 2008 || year > fetchedAt.getUTCFullYear())) {
+    throw new Error('Invalid contribution years');
+  }
+  return years;
+}
+
+function annualField(year, fetchedAt) {
+  const to = year === fetchedAt.getUTCFullYear() ? fetchedAt.toISOString() : `${year}-12-31T23:59:59Z`;
+  return `year${year}: contributionsCollection(from: "${year}-01-01T00:00:00Z", to: "${to}") { ${CALENDAR_FIELDS} }`;
+}
+
+function normalizeAnnual(history, year) {
+  const annual = normalizeCalendar(history[`year${year}`]?.contributionCalendar);
+  if (annual.weeks.flat().some(day => !day.date.startsWith(`${year}-`))) {
+    throw new Error('Invalid annual contribution day');
+  }
+  return { year, ...annual };
+}
+
+export async function fetchContributions({ token = process.env.GITHUB_TOKEN, request = fetch, now = Date.now } = {}) {
+  if (!token) throw new Error('GitHub contributions are not configured');
+  const signal = AbortSignal.timeout(20000);
+  const fetchedAt = new Date(now());
+  const query = await createGitHubQuery({ token, request, signal });
+  const user = await query(`query RecentContributions {
+    user(login: "Paryx-games") {
+      contributionsCollection {
+        contributionYears
+        ${CALENDAR_FIELDS}
+      }
+    }
+  }`);
+  const collection = user.contributionsCollection;
+  const calendar = normalizeCalendar(collection?.contributionCalendar);
+  const years = validateYears(collection.contributionYears, fetchedAt);
+  if (!years.length && calendar.total > 0) throw new Error('Invalid contribution years');
+  return { ...calendar, years, fetchedAt: fetchedAt.toISOString() };
+}
+
+export async function fetchContributionHistory({ period, year, token = process.env.GITHUB_TOKEN, request = fetch, now = Date.now } = {}) {
+  if (!token) throw new Error('GitHub contributions are not configured');
+  if (period !== 'all' && period !== 'year') throw new Error('Invalid contribution period');
+  const signal = AbortSignal.timeout(20000);
+  const fetchedAt = new Date(now());
+  const query = await createGitHubQuery({ token, request, signal });
+
+  if (period === 'year') {
+    if (!Number.isInteger(year) || year < 2008 || year > fetchedAt.getUTCFullYear()) {
+      throw new Error('Invalid contribution year');
+    }
+    const history = await query(`query ContributionYear {
+      user(login: "Paryx-games") {
+        ${annualField(year, fetchedAt)}
+      }
+    }`);
+    const annual = normalizeAnnual(history, year);
+    return { ...annual, period: 'year', fetchedAt: fetchedAt.toISOString() };
+  }
+
+  const yearsUser = await query(YEARS_QUERY);
+  const years = validateYears(yearsUser.contributionsCollection?.contributionYears, fetchedAt);
+  if (!years.length) return { years: [], total: 0, period: 'all', fetchedAt: fetchedAt.toISOString() };
+  const fields = years.map(value => annualField(value, fetchedAt)).join('\n');
+  const history = await query(`query ContributionHistory { user(login: "Paryx-games") { ${fields} } }`);
+  const calendars = years.map(value => normalizeAnnual(history, value));
+  const total = calendars.reduce((sum, calendar) => sum + calendar.total, 0);
+  if (!Number.isSafeInteger(total)) throw new Error('Invalid all-time contribution total');
+  return { years: calendars, total, period: 'all', fetchedAt: fetchedAt.toISOString() };
+}
+
+export function createContributionsHandler({
+  load,
+  loadRecent = load || fetchContributions,
+  loadHistory = fetchContributionHistory,
+  configured = () => Boolean(process.env.GITHUB_TOKEN),
+  now = Date.now,
+} = {}) {
+  const cache = new Map();
+  const pending = new Map();
   return async (req, res) => {
     const send = (status, body) => {
       res.setHeader('Cache-Control', status === 200 ? 'public, s-maxage=900, stale-while-revalidate=3600' : 'no-store');
@@ -85,13 +133,31 @@ export function createContributionsHandler({ load = fetchContributions, configur
     };
     if (req.method !== 'GET') { res.setHeader('Allow', 'GET'); return send(405, { error: 'Method not allowed' }); }
     if (!configured()) return send(503, { error: 'GitHub contributions are not configured' });
-    if (cached && now() - fetchedAt < 900000) return send(200, cached);
+
+    const period = req.query?.period || 'recent';
+    const yearValue = req.query?.year;
+    const year = typeof yearValue === 'string' && /^\d{4}$/.test(yearValue) ? Number(yearValue) : yearValue;
+    if (period !== 'recent' && period !== 'all' && period !== 'year') return send(400, { error: 'Invalid contribution period' });
+    if ((period === 'year' && !Number.isInteger(year)) || (period !== 'year' && yearValue !== undefined)) {
+      return send(400, { error: 'Invalid contribution year' });
+    }
+
+    const key = period === 'year' ? `year:${year}` : period;
+    const cached = cache.get(key);
+    if (cached && now() - cached.fetchedAt < 900000) return send(200, cached.data);
     try {
-      pending ||= load().then(data => { cached = data; fetchedAt = now(); return data; }).finally(() => { pending = null; });
-      return send(200, await pending);
+      if (!pending.has(key)) {
+        const loader = period === 'recent' ? loadRecent : loadHistory;
+        const options = period === 'year' ? { period, year } : { period };
+        pending.set(key, loader(options).then(data => {
+          cache.set(key, { data, fetchedAt: now() });
+          return data;
+        }).finally(() => pending.delete(key)));
+      }
+      return send(200, await pending.get(key));
     } catch (error) {
       await captureApiException(error, "/api/github-contributions");
-      if (cached) return send(200, { ...cached, stale: true });
+      if (cached) return send(200, { ...cached.data, stale: true });
       return send(502, { error: 'GitHub contributions unavailable' });
     }
   };

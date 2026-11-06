@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
-  normalizeCalendar, fetchContributions, createContributionsHandler,
+  normalizeCalendar, fetchContributions, fetchContributionHistory, createContributionsHandler,
 } from '../api/github-contributions.js';
 import {
   aggregateRepositoryLanguages, normalizeLanguageEndpoint, contributionMonthHeadings, contributionWeekX, contributionYearBoundaries,
@@ -96,15 +96,51 @@ test('GitHub credentials stay upstream and partial GraphQL errors are rejected',
   const data = await fetchContributions({ token: 'test-only-secret', request, now: () => Date.parse('2026-10-17T12:00:00Z') });
   assert.equal(headers.Authorization, 'Bearer test-only-secret');
   assert.equal(data.total, 7);
-  assert.equal(data.allTime, 50);
-  assert.deepEqual(data.years.map(({ year, total }) => [year, total]), [[2026, 40], [2025, 10]]);
-  assert.equal(data.years[0].weeks[0][0].date, '2026-10-16');
-  assert.match(queries[1], /contributionDays \{ date weekday contributionCount contributionLevel \}/);
-  assert.equal(queries.length, 2);
-  assert.match(queries[1], /from: "2025-01-01T00:00:00Z", to: "2025-12-31T23:59:59Z"/);
-  assert.match(queries[1], /to: "2026-10-17T12:00:00.000Z"/);
+  assert.deepEqual(data.years, [2026, 2025]);
+  assert.equal(data.weeks[0][0].date, '2026-10-16');
+  assert.match(queries[0], /contributionDays \{ date weekday contributionCount contributionLevel \}/);
+  assert.equal(queries.length, 1);
+  assert.doesNotMatch(queries[0], /contributionsCollection\(from:/);
   assert.ok(!JSON.stringify(data).includes('test-only-secret'));
   await assert.rejects(fetchContributions({ token: 'test-only-secret', request: async () => ({ ok: true, json: async () => ({ errors: [{ message: 'private upstream detail' }], data: {} }) }) }));
+});
+
+test('historical calendars are fetched on demand for a selected year or all-time', async () => {
+  const queries = [];
+  const request = async (_url, options) => {
+    const query = JSON.parse(options.body).query;
+    queries.push(query);
+    const user = query.startsWith('query ContributionYear {')
+        ? { year2025: { contributionCalendar: { totalContributions: 10, weeks: [{ contributionDays: [
+          { date: '2025-10-16', weekday: 4, contributionCount: 4, contributionLevel: 'SECOND_QUARTILE' },
+          { date: '2025-10-17', weekday: 5, contributionCount: 6, contributionLevel: 'THIRD_QUARTILE' },
+        ] }] } } }
+        : query.includes('ContributionYears')
+          ? { contributionsCollection: { contributionYears: [2026, 2025] } }
+          : {
+            year2026: { contributionCalendar: { ...calendar, totalContributions: 40 } },
+            year2025: { contributionCalendar: { totalContributions: 10, weeks: [{ contributionDays: [
+              { date: '2025-10-16', weekday: 4, contributionCount: 4, contributionLevel: 'SECOND_QUARTILE' },
+              { date: '2025-10-17', weekday: 5, contributionCount: 6, contributionLevel: 'THIRD_QUARTILE' },
+            ] }] } },
+          };
+    return { ok: true, json: async () => ({ data: { user } }) };
+  };
+  const options = { token: 'test-only-secret', request, now: () => Date.parse('2026-10-17T12:00:00Z') };
+  const year = await fetchContributionHistory({ ...options, period: 'year', year: 2025 });
+  assert.equal(year.total, 10);
+  assert.equal(year.year, 2025);
+  assert.match(queries[0], /from: "2025-01-01T00:00:00Z", to: "2025-12-31T23:59:59Z"/);
+  assert.equal(queries.length, 1);
+
+  queries.length = 0;
+  const all = await fetchContributionHistory({ ...options, period: 'all' });
+  assert.equal(all.total, 50);
+  assert.deepEqual(all.years.map(({ year: value, total }) => [value, total]), [[2026, 40], [2025, 10]]);
+  assert.equal(queries.length, 2);
+  assert.match(queries[1], /to: "2026-10-17T12:00:00.000Z"/);
+  assert.ok(!JSON.stringify(all).includes('test-only-secret'));
+  await assert.rejects(fetchContributionHistory({ ...options, period: 'year', year: 2024 }));
 });
 
 const response = () => {
@@ -112,6 +148,31 @@ const response = () => {
   const res = { setHeader(key, value) { result.headers[key] = value; }, status(code) { result.status = code; return res; }, json(body) { result.body = body; } };
   return { result, res };
 };
+
+test('the contributions endpoint routes recent, all-time, and year requests independently', async () => {
+  const requested = [];
+  const handler = createContributionsHandler({
+    configured: () => true,
+    loadRecent: async () => ({ period: 'recent' }),
+    loadHistory: async options => { requested.push(options); return options; },
+  });
+  const recent = response();
+  await handler({ method: 'GET' }, recent.res);
+  assert.deepEqual(recent.result.body, { period: 'recent' });
+
+  const all = response();
+  await handler({ method: 'GET', query: { period: 'all' } }, all.res);
+  assert.deepEqual(all.result.body, { period: 'all' });
+
+  const year = response();
+  await handler({ method: 'GET', query: { period: 'year', year: '2025' } }, year.res);
+  assert.deepEqual(year.result.body, { period: 'year', year: 2025 });
+  assert.deepEqual(requested, [{ period: 'all' }, { period: 'year', year: 2025 }]);
+
+  const invalid = response();
+  await handler({ method: 'GET', query: { period: 'year', year: 'bad' } }, invalid.res);
+  assert.equal(invalid.result.status, 400);
+});
 
 test('concurrent reads share a cached request and upstream failures retain the last snapshot', async () => {
   let calls = 0;

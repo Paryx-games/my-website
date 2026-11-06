@@ -2,7 +2,7 @@
 
 ## GitHub contributions
 
-`GET /api/github-contributions` returns `{ version, username, total, weeks, allTime, years, fetchedAt }`. `weeks` and `total` describe the most recent 365 days. `allTime` is the sum of GitHub's calendar-year totals, and `years` contains `{ year, version, username, total, weeks }` for each year with contributions. Each week contains days with `{ date, weekday, count, level }`. The endpoint uses the server-side GitHub token and caches successful snapshots for 15 minutes; a stale snapshot may be returned during upstream failures.
+`GET /api/github-contributions` (or `?period=recent`) returns `{ version, username, total, weeks, years, fetchedAt }`. `weeks` and `total` describe the most recent 365 days; `years` is the list of available calendar years. Historical data is loaded only when requested: `?period=year&year=YYYY` returns `{ version, username, year, total, weeks, period, fetchedAt }`, and `?period=all` returns `{ years, total, period, fetchedAt }`, where each year entry contains `{ year, version, username, total, weeks }`. Each week contains days with `{ date, weekday, count, level }`. The endpoint uses the server-side GitHub token and caches each period for 15 minutes; a stale snapshot may be returned during upstream failures.
 
 ## GitHub projects
 
