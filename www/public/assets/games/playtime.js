@@ -80,7 +80,7 @@ export function playtimeEntries(playtime, includeTotal = false) {
   const entries = [['pc', 'PC'], ['mobile', 'Mobile'], ['console', 'Console']].flatMap(([key, label]) => {
     const raw = playtime?.[key];
     const value = typeof raw === 'string' && /^-?\d+(?:\.\d+)?$/.test(raw.trim()) ? Number(raw.trim()) : raw;
-    if (typeof value === 'number' && Number.isFinite(value) && value >= 0) {
+    if (typeof value === 'number' && Number.isFinite(value) && value > 0) {
       return [[key, label, formatMinutes(value)]];
     }
     if (typeof value === 'string' && value.trim()) return [[key, label, value.trim()]];
@@ -94,9 +94,9 @@ export function playtimeEntries(playtime, includeTotal = false) {
     const minutes = ['pc', 'mobile', 'console'].map(key => {
       const raw = playtime?.[key];
       return typeof raw === 'number' ? raw : typeof raw === 'string' && /^\d+(?:\.\d+)?$/.test(raw.trim()) ? Number(raw.trim()) : null;
-    }).filter(value => value !== null && Number.isSafeInteger(Math.round(value)) && value >= 0);
+    }).filter(value => value !== null && Number.isSafeInteger(Math.round(value)) && value > 0);
     const total = minutes.reduce((sum, value) => sum + value, 0);
-    if (pcMinutes !== null && Number.isSafeInteger(Math.round(pcMinutes)) && pcMinutes >= 0 &&
+    if (pcMinutes !== null && Number.isSafeInteger(Math.round(pcMinutes)) && pcMinutes > 0 &&
         minutes.length > 1 && Number.isSafeInteger(total)) entries.push(['total', 'Total', formatMinutes(total)]);
   }
   return entries;

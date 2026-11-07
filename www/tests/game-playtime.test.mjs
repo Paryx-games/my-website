@@ -24,7 +24,7 @@ test('manual last-played overrides take precedence and display the latest platfo
 
 test('playtime converts numeric minutes, preserves estimates and hides unspecified platforms', () => {
   assert.deepEqual(playtimeEntries({ pc: 125, mobile: 1 }), [['pc', 'PC', '2 hours 5 minutes'], ['mobile', 'Mobile', '1 minute']]);
-  assert.deepEqual(playtimeEntries({ pc: 0, mobile: '61' }), [['pc', 'PC', '0 minutes'], ['mobile', 'Mobile', '1 hour 1 minute']]);
+  assert.deepEqual(playtimeEntries({ pc: 0, mobile: '61' }), [['mobile', 'Mobile', '1 hour 1 minute']]);
   assert.deepEqual(playtimeEntries({ pc: ' ', mobile: null }), []);
   assert.deepEqual(playtimeEntries({ pc: -1, mobile: NaN }), []);
   assert.deepEqual(playtimeEntries(), []);
@@ -74,5 +74,11 @@ test('playtime shows a total only when PC and another platform have numeric valu
   ]);
   assert.deepEqual(playtimeEntries({ pc: '', mobile: '', console: '60' }, true), [
     ['console', 'Console', '1 hour'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: '0', mobile: '', console: '60' }, true), [
+    ['console', 'Console', '1 hour'],
+  ]);
+  assert.deepEqual(playtimeEntries({ pc: 0, mobile: '60', console: '120' }, true), [
+    ['mobile', 'Mobile', '1 hour'], ['console', 'Console', '2 hours'],
   ]);
 });
