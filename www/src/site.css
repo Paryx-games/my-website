@@ -12,6 +12,12 @@
 .contributions-period-label { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 12px; color: var(--color-muted); font-size: 12px; }
 .contributions-period-label select { min-height: 34px; padding: 4px 30px 4px 10px; border: 1px solid var(--color-border); border-radius: 5px; background: var(--color-bg); color: var(--color-text); font: inherit; }
 .contributions-calendar { min-height: 116px; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--color-border-strong) var(--color-surface); }
+.contributions-skeleton { position: relative; display: grid; grid-template-columns: repeat(var(--skeleton-weeks), 10px); grid-template-rows: repeat(7, 10px); grid-auto-flow: column; gap: 3px; box-sizing: content-box; width: max-content; min-width: 650px; padding: 21px 0 0 30px; overflow: hidden; }
+.contributions-skeleton span { border-radius: 2px; background: var(--color-border-strong); opacity: .65; }
+.contributions-skeleton span:nth-child(5n) { opacity: .35; }
+.contributions-skeleton::after { position: absolute; inset: 0; background: linear-gradient(100deg, transparent 20%, color-mix(in srgb, var(--color-text) 10%, transparent) 50%, transparent 80%); content: ""; transform: translateX(-100%); animation: contributions-shimmer 1.4s ease-in-out infinite; }
+@keyframes contributions-shimmer { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .contributions-skeleton::after { animation: none; } }
 .contributions-calendar::-webkit-scrollbar { height: 8px; }
 .contributions-calendar::-webkit-scrollbar-track { background: var(--color-surface); border-radius: 4px; }
 .contributions-calendar::-webkit-scrollbar-thumb { background: var(--color-border-strong); border: 2px solid var(--color-surface); border-radius: 4px; }

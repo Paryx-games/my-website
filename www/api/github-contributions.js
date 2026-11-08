@@ -15,6 +15,7 @@ export function normalizeCalendar(calendar) {
   if (!Number.isSafeInteger(calendar?.totalContributions) || calendar.totalContributions < 0 ||
       !Array.isArray(calendar.weeks) || calendar.weeks.length < 1 || calendar.weeks.length > 54) throw new Error('Invalid contribution calendar');
   let previous = '';
+  let total = 0;
   const weeks = calendar.weeks.map(week => {
     if (!Array.isArray(week.contributionDays) || week.contributionDays.length < 1 || week.contributionDays.length > 7) throw new Error('Invalid contribution week');
     return week.contributionDays.map(day => {
@@ -24,9 +25,12 @@ export function normalizeCalendar(calendar) {
           day.date <= previous || !Number.isInteger(day.weekday) || day.weekday !== date.getUTCDay() ||
           !Number.isSafeInteger(day.contributionCount) || day.contributionCount < 0 || level < 0) throw new Error('Invalid contribution day');
       previous = day.date;
+      total += day.contributionCount;
+      if (!Number.isSafeInteger(total)) throw new Error('Invalid contribution total');
       return { date: day.date, weekday: day.weekday, count: day.contributionCount, level };
     });
   });
+  if (total !== calendar.totalContributions) throw new Error('Contribution total does not match daily counts');
   return { version: 1, username: 'Paryx-games', total: calendar.totalContributions, weeks };
 }
 
@@ -58,6 +62,12 @@ function annualField(year, fetchedAt) {
   return `year${year}: contributionsCollection(from: "${year}-01-01T00:00:00Z", to: "${to}") { ${CALENDAR_FIELDS} }`;
 }
 
+function recentField(fetchedAt) {
+  const from = new Date(fetchedAt);
+  from.setUTCFullYear(from.getUTCFullYear() - 1);
+  return `recent: contributionsCollection(from: "${from.toISOString()}", to: "${fetchedAt.toISOString()}") { ${CALENDAR_FIELDS} }`;
+}
+
 function normalizeAnnual(history, year) {
   const annual = normalizeCalendar(history[`year${year}`]?.contributionCalendar);
   if (annual.weeks.flat().some(day => !day.date.startsWith(`${year}-`))) {
@@ -73,14 +83,12 @@ export async function fetchContributions({ token = process.env.GITHUB_TOKEN, req
   const query = await createGitHubQuery({ token, request, signal });
   const user = await query(`query RecentContributions {
     user(login: "Paryx-games") {
-      contributionsCollection {
-        contributionYears
-        ${CALENDAR_FIELDS}
-      }
+      contributionsCollection { contributionYears }
+      ${recentField(fetchedAt)}
     }
   }`);
   const collection = user.contributionsCollection;
-  const calendar = normalizeCalendar(collection?.contributionCalendar);
+  const calendar = normalizeCalendar(user.recent?.contributionCalendar);
   const years = validateYears(collection.contributionYears, fetchedAt);
   if (!years.length && calendar.total > 0) throw new Error('Invalid contribution years');
   return { ...calendar, years, fetchedAt: fetchedAt.toISOString() };

@@ -14,6 +14,13 @@ const calendar = {
     { date: '2026-10-17', weekday: 6, contributionCount: 5, contributionLevel: 'FOURTH_QUARTILE' },
   ] }],
 };
+const calendar2026 = {
+  totalContributions: 40,
+  weeks: [{ contributionDays: [
+    { date: '2026-10-16', weekday: 5, contributionCount: 20, contributionLevel: 'FIRST_QUARTILE' },
+    { date: '2026-10-17', weekday: 6, contributionCount: 20, contributionLevel: 'FOURTH_QUARTILE' },
+  ] }],
+};
 
 test('calendar preserves partial-week alignment and rejects malformed provider data', () => {
   assert.deepEqual(normalizeCalendar(calendar).weeks[0], [
@@ -23,6 +30,7 @@ test('calendar preserves partial-week alignment and rejects malformed provider d
   for (const extra of [{ weekday: 0 }, { date: '2026-02-30' }, { contributionCount: -1 }, { contributionLevel: 'OTHER' }, { date: '2026-10-16' }]) {
     assert.throws(() => normalizeCalendar({ ...calendar, weeks: [{ contributionDays: [calendar.weeks[0].contributionDays[0], { ...calendar.weeks[0].contributionDays[1], ...extra }] }] }));
   }
+  assert.throws(() => normalizeCalendar({ ...calendar, totalContributions: 8 }));
 });
 
 test('all-time month headings start with the first contribution year and retain the full timeline', () => {
@@ -84,13 +92,13 @@ test('GitHub credentials stay upstream and partial GraphQL errors are rejected',
     queries.push(query);
     const user = query.includes('query ContributionTotals')
       ? {
-          year2026: { contributionCalendar: { ...calendar, totalContributions: 40 } },
+          year2026: { contributionCalendar: calendar2026 },
           year2025: { contributionCalendar: { totalContributions: 10, weeks: [{ contributionDays: [
             { date: '2025-10-16', weekday: 4, contributionCount: 4, contributionLevel: 'SECOND_QUARTILE' },
             { date: '2025-10-17', weekday: 5, contributionCount: 6, contributionLevel: 'THIRD_QUARTILE' },
           ] }] } },
         }
-      : { contributionsCollection: { contributionCalendar: calendar, contributionYears: [2026, 2025] } };
+      : { contributionsCollection: { contributionYears: [2026, 2025] }, recent: { contributionCalendar: calendar } };
     return { ok: true, json: async () => ({ data: { user } }) };
   };
   const data = await fetchContributions({ token: 'test-only-secret', request, now: () => Date.parse('2026-10-17T12:00:00Z') });
@@ -100,7 +108,7 @@ test('GitHub credentials stay upstream and partial GraphQL errors are rejected',
   assert.equal(data.weeks[0][0].date, '2026-10-16');
   assert.match(queries[0], /contributionDays \{ date weekday contributionCount contributionLevel \}/);
   assert.equal(queries.length, 1);
-  assert.doesNotMatch(queries[0], /contributionsCollection\(from:/);
+  assert.match(queries[0], /contributionsCollection\(from: "2025-10-17T12:00:00\.000Z", to: "2026-10-17T12:00:00\.000Z"\)/);
   assert.ok(!JSON.stringify(data).includes('test-only-secret'));
   await assert.rejects(fetchContributions({ token: 'test-only-secret', request: async () => ({ ok: true, json: async () => ({ errors: [{ message: 'private upstream detail' }], data: {} }) }) }));
 });
@@ -118,7 +126,7 @@ test('historical calendars are fetched on demand for a selected year or all-time
         : query.includes('ContributionYears')
           ? { contributionsCollection: { contributionYears: [2026, 2025] } }
           : {
-            year2026: { contributionCalendar: { ...calendar, totalContributions: 40 } },
+            year2026: { contributionCalendar: calendar2026 },
             year2025: { contributionCalendar: { totalContributions: 10, weeks: [{ contributionDays: [
               { date: '2025-10-16', weekday: 4, contributionCount: 4, contributionLevel: 'SECOND_QUARTILE' },
               { date: '2025-10-17', weekday: 5, contributionCount: 6, contributionLevel: 'THIRD_QUARTILE' },

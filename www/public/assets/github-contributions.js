@@ -49,6 +49,19 @@ export function contributionYearBoundaries(weeks) {
 const CONTRIBUTION_COLUMN_STEP = 13;
 const CONTRIBUTION_YEAR_GAP = 12;
 
+function renderContributionSkeleton(calendar, weeks = 53, height = 116) {
+  const skeleton = document.createElement('div');
+  skeleton.className = 'contributions-skeleton';
+  skeleton.setAttribute('aria-hidden', 'true');
+  skeleton.style.setProperty('--skeleton-weeks', weeks);
+  skeleton.style.minHeight = `${height}px`;
+  for (let index = 0; index < weeks * 7; index += 1) {
+    skeleton.append(document.createElement('span'));
+  }
+  calendar.replaceChildren(skeleton);
+  calendar.setAttribute('aria-busy', 'true');
+}
+
 export function contributionWeekX(index, yearBoundaries = []) {
   const gapsBeforeWeek = yearBoundaries.filter(boundary => boundary > 0 && boundary <= index).length;
   return 30 + index * CONTRIBUTION_COLUMN_STEP + gapsBeforeWeek * CONTRIBUTION_YEAR_GAP;
@@ -245,6 +258,7 @@ export function renderContributions(root, data, { periodCache = new Map(), loadP
 
     const calendar = root.querySelector('#contributions-calendar');
     calendar.replaceChildren(svg);
+    calendar.removeAttribute('aria-busy');
     squares.at(-1).setAttribute('tabindex', '0');
     calendar.onscroll = hideTooltip;
     const scrollToLatest = () => {
@@ -273,7 +287,14 @@ export function renderContributions(root, data, { periodCache = new Map(), loadP
       return;
     }
     periodSelect.disabled = true;
+    summary.textContent = 'Loading contributions...';
     updated.textContent = 'Loading historical contributions...';
+    const yearCount = data.years.length ? Math.max(...data.years) - Math.min(...data.years) + 1 : 1;
+    renderContributionSkeleton(
+      root.querySelector('#contributions-calendar'),
+      key === 'all' ? yearCount * 53 : 53,
+      key === 'all' ? 140 : 116,
+    );
     try {
       const history = await loadPeriod(key);
       if (currentRequest !== requestId) return;
@@ -285,6 +306,7 @@ export function renderContributions(root, data, { periodCache = new Map(), loadP
       if (currentRequest !== requestId) return;
       periodSelect.value = activeKey;
       periodSelect.disabled = false;
+      paintCached(activeKey);
       updated.textContent = 'Could not load that contribution period.';
     }
   };
@@ -318,6 +340,7 @@ export function renderLanguageBar(root, languages) {
 
 const root = typeof document === 'undefined' ? null : document.getElementById('github-contributions');
 if (root) {
+  renderContributionSkeleton(root.querySelector('#contributions-calendar'));
   const languageBar = root.querySelector('#contributions-language-bar');
   const periodCache = new Map();
   const fetchMeasured = async (url, name) => {
@@ -350,7 +373,9 @@ if (root) {
     } catch {
       root.querySelector('#contributions-summary-text').textContent = 'GitHub contributions are currently unavailable.';
       root.querySelector('#contributions-period').disabled = true;
-      root.querySelector('#contributions-calendar').textContent = 'Open my GitHub profile to view contribution activity.';
+      const calendar = root.querySelector('#contributions-calendar');
+      calendar.removeAttribute('aria-busy');
+      calendar.textContent = 'Open my GitHub profile to view contribution activity.';
     }
   };
   const loadLanguages = async () => {
