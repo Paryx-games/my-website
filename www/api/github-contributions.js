@@ -11,7 +11,7 @@ const YEARS_QUERY = `query ContributionYears {
 }`;
 const LEVELS = ['NONE', 'FIRST_QUARTILE', 'SECOND_QUARTILE', 'THIRD_QUARTILE', 'FOURTH_QUARTILE'];
 
-export function normalizeCalendar(calendar) {
+export function normalizeCalendar(calendar, { from, to } = {}) {
   if (!Number.isSafeInteger(calendar?.totalContributions) || calendar.totalContributions < 0 ||
       !Array.isArray(calendar.weeks) || calendar.weeks.length < 1 || calendar.weeks.length > 54) throw new Error('Invalid contribution calendar');
   let previous = '';
@@ -25,13 +25,15 @@ export function normalizeCalendar(calendar) {
           day.date <= previous || !Number.isInteger(day.weekday) || day.weekday !== date.getUTCDay() ||
           !Number.isSafeInteger(day.contributionCount) || day.contributionCount < 0 || level < 0) throw new Error('Invalid contribution day');
       previous = day.date;
-      total += day.contributionCount;
+      const inRange = (!from || day.date >= from) && (!to || day.date <= to);
+      const count = inRange ? day.contributionCount : 0;
+      total += count;
       if (!Number.isSafeInteger(total)) throw new Error('Invalid contribution total');
-      return { date: day.date, weekday: day.weekday, count: day.contributionCount, level };
+      return { date: day.date, weekday: day.weekday, count, level: count ? level : 0 };
     });
   });
-  if (total !== calendar.totalContributions) throw new Error('Contribution total does not match daily counts');
-  return { version: 1, username: 'Paryx-games', total: calendar.totalContributions, weeks };
+  if ((!from && !to) && total !== calendar.totalContributions) throw new Error('Contribution total does not match daily counts');
+  return { version: 1, username: 'Paryx-games', total, weeks };
 }
 
 async function createGitHubQuery({ token, request, signal }) {
@@ -65,7 +67,12 @@ function annualField(year, fetchedAt) {
 function recentField(fetchedAt) {
   const from = new Date(fetchedAt);
   from.setUTCFullYear(from.getUTCFullYear() - 1);
-  return `recent: contributionsCollection(from: "${from.toISOString()}", to: "${fetchedAt.toISOString()}") { ${CALENDAR_FIELDS} }`;
+  const to = fetchedAt.toISOString().slice(0, 10);
+  return {
+    from: from.toISOString().slice(0, 10),
+    to,
+    query: `recent: contributionsCollection(from: "${from.toISOString().slice(0, 10)}T00:00:00Z", to: "${to}T23:59:59Z") { ${CALENDAR_FIELDS} }`,
+  };
 }
 
 function normalizeAnnual(history, year) {
@@ -81,14 +88,15 @@ export async function fetchContributions({ token = process.env.GITHUB_TOKEN, req
   const signal = AbortSignal.timeout(20000);
   const fetchedAt = new Date(now());
   const query = await createGitHubQuery({ token, request, signal });
+  const range = recentField(fetchedAt);
   const user = await query(`query RecentContributions {
     user(login: "Paryx-games") {
       contributionsCollection { contributionYears }
-      ${recentField(fetchedAt)}
+      ${range.query}
     }
   }`);
   const collection = user.contributionsCollection;
-  const calendar = normalizeCalendar(user.recent?.contributionCalendar);
+  const calendar = normalizeCalendar(user.recent?.contributionCalendar, range);
   const years = validateYears(collection.contributionYears, fetchedAt);
   if (!years.length && calendar.total > 0) throw new Error('Invalid contribution years');
   return { ...calendar, years, fetchedAt: fetchedAt.toISOString() };

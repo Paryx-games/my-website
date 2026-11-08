@@ -31,6 +31,17 @@ test('calendar preserves partial-week alignment and rejects malformed provider d
     assert.throws(() => normalizeCalendar({ ...calendar, weeks: [{ contributionDays: [calendar.weeks[0].contributionDays[0], { ...calendar.weeks[0].contributionDays[1], ...extra }] }] }));
   }
   assert.throws(() => normalizeCalendar({ ...calendar, totalContributions: 8 }));
+  const boundaryCalendar = {
+    totalContributions: 12,
+    weeks: [{ contributionDays: [
+      { date: '2026-10-15', weekday: 4, contributionCount: 5, contributionLevel: 'THIRD_QUARTILE' },
+      { date: '2026-10-16', weekday: 5, contributionCount: 2, contributionLevel: 'FIRST_QUARTILE' },
+      { date: '2026-10-17', weekday: 6, contributionCount: 5, contributionLevel: 'FOURTH_QUARTILE' },
+    ] }],
+  };
+  const bounded = normalizeCalendar(boundaryCalendar, { from: '2026-10-16', to: '2026-10-17' });
+  assert.equal(bounded.total, 7);
+  assert.deepEqual(bounded.weeks[0].map(day => [day.count, day.level]), [[0, 0], [2, 1], [5, 4]]);
 });
 
 test('all-time month headings start with the first contribution year and retain the full timeline', () => {
@@ -108,7 +119,7 @@ test('GitHub credentials stay upstream and partial GraphQL errors are rejected',
   assert.equal(data.weeks[0][0].date, '2026-10-16');
   assert.match(queries[0], /contributionDays \{ date weekday contributionCount contributionLevel \}/);
   assert.equal(queries.length, 1);
-  assert.match(queries[0], /contributionsCollection\(from: "2025-10-17T12:00:00\.000Z", to: "2026-10-17T12:00:00\.000Z"\)/);
+  assert.match(queries[0], /contributionsCollection\(from: "2025-10-17T00:00:00Z", to: "2026-10-17T23:59:59Z"\)/);
   assert.ok(!JSON.stringify(data).includes('test-only-secret'));
   await assert.rejects(fetchContributions({ token: 'test-only-secret', request: async () => ({ ok: true, json: async () => ({ errors: [{ message: 'private upstream detail' }], data: {} }) }) }));
 });
