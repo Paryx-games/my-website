@@ -18,7 +18,7 @@ export function createImageLoader(createImage = () => new Image()) {
       element.classList.remove('is-loading');
       shell.classList.remove('is-loading');
       shell.setAttribute('aria-busy', 'false');
-      onReady?.();
+      onReady?.(pending);
     } catch {
       if (versions.get(element) !== version) return;
       element.classList.remove('is-loading');

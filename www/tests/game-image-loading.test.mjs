@@ -13,6 +13,8 @@ function harness() {
   };
   const pending = [];
   const load = createImageLoader(() => ({
+    naturalWidth: 600,
+    naturalHeight: 900,
     decode() {
       return new Promise((resolve, reject) => pending.push({ resolve, reject }));
     },
@@ -58,4 +60,16 @@ test('failed loading leaves a placeholder rather than showing the previous game'
   assert.ok(classes.has('is-error'));
   assert.ok(!classes.has('is-loading'));
   assert.equal(attributes.get('aria-busy'), 'false');
+});
+
+test('onReady receives the decoded image dimensions', async () => {
+  const { element, pending, load } = harness();
+  let loadedImage;
+  const request = load(element, 'portrait.webp', {
+    onReady: image => { loadedImage = image; },
+  });
+  pending[0].resolve();
+  await request;
+  assert.equal(loadedImage.naturalWidth, 600);
+  assert.equal(loadedImage.naturalHeight, 900);
 });

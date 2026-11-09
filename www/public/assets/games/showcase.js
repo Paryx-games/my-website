@@ -98,8 +98,8 @@ const card = (game, portrait = true) => {
   artworkShell.append(artwork);
   loadGameImage(artwork, game.cover, {
     shell: artworkShell,
-    onReady: () => {
-      if (!portrait || Math.abs(artwork.naturalWidth / artwork.naturalHeight - 2 / 3) < 0.04) return;
+    onReady: loadedArtwork => {
+      if (!portrait || Math.abs(loadedArtwork.naturalWidth / loadedArtwork.naturalHeight - 2 / 3) < 0.04) return;
       artworkShell.classList.add('has-cover-fill');
       artworkShell.style.setProperty('--cover-art', `url("${game.cover}")`);
     },
