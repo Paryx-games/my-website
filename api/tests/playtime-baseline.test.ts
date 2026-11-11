@@ -5,7 +5,7 @@ import { composePlaytime, type Baseline, type Total } from '../lib/playtime-base
 import { validateUpload } from '../lib/playtime.js';
 
 const baselines: Baseline[] = [
-  { game_id: 'town', pc: 15606, mobile: null, console: 243, universe_id: '1718755273', pc_last_played_at: null, mobile_last_played_at: null, console_last_played_at: null },
+  { game_id: 'town', pc: 20514, mobile: null, console: 243, universe_id: '1718755273', pc_last_played_at: null, mobile_last_played_at: null, console_last_played_at: null },
   { game_id: 'minecraft', pc: 49671, mobile: null, console: 22606, universe_id: null, pc_last_played_at: null, mobile_last_played_at: null, console_last_played_at: null },
   { game_id: 'satisfactory', pc: 9298, mobile: null, console: null, universe_id: null, pc_last_played_at: null, mobile_last_played_at: null, console_last_played_at: null },
 ];
@@ -16,11 +16,11 @@ const total = (game_id: string, source: string, minutes: number, baseline: numbe
 test('frozen baselines are available before uploads and Minecraft uploads are added once', () => {
   const first = composePlaytime(baselines, []);
   assert.equal(first.version, 2);
-  assert.equal(first.games.town.pc, 15606);
+  assert.equal(first.games.town.pc, 20514);
   assert.equal(first.games.minecraft.console, 22606);
   for (let refresh = 0; refresh < 2; refresh++) {
     const data = composePlaytime(baselines, [total('1718755273', 'roblox', 12, 2), total('minecraft', 'modrinth', 20000, 19671), total('satisfactory', 'steam', 9300, 9290)]);
-    assert.equal(data.games.town.pc, 15618);
+    assert.equal(data.games.town.pc, 20526);
     assert.equal(data.games.town.pcIncrease24hMinutes, 10);
     assert.equal(data.games.town.lastPlayedAt, '2026-10-17T12:00:00.000Z');
     assert.equal(data.games.minecraft.pc, 69671);
@@ -62,7 +62,7 @@ test('unknown universes are retained and exposed without editing a backend allow
   assert.deepEqual(validateUpload({ collectorId: 'pc', sequence: 1, entries }, 'pc').entries, entries);
   const data = composePlaytime(baselines, [total('10767441669', 'roblox', 10)]);
   assert.equal(data.games['roblox-10767441669'].pc, 10);
-  assert.equal(data.games.roblox.pc, 15616);
+  assert.equal(data.games.roblox.pc, 20524);
   assert.equal(data.games['roblox-10767441669'].pcIncrease24hMinutes, 10);
   assert.equal(data.games.roblox.pcIncrease24hMinutes, 10);
   const named = composePlaytime(baselines, [total('10767441669', 'roblox', 10)], [
@@ -72,7 +72,9 @@ test('unknown universes are retained and exposed without editing a backend allow
     universeId: '10767441669', name: 'Unlisted experience', placeIds: ['456'],
   });
   const known = composePlaytime(baselines, [total('1718755273', 'roblox', 5)]);
+  assert.equal(known.games.town.pc, 20519);
   assert.equal(known.games.town.pcIncrease24hMinutes, 5);
+  assert.equal(known.games.roblox.pc, 20519);
   assert.equal(known.games.roblox.pcIncrease24hMinutes, 5);
   for (const id of ['town', '0', '-1', '1.5', '9007199254740992']) {
     assert.throws(() => validateUpload({ collectorId: 'pc', sequence: 1, entries: [{ ...entries[0], gameId: id }] }, 'pc'));
@@ -85,7 +87,7 @@ test('the Roblox platform total combines its experience playtime across all repo
     { game_id: 'pressure', pc: 10, mobile: 120, console: 180, universe_id: '1234', pc_last_played_at: null, mobile_last_played_at: null, console_last_played_at: null },
   ], []);
   assert.deepEqual(data.games.pressure, { pc: 10, mobile: 120, console: 180 });
-  assert.deepEqual(data.games.roblox, { pc: 15616, mobile: 120, console: 423 });
+  assert.deepEqual(data.games.roblox, { pc: 20524, mobile: 120, console: 423 });
 });
 
 test('migration snapshot matches every numeric platform value in the frozen backup', () => {

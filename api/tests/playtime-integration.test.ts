@@ -27,7 +27,7 @@ test('Neon uploads are atomic, replay-safe, cumulative and ordered under concurr
     assert.equal(Number(rolledBack.last_sequence), 4);
     const before = await store.read();
     assert.equal(before.version, 2);
-    assert.ok(before.games.town.pc >= 15606);
+    assert.ok(before.games.town.pc >= 20514);
     const snapshot = JSON.parse(readFileSync(new URL('../../data/playtime-baseline.json', import.meta.url), 'utf8')) as { gameId: string; pc?: number; mobile?: number; console?: number; universeId?: number }[];
     const seeded = await sql`SELECT game_id, pc::text, mobile::text, console::text, universe_id::text FROM playtime.baselines ORDER BY game_id`;
     assert.deepEqual(seeded, snapshot.map(row => ({
