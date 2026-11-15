@@ -4,7 +4,14 @@ The API service for [paryx.uk](https://paryx.uk) and my other projects.
 
 Visit [api.paryx.uk](https://api.paryx.uk).
 
-The service provides backend functionality and language statistics for public GitHub repositories. Language breakdowns are available as structured data and visual bars, with colours based on GitHub Linguist and optional language names and percentages.
+The service provides backend functionality and language statistics for public GitHub repositories.
+
+Health checks:
+
+- `GET /health` confirms that the API function is responding. It does not depend on external services.
+- `GET /ready` checks that the configured Neon database can execute a simple query. It returns `503` when the database is unavailable or not configured.
+
+Language breakdowns are available as structured data and visual bars, with colours based on GitHub Linguist and optional language names and percentages.
 
 Language endpoints:
 

@@ -17,6 +17,8 @@
 		}
 	],
 	"rewrites": [
+		{ "source": "/health", "destination": "/api/health" },
+		{ "source": "/ready", "destination": "/api/ready" },
 		{ "source": "/roblox/stats", "destination": "/api/roblox/stats" },
 		{ "source": "/playtime", "destination": "/api/playtime" },
 		{
