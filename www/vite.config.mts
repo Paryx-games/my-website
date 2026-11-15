@@ -59,6 +59,11 @@ const topbar = readFileSync(
   "utf8",
 );
 
+const footer = readFileSync(
+  new URL("../.shared/components/footer.html", import.meta.url),
+  "utf8",
+);
+
 export default defineConfig(({ mode }) => {
   const root = fileURLToPath(new URL("./", import.meta.url));
   const environment = loadEnv(mode, root, "");
@@ -144,6 +149,33 @@ export default defineConfig(({ mode }) => {
               .replaceAll("{{HOME_CURRENT}}", 'aria-current="page"')
               .replaceAll("{{BLOG_CURRENT}}", "")
               .replaceAll("{{SEARCH_HREF}}", "https://blog.paryx.uk/")}</header>`,
+          );
+        },
+      },
+      {
+        name: "shared-footer",
+        transformIndexHtml(html, context) {
+          if (!context.filename.endsWith(".html")) return html;
+          const footerMarkup = footer
+            .replaceAll(
+              "{{PORTFOLIO_CURRENT}}",
+              context.filename.endsWith("portfolio.html")
+                ? 'aria-current="page"'
+                : "",
+            )
+            .replaceAll("{{CURRENT_YEAR}}", String(new Date().getFullYear()));
+          const footerStart = html.indexOf("<footer");
+          const footerEnd = html.indexOf("</footer>", footerStart);
+          if (footerStart < 0 || footerEnd < 0) return html;
+          const updatedHtml =
+            html.slice(0, footerStart) +
+            footerMarkup +
+            html.slice(footerEnd + "</footer>".length);
+          return updatedHtml.replace(
+            "</head>",
+            '  <link rel="stylesheet" href="/assets/site-footer.css">' +
+              "\n" +
+              "</head>",
           );
         },
       },
