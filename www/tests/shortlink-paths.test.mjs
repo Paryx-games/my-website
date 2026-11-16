@@ -38,3 +38,14 @@ test('short links fail closed when a www root route is dynamic', () => {
   assert.equal(manifest.allPathsReserved, true);
   assert.equal(isShortLinkPathAvailable('random1234', manifest), false);
 });
+
+test('short-link rewrite through the consolidated forms API does not reserve every path', () => {
+  const manifest = createReservedShortLinkPaths([], {
+    rewrites: [{
+      source: '/:code([a-z0-9-]{1,32})',
+      destination: 'https://admin.paryx.uk/api/forms?resource=shortlinks&code=:code',
+    }],
+  });
+  assert.equal(manifest.allPathsReserved, false);
+  assert.equal(isShortLinkPathAvailable('random1234', manifest), true);
+});

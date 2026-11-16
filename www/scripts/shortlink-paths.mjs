@@ -21,7 +21,8 @@ export function createReservedShortLinkPaths(entries, vercelConfig) {
   }
 
   for (const route of [...(vercelConfig.rewrites || []), ...(vercelConfig.redirects || [])]) {
-    if (route.destination === 'https://admin.paryx.uk/api/shortlinks/resolve/:code') continue;
+    if (route.destination === 'https://admin.paryx.uk/api/shortlinks/resolve/:code'
+      || route.destination === 'https://admin.paryx.uk/api/forms?resource=shortlinks&code=:code') continue;
     const firstSegment = route.source.split('/').filter(Boolean)[0];
     if (!firstSegment) continue;
     if (/[:*()]/.test(firstSegment)) {
