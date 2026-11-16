@@ -6,7 +6,7 @@ import { isShortLinkPathAvailable } from '../api/shortlinks/path-availability.js
 const file = (name) => ({ name, isDirectory: () => false });
 const directory = (name) => ({ name, isDirectory: () => true });
 
-test('short links reserve www static routes, route prefixes, and API paths', () => {
+test('short links reserve www routes and allow the unused api root', () => {
   const manifest = createReservedShortLinkPaths([
     file('index.html'),
     file('portfolio.html'),
@@ -23,9 +23,9 @@ test('short links reserve www static routes, route prefixes, and API paths', () 
 
   assert.deepEqual(manifest, {
     allPathsReserved: false,
-    segments: ['api', 'assets', 'changelog', 'portfolio', 'projects'],
+    segments: ['assets', 'changelog', 'portfolio', 'projects'],
   });
-  assert.equal(isShortLinkPathAvailable('api', manifest), false);
+  assert.equal(isShortLinkPathAvailable('api', manifest), true);
   assert.equal(isShortLinkPathAvailable('portfolio', manifest), false);
   assert.equal(isShortLinkPathAvailable('projects', manifest), false);
   assert.equal(isShortLinkPathAvailable('random1234', manifest), true);

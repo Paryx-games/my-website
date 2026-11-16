@@ -6,7 +6,7 @@ function addReservedSegment(segments, value) {
 }
 
 export function createReservedShortLinkPaths(entries, vercelConfig) {
-  const segments = new Set(['api']);
+  const segments = new Set();
   let allPathsReserved = false;
 
   for (const entry of entries) {
