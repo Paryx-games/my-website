@@ -34,6 +34,7 @@ dist/
 /.playtime-collector-state.json*
 /.test-build/
 /api/.test-build/
+/www/api/shortlinks/reserved-paths.json
 .agents
 AGENTS.md
 

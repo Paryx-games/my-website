@@ -15,3 +15,5 @@ Each game's `www/public/assets/games/game.json` entry can set `playtime.lastPlay
 My [Portfolio](https://paryx.uk/portfolio) shows Roblox work through featured projects, compact project cards, and screenshot galleries. Coding projects are listed on the homepage.
 
 Browser exceptions are reported to Sentry when the public `VITE_SENTRY_DSN` build variable is configured. Serverless API exceptions are reported when `SENTRY_DSN` is configured; `SENTRY_ENVIRONMENT` can override the deployment environment label. The browser DSN is embedded in the site bundle. See the [privacy policy](https://paryx.uk/privacy-policy) for the exact event fields and exclusions.
+
+Short-link requests use a Vercel rewrite to the admin service only after this project's files and functions are checked. The build generates `api/shortlinks/reserved-paths.json` from the static output and Vercel routes so the admin API can reject paths already owned by this website. Keep the rewrite after filesystem handling; www routes must remain authoritative.

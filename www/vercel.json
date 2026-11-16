@@ -21,6 +21,10 @@
   ],
   "rewrites": [
     {
+      "source": "/:code([a-z0-9-]{1,32})",
+      "destination": "https://admin.paryx.uk/api/shortlinks/resolve/:code"
+    },
+    {
       "source": "/projects/changelog",
       "destination": "/changelog"
     },
@@ -29,6 +33,11 @@
       "destination": "https://blog.paryx.uk/search-index.json"
     }
   ],
+  "functions": {
+    "api/shortlinks/path-availability.js": {
+      "includeFiles": "api/shortlinks/reserved-paths.json"
+    }
+  },
   "redirects": [
     {
       "source": "/projects",
