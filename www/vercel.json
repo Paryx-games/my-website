@@ -22,7 +22,7 @@
   "rewrites": [
     {
       "source": "/:code([a-z0-9-]{1,32})",
-      "destination": "https://admin.paryx.uk/api/shortlinks?code=:code"
+      "destination": "https://admin.paryx.uk/api/forms?resource=shortlinks&code=:code"
     },
     {
       "source": "/projects/changelog",
