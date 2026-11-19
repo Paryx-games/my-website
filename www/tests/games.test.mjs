@@ -24,7 +24,7 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
     'forza-horizon-6', 'forza-horizon-5', 'forza-horizon-4', 'rocket-league',
   ]);
   assert.deepEqual(catalogue.slice(-5).map(game => game.id), [
-    'nuclear-blast-testing-facility', 'apeirophobia', 'unseen-liminality', 'oakridge-nuclear-power-station', 'a-core-game',
+    'oakridge-nuclear-power-station', 'a-core-game', 'update-slap-battles', 'rise-of-nations', 'tower-defense-simulator',
   ]);
   assert.ok(catalogue.slice(23).every(game => game.roblox));
   assert.deepEqual(catalogue.slice(23).map(game => game.id), robloxGames.map(game => game.id));
@@ -37,7 +37,8 @@ test('favorites and rotation resolve to complete galleries with local artwork', 
     'blox-fruits', 'the-strongest-battlegrounds', 'doors', 'jujutsu-shenanigans', 'bee-swarm-simulator',
     'build-a-boat-for-treasure', 'islands', 'car-crushers-2', 'pressure', 'town', 'industrialist',
     'scp-roleplay', 'notoriety', 'cook-burgers', 'nuclear-blast-testing-facility', 'apeirophobia',
-    'unseen-liminality', 'oakridge-nuclear-power-station', 'a-core-game',
+    'unseen-liminality', 'oakridge-nuclear-power-station', 'a-core-game', 'update-slap-battles',
+    'rise-of-nations', 'tower-defense-simulator',
   ]);
   for (const entry of rotation) assert.ok(catalogue.some(game => game.id === entry.id), entry.id);
   for (const game of catalogue) {

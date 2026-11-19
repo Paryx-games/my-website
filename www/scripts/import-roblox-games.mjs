@@ -223,6 +223,7 @@ async function applyGames(games) {
   ]);
   const artworkSources = JSON.parse(artworkText);
   const provenance = JSON.parse(sourcesText);
+  const existingSourceUrls = new Set(Object.keys(provenance.sources));
   const universeMap = Object.fromEntries(currentGames.robloxGames.map(game => [game.id, game.roblox.universeId]));
   const duplicateUniverseIds = new Set(Object.values(universeMap));
   for (const game of games) {
@@ -243,7 +244,7 @@ async function applyGames(games) {
   const changedFiles = new Map([
     [catalogueFile, updatedCatalogue],
     [artworkFile, JSON.stringify(artworkSources, null, 2) + '\n'],
-    [sourcesFile, addObjectEntries(sourcesText, Object.fromEntries(Object.entries(provenance.sources).filter(([url]) => !sources.sources[url])), 'sources')],
+    [sourcesFile, addObjectEntries(sourcesText, Object.fromEntries(Object.entries(provenance.sources).filter(([url]) => !existingSourceUrls.has(url))), 'sources')],
     [statsFile, updatedStats],
   ]);
 

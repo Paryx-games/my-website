@@ -2461,5 +2461,167 @@
     "purpose": "publisher screenshot",
     "width": 1920,
     "height": 1080
+  },
+  "/assets/games/update-slap-battles-icon.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-1781fb285689b1848a86b6fe6870a048/512/512/Image/Png/noFilter",
+    "purpose": "official Roblox icon",
+    "width": 512,
+    "height": 512
+  },
+  "/assets/games/update-slap-battles-1.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-91a87ec7c3055778430a3f4eb54e286c/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/update-slap-battles-2.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-65806ac0878d87ceda18f4062e154880/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/update-slap-battles-3.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-fac41e032f9d2098b86fab095879d207/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/update-slap-battles-4.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-6b4da395f9a1b5c8e2acd6ee1e2d59cb/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/update-slap-battles-5.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-ad2891346122cda1841fe95652b89b65/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/update-slap-battles-6.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-0794e98f2f9887ffa8d1b0913fa8a618/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-icon.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-f4810af4473fef2efcd095d072d31542/512/512/Image/Png/noFilter",
+    "purpose": "official Roblox icon",
+    "width": 512,
+    "height": 512
+  },
+  "/assets/games/rise-of-nations-1.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-06b56c6475546b0ad2a506cd23cb49bb/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-2.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-fc73a95ec2bd241e473e1b9c6598a9c1/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-3.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-621d2616e440160fceb04463fcf2ae8f/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-4.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-8887759bc423972761ef908294a72d39/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-5.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-aa069242bea85b9fee378768124357ee/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-6.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-408dc1fd214d2903d2d102dd3d2035a8/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-7.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-eaf6d04346773d88840a44f3388083a9/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-8.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-e02a62ca7694bc885843d2566f28eb9c/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/rise-of-nations-9.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-d71c0768efdf3e3a872250ca04453e50/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-icon.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-9efdb2e60300cdc5e777ffa31b1bbd92/512/512/Image/Png/noFilter",
+    "purpose": "official Roblox icon",
+    "width": 512,
+    "height": 512
+  },
+  "/assets/games/tower-defense-simulator-1.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-860778a2d26920eaad242dbb544ae277/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-2.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-82cd3e18ce8883b327734dbfaa76ccf4/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-3.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-7ae4fdfed08e631e29a15e1b232be165/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-4.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-f8773b4ccda79ca5f739d762ea0410be/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-5.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-2859bf9a3211f9913263ecd2679789d3/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-6.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-29b7edfb1b923cf5db280daeee4c934f/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-7.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-d9de10e71f14835abaa814ad4b0cfab4/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-8.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-227a73470d3dc0278c90667a8c693def/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
+  },
+  "/assets/games/tower-defense-simulator-9.png": {
+    "url": "https://tr.rbxcdn.com/180DAY-297d54160b759591b0388e3dd1b7201b/768/432/Image/Png/noFilter",
+    "purpose": "official Roblox thumbnail",
+    "width": 768,
+    "height": 432
   }
 }

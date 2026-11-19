@@ -16,6 +16,9 @@ export const universes = {
   'islands': 1659645941,
   'bee-swarm-simulator': 601130232,
   'oakridge-nuclear-power-station': 5417936082,
+  'update-slap-battles': 2380077519,
+  'rise-of-nations': 918677693,
+  'tower-defense-simulator': 1176784616,
 };
 export type RobloxStats = {
   universeId: number; placeId: number; creatorType: 'Group' | 'User'; creatorId: number;
