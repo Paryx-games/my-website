@@ -6,6 +6,7 @@ import { renderQuote, gameLinkElement } from './quote-links.js';
 import { renderRobloxDetails, creatorDetailElement } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
+import { fetchRobloxArtwork, mergeRobloxArtwork } from './remote-roblox-artwork.js';
 import { favoriteBadgeElement, robloxBadgeElement } from './favorites.js';
 import { setupDescriptionDisclosure } from './description.js';
 import { setupGameSort } from './sort.js';
@@ -156,6 +157,38 @@ const sortSections = [
   [document.getElementById('roblox-games-list'), robloxGames],
 ].map(([root, games]) => setupGameSort(root, games, () => gameDetails, () => ratings));
 
+async function refreshRobloxArtwork() {
+  const response = await fetchRobloxArtwork();
+  if (!response) return;
+  if (!mergeRobloxArtwork(robloxGames, response)) {
+    console.warn('Invalid Roblox artwork response; bundled artwork remains in use.');
+    return;
+  }
+  for (const link of document.querySelectorAll('a[data-game]')) {
+    const game = catalogue.find(item => item.id === link.dataset.game);
+    if (!game?.roblox) continue;
+    const cover = link.querySelector('.game-cover-image img');
+    const coverShell = cover?.parentElement;
+    if (cover && coverShell) loadGameImage(cover, game.cover, {
+      shell: coverShell,
+      onReady: loadedArtwork => {
+        const portrait = !link.closest('.game-card')?.classList.contains('game-card-square');
+        if (!portrait || Math.abs(loadedArtwork.naturalWidth / loadedArtwork.naturalHeight - 2 / 3) < 0.04) return;
+        coverShell.classList.add('has-cover-fill');
+        coverShell.style.setProperty('--cover-art', `url("${game.cover}")`);
+      },
+    });
+    const icon = link.querySelector('.game-icon-shell img');
+    if (icon?.parentElement) loadGameImage(icon, game.icon, { shell: icon.parentElement });
+  }
+  if (dialog.open && active?.roblox) {
+    loadGameImage(document.getElementById('game-backdrop'), active.backdrop || active.cover);
+    renderGameThumbnails(active);
+    showPicture(Math.min(pictureIndex, active.pictures.length - 1));
+  }
+}
+refreshRobloxArtwork();
+
 let playtimeRefresh;
 let playtimeRefreshedAt = 0;
 function refreshRemotePlaytime() {
@@ -204,6 +237,21 @@ function showPicture(index) {
   });
   [...thumbs.children].forEach((button, index) => button.setAttribute('aria-pressed', String(index === pictureIndex)));
   if (dialog.open) thumbs.children[pictureIndex]?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion.matches ? 'instant' : 'smooth' });
+}
+
+function renderGameThumbnails(game) {
+  thumbs.replaceChildren(...game.pictures.map((src, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-label', `Show picture ${index + 1}: ${game.captions[index]}`);
+    const thumb = document.createElement('img');
+    thumb.alt = '';
+    thumb.loading = 'lazy';
+    button.append(thumb);
+    loadGameImage(thumb, src, { shell: button });
+    button.addEventListener('click', () => showPicture(index));
+    return button;
+  }));
 }
 
 function openShowcase(game, link) {
@@ -264,18 +312,7 @@ function openShowcase(game, link) {
   document.querySelector('.game-image-credit').textContent = active.roblox
     ? 'Official experience icon and thumbnails from Roblox.'
     : 'Official artwork and screenshots from the linked game page.';
-  thumbs.replaceChildren(...active.pictures.map((src, index) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.setAttribute('aria-label', `Show picture ${index + 1}: ${active.captions[index]}`);
-    const thumb = document.createElement('img');
-    thumb.alt = '';
-    thumb.loading = 'lazy';
-    button.append(thumb);
-    loadGameImage(thumb, src, { shell: button });
-    button.addEventListener('click', () => showPicture(index));
-    return button;
-  }));
+  renderGameThumbnails(active);
   showPicture(0);
   if (!wasOpen) dialog.showModal();
   descriptionDisclosure.update();

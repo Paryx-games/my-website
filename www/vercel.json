@@ -44,5 +44,11 @@
       "destination": "/#projects",
       "permanent": true
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/roblox-artwork",
+      "schedule": "0 0 * * *"
+    }
   ]
 }
