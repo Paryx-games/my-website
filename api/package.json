@@ -2,6 +2,10 @@
 	"name": "paryx-api",
 	"private": true,
 	"type": "module",
+	"engines": {
+		"node": "26.x"
+	},
+	"packageManager": "pnpm@10.28.0",
 	"scripts": {
 		"typecheck": "tsc --noEmit",
 		"test": "tsc -p tsconfig.test.json && node --test .test-build/tests/*.test.js",
