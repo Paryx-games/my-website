@@ -39,6 +39,7 @@
 #pc-specs .pc-fetch { gap: 22px; }
 #pc-specs .pc-terminal { font-size: 12px; }
 #pc-specs .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
+#pc-specs .home-pc-parts .repo { min-height: 112px; gap: 6px; padding: 12px 14px 18px; }
 #pc-specs .home-pc-parts .repo:hover, #pc-specs .home-pc-parts .repo:focus-within { border-color: var(--lang); }
 #pc-specs .home-pc-parts .repo:hover .repo-languages, #pc-specs .home-pc-parts .repo:focus-within .repo-languages { background: var(--lang); }
 #pc-specs .home-pc-parts .repo-origin-icon { color: var(--color-muted); }
@@ -46,14 +47,14 @@
 #pc-specs .home-pc-parts .repo-origin-icon > svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 #pc-specs .home-pc-parts .repo-foot { justify-content: space-between; }
 #pc-specs .home-pc-parts .repo-languages { background: var(--color-border); transition: background-color var(--motion-fast) var(--ease); }
-#pc-specs .home-pc-parts .home-pc-part-price { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
-#pc-specs .home-pc-parts .pc-part-price-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px 8px; }
-#pc-specs .home-pc-parts .pc-part-price-meta > span { padding: 2px 6px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-muted); font-size: 10px; line-height: 1.4; }
+#pc-specs .home-pc-parts .home-pc-part-price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+#pc-specs .home-pc-parts .pc-part-price-meta { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 2px 5px; }
+#pc-specs .home-pc-parts .pc-part-price-meta > span { padding: 1px 4px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-muted); font-size: 8px; line-height: 1.2; }
 #pc-specs .home-pc-parts .pc-part-price-meta > .pc-part-price-note { border-color: color-mix(in srgb, var(--lang) 30%, var(--color-border)); color: var(--color-soft); }
-#pc-specs .home-pc-parts .pc-part-highlights { display: inline-flex; flex-wrap: wrap; gap: 6px; margin: 0 0 10px; }
-#pc-specs .home-pc-parts .pc-part-highlight { display: inline-flex; align-items: baseline; gap: 5px; padding: 4px 7px; border: 1px solid var(--color-border); border-radius: 6px; background: #0c0d0f; line-height: 1.35; }
-#pc-specs .home-pc-parts .pc-part-highlight b { color: var(--color-soft); font-size: 11px; font-weight: 500; }
-#pc-specs .home-pc-parts .pc-part-highlight small { color: var(--color-faint); font-size: 10px; }
+#pc-specs .home-pc-parts .pc-part-highlights { display: inline-flex; flex-wrap: wrap; gap: 3px; margin: 0 0 4px; }
+#pc-specs .home-pc-parts .pc-part-highlight { display: inline-flex; align-items: baseline; gap: 3px; padding: 1px 5px; border: 1px solid var(--color-border); border-radius: 4px; background: #0c0d0f; line-height: 1.2; }
+#pc-specs .home-pc-parts .pc-part-highlight b { color: var(--color-soft); font-size: 9px; font-weight: 500; }
+#pc-specs .home-pc-parts .pc-part-highlight small { color: var(--color-faint); font-size: 8px; }
 #pc-specs .home-pc-parts .repo-open:disabled { color: var(--color-faint); cursor: not-allowed; opacity: .45; }
 #pc-specs .home-pc-parts .repo-open:disabled:hover { background: transparent; color: var(--color-faint); }
 .pc-hardware-details { margin-top: 42px; }
