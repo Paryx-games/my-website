@@ -1,4 +1,5 @@
 import { getGitHubProjects } from "./github-projects.js";
+import { cardIcons, renderRepoCard } from "./repo-card.js";
 
 const CONFIG = {
   githubUser: "Paryx-games",
@@ -291,10 +292,8 @@ const GITHUB_LANGUAGE_COLORS = {
 const STROKE =
   'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
 const UI = {
-  copy: `<svg ${STROKE}><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg>`,
-  check: `<svg ${STROKE}><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`,
+  ...cardIcons,
   mail: `<svg ${STROKE}><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7.5l8.5 6 8.5-6"/></svg>`,
-  launch: `<svg ${STROKE}><path d="M14 5h5v5"/><path d="M10 14 19 5"/><path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>`,
   warning: `<svg ${STROKE}><path d="M10.3 3.7 2.8 17a2 2 0 0 0 1.7 3h15a2 2 0 0 0 1.7-3L13.7 3.7a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`,
   star: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"/></svg>',
   fork: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a2.25 2.25 0 1 1 1.5 0v.878a2.25 2.25 0 0 1-2.25 2.25h-1.5v2.128a2.251 2.251 0 1 1-1.5 0V8.5h-1.5A2.25 2.25 0 0 1 3.5 6.25v-.878a2.25 2.25 0 1 1 1.5 0ZM5 3.25a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Zm6.75.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm-3 8.75a.75.75 0 1 0-1.5 0 .75.75 0 0 0 1.5 0Z"/></svg>',
@@ -1624,17 +1623,18 @@ const repoCard = (
   const fullName = `${owner}/${name}`;
   const url = `https://github.com/${owner}/${name}`;
   const languageColor = GITHUB_LANGUAGE_COLORS[language] || "#8b949e";
-  return `<article class="repo${archived ? " is-archived" : ""}${fork ? " is-fork" : ""}" style="--lang:${languageColor}" data-repo-full-name="${esc(fullName)}">
-  <div class="repo-head">
-    <div class="repo-title"><span class="repo-origin-icon" aria-hidden="true">${svg("github")}<span class="repo-fork-badge"${fork ? "" : " hidden"}>${UI.fork}</span></span><span class="repo-name">${esc(title)}</span><button class="icon-btn repo-copy" type="button" data-repo-copy="${esc(fullName)}" data-tip="Copy ${esc(fullName)}" aria-label="Copy ${esc(fullName)}"><span class="i-copy">${UI.copy}</span><span class="i-check">${UI.check}</span></button></div>
-    <div class="repo-actions">
-      <a class="icon-btn repo-open" href="${esc(url)}" target="_blank" rel="noopener noreferrer" data-tip="Open Repository" aria-label="Open ${esc(fullName)} on GitHub">${UI.launch}</a>
-    </div>
-  </div>
-  <p class="repo-parent"${fork && parent ? "" : " hidden"}>${fork ? repoSource(parent) : ""}</p>
-  <p class="repo-desc">${esc(description || "No description yet")}</p>
-  <div class="repo-foot">
-    ${language ? `<span class="language"><i class="dot"></i>${esc(language)}</span>` : ""}
+  return renderRepoCard({
+    title, url, fullName,
+    copyValue: fullName,
+    classes: [archived && "is-archived", fork && "is-fork"].filter(Boolean).join(" "),
+    style: `--lang:${languageColor}`,
+    icon: svg("github"),
+    linkTip: "Open Repository",
+    linkLabel: `Open ${fullName} on GitHub`,
+    parent: fork ? repoSource(parent) : "",
+    description: description || "No description yet",
+    languageBarLabel: "Repository language usage",
+    footer: `${language ? `<span class="language"><i class="dot"></i>${esc(language)}</span>` : ""}
     <span class="stars" data-tip="Stars">${UI.star}<b>${stars}</b></span>
     <span class="forks" data-tip="Forks">${UI.fork}<b>${forks}</b></span>
     ${
@@ -1643,17 +1643,14 @@ const repoCard = (
     <span class="issues repo-stat" data-tip="Issue stats loading">${UI.target}<b>-</b></span>
     <span class="prs repo-stat" data-tip="Pull request stats loading">${UI.branch}<b>-</b><span class="prs-closed" hidden></span></span>`
         : ""
-    }
-  </div>
-  <div class="repo-languages" aria-label="Repository language usage"></div>
-  <span class="sr-only" role="status"></span>
-</article>`;
+    }`,
+  });
 };
 
 const onRepoClick = async (event) => {
-  const button = event.target.closest("[data-repo-copy], [data-pc-copy]");
+  const button = event.target.closest("[data-repo-copy]");
   if (!button) return;
-  const value = button.dataset.repoCopy || button.dataset.pcCopy;
+  const value = button.dataset.repoCopy;
   const status = button.closest(".repo").querySelector("[role=status]");
   const copied = await copyText(value);
   button.classList.toggle("is-copied", copied);
@@ -2114,7 +2111,8 @@ const initOtherProjects = () => {
 const renderProjects = () => {
   addEventListener("resize", () => syncRepoNameTooltips(), { passive: true });
   $("repos").addEventListener("click", onRepoClick);
-  $("pc-specs").querySelector(".home-pc-parts").addEventListener("click", onRepoClick);
+  $("pc-specs").addEventListener("click", onRepoClick);
+  observeRepoNameTooltips($("pc-specs"));
   $("gamesRepos").addEventListener("click", onRepoClick);
   $("labsRepos").addEventListener("click", onRepoClick);
   initOtherProjects();

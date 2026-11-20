@@ -10,16 +10,20 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   const detail = await readFile(new URL('pc-specs.html', root), 'utf8');
   const styles = await readFile(new URL('public/assets/pc-specs.css', root), 'utf8');
   const generator = await readFile(new URL('scripts/sync-pc-specs.mjs', root), 'utf8');
+  const cardTemplate = await readFile(new URL('src/repo-card.js', root), 'utf8');
   const partsMarkup = home.match(/<!-- pc-parts:start -->([\s\S]*?)<!-- pc-parts:end -->/)?.[1];
   assert.ok(partsMarkup, 'homepage PC part markers are present');
-  const homePartCards = [...partsMarkup.matchAll(/class="repo home-pc-part"/g)];
+  const homePartCards = [...partsMarkup.matchAll(/<article class="repo home-pc-part" style="--lang:(#[a-f0-9]+)"/g)];
   assert.equal(homePartCards.length, specs.homeParts.length);
+  assert.ok(homePartCards.every(([, color]) => /^#[a-f0-9]{6}$/i.test(color)));
   assert.ok(partsMarkup.includes('class="repo home-pc-part"'));
-  assert.ok(partsMarkup.includes('class="repo-origin-icon home-pc-part-icon"'));
-  assert.ok(partsMarkup.includes('data-pc-copy='));
+  assert.ok(partsMarkup.includes('class="repo-origin-icon"'));
+  assert.ok(partsMarkup.includes('data-repo-copy='));
   assert.ok(partsMarkup.includes('class="icon-btn repo-open"'));
-  assert.ok(generator.includes('class="icon-btn repo-open" type="button" disabled'));
-  assert.ok(partsMarkup.includes('class="home-pc-category"'));
+  assert.ok(generator.includes('renderRepoCard({'));
+  assert.ok(cardTemplate.includes('export function renderRepoCard'));
+  assert.ok(partsMarkup.includes('class="language"'), 'hardware card uses the project language footer slot');
+  assert.ok(partsMarkup.includes('repo-languages'));
   assert.ok(partsMarkup.includes('launch MSRP'));
   assert.ok(partsMarkup.includes('estimated MSRP'));
   assert.ok(partsMarkup.includes('Launched 2024*'));
@@ -29,9 +33,9 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(partsMarkup.includes('MSI GeForce RTX 5070 Ti VENTUS/SHADOW/INSPIRE 3X OC'));
   assert.ok(!partsMarkup.includes('pc-terminal'));
   assert.ok(!partsMarkup.includes('<details'));
-  assert.ok(styles.includes('.repo.home-pc-part'));
-  assert.ok(styles.includes('border-color: var(--spec-color)'));
-  assert.ok(styles.includes('.home-pc-part .repo-open:disabled'));
+  assert.ok(styles.includes('#pc-specs .home-pc-parts .repo'));
+  assert.ok(styles.includes('border-color: var(--lang)'));
+  assert.ok(styles.includes('#pc-specs .home-pc-parts .repo-open:disabled'));
   assert.ok(generator.includes("label: 'CPU'"));
   assert.ok(generator.includes("label: 'GPU'"));
   assert.ok(generator.includes("label: 'RAM'"));
@@ -59,6 +63,5 @@ test('homepage PC specs use project cards with categorized icons and actions', a
     assert.ok(partsMarkup.includes(`>${part.name}</span>`), `missing part name: ${part.id}`);
     assert.ok(partsMarkup.includes(`<b>${part.price}</b>`), `missing part price: ${part.id}`);
     assert.ok(partsMarkup.includes(`Launched ${part.launchYear}`), `missing launch year: ${part.id}`);
-    assert.ok(partsMarkup.includes(`--spec-color:`), `missing category border color: ${part.id}`);
   }
 });

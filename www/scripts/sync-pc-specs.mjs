@@ -1,4 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
+import { renderRepoCard } from '../src/repo-card.js';
 
 const root = new URL('../', import.meta.url);
 const specs = JSON.parse(await readFile(new URL('public/pc-specs.json', root), 'utf8'));
@@ -32,18 +33,20 @@ const homeParts = specs.homeParts.map(part => {
     part.priceNote ? `<span>${escape(part.priceNote)}</span>` : '',
     `<span>Launched ${escape(part.launchYear)}</span>`,
   ].filter(Boolean).join('');
-  const link = part.href
-    ? `<a class="icon-btn repo-open" href="${escape(part.href)}" target="_blank" rel="noopener noreferrer" data-tip="Open ${escape(part.name)} link" aria-label="Open ${escape(part.name)} link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>`
-    : `<button class="icon-btn repo-open" type="button" disabled data-tip="No link configured" aria-label="No link configured for ${escape(part.name)}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 5h5v5M10 14 19 5M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></button>`;
-  return `<article class="repo home-pc-part" style="--spec-color:${category.color}" data-spec-name="${escape(part.name)}">
-  <div class="repo-head">
-    <div class="repo-title"><span class="repo-origin-icon home-pc-part-icon" aria-hidden="true"><svg viewBox="0 0 24 24">${category.icon}</svg></span><span class="repo-name">${escape(part.name)}</span><button class="icon-btn repo-copy" type="button" data-pc-copy="${escape(part.name)}" data-tip="Copy ${escape(part.name)}" aria-label="Copy ${escape(part.name)}"><span class="i-copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg></span><span class="i-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span></button></div>
-    <div class="repo-actions">${link}</div>
-  </div>
-  <p class="repo-desc">${escape(part.description)}</p>
-  <div class="repo-foot"><span class="home-pc-category">${category.label}</span><span class="home-pc-part-price"><b>${escape(part.price)}</b>${priceNote}</span></div>
-  <span class="sr-only" role="status"></span>
-</article>`;
+  const icon = `<svg viewBox="0 0 24 24" aria-hidden="true">${category.icon}</svg>`;
+  return renderRepoCard({
+    title: part.name,
+    copyValue: part.name,
+    description: part.description,
+    icon,
+    url: part.href || '',
+    linkTip: `Open ${part.name} link`,
+    linkLabel: `Open ${part.name} link`,
+    classes: 'home-pc-part',
+    style: `--lang:${category.color}`,
+    languageBarLabel: '',
+    footer: `<span class="language"><i class="dot"></i>${category.label}</span><span class="home-pc-part-price"><b>${escape(part.price)}</b>${priceNote}</span>`,
+  });
 }).join('\n');
 
 const homeFile = new URL('index.html', root);
@@ -53,6 +56,6 @@ if (!home.includes('<!-- pc-parts:start -->') || !home.includes('<!-- pc-parts:e
 }
 home = home.replace(
   /<!-- pc-parts:start -->[\s\S]*?<!-- pc-parts:end -->/,
-  `<!-- pc-parts:start -->\n<div class="home-pc-parts">\n${homeParts}\n</div>\n<!-- pc-parts:end -->`,
+  `<!-- pc-parts:start -->\n<div class="repos home-pc-parts">\n${homeParts}\n</div>\n<!-- pc-parts:end -->`,
 );
 await writeFile(homeFile, home);

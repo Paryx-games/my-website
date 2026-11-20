@@ -39,21 +39,14 @@
 #pc-specs .pc-fetch { gap: 22px; }
 #pc-specs .pc-terminal { font-size: 12px; }
 #pc-specs .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
-.home-pc-parts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 12px; }
-.repo.home-pc-part { --spec-color: #58a6ff; min-height: 150px; border-color: color-mix(in srgb, var(--spec-color) 46%, var(--color-border)); }
-.repo.home-pc-part:hover, .repo.home-pc-part:focus-within { border-color: var(--spec-color); }
-.home-pc-part .repo-origin-icon { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid color-mix(in srgb, var(--spec-color) 55%, transparent); border-radius: 8px; background: color-mix(in srgb, var(--spec-color) 11%, var(--color-surface)); color: var(--spec-color); }
-.home-pc-part .repo-origin-icon > svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-.home-pc-part .repo-desc { margin: 0; }
-.home-pc-part .repo-foot { justify-content: space-between; gap: 8px 16px; }
-.home-pc-part .home-pc-category { color: var(--spec-color); font-size: 0.6875rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; }
-.home-pc-part .home-pc-part-price { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 3px 10px; margin-left: auto; text-align: right; font-variant-numeric: tabular-nums; }
-.home-pc-part .home-pc-part-price b { color: var(--color-text); font-size: 0.75rem; font-weight: 500; }
-.home-pc-part .home-pc-part-price span { color: var(--color-faint); font-size: 0.6875rem; }
-.home-pc-part .repo-copy, .home-pc-part .repo-open { top: 0; width: 28px; height: 28px; }
-.home-pc-part .repo-open:disabled { color: var(--color-faint); cursor: not-allowed; opacity: .45; }
-.home-pc-part .repo-open:disabled:hover { background: transparent; color: var(--color-faint); }
-.home-pc-part .repo-open svg { display: block; width: 16px; height: 16px; }
+#pc-specs .home-pc-parts .repo { border-color: color-mix(in srgb, var(--lang) 46%, var(--color-border)); }
+#pc-specs .home-pc-parts .repo:hover, #pc-specs .home-pc-parts .repo:focus-within { border-color: var(--lang); }
+#pc-specs .home-pc-parts .repo-origin-icon { color: var(--lang); }
+#pc-specs .home-pc-parts .repo-origin-icon > svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#pc-specs .home-pc-parts .language { color: var(--lang); }
+#pc-specs .home-pc-parts .repo-foot { justify-content: space-between; }
+#pc-specs .home-pc-parts .repo-open:disabled { color: var(--color-faint); cursor: not-allowed; opacity: .45; }
+#pc-specs .home-pc-parts .repo-open:disabled:hover { background: transparent; color: var(--color-faint); }
 .pc-hardware-details { margin-top: 42px; }
 .pc-detail-group { display: grid; grid-template-columns: minmax(140px, 1fr) minmax(0, 2fr); gap: 12px 36px; padding: 30px 0; border-top: 1px solid var(--line); }
 .pc-detail-group h2 { margin: 0; font-size: 20px; letter-spacing: -.03em; }
@@ -79,7 +72,6 @@
 }
 @media (max-width: 600px) {
   .pc-specs-page { padding-top: 28px; }
-  .home-pc-parts { grid-template-columns: minmax(0, 1fr); }
   .pc-terminal, .pc-specs-page .pc-terminal { font-size: 12px; }
   .pc-terminal-inner, .pc-specs-page .pc-terminal-inner { padding: 19px 16px 22px; }
   .pc-terminal-bar { padding: 9px 16px; }
