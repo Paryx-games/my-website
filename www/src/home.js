@@ -1651,9 +1651,9 @@ const repoCard = (
 };
 
 const onRepoClick = async (event) => {
-  const button = event.target.closest("[data-repo-copy]");
+  const button = event.target.closest("[data-repo-copy], [data-pc-copy]");
   if (!button) return;
-  const value = button.dataset.repoCopy;
+  const value = button.dataset.repoCopy || button.dataset.pcCopy;
   const status = button.closest(".repo").querySelector("[role=status]");
   const copied = await copyText(value);
   button.classList.toggle("is-copied", copied);
@@ -2114,6 +2114,7 @@ const initOtherProjects = () => {
 const renderProjects = () => {
   addEventListener("resize", () => syncRepoNameTooltips(), { passive: true });
   $("repos").addEventListener("click", onRepoClick);
+  $("pc-specs").querySelector(".home-pc-parts").addEventListener("click", onRepoClick);
   $("gamesRepos").addEventListener("click", onRepoClick);
   $("labsRepos").addEventListener("click", onRepoClick);
   initOtherProjects();
