@@ -26,26 +26,31 @@ const homeParts = specs.homeParts.map(part => {
       throw new Error(`Homepage PC part ${part.id} is missing ${key}`);
     }
   }
+  if (!Array.isArray(part.highlights) || part.highlights.length < 2 || part.highlights.some(({ label, value }) => !label?.trim() || !value?.trim())) {
+    throw new Error(`Homepage PC part ${part.id} needs at least two labeled highlights`);
+  }
   if (part.href && typeof part.href !== 'string') {
     throw new Error(`Homepage PC part ${part.id} has an invalid link`);
   }
   const priceNote = [
-    part.priceNote ? `<span>${escape(part.priceNote)}</span>` : '',
-    `<span>Launched ${escape(part.launchYear)}</span>`,
+    part.priceNote ? `<span class="pc-part-price-note">${escape(part.priceNote)}</span>` : '',
+    `<span class="pc-part-launch">${escape(part.launchYear)}</span>`,
   ].filter(Boolean).join('');
+  const highlights = part.highlights.map(({ label, value }) => `<span class="pc-part-highlight"><b>${escape(value)}</b><small>${escape(label)}</small></span>`).join('');
   const icon = `<svg viewBox="0 0 24 24" aria-hidden="true">${category.icon}</svg>`;
   return renderRepoCard({
     title: part.name,
     copyValue: part.name,
     description: part.description,
     icon,
+    parent: `<span class="pc-part-highlights">${highlights}</span>`,
     url: part.href || '',
     linkTip: `Open ${part.name} link`,
     linkLabel: `Open ${part.name} link`,
     classes: 'home-pc-part',
     style: `--lang:${category.color}`,
     languageBarLabel: '',
-    footer: `<span class="language"><i class="dot"></i>${category.label}</span><span class="home-pc-part-price"><b>${escape(part.price)}</b>${priceNote}</span>`,
+    footer: `<span class="language"><i class="dot"></i>${category.label}</span><span class="home-pc-part-price"><b>${escape(part.price)}</b><span class="pc-part-price-meta">${[priceNote].filter(Boolean).join('')}</span></span>`,
   });
 }).join('\n');
 

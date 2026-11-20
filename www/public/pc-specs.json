@@ -6,7 +6,12 @@
       "id": "cpu",
       "name": "AMD Ryzen 7 9800X3D",
       "href": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-7-9800x3d.html",
-      "description": "8 cores / 16 threads / 96 MB L3 cache",
+      "description": "Gaming-focused 3D V-Cache processor",
+      "highlights": [
+        { "label": "Cores", "value": "8" },
+        { "label": "Threads", "value": "16" },
+        { "label": "L3 cache", "value": "96 MB" }
+      ],
       "launchYear": "2024",
       "price": "$479",
       "priceNote": "launch MSRP",
@@ -16,7 +21,12 @@
       "id": "gpu",
       "name": "NVIDIA GeForce RTX 5070 Ti",
       "href": "https://www.nvidia.com/en-gb/geforce/graphics-cards/50-series/rtx-5070-family/",
-      "description": "MSI GeForce RTX 5070 Ti VENTUS/SHADOW/INSPIRE 3X OC / 16 GB GDDR7",
+      "description": "MSI GeForce RTX 5070 Ti VENTUS 3X OC",
+      "highlights": [
+        { "label": "VRAM", "value": "16 GB GDDR7" },
+        { "label": "Memory bus", "value": "256-bit" },
+        { "label": "Interface", "value": "PCIe 5.0 x16" }
+      ],
       "launchYear": "2025",
       "price": "$749",
       "priceNote": "launch MSRP",
@@ -26,7 +36,12 @@
       "id": "memory",
       "name": "Kingston FURY Beast DDR5-6000 CL30 32 GB",
       "href": "https://www.kingston.com/en/memory/gaming/kingston-fury-beast-ddr5-memory",
-      "description": "2 x 16 GB / CL30 / dual channel",
+      "description": "Kingston FURY Beast DDR5 desktop memory",
+      "highlights": [
+        { "label": "Capacity", "value": "32 GB" },
+        { "label": "Speed", "value": "6000 MT/s" },
+        { "label": "Timing", "value": "CL30" }
+      ],
       "launchYear": "2024*",
       "price": "No confirmed MSRP",
       "icon": "memory"
@@ -35,7 +50,12 @@
       "id": "board",
       "name": "ASUS ROG STRIX B850-E GAMING WIFI",
       "href": "https://rog.asus.com/motherboards/rog-strix/rog-strix-b850-e-gaming-wifi/",
-      "description": "AM5 / PCIe 5.0 / BIOS 1066",
+      "description": "ASUS ROG STRIX gaming motherboard",
+      "highlights": [
+        { "label": "Socket", "value": "AM5" },
+        { "label": "Chipset", "value": "B850" },
+        { "label": "BIOS", "value": "1066" }
+      ],
       "launchYear": "2025",
       "price": "$309",
       "priceNote": "launch MSRP",
@@ -45,7 +65,12 @@
       "id": "storage",
       "name": "WD_BLACK SN850X 2 TB",
       "href": "https://www.westerndigital.com/products/internal-drives/wd-black-sn850x-nvme-ssd",
-      "description": "NVMe SSD / PCIe 4.0 x4",
+      "description": "WD_BLACK NVMe solid-state drive",
+      "highlights": [
+        { "label": "Capacity", "value": "2 TB" },
+        { "label": "Interface", "value": "PCIe 4.0 x4" },
+        { "label": "Form factor", "value": "M.2 2280" }
+      ],
       "launchYear": "2022",
       "price": "$289.99",
       "priceNote": "launch MSRP",
@@ -55,7 +80,12 @@
       "id": "display",
       "name": "LG UltraGear 27GS75Q 27 inch",
       "href": "https://www.lg.com/uk/gaming-monitors/",
-      "description": "2560 x 1440 / 180 Hz",
+      "description": "LG UltraGear QHD gaming monitor",
+      "highlights": [
+        { "label": "Resolution", "value": "2560 x 1440" },
+        { "label": "Refresh", "value": "180 Hz" },
+        { "label": "Size", "value": "27 in" }
+      ],
       "launchYear": "2024",
       "price": "$349.99",
       "priceNote": "estimated MSRP",
@@ -65,7 +95,12 @@
       "id": "display-secondary",
       "name": "Dell P2317H 23 inch",
       "href": "https://www.dell.com/support/home/en-uk/product-support/product/dell-p2317h-monitor/overview",
-      "description": "1920 x 1080 / 60 Hz",
+      "description": "Dell P-series Full HD monitor",
+      "highlights": [
+        { "label": "Resolution", "value": "1920 x 1080" },
+        { "label": "Refresh", "value": "60 Hz" },
+        { "label": "Size", "value": "23 in" }
+      ],
       "launchYear": "2016",
       "price": "$209.99",
       "priceNote": "estimated MSRP",

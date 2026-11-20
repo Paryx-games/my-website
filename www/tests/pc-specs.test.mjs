@@ -24,17 +24,23 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(cardTemplate.includes('export function renderRepoCard'));
   assert.ok(partsMarkup.includes('class="language"'), 'hardware card uses the project language footer slot');
   assert.ok(partsMarkup.includes('repo-languages'));
+  assert.ok(partsMarkup.includes('class="pc-part-highlights"'));
+  assert.ok(partsMarkup.includes('<small>Cores</small>'));
+  assert.ok(partsMarkup.includes('<b>180 Hz</b><small>Refresh</small>'));
+  assert.ok(partsMarkup.includes('class="pc-part-price-meta"'));
   assert.ok(partsMarkup.includes('launch MSRP'));
   assert.ok(partsMarkup.includes('estimated MSRP'));
-  assert.ok(partsMarkup.includes('Launched 2024*'));
+  assert.ok(partsMarkup.includes('2024*'));
   assert.ok(partsMarkup.includes('$289.99'));
   assert.ok(partsMarkup.includes('$349.99'));
   assert.ok(partsMarkup.includes('$209.99'));
-  assert.ok(partsMarkup.includes('MSI GeForce RTX 5070 Ti VENTUS/SHADOW/INSPIRE 3X OC'));
+  assert.ok(partsMarkup.includes('MSI GeForce RTX 5070 Ti VENTUS 3X OC'));
   assert.ok(!partsMarkup.includes('pc-terminal'));
   assert.ok(!partsMarkup.includes('<details'));
   assert.ok(styles.includes('#pc-specs .home-pc-parts .repo:hover .repo-origin-icon'));
   assert.ok(styles.includes('#pc-specs .home-pc-parts .repo-open:disabled'));
+  assert.ok(styles.includes('.repo:hover .repo-languages'));
+  assert.ok(styles.includes('.pc-part-highlight'));
   assert.ok(!styles.includes('#pc-specs .home-pc-parts .language { color: var(--lang); }'));
   assert.ok(!/\.repo\.home-pc-part\s*\{[^}]*border-color\s*:\s*color-mix/.test(home));
   assert.ok(!/\.repo\.home-pc-part \.language\s*\{[^}]*color\s*:\s*var\(--lang\)/.test(home));
@@ -64,6 +70,7 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   for (const part of specs.homeParts) {
     assert.ok(partsMarkup.includes(`>${part.name}</span>`), `missing part name: ${part.id}`);
     assert.ok(partsMarkup.includes(`<b>${part.price}</b>`), `missing part price: ${part.id}`);
-    assert.ok(partsMarkup.includes(`Launched ${part.launchYear}`), `missing launch year: ${part.id}`);
+    assert.ok(partsMarkup.includes(`<span class="pc-part-launch">${part.launchYear}</span>`), `missing launch year: ${part.id}`);
+    assert.ok(part.highlights.length >= 2, `missing hardware highlights: ${part.id}`);
   }
 });
