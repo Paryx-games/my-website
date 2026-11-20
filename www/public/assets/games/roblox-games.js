@@ -1009,6 +1009,7 @@ export const robloxGames = [
   },
 {
   "id": "update-slap-battles",
+  "playtimeId": "slap-battles",
   "titleArtwork": "/assets/games/update-slap-battles-icon.png",
   "title": "[UPDATE🔪] Slap Battles👏",
   "year": "2021",
