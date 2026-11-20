@@ -39,11 +39,10 @@
 #pc-specs .pc-fetch { gap: 22px; }
 #pc-specs .pc-terminal { font-size: 12px; }
 #pc-specs .pc-facts > div { grid-template-columns: 90px minmax(0, 1fr); }
-#pc-specs .home-pc-parts .repo { border-color: color-mix(in srgb, var(--lang) 46%, var(--color-border)); }
 #pc-specs .home-pc-parts .repo:hover, #pc-specs .home-pc-parts .repo:focus-within { border-color: var(--lang); }
-#pc-specs .home-pc-parts .repo-origin-icon { color: var(--lang); }
+#pc-specs .home-pc-parts .repo-origin-icon { color: var(--color-muted); }
+#pc-specs .home-pc-parts .repo:hover .repo-origin-icon, #pc-specs .home-pc-parts .repo:focus-within .repo-origin-icon { color: var(--lang); }
 #pc-specs .home-pc-parts .repo-origin-icon > svg { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
-#pc-specs .home-pc-parts .language { color: var(--lang); }
 #pc-specs .home-pc-parts .repo-foot { justify-content: space-between; }
 #pc-specs .home-pc-parts .repo-open:disabled { color: var(--color-faint); cursor: not-allowed; opacity: .45; }
 #pc-specs .home-pc-parts .repo-open:disabled:hover { background: transparent; color: var(--color-faint); }

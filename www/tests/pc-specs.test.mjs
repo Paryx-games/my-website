@@ -33,9 +33,11 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(partsMarkup.includes('MSI GeForce RTX 5070 Ti VENTUS/SHADOW/INSPIRE 3X OC'));
   assert.ok(!partsMarkup.includes('pc-terminal'));
   assert.ok(!partsMarkup.includes('<details'));
-  assert.ok(styles.includes('#pc-specs .home-pc-parts .repo'));
-  assert.ok(styles.includes('border-color: var(--lang)'));
+  assert.ok(styles.includes('#pc-specs .home-pc-parts .repo:hover .repo-origin-icon'));
   assert.ok(styles.includes('#pc-specs .home-pc-parts .repo-open:disabled'));
+  assert.ok(!styles.includes('#pc-specs .home-pc-parts .language { color: var(--lang); }'));
+  assert.ok(!home.includes('.repo.home-pc-part {\n      border-color: color-mix')); 
+  assert.ok(!home.includes('.repo.home-pc-part .language {\n      color: var(--lang);'));
   assert.ok(generator.includes("label: 'CPU'"));
   assert.ok(generator.includes("label: 'GPU'"));
   assert.ok(generator.includes("label: 'RAM'"));
