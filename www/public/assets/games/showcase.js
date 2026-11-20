@@ -107,7 +107,7 @@ const card = (game, portrait = true) => {
   const increase = createPlaytimeIncrease(gameDetails[game.id]?.playtime?.pcIncrease24hMinutes, true);
   if (increase) name.append(increase);
   if (game.favorite) {
-    if (game.roblox) name.append(robloxBadgeElement());
+    if (game.roblox && portrait) name.append(robloxBadgeElement());
     name.append(favoriteBadgeElement(true));
   }
   cover.append(artworkShell, name);
