@@ -1,7 +1,7 @@
 import { robloxGames } from "../public/assets/games/roblox-games.js";
 import { captureApiException, withSentry } from "./sentry.js";
 
-const cacheControl = "public, s-maxage=82800";
+const cacheControl = "public, s-maxage=300";
 const isRobloxCdnUrl = (value) => {
   try {
     const url = new URL(value);

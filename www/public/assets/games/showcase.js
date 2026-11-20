@@ -3,7 +3,7 @@ import { loadGameImage } from './load-image.js';
 import { ratingsPanelElement } from './ratings.js';
 import { renderLastPlayed, renderPlaytime, createPlaytimeIncrease, resolveLastPlayedAt } from './playtime.js';
 import { renderQuote, gameLinkElement } from './quote-links.js';
-import { renderRobloxDetails, creatorDetailElement } from './roblox-details.js';
+import { renderRobloxDetails, updateRobloxStatsAge, creatorDetailElement } from './roblox-details.js';
 import { fetchRemotePlaytime, mergeRemotePlaytime } from './remote-playtime.js';
 import { fetchRobloxStats, mergeRobloxStats } from './remote-roblox.js';
 import { fetchRobloxArtwork, mergeRobloxArtwork } from './remote-roblox-artwork.js';
@@ -45,21 +45,6 @@ let opener;
 let closing = false;
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let robloxRefresh;
-let robloxRefreshedAt = 0;
-function refreshRobloxStats() {
-  if (robloxRefresh || Date.now() - robloxRefreshedAt < 60_000) return;
-  robloxRefresh = fetchRobloxStats().then(response => {
-    if (!mergeRobloxStats(robloxGames, response)) return;
-    sortSections.forEach(apply => apply());
-    if (dialog.open && active?.roblox) {
-      renderRobloxDetails(document.getElementById('game-roblox-details'), active);
-      renderGameFacts(active);
-      document.getElementById('game-description').textContent = active.description;
-      descriptionDisclosure.update();
-    }
-  }).finally(() => { robloxRefresh = null; robloxRefreshedAt = Date.now(); });
-}
-refreshRobloxStats();
 const factIcons = [
   '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18M8 15h.01M12 15h.01M16 15h.01"/>',
   '<circle cx="9" cy="7" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M17 4a3 3 0 0 1 0 6M17 14a5 5 0 0 1 4 5v2"/>',
@@ -157,13 +142,7 @@ const sortSections = [
   [document.getElementById('roblox-games-list'), robloxGames],
 ].map(([root, games]) => setupGameSort(root, games, () => gameDetails, () => ratings));
 
-async function refreshRobloxArtwork() {
-  const response = await fetchRobloxArtwork();
-  if (!response) return;
-  if (!mergeRobloxArtwork(robloxGames, response)) {
-    console.warn('Invalid Roblox artwork response; bundled artwork remains in use.');
-    return;
-  }
+function renderRobloxArtwork() {
   for (const link of document.querySelectorAll('a[data-game]')) {
     const game = catalogue.find(item => item.id === link.dataset.game);
     if (!game?.roblox) continue;
@@ -187,7 +166,29 @@ async function refreshRobloxArtwork() {
     showPicture(Math.min(pictureIndex, active.pictures.length - 1));
   }
 }
-refreshRobloxArtwork();
+
+function refreshRobloxData() {
+  if (robloxRefresh) return robloxRefresh;
+  robloxRefresh = Promise.all([fetchRobloxStats(), fetchRobloxArtwork()]).then(([stats, artwork]) => {
+    if (mergeRobloxStats(robloxGames, stats)) {
+      sortSections.forEach(apply => apply());
+      if (dialog.open && active?.roblox) {
+        renderRobloxDetails(document.getElementById('game-roblox-details'), active);
+        renderGameFacts(active);
+        document.getElementById('game-description').textContent = active.description;
+        descriptionDisclosure.update();
+      }
+    }
+    if (artwork && !mergeRobloxArtwork(robloxGames, artwork)) {
+      console.warn('Invalid Roblox artwork response; bundled artwork remains in use.');
+    } else if (artwork) {
+      renderRobloxArtwork();
+    }
+  }).finally(() => { robloxRefresh = null; });
+  return robloxRefresh;
+}
+refreshRobloxData();
+setInterval(refreshRobloxData, 5 * 60_000);
 
 let playtimeRefresh;
 let playtimeRefreshedAt = 0;
@@ -308,10 +309,6 @@ function openShowcase(game, link) {
   renderLastPlayed(document.getElementById('game-last-played'), resolveLastPlayedAt(gameDetails[active.id]?.playtime));
   renderPlaytime(document.getElementById('game-playtime'), gameDetails[active.id]?.playtime, active.id === 'roblox');
   renderRobloxDetails(document.getElementById('game-roblox-details'), active);
-  if (active.roblox) refreshRobloxStats();
-  document.querySelector('.game-image-credit').textContent = active.roblox
-    ? 'Official experience icon and thumbnails from Roblox.'
-    : 'Official artwork and screenshots from the linked game page.';
   renderGameThumbnails(active);
   showPicture(0);
   if (!wasOpen) dialog.showModal();
@@ -327,8 +324,10 @@ window.addEventListener('paryx:timezonechange', () => {
 });
 
 setInterval(() => {
-  if (dialog.open && active) renderLastPlayed(document.getElementById('game-last-played'), resolveLastPlayedAt(gameDetails[active.id]?.playtime));
-}, 60_000);
+  if (!dialog.open || !active) return;
+  renderLastPlayed(document.getElementById('game-last-played'), resolveLastPlayedAt(gameDetails[active.id]?.playtime));
+  if (active.roblox) updateRobloxStatsAge(document.getElementById('game-roblox-details'));
+}, 1000);
 
 function renderGameFacts(game) {
   const facts = document.getElementById('game-facts');

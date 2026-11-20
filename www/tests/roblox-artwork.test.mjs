@@ -101,7 +101,7 @@ test("artwork endpoint caches successful daily snapshots and rejects invalid req
   const success = createResponse();
   await handler({ method: "GET", url: "/api/roblox-artwork" }, success.res);
   assert.equal(success.output.status, 200);
-  assert.equal(success.output.headers["Cache-Control"], "public, s-maxage=82800");
+  assert.equal(success.output.headers["Cache-Control"], "public, s-maxage=300");
   assert.equal(success.output.body.version, 1);
 
   const invalidQuery = createResponse();

@@ -47,11 +47,33 @@ export function renderRobloxDetails(root, game) {
     row.append(term, detail);
     list.append(row);
   }
-  const note = document.createElement('p');
+  const note = document.createElement('details');
   note.className = 'game-roblox-snapshot';
+  const summary = document.createElement('summary');
   const timestamp = document.createElement('time');
   timestamp.dateTime = data.checked;
-  timestamp.textContent = new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Europe/London' }).format(new Date(data.checked));
-  note.append('Stats fetched ', timestamp, ' (UK time). Counts may have changed.');
+  timestamp.dataset.relativeTime = '';
+  const expandedTimestamp = document.createElement('time');
+  expandedTimestamp.dateTime = data.checked;
+  expandedTimestamp.textContent = `${new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium', timeZone: 'Europe/London' }).format(new Date(data.checked))} at ${new Intl.DateTimeFormat('en-GB', { timeStyle: 'short', timeZone: 'Europe/London' }).format(new Date(data.checked))} (UK time)`;
+  summary.append('Stats fetched ', timestamp, '. Counts may have changed.');
+  note.append(summary, expandedTimestamp);
   root.append(heading, list, note);
+  updateRobloxStatsAge(root);
+}
+
+export function updateRobloxStatsAge(root, now = Date.now()) {
+  const timestamp = root?.querySelector('[data-relative-time]');
+  if (!timestamp) return;
+  const fetchedAt = Date.parse(timestamp.dateTime);
+  if (!Number.isFinite(fetchedAt)) return;
+  const seconds = Math.max(0, Math.floor((now - fetchedAt) / 1000));
+  const minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  const relative = days ? `${days} day${days === 1 ? '' : 's'} ago`
+    : hours ? `${hours} hour${hours === 1 ? '' : 's'} ago`
+      : minutes ? `${minutes} minute${minutes === 1 ? '' : 's'} ago`
+        : `${seconds} second${seconds === 1 ? '' : 's'} ago`;
+  timestamp.textContent = relative;
 }
