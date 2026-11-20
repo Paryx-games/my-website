@@ -27,6 +27,8 @@ Archived websites may return in the future. Closed websites have been retired an
 | [blog.paryx.uk](https://blog.paryx.uk) | Articles, experiments, and development stories | `blog/` | Vercel | Open source ✅ |
 | [api.paryx.uk](https://api.paryx.uk) | APIs and services used by my projects | `api/` | Vercel, Neon | Open source ✅ |
 | [admin.paryx.uk](https://admin.paryx.uk) | Admin website used for the backend | `🔒` | Vercel | Closed Source ❌ |
+| [forms.paryx.uk](https://forms.paryx.uk) | Forms created on the admin website | `🔒` | Vercel | Closed Source ❌ |
+| [status.paryx.uk](https://status.paryx.uk) | Status website used for my personal stuff | `🔒` | Uptime Kuma | N/A 🟡 |
 
 ## Languages
 
