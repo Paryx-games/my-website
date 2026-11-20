@@ -176,6 +176,9 @@ img.is-loading { opacity: 0 !important; }
 #game-roblox-details dd { margin: 0; font-size: 0.85rem; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
 #game-roblox-details a { color: var(--color-muted); font-size: 0.8rem; text-decoration: underline; }
 .game-roblox-snapshot { color: var(--color-faint); font-size: 0.7rem; line-height: 1.5; margin: 10px 0 0; }
+.game-roblox-snapshot summary { cursor: pointer; width: fit-content; }
+.game-roblox-snapshot summary time { text-decoration: underline dotted; text-underline-offset: 2px; }
+.game-roblox-snapshot > time { display: block; margin-top: 4px; }
 @media (min-width: 1050px) {
   #game-showcase.is-roblox { width: min(1800px, calc(100vw - 48px)); padding-left: 28px; padding-right: 28px; }
   .is-roblox .game-showcase-layout { grid-template-columns: minmax(240px, 0.85fr) minmax(360px, 1.8fr) minmax(240px, 0.85fr); gap: 24px; }
@@ -205,7 +208,6 @@ img.is-loading { opacity: 0 !important; }
 #game-thumbnails button { position: relative; overflow: hidden; flex: 0 0 calc((100% - 24px) / 3); padding: 3px; }
 #game-thumbnails button[aria-pressed="true"] { border-color: var(--game-accent); box-shadow: 0 0 0 1px var(--game-accent); }
 #game-thumbnails img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 3px; }
-.game-image-credit { margin-top: 8px; font-size: 0.7rem; color: var(--color-faint); }
 @keyframes game-card-enter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @media (max-width: 800px) { #game-showcase { width: calc(100vw - 32px); padding: 64px 20px 24px; } .game-showcase-layout { grid-template-columns: 1fr; gap: 24px; } .game-gallery { grid-row: 1; padding: 0; } .game-info-panel, #game-ratings .game-ratings-panel { padding: 0 16px 16px; } #game-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; } #game-logo { max-width: 320px; } }
 @media (max-width: 560px) { .games-row { gap: 16px 12px; } .game-card { width: min(144px, calc((100% - 12px) / 2)); } .rating-star, .rating-star svg { width: 20px; height: 20px; } #game-showcase { width: calc(100vw - 20px); max-height: calc(100svh - 20px); padding: 64px 12px 20px; } #game-showcase #game-prev, #game-showcase #game-next { bottom: 10px; width: 44px; height: 44px; } #game-prev { left: 8px; } #game-next { right: 8px; } #game-thumbnails { gap: 8px; } #game-thumbnails button { flex-basis: calc((100% - 16px) / 3); } .game-fact { column-gap: 8px; } }
