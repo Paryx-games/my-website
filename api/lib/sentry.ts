@@ -1,6 +1,6 @@
 import { release as osRelease } from "node:os";
 import * as Sentry from "@sentry/node";
-import type { ErrorEvent, Exception } from "@sentry/node";
+import type { ErrorEvent, Exception, StackFrame } from "@sentry/node";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 function redact(value: string | undefined): string | undefined {
@@ -20,7 +20,7 @@ function safeException(exception: Exception) {
     value: redact(exception.value),
     stacktrace: exception.stacktrace
       ? {
-          frames: exception.stacktrace.frames?.map((frame) => ({
+          frames: exception.stacktrace.frames?.map((frame: StackFrame) => ({
             filename: redact(frame.filename?.replace(/[?#].*$/, "")),
             function: redact(frame.function),
             lineno: frame.lineno,
@@ -61,7 +61,7 @@ export function sanitizeApiEvent(event: ErrorEvent): ErrorEvent {
 
 if (process.env.SENTRY_DSN) {
   Sentry.init({
-    dsn: process.env.SENTRY_DSN,
+    // Sentry v11 reads the DSN from SENTRY_DSN in the environment.
     environment: process.env.SENTRY_ENVIRONMENT ?? process.env.VERCEL_ENV,
     release: process.env.VERCEL_GIT_COMMIT_SHA,
     tracesSampleRate: 0,
@@ -74,7 +74,7 @@ export async function captureApiException(
   error: unknown,
   route: string,
 ): Promise<void> {
-  Sentry.withScope((scope) => {
+  Sentry.withScope((scope: Sentry.Scope) => {
     scope.setTag("application", "api");
     scope.setTag("route", route);
     Sentry.captureException(error);
