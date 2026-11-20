@@ -36,8 +36,8 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(styles.includes('#pc-specs .home-pc-parts .repo:hover .repo-origin-icon'));
   assert.ok(styles.includes('#pc-specs .home-pc-parts .repo-open:disabled'));
   assert.ok(!styles.includes('#pc-specs .home-pc-parts .language { color: var(--lang); }'));
-  assert.ok(!home.includes('.repo.home-pc-part {\n      border-color: color-mix')); 
-  assert.ok(!home.includes('.repo.home-pc-part .language {\n      color: var(--lang);'));
+  assert.ok(!/\.repo\.home-pc-part\s*\{[^}]*border-color\s*:\s*color-mix/.test(home));
+  assert.ok(!/\.repo\.home-pc-part \.language\s*\{[^}]*color\s*:\s*var\(--lang\)/.test(home));
   assert.ok(generator.includes("label: 'CPU'"));
   assert.ok(generator.includes("label: 'GPU'"));
   assert.ok(generator.includes("label: 'RAM'"));
