@@ -3,6 +3,7 @@
 .env.local
 .env.*.local
 .vercel
+api/migrations/
 
 # personal guides and maintenance notes (in any directory)
 PERSONAL.md

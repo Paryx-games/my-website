@@ -4,22 +4,7 @@ Source for [paryx.uk](https://paryx.uk) and its related sites.
 
 This repository contains my personal website, blog, and supporting services. I use it to build projects, document my work, and write about what I learn.
 
-The table lists the subdomains that are currently online. The dropdown contains subdomains and websites that have been archived or closed.
-
-<details>
-<summary> Archived or closed websites </summary>
-
-Archived websites may return in the future. Closed websites have been retired and will not return in their current form, although they may be replaced by something new.
-
-| Site | Purpose | Directory | Visibility |
-| --- | --- | --- | --- |
-| [dev.paryx.uk](https://dev.paryx.uk) | Development preview for upcoming changes | `.archive/dev/` | Archived |
-| [test.paryx.uk](https://test.paryx.uk) | Prototypes and experimental features | `.archive/test/` | Archived |
-| [codeinterpreter.paryx.uk](https://codeinterpreter.paryx.uk) | Code interpreter using Vite frontend and a private backend. | `🔒` | Closed |
-
----
-
-</details>
+The table lists the subdomains that are currently online.
 
 | Site | Purpose | Directory | Platform | Visibility |
 | --- | --- | --- | --- | --- |
@@ -88,8 +73,6 @@ Both structured language endpoints return the same response shape:
   ]
 }
 ```
-
-The previous `/github/languages?repo=owner/repo` route remains available as a compatibility alias for the repository endpoint.
 
 ### GitHub Language Bar
 
