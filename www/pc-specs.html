@@ -249,6 +249,12 @@
         font-variant-numeric: tabular-nums;
       }
 
+      .part-price b[title] {
+        text-decoration: underline dotted var(--color-faint);
+        text-underline-offset: 0.25em;
+        cursor: help;
+      }
+
       .part-price span {
         color: var(--color-faint);
         font-size: 0.75rem;
@@ -529,7 +535,7 @@
                   <p class="part-sub">8 cores / 16 threads / 96 MB L3 cache / launched 2024</p>
                 </div>
                 <div class="part-price">
-                  <b>$479</b><span>launch MSRP</span>
+                  <b title="Confirmed MSRP" tabindex="0" aria-label="$479, Confirmed MSRP">$479</b>
                 </div>
               </div>
               <details class="part-more">
@@ -601,7 +607,7 @@
                   <p class="part-sub">16 GB GDDR7 / 256-bit / PCIe 5.0 x16 / launched 2025</p>
                 </div>
                 <div class="part-price">
-                  <b>$749</b><span>launch MSRP</span>
+                  <b title="Confirmed MSRP" tabindex="0" aria-label="$749, Confirmed MSRP">$749</b>
                 </div>
               </div>
               <details class="part-more">
@@ -746,7 +752,7 @@
                   <p class="part-sub">AM5 / PCIe 5.0 / BIOS 1066 / launched 2025</p>
                 </div>
                 <div class="part-price">
-                  <b>$309</b><span>launch MSRP</span>
+                  <b title="Confirmed MSRP" tabindex="0" aria-label="$309, Confirmed MSRP">$309</b>
                 </div>
               </div>
               <details class="part-more">
@@ -805,7 +811,7 @@
                   <p class="part-sub">NVMe SSD / PCIe 4.0 x4 / launched 2022</p>
                 </div>
                 <div class="part-price">
-                  <b>$289.99</b><span>launch MSRP</span>
+                  <b title="Confirmed MSRP" tabindex="0" aria-label="$289.99, Confirmed MSRP">$289.99</b>
                 </div>
               </div>
               <details class="part-more">
@@ -868,7 +874,7 @@
                   <p class="part-sub">2560 x 1440 / 180 Hz / launched 2024</p>
                 </div>
                 <div class="part-price">
-                  <b>$349.99</b><span>estimated MSRP</span>
+                  <b title="Estimated MSRP" tabindex="0" aria-label="$349.99, Estimated MSRP">$349.99</b>
                 </div>
               </div>
               <details class="part-more">
@@ -918,7 +924,7 @@
                   <p class="part-sub">1920 x 1080 / 60 Hz / launched 2016</p>
                 </div>
                 <div class="part-price">
-                  <b>$209.99</b><span>estimated MSRP</span>
+                  <b title="Estimated MSRP" tabindex="0" aria-label="$209.99, Estimated MSRP">$209.99</b>
                 </div>
               </div>
             </article>

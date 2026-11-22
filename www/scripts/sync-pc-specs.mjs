@@ -32,10 +32,17 @@ const homeParts = specs.homeParts.map(part => {
   if (part.href && typeof part.href !== 'string') {
     throw new Error(`Homepage PC part ${part.id} has an invalid link`);
   }
-  const priceNote = [
-    part.priceNote ? `<span class="pc-part-price-note">${escape(part.priceNote)}</span>` : '',
-    `<span class="pc-part-launch">${escape(part.launchYear)}</span>`,
-  ].filter(Boolean).join('');
+  const priceLabel = {
+    'launch MSRP': 'Confirmed MSRP',
+    'estimated MSRP': 'Estimated MSRP',
+  }[part.priceNote];
+  if (part.priceNote && !priceLabel) {
+    throw new Error(`Homepage PC part ${part.id} has an unsupported price note`);
+  }
+  const price = priceLabel
+    ? `<b class="pc-part-price-value" title="${priceLabel}" tabindex="0" aria-label="${escape(part.price)}, ${priceLabel}">${escape(part.price)}</b>`
+    : `<b>${escape(part.price)}</b>`;
+  const launchYear = escape(part.launchYear);
   const highlights = part.highlights.map(({ label, value }) => `<span class="pc-part-highlight"><b>${escape(value)}</b><small>${escape(label)}</small></span>`).join('');
   const icon = `<svg viewBox="0 0 24 24" aria-hidden="true">${category.icon}</svg>`;
   return renderRepoCard({
@@ -50,7 +57,7 @@ const homeParts = specs.homeParts.map(part => {
     classes: 'home-pc-part',
     style: `--lang:${category.color}`,
     languageBarLabel: '',
-    footer: `<span class="language"><i class="dot"></i>${category.label}</span><span class="home-pc-part-price"><b>${escape(part.price)}</b><span class="pc-part-price-meta">${[priceNote].filter(Boolean).join('')}</span></span>`,
+    footer: `<span class="pc-part-category"><span class="language"><i class="dot"></i>${category.label}</span><span class="pc-part-year" title="Launch year: ${launchYear}"><svg class="stroke-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg><b>${launchYear}</b></span></span><span class="home-pc-part-price">${price}</span>`,
   });
 }).join('\n');
 

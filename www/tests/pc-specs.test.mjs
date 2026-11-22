@@ -27,9 +27,13 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(partsMarkup.includes('class="pc-part-highlights"'));
   assert.ok(partsMarkup.includes('<small>Cores</small>'));
   assert.ok(partsMarkup.includes('<b>180 Hz</b><small>Refresh</small>'));
-  assert.ok(partsMarkup.includes('class="pc-part-price-meta"'));
-  assert.ok(partsMarkup.includes('launch MSRP'));
-  assert.ok(partsMarkup.includes('estimated MSRP'));
+  assert.ok(partsMarkup.includes('class="pc-part-year"'));
+  assert.ok(partsMarkup.includes('class="pc-part-price-value"'));
+  assert.ok(partsMarkup.includes('title="Confirmed MSRP"'));
+  assert.ok(partsMarkup.includes('title="Estimated MSRP"'));
+  assert.ok(!partsMarkup.includes('launch MSRP'));
+  assert.ok(!partsMarkup.includes('estimated MSRP'));
+  assert.ok(partsMarkup.includes('<b>No confirmed MSRP</b>'));
   assert.ok(partsMarkup.includes('2024*'));
   assert.ok(partsMarkup.includes('$289.99'));
   assert.ok(partsMarkup.includes('$349.99'));
@@ -41,6 +45,11 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(styles.includes('#pc-specs .home-pc-parts .repo-open:disabled'));
   assert.ok(styles.includes('.repo:hover .repo-languages'));
   assert.ok(styles.includes('.pc-part-highlight'));
+  assert.ok(styles.includes('.pc-part-price-value'));
+  assert.ok(styles.includes('.pc-part-year'));
+  assert.ok(styles.includes('min-height: 128px'));
+  assert.ok(styles.includes('.pc-part-year { color: var(--color-faint)'));
+  assert.ok(styles.includes('.repo:hover .pc-part-year'));
   assert.ok(!styles.includes('#pc-specs .home-pc-parts .language { color: var(--lang); }'));
   assert.ok(!/\.repo\.home-pc-part\s*\{[^}]*border-color\s*:\s*color-mix/.test(home));
   assert.ok(!/\.repo\.home-pc-part \.language\s*\{[^}]*color\s*:\s*var\(--lang\)/.test(home));
@@ -52,6 +61,10 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(detail.includes('AMD Ryzen 7 9800X3D'));
   assert.ok(detail.includes('NVIDIA GeForce RTX 5070 Ti'));
   assert.ok(detail.includes('All specs'));
+  assert.ok(detail.includes('title="Confirmed MSRP"'));
+  assert.ok(detail.includes('title="Estimated MSRP"'));
+  assert.ok(!detail.includes('<span>launch MSRP</span>'));
+  assert.ok(!detail.includes('<span>estimated MSRP</span>'));
   assert.equal(specs.homeParts.length, 7);
   assert.deepEqual(
     specs.homeParts.map(({ id, launchYear }) => [id, launchYear]),
@@ -69,8 +82,13 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(specs.details.flatMap(group => group.fields).length > 45);
   for (const part of specs.homeParts) {
     assert.ok(partsMarkup.includes(`>${part.name}</span>`), `missing part name: ${part.id}`);
-    assert.ok(partsMarkup.includes(`<b>${part.price}</b>`), `missing part price: ${part.id}`);
-    assert.ok(partsMarkup.includes(`<span class="pc-part-launch">${part.launchYear}</span>`), `missing launch year: ${part.id}`);
+    if (part.priceNote) {
+      assert.ok(partsMarkup.includes(`aria-label="${part.price}, ${part.priceNote === 'launch MSRP' ? 'Confirmed MSRP' : 'Estimated MSRP'}">${part.price}</b>`), `missing part price: ${part.id}`);
+    } else {
+      assert.ok(partsMarkup.includes(`<b>${part.price}</b>`), `missing part price: ${part.id}`);
+    }
+    assert.ok(partsMarkup.includes(`title="Launch year: ${part.launchYear}"><svg`), `missing launch year tooltip: ${part.id}`);
+    assert.ok(partsMarkup.includes(`>${part.launchYear}</b></span>`), `missing launch year: ${part.id}`);
     assert.ok(part.highlights.length >= 2, `missing hardware highlights: ${part.id}`);
   }
 });
