@@ -51,6 +51,15 @@ function Update-RobloxTrackedEvent {
     if (-not $State.ContainsKey('LastEvents')) { $State.LastEvents = @{} }
     if ($State.LastEvents.ContainsKey($Client) -and $at -le $State.LastEvents[$Client]) { Write-Verbose "Ignoring a duplicate or out-of-order $($Event.Kind) event for $Client."; return }
     $State.LastEvents[$Client] = $at
+    # A teleport logs the old server's Client:Disconnect just after the new place's join report.
+    # Honouring it would end the new session immediately, so a leave this soon after a join is ignored.
+    if ($Event.Kind -eq 'leave' -and $State.Active.ContainsKey($Client)) {
+        $current = $State.Active[$Client]
+        if ($current.ContainsKey('JoinedAt') -and ($at - $current.JoinedAt) -lt 3000) {
+            Write-Verbose "Ignoring a disconnect for $Client straight after a join."
+            return
+        }
+    }
     Add-RobloxTrackedTime $State $Client $at
     if ($Event.Kind -eq 'leave') { $State.Active.Remove($Client); return }
     if (-not $State.ContainsKey('Games')) { $State.Games = @{} }
@@ -69,7 +78,7 @@ function Update-RobloxTrackedEvent {
     $previousTotal = if ($State.Totals.ContainsKey($Event.UniverseId)) { [double]$State.Totals[$Event.UniverseId] } else { 0.0 }
     $State.Active[$Client] = @{
         UniverseId = $Event.UniverseId; PlaceId = $Event.PlaceId
-        At = $start; Floor = $start; StartedTotal = $previousTotal
+        At = $start; Floor = $start; StartedTotal = $previousTotal; JoinedAt = $at
     }
 }
 
