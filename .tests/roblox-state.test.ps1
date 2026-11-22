@@ -38,6 +38,15 @@ try {
     Assert-Near $restored.Totals['123'] 62.5 'Replayed log events do not change counters'
     Update-RobloxTrackedEvent $restored 'replacement-client' $join 100000
     Assert-Near $restored.Active.Count 1 'Replacement clients do not overlap'
+    $teleported = @{ Version = 1; StartedAt = 0L; Totals = @{}; Active = @{}; Cursors = @{} }
+    $teleportJoin = [pscustomobject]@{ Kind = 'join'; At = [DateTimeOffset]::FromUnixTimeMilliseconds(200000); UniverseId = '123'; PlaceId = '789' }
+    $trailingLeave = [pscustomobject]@{ Kind = 'leave'; At = [DateTimeOffset]::FromUnixTimeMilliseconds(200001) }
+    Update-RobloxTrackedEvent $teleported 'client' $teleportJoin 0
+    Update-RobloxTrackedEvent $teleported 'client' $trailingLeave 0
+    if (-not $teleported.Active.ContainsKey('client')) { throw 'A disconnect logged straight after a join must not end the new session.' }
+    $laterLeave = [pscustomobject]@{ Kind = 'leave'; At = [DateTimeOffset]::FromUnixTimeMilliseconds(260000) }
+    Update-RobloxTrackedEvent $teleported 'client' $laterLeave 0
+    if ($teleported.Active.ContainsKey('client')) { throw 'A later disconnect must still end the session.' }
     $restored.Cursors['client'] = @{ Offset = 50L; Partial = 'private log fragment' }
     Save-RobloxTrackerState $path $restored
     $saved = Get-Content -LiteralPath $path -Raw

@@ -191,12 +191,12 @@ function Invoke-RobloxTracker {
             }
             $players = @(Get-Process -Name RobloxPlayerBeta -ErrorAction SilentlyContinue)
             foreach ($client in @($state.Active.Keys)) {
-                if ($players.Count -eq 1) { Add-RobloxTrackedTime $state $client $now }
-                elseif ($players.Count -eq 0) {
+                if ($players.Count -eq 0) {
                     Write-RobloxTrackerLeave $state $state.Active[$client] 'player exited' $gameNames $nameAttempts $eventLog
                     $state.Active.Remove($client)
                 }
-                else { $state.Active[$client].At = $now; $state.Active[$client].Floor = $now }
+                # Only one session is ever tracked, so a second process during a teleport cannot double count.
+                else { Add-RobloxTrackedTime $state $client $now }
             }
             $state.UpdatedAt = $now
             Save-RobloxTrackerState $Path $state
