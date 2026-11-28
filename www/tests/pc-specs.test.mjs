@@ -37,8 +37,11 @@ test('homepage PC specs use project cards with categorized icons and actions', a
   assert.ok(partsMarkup.includes('2024*'));
   assert.ok(partsMarkup.includes('$289.99'));
   assert.ok(partsMarkup.includes('$349.99'));
-  assert.ok(partsMarkup.includes('$209.99'));
   assert.ok(partsMarkup.includes('MSI GeForce RTX 5070 Ti VENTUS 3X OC'));
+  assert.ok(partsMarkup.includes('MSI MAG 274Q X24 27 inch'));
+  assert.ok(partsMarkup.includes('240 Hz'));
+  assert.ok(partsMarkup.includes('LG UltraGear 27GS75Q 27 inch'));
+  assert.ok(!partsMarkup.includes('Dell P2317H'));
   assert.ok(!partsMarkup.includes('pc-terminal'));
   assert.ok(!partsMarkup.includes('<details'));
   assert.ok(styles.includes('#pc-specs .home-pc-parts .repo:hover .repo-origin-icon'));
@@ -74,8 +77,8 @@ test('homepage PC specs use project cards with categorized icons and actions', a
       ['memory', '2024*'],
       ['board', '2025'],
       ['storage', '2022'],
-      ['display', '2024'],
-      ['display-secondary', '2016'],
+      ['display', '2025'],
+      ['display-secondary', '2024'],
     ],
   );
   assert.ok(home.indexOf('id="time"') < home.indexOf('id="pc-specs"'));

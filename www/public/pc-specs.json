@@ -78,6 +78,20 @@
     },
     {
       "id": "display",
+      "name": "MSI MAG 274Q X24 27 inch",
+      "href": "https://www.msi.com/Monitor/MAG-274Q-X24",
+      "description": "MSI MAG 240 Hz QHD gaming monitor",
+      "highlights": [
+        { "label": "Resolution", "value": "2560 x 1440" },
+        { "label": "Refresh", "value": "240 Hz" },
+        { "label": "Size", "value": "27 in" }
+      ],
+      "launchYear": "2025",
+      "price": "No confirmed MSRP",
+      "icon": "display"
+    },
+    {
+      "id": "display-secondary",
       "name": "LG UltraGear 27GS75Q 27 inch",
       "href": "https://www.lg.com/uk/gaming-monitors/",
       "description": "LG UltraGear QHD gaming monitor",
@@ -88,21 +102,6 @@
       ],
       "launchYear": "2024",
       "price": "$349.99",
-      "priceNote": "estimated MSRP",
-      "icon": "display"
-    },
-    {
-      "id": "display-secondary",
-      "name": "Dell P2317H 23 inch",
-      "href": "https://www.dell.com/support/home/en-uk/product-support/product/dell-p2317h-monitor/overview",
-      "description": "Dell P-series Full HD monitor",
-      "highlights": [
-        { "label": "Resolution", "value": "1920 x 1080" },
-        { "label": "Refresh", "value": "60 Hz" },
-        { "label": "Size", "value": "23 in" }
-      ],
-      "launchYear": "2016",
-      "price": "$209.99",
       "priceNote": "estimated MSRP",
       "icon": "display"
     }
@@ -178,12 +177,12 @@
         {
           "id": "display",
           "label": "Display",
-          "value": "LG UltraGear / 27 inch / 2560 x 1440 / 180 Hz"
+          "value": "MSI MAG 274Q X24 / 27 inch / 2560 x 1440 / 240 Hz"
         },
         {
           "id": "display-secondary",
           "label": "Display 2",
-          "value": "Dell P2317H / 23 inch / 1920 x 1080 / 60 Hz"
+          "value": "LG UltraGear 27GS75Q / 27 inch / 2560 x 1440 / 180 Hz"
         }
       ]
     },
@@ -468,12 +467,12 @@
     {
       "id": "screens",
       "title": "Displays",
-      "description": "A high-refresh 1440p main display and a secondary 1080p monitor.",
+      "description": "A 240 Hz 1440p main display and a 180 Hz QHD secondary monitor.",
       "fields": [
         {
           "id": "detail-screens-0",
           "label": "Main monitor",
-          "value": "LG UltraGear / 27 inch"
+          "value": "MSI MAG 274Q X24 / 27 inch"
         },
         {
           "id": "detail-screens-1",
@@ -483,32 +482,32 @@
         {
           "id": "detail-screens-2",
           "label": "Main refresh rate",
-          "value": "180 Hz"
+          "value": "240 Hz"
         },
         {
           "id": "detail-screens-3",
           "label": "DisplayPort capability",
-          "value": "Supported on the LG display"
+          "value": "DisplayPort 1.4a"
         },
         {
           "id": "detail-screens-4",
           "label": "Colour-depth capability",
-          "value": "10 bits per primary colour on the LG display"
+          "value": "10 bits per primary colour"
         },
         {
           "id": "detail-screens-5",
           "label": "Secondary monitor",
-          "value": "Dell P2317H / 23 inch"
+          "value": "LG UltraGear 27GS75Q / 27 inch"
         },
         {
           "id": "detail-screens-6",
           "label": "Secondary resolution",
-          "value": "1920 x 1080"
+          "value": "2560 x 1440"
         },
         {
           "id": "detail-screens-7",
           "label": "Secondary refresh rate",
-          "value": "60 Hz"
+          "value": "180 Hz"
         }
       ]
     }
