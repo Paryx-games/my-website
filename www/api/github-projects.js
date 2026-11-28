@@ -74,12 +74,26 @@ const normalize = (repo) => {
 };
 
 export async function fetchProjects({
-  token = process.env.GITHUB_TOKEN,
+  token,
+  tokens = {},
   request = fetch,
   now = Date.now,
 } = {}) {
-  if (!token) throw new Error("GitHub projects are not configured");
-  const graphql = async (query, variables) => {
+  const credentials = {
+    games:
+      tokens.games ||
+      process.env.GITHUB_TOKEN_PARYX_GAMES ||
+      token ||
+      process.env.GITHUB_TOKEN,
+    labs:
+      tokens.labs ||
+      process.env.GITHUB_TOKEN_PARYX_LABS ||
+      token ||
+      process.env.GITHUB_TOKEN,
+  };
+  if (!credentials.games && !credentials.labs)
+    throw new Error("GitHub projects are not configured");
+  const graphql = async (token, query, variables) => {
     const response = await request("https://api.github.com/graphql", {
       method: "POST",
       headers: {
@@ -97,48 +111,80 @@ export async function fetchProjects({
   };
   const nodes = { pinned: [], games: [], labs: [] };
   const errors = {};
-  let includeUser = true;
-  let includeLabs = true;
-  let userAfter = null;
-  let labsAfter = null;
-  while (includeUser || includeLabs) {
-    const result = await graphql(PROJECTS_QUERY, {
-      includeUser,
-      includeLabs,
-      userAfter,
-      labsAfter,
-    });
-    if (includeUser) {
-      const user = result.data.user;
-      if (!user) {
-        errors.games = errors.pinned =
-          "Personal GitHub repositories unavailable";
-      } else {
-        if (!userAfter) nodes.pinned = publicRepos(user.pinnedItems?.nodes);
+  const repoTokens = new Map();
+  const loadSource = async (source, sourceToken) => {
+    if (!sourceToken) {
+      errors[source] =
+        source === "games"
+          ? "Personal GitHub repositories unavailable: token not configured"
+          : "Paryx Labs repositories unavailable: token not configured";
+      if (source === "games")
+        errors.pinned = "Pinned GitHub repositories unavailable";
+      return;
+    }
+    let after = null;
+    let hasNextPage = true;
+    while (hasNextPage) {
+      const userSource = source === "games";
+      let result;
+      try {
+        result = await graphql(sourceToken, PROJECTS_QUERY, {
+          includeUser: userSource,
+          includeLabs: !userSource,
+          userAfter: userSource ? after : null,
+          labsAfter: userSource ? null : after,
+        });
+      } catch {
+        errors[source] = userSource
+          ? "Personal GitHub repositories unavailable"
+          : "Paryx Labs repositories unavailable";
+        if (userSource)
+          errors.pinned = "Pinned GitHub repositories unavailable";
+        return;
+      }
+      if (userSource) {
+        const user = result.data.user;
+        if (!user) {
+          errors.games = errors.pinned =
+            "Personal GitHub repositories unavailable";
+          return;
+        }
+        if (!after) nodes.pinned = publicRepos(user.pinnedItems?.nodes);
         if (!user.pinnedItems)
           errors.pinned = "Pinned GitHub repositories unavailable";
-        if (!user.repositories)
+        if (!user.repositories) {
           errors.games = "Personal GitHub repositories unavailable";
-        nodes.games.push(...publicRepos(user.repositories?.nodes));
+          return;
+        }
+        const repos = publicRepos(user.repositories.nodes);
+        nodes.games.push(...repos);
+        repos.forEach((repo) => repoTokens.set(repo.nameWithOwner, sourceToken));
+        hasNextPage = Boolean(user.repositories.pageInfo.hasNextPage);
+        const next = user.repositories.pageInfo.endCursor || null;
+        if (hasNextPage && (!next || next === after))
+          throw new Error("GitHub pagination unavailable");
+        after = next;
+      } else {
+        const organization = result.data.organization;
+        if (!organization?.repositories) {
+          errors.labs = "Paryx Labs repositories unavailable";
+          return;
+        }
+        const repos = publicRepos(organization.repositories.nodes);
+        nodes.labs.push(...repos);
+        repos.forEach((repo) => repoTokens.set(repo.nameWithOwner, sourceToken));
+        hasNextPage = Boolean(organization.repositories.pageInfo.hasNextPage);
+        const next = organization.repositories.pageInfo.endCursor || null;
+        if (hasNextPage && (!next || next === after))
+          throw new Error("GitHub pagination unavailable");
+        after = next;
       }
-      includeUser = Boolean(user?.repositories?.pageInfo.hasNextPage);
-      const nextUser = user?.repositories?.pageInfo.endCursor || null;
-      if (includeUser && (!nextUser || nextUser === userAfter))
-        throw new Error("GitHub pagination unavailable");
-      userAfter = nextUser;
     }
-    if (includeLabs) {
-      const labs = result.data.organization;
-      if (!labs?.repositories)
-        errors.labs = "Paryx Labs repositories unavailable";
-      else nodes.labs.push(...publicRepos(labs.repositories?.nodes));
-      includeLabs = Boolean(labs?.repositories?.pageInfo.hasNextPage);
-      const nextLabs = labs?.repositories?.pageInfo.endCursor || null;
-      if (includeLabs && (!nextLabs || nextLabs === labsAfter))
-        throw new Error("GitHub pagination unavailable");
-      labsAfter = nextLabs;
-    }
-  }
+  };
+  await Promise.all([
+    loadSource("games", credentials.games),
+    loadSource("labs", credentials.labs),
+  ]);
   // Connections over GitHub's 100-item limit need extra pages; the browser still
   // receives one response, and ordinary-sized profiles use one upstream request.
   for (const repo of new Map(
@@ -148,6 +194,7 @@ export async function fetchProjects({
   ).values()) {
     while (repo.languages?.pageInfo.hasNextPage) {
       const result = await graphql(
+        repoTokens.get(repo.nameWithOwner),
         `
           query Languages($owner: String!, $name: String!, $after: String!) {
             repository(owner: $owner, name: $name) {
@@ -210,7 +257,12 @@ export async function fetchProjects({
 export function createProjectsHandler({
   load = fetchProjects,
   now = Date.now,
-  configured = () => Boolean(process.env.GITHUB_TOKEN),
+  configured = () =>
+    Boolean(
+      process.env.GITHUB_TOKEN_PARYX_GAMES ||
+        process.env.GITHUB_TOKEN_PARYX_LABS ||
+        process.env.GITHUB_TOKEN,
+    ),
 } = {}) {
   let cached;
   let pending;

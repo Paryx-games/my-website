@@ -43,7 +43,7 @@ const payload = {
   errors: {},
 };
 
-test("one GitHub query returns all card data and filters private repositories and parents", async () => {
+test("owner queries return all card data and filter private repositories and parents", async () => {
   const project = repo("fork", {
     isFork: true,
     parent: { nameWithOwner: "upstream/project", isPrivate: false },
@@ -80,7 +80,7 @@ test("one GitHub query returns all card data and filters private repositories an
       };
     },
   });
-  assert.equal(calls, 1);
+  assert.equal(calls, 2);
   assert.equal(data.pinned.length, 1);
   assert.equal(data.games[0].stats.prsClosed, 41);
   assert.equal(data.games[0].stats.parent, "upstream/project");
@@ -91,6 +91,42 @@ test("one GitHub query returns all card data and filters private repositories an
   assert.ok(!JSON.stringify(data).includes("server-only-token"));
 });
 
+test("each repository owner uses its own token for issue and PR counts", async () => {
+  const gamesRepo = repo("manager");
+  const labsRepo = repo("shortcuts", {
+    nameWithOwner: "Paryx-Labs/shortcuts",
+    owner: { login: "Paryx-Labs" },
+  });
+  const data = await fetchProjects({
+    tokens: { games: "games-token", labs: "labs-token" },
+    request: async (_, options) => {
+      const { variables } = JSON.parse(options.body);
+      const isLabs = variables.includeLabs;
+      assert.equal(
+        options.headers.Authorization,
+        `Bearer ${isLabs ? "labs-token" : "games-token"}`,
+      );
+      return {
+        ok: true,
+        json: async () => ({
+          data: isLabs
+            ? { organization: { repositories: page([labsRepo]) } }
+            : {
+                user: {
+                  pinnedItems: page([gamesRepo]),
+                  repositories: page([gamesRepo]),
+                },
+              },
+        }),
+      };
+    },
+  });
+  assert.equal(data.games[0].stats.issuesOpen, 2);
+  assert.equal(data.games[0].stats.prsOpen, 3);
+  assert.equal(data.labs[0].stats.issuesOpen, 2);
+  assert.equal(data.labs[0].stats.prsOpen, 3);
+});
+
 test("profiles beyond GitHub page limits remain complete without refetching completed sources", async () => {
   let calls = 0;
   const data = await fetchProjects({
@@ -98,7 +134,14 @@ test("profiles beyond GitHub page limits remain complete without refetching comp
     request: async (_, options) => {
       const { variables } = JSON.parse(options.body);
       calls++;
-      if (calls === 1)
+      if (variables.includeLabs)
+        return {
+          ok: true,
+          json: async () => ({
+            data: { organization: { repositories: page([repo("org")]) } },
+          }),
+        };
+      if (!variables.userAfter)
         return {
           ok: true,
           json: async () => ({
@@ -110,11 +153,9 @@ test("profiles beyond GitHub page limits remain complete without refetching comp
                   pageInfo: { hasNextPage: true, endCursor: "next" },
                 },
               },
-              organization: { repositories: page([repo("org")]) },
             },
           }),
         };
-      assert.equal(variables.includeLabs, false);
       assert.equal(variables.userAfter, "next");
       return {
         ok: true,
@@ -126,7 +167,7 @@ test("profiles beyond GitHub page limits remain complete without refetching comp
       };
     },
   });
-  assert.equal(calls, 2);
+  assert.equal(calls, 3);
   assert.deepEqual(
     data.games.map((repo) => repo.name),
     ["one", "two"],
@@ -146,7 +187,31 @@ test("pinned and duplicate cards share complete language pagination", async () =
     token: "token",
     request: async (_, options) => {
       calls++;
-      if (calls === 1)
+      const { query, variables } = JSON.parse(options.body);
+      if (query.includes("query Languages")) {
+        assert.equal(variables.after, "languages-next");
+        return {
+          ok: true,
+          json: async () => ({
+            data: {
+              repository: {
+                languages: {
+                  edges: [{ size: 5, node: { name: "Lua" } }],
+                  pageInfo: { hasNextPage: false },
+                },
+              },
+            },
+          }),
+        };
+      }
+      if (variables.includeLabs)
+        return {
+          ok: true,
+          json: async () => ({
+            data: { organization: { repositories: page([]) } },
+          }),
+        };
+      if (!variables.userAfter)
         return {
           ok: true,
           json: async () => ({
@@ -159,20 +224,7 @@ test("pinned and duplicate cards share complete language pagination", async () =
             },
           }),
         };
-      assert.equal(JSON.parse(options.body).variables.after, "languages-next");
-      return {
-        ok: true,
-        json: async () => ({
-          data: {
-            repository: {
-              languages: {
-                edges: [{ size: 5, node: { name: "Lua" } }],
-                pageInfo: { hasNextPage: false },
-              },
-            },
-          },
-        }),
-      };
+      throw new Error("Unexpected GitHub query");
     },
   });
   assert.deepEqual(data.pinned[0].languageBytes, { Rust: 5, Lua: 5 });
