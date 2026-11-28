@@ -193,6 +193,45 @@ test('the contributions endpoint routes recent, all-time, and year requests inde
   assert.equal(invalid.result.status, 400);
 });
 
+test('the contributions endpoint uses the Paryx-games token without the legacy token', async () => {
+  const previousGamesToken = process.env.GITHUB_TOKEN_PARYX_GAMES;
+  const previousToken = process.env.GITHUB_TOKEN;
+  process.env.GITHUB_TOKEN_PARYX_GAMES = 'games-only-token';
+  delete process.env.GITHUB_TOKEN;
+  try {
+    const headers = [];
+    const request = async (_url, options) => {
+      headers.push(options.headers.Authorization);
+      return {
+        ok: true,
+        json: async () => ({
+          data: {
+            user: {
+              contributionsCollection: { contributionYears: [2026] },
+              recent: { contributionCalendar: calendar },
+            },
+          },
+        }),
+      };
+    };
+    const now = () => Date.parse('2026-10-17T12:00:00Z');
+    const handler = createContributionsHandler({
+      loadRecent: options => fetchContributions({ ...options, request, now }),
+      now,
+    });
+    const result = response();
+    await handler({ method: 'GET' }, result.res);
+    assert.equal(result.result.status, 200);
+    assert.equal(result.result.body.total, 7);
+    assert.deepEqual(headers, ['Bearer games-only-token']);
+  } finally {
+    if (previousGamesToken === undefined) delete process.env.GITHUB_TOKEN_PARYX_GAMES;
+    else process.env.GITHUB_TOKEN_PARYX_GAMES = previousGamesToken;
+    if (previousToken === undefined) delete process.env.GITHUB_TOKEN;
+    else process.env.GITHUB_TOKEN = previousToken;
+  }
+});
+
 test('concurrent reads share a cached request and upstream failures retain the last snapshot', async () => {
   let calls = 0;
   let time = 0;

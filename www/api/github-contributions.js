@@ -10,6 +10,7 @@ const YEARS_QUERY = `query ContributionYears {
   }
 }`;
 const LEVELS = ['NONE', 'FIRST_QUARTILE', 'SECOND_QUARTILE', 'THIRD_QUARTILE', 'FOURTH_QUARTILE'];
+const githubToken = () => process.env.GITHUB_TOKEN_PARYX_GAMES || process.env.GITHUB_TOKEN;
 
 export function normalizeCalendar(calendar, { from, to } = {}) {
   if (!Number.isSafeInteger(calendar?.totalContributions) || calendar.totalContributions < 0 ||
@@ -83,7 +84,7 @@ function normalizeAnnual(history, year) {
   return { year, ...annual };
 }
 
-export async function fetchContributions({ token = process.env.GITHUB_TOKEN, request = fetch, now = Date.now } = {}) {
+export async function fetchContributions({ token = githubToken(), request = fetch, now = Date.now } = {}) {
   if (!token) throw new Error('GitHub contributions are not configured');
   const signal = AbortSignal.timeout(20000);
   const fetchedAt = new Date(now());
@@ -102,7 +103,7 @@ export async function fetchContributions({ token = process.env.GITHUB_TOKEN, req
   return { ...calendar, years, fetchedAt: fetchedAt.toISOString() };
 }
 
-export async function fetchContributionHistory({ period, year, token = process.env.GITHUB_TOKEN, request = fetch, now = Date.now } = {}) {
+export async function fetchContributionHistory({ period, year, token = githubToken(), request = fetch, now = Date.now } = {}) {
   if (!token) throw new Error('GitHub contributions are not configured');
   if (period !== 'all' && period !== 'year') throw new Error('Invalid contribution period');
   const signal = AbortSignal.timeout(20000);
@@ -137,7 +138,7 @@ export function createContributionsHandler({
   load,
   loadRecent = load || fetchContributions,
   loadHistory = fetchContributionHistory,
-  configured = () => Boolean(process.env.GITHUB_TOKEN),
+  configured = () => Boolean(githubToken()),
   now = Date.now,
 } = {}) {
   const cache = new Map();
